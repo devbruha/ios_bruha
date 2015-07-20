@@ -1,0 +1,114 @@
+//
+//  DeleteData.swift
+//  BruhaMobile
+//
+//  Created by Ryan O'Neill on 2015-07-09.
+//  Copyright (c) 2015 Bruha. All rights reserved.
+//
+
+import Foundation
+import CoreData
+
+class DeleteData {
+    
+    let managedObjectContext: NSManagedObjectContext?
+    
+    init(context: NSManagedObjectContext?){
+        
+        self.managedObjectContext = context
+    }
+    
+    func deleteAll() {
+        
+        deleteEvents()
+        deleteVenues()
+        deleteArtists()
+        deleteOrganizations()
+    }
+    
+    // Deletes all entries in the Core Data table
+    
+    func deleteEvents() {
+        
+        let fetchRequest = NSFetchRequest(entityName: "EventList")
+        fetchRequest.includesPropertyValues = false // Only fetch the managedObjectID (not the full object structure)
+        if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [EventDBModel] {
+            
+            for result in fetchResults {
+                managedObjectContext!.deleteObject(result)
+            }
+            
+        }
+        
+        var err: NSError?
+        if !managedObjectContext!.save(&err) {
+            println("deleteData - Error : \(err!.localizedDescription)")
+            abort()
+        } else {
+            println("deleteData - Success - Events")
+        }
+    }
+    
+    func deleteVenues() {
+        
+        let fetchRequest = NSFetchRequest(entityName: "VenueList")
+        fetchRequest.includesPropertyValues = false // Only fetch the managedObjectID (not the full object structure)
+        if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [VenueDBModel] {
+            
+            for result in fetchResults {
+                managedObjectContext!.deleteObject(result)
+            }
+            
+        }
+        
+        var err: NSError?
+        if !managedObjectContext!.save(&err) {
+            println("deleteData - Error : \(err!.localizedDescription)")
+            abort()
+        } else {
+            println("deleteData - Success - Venues")
+        }
+    }
+    
+    func deleteArtists() {
+        
+        let fetchRequest = NSFetchRequest(entityName: "ArtistList")
+        fetchRequest.includesPropertyValues = false // Only fetch the managedObjectID (not the full object structure)
+        if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [ArtistDBModel] {
+            
+            for result in fetchResults {
+                managedObjectContext!.deleteObject(result)
+            }
+            
+        }
+        
+        var err: NSError?
+        if !managedObjectContext!.save(&err) {
+            println("deleteData - Error : \(err!.localizedDescription)")
+            abort()
+        } else {
+            println("deleteData - Success - Artists")
+        }
+    }
+    
+    func deleteOrganizations() {
+        
+        let fetchRequest = NSFetchRequest(entityName: "OrganizationList")
+        fetchRequest.includesPropertyValues = false // Only fetch the managedObjectID (not the full object structure)
+        if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [OrganizationDBModel] {
+            
+            for result in fetchResults {
+                managedObjectContext!.deleteObject(result)
+            }
+            
+        }
+        
+        var err: NSError?
+        if !managedObjectContext!.save(&err) {
+            println("deleteData - Error : \(err!.localizedDescription)")
+            abort()
+        } else {
+            println("deleteData - Success - Organizations")
+        }
+    }
+}

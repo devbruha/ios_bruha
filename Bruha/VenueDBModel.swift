@@ -1,0 +1,20 @@
+//
+//  VenueList.swift
+//  BruhaMobile
+//
+//  Created by Ryan O'Neill on 2015-07-10.
+//  Copyright (c) 2015 Bruha. All rights reserved.
+//
+
+import Foundation
+import CoreData
+
+class VenueDBModel: NSManagedObject {
+
+    @NSManaged var name: String
+    @NSManaged var venueDescription: String
+    @NSManaged var location: String
+    @NSManaged var latitude: NSNumber
+    @NSManaged var longitude: NSNumber
+
+}
