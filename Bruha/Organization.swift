@@ -8,11 +8,11 @@
 
 import Foundation
 
+// Custom object model
+
 struct Organization {
     
     //Event Variables
-    
-    //let eventIcon: Int?
     
     let organizationID: String?
     let organizationName: String?

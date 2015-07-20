@@ -8,6 +8,8 @@
 
 import Foundation
 
+// Custom object model
+
 struct Artist {
     
     let artistID: String?

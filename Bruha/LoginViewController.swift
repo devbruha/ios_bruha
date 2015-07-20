@@ -9,6 +9,9 @@
 import UIKit
 
 class LoginViewController: UIViewController {
+    
+    // Retreive the managedObjectContext from AppDelegate
+    let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +24,37 @@ class LoginViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    // Login Button Onclick logic
+    
+    @IBAction func loginPress(sender: AnyObject) {
+        
+        // Creating an instance of the LoginService
+        
+        let loginService = LoginService(context: managedObjectContext)
+        
+        // Running the login service, currently hard coded credentials, needs to take user input
+        
+        loginService.loginCheck {
+            (let loginResponse) in
+            
+            println(loginResponse!)
+            
+            // If server response from credential check = "1", procede with downloading user info
+            
+            if (loginResponse! == "  1"){
+                
+                loginService.getUserInformation{
+                    (let userInfo) in
+                    
+                    
+                }
+            }
+            else{
+                
+                println("Failed Login")
+            }
+        }
+    }
 
     /*
     // MARK: - Navigation

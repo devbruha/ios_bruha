@@ -8,6 +8,8 @@
 
 import Foundation
 
+// Custom object model
+
 struct Venue {
     
     let venueID: String?

@@ -26,7 +26,8 @@ class DeleteData {
         deleteOrganizations()
     }
     
-    // Deletes all entries in the Core Data table
+    // Deletes all entries of an object in the Core Data table
+    // Does this one entry at a time rather than dropping entire tables
     
     func deleteEvents() {
         
@@ -46,6 +47,27 @@ class DeleteData {
             abort()
         } else {
             println("deleteData - Success - Events")
+        }
+    }
+    
+    func deleteUserInfo() {
+        
+        let fetchRequest = NSFetchRequest(entityName: "UserList")
+        fetchRequest.includesPropertyValues = false // Only fetch the managedObjectID (not the full object structure)
+        if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [UserDBModel] {
+            
+            for result in fetchResults {
+                managedObjectContext!.deleteObject(result)
+            }
+            
+        }
+        
+        var err: NSError?
+        if !managedObjectContext!.save(&err) {
+            println("deleteData - Error : \(err!.localizedDescription)")
+            abort()
+        } else {
+            println("deleteData - Success - Users")
         }
     }
     

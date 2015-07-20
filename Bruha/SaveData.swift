@@ -10,11 +10,15 @@ import Foundation
 import CoreData
 import UIKit
 
+// Each function in this class stores a certain object into the local database (Core Data)
+
 class SaveData {
     
     let managedObjectContext: NSManagedObjectContext?
     
     init(context: NSManagedObjectContext?){
+        
+        // Retrieves passed in context
         
         self.managedObjectContext = context
     }
@@ -26,6 +30,8 @@ class SaveData {
         let en = NSEntityDescription.entityForName("EventList", inManagedObjectContext: managedObjectContext!)
         
         for event in EventList{
+            
+            // Creating template object that'll be pushed into the local database
             
             var newItem = EventDBModel(entity:en!, insertIntoManagedObjectContext: managedObjectContext!)
             
@@ -128,5 +134,28 @@ class SaveData {
         
         //println(FetchData(context: managedObjectContext).fetchOrganizations()?.count)
         
+    }
+    
+    func saveUser(user: User){
+        
+        let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let en = NSEntityDescription.entityForName("UserList", inManagedObjectContext: managedObjectContext!)
+            
+        var newItem = UserDBModel(entity:en!, insertIntoManagedObjectContext: managedObjectContext!)
+        
+        newItem.userName = user.userName!
+        newItem.firstName = user.userFirstName!
+        newItem.city = user.userCity!
+        newItem.birthdate = user.userBirthdate!
+        newItem.gender = user.userGender!
+        newItem.email = user.userEmail!
+        
+        managedObjectContext!.save(nil)
+        
+        
+        println("User Save")
+        
+        //println(FetchData(context: managedObjectContext).fetchUserInfo()?.count)
     }
 }

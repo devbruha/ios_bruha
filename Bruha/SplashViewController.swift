@@ -23,15 +23,13 @@ class SplashViewController: UIViewController,UIScrollViewDelegate {
         
         super.viewDidLoad()
         
-        dispatch_async(dispatch_get_main_queue()) {
+        // Clearing data from CoreDate to ensure up to date information
             
-            DeleteData(context: self.managedObjectContext).deleteAll()
+        DeleteData(context: self.managedObjectContext).deleteAll()
+        
+        // Retrieving all events/venues/artists/organizations and storing locally
             
-            LoadScreenService(context: self.managedObjectContext).retrieveAll()
-            
-            println("Hi")
-            
-        }
+        LoadScreenService(context: self.managedObjectContext).retrieveAll()
 
         self.scrollView.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
         let scrollViewWidth:CGFloat = self.scrollView.frame.width

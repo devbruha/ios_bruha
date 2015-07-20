@@ -9,6 +9,8 @@
 import Foundation
 import CoreData
 
+// Model for local database object
+
 class VenueDBModel: NSManagedObject {
 
     @NSManaged var name: String

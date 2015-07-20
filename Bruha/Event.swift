@@ -8,6 +8,8 @@
 
 import Foundation
 
+// Custom object model
+
 struct Event {
     
     //Event Variables

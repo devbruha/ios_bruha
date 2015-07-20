@@ -18,7 +18,7 @@
 		45FA05981B5D4188004AD819 /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA058F1B5D4188004AD819 /* Artist.swift */; };
 		45FA05991B5D4188004AD819 /* Organization.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05901B5D4188004AD819 /* Organization.swift */; };
 		45FA059A1B5D4188004AD819 /* VenueDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05911B5D4188004AD819 /* VenueDBModel.swift */; };
-		45FA059B1B5D4188004AD819 /* FilterTracker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05921B5D4188004AD819 /* FilterTracker.swift */; };
+		45FA059B1B5D4188004AD819 /* GlobalVariables.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05921B5D4188004AD819 /* GlobalVariables.swift */; };
 		45FA059C1B5D4188004AD819 /* ArtistDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05931B5D4188004AD819 /* ArtistDBModel.swift */; };
 		45FA059D1B5D4188004AD819 /* OrganizationDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05941B5D4188004AD819 /* OrganizationDBModel.swift */; };
 		45FA05A41B5D4190004AD819 /* EventService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA059E1B5D4190004AD819 /* EventService.swift */; };
@@ -30,11 +30,13 @@
 		45FA05AD1B5D4196004AD819 /* FetchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05AA1B5D4196004AD819 /* FetchData.swift */; };
 		45FA05AE1B5D4196004AD819 /* SaveData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05AB1B5D4196004AD819 /* SaveData.swift */; };
 		45FA05AF1B5D4196004AD819 /* DeleteData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05AC1B5D4196004AD819 /* DeleteData.swift */; };
-		45FA05B61B5D4324004AD819 /* InitialLoadViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05B51B5D4324004AD819 /* InitialLoadViewController.swift */; };
 		45FA05B81B5D432C004AD819 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05B71B5D432C004AD819 /* SplashViewController.swift */; };
 		45FA05BA1B5D63EB004AD819 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 45FA05B91B5D63EB004AD819 /* Main.storyboard */; };
 		45FA05BD1B5D640A004AD819 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05BB1B5D640A004AD819 /* LoginViewController.swift */; };
 		45FA05BE1B5D640A004AD819 /* SignUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05BC1B5D640A004AD819 /* SignUpViewController.swift */; };
+		45FA05C11B5D6FCC004AD819 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05C01B5D6FCC004AD819 /* LoginService.swift */; };
+		45FA05C41B5D7000004AD819 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05C31B5D7000004AD819 /* User.swift */; };
+		45FA05C61B5D7D9E004AD819 /* UserDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05C51B5D7D9E004AD819 /* UserDBModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,7 +65,7 @@
 		45FA058F1B5D4188004AD819 /* Artist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
 		45FA05901B5D4188004AD819 /* Organization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Organization.swift; sourceTree = "<group>"; };
 		45FA05911B5D4188004AD819 /* VenueDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueDBModel.swift; sourceTree = "<group>"; };
-		45FA05921B5D4188004AD819 /* FilterTracker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTracker.swift; sourceTree = "<group>"; };
+		45FA05921B5D4188004AD819 /* GlobalVariables.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GlobalVariables.swift; sourceTree = "<group>"; };
 		45FA05931B5D4188004AD819 /* ArtistDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistDBModel.swift; sourceTree = "<group>"; };
 		45FA05941B5D4188004AD819 /* OrganizationDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrganizationDBModel.swift; sourceTree = "<group>"; };
 		45FA059E1B5D4190004AD819 /* EventService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventService.swift; sourceTree = "<group>"; };
@@ -75,11 +77,13 @@
 		45FA05AA1B5D4196004AD819 /* FetchData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FetchData.swift; sourceTree = "<group>"; };
 		45FA05AB1B5D4196004AD819 /* SaveData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveData.swift; sourceTree = "<group>"; };
 		45FA05AC1B5D4196004AD819 /* DeleteData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeleteData.swift; sourceTree = "<group>"; };
-		45FA05B51B5D4324004AD819 /* InitialLoadViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InitialLoadViewController.swift; sourceTree = "<group>"; };
 		45FA05B71B5D432C004AD819 /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		45FA05B91B5D63EB004AD819 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		45FA05BB1B5D640A004AD819 /* LoginViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		45FA05BC1B5D640A004AD819 /* SignUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpViewController.swift; sourceTree = "<group>"; };
+		45FA05C01B5D6FCC004AD819 /* LoginService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginService.swift; sourceTree = "<group>"; };
+		45FA05C31B5D7000004AD819 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		45FA05C51B5D7D9E004AD819 /* UserDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDBModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -122,15 +126,13 @@
 			isa = PBXGroup;
 			children = (
 				45FA05691B5D4158004AD819 /* AppDelegate.swift */,
-				45FA05B71B5D432C004AD819 /* SplashViewController.swift */,
-				45FA05BB1B5D640A004AD819 /* LoginViewController.swift */,
-				45FA05BC1B5D640A004AD819 /* SignUpViewController.swift */,
-				45FA05B51B5D4324004AD819 /* InitialLoadViewController.swift */,
+				45FA05921B5D4188004AD819 /* GlobalVariables.swift */,
+				45FA05B91B5D63EB004AD819 /* Main.storyboard */,
+				45FA05BF1B5D6F76004AD819 /* Views */,
 				45FA05B21B5D4287004AD819 /* Core Data Calls */,
 				45FA05B11B5D4280004AD819 /* PHP Calls */,
 				45FA05B01B5D4278004AD819 /* Object Models */,
 				45FA05731B5D4158004AD819 /* Images.xcassets */,
-				45FA05B91B5D63EB004AD819 /* Main.storyboard */,
 				45FA05751B5D4158004AD819 /* LaunchScreen.xib */,
 				45FA056B1B5D4158004AD819 /* Bruha.xcdatamodeld */,
 				45FA05671B5D4158004AD819 /* Supporting Files */,
@@ -166,15 +168,12 @@
 		45FA05B01B5D4278004AD819 /* Object Models */ = {
 			isa = PBXGroup;
 			children = (
+				45FA05C21B5D6FDD004AD819 /* LocalDB */,
 				45FA058C1B5D4188004AD819 /* Event.swift */,
-				45FA058D1B5D4188004AD819 /* EventDBModel.swift */,
 				45FA058E1B5D4188004AD819 /* Venue.swift */,
 				45FA058F1B5D4188004AD819 /* Artist.swift */,
 				45FA05901B5D4188004AD819 /* Organization.swift */,
-				45FA05911B5D4188004AD819 /* VenueDBModel.swift */,
-				45FA05921B5D4188004AD819 /* FilterTracker.swift */,
-				45FA05931B5D4188004AD819 /* ArtistDBModel.swift */,
-				45FA05941B5D4188004AD819 /* OrganizationDBModel.swift */,
+				45FA05C31B5D7000004AD819 /* User.swift */,
 			);
 			name = "Object Models";
 			sourceTree = "<group>";
@@ -188,6 +187,7 @@
 				45FA05A11B5D4190004AD819 /* LoadScreenService.swift */,
 				45FA05A21B5D4190004AD819 /* ArtistService.swift */,
 				45FA05A31B5D4190004AD819 /* OrganizationService.swift */,
+				45FA05C01B5D6FCC004AD819 /* LoginService.swift */,
 			);
 			name = "PHP Calls";
 			sourceTree = "<group>";
@@ -200,6 +200,28 @@
 				45FA05AC1B5D4196004AD819 /* DeleteData.swift */,
 			);
 			name = "Core Data Calls";
+			sourceTree = "<group>";
+		};
+		45FA05BF1B5D6F76004AD819 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				45FA05B71B5D432C004AD819 /* SplashViewController.swift */,
+				45FA05BB1B5D640A004AD819 /* LoginViewController.swift */,
+				45FA05BC1B5D640A004AD819 /* SignUpViewController.swift */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		45FA05C21B5D6FDD004AD819 /* LocalDB */ = {
+			isa = PBXGroup;
+			children = (
+				45FA058D1B5D4188004AD819 /* EventDBModel.swift */,
+				45FA05911B5D4188004AD819 /* VenueDBModel.swift */,
+				45FA05931B5D4188004AD819 /* ArtistDBModel.swift */,
+				45FA05941B5D4188004AD819 /* OrganizationDBModel.swift */,
+				45FA05C51B5D7D9E004AD819 /* UserDBModel.swift */,
+			);
+			name = LocalDB;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -305,23 +327,25 @@
 				45FA05A91B5D4190004AD819 /* OrganizationService.swift in Sources */,
 				45FA05A81B5D4190004AD819 /* ArtistService.swift in Sources */,
 				45FA05A61B5D4190004AD819 /* VenueService.swift in Sources */,
+				45FA05C41B5D7000004AD819 /* User.swift in Sources */,
 				45FA05BD1B5D640A004AD819 /* LoginViewController.swift in Sources */,
 				45FA05951B5D4188004AD819 /* Event.swift in Sources */,
 				45FA05971B5D4188004AD819 /* Venue.swift in Sources */,
 				45FA05B81B5D432C004AD819 /* SplashViewController.swift in Sources */,
+				45FA05C11B5D6FCC004AD819 /* LoginService.swift in Sources */,
 				45FA05A71B5D4190004AD819 /* LoadScreenService.swift in Sources */,
+				45FA05C61B5D7D9E004AD819 /* UserDBModel.swift in Sources */,
 				45FA05AF1B5D4196004AD819 /* DeleteData.swift in Sources */,
 				45FA05991B5D4188004AD819 /* Organization.swift in Sources */,
 				45FA05AD1B5D4196004AD819 /* FetchData.swift in Sources */,
 				45FA059D1B5D4188004AD819 /* OrganizationDBModel.swift in Sources */,
-				45FA059B1B5D4188004AD819 /* FilterTracker.swift in Sources */,
+				45FA059B1B5D4188004AD819 /* GlobalVariables.swift in Sources */,
 				45FA05A51B5D4190004AD819 /* NetworkOperation.swift in Sources */,
 				45FA056D1B5D4158004AD819 /* Bruha.xcdatamodeld in Sources */,
 				45FA05961B5D4188004AD819 /* EventDBModel.swift in Sources */,
 				45FA05AE1B5D4196004AD819 /* SaveData.swift in Sources */,
 				45FA056A1B5D4158004AD819 /* AppDelegate.swift in Sources */,
 				45FA05BE1B5D640A004AD819 /* SignUpViewController.swift in Sources */,
-				45FA05B61B5D4324004AD819 /* InitialLoadViewController.swift in Sources */,
 				45FA059A1B5D4188004AD819 /* VenueDBModel.swift in Sources */,
 				45FA05981B5D4188004AD819 /* Artist.swift in Sources */,
 				45FA05A41B5D4190004AD819 /* EventService.swift in Sources */,
@@ -513,6 +537,7 @@
 				45FA05881B5D4158004AD819 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		45FA05891B5D4158004AD819 /* Build configuration list for PBXNativeTarget "BruhaTests" */ = {
 			isa = XCConfigurationList;
@@ -521,6 +546,7 @@
 				45FA058B1B5D4158004AD819 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 

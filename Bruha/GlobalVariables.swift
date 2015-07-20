@@ -16,7 +16,7 @@ enum FilterState: String {
     case Organizations = "organizations"
 }
 
-class FilterTracker{
+class GlobalVariables{
     
     static var currentFilter = FilterState.Events
 }

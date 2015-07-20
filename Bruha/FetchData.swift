@@ -9,6 +9,8 @@
 import Foundation
 import CoreData
 
+// Each function in this class shall return an Array of items being stored in the relevant table from CoreDate (Local)
+
 class FetchData {
     
     let managedObjectContext: NSManagedObjectContext?
@@ -74,6 +76,22 @@ class FetchData {
         
         // Execute the fetch request, and cast the results to an array of LogItem objects
         if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [OrganizationDBModel] {
+            
+            return fetchResults
+            
+        }
+        else{
+            return nil
+        }
+    }
+    
+    func fetchUserInfo() -> [UserDBModel]?{
+        
+        // Create a new fetch request using the LogItem entity
+        let fetchRequest = NSFetchRequest(entityName: "UserList")
+        
+        // Execute the fetch request, and cast the results to an array of LogItem objects
+        if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [UserDBModel] {
             
             return fetchResults
             
