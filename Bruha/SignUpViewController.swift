@@ -9,6 +9,9 @@
 import UIKit
 
 class SignUpViewController: UIViewController {
+    
+    // Retreive the managedObjectContext from AppDelegate
+    let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,6 +24,20 @@ class SignUpViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    @IBAction func registerButtonClick(sender: AnyObject) {
+        
+        // Creating an instance of the LoginService
+        
+        let registerService = RegisterService(context: managedObjectContext)
+        
+        // Running the login service, currently hard coded credentials, needs to take user input
+        
+        registerService.registerNewUser{
+            (let registerResponse) in
+            
+            println(registerResponse!)
+        }
+    }
 
     /*
     // MARK: - Navigation
