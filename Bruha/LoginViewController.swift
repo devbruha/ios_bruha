@@ -55,11 +55,11 @@ class LoginViewController: UIViewController {
         return false
     }
     func internetCheck() -> Bool{
+        
         if Reachability.isConnectedToNetwork() == true {
             println("Internet connection OK")
+            
             return true
-        } else {
-            println("Internet connection FAILED")
         }
         return false
     }
@@ -68,6 +68,10 @@ class LoginViewController: UIViewController {
         
         var username:String = self.username.text
         var password:String = self.password.text
+/*
+        var alert = UIAlertView(title: "No Internet Connection", message: "Make sure your device is connected to the internet.", delegate: nil, cancelButtonTitle: "OK")
+        alert.show()
+*/
         
         if usernameCheck(username) == true && passwordCheck(password) == true && internetCheck() == true {
             println("ALL CONDITIONS ARE OKOKOK")
@@ -90,6 +94,7 @@ class LoginViewController: UIViewController {
                         
                      }
                 }
+                    
                 else{
                     
                     println("Failed Login")
