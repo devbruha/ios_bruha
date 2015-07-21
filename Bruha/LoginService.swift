@@ -21,10 +21,14 @@ import CoreData
 struct LoginService {
     
     let managedObjectContext: NSManagedObjectContext?
+    let userName:String
+    let passWord:String
     
-    init(context: NSManagedObjectContext?){
+    init(context: NSManagedObjectContext?, username: String, password: String){
         
         managedObjectContext = context
+        userName = username
+        passWord = password
     }
     
     let bruhaBaseURL: NSURL? = NSURL(string: "http://bruha.com/mobile_php/")
@@ -37,7 +41,7 @@ struct LoginService {
             
             dispatch_async(dispatch_get_main_queue()) {
                 
-                networkOperation.loginCheckFromURLPost("username=TestAccount&password=12345678") {
+                networkOperation.stringFromURLPost("username=\(self.userName)&password=\(self.passWord)") {
                     (let loginSignal) in
                     
                     completion(loginSignal)

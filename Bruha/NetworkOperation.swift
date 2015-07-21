@@ -19,7 +19,7 @@ class NetworkOperation {
     let queryURL : NSURL
     
     typealias JSONArrayCompletion = (NSArray?) -> Void
-    typealias loginCheckCompletion = (NSString?) -> Void
+    typealias stringCompletion = (NSString?) -> Void
     
     init(url: NSURL){
         
@@ -56,7 +56,7 @@ class NetworkOperation {
         dataTask.resume()
     }
     
-    func loginCheckFromURLPost(post: String, completion: loginCheckCompletion){
+    func stringFromURLPost(post: String, completion: stringCompletion){
         
         var request = NSMutableURLRequest(URL: queryURL)
         request.HTTPMethod = "POST"
