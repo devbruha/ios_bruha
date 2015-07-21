@@ -233,6 +233,9 @@
                                 <state key="normal" title="CREATE NEW ACCOUNT">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="registerButtonClick:" destination="Dba-0b-X1L" eventType="touchUpInside" id="S7K-XC-Zud"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KPh-xi-BKg">
                                 <rect key="frame" x="32" y="454" width="256" height="30"/>
