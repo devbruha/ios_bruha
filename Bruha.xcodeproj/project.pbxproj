@@ -7,11 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-<<<<<<< HEAD
+
 		1835F8F31B5EAD7200FD1BD1 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1835F8F21B5EAD7200FD1BD1 /* Reachability.swift */; };
-=======
+
 		45D8986F1B5E89E6003ED862 /* RegisterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8986E1B5E89E6003ED862 /* RegisterService.swift */; };
->>>>>>> origin/master
+
 		45FA056A1B5D4158004AD819 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05691B5D4158004AD819 /* AppDelegate.swift */; };
 		45FA056D1B5D4158004AD819 /* Bruha.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 45FA056B1B5D4158004AD819 /* Bruha.xcdatamodeld */; };
 		45FA05741B5D4158004AD819 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45FA05731B5D4158004AD819 /* Images.xcassets */; };
@@ -55,11 +55,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-<<<<<<< HEAD
+
 		1835F8F21B5EAD7200FD1BD1 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
-=======
+
 		45D8986E1B5E89E6003ED862 /* RegisterService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterService.swift; sourceTree = "<group>"; };
->>>>>>> origin/master
+
 		45FA05641B5D4158004AD819 /* Bruha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bruha.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45FA05681B5D4158004AD819 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45FA05691B5D4158004AD819 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };

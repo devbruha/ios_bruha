@@ -280,6 +280,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="B5q-Px-DXx"/>
+                    <connections>
+                        <outlet property="emailaddress" destination="QJo-sA-aIg" id="pkr-eG-s2T"/>
+                        <outlet property="password" destination="G4a-Df-YW3" id="lIW-f9-DOQ"/>
+                        <outlet property="username" destination="TzN-5r-okt" id="cmH-CJ-K5i"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZQR-6H-D9O" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

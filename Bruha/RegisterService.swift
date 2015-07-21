@@ -12,10 +12,17 @@ import CoreData
 struct RegisterService{
     
     let managedObjectContext: NSManagedObjectContext?
+    let userName:String
+    let passWord:String
+    let emailAddress:String
+
     
-    init(context: NSManagedObjectContext?){
+    init(context: NSManagedObjectContext?, username: String, password: String, emailaddress:String){
         
         managedObjectContext = context
+        userName = username
+        passWord = password
+        emailAddress = emailaddress
     }
     
     let bruhaBaseURL: NSURL? = NSURL(string: "http://bruha.com/mobile_php/")
@@ -28,7 +35,7 @@ struct RegisterService{
             
             dispatch_async(dispatch_get_main_queue()) {
                 
-                networkOperation.stringFromURLPost("user_id=TestAccount123&password=S12345678&email=ttttttttt@hotmail.com") {
+                networkOperation.stringFromURLPost("user_id=\(self.userName)&password=\(self.passWord)&email=\(self.emailAddress)") {
                     (let registerSignal) in
                     
                     completion(registerSignal)

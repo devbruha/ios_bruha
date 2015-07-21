@@ -10,7 +10,11 @@ import UIKit
 
 class SignUpViewController: UIViewController {
     
+    @IBOutlet weak var username: UITextField!
     // Retreive the managedObjectContext from AppDelegate
+    @IBOutlet weak var password: UITextField!
+    
+    @IBOutlet weak var emailaddress: UITextField!
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
 
     override func viewDidLoad() {
@@ -26,9 +30,13 @@ class SignUpViewController: UIViewController {
     
     @IBAction func registerButtonClick(sender: AnyObject) {
         
+        var username:String = self.username.text
+        var password:String = self.password.text
+        var emailaddress:String = self.emailaddress.text
+        
         // Creating an instance of the LoginService
         
-        let registerService = RegisterService(context: managedObjectContext)
+        let registerService = RegisterService(context: managedObjectContext, username: username, password: password, emailaddress: emailaddress)
         
         // Running the login service, currently hard coded credentials, needs to take user input
         

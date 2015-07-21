@@ -41,11 +41,8 @@ struct LoginService {
             
             dispatch_async(dispatch_get_main_queue()) {
                 
-<<<<<<< HEAD
                 networkOperation.stringFromURLPost("username=\(self.userName)&password=\(self.passWord)") {
-=======
-                networkOperation.stringFromURLPost("username=TestAccount&password=12345678") {
->>>>>>> origin/master
+
                     (let loginSignal) in
                     
                     completion(loginSignal)
