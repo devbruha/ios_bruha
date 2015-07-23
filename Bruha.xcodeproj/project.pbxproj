@@ -10,6 +10,7 @@
 		1835F8F31B5EAD7200FD1BD1 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1835F8F21B5EAD7200FD1BD1 /* Reachability.swift */; };
 		1835F8F51B5ECF3500FD1BD1 /* DashBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1835F8F41B5ECF3500FD1BD1 /* DashBoardViewController.swift */; };
 		184231FA1B5FF173003948F5 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184231F91B5FF173003948F5 /* ProfileViewController.swift */; };
+		45AFAF231B60332E00BA6854 /* CredentialCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AFAF221B60332E00BA6854 /* CredentialCheck.swift */; };
 		45D8986F1B5E89E6003ED862 /* RegisterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8986E1B5E89E6003ED862 /* RegisterService.swift */; };
 		45FA056A1B5D4158004AD819 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05691B5D4158004AD819 /* AppDelegate.swift */; };
 		45FA056D1B5D4158004AD819 /* Bruha.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 45FA056B1B5D4158004AD819 /* Bruha.xcdatamodeld */; };
@@ -57,6 +58,7 @@
 		1835F8F21B5EAD7200FD1BD1 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		1835F8F41B5ECF3500FD1BD1 /* DashBoardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashBoardViewController.swift; sourceTree = "<group>"; };
 		184231F91B5FF173003948F5 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		45AFAF221B60332E00BA6854 /* CredentialCheck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CredentialCheck.swift; sourceTree = "<group>"; };
 		45D8986E1B5E89E6003ED862 /* RegisterService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterService.swift; sourceTree = "<group>"; };
 		45FA05641B5D4158004AD819 /* Bruha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bruha.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45FA05681B5D4158004AD819 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -112,6 +114,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		45AFAF1E1B60313D00BA6854 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				1835F8F41B5ECF3500FD1BD1 /* DashBoardViewController.swift */,
+				184231F91B5FF173003948F5 /* ProfileViewController.swift */,
+				45FA05B71B5D432C004AD819 /* SplashViewController.swift */,
+				45FA05BB1B5D640A004AD819 /* LoginViewController.swift */,
+				45FA05BC1B5D640A004AD819 /* SignUpViewController.swift */,
+			);
+			name = Controllers;
+			sourceTree = "<group>";
+		};
+		45AFAF201B60317200BA6854 /* Data Call Models */ = {
+			isa = PBXGroup;
+			children = (
+				45FA05B21B5D4287004AD819 /* Core Data Calls */,
+				45FA05B11B5D4280004AD819 /* PHP Calls */,
+			);
+			name = "Data Call Models";
+			sourceTree = "<group>";
+		};
+		45AFAF211B60331100BA6854 /* Processing */ = {
+			isa = PBXGroup;
+			children = (
+				45AFAF221B60332E00BA6854 /* CredentialCheck.swift */,
+			);
+			name = Processing;
+			sourceTree = "<group>";
+		};
 		45FA055B1B5D4158004AD819 = {
 			isa = PBXGroup;
 			children = (
@@ -133,18 +164,14 @@
 		45FA05661B5D4158004AD819 /* Bruha */ = {
 			isa = PBXGroup;
 			children = (
-				45FA05691B5D4158004AD819 /* AppDelegate.swift */,
 				45FA05921B5D4188004AD819 /* GlobalVariables.swift */,
-				1835F8F21B5EAD7200FD1BD1 /* Reachability.swift */,
-				1835F8F41B5ECF3500FD1BD1 /* DashBoardViewController.swift */,
-				184231F91B5FF173003948F5 /* ProfileViewController.swift */,
-				45FA05B91B5D63EB004AD819 /* Main.storyboard */,
-				45FA05BF1B5D6F76004AD819 /* Views */,
-				45FA05B21B5D4287004AD819 /* Core Data Calls */,
-				45FA05B11B5D4280004AD819 /* PHP Calls */,
-				45FA05731B5D4158004AD819 /* Images.xcassets */,
-				45FA05751B5D4158004AD819 /* LaunchScreen.xib */,
 				45FA056B1B5D4158004AD819 /* Bruha.xcdatamodeld */,
+				45AFAF211B60331100BA6854 /* Processing */,
+				45AFAF201B60317200BA6854 /* Data Call Models */,
+				45FA05B01B5D4278004AD819 /* Object Models */,
+				45AFAF1E1B60313D00BA6854 /* Controllers */,
+				45FA05BF1B5D6F76004AD819 /* Views */,
+				45FA05731B5D4158004AD819 /* Images.xcassets */,
 				45FA05671B5D4158004AD819 /* Supporting Files */,
 			);
 			path = Bruha;
@@ -153,6 +180,8 @@
 		45FA05671B5D4158004AD819 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				1835F8F21B5EAD7200FD1BD1 /* Reachability.swift */,
+				45FA05691B5D4158004AD819 /* AppDelegate.swift */,
 				45FA05681B5D4158004AD819 /* Info.plist */,
 			);
 			name = "Supporting Files";
@@ -199,7 +228,6 @@
 				45FA05A31B5D4190004AD819 /* OrganizationService.swift */,
 				45FA05C01B5D6FCC004AD819 /* LoginService.swift */,
 				45D8986E1B5E89E6003ED862 /* RegisterService.swift */,
-				45FA05B01B5D4278004AD819 /* Object Models */,
 			);
 			name = "PHP Calls";
 			sourceTree = "<group>";
@@ -217,9 +245,8 @@
 		45FA05BF1B5D6F76004AD819 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				45FA05B71B5D432C004AD819 /* SplashViewController.swift */,
-				45FA05BB1B5D640A004AD819 /* LoginViewController.swift */,
-				45FA05BC1B5D640A004AD819 /* SignUpViewController.swift */,
+				45FA05B91B5D63EB004AD819 /* Main.storyboard */,
+				45FA05751B5D4158004AD819 /* LaunchScreen.xib */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -347,6 +374,7 @@
 				45FA05B81B5D432C004AD819 /* SplashViewController.swift in Sources */,
 				45FA05C11B5D6FCC004AD819 /* LoginService.swift in Sources */,
 				45FA05A71B5D4190004AD819 /* LoadScreenService.swift in Sources */,
+				45AFAF231B60332E00BA6854 /* CredentialCheck.swift in Sources */,
 				45FA05C61B5D7D9E004AD819 /* UserDBModel.swift in Sources */,
 				184231FA1B5FF173003948F5 /* ProfileViewController.swift in Sources */,
 				45FA05AF1B5D4196004AD819 /* DeleteData.swift in Sources */,

@@ -22,13 +22,16 @@ class ProfileViewController: UIViewController {
     @IBOutlet weak var email: UILabel!
     
     func configureView(){
+        
         myImage.layer.borderWidth = 1
         myImage.layer.masksToBounds = false
         myImage.layer.borderColor = UIColor.blackColor().CGColor
         myImage.layer.cornerRadius = myImage.frame.height/2
         myImage.clipsToBounds = true
     }
+    
     func loadUserInfo(){
+        
         let userInfo = FetchData(context: managedObjectContext).fetchUserInfo()
         
         name.text = (userInfo?.first?.firstName)!
