@@ -24,12 +24,8 @@ struct Event {
     let eventStartTime: String?
     let eventEndDate: String?
     let eventEndTime: String?
-    //let eventDistance: Double?
-    //let eventPicture: Int?
     
     //Event location variables
-    
-    let locationID: String?
     
     let eventLatitude: Double?
     let eventLongitude: Double?
@@ -45,6 +41,14 @@ struct Event {
     
     init(eventDictionary: [String: AnyObject]) {
         
+        var appt = eventDictionary["appt"] as? String
+        var streetNo = eventDictionary["street_no"] as? String
+        var streetName = eventDictionary["street_name"] as? String
+        var city = eventDictionary["location_city"] as? String
+        var postalCode = eventDictionary["postal_code"] as? String
+        
+        eventVenueAddress = "\(streetNo) \(streetName), \(postalCode)"
+        
         eventPrice = eventDictionary["Admission_price"] as? String
         
         eventName = eventDictionary["event_name"] as? String
@@ -58,10 +62,8 @@ struct Event {
         eventDescription = eventDictionary["event_desc"] as? String
         
         venueID = eventDictionary["venue_id"] as? String
-        locationID = eventDictionary["location_id"] as? String
         
         eventVenueName = eventDictionary["venue_name"] as? String
-        eventVenueAddress = eventDictionary["venue_location"] as? String
         eventVenueCity = eventDictionary["location_city"] as? String
         
         if let eventLatString = eventDictionary["location_lat"] as? String {

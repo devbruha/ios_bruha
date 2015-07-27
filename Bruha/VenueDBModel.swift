@@ -12,11 +12,12 @@ import CoreData
 // Model for local database object
 
 class VenueDBModel: NSManagedObject {
-
+    
     @NSManaged var name: String
     @NSManaged var venueDescription: String
-    @NSManaged var location: String
+    @NSManaged var address: String
     @NSManaged var latitude: NSNumber
     @NSManaged var longitude: NSNumber
-
+    
 }
+
