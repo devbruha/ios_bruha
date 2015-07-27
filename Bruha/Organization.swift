@@ -17,25 +17,28 @@ struct Organization {
     let organizationID: String?
     let organizationName: String?
     let organizationDescription: String?
-    let organizationLocation: String?
+    let organizationAddress: String?
     
     //Event location variables
-    
-    let locationID: String?
     
     let organizationLatitude: Double?
     let organizationLongitude: Double?
     
     init(organizationDictionary: [String: AnyObject]) {
         
+        var appt = organizationDictionary["appt"] as? String
+        var streetNo = organizationDictionary["street_no"] as? String
+        var streetName = organizationDictionary["street_name"] as? String
+        var city = organizationDictionary["location_city"] as? String
+        var postalCode = organizationDictionary["postal_code"] as? String
+        
+        organizationAddress = "\(streetNo) \(streetName), \(postalCode)"
+        
         organizationName = organizationDictionary["organization_name"] as? String
         
         organizationID = organizationDictionary["organization_id"] as? String
         organizationDescription = organizationDictionary["organization_desc"] as? String
         
-        organizationLocation = organizationDictionary["organization_location"] as? String
-        
-        locationID = organizationDictionary["location_id"] as? String
         
         if let organizationLatString = organizationDictionary["location_lat"] as? String {
             

@@ -15,7 +15,7 @@ struct Venue {
     let venueID: String?
     let venueName: String?
     let venueDescription: String?
-    let venueLocation: String?
+    let venueAddress: String?
     
     /*
     let venueCategoryIcon: Int?
@@ -28,19 +28,22 @@ struct Venue {
     let contactAddress: String?
     */
     
-    let locationID: String?
-    
     let venueLatitude: Double?
     let venueLongitude: Double?
     
     
     init(venueDictionary: [String: AnyObject]) {
         
+        var appt = venueDictionary["appt"] as? String
+        var streetNo = venueDictionary["street_no"] as? String
+        var streetName = venueDictionary["street_name"] as? String
+        var city = venueDictionary["location_city"] as? String
+        var postalCode = venueDictionary["postal_code"] as? String
         
+        venueAddress = "\(streetNo) \(streetName), \(postalCode)"
         venueID = venueDictionary["venue_id"] as? String
         venueName = venueDictionary["venue_name"] as?  String
         venueDescription = venueDictionary["venue_desc"] as?  String
-        venueLocation = venueDictionary["venue_location"] as?  String
         
         /*
         venueCategoryIcon = venueDictionary["location_lat"] as?  Int
@@ -53,7 +56,6 @@ struct Venue {
         contactAddress = venueDictionary["location_lat"] as?  String
         */
         
-        locationID = venueDictionary["location_id"] as?  String
         
         if let venueLatString = venueDictionary["location_lat"] as? String {
             

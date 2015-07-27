@@ -12,13 +12,12 @@ import CoreData
 // Model for local database object
 
 class EventDBModel: NSManagedObject {
-
+    
     @NSManaged var endDate: String
     @NSManaged var endTime: String
     @NSManaged var eventDescription: String
     @NSManaged var id: String
     @NSManaged var latitude: NSNumber
-    @NSManaged var locationID: String
     @NSManaged var longitude: NSNumber
     @NSManaged var name: String
     @NSManaged var price: String
@@ -28,5 +27,6 @@ class EventDBModel: NSManagedObject {
     @NSManaged var venueCity: String
     @NSManaged var venueID: String
     @NSManaged var venueName: String
-
+    
 }
+

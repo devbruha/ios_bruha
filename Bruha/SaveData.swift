@@ -43,8 +43,6 @@ class SaveData {
             newItem.endTime = event.eventEndTime!
             newItem.startDate = event.eventStartDate!
             newItem.endDate = event.eventEndDate!
-            
-            newItem.locationID = event.locationID!
             newItem.latitude = event.eventLatitude!
             newItem.longitude = event.eventLongitude!
             
@@ -73,7 +71,7 @@ class SaveData {
             
             newItem.name = venue.venueName!
             newItem.venueDescription = venue.venueDescription!
-            newItem.location = venue.venueLocation!
+            newItem.address = venue.venueAddress!
             newItem.latitude = venue.venueLatitude!
             newItem.longitude = venue.venueLongitude!
             
@@ -122,8 +120,7 @@ class SaveData {
             newItem.id = organization.organizationID!
             newItem.name = organization.organizationName!
             newItem.orgDescription = organization.organizationDescription!
-            newItem.locID = organization.locationID!
-            newItem.location = organization.organizationLocation!
+            newItem.address = organization.organizationAddress!
             newItem.latitude = organization.organizationLatitude!
             newItem.longitude = organization.organizationLongitude!
             
@@ -141,7 +138,7 @@ class SaveData {
         let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         let en = NSEntityDescription.entityForName("UserList", inManagedObjectContext: managedObjectContext!)
-            
+        
         var newItem = UserDBModel(entity:en!, insertIntoManagedObjectContext: managedObjectContext!)
         
         newItem.userName = user.userName!

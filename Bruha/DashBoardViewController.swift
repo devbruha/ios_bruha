@@ -11,6 +11,7 @@ import UIKit
 class DashBoardViewController: UIViewController {
 
     @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var exploreImage: UIImageView!
     
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
@@ -41,10 +42,19 @@ class DashBoardViewController: UIViewController {
         }
     }
     
+    func exploreImageTapped(){
+        var storyboard = UIStoryboard(name: "Main", bundle: nil)
+        self.performSegueWithIdentifier("GoToExplore", sender: self)
+    }
+    
     func performImageSegue(){
-        var tgr = UITapGestureRecognizer(target:self , action: Selector("profileImageTapped"))
-        profileImage.addGestureRecognizer(tgr)
+        var tgr1 = UITapGestureRecognizer(target:self , action: Selector("profileImageTapped"))
+        profileImage.addGestureRecognizer(tgr1)
         profileImage.userInteractionEnabled = true
+        
+        var tgr2 = UITapGestureRecognizer(target:self , action: Selector("exploreImageTapped"))
+        exploreImage.addGestureRecognizer(tgr2)
+        exploreImage.userInteractionEnabled = true
     }
 
     override func viewDidLoad() {
