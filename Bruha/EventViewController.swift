@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ExploreViewController: UIViewController {
+class EventViewController: UIViewController {
     
     @IBOutlet weak var exploreTableView: UITableView!
     var item = ["Slide 1.jpg","Slide 2.jpg","Slide 3.jpg","Slide 4.jpg","Slide 5.jpg","Slide 6.jpg","Slide 7.jpg","Slide 8.jpg"]
@@ -40,10 +40,10 @@ class ExploreViewController: UIViewController {
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        var cell : ExploreTableViewCell! = tableView.dequeueReusableCellWithIdentifier("Cell") as! ExploreTableViewCell!
+        var cell : EventTableViewCell! = tableView.dequeueReusableCellWithIdentifier("Cell") as! EventTableViewCell!
         if(cell == nil)
         {
-            cell = NSBundle.mainBundle().loadNibNamed("Cell", owner: self, options: nil)[0] as! ExploreTableViewCell;
+            cell = NSBundle.mainBundle().loadNibNamed("Cell", owner: self, options: nil)[0] as! EventTableViewCell;
         }
         //let stringTitle = itemName[indexPath.row] as String //NOT NSString
         let strCarName = item[indexPath.row] as String
@@ -53,7 +53,7 @@ class ExploreViewController: UIViewController {
         
         // Configure the cell...
         
-        return cell as ExploreTableViewCell
+        return cell as EventTableViewCell
     }
     
 

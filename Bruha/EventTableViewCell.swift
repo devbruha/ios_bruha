@@ -8,11 +8,11 @@
 
 import UIKit
 
-class ExploreTableViewCell: UITableViewCell {
+class EventTableViewCell: UITableViewCell {
 
     @IBOutlet weak var ExploreImage: UIImageView!
-    @IBOutlet weak var circView: CircleView!
-    @IBOutlet weak var rectView: RectangleView!
+    @IBOutlet weak var circView: EventCircleView!
+    @IBOutlet weak var rectView: EventRectangleView!
     
     let tapRec = UITapGestureRecognizer()
 
