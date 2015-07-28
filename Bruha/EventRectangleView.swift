@@ -9,7 +9,7 @@
 import UIKit
 
 @IBDesignable
-class RectangleView: UIView {
+class EventRectangleView: UIView {
 
     override func drawRect(rect: CGRect) {
         var path = UIBezierPath(rect: rect)

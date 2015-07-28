@@ -9,7 +9,7 @@
 import UIKit
 
 @IBDesignable
-class CircleView: UIView {
+class EventCircleView: UIView {
 
     override func drawRect(rect: CGRect) {
         var path = UIBezierPath(ovalInRect: rect)
