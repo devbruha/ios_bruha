@@ -12,10 +12,10 @@
 		184231FA1B5FF173003948F5 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184231F91B5FF173003948F5 /* ProfileViewController.swift */; };
 		3FBD3EDB6177AE183A0340DF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C40848564A9A9ABD06E1BFE /* libPods.a */; };
 		4560C5471B66D09900AB5382 /* SaveData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4560C5461B66D09900AB5382 /* SaveData.swift */; };
-		4560C5491B66D42000AB5382 /* ExploreViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4560C5481B66D42000AB5382 /* ExploreViewController.swift */; };
+		4560C5491B66D42000AB5382 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4560C5481B66D42000AB5382 /* EventViewController.swift */; };
 		4560C54B1B66D44700AB5382 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4560C54A1B66D44700AB5382 /* CircleView.swift */; };
 		4560C54D1B66D45100AB5382 /* RectangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4560C54C1B66D45100AB5382 /* RectangleView.swift */; };
-		4560C54F1B66D49800AB5382 /* ExploreTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4560C54E1B66D49800AB5382 /* ExploreTableViewCell.swift */; };
+		4560C54F1B66D49800AB5382 /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4560C54E1B66D49800AB5382 /* EventTableViewCell.swift */; };
 		45AFAF231B60332E00BA6854 /* CredentialCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AFAF221B60332E00BA6854 /* CredentialCheck.swift */; };
 		45D8986F1B5E89E6003ED862 /* RegisterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8986E1B5E89E6003ED862 /* RegisterService.swift */; };
 		45FA056A1B5D4158004AD819 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05691B5D4158004AD819 /* AppDelegate.swift */; };
@@ -64,10 +64,10 @@
 		1835F8F41B5ECF3500FD1BD1 /* DashBoardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashBoardViewController.swift; sourceTree = "<group>"; };
 		184231F91B5FF173003948F5 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		4560C5461B66D09900AB5382 /* SaveData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveData.swift; sourceTree = "<group>"; };
-		4560C5481B66D42000AB5382 /* ExploreViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreViewController.swift; sourceTree = "<group>"; };
+		4560C5481B66D42000AB5382 /* EventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
 		4560C54A1B66D44700AB5382 /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		4560C54C1B66D45100AB5382 /* RectangleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RectangleView.swift; sourceTree = "<group>"; };
-		4560C54E1B66D49800AB5382 /* ExploreTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreTableViewCell.swift; sourceTree = "<group>"; };
+		4560C54E1B66D49800AB5382 /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		45AFAF221B60332E00BA6854 /* CredentialCheck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CredentialCheck.swift; sourceTree = "<group>"; };
 		45D8986E1B5E89E6003ED862 /* RegisterService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterService.swift; sourceTree = "<group>"; };
 		45FA05641B5D4158004AD819 /* Bruha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bruha.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -141,7 +141,7 @@
 			children = (
 				1835F8F41B5ECF3500FD1BD1 /* DashBoardViewController.swift */,
 				184231F91B5FF173003948F5 /* ProfileViewController.swift */,
-				4560C5481B66D42000AB5382 /* ExploreViewController.swift */,
+				4560C5481B66D42000AB5382 /* EventViewController.swift */,
 				45FA05B71B5D432C004AD819 /* SplashViewController.swift */,
 				45FA05BB1B5D640A004AD819 /* LoginViewController.swift */,
 				45FA05BC1B5D640A004AD819 /* SignUpViewController.swift */,
@@ -271,7 +271,7 @@
 			isa = PBXGroup;
 			children = (
 				45FA05B91B5D63EB004AD819 /* Main.storyboard */,
-				4560C54E1B66D49800AB5382 /* ExploreTableViewCell.swift */,
+				4560C54E1B66D49800AB5382 /* EventTableViewCell.swift */,
 				4560C54C1B66D45100AB5382 /* RectangleView.swift */,
 				4560C54A1B66D44700AB5382 /* CircleView.swift */,
 				45FA05751B5D4158004AD819 /* LaunchScreen.xib */,
@@ -445,7 +445,7 @@
 				45FA05971B5D4188004AD819 /* Venue.swift in Sources */,
 				45FA05B81B5D432C004AD819 /* SplashViewController.swift in Sources */,
 				45FA05C11B5D6FCC004AD819 /* LoginService.swift in Sources */,
-				4560C54F1B66D49800AB5382 /* ExploreTableViewCell.swift in Sources */,
+				4560C54F1B66D49800AB5382 /* EventTableViewCell.swift in Sources */,
 				45FA05A71B5D4190004AD819 /* LoadScreenService.swift in Sources */,
 				45AFAF231B60332E00BA6854 /* CredentialCheck.swift in Sources */,
 				45FA05C61B5D7D9E004AD819 /* UserDBModel.swift in Sources */,
@@ -456,7 +456,7 @@
 				45FA059D1B5D4188004AD819 /* OrganizationDBModel.swift in Sources */,
 				45FA059B1B5D4188004AD819 /* GlobalVariables.swift in Sources */,
 				45FA05A51B5D4190004AD819 /* NetworkOperation.swift in Sources */,
-				4560C5491B66D42000AB5382 /* ExploreViewController.swift in Sources */,
+				4560C5491B66D42000AB5382 /* EventViewController.swift in Sources */,
 				4560C54D1B66D45100AB5382 /* RectangleView.swift in Sources */,
 				45FA056D1B5D4158004AD819 /* Bruha.xcdatamodeld in Sources */,
 				45FA05961B5D4188004AD819 /* EventDBModel.swift in Sources */,

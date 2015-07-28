@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ExploreTableViewCell: UITableViewCell {
+class EventTableViewCell: UITableViewCell {
 
     @IBOutlet weak var ExploreImage: UIImageView!
     @IBOutlet weak var circView: CircleView!
