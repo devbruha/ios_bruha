@@ -47,7 +47,7 @@ struct Event {
         var city = eventDictionary["location_city"] as? String
         var postalCode = eventDictionary["postal_code"] as? String
         
-        eventVenueAddress = "\(streetNo) \(streetName), \(postalCode)"
+        eventVenueAddress = "\(streetNo!) \(streetName!), \(postalCode!)"
         
         eventPrice = eventDictionary["Admission_price"] as? String
         
