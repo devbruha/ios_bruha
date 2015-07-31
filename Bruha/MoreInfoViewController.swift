@@ -15,6 +15,12 @@ class MoreInfoViewController: UIViewController {
     @IBOutlet weak var smallImage: UIImageView!
     @IBOutlet weak var price: UILabel!
     @IBOutlet weak var eventTitle: UILabel!
+    @IBOutlet weak var startTime: UILabel!
+    @IBOutlet weak var startDate: UILabel!
+    @IBOutlet weak var venue: UILabel!
+    @IBOutlet weak var location: UILabel!
+    @IBOutlet weak var endTime: UILabel!
+    @IBOutlet weak var ticketPrice: UILabel!
     
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
@@ -25,8 +31,23 @@ class MoreInfoViewController: UIViewController {
         verticalScroll.contentSize.width = screenWidth
         verticalScroll.contentSize.height = 800
         
+       // GlobalVariables.eventSelected.
+        
         let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
-        price.text = (eventInfo?.first?.price)!
+        for event in eventInfo!{
+            if event.name == GlobalVariables.eventSelected{
+                eventTitle.text = GlobalVariables.eventSelected
+                price.text = "$\(event.price)"
+                startTime.text = event.startTime
+                startDate.text = event.startDate
+                venue.text = event.venueName
+                location.text = event.venueAddress
+                endTime.text = event.endDate + "  \(event.endTime)"
+                ticketPrice.text = "$\(event.price)"
+                
+            }
+        }
+        
 
         // Do any additional setup after loading the view.
     }

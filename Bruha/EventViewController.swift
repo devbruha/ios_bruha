@@ -121,6 +121,8 @@ class EventViewController: UIViewController, SWTableViewCellDelegate{
     //Swipe Cells Actions
     func swipeableTableViewCell( cell : SWTableViewCell!,didTriggerLeftUtilityButtonWithIndex index:NSInteger){
         
+        
+        
         switch(index){
         case 0:
             //map
@@ -134,6 +136,7 @@ class EventViewController: UIViewController, SWTableViewCellDelegate{
     }
     
     func swipeableTableViewCell( cell : SWTableViewCell!,didTriggerRightUtilityButtonWithIndex index:NSInteger){
+        
         switch(index){
         case 0:
             //Preview
@@ -143,6 +146,13 @@ class EventViewController: UIViewController, SWTableViewCellDelegate{
             break
         case 2:
             //More info
+            
+            var cellIndexPath = self.exploreTableView.indexPathForCell(cell)
+            
+            var selectedCell = self.exploreTableView.cellForRowAtIndexPath(cellIndexPath!) as! EventTableViewCell
+            
+            GlobalVariables.eventSelected = selectedCell.circTitle.text!
+            
             self.performSegueWithIdentifier("GoToMoreInfo", sender: self)
             break
         default:

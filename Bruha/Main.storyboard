@@ -515,6 +515,7 @@
                                             <outlet property="startTime" destination="Cre-SR-pg3" id="neP-5W-IzG"/>
                                             <outlet property="venueAddress" destination="qqU-nd-2Iw" id="8gt-uT-Nt8"/>
                                             <outlet property="venueName" destination="u0b-G5-u8A" id="1SG-tL-WS1"/>
+                                            <segue destination="Lf9-6e-lim" kind="modal" identifier="GoToMoreInfo" id="z7s-Lt-4ee"/>
                                         </connections>
                                     </tableViewCell>
                                 </prototypes>
@@ -537,7 +538,6 @@
                     </view>
                     <connections>
                         <outlet property="exploreTableView" destination="oaV-wG-kyD" id="2tT-Ma-OdX"/>
-                        <segue destination="Lf9-6e-lim" kind="modal" identifier="GoToMoreInfo" id="9Bg-Fl-RIr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wTm-IP-AoX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -930,6 +930,9 @@
                                     <color key="titleColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <segue destination="zh2-4j-mHu" kind="modal" id="437-ER-3h7"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aXy-RA-ze9">
                                 <rect key="frame" x="265" y="20" width="39" height="33"/>
@@ -957,10 +960,16 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="endTime" destination="YzI-D2-zsE" id="p4C-6q-QSZ"/>
                         <outlet property="eventTitle" destination="okZ-fP-f1i" id="fij-xy-o9K"/>
                         <outlet property="largeImage" destination="qyR-12-Puu" id="52F-0O-Ibw"/>
+                        <outlet property="location" destination="aAh-9n-Zpn" id="vZO-A7-0EP"/>
                         <outlet property="price" destination="R8H-WG-dGe" id="efj-BN-omi"/>
                         <outlet property="smallImage" destination="qKe-kv-8Qf" id="M8R-Gf-akR"/>
+                        <outlet property="startDate" destination="GLv-xP-DKQ" id="DHa-05-rhI"/>
+                        <outlet property="startTime" destination="fgV-9H-Zlx" id="ryb-2c-gRv"/>
+                        <outlet property="ticketPrice" destination="kz0-XH-fRd" id="WVy-LO-MFM"/>
+                        <outlet property="venue" destination="H6I-Wx-waa" id="Qh7-Px-kWI"/>
                         <outlet property="verticalScroll" destination="otr-oT-9gg" id="vMi-sj-1r0"/>
                     </connections>
                 </viewController>
@@ -1289,7 +1298,7 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Rkq-9y-PIT"/>
+        <segue reference="437-ER-3h7"/>
         <segue reference="zjY-DB-duY"/>
         <segue reference="uZx-1x-ByM"/>
     </inferredMetricsTieBreakers>
