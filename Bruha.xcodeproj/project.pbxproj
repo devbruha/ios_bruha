@@ -7,9 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1824C0871B6AA7BA0007840F /* MoreInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1824C0861B6AA7BA0007840F /* MoreInfoViewController.swift */; };
 		1835F8F31B5EAD7200FD1BD1 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1835F8F21B5EAD7200FD1BD1 /* Reachability.swift */; };
 		1835F8F51B5ECF3500FD1BD1 /* DashBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1835F8F41B5ECF3500FD1BD1 /* DashBoardViewController.swift */; };
 		184231FA1B5FF173003948F5 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184231F91B5FF173003948F5 /* ProfileViewController.swift */; };
+		18E2DD8C1B69537D007C61B5 /* DashLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E2DD8B1B69537D007C61B5 /* DashLine.swift */; };
 		3FBD3EDB6177AE183A0340DF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C40848564A9A9ABD06E1BFE /* libPods.a */; };
 		4560C5471B66D09900AB5382 /* SaveData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4560C5461B66D09900AB5382 /* SaveData.swift */; };
 		4560C5491B66D42000AB5382 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4560C5481B66D42000AB5382 /* EventViewController.swift */; };
@@ -60,10 +62,12 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		1824C0861B6AA7BA0007840F /* MoreInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreInfoViewController.swift; sourceTree = "<group>"; };
 		183286A81B6806B2007B5134 /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		1835F8F21B5EAD7200FD1BD1 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		1835F8F41B5ECF3500FD1BD1 /* DashBoardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashBoardViewController.swift; sourceTree = "<group>"; };
 		184231F91B5FF173003948F5 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		18E2DD8B1B69537D007C61B5 /* DashLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashLine.swift; sourceTree = "<group>"; };
 		4560C5461B66D09900AB5382 /* SaveData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveData.swift; sourceTree = "<group>"; };
 		4560C5481B66D42000AB5382 /* EventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
 		4560C54A1B66D44700AB5382 /* EventCircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCircleView.swift; sourceTree = "<group>"; };
@@ -191,6 +195,8 @@
 			isa = PBXGroup;
 			children = (
 				45FA05921B5D4188004AD819 /* GlobalVariables.swift */,
+				18E2DD8B1B69537D007C61B5 /* DashLine.swift */,
+				1824C0861B6AA7BA0007840F /* MoreInfoViewController.swift */,
 				183286A81B6806B2007B5134 /* Bridging-Header.h */,
 				45FA056B1B5D4158004AD819 /* Bruha.xcdatamodeld */,
 				45AFAF211B60331100BA6854 /* Processing */,
@@ -460,6 +466,7 @@
 				45FA05A51B5D4190004AD819 /* NetworkOperation.swift in Sources */,
 				4560C5491B66D42000AB5382 /* EventViewController.swift in Sources */,
 				4560C54D1B66D45100AB5382 /* EventRectangleView.swift in Sources */,
+				1824C0871B6AA7BA0007840F /* MoreInfoViewController.swift in Sources */,
 				45FA056D1B5D4158004AD819 /* Bruha.xcdatamodeld in Sources */,
 				45FA05961B5D4188004AD819 /* EventDBModel.swift in Sources */,
 				45FA056A1B5D4158004AD819 /* AppDelegate.swift in Sources */,
@@ -469,6 +476,7 @@
 				45FA05981B5D4188004AD819 /* Artist.swift in Sources */,
 				45D8986F1B5E89E6003ED862 /* RegisterService.swift in Sources */,
 				45FA05A41B5D4190004AD819 /* EventService.swift in Sources */,
+				18E2DD8C1B69537D007C61B5 /* DashLine.swift in Sources */,
 				1835F8F51B5ECF3500FD1BD1 /* DashBoardViewController.swift in Sources */,
 				45FA059C1B5D4188004AD819 /* ArtistDBModel.swift in Sources */,
 			);

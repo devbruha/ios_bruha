@@ -7,72 +7,98 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		004415E00AE770C0523552052C9F696F /* ARSPVisibilityState.h in Headers */ = {isa = PBXBuildFile; fileRef = FB32255B9EA064EBB4CCB59B4EFFEDE3 /* ARSPVisibilityState.h */; };
 		02343597B2DA4D9DC3044F471767962D /* SWTableViewCell.h in Headers */ = {isa = PBXBuildFile; fileRef = F966325ED1328B281F77CC34C4D775A9 /* SWTableViewCell.h */; };
 		04B5F22B8E40E0993BF243ADE6E0666F /* SWCellScrollView.m in Sources */ = {isa = PBXBuildFile; fileRef = FC3EE8DC3EF3470AB5D3E4B6B78803C5 /* SWCellScrollView.m */; };
 		0AC44EE7F6F204E829A14D69DBD8A182 /* SWLongPressGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = 81C804832C86C59284E717DBB35CDFE1 /* SWLongPressGestureRecognizer.m */; };
-		269DF4D65E4CADBD506F455B821420CA /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 035556EBF8F6AD7887161806B0F89508 /* Foundation.framework */; };
+		239323206DCE88C4B35B58F4BCFDEFB4 /* ARSPMainViewControllerSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 9F5F3F5BEAF3393CA91516D0029ADDBB /* ARSPMainViewControllerSegue.m */; };
+		33EA0DBD7E9031AC374DE13A33CD565C /* ARSPPanelViewControllerSegue.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D94ECA863E843DB5B1F649488DA6405 /* ARSPPanelViewControllerSegue.m */; };
 		458D90856078F09D40F0E432EB197F90 /* SWUtilityButtonView.m in Sources */ = {isa = PBXBuildFile; fileRef = 16C4D6A3FD3FD647ED424E150747FEA4 /* SWUtilityButtonView.m */; };
 		4914DD250B35D4C747CC9D997374A4A7 /* NSMutableArray+SWUtilityButtons.h in Headers */ = {isa = PBXBuildFile; fileRef = 831301B9CE30CF60350CFC73034A07EF /* NSMutableArray+SWUtilityButtons.h */; };
 		4E571FB70A4A3F416FBE60736715B363 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 035556EBF8F6AD7887161806B0F89508 /* Foundation.framework */; };
+		4E8EC2FF10993678622054367E795BAF /* ARSPContainerController.m in Sources */ = {isa = PBXBuildFile; fileRef = AA60C492B331F116EFF31EFD0A493689 /* ARSPContainerController.m */; };
 		50DF4FA477ED67E4B91B39B082350CDB /* SWUtilityButtonTapGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 9470A22E376584153020987EA5CF31AB /* SWUtilityButtonTapGestureRecognizer.h */; };
+		530915AEBD3721D5B682BFA33B434E96 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 035556EBF8F6AD7887161806B0F89508 /* Foundation.framework */; };
+		5AF9F47FF1B3847546DDB26CC33C2F3C /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 035556EBF8F6AD7887161806B0F89508 /* Foundation.framework */; };
 		708DF68BB34B6191E08027022E00E858 /* SWUtilityButtonTapGestureRecognizer.m in Sources */ = {isa = PBXBuildFile; fileRef = EBF9638E80052256979719EE1D300CCE /* SWUtilityButtonTapGestureRecognizer.m */; };
+		72B975390D6950B8FD14E977D8F87625 /* ARSPContainerController.h in Headers */ = {isa = PBXBuildFile; fileRef = 3600512977DAAFED963570EA92044E19 /* ARSPContainerController.h */; };
 		8440C0485667BBA1C37AC306020EBE87 /* SWTableViewCell-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 6FBC6A16797614B63BAA8C9F4CAE9AF6 /* SWTableViewCell-dummy.m */; };
 		94059260D174388FA55776F3B5ED4992 /* SWCellScrollView.h in Headers */ = {isa = PBXBuildFile; fileRef = 44B1D2DF9098AFFC922F54F1F0948CC4 /* SWCellScrollView.h */; };
 		9D99D6E31798EB6767BC94348A01ABE0 /* SWUtilityButtonView.h in Headers */ = {isa = PBXBuildFile; fileRef = 640A5B869A6211B1B9630E3551EC2125 /* SWUtilityButtonView.h */; };
-		A7A94BD9DDF5D2E30A6CC923AB81BD07 /* Pods-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 40D31C386ADD7E223A53BE4C37ED3F84 /* Pods-dummy.m */; };
+		A260DAD9DE768D0ECB2614DBDE24ACC1 /* ARSPVisibilityStateDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = 26F6C6437CDC0FF2DBE244B0C898440F /* ARSPVisibilityStateDelegate.h */; };
 		A9C183B85BBBA6B8CECA4FFBC5B1D843 /* SWTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = EFC5B7967F2DD30BC721D6E61C85BA62 /* SWTableViewCell.m */; };
 		B8328810D6666C0837E84488D96DD50C /* SWLongPressGestureRecognizer.h in Headers */ = {isa = PBXBuildFile; fileRef = 3F6DC1D7C5B3D8AFBB4557B22A5E68B4 /* SWLongPressGestureRecognizer.h */; };
+		D353884A7A67E835DE788FD21B5D1779 /* ARSPDragDelegate.h in Headers */ = {isa = PBXBuildFile; fileRef = DB77AC7F612EA444789607D07FABB139 /* ARSPDragDelegate.h */; };
+		DA07F84A7E484FADDD9C4A40DBDDC326 /* Pods-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = A220E18F16B733DEFDE1EF328F6B58CC /* Pods-dummy.m */; };
+		DF4EA375A64FEE9899F2B84D497C8BC7 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F6016709B376DE85A707FAF04D731840 /* UIKit.framework */; };
+		EB023E5CBB1A6D4908016401351455F4 /* ARSPMainViewControllerSegue.h in Headers */ = {isa = PBXBuildFile; fileRef = F431A9696B59F37E3BDCAC5167BFF659 /* ARSPMainViewControllerSegue.h */; };
+		F318147B49602E127D27453949AEF4A3 /* ARSPPanelViewControllerSegue.h in Headers */ = {isa = PBXBuildFile; fileRef = 90AB95767A76077A77083DA804346E4C /* ARSPPanelViewControllerSegue.h */; };
 		F36F4AA24579B8D13A013C9A4216361C /* NSMutableArray+SWUtilityButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = 76F20E1294DF68273D66E175B18389DE /* NSMutableArray+SWUtilityButtons.m */; };
+		F9C3C3CE32735F0AD9A6C15E6AAEBEE5 /* ARSlidingPanel-dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 1A6BA69E4F64DD8C5FE61D9D572D585B /* ARSlidingPanel-dummy.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		CE241EDA9A2311C97A822B15BA8D7B33 /* PBXContainerItemProxy */ = {
+		3C2C84658A8E47CF8CC5C02586AF40A2 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = CDE0B7668B6EC1B2BF166A65E070AF5E;
 			remoteInfo = SWTableViewCell;
 		};
+		C9A415D2FDC44F78708B178D4357789B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D41D8CD98F00B204E9800998ECF8427E /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B54BB5A5CA77FE7595B405FDDF52F5C0;
+			remoteInfo = ARSlidingPanel;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		01E9CF199A5D1CDFF5AD6352486AE438 /* SWTableViewCell-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "SWTableViewCell-Private.xcconfig"; sourceTree = "<group>"; };
 		035556EBF8F6AD7887161806B0F89508 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/Foundation.framework; sourceTree = DEVELOPER_DIR; };
-		03EC86C8972FE0C3CD96253E2825BE3E /* SWTableViewCell.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SWTableViewCell.xcconfig; sourceTree = "<group>"; };
 		15A529C27057E4A57D259CBC6E6CE49C /* Pods-acknowledgements.markdown */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; path = "Pods-acknowledgements.markdown"; sourceTree = "<group>"; };
 		16C4D6A3FD3FD647ED424E150747FEA4 /* SWUtilityButtonView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SWUtilityButtonView.m; path = SWTableViewCell/PodFiles/SWUtilityButtonView.m; sourceTree = "<group>"; };
-		2A71A539E059C1633A8206D4CD4C1272 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		1A6BA69E4F64DD8C5FE61D9D572D585B /* ARSlidingPanel-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "ARSlidingPanel-dummy.m"; sourceTree = "<group>"; };
+		24C0CFD9634ABF80136C8D0E6A01A12F /* ARSlidingPanel-Private.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = "ARSlidingPanel-Private.xcconfig"; sourceTree = "<group>"; };
+		26F6C6437CDC0FF2DBE244B0C898440F /* ARSPVisibilityStateDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ARSPVisibilityStateDelegate.h; path = Classes/ARSPVisibilityStateDelegate.h; sourceTree = "<group>"; };
+		3600512977DAAFED963570EA92044E19 /* ARSPContainerController.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ARSPContainerController.h; path = Classes/ARSPContainerController.h; sourceTree = "<group>"; };
 		3F6DC1D7C5B3D8AFBB4557B22A5E68B4 /* SWLongPressGestureRecognizer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SWLongPressGestureRecognizer.h; path = SWTableViewCell/PodFiles/SWLongPressGestureRecognizer.h; sourceTree = "<group>"; };
-		40D31C386ADD7E223A53BE4C37ED3F84 /* Pods-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-dummy.m"; sourceTree = "<group>"; };
 		44B1D2DF9098AFFC922F54F1F0948CC4 /* SWCellScrollView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SWCellScrollView.h; path = SWTableViewCell/PodFiles/SWCellScrollView.h; sourceTree = "<group>"; };
-		588266C5B742D4564663D03C0969DA2E /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.release.xcconfig; sourceTree = "<group>"; };
+		4D94ECA863E843DB5B1F649488DA6405 /* ARSPPanelViewControllerSegue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ARSPPanelViewControllerSegue.m; path = Classes/ARSPPanelViewControllerSegue.m; sourceTree = "<group>"; };
+		6062EBEDD63132A672507A223E4D0A3F /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		640A5B869A6211B1B9630E3551EC2125 /* SWUtilityButtonView.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SWUtilityButtonView.h; path = SWTableViewCell/PodFiles/SWUtilityButtonView.h; sourceTree = "<group>"; };
 		641AE05DD55E5E6AC1590CD7B4A18F97 /* Pods-resources.sh */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.script.sh; path = "Pods-resources.sh"; sourceTree = "<group>"; };
+		6BA152343011944D45C33F4E5ACE8875 /* SWTableViewCell-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SWTableViewCell-prefix.pch"; sourceTree = "<group>"; };
 		6FBC6A16797614B63BAA8C9F4CAE9AF6 /* SWTableViewCell-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "SWTableViewCell-dummy.m"; sourceTree = "<group>"; };
+		7591DA9906061821C50D2926F2EDC913 /* ARSlidingPanel.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = ARSlidingPanel.xcconfig; sourceTree = "<group>"; };
 		76F20E1294DF68273D66E175B18389DE /* NSMutableArray+SWUtilityButtons.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = "NSMutableArray+SWUtilityButtons.m"; path = "SWTableViewCell/PodFiles/NSMutableArray+SWUtilityButtons.m"; sourceTree = "<group>"; };
 		81C804832C86C59284E717DBB35CDFE1 /* SWLongPressGestureRecognizer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SWLongPressGestureRecognizer.m; path = SWTableViewCell/PodFiles/SWLongPressGestureRecognizer.m; sourceTree = "<group>"; };
 		831301B9CE30CF60350CFC73034A07EF /* NSMutableArray+SWUtilityButtons.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = "NSMutableArray+SWUtilityButtons.h"; path = "SWTableViewCell/PodFiles/NSMutableArray+SWUtilityButtons.h"; sourceTree = "<group>"; };
+		90AB95767A76077A77083DA804346E4C /* ARSPPanelViewControllerSegue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ARSPPanelViewControllerSegue.h; path = Classes/ARSPPanelViewControllerSegue.h; sourceTree = "<group>"; };
 		9470A22E376584153020987EA5CF31AB /* SWUtilityButtonTapGestureRecognizer.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SWUtilityButtonTapGestureRecognizer.h; path = SWTableViewCell/PodFiles/SWUtilityButtonTapGestureRecognizer.h; sourceTree = "<group>"; };
+		959EA9246D50779924FF57E011F0A569 /* libARSlidingPanel.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libARSlidingPanel.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		96B44F2FCBFCACB80E54E2E07D0996FB /* libSWTableViewCell.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libSWTableViewCell.a; sourceTree = BUILT_PRODUCTS_DIR; };
-		B9B4567149756E0E62B31DFC1E0AAEAC /* SWTableViewCell-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "SWTableViewCell-prefix.pch"; sourceTree = "<group>"; };
+		9F5F3F5BEAF3393CA91516D0029ADDBB /* ARSPMainViewControllerSegue.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ARSPMainViewControllerSegue.m; path = Classes/ARSPMainViewControllerSegue.m; sourceTree = "<group>"; };
+		A220E18F16B733DEFDE1EF328F6B58CC /* Pods-dummy.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; path = "Pods-dummy.m"; sourceTree = "<group>"; };
+		A3A9533B9902343330C6FCD31A85FE01 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.debug.xcconfig; sourceTree = "<group>"; };
+		A7491BDD53D2317657250B22529F9F54 /* SWTableViewCell.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = SWTableViewCell.xcconfig; sourceTree = "<group>"; };
+		AA60C492B331F116EFF31EFD0A493689 /* ARSPContainerController.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = ARSPContainerController.m; path = Classes/ARSPContainerController.m; sourceTree = "<group>"; };
+		B2373BE112DE2974098922385024AC1F /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.release.xcconfig; sourceTree = "<group>"; };
 		BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text; name = Podfile; path = ../Podfile; sourceTree = SOURCE_ROOT; xcLanguageSpecificationIdentifier = xcode.lang.ruby; };
 		BF59BC15D23E1E1912C8F334E7236813 /* Pods-acknowledgements.plist */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.plist.xml; path = "Pods-acknowledgements.plist"; sourceTree = "<group>"; };
-		E2B19DFA13C25C8FA785AA0C9A9FFBB0 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; path = Pods.debug.xcconfig; sourceTree = "<group>"; };
+		D102EC6A14053EA47DDFBEB0E34D0083 /* ARSlidingPanel-prefix.pch */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; path = "ARSlidingPanel-prefix.pch"; sourceTree = "<group>"; };
+		DB77AC7F612EA444789607D07FABB139 /* ARSPDragDelegate.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ARSPDragDelegate.h; path = Classes/ARSPDragDelegate.h; sourceTree = "<group>"; };
 		EBF9638E80052256979719EE1D300CCE /* SWUtilityButtonTapGestureRecognizer.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SWUtilityButtonTapGestureRecognizer.m; path = SWTableViewCell/PodFiles/SWUtilityButtonTapGestureRecognizer.m; sourceTree = "<group>"; };
 		EFC5B7967F2DD30BC721D6E61C85BA62 /* SWTableViewCell.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SWTableViewCell.m; path = SWTableViewCell/PodFiles/SWTableViewCell.m; sourceTree = "<group>"; };
+		F431A9696B59F37E3BDCAC5167BFF659 /* ARSPMainViewControllerSegue.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ARSPMainViewControllerSegue.h; path = Classes/ARSPMainViewControllerSegue.h; sourceTree = "<group>"; };
+		F6016709B376DE85A707FAF04D731840 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS8.3.sdk/System/Library/Frameworks/UIKit.framework; sourceTree = DEVELOPER_DIR; };
 		F966325ED1328B281F77CC34C4D775A9 /* SWTableViewCell.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = SWTableViewCell.h; path = SWTableViewCell/PodFiles/SWTableViewCell.h; sourceTree = "<group>"; };
+		FB32255B9EA064EBB4CCB59B4EFFEDE3 /* ARSPVisibilityState.h */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.h; name = ARSPVisibilityState.h; path = Classes/ARSPVisibilityState.h; sourceTree = "<group>"; };
 		FC3EE8DC3EF3470AB5D3E4B6B78803C5 /* SWCellScrollView.m */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = sourcecode.c.objc; name = SWCellScrollView.m; path = SWTableViewCell/PodFiles/SWCellScrollView.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		2E91C4874338FE44F9590F6B8DD5C947 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				269DF4D65E4CADBD506F455B821420CA /* Foundation.framework in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 		3074EEAB6AB7E3D27DA4B95984335394 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -81,88 +107,84 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4F1BB49649E8645C0F212308F9118165 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				530915AEBD3721D5B682BFA33B434E96 /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		DC96B401A5E4CAD0708F12ECFEA6D925 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5AF9F47FF1B3847546DDB26CC33C2F3C /* Foundation.framework in Frameworks */,
+				DF4EA375A64FEE9899F2B84D497C8BC7 /* UIKit.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		53F661C0CA7190D2CF05023FB33D61E4 /* iOS */ = {
+		16D65A44AAD18D135A5D59F5FCDFFF94 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
-				035556EBF8F6AD7887161806B0F89508 /* Foundation.framework */,
+				26655EBACFA0F48F1EE25DB15D58A2D2 /* ARSlidingPanel */,
+				811A911C798599CC91F05D4E452464ED /* SWTableViewCell */,
 			);
-			name = iOS;
+			name = Pods;
 			sourceTree = "<group>";
 		};
-		71495348F51F0AFC61694D469542DFA5 /* Support Files */ = {
+		26655EBACFA0F48F1EE25DB15D58A2D2 /* ARSlidingPanel */ = {
 			isa = PBXGroup;
 			children = (
-				03EC86C8972FE0C3CD96253E2825BE3E /* SWTableViewCell.xcconfig */,
+				3600512977DAAFED963570EA92044E19 /* ARSPContainerController.h */,
+				AA60C492B331F116EFF31EFD0A493689 /* ARSPContainerController.m */,
+				DB77AC7F612EA444789607D07FABB139 /* ARSPDragDelegate.h */,
+				F431A9696B59F37E3BDCAC5167BFF659 /* ARSPMainViewControllerSegue.h */,
+				9F5F3F5BEAF3393CA91516D0029ADDBB /* ARSPMainViewControllerSegue.m */,
+				90AB95767A76077A77083DA804346E4C /* ARSPPanelViewControllerSegue.h */,
+				4D94ECA863E843DB5B1F649488DA6405 /* ARSPPanelViewControllerSegue.m */,
+				FB32255B9EA064EBB4CCB59B4EFFEDE3 /* ARSPVisibilityState.h */,
+				26F6C6437CDC0FF2DBE244B0C898440F /* ARSPVisibilityStateDelegate.h */,
+				DD7FB782084BE14D8801457A6ADA8C10 /* Support Files */,
+			);
+			path = ARSlidingPanel;
+			sourceTree = "<group>";
+		};
+		2666E9CC57D9567E13E5A5C9D91AB2CF /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				A7491BDD53D2317657250B22529F9F54 /* SWTableViewCell.xcconfig */,
 				01E9CF199A5D1CDFF5AD6352486AE438 /* SWTableViewCell-Private.xcconfig */,
 				6FBC6A16797614B63BAA8C9F4CAE9AF6 /* SWTableViewCell-dummy.m */,
-				B9B4567149756E0E62B31DFC1E0AAEAC /* SWTableViewCell-prefix.pch */,
+				6BA152343011944D45C33F4E5ACE8875 /* SWTableViewCell-prefix.pch */,
 			);
 			name = "Support Files";
 			path = "../Target Support Files/SWTableViewCell";
 			sourceTree = "<group>";
 		};
-		7523D91959F5B2C6AC17DDAC2AA63CFD /* Pods */ = {
+		433CD3331B6C3787F473C941B61FC68F /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				DAF2A9393675DCDC4DC9C0E1EB06CB1B /* SWTableViewCell */,
+				D0FB9306D21AF23A056944AE037CBFFF /* iOS */,
 			);
-			name = Pods;
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		7DB346D0F39D3F0E887471402A8071AB = {
 			isa = PBXGroup;
 			children = (
 				BA6428E9F66FD5A23C0A2E06ED26CD2F /* Podfile */,
-				BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */,
-				7523D91959F5B2C6AC17DDAC2AA63CFD /* Pods */,
+				433CD3331B6C3787F473C941B61FC68F /* Frameworks */,
+				16D65A44AAD18D135A5D59F5FCDFFF94 /* Pods */,
 				CCA510CFBEA2D207524CDA0D73C3B561 /* Products */,
 				D2411A5FE7F7A004607BED49990C37F4 /* Targets Support Files */,
 			);
 			sourceTree = "<group>";
 		};
-		952EEBFAF8F7E620423C9F156F25A506 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				15A529C27057E4A57D259CBC6E6CE49C /* Pods-acknowledgements.markdown */,
-				BF59BC15D23E1E1912C8F334E7236813 /* Pods-acknowledgements.plist */,
-				40D31C386ADD7E223A53BE4C37ED3F84 /* Pods-dummy.m */,
-				641AE05DD55E5E6AC1590CD7B4A18F97 /* Pods-resources.sh */,
-				E2B19DFA13C25C8FA785AA0C9A9FFBB0 /* Pods.debug.xcconfig */,
-				588266C5B742D4564663D03C0969DA2E /* Pods.release.xcconfig */,
-			);
-			name = Pods;
-			path = "Target Support Files/Pods";
-			sourceTree = "<group>";
-		};
-		BC3CA7F9E30CC8F7E2DD044DD34432FC /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-				53F661C0CA7190D2CF05023FB33D61E4 /* iOS */,
-			);
-			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		CCA510CFBEA2D207524CDA0D73C3B561 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				2A71A539E059C1633A8206D4CD4C1272 /* libPods.a */,
-				96B44F2FCBFCACB80E54E2E07D0996FB /* libSWTableViewCell.a */,
-			);
-			name = Products;
-			sourceTree = "<group>";
-		};
-		D2411A5FE7F7A004607BED49990C37F4 /* Targets Support Files */ = {
-			isa = PBXGroup;
-			children = (
-				952EEBFAF8F7E620423C9F156F25A506 /* Pods */,
-			);
-			name = "Targets Support Files";
-			sourceTree = "<group>";
-		};
-		DAF2A9393675DCDC4DC9C0E1EB06CB1B /* SWTableViewCell */ = {
+		811A911C798599CC91F05D4E452464ED /* SWTableViewCell */ = {
 			isa = PBXGroup;
 			children = (
 				831301B9CE30CF60350CFC73034A07EF /* NSMutableArray+SWUtilityButtons.h */,
@@ -177,14 +199,80 @@
 				EBF9638E80052256979719EE1D300CCE /* SWUtilityButtonTapGestureRecognizer.m */,
 				640A5B869A6211B1B9630E3551EC2125 /* SWUtilityButtonView.h */,
 				16C4D6A3FD3FD647ED424E150747FEA4 /* SWUtilityButtonView.m */,
-				71495348F51F0AFC61694D469542DFA5 /* Support Files */,
+				2666E9CC57D9567E13E5A5C9D91AB2CF /* Support Files */,
 			);
 			path = SWTableViewCell;
+			sourceTree = "<group>";
+		};
+		952EEBFAF8F7E620423C9F156F25A506 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				15A529C27057E4A57D259CBC6E6CE49C /* Pods-acknowledgements.markdown */,
+				BF59BC15D23E1E1912C8F334E7236813 /* Pods-acknowledgements.plist */,
+				A220E18F16B733DEFDE1EF328F6B58CC /* Pods-dummy.m */,
+				641AE05DD55E5E6AC1590CD7B4A18F97 /* Pods-resources.sh */,
+				A3A9533B9902343330C6FCD31A85FE01 /* Pods.debug.xcconfig */,
+				B2373BE112DE2974098922385024AC1F /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			path = "Target Support Files/Pods";
+			sourceTree = "<group>";
+		};
+		CCA510CFBEA2D207524CDA0D73C3B561 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				959EA9246D50779924FF57E011F0A569 /* libARSlidingPanel.a */,
+				6062EBEDD63132A672507A223E4D0A3F /* libPods.a */,
+				96B44F2FCBFCACB80E54E2E07D0996FB /* libSWTableViewCell.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		D0FB9306D21AF23A056944AE037CBFFF /* iOS */ = {
+			isa = PBXGroup;
+			children = (
+				035556EBF8F6AD7887161806B0F89508 /* Foundation.framework */,
+				F6016709B376DE85A707FAF04D731840 /* UIKit.framework */,
+			);
+			name = iOS;
+			sourceTree = "<group>";
+		};
+		D2411A5FE7F7A004607BED49990C37F4 /* Targets Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				952EEBFAF8F7E620423C9F156F25A506 /* Pods */,
+			);
+			name = "Targets Support Files";
+			sourceTree = "<group>";
+		};
+		DD7FB782084BE14D8801457A6ADA8C10 /* Support Files */ = {
+			isa = PBXGroup;
+			children = (
+				7591DA9906061821C50D2926F2EDC913 /* ARSlidingPanel.xcconfig */,
+				24C0CFD9634ABF80136C8D0E6A01A12F /* ARSlidingPanel-Private.xcconfig */,
+				1A6BA69E4F64DD8C5FE61D9D572D585B /* ARSlidingPanel-dummy.m */,
+				D102EC6A14053EA47DDFBEB0E34D0083 /* ARSlidingPanel-prefix.pch */,
+			);
+			name = "Support Files";
+			path = "../Target Support Files/ARSlidingPanel";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
+		A45EC8E7A7DFE4267985D23F4042D8C0 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				72B975390D6950B8FD14E977D8F87625 /* ARSPContainerController.h in Headers */,
+				D353884A7A67E835DE788FD21B5D1779 /* ARSPDragDelegate.h in Headers */,
+				EB023E5CBB1A6D4908016401351455F4 /* ARSPMainViewControllerSegue.h in Headers */,
+				F318147B49602E127D27453949AEF4A3 /* ARSPPanelViewControllerSegue.h in Headers */,
+				004415E00AE770C0523552052C9F696F /* ARSPVisibilityState.h in Headers */,
+				A260DAD9DE768D0ECB2614DBDE24ACC1 /* ARSPVisibilityStateDelegate.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		FBD05ED36BC00EC62C78A7B198EB64F7 /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -201,21 +289,39 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
-		0751B22BA7CF5AA0A9D21CE685B34827 /* Pods */ = {
+		11A88ED9A6A3E2194472781A7FD275C0 /* Pods */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 1E7CB6D0CEC502ED517228B32862CDD2 /* Build configuration list for PBXNativeTarget "Pods" */;
+			buildConfigurationList = D7B333C145850AA581ED21C54DB4BF9B /* Build configuration list for PBXNativeTarget "Pods" */;
 			buildPhases = (
-				ED79F1A2D9106EB4FF945434C7986CF7 /* Sources */,
-				2E91C4874338FE44F9590F6B8DD5C947 /* Frameworks */,
+				20A55356017A4F8309DE014860AEFB6B /* Sources */,
+				4F1BB49649E8645C0F212308F9118165 /* Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				4117CFAFBAD0BB74C8EDA15D8BCB1B2B /* PBXTargetDependency */,
+				8D35F4AE322E5E475E3FD7DC73D2E8B5 /* PBXTargetDependency */,
+				72C054EE414791DF395094FABB3EA6B4 /* PBXTargetDependency */,
 			);
 			name = Pods;
 			productName = Pods;
-			productReference = 2A71A539E059C1633A8206D4CD4C1272 /* libPods.a */;
+			productReference = 6062EBEDD63132A672507A223E4D0A3F /* libPods.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+		B54BB5A5CA77FE7595B405FDDF52F5C0 /* ARSlidingPanel */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 2621402A0DF21110240A80C9CA1FDB04 /* Build configuration list for PBXNativeTarget "ARSlidingPanel" */;
+			buildPhases = (
+				E2AD672846514AAE5A7A091365EB1DF8 /* Sources */,
+				DC96B401A5E4CAD0708F12ECFEA6D925 /* Frameworks */,
+				A45EC8E7A7DFE4267985D23F4042D8C0 /* Headers */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ARSlidingPanel;
+			productName = ARSlidingPanel;
+			productReference = 959EA9246D50779924FF57E011F0A569 /* libARSlidingPanel.a */;
 			productType = "com.apple.product-type.library.static";
 		};
 		CDE0B7668B6EC1B2BF166A65E070AF5E /* SWTableViewCell */ = {
@@ -256,13 +362,22 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0751B22BA7CF5AA0A9D21CE685B34827 /* Pods */,
+				B54BB5A5CA77FE7595B405FDDF52F5C0 /* ARSlidingPanel */,
+				11A88ED9A6A3E2194472781A7FD275C0 /* Pods */,
 				CDE0B7668B6EC1B2BF166A65E070AF5E /* SWTableViewCell */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXSourcesBuildPhase section */
+		20A55356017A4F8309DE014860AEFB6B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				DA07F84A7E484FADDD9C4A40DBDDC326 /* Pods-dummy.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		773CAFB38E297B2514200DAAE08669A1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -277,29 +392,54 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		ED79F1A2D9106EB4FF945434C7986CF7 /* Sources */ = {
+		E2AD672846514AAE5A7A091365EB1DF8 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A7A94BD9DDF5D2E30A6CC923AB81BD07 /* Pods-dummy.m in Sources */,
+				4E8EC2FF10993678622054367E795BAF /* ARSPContainerController.m in Sources */,
+				239323206DCE88C4B35B58F4BCFDEFB4 /* ARSPMainViewControllerSegue.m in Sources */,
+				33EA0DBD7E9031AC374DE13A33CD565C /* ARSPPanelViewControllerSegue.m in Sources */,
+				F9C3C3CE32735F0AD9A6C15E6AAEBEE5 /* ARSlidingPanel-dummy.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		4117CFAFBAD0BB74C8EDA15D8BCB1B2B /* PBXTargetDependency */ = {
+		72C054EE414791DF395094FABB3EA6B4 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			name = SWTableViewCell;
 			target = CDE0B7668B6EC1B2BF166A65E070AF5E /* SWTableViewCell */;
-			targetProxy = CE241EDA9A2311C97A822B15BA8D7B33 /* PBXContainerItemProxy */;
+			targetProxy = 3C2C84658A8E47CF8CC5C02586AF40A2 /* PBXContainerItemProxy */;
+		};
+		8D35F4AE322E5E475E3FD7DC73D2E8B5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			name = ARSlidingPanel;
+			target = B54BB5A5CA77FE7595B405FDDF52F5C0 /* ARSlidingPanel */;
+			targetProxy = C9A415D2FDC44F78708B178D4357789B /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
-		5E004D018321912C8186A6996743F746 /* Debug */ = {
+		056214DB958D3B466C495202BB997C18 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E2B19DFA13C25C8FA785AA0C9A9FFBB0 /* Pods.debug.xcconfig */;
+			baseConfigurationReference = 24C0CFD9634ABF80136C8D0E6A01A12F /* ARSlidingPanel-Private.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/ARSlidingPanel/ARSlidingPanel-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		1124F83C49B73F47B15365DE8BEEB1A5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = A3A9533B9902343330C6FCD31A85FE01 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -329,9 +469,9 @@
 			};
 			name = Debug;
 		};
-		9E0AFA264CD8A390F007663AEFD4448E /* Release */ = {
+		9C91B75E3497C158AE92D9F263BA9DA5 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 588266C5B742D4564663D03C0969DA2E /* Pods.release.xcconfig */;
+			baseConfigurationReference = B2373BE112DE2974098922385024AC1F /* Pods.release.xcconfig */;
 			buildSettings = {
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
@@ -383,6 +523,22 @@
 				SYMROOT = "${SRCROOT}/../build";
 			};
 			name = Debug;
+		};
+		A7D401CD0CB7DBB279E3394B8678DDC0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 24C0CFD9634ABF80136C8D0E6A01A12F /* ARSlidingPanel-Private.xcconfig */;
+			buildSettings = {
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_PREFIX_HEADER = "Target Support Files/ARSlidingPanel/ARSlidingPanel-prefix.pch";
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				OTHER_LDFLAGS = "";
+				OTHER_LIBTOOLFLAGS = "";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
 		};
 		D014ECDF2444DDB184A757F20B965CA0 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -437,11 +593,11 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		1E7CB6D0CEC502ED517228B32862CDD2 /* Build configuration list for PBXNativeTarget "Pods" */ = {
+		2621402A0DF21110240A80C9CA1FDB04 /* Build configuration list for PBXNativeTarget "ARSlidingPanel" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				5E004D018321912C8186A6996743F746 /* Debug */,
-				9E0AFA264CD8A390F007663AEFD4448E /* Release */,
+				056214DB958D3B466C495202BB997C18 /* Debug */,
+				A7D401CD0CB7DBB279E3394B8678DDC0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -460,6 +616,15 @@
 			buildConfigurations = (
 				6F60179F5E6A7ECE363D2BE635CEB2B2 /* Debug */,
 				D014ECDF2444DDB184A757F20B965CA0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D7B333C145850AA581ED21C54DB4BF9B /* Build configuration list for PBXNativeTarget "Pods" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				1124F83C49B73F47B15365DE8BEEB1A5 /* Debug */,
+				9C91B75E3497C158AE92D9F263BA9DA5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;

@@ -49,8 +49,8 @@ class EventViewController: UIViewController, SWTableViewCellDelegate{
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        let userInfo = FetchData(context: managedObjectContext).fetchEvents()
-        return (userInfo?.count)!
+        let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
+        return (eventInfo?.count)!
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -65,8 +65,8 @@ class EventViewController: UIViewController, SWTableViewCellDelegate{
         //cell.lblTitle.text=stringTitle
         cell.ExploreImage.image = UIImage(named: strCarName)
         
-        let userInfo = FetchData(context: managedObjectContext).fetchEvents()
-        let event = userInfo![indexPath.row]
+        let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
+        let event = eventInfo![indexPath.row]
         
         let circViewWidthConstraint = NSLayoutConstraint (item: cell.circView, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: screenHeight)
         
@@ -143,7 +143,7 @@ class EventViewController: UIViewController, SWTableViewCellDelegate{
             break
         case 2:
             //More info
-            //self.performSegueWithIdentifier("GoToMoreInfo", sender: self)
+            self.performSegueWithIdentifier("GoToMoreInfo", sender: self)
             break
         default:
             break

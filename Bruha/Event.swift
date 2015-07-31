@@ -49,7 +49,13 @@ struct Event {
         
         eventVenueAddress = "\(streetNo!) \(streetName!), \(postalCode!)"
         
-        eventPrice = eventDictionary["Admission_price"] as? String
+        if let admission = eventDictionary["Admission_price"] as? String{
+            
+            eventPrice = admission
+        }
+        else{
+            eventPrice = "0.00"
+        }
         
         eventName = eventDictionary["event_name"] as? String
         
