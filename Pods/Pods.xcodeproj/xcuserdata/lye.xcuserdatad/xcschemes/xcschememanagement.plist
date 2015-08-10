@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>MBCalendarKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -22,12 +27,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>11A88ED9A6A3E2194472781A7FD275C0</key>
+		<key>0FDFEF7AEEA6608736B7054EB637F027</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B54BB5A5CA77FE7595B405FDDF52F5C0</key>
+		<key>730CE8C6E3FEA67ECD15A6C3E0DE80E3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AAC92C7740A366DC91C52A86851CBD06</key>
 		<dict>
 			<key>primary</key>
 			<true/>

@@ -1,0 +1,6 @@
+#include "ARSlidingPanel.xcconfig"
+GCC_PREPROCESSOR_DEFINITIONS = $(inherited) COCOAPODS=1
+HEADER_SEARCH_PATHS = "${PODS_ROOT}/Headers/Private" "${PODS_ROOT}/Headers/Private/ARSlidingPanel" "${PODS_ROOT}/Headers/Public" "${PODS_ROOT}/Headers/Public/ARSlidingPanel" "${PODS_ROOT}/Headers/Public/MBCalendarKit" "${PODS_ROOT}/Headers/Public/SWTableViewCell"
+OTHER_LDFLAGS = ${ARSLIDINGPANEL_OTHER_LDFLAGS}
+PODS_ROOT = ${SRCROOT}
+SKIP_INSTALL = YES

@@ -37,6 +37,7 @@ class EventTableViewCell: SWTableViewCell {
         tapRec.addTarget(self, action: "tappedView:")
         self.addGestureRecognizer(tapRec)
         // Initialization code
+
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
