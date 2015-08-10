@@ -47,6 +47,7 @@
 		452BC0CA1B791238003E7142 /* VenueTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452BC0C91B791238003E7142 /* VenueTableViewCell.swift */; };
 		452BC0CC1B791251003E7142 /* ArtistTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452BC0CB1B791251003E7142 /* ArtistTableViewCell.swift */; };
 		452BC0CE1B791260003E7142 /* OrganizationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452BC0CD1B791260003E7142 /* OrganizationTableViewCell.swift */; };
+		452BC0D01B7937D5003E7142 /* MapFilterPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452BC0CF1B7937D5003E7142 /* MapFilterPanelViewController.swift */; };
 		4560C5471B66D09900AB5382 /* SaveData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4560C5461B66D09900AB5382 /* SaveData.swift */; };
 		4560C5491B66D42000AB5382 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4560C5481B66D42000AB5382 /* EventViewController.swift */; };
 		4560C54B1B66D44700AB5382 /* EventCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4560C54A1B66D44700AB5382 /* EventCircleView.swift */; };
@@ -136,6 +137,7 @@
 		452BC0C91B791238003E7142 /* VenueTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueTableViewCell.swift; sourceTree = "<group>"; };
 		452BC0CB1B791251003E7142 /* ArtistTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistTableViewCell.swift; sourceTree = "<group>"; };
 		452BC0CD1B791260003E7142 /* OrganizationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrganizationTableViewCell.swift; sourceTree = "<group>"; };
+		452BC0CF1B7937D5003E7142 /* MapFilterPanelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapFilterPanelViewController.swift; sourceTree = "<group>"; };
 		4560C5461B66D09900AB5382 /* SaveData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveData.swift; sourceTree = "<group>"; };
 		4560C5481B66D42000AB5382 /* EventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
 		4560C54A1B66D44700AB5382 /* EventCircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCircleView.swift; sourceTree = "<group>"; };
@@ -298,6 +300,7 @@
 				1824C0861B6AA7BA0007840F /* MoreInfoViewController.swift */,
 				18D2169C1B6BF1D9005DAAA8 /* EventFilterPanelViewController.swift */,
 				18A2A11A1B728241005E1DCB /* CalendarViewController.swift */,
+				452BC0CF1B7937D5003E7142 /* MapFilterPanelViewController.swift */,
 				180F6DFD1B75006800F86BF5 /* MapViewController.swift */,
 				183286A81B6806B2007B5134 /* Bridging-Header.h */,
 				181EB6041B714B6300B9295E /* CalendarKit */,
@@ -612,6 +615,7 @@
 				45FA056D1B5D4158004AD819 /* Bruha.xcdatamodeld in Sources */,
 				45FA05961B5D4188004AD819 /* EventDBModel.swift in Sources */,
 				45FA056A1B5D4158004AD819 /* AppDelegate.swift in Sources */,
+				452BC0D01B7937D5003E7142 /* MapFilterPanelViewController.swift in Sources */,
 				4560C5471B66D09900AB5382 /* SaveData.swift in Sources */,
 				45FA05BE1B5D640A004AD819 /* SignUpViewController.swift in Sources */,
 				45FA059A1B5D4188004AD819 /* VenueDBModel.swift in Sources */,
