@@ -12,6 +12,7 @@ class DashBoardViewController: UIViewController {
 
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var exploreImage: UIImageView!
+    @IBOutlet weak var calendarImage: UIImageView!
     
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
@@ -47,6 +48,11 @@ class DashBoardViewController: UIViewController {
         self.performSegueWithIdentifier("GoToExplore", sender: self)
     }
     
+    func calendarImageTapped(){
+        var storyboard = UIStoryboard(name: "Main", bundle: nil)
+        self.performSegueWithIdentifier("GoToCalendar", sender: self)
+    }
+    
     func performImageSegue(){
         var tgr1 = UITapGestureRecognizer(target:self , action: Selector("profileImageTapped"))
         profileImage.addGestureRecognizer(tgr1)
@@ -55,6 +61,10 @@ class DashBoardViewController: UIViewController {
         var tgr2 = UITapGestureRecognizer(target:self , action: Selector("exploreImageTapped"))
         exploreImage.addGestureRecognizer(tgr2)
         exploreImage.userInteractionEnabled = true
+        
+        var tgr3 = UITapGestureRecognizer(target:self , action: Selector("calendarImageTapped"))
+        calendarImage.addGestureRecognizer(tgr3)
+        calendarImage.userInteractionEnabled = true
     }
 
     override func viewDidLoad() {

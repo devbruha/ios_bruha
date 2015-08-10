@@ -8,30 +8,34 @@
 
 import UIKit
 
-class EventViewController: UIViewController, SWTableViewCellDelegate{
+class EventViewController: UIViewController, SWTableViewCellDelegate,ARSPDragDelegate, ARSPVisibilityStateDelegate{
     
     @IBOutlet weak var exploreTableView: UITableView!
     
     
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
+    var panelControllerContainer: ARSPContainerController!
     var item = ["Slide 1.jpg","Slide 2.jpg","Slide 3.jpg","Slide 4.jpg","Slide 5.jpg","Slide 6.jpg","Slide 7.jpg","Slide 8.jpg"]
     
     var screenWidth: CGFloat = 0.0
     var screenHeight: CGFloat = 0.0
-    
-    
     
     func configureView(){
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         let screenWidth = screenSize.width
         let screenHeight = screenSize.height
         exploreTableView.rowHeight = screenHeight * 0.33
+        self.panelControllerContainer = self.parentViewController as! ARSPContainerController
+        self.panelControllerContainer.dragDelegate = self
+        self.panelControllerContainer.visibilityStateDelegate = self
+        self.exploreTableView!.allowsMultipleSelection = false
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
+        
         // Do any additional setup after loading the view.
     }
 
@@ -49,8 +53,8 @@ class EventViewController: UIViewController, SWTableViewCellDelegate{
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        let userInfo = FetchData(context: managedObjectContext).fetchEvents()
-        return (userInfo?.count)!
+        let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
+        return (eventInfo?.count)!
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
@@ -65,8 +69,8 @@ class EventViewController: UIViewController, SWTableViewCellDelegate{
         //cell.lblTitle.text=stringTitle
         cell.ExploreImage.image = UIImage(named: strCarName)
         
-        let userInfo = FetchData(context: managedObjectContext).fetchEvents()
-        let event = userInfo![indexPath.row]
+        let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
+        let event = eventInfo![indexPath.row]
         
         let circViewWidthConstraint = NSLayoutConstraint (item: cell.circView, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: screenHeight)
         
@@ -83,8 +87,11 @@ class EventViewController: UIViewController, SWTableViewCellDelegate{
         
         let rectyConstraint = NSLayoutConstraint(item: cell.rectView, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: cell, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0)
         
+        let rectWidthConstraint = NSLayoutConstraint(item: cell.rectView, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: cell, attribute: NSLayoutAttribute.Width, multiplier: 1, constant: 0)
+        
         cell.addConstraint(rectxConstraint)
         cell.addConstraint(rectyConstraint)
+        cell.addConstraint(rectWidthConstraint)
 
         cell.circTitle.text = event.name
         cell.circDate.text = event.startDate
@@ -121,6 +128,8 @@ class EventViewController: UIViewController, SWTableViewCellDelegate{
     //Swipe Cells Actions
     func swipeableTableViewCell( cell : SWTableViewCell!,didTriggerLeftUtilityButtonWithIndex index:NSInteger){
         
+        
+        
         switch(index){
         case 0:
             //map
@@ -134,6 +143,7 @@ class EventViewController: UIViewController, SWTableViewCellDelegate{
     }
     
     func swipeableTableViewCell( cell : SWTableViewCell!,didTriggerRightUtilityButtonWithIndex index:NSInteger){
+        
         switch(index){
         case 0:
             //Preview
@@ -143,14 +153,21 @@ class EventViewController: UIViewController, SWTableViewCellDelegate{
             break
         case 2:
             //More info
-            //self.performSegueWithIdentifier("GoToMoreInfo", sender: self)
+            
+            var cellIndexPath = self.exploreTableView.indexPathForCell(cell)
+            
+            var selectedCell = self.exploreTableView.cellForRowAtIndexPath(cellIndexPath!) as! EventTableViewCell
+            
+            GlobalVariables.eventSelected = selectedCell.circTitle.text!
+            
+            self.performSegueWithIdentifier("GoToMoreInfo", sender: self)
             break
         default:
             break
         }
         
     }
-    
+   
     //Circ and Rect View changing
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
@@ -158,6 +175,24 @@ class EventViewController: UIViewController, SWTableViewCellDelegate{
         let currentCell = tableView.cellForRowAtIndexPath(indexPath!) as! EventTableViewCell;
         currentCell.tappedView();
         tableView.deselectRowAtIndexPath(indexPath!, animated: false)
+    }
+    
+    
+    func panelControllerChangedVisibilityState(state:ARSPVisibilityState) {
+        //TODO
+        if(panelControllerContainer.shouldOverlapMainViewController){
+            if (state.value == ARSPVisibilityStateMaximized.value) {
+                self.panelControllerContainer.panelViewController.view.alpha = 1
+            }else{
+                self.panelControllerContainer.panelViewController.view.alpha = 1
+            }
+        }else{
+            self.panelControllerContainer.panelViewController.view.alpha = 1
+        }
+    }
+    
+    func panelControllerWasDragged(panelControllerVisibility : CGFloat) {
+        
     }
 
 

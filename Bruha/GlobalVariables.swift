@@ -19,4 +19,5 @@ enum FilterState: String {
 class GlobalVariables{
     
     static var currentFilter = FilterState.Events
+    static var eventSelected = "999999"
 }
