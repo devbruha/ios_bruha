@@ -4,20 +4,49 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>ARSlidingPanel.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>MBCalendarKit.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>1</integer>
 		</dict>
 		<key>SWTableViewCell.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>2</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>0751B22BA7CF5AA0A9D21CE685B34827</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>0FDFEF7AEEA6608736B7054EB637F027</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>730CE8C6E3FEA67ECD15A6C3E0DE80E3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AAC92C7740A366DC91C52A86851CBD06</key>
 		<dict>
 			<key>primary</key>
 			<true/>

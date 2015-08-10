@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="oKN-du-QXO">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14E46" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -468,6 +468,12 @@
                             <constraint firstItem="fv8-QC-QDJ" firstAttribute="leading" secondItem="9bB-4w-ZEn" secondAttribute="leading" id="x8f-pf-cLO"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="artistSelectedB" destination="z55-iv-qkW" id="JW5-rO-mqy"/>
+                        <outlet property="eventSelectedB" destination="PXb-4Z-59H" id="w4U-vA-Ti5"/>
+                        <outlet property="organizationSelectedB" destination="xo5-cm-x41" id="56J-jZ-rTL"/>
+                        <outlet property="venueSelectedB" destination="9NE-aT-sYN" id="eba-jj-HtP"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GE5-3F-LNV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1559,8 +1565,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="5DM-Zi-tRH"/>
         <segue reference="Rkq-9y-PIT"/>
-        <segue reference="J3w-Nl-jcV"/>
+        <segue reference="zjY-DB-duY"/>
+        <segue reference="uZx-1x-ByM"/>
     </inferredMetricsTieBreakers>
 </document>
