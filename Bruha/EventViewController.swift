@@ -129,6 +129,7 @@ class EventViewController: UIViewController, SWTableViewCellDelegate,ARSPDragDel
             
             cell.delegate = self
             cell.selectionStyle = .None
+            
             return cell as EventTableViewCell
 
         case "Venue":
