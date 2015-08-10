@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		180ACC8C1B791D5A00F152FC /* MapFilterPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180ACC8B1B791D5A00F152FC /* MapFilterPanelViewController.swift */; };
 		180F6DFE1B75006800F86BF5 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180F6DFD1B75006800F86BF5 /* MapViewController.swift */; };
 		180F6E241B75231200F86BF5 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 180F6E231B75231200F86BF5 /* GoogleMaps.framework */; };
 		180F6E261B75232700F86BF5 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 180F6E251B75232700F86BF5 /* GoogleMaps.bundle */; };
@@ -90,6 +91,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		180ACC8B1B791D5A00F152FC /* MapFilterPanelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapFilterPanelViewController.swift; sourceTree = "<group>"; };
 		180F6DFD1B75006800F86BF5 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		180F6E231B75231200F86BF5 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
 		180F6E251B75232700F86BF5 /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
@@ -287,6 +289,7 @@
 				18D2169C1B6BF1D9005DAAA8 /* EventFilterPanelViewController.swift */,
 				18A2A11A1B728241005E1DCB /* CalendarViewController.swift */,
 				180F6DFD1B75006800F86BF5 /* MapViewController.swift */,
+				180ACC8B1B791D5A00F152FC /* MapFilterPanelViewController.swift */,
 				183286A81B6806B2007B5134 /* Bridging-Header.h */,
 				181EB6041B714B6300B9295E /* CalendarKit */,
 				45FA056B1B5D4158004AD819 /* Bruha.xcdatamodeld */,
@@ -552,6 +555,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				180ACC8C1B791D5A00F152FC /* MapFilterPanelViewController.swift in Sources */,
 				45FA05A91B5D4190004AD819 /* OrganizationService.swift in Sources */,
 				181EB6161B714B7600B9295E /* WeekHeaderView.swift in Sources */,
 				45FA05A81B5D4190004AD819 /* ArtistService.swift in Sources */,
