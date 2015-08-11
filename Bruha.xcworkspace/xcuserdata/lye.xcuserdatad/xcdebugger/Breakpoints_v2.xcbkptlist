@@ -31,8 +31,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "18"
             endingLineNumber = "18"
-            landmarkName = "viewDidLoad()"
-            landmarkType = "5">
+            landmarkName = "EventFilterPanelViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -47,8 +47,8 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "28"
             endingLineNumber = "28"
-            landmarkName = "viewWillAppear(_:)"
-            landmarkType = "5">
+            landmarkName = "EventFilterPanelViewController"
+            landmarkType = "3">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -58,12 +58,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "Bruha/EventViewController.swift"
-            timestampString = "460395406.042502"
+            timestampString = "461016324.987068"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "187"
-            endingLineNumber = "187"
-            landmarkName = "panelControllerChangedVisibilityState(_:)"
+            startingLineNumber = "229"
+            endingLineNumber = "229"
+            landmarkName = "swipeableTableViewCell(_:didTriggerLeftUtilityButtonWithIndex:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

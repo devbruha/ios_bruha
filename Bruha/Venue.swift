@@ -40,7 +40,7 @@ struct Venue {
         var city = venueDictionary["location_city"] as? String
         var postalCode = venueDictionary["postal_code"] as? String
         
-        venueAddress = "\(streetNo) \(streetName), \(postalCode)"
+        venueAddress = "\(streetNo!) \(streetName!), \(postalCode!)"
         venueID = venueDictionary["venue_id"] as? String
         venueName = venueDictionary["venue_name"] as?  String
         venueDescription = venueDictionary["venue_desc"] as?  String
