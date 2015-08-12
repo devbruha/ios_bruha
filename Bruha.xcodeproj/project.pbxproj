@@ -38,7 +38,7 @@
 		1835F8F51B5ECF3500FD1BD1 /* DashBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1835F8F41B5ECF3500FD1BD1 /* DashBoardViewController.swift */; };
 		184231FA1B5FF173003948F5 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184231F91B5FF173003948F5 /* ProfileViewController.swift */; };
 		18A2A11B1B728241005E1DCB /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2A11A1B728241005E1DCB /* CalendarViewController.swift */; };
-		18D2169D1B6BF1D9005DAAA8 /* EventFilterPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D2169C1B6BF1D9005DAAA8 /* EventFilterPanelViewController.swift */; };
+		18D2169D1B6BF1D9005DAAA8 /* ExploreListPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D2169C1B6BF1D9005DAAA8 /* ExploreListPanelViewController.swift */; };
 		18E2DD8C1B69537D007C61B5 /* DashLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E2DD8B1B69537D007C61B5 /* DashLine.swift */; };
 		3FBD3EDB6177AE183A0340DF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C40848564A9A9ABD06E1BFE /* libPods.a */; };
 		452BC0C41B791068003E7142 /* VenueTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 452BC0C31B791068003E7142 /* VenueTableViewCell.xib */; };
@@ -49,11 +49,12 @@
 		452BC0CE1B791260003E7142 /* OrganizationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452BC0CD1B791260003E7142 /* OrganizationTableViewCell.swift */; };
 		452BC0D01B7937D5003E7142 /* MapFilterPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452BC0CF1B7937D5003E7142 /* MapFilterPanelViewController.swift */; };
 		4560C5471B66D09900AB5382 /* SaveData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4560C5461B66D09900AB5382 /* SaveData.swift */; };
-		4560C5491B66D42000AB5382 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4560C5481B66D42000AB5382 /* EventViewController.swift */; };
+		4560C5491B66D42000AB5382 /* ExploreListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4560C5481B66D42000AB5382 /* ExploreListViewController.swift */; };
 		4560C54B1B66D44700AB5382 /* EventCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4560C54A1B66D44700AB5382 /* EventCircleView.swift */; };
 		4560C54D1B66D45100AB5382 /* EventRectangleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4560C54C1B66D45100AB5382 /* EventRectangleView.swift */; };
 		4560C54F1B66D49800AB5382 /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4560C54E1B66D49800AB5382 /* EventTableViewCell.swift */; };
 		45AFAF231B60332E00BA6854 /* CredentialCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AFAF221B60332E00BA6854 /* CredentialCheck.swift */; };
+		45C0F5F91B7BBE780041A1C8 /* EventSubCategoryDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C0F5F81B7BBE780041A1C8 /* EventSubCategoryDBModel.swift */; };
 		45D8986F1B5E89E6003ED862 /* RegisterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8986E1B5E89E6003ED862 /* RegisterService.swift */; };
 		45FA056A1B5D4158004AD819 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05691B5D4158004AD819 /* AppDelegate.swift */; };
 		45FA056D1B5D4158004AD819 /* Bruha.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 45FA056B1B5D4158004AD819 /* Bruha.xcdatamodeld */; };
@@ -129,7 +130,7 @@
 		1835F8F41B5ECF3500FD1BD1 /* DashBoardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashBoardViewController.swift; sourceTree = "<group>"; };
 		184231F91B5FF173003948F5 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		18A2A11A1B728241005E1DCB /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
-		18D2169C1B6BF1D9005DAAA8 /* EventFilterPanelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventFilterPanelViewController.swift; sourceTree = "<group>"; };
+		18D2169C1B6BF1D9005DAAA8 /* ExploreListPanelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreListPanelViewController.swift; sourceTree = "<group>"; };
 		18E2DD8B1B69537D007C61B5 /* DashLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashLine.swift; sourceTree = "<group>"; };
 		452BC0C31B791068003E7142 /* VenueTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VenueTableViewCell.xib; sourceTree = "<group>"; };
 		452BC0C51B79118F003E7142 /* ArtistTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArtistTableViewCell.xib; sourceTree = "<group>"; };
@@ -139,11 +140,12 @@
 		452BC0CD1B791260003E7142 /* OrganizationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrganizationTableViewCell.swift; sourceTree = "<group>"; };
 		452BC0CF1B7937D5003E7142 /* MapFilterPanelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapFilterPanelViewController.swift; sourceTree = "<group>"; };
 		4560C5461B66D09900AB5382 /* SaveData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveData.swift; sourceTree = "<group>"; };
-		4560C5481B66D42000AB5382 /* EventViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
+		4560C5481B66D42000AB5382 /* ExploreListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreListViewController.swift; sourceTree = "<group>"; };
 		4560C54A1B66D44700AB5382 /* EventCircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCircleView.swift; sourceTree = "<group>"; };
 		4560C54C1B66D45100AB5382 /* EventRectangleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventRectangleView.swift; sourceTree = "<group>"; };
 		4560C54E1B66D49800AB5382 /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		45AFAF221B60332E00BA6854 /* CredentialCheck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CredentialCheck.swift; sourceTree = "<group>"; };
+		45C0F5F81B7BBE780041A1C8 /* EventSubCategoryDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventSubCategoryDBModel.swift; sourceTree = "<group>"; };
 		45D8986E1B5E89E6003ED862 /* RegisterService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterService.swift; sourceTree = "<group>"; };
 		45FA05641B5D4158004AD819 /* Bruha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bruha.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45FA05681B5D4158004AD819 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -245,10 +247,14 @@
 		45AFAF1E1B60313D00BA6854 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				45FA05B71B5D432C004AD819 /* SplashViewController.swift */,
 				1835F8F41B5ECF3500FD1BD1 /* DashBoardViewController.swift */,
 				184231F91B5FF173003948F5 /* ProfileViewController.swift */,
-				4560C5481B66D42000AB5382 /* EventViewController.swift */,
-				45FA05B71B5D432C004AD819 /* SplashViewController.swift */,
+				180F6DFD1B75006800F86BF5 /* MapViewController.swift */,
+				452BC0CF1B7937D5003E7142 /* MapFilterPanelViewController.swift */,
+				4560C5481B66D42000AB5382 /* ExploreListViewController.swift */,
+				18D2169C1B6BF1D9005DAAA8 /* ExploreListPanelViewController.swift */,
+				1824C0861B6AA7BA0007840F /* MoreInfoViewController.swift */,
 				45FA05BB1B5D640A004AD819 /* LoginViewController.swift */,
 				45FA05BC1B5D640A004AD819 /* SignUpViewController.swift */,
 			);
@@ -296,15 +302,9 @@
 			isa = PBXGroup;
 			children = (
 				45FA05921B5D4188004AD819 /* GlobalVariables.swift */,
-				18E2DD8B1B69537D007C61B5 /* DashLine.swift */,
-				1824C0861B6AA7BA0007840F /* MoreInfoViewController.swift */,
-				18D2169C1B6BF1D9005DAAA8 /* EventFilterPanelViewController.swift */,
 				18A2A11A1B728241005E1DCB /* CalendarViewController.swift */,
-				452BC0CF1B7937D5003E7142 /* MapFilterPanelViewController.swift */,
-				180F6DFD1B75006800F86BF5 /* MapViewController.swift */,
 				183286A81B6806B2007B5134 /* Bridging-Header.h */,
 				181EB6041B714B6300B9295E /* CalendarKit */,
-				45FA056B1B5D4158004AD819 /* Bruha.xcdatamodeld */,
 				45AFAF211B60331100BA6854 /* Processing */,
 				45AFAF201B60317200BA6854 /* Data Call Models */,
 				45FA05B01B5D4278004AD819 /* Object Models */,
@@ -319,6 +319,7 @@
 		45FA05671B5D4158004AD819 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				45FA056B1B5D4158004AD819 /* Bruha.xcdatamodeld */,
 				1835F8F21B5EAD7200FD1BD1 /* Reachability.swift */,
 				45FA05691B5D4158004AD819 /* AppDelegate.swift */,
 				45FA05681B5D4158004AD819 /* Info.plist */,
@@ -384,14 +385,15 @@
 		45FA05BF1B5D6F76004AD819 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				45FA05751B5D4158004AD819 /* LaunchScreen.xib */,
 				45FA05B91B5D63EB004AD819 /* Main.storyboard */,
-				4560C54E1B66D49800AB5382 /* EventTableViewCell.swift */,
+				18E2DD8B1B69537D007C61B5 /* DashLine.swift */,
 				4560C54C1B66D45100AB5382 /* EventRectangleView.swift */,
 				4560C54A1B66D44700AB5382 /* EventCircleView.swift */,
-				45FA05751B5D4158004AD819 /* LaunchScreen.xib */,
 				452BC0C31B791068003E7142 /* VenueTableViewCell.xib */,
 				452BC0C51B79118F003E7142 /* ArtistTableViewCell.xib */,
 				452BC0C71B79119D003E7142 /* OrganizationTableViewCell.xib */,
+				4560C54E1B66D49800AB5382 /* EventTableViewCell.swift */,
 				452BC0C91B791238003E7142 /* VenueTableViewCell.swift */,
 				452BC0CB1B791251003E7142 /* ArtistTableViewCell.swift */,
 				452BC0CD1B791260003E7142 /* OrganizationTableViewCell.swift */,
@@ -407,6 +409,7 @@
 				45FA05931B5D4188004AD819 /* ArtistDBModel.swift */,
 				45FA05941B5D4188004AD819 /* OrganizationDBModel.swift */,
 				45FA05C51B5D7D9E004AD819 /* UserDBModel.swift */,
+				45C0F5F81B7BBE780041A1C8 /* EventSubCategoryDBModel.swift */,
 			);
 			name = LocalDB;
 			sourceTree = "<group>";
@@ -595,6 +598,7 @@
 				181EB6141B714B7600B9295E /* DayCollectionCell.swift in Sources */,
 				181EB6101B714B7600B9295E /* CalendarView.swift in Sources */,
 				45FA05C11B5D6FCC004AD819 /* LoginService.swift in Sources */,
+				45C0F5F91B7BBE780041A1C8 /* EventSubCategoryDBModel.swift in Sources */,
 				4560C54F1B66D49800AB5382 /* EventTableViewCell.swift in Sources */,
 				181EB6191B714B7600B9295E /* Date.swift in Sources */,
 				45FA05A71B5D4190004AD819 /* LoadScreenService.swift in Sources */,
@@ -608,9 +612,9 @@
 				45FA059D1B5D4188004AD819 /* OrganizationDBModel.swift in Sources */,
 				45FA059B1B5D4188004AD819 /* GlobalVariables.swift in Sources */,
 				45FA05A51B5D4190004AD819 /* NetworkOperation.swift in Sources */,
-				4560C5491B66D42000AB5382 /* EventViewController.swift in Sources */,
+				4560C5491B66D42000AB5382 /* ExploreListViewController.swift in Sources */,
 				4560C54D1B66D45100AB5382 /* EventRectangleView.swift in Sources */,
-				18D2169D1B6BF1D9005DAAA8 /* EventFilterPanelViewController.swift in Sources */,
+				18D2169D1B6BF1D9005DAAA8 /* ExploreListPanelViewController.swift in Sources */,
 				1824C0871B6AA7BA0007840F /* MoreInfoViewController.swift in Sources */,
 				45FA056D1B5D4158004AD819 /* Bruha.xcdatamodeld in Sources */,
 				45FA05961B5D4188004AD819 /* EventDBModel.swift in Sources */,

@@ -28,6 +28,7 @@ class SaveData {
         let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         let en = NSEntityDescription.entityForName("EventList", inManagedObjectContext: managedObjectContext!)
+        let en2 = NSEntityDescription.entityForName("EventSubCategoryList", inManagedObjectContext: managedObjectContext!)
         
         for event in EventList{
             
@@ -39,6 +40,19 @@ class SaveData {
             newItem.name = event.eventName!
             newItem.price = event.eventPrice!
             newItem.eventDescription = event.eventDescription!
+            newItem.primaryCategory = event.primaryCategory!
+            
+            for(var i = 0; i < event.subCategoryName!.count; ++i){
+                
+                var newSubItem = EventSubCategoryDBModel(entity:en2!, insertIntoManagedObjectContext: managedObjectContext!)
+                
+                newSubItem.eventID = event.eventID!
+                newSubItem.subCategoryID = event.subCategoryID![i]
+                newSubItem.subCategoryName = event.subCategoryName![i]
+                
+                managedObjectContext!.save(nil)
+            }
+            
             newItem.startTime = event.eventStartTime!
             newItem.endTime = event.eventEndTime!
             newItem.startDate = event.eventStartDate!
@@ -50,6 +64,8 @@ class SaveData {
             newItem.venueName = event.eventVenueName!
             newItem.venueCity = event.eventVenueCity!
             newItem.venueAddress = event.eventVenueAddress!
+            
+            newItem.userID = event.userID!
             
             managedObjectContext!.save(nil)
         }
@@ -71,6 +87,7 @@ class SaveData {
             
             newItem.name = venue.venueName!
             newItem.venueDescription = venue.venueDescription!
+            newItem.primaryCategory = venue.primaryCategory!
             newItem.address = venue.venueAddress!
             newItem.latitude = venue.venueLatitude!
             newItem.longitude = venue.venueLongitude!
@@ -96,6 +113,7 @@ class SaveData {
             
             newItem.name = artist.artistName!
             newItem.artistDescription = artist.artistDescription!
+            newItem.primaryCategory = artist.primaryCategory!
             newItem.id = artist.artistID!
             
             managedObjectContext!.save(nil)
@@ -120,6 +138,7 @@ class SaveData {
             newItem.id = organization.organizationID!
             newItem.name = organization.organizationName!
             newItem.orgDescription = organization.organizationDescription!
+            newItem.primaryCategory = organization.primaryCategory!
             newItem.address = organization.organizationAddress!
             newItem.latitude = organization.organizationLatitude!
             newItem.longitude = organization.organizationLongitude!

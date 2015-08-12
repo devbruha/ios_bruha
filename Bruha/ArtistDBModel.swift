@@ -16,5 +16,5 @@ class ArtistDBModel: NSManagedObject {
     @NSManaged var id: String
     @NSManaged var name: String
     @NSManaged var artistDescription: String
-
+    @NSManaged var primaryCategory: String
 }

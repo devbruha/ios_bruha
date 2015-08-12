@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EventViewController: UIViewController, SWTableViewCellDelegate,ARSPDragDelegate, ARSPVisibilityStateDelegate{
+class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPDragDelegate, ARSPVisibilityStateDelegate{
     
     @IBOutlet weak var exploreTableView: UITableView!
     
@@ -16,7 +16,7 @@ class EventViewController: UIViewController, SWTableViewCellDelegate,ARSPDragDel
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     var panelControllerContainer: ARSPContainerController!
-    var item = ["Slide 1.jpg","Slide 2.jpg","Slide 3.jpg","Slide 4.jpg","Slide 5.jpg","Slide 6.jpg","Slide 7.jpg","Slide 8.jpg"]
+    var item = ["Slide 1.jpg","Slide 2.jpg","Slide 3.jpg","Slide 4.jpg","Slide 5.jpg","Slide 6.jpg","Slide 7.jpg","Slide 8.jpg","Slide 8.jpg","Slide 8.jpg","Slide 8.jpg","Slide 8.jpg","Slide 8.jpg","Slide 8.jpg","Slide 8.jpg","Slide 8.jpg","Slide 8.jpg","Slide 8.jpg"]
     
     var screenWidth: CGFloat = 0.0
     var screenHeight: CGFloat = 0.0
@@ -67,13 +67,12 @@ class EventViewController: UIViewController, SWTableViewCellDelegate,ARSPDragDel
             
             var cell : EventTableViewCell! = tableView.dequeueReusableCellWithIdentifier("Cell") as! EventTableViewCell!
             
-            if(cell == nil)
-            {
+            if(cell == nil){
+                
                 cell = NSBundle.mainBundle().loadNibNamed("Cell", owner: self, options: nil)[0] as! EventTableViewCell;
             }
-            //let stringTitle = itemName[indexPath.row] as String //NOT NSString
+            
             let strCarName = item[indexPath.row] as String
-            //cell.lblTitle.text=stringTitle
             cell.ExploreImage.image = UIImage(named: strCarName)
             
             let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
@@ -100,18 +99,18 @@ class EventViewController: UIViewController, SWTableViewCellDelegate,ARSPDragDel
             cell.addConstraint(rectyConstraint)
             cell.addConstraint(rectWidthConstraint)
             
-            cell.circTitle.text = event.name
-            cell.circDate.text = event.startDate
-            cell.circPrice.text = "$\(event.price)"
+            cell.circTitle.text = event.eventName
+            cell.circDate.text = event.eventStartDate
+            cell.circPrice.text = "$\(event.eventPrice!)"
             
             cell.rectTitle.text = event.eventDescription
-            cell.rectPrice.text = "$\(event.price)"
-            cell.venueName.text = event.venueName
-            cell.venueAddress.text = event.venueAddress
-            cell.startDate.text = event.startDate
-            cell.startTime.text = "\(event.startTime) -"
-            cell.endDate.text = event.endDate
-            cell.endTime.text = event.endTime
+            cell.rectPrice.text = "$\(event.eventPrice!)"
+            cell.venueName.text = event.eventVenueName
+            cell.venueAddress.text = event.eventVenueAddress
+            cell.startDate.text = event.eventStartDate
+            cell.startTime.text = "\(event.eventStartTime!) -"
+            cell.endDate.text = event.eventEndDate
+            cell.endTime.text = event.eventEndTime
             // Configure the cell...
             
             
@@ -270,6 +269,7 @@ class EventViewController: UIViewController, SWTableViewCellDelegate,ARSPDragDel
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         let indexPath = tableView.indexPathForSelectedRow();
+        
         if GlobalVariables.selectedDisplay == "Event"{
             let currentCell = tableView.cellForRowAtIndexPath(indexPath!) as! EventTableViewCell;
             currentCell.tappedView();
@@ -308,8 +308,6 @@ class EventViewController: UIViewController, SWTableViewCellDelegate,ARSPDragDel
     }
     
     func updateNotification(){
-        
-        println("Hi")
         
         self.exploreTableView.reloadData()
     }

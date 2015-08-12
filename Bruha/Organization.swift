@@ -19,6 +19,8 @@ struct Organization {
     let organizationDescription: String?
     let organizationAddress: String?
     
+    let primaryCategory: String?
+    
     //Event location variables
     
     let organizationLatitude: Double?
@@ -38,6 +40,8 @@ struct Organization {
         
         organizationID = organizationDictionary["organization_id"] as? String
         organizationDescription = organizationDictionary["organization_desc"] as? String
+        
+        primaryCategory = organizationDictionary["primary_category"] as? String
         
         
         if let organizationLatString = organizationDictionary["location_lat"] as? String {

@@ -17,6 +17,7 @@ class OrganizationDBModel: NSManagedObject {
     @NSManaged var name: String
     @NSManaged var address: String
     @NSManaged var orgDescription: String
+    @NSManaged var primaryCategory: String
     @NSManaged var latitude: NSNumber
     @NSManaged var longitude: NSNumber
     

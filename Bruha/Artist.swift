@@ -16,6 +16,8 @@ struct Artist {
     let artistName: String?
     let artistDescription: String?
     
+    let primaryCategory: String?
+    
     //let artistEventID: Int?
     
     //let artistPicture: Int?
@@ -34,6 +36,7 @@ struct Artist {
         artistID = artistDictionary["Artist_id"] as? String
         artistName = artistDictionary["Artist_name"] as? String
         artistDescription = artistDictionary["Artist_desc"] as? String
+        primaryCategory = artistDictionary["primary_category"] as? String
     
     }
 }

@@ -15,6 +15,7 @@ class VenueDBModel: NSManagedObject {
     
     @NSManaged var name: String
     @NSManaged var venueDescription: String
+    @NSManaged var primaryCategory: String
     @NSManaged var address: String
     @NSManaged var latitude: NSNumber
     @NSManaged var longitude: NSNumber

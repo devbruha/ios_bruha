@@ -17,6 +17,8 @@ struct Venue {
     let venueDescription: String?
     let venueAddress: String?
     
+    let primaryCategory: String?
+    
     /*
     let venueCategoryIcon: Int?
     let venuePicture: Int?
@@ -76,6 +78,8 @@ struct Venue {
             
             venueLongitude = nil
         }
+        
+        primaryCategory = venueDictionary["primary_category"] as? String
         
     }
 }

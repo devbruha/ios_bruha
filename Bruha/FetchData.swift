@@ -21,7 +21,9 @@ class FetchData {
     }
 
     
-    func fetchEvents() -> [EventDBModel]?{
+    func fetchEvents() -> [Event]?{
+        
+        var returnedEvent: [Event] = [Event]()
         
         // Create a new fetch request using the LogItem entity
         let fetchRequest = NSFetchRequest(entityName: "EventList")
@@ -29,10 +31,52 @@ class FetchData {
         // Execute the fetch request, and cast the results to an array of LogItem objects
         if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [EventDBModel] {
             
-            return fetchResults
+            for(var i = 0; i < fetchResults.count; ++i){
+                
+                var event = Event()
+                
+                event.eventID = fetchResults[i].id
+                event.eventName = fetchResults[i].name
+                event.eventPrice = fetchResults[i].price
+                event.eventDescription = fetchResults[i].eventDescription
+                event.eventStartDate = fetchResults[i].startDate
+                event.eventStartTime = fetchResults[i].startTime
+                event.eventEndDate = fetchResults[i].endDate
+                event.eventEndTime = fetchResults[i].endTime
+                
+                event.eventLatitude = fetchResults[i].latitude as Double
+                event.eventLongitude = fetchResults[i].longitude as Double
+                
+                event.venueID = fetchResults[i].venueID
+                event.eventVenueName = fetchResults[i].venueName
+                event.eventVenueAddress = fetchResults[i].venueAddress
+                event.eventVenueCity = fetchResults[i].venueCity
+                
+                event.userID = fetchResults[i].userID
+                
+                event.primaryCategory = fetchResults[i].primaryCategory
+                
+                let fetchSubRequest = NSFetchRequest(entityName: "EventSubCategoryList")
+                let predicate = NSPredicate(format: "eventID == %@", fetchResults[i].id)
+                fetchSubRequest.predicate = predicate
+                
+                if let fetchSubResults = managedObjectContext!.executeFetchRequest(fetchSubRequest, error: nil) as? [EventSubCategoryDBModel]{
+                    
+                    for(var j = 0; j < fetchSubResults.count; ++j){
+                        
+                        event.subCategoryID?.append(fetchSubResults[j].subCategoryID as String)
+                        event.subCategoryName?.append(fetchSubResults[j].subCategoryName as String)
+                    }
+                }
+                
+                returnedEvent.append(event)
+                
+            }
             
+            return returnedEvent
         }
-        else{
+            
+        else {
             return nil
         }
     }

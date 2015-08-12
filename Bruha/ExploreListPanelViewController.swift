@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EventFilterPanelViewController: UIViewController {
+class ExploreListPanelViewController: UIViewController {
 
     @IBOutlet weak var eventSelectedB: UIButton!
     @IBOutlet weak var venueSelectedB: UIButton!

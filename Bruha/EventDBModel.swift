@@ -16,6 +16,9 @@ class EventDBModel: NSManagedObject {
     @NSManaged var endDate: String
     @NSManaged var endTime: String
     @NSManaged var eventDescription: String
+    @NSManaged var primaryCategory: String
+    @NSManaged var subCategoryName: NSArray
+    @NSManaged var subCategoryID: NSArray
     @NSManaged var id: String
     @NSManaged var latitude: NSNumber
     @NSManaged var longitude: NSNumber
@@ -27,6 +30,7 @@ class EventDBModel: NSManagedObject {
     @NSManaged var venueCity: String
     @NSManaged var venueID: String
     @NSManaged var venueName: String
+    @NSManaged var userID: String
     
 }
 

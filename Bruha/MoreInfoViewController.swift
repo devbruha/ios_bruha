@@ -35,15 +35,15 @@ class MoreInfoViewController: UIViewController {
         
         let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
         for event in eventInfo!{
-            if event.name == GlobalVariables.eventSelected{
+            if event.eventName == GlobalVariables.eventSelected{
                 eventTitle.text = GlobalVariables.eventSelected
-                price.text = "$\(event.price)"
-                startTime.text = event.startTime
-                startDate.text = event.startDate
-                venue.text = event.venueName
-                location.text = event.venueAddress
-                endTime.text = event.endDate + "  \(event.endTime)"
-                ticketPrice.text = "$\(event.price)"
+                price.text = "$\(event.eventPrice)"
+                startTime.text = event.eventStartTime
+                startDate.text = event.eventStartDate
+                venue.text = event.eventVenueName
+                location.text = event.eventVenueAddress
+                endTime.text = event.eventEndDate! + "  \(event.eventEndTime)"
+                ticketPrice.text = "$\(event.eventPrice)"
                 
             }
         }

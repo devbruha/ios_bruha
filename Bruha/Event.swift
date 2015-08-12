@@ -16,28 +16,66 @@ struct Event {
     
     //let eventIcon: Int?
     
-    let eventID: String?
-    let eventName: String?
-    let eventPrice: String?
-    let eventDescription: String?
-    let eventStartDate: String?
-    let eventStartTime: String?
-    let eventEndDate: String?
-    let eventEndTime: String?
+    var eventID: String?
+    var eventName: String?
+    var eventPrice: String?
+    var eventDescription: String?
+    var eventStartDate: String?
+    var eventStartTime: String?
+    var eventEndDate: String?
+    var eventEndTime: String?
     
     //Event location variables
     
-    let eventLatitude: Double?
-    let eventLongitude: Double?
+    var eventLatitude: Double?
+    var eventLongitude: Double?
     
     //Event venue variables
     
-    let venueID: String?
+    var venueID: String?
     
-    let eventVenueName: String?
-    let eventVenueAddress: String?
-    let eventVenueCity: String?
+    var eventVenueName: String?
+    var eventVenueAddress: String?
+    var eventVenueCity: String?
     
+    // UserID
+    
+    var userID: String?
+    
+    //Categories
+    
+    var primaryCategory: String?
+    
+    var subCategoryName: [String]?
+    var subCategoryID: [String]?
+    
+    init(){
+        
+        eventID = "0"
+        eventVenueAddress = "0"
+        eventPrice = "0"
+        eventName = "0"
+        eventStartDate = "0"
+        eventStartTime = "0"
+        eventEndDate = "0"
+        eventEndTime = "0"
+        eventDescription = "0"
+        
+        eventLatitude = 0.00
+        eventLongitude = 0.00
+        
+        venueID = "0"
+        eventVenueName = "0"
+        eventVenueCity = "0"
+        
+        userID = "0"
+        
+        primaryCategory = "0"
+        
+        subCategoryID = []
+        subCategoryName = []
+    }
+
     
     init(eventDictionary: [String: AnyObject]) {
         
@@ -92,5 +130,11 @@ struct Event {
             eventLongitude = nil
         }
         
+        userID = eventDictionary["user_id"] as? String
+        
+        primaryCategory = eventDictionary["primary_category"] as? String
+        
+        subCategoryName = eventDictionary["sub_category"] as? [String]
+        subCategoryID = eventDictionary["sub_category_id"] as? [String]
     }
 }
