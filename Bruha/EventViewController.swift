@@ -141,6 +141,30 @@ class EventViewController: UIViewController, SWTableViewCellDelegate,ARSPDragDel
                 cell = NSBundle.mainBundle().loadNibNamed("VenueTableViewCell", owner: self, options: nil)[0] as! VenueTableViewCell;
             }
             
+            let venueInfo = FetchData(context: managedObjectContext).fetchVenues()
+            let venue = venueInfo![indexPath.row]
+
+            
+            let strCarName = item[indexPath.row] as String
+            cell.venueImage.image = UIImage(named: strCarName)
+            cell.venueName.text = venue.name
+            cell.venueDescription.text = venue.venueDescription
+            cell.venueAddress.text = venue.address
+            cell.circVenueName.text = venue.name
+            
+            var temp: NSMutableArray = NSMutableArray()
+            temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Like")
+            cell.leftUtilityButtons = temp as [AnyObject]
+            
+            var temp2: NSMutableArray = NSMutableArray()
+            temp2.sw_addUtilityButtonWithColor(UIColor.grayColor(), title: "Map")
+            temp2.sw_addUtilityButtonWithColor(UIColor.orangeColor(), title: "More Info")
+            cell.rightUtilityButtons = nil
+            cell.rightUtilityButtons = temp2 as [AnyObject]
+            
+            cell.delegate = self
+            cell.selectionStyle = .None
+            
             return cell as VenueTableViewCell
             
         case "Artist":
@@ -151,6 +175,26 @@ class EventViewController: UIViewController, SWTableViewCellDelegate,ARSPDragDel
             {
                 cell = NSBundle.mainBundle().loadNibNamed("ArtistTableViewCell", owner: self, options: nil)[0] as! ArtistTableViewCell;
             }
+            
+            let artistInfo = FetchData(context: managedObjectContext).fetchArtists()
+            let artist = artistInfo![indexPath.row]
+            
+            let strCarName = item[indexPath.row] as String
+            cell.artistsImage.image = UIImage(named: strCarName)
+            cell.artistName.text = artist.name
+            cell.circArtistName.text = artist.name
+            cell.circDescription.text = artist.description
+            
+            var temp: NSMutableArray = NSMutableArray()
+            temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Like")
+            cell.leftUtilityButtons = temp as [AnyObject]
+            
+            var temp2: NSMutableArray = NSMutableArray()
+            temp2.sw_addUtilityButtonWithColor(UIColor.grayColor(), title: "Map")
+            temp2.sw_addUtilityButtonWithColor(UIColor.orangeColor(), title: "More Info")
+            cell.rightUtilityButtons = nil
+            cell.rightUtilityButtons = temp2 as [AnyObject]
+
             
             return cell as ArtistTableViewCell
             
@@ -181,8 +225,6 @@ class EventViewController: UIViewController, SWTableViewCellDelegate,ARSPDragDel
     
     //Swipe Cells Actions
     func swipeableTableViewCell( cell : SWTableViewCell!,didTriggerLeftUtilityButtonWithIndex index:NSInteger){
-        
-        
         
         switch(index){
         case 0:
@@ -228,11 +270,25 @@ class EventViewController: UIViewController, SWTableViewCellDelegate,ARSPDragDel
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         let indexPath = tableView.indexPathForSelectedRow();
-        let currentCell = tableView.cellForRowAtIndexPath(indexPath!) as! EventTableViewCell;
-        currentCell.tappedView();
-        tableView.deselectRowAtIndexPath(indexPath!, animated: false)
+        if GlobalVariables.selectedDisplay == "Event"{
+            let currentCell = tableView.cellForRowAtIndexPath(indexPath!) as! EventTableViewCell;
+            currentCell.tappedView();
+            tableView.deselectRowAtIndexPath(indexPath!, animated: false)
+
+        }
+        if GlobalVariables.selectedDisplay == "Venue"{
+            let currentCell = tableView.cellForRowAtIndexPath(indexPath!) as! VenueTableViewCell;
+            currentCell.tappedView();
+            tableView.deselectRowAtIndexPath(indexPath!, animated: false)
+            
+        }
+        if GlobalVariables.selectedDisplay == "Artist"{
+            let currentCell = tableView.cellForRowAtIndexPath(indexPath!) as! ArtistTableViewCell;
+            currentCell.tappedView();
+            tableView.deselectRowAtIndexPath(indexPath!, animated: false)
+
+        }
     }
-    
     
     func panelControllerChangedVisibilityState(state:ARSPVisibilityState) {
         //TODO

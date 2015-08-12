@@ -42,7 +42,7 @@ class MapViewController: UIViewController,CLLocationManagerDelegate, GMSMapViewD
         if !didFindMyLocation {
             let myLocation: CLLocation = change[NSKeyValueChangeNewKey] as! CLLocation
             viewMap.camera = GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: 10.0)
-            //viewMap.settings.myLocationButton = true
+           // viewMap.settings.myLocationButton = true
             
             didFindMyLocation = true
         }

@@ -10,14 +10,19 @@ import UIKit
 
 class ArtistTableViewCell: SWTableViewCell {
     
-    @IBOutlet weak var artistLabel: UILabel!
+    @IBOutlet weak var artistsImage: UIImageView!
+    @IBOutlet weak var artistName: UILabel!
+    @IBOutlet weak var circArtistName: UILabel!
+    @IBOutlet weak var circDescription: UILabel!
+    @IBOutlet weak var rectView: EventRectangleView!
+    @IBOutlet weak var circView: EventCircleView!
     
     let tapRec = UITapGestureRecognizer()
     
     override func awakeFromNib() {
         super.awakeFromNib()
         self.userInteractionEnabled = true
-        
+        rectView.hidden = true
         tapRec.addTarget(self, action: "tappedView:")
         self.addGestureRecognizer(tapRec)
         // Initialization code
@@ -30,4 +35,17 @@ class ArtistTableViewCell: SWTableViewCell {
         
         // Configure the view for the selected state
     }
+    func tappedView(){
+        
+        if(!circView.hidden && !rectView.hidden){
+            circView.hidden = true
+        }else if(circView.hidden){
+            circView.hidden = false
+            rectView.hidden = true
+        }else{
+            circView.hidden = true
+            rectView.hidden = false
+        }
+    }
+
 }
