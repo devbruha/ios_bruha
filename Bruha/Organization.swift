@@ -34,7 +34,7 @@ struct Organization {
         var city = organizationDictionary["location_city"] as? String
         var postalCode = organizationDictionary["postal_code"] as? String
         
-        organizationAddress = "\(streetNo) \(streetName), \(postalCode)"
+        organizationAddress = "\(streetNo!) \(streetName!), \(postalCode!)"
         
         organizationName = organizationDictionary["organization_name"] as? String
         
