@@ -206,6 +206,27 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 cell = NSBundle.mainBundle().loadNibNamed("OrganizationTableViewCell", owner: self, options: nil)[0] as! OrganizationTableViewCell;
             }
             
+            let organizationInfo = FetchData(context: managedObjectContext).fetchOrganizations()
+            let organization = organizationInfo![indexPath.row]
+            
+            let strCarName = item[indexPath.row] as String
+            cell.organizationImage.image = UIImage(named: strCarName)
+            cell.organizationName.text = organization.name
+            cell.organizationDescription.text = organization.orgDescription
+            cell.address.text = organization.address
+            cell.circOrgName.text = organization.name
+            
+            var temp: NSMutableArray = NSMutableArray()
+            temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Like")
+            cell.leftUtilityButtons = temp as [AnyObject]
+            
+            var temp2: NSMutableArray = NSMutableArray()
+            temp2.sw_addUtilityButtonWithColor(UIColor.grayColor(), title: "Map")
+            temp2.sw_addUtilityButtonWithColor(UIColor.orangeColor(), title: "More Info")
+            cell.rightUtilityButtons = nil
+            cell.rightUtilityButtons = temp2 as [AnyObject]
+
+            
             return cell as OrganizationTableViewCell
             
         default:
@@ -284,6 +305,12 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         }
         if GlobalVariables.selectedDisplay == "Artist"{
             let currentCell = tableView.cellForRowAtIndexPath(indexPath!) as! ArtistTableViewCell;
+            currentCell.tappedView();
+            tableView.deselectRowAtIndexPath(indexPath!, animated: false)
+
+        }
+        if GlobalVariables.selectedDisplay == "Organization"{
+            let currentCell = tableView.cellForRowAtIndexPath(indexPath!) as! OrganizationTableViewCell;
             currentCell.tappedView();
             tableView.deselectRowAtIndexPath(indexPath!, animated: false)
 
