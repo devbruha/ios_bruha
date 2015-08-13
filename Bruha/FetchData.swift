@@ -83,6 +83,8 @@ class FetchData {
     
     func fetchVenues() -> [VenueDBModel]?{
         
+        var returnedVenue: [Venue] = [Venue]()
+        
         // Create a new fetch request using the LogItem entity
         let fetchRequest = NSFetchRequest(entityName: "VenueList")
         
@@ -99,6 +101,8 @@ class FetchData {
     
     func fetchArtists() -> [ArtistDBModel]?{
         
+        var returnedArtist: [Artist] = [Artist]()
+        
         // Create a new fetch request using the LogItem entity
         let fetchRequest = NSFetchRequest(entityName: "ArtistList")
         
@@ -114,6 +118,8 @@ class FetchData {
     }
     
     func fetchOrganizations() -> [OrganizationDBModel]?{
+        
+        var returnedOrganization: [Organization] = [Organization]()
         
         // Create a new fetch request using the LogItem entity
         let fetchRequest = NSFetchRequest(entityName: "OrganizationList")
