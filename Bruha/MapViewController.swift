@@ -14,12 +14,15 @@ class MapViewController: UIViewController,CLLocationManagerDelegate, GMSMapViewD
     @IBOutlet weak var myLocation: UIButton!
     
     var panelControllerContainer: ARSPContainerController!
+    
     var locationManager = CLLocationManager()
     var didFindMyLocation = false
+    
     var locationMarker: GMSMarker!
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         // Do any additional setup after loading the view, typically from a nib.
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
@@ -40,9 +43,10 @@ class MapViewController: UIViewController,CLLocationManagerDelegate, GMSMapViewD
     
     override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
         if !didFindMyLocation {
+            
             let myLocation: CLLocation = change[NSKeyValueChangeNewKey] as! CLLocation
-            viewMap.camera = GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: 10.0)
-           // viewMap.settings.myLocationButton = true
+            viewMap.camera = GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: 13.0)
+            //viewMap.settings.myLocationButton = true
             
             didFindMyLocation = true
         }
@@ -51,9 +55,16 @@ class MapViewController: UIViewController,CLLocationManagerDelegate, GMSMapViewD
     
     func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         if status == CLAuthorizationStatus.AuthorizedWhenInUse {
+            
             viewMap.myLocationEnabled = true
-            //viewMap.settings.myLocationButton = true
+            viewMap.settings.myLocationButton = true
             locationManager.startUpdatingLocation()
+        }
+        else{
+            
+            var defaultLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 43.2500,longitude: -79.8667)
+            
+            viewMap.camera = GMSCameraPosition.cameraWithTarget(defaultLocation, zoom: 13.0)
         }
     }
     
@@ -61,25 +72,11 @@ class MapViewController: UIViewController,CLLocationManagerDelegate, GMSMapViewD
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         if let location = locations.first as? CLLocation {
             
-            // 6
             viewMap.camera = GMSCameraPosition(target: location.coordinate, zoom: 15, bearing: 0, viewingAngle: 0)
-            
-            // 7
             locationManager.stopUpdatingLocation()
         }
     }
     
-    func showAlertWithMessage(message: String) {
-        let alertController = UIAlertController(title: "GMapsDemo", message: message, preferredStyle: UIAlertControllerStyle.Alert)
-        
-        let closeAction = UIAlertAction(title: "Close", style: UIAlertActionStyle.Cancel) { (alertAction) -> Void in
-            
-        }
-        
-        alertController.addAction(closeAction)
-        
-        presentViewController(alertController, animated: true, completion: nil)
-    }
     func panelControllerChangedVisibilityState(state:ARSPVisibilityState) {
         //TODO
         if(panelControllerContainer.shouldOverlapMainViewController){

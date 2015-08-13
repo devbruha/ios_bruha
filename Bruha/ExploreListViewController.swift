@@ -22,6 +22,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
     var screenHeight: CGFloat = 0.0
     
     func configureView(){
+        
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         let screenWidth = screenSize.width
         let screenHeight = screenSize.height
@@ -37,6 +38,8 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         configureView()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateNotification", name: "itemDisplayChange", object: nil)
+        
+        GlobalVariables.displayedEvents = FetchData(context: managedObjectContext).fetchEvents()!
         
         // Do any additional setup after loading the view.
     }
