@@ -97,7 +97,10 @@ class ExploreListPanelViewController: UIViewController {
         
         var organizationTgr = UITapGestureRecognizer(target: self, action: ("organizationTapped"))
         organizationSelectedB.addGestureRecognizer(organizationTgr)
-    
+        
+        self.venueTable.tableFooterView = UIView()
+        self.artistTable.tableFooterView = UIView()
+        self.organizationTable.tableFooterView = UIView()
         
     }
     
