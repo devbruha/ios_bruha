@@ -18,18 +18,13 @@ struct Artist {
     
     let primaryCategory: String?
     
-    //let artistEventID: Int?
-    
-    //let artistPicture: Int?
-    //let artistIcon: Int?
-    
-    /*
-    let contactName: String?
-    let contactPhoneNumber: String?
-    let contactEmail: String?
-    let contactWebsite: String?
-    let contactAddress: String?
-    */
+    init(fetchResults: ArtistDBModel){
+        
+        artistID = fetchResults.id
+        artistName = fetchResults.name
+        artistDescription = fetchResults.artistDescription
+        primaryCategory = fetchResults.primaryCategory
+    }
     
     init(artistDictionary: [String: AnyObject]) {
         

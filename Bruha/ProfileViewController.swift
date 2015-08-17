@@ -34,12 +34,12 @@ class ProfileViewController: UIViewController {
         
         let userInfo = FetchData(context: managedObjectContext).fetchUserInfo()
         
-        name.text = (userInfo?.first?.firstName)!
-        userName.text = (userInfo?.first?.userName)!
-        sex.text = (userInfo?.first?.gender)!
-        email.text = (userInfo?.first?.email)!
-        birthday.text = (userInfo?.first?.birthdate)!
-        location.text = (userInfo?.first?.city)!
+        name.text = (userInfo?.first?.userFirstName)!
+        userName.text = (userInfo?.first?.userName)
+        sex.text = (userInfo?.first?.userGender)!
+        email.text = (userInfo?.first?.userEmail)!
+        birthday.text = (userInfo?.first?.userBirthdate)!
+        location.text = (userInfo?.first?.userCity)!
         
         myImage.image = UIImage(named: "Slide 3.png")
     }

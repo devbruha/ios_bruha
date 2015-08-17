@@ -42,7 +42,7 @@ class MoreInfoViewController: UIViewController {
                 startDate.text = event.eventStartDate
                 venue.text = event.eventVenueName
                 location.text = event.eventVenueAddress
-                endTime.text = event.eventEndDate! + "  \(event.eventEndTime)"
+                endTime.text = event.eventEndDate + "  \(event.eventEndTime)"
                 ticketPrice.text = "$\(event.eventPrice)"
                 
             }

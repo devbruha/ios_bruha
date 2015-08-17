@@ -14,16 +14,26 @@ struct User {
     
     //User Variables
     
-    let userName: String?
+    let userName: String
     let userEmail: String?
     let userCity: String?
     let userFirstName: String?
     let userGender: String?
     let userBirthdate: String?
     
+    init(fetchResults: UserDBModel){
+        
+        userName = fetchResults.userName
+        userEmail = fetchResults.email
+        userCity = fetchResults.city
+        userFirstName = fetchResults.firstName
+        userGender = fetchResults.gender
+        userBirthdate = fetchResults.birthdate
+    }
+    
     init(userDictionary: [String: AnyObject]) {
         
-        userName = userDictionary["Username"] as? String
+        userName = userDictionary["Username"] as! String
         userFirstName = userDictionary["Name"] as? String
         userEmail = userDictionary["Email"] as? String
         userCity = userDictionary["City"] as? String

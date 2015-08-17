@@ -14,68 +14,68 @@ struct Event {
     
     //Event Variables
     
-    //let eventIcon: Int?
-    
-    var eventID: String?
-    var eventName: String?
+    var eventID: String
+    var eventName: String
     var eventPrice: String?
-    var eventDescription: String?
-    var eventStartDate: String?
-    var eventStartTime: String?
-    var eventEndDate: String?
-    var eventEndTime: String?
+    var eventDescription: String
+    var eventStartDate: String
+    var eventStartTime: String
+    var eventEndDate: String
+    var eventEndTime: String
     
     //Event location variables
     
-    var eventLatitude: Double?
-    var eventLongitude: Double?
+    var eventLatitude: Double
+    var eventLongitude: Double
     
     //Event venue variables
     
-    var venueID: String?
+    var venueID: String
     
-    var eventVenueName: String?
-    var eventVenueAddress: String?
-    var eventVenueCity: String?
+    var eventVenueName: String
+    var eventVenueAddress: String
+    var eventVenueCity: String
     
     // UserID
     
-    var userID: String?
+    var userID: String
     
     //Categories
     
-    var primaryCategory: String?
+    var primaryCategory: String
     
-    var subCategoryName: [String]?
-    var subCategoryID: [String]?
+    var subCategoryName: [String] = []
+    var subCategoryID: [String] = []
     
-    init(){
+    init(fetchResults: EventDBModel, fetchSubResults: [EventSubCategoryDBModel]){
         
-        eventID = "0"
-        eventVenueAddress = "0"
-        eventPrice = "0"
-        eventName = "0"
-        eventStartDate = "0"
-        eventStartTime = "0"
-        eventEndDate = "0"
-        eventEndTime = "0"
-        eventDescription = "0"
+        eventID = fetchResults.id
+        eventName = fetchResults.name
+        eventPrice = fetchResults.price
+        eventDescription = fetchResults.eventDescription
+        eventStartDate = fetchResults.startDate
+        eventStartTime = fetchResults.startTime
+        eventEndDate = fetchResults.endDate
+        eventEndTime = fetchResults.endTime
         
-        eventLatitude = 0.00
-        eventLongitude = 0.00
+        eventLatitude = fetchResults.latitude as Double
+        eventLongitude = fetchResults.longitude as Double
         
-        venueID = "0"
-        eventVenueName = "0"
-        eventVenueCity = "0"
+        venueID = fetchResults.venueID
+        eventVenueName = fetchResults.venueName
+        eventVenueAddress = fetchResults.venueAddress
+        eventVenueCity = fetchResults.venueCity
         
-        userID = "0"
+        userID = fetchResults.userID
         
-        primaryCategory = "0"
+        primaryCategory = fetchResults.primaryCategory
         
-        subCategoryID = []
-        subCategoryName = []
+        for(var j = 0; j < fetchSubResults.count; ++j){
+            
+            subCategoryID.append(fetchSubResults[j].subCategoryID as String)
+            subCategoryName.append(fetchSubResults[j].subCategoryName as String)
+        }
     }
-
     
     init(eventDictionary: [String: AnyObject]) {
         
@@ -95,20 +95,20 @@ struct Event {
             eventPrice = "0.00"
         }
         
-        eventName = eventDictionary["event_name"] as? String
+        eventName = eventDictionary["event_name"] as! String
         
-        eventStartDate = eventDictionary["evnt_start_date"] as? String
-        eventEndDate = eventDictionary["event_end_date"] as? String
-        eventStartTime = eventDictionary["event_start_time"] as? String
-        eventEndTime = eventDictionary["event_end_time"] as? String
+        eventStartDate = eventDictionary["evnt_start_date"] as! String
+        eventEndDate = eventDictionary["event_end_date"] as! String
+        eventStartTime = eventDictionary["event_start_time"] as! String
+        eventEndTime = eventDictionary["event_end_time"] as! String
         
-        eventID = eventDictionary["event_id"] as? String
-        eventDescription = eventDictionary["event_desc"] as? String
+        eventID = eventDictionary["event_id"] as! String
+        eventDescription = eventDictionary["event_desc"] as! String
         
-        venueID = eventDictionary["venue_id"] as? String
+        venueID = eventDictionary["venue_id"] as! String
         
-        eventVenueName = eventDictionary["venue_name"] as? String
-        eventVenueCity = eventDictionary["location_city"] as? String
+        eventVenueName = eventDictionary["venue_name"] as! String
+        eventVenueCity = eventDictionary["location_city"] as! String
         
         if let eventLatString = eventDictionary["location_lat"] as? String {
             
@@ -117,7 +117,7 @@ struct Event {
             
         } else {
             
-            eventLatitude = nil
+            eventLatitude = 0.0
         }
         
         if let eventLngString = eventDictionary["location_lng"] as? String {
@@ -127,14 +127,14 @@ struct Event {
             
         } else {
             
-            eventLongitude = nil
+            eventLongitude = 0.0
         }
         
-        userID = eventDictionary["user_id"] as? String
+        userID = eventDictionary["user_id"] as! String
         
-        primaryCategory = eventDictionary["primary_category"] as? String
+        primaryCategory = eventDictionary["primary_category"] as! String
         
-        subCategoryName = eventDictionary["sub_category"] as? [String]
-        subCategoryID = eventDictionary["sub_category_id"] as? [String]
+        subCategoryName = eventDictionary["sub_category"] as! [String]
+        subCategoryID = eventDictionary["sub_category_id"] as! [String]
     }
 }
