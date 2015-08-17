@@ -23,4 +23,7 @@ class GlobalVariables{
     static var selectedDisplay = "Event"
     
     static var displayedEvents: [Event] = []
+    static var displayedVenues: [Venue] = []
+    static var displayedArtists: [Artist] = []
+    static var displayedOrganizations: [Organization] = []
 }
