@@ -9,7 +9,6 @@
 import UIKit
 
 class ExplorePanelViewTableViewCell: UITableViewCell {
-    @IBOutlet weak var exploreCategories: UILabel!
     @IBOutlet weak var picker: UIView!
 
     override func awakeFromNib() {

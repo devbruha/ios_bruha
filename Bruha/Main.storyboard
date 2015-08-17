@@ -466,30 +466,31 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist Category" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kq5-c1-Wip">
-                                                            <rect key="frame" x="8" y="8" width="288" height="21"/>
+                                                            <rect key="frame" x="5" y="0.0" width="294" height="27"/>
                                                             <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
-                                                                <constraint firstAttribute="height" constant="21" id="kWA-Md-Kx7"/>
+                                                                <constraint firstAttribute="height" constant="27" id="kWA-Md-Kx7"/>
                                                             </constraints>
                                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Qcu-RO-DtT" customClass="ArtistView" customModule="Bruha" customModuleProvider="target">
-                                                            <rect key="frame" x="8" y="31" width="288" height="421"/>
+                                                            <rect key="frame" x="5" y="31" width="294" height="421"/>
                                                             <color key="backgroundColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                         </view>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstItem="Kq5-c1-Wip" firstAttribute="top" secondItem="VtP-Wc-yuf" secondAttribute="topMargin" id="5Hq-Hb-laE"/>
-                                                        <constraint firstItem="Kq5-c1-Wip" firstAttribute="leading" secondItem="VtP-Wc-yuf" secondAttribute="leadingMargin" id="UOg-ZR-Bez"/>
-                                                        <constraint firstItem="Kq5-c1-Wip" firstAttribute="trailing" secondItem="VtP-Wc-yuf" secondAttribute="trailingMargin" id="ZXC-ri-uCJ"/>
-                                                        <constraint firstItem="Qcu-RO-DtT" firstAttribute="trailing" secondItem="VtP-Wc-yuf" secondAttribute="trailingMargin" id="uOM-1B-E8O"/>
-                                                        <constraint firstItem="Qcu-RO-DtT" firstAttribute="leading" secondItem="VtP-Wc-yuf" secondAttribute="leadingMargin" id="xoD-Je-4e6"/>
+                                                        <constraint firstItem="Kq5-c1-Wip" firstAttribute="leading" secondItem="VtP-Wc-yuf" secondAttribute="leading" constant="5" id="2Fm-dj-s2f"/>
+                                                        <constraint firstItem="Kq5-c1-Wip" firstAttribute="top" secondItem="VtP-Wc-yuf" secondAttribute="topMargin" constant="-8" id="5Hq-Hb-laE"/>
+                                                        <constraint firstItem="Qcu-RO-DtT" firstAttribute="top" secondItem="Kq5-c1-Wip" secondAttribute="bottom" constant="4" id="H3Z-3z-2aQ"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Kq5-c1-Wip" secondAttribute="trailing" constant="5" id="eRh-7D-JrM"/>
+                                                        <constraint firstItem="Qcu-RO-DtT" firstAttribute="trailing" secondItem="VtP-Wc-yuf" secondAttribute="trailingMargin" constant="3" id="uOM-1B-E8O"/>
+                                                        <constraint firstItem="Qcu-RO-DtT" firstAttribute="leading" secondItem="VtP-Wc-yuf" secondAttribute="leadingMargin" constant="-3" id="xoD-Je-4e6"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
+                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 <connections>
-                                                    <outlet property="exploreCategories" destination="Kq5-c1-Wip" id="Nic-Wf-Lz5"/>
                                                     <outlet property="picker" destination="Qcu-RO-DtT" id="qnt-6s-Vz6"/>
                                                 </connections>
                                             </tableViewCell>
@@ -510,7 +511,7 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Venue Category" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Avo-ut-ncK">
-                                                            <rect key="frame" x="8" y="0.0" width="288" height="27"/>
+                                                            <rect key="frame" x="5" y="0.0" width="294" height="27"/>
                                                             <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="27" id="qeM-Qj-l3p"/>
@@ -519,17 +520,21 @@
                                                             <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                             <nil key="highlightedColor"/>
                                                         </label>
-                                                        <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dwZ-bt-Emp" customClass="VenueView" customModule="Bruha" customModuleProvider="target">
-                                                            <rect key="frame" x="8" y="31" width="288" height="421"/>
+                                                        <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dwZ-bt-Emp" customClass="VenueView" customModule="Bruha" customModuleProvider="target">
+                                                            <rect key="frame" x="5" y="31" width="294" height="421"/>
                                                             <color key="backgroundColor" red="0.94901960780000005" green="0.45098039220000002" blue="0.59607843140000005" alpha="1" colorSpace="calibratedRGB"/>
                                                         </view>
                                                     </subviews>
                                                     <constraints>
                                                         <constraint firstItem="Avo-ut-ncK" firstAttribute="top" secondItem="ZGb-VN-VHC" secondAttribute="top" id="4o8-u3-kEu"/>
-                                                        <constraint firstAttribute="trailing" secondItem="Avo-ut-ncK" secondAttribute="trailing" constant="8" id="6B2-No-Ja6"/>
-                                                        <constraint firstItem="Avo-ut-ncK" firstAttribute="leading" secondItem="ZGb-VN-VHC" secondAttribute="leading" constant="8" id="d5Y-jN-dY0"/>
+                                                        <constraint firstAttribute="trailing" secondItem="Avo-ut-ncK" secondAttribute="trailing" constant="5" id="6B2-No-Ja6"/>
+                                                        <constraint firstAttribute="bottomMargin" secondItem="dwZ-bt-Emp" secondAttribute="bottom" constant="-5" id="XEz-dB-mSP"/>
+                                                        <constraint firstItem="Avo-ut-ncK" firstAttribute="leading" secondItem="ZGb-VN-VHC" secondAttribute="leading" constant="5" id="d5Y-jN-dY0"/>
+                                                        <constraint firstAttribute="trailing" secondItem="dwZ-bt-Emp" secondAttribute="trailing" constant="5" id="ecb-u6-NsI"/>
+                                                        <constraint firstItem="dwZ-bt-Emp" firstAttribute="leading" secondItem="ZGb-VN-VHC" secondAttribute="leading" constant="5" id="zjp-wc-lRZ"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
+                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 <connections>
                                                     <outlet property="picker" destination="dwZ-bt-Emp" id="SRq-TN-IXO"/>
                                                 </connections>
@@ -551,7 +556,7 @@
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Organization Category" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KBw-hf-0bE">
-                                                            <rect key="frame" x="8" y="0.0" width="288" height="28"/>
+                                                            <rect key="frame" x="5" y="0.0" width="294" height="28"/>
                                                             <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                             <constraints>
                                                                 <constraint firstAttribute="height" constant="28" id="Nts-pv-BqC"/>
@@ -561,18 +566,19 @@
                                                             <nil key="highlightedColor"/>
                                                         </label>
                                                         <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="1r3-z7-Syh" customClass="OrganizationView" customModule="Bruha" customModuleProvider="target">
-                                                            <rect key="frame" x="8" y="30" width="288" height="418"/>
+                                                            <rect key="frame" x="5" y="30" width="294" height="426"/>
                                                             <color key="backgroundColor" red="0.27450980390000002" green="0.72549019609999998" blue="0.74509803919999995" alpha="1" colorSpace="calibratedRGB"/>
                                                         </view>
                                                     </subviews>
                                                     <constraints>
-                                                        <constraint firstAttribute="trailing" secondItem="KBw-hf-0bE" secondAttribute="trailing" constant="8" id="ToK-kQ-3aD"/>
-                                                        <constraint firstAttribute="trailing" secondItem="1r3-z7-Syh" secondAttribute="trailing" constant="8" id="W23-zY-ZVh"/>
+                                                        <constraint firstAttribute="trailing" secondItem="KBw-hf-0bE" secondAttribute="trailing" constant="5" id="ToK-kQ-3aD"/>
+                                                        <constraint firstAttribute="trailing" secondItem="1r3-z7-Syh" secondAttribute="trailing" constant="5" id="W23-zY-ZVh"/>
                                                         <constraint firstItem="KBw-hf-0bE" firstAttribute="top" secondItem="OpK-Sd-BSh" secondAttribute="top" id="nB2-lY-o26"/>
-                                                        <constraint firstItem="1r3-z7-Syh" firstAttribute="leading" secondItem="OpK-Sd-BSh" secondAttribute="leading" constant="8" id="pnE-6s-7cf"/>
-                                                        <constraint firstItem="KBw-hf-0bE" firstAttribute="leading" secondItem="OpK-Sd-BSh" secondAttribute="leading" constant="8" id="sB0-pE-hem"/>
+                                                        <constraint firstItem="1r3-z7-Syh" firstAttribute="leading" secondItem="OpK-Sd-BSh" secondAttribute="leading" constant="5" id="pnE-6s-7cf"/>
+                                                        <constraint firstItem="KBw-hf-0bE" firstAttribute="leading" secondItem="OpK-Sd-BSh" secondAttribute="leading" constant="5" id="sB0-pE-hem"/>
                                                     </constraints>
                                                 </tableViewCellContentView>
+                                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                 <connections>
                                                     <outlet property="picker" destination="1r3-z7-Syh" id="aJM-gz-ClG"/>
                                                 </connections>
@@ -588,6 +594,7 @@
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="De7-Cq-uMb" secondAttribute="trailing" constant="8" id="7lQ-Me-jLe"/>
                                     <constraint firstAttribute="bottom" secondItem="De7-Cq-uMb" secondAttribute="bottom" constant="8" id="AQX-oy-ZqS"/>
+                                    <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="gcT-zG-mRY" secondAttribute="bottom" constant="8" id="HJo-1s-QXB"/>
                                     <constraint firstAttribute="trailing" secondItem="gcT-zG-mRY" secondAttribute="trailing" constant="8" id="JbP-Ma-5wi"/>
                                     <constraint firstItem="gcT-zG-mRY" firstAttribute="top" secondItem="fv8-QC-QDJ" secondAttribute="top" constant="8" id="MPX-y7-JjB"/>
                                     <constraint firstItem="gcT-zG-mRY" firstAttribute="leading" secondItem="fv8-QC-QDJ" secondAttribute="leading" constant="8" id="ZeZ-Zl-4Vk"/>
