@@ -40,9 +40,9 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateNotification", name: "itemDisplayChange", object: nil)
         
         GlobalVariables.displayedEvents = FetchData(context: managedObjectContext).fetchEvents()!
-        /*GlobalVariables.displayedVenues = FetchData(context: managedObjectContext).fetchVenues()!
+        GlobalVariables.displayedVenues = FetchData(context: managedObjectContext).fetchVenues()!
         GlobalVariables.displayedArtists = FetchData(context: managedObjectContext).fetchEvents()!
-        GlobalVariables.displayedOrganizations = FetchData(context: managedObjectContext).fetchEvents()!*/
+        GlobalVariables.displayedOrganizations = FetchData(context: managedObjectContext).fetchEvents()!
         
         // Do any additional setup after loading the view.
     }
