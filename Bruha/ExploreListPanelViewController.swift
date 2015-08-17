@@ -14,6 +14,11 @@ class ExploreListPanelViewController: UIViewController {
     @IBOutlet weak var venueSelectedB: UIButton!
     @IBOutlet weak var artistSelectedB: UIButton!
     @IBOutlet weak var organizationSelectedB: UIButton!
+    @IBOutlet weak var venueTable: UITableView!
+    @IBOutlet weak var artistTable: UITableView!
+    @IBOutlet weak var organizationTable: UITableView!
+    
+    
     
     var panelControllerContainer: ARSPContainerController!
     var swipeZoneHeight: CGFloat = 74
@@ -21,13 +26,30 @@ class ExploreListPanelViewController: UIViewController {
     
     func eventTapped(){
         
+        venueTable.alpha = 0
+        artistTable.alpha = 0
+        organizationTable.alpha = 0
+        /*eventCategories.alpha = 1
+        venueCategories.alpha = 0
+        artistCategories.alpha = 0
+        organizationCategories.alpha = 0*/
+        
         GlobalVariables.selectedDisplay = "Event"
         
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChange", object: self)
+        
     }
     
     func venueTapped(){
-
+        
+        venueTable.alpha = 1
+        artistTable.alpha = 0
+        organizationTable.alpha = 0
+        /*eventCategories.alpha = 0
+        venueCategories.alpha = 1
+        artistCategories.alpha = 0
+        organizationCategories.alpha = 0*/
+        
         GlobalVariables.selectedDisplay = "Venue"
         
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChange", object: self)
@@ -35,12 +57,20 @@ class ExploreListPanelViewController: UIViewController {
     
     func artistTapped(){
         
+        venueTable.alpha = 0
+        artistTable.alpha = 1
+        organizationTable.alpha = 0
+        
         GlobalVariables.selectedDisplay = "Artist"
         
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChange", object: self)
     }
     
     func organizationTapped(){
+        
+        venueTable.alpha = 0
+        artistTable.alpha = 0
+        organizationTable.alpha = 1
         
         GlobalVariables.selectedDisplay = "Organization"
         
@@ -84,5 +114,67 @@ class ExploreListPanelViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+    var selectedIndexPath : NSIndexPath?
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        // #warning Potentially incomplete method implementation.
+        // Return the number of sections.
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete method implementation.
+        // Return the number of rows in the section.
+        return 1
+    }
+    
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! ExplorePanelViewTableViewCell
+        
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
+        
+        return cell
+        
+        
+        // Configure the cell...
+    }
+    
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let previousIndexPath = selectedIndexPath
+        if indexPath == selectedIndexPath {
+            selectedIndexPath = nil
+        }
+        else{
+            selectedIndexPath = indexPath
+        }
+        var indexPaths: Array<NSIndexPath> = []
+        if let previous = previousIndexPath{
+            indexPaths += [previous]
+        }
+        if let current = selectedIndexPath {
+            indexPaths += [current]
+        }
+        if indexPaths.count > 0 {
+            tableView.reloadRowsAtIndexPaths(indexPaths, withRowAnimation: UITableViewRowAnimation.Automatic)
+        }
+    }
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        (cell as! ExplorePanelViewTableViewCell).watchFrameChanges()
+    }
+    func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        (cell as! ExplorePanelViewTableViewCell).ignoreFrameChanges()
+    }
+    
+    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
+        if indexPath == selectedIndexPath {
+            return ExplorePanelViewTableViewCell.expandedHeight
+        } else {
+            return ExplorePanelViewTableViewCell.defaultHeight
+        }
+    }
+
 
 }

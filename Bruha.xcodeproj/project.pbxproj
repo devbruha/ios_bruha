@@ -34,9 +34,14 @@
 		181EB6191B714B7600B9295E /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181EB60E1B714B7600B9295E /* Date.swift */; };
 		181EB61A1B714B7600B9295E /* NSDateAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181EB60F1B714B7600B9295E /* NSDateAdditions.swift */; };
 		1824C0871B6AA7BA0007840F /* MoreInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1824C0861B6AA7BA0007840F /* MoreInfoViewController.swift */; };
+		1834845C1B7E347D00EA0D13 /* VenueView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1834845B1B7E347D00EA0D13 /* VenueView.xib */; };
+		1834845E1B7E352F00EA0D13 /* VenueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1834845D1B7E352F00EA0D13 /* VenueView.swift */; };
+		183484601B7E704B00EA0D13 /* ArtistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1834845F1B7E704B00EA0D13 /* ArtistView.swift */; };
+		183484621B7E71CF00EA0D13 /* OrganizationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 183484611B7E71CF00EA0D13 /* OrganizationView.swift */; };
 		1835F8F31B5EAD7200FD1BD1 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1835F8F21B5EAD7200FD1BD1 /* Reachability.swift */; };
 		1835F8F51B5ECF3500FD1BD1 /* DashBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1835F8F41B5ECF3500FD1BD1 /* DashBoardViewController.swift */; };
 		184231FA1B5FF173003948F5 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184231F91B5FF173003948F5 /* ProfileViewController.swift */; };
+		1872E9EF1B7D258E0099AA36 /* ExplorePanelViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1872E9EE1B7D258E0099AA36 /* ExplorePanelViewTableViewCell.swift */; };
 		18A2A11B1B728241005E1DCB /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2A11A1B728241005E1DCB /* CalendarViewController.swift */; };
 		18D2169D1B6BF1D9005DAAA8 /* ExploreListPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D2169C1B6BF1D9005DAAA8 /* ExploreListPanelViewController.swift */; };
 		18E2DD8C1B69537D007C61B5 /* DashLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E2DD8B1B69537D007C61B5 /* DashLine.swift */; };
@@ -126,9 +131,14 @@
 		181EB60F1B714B7600B9295E /* NSDateAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateAdditions.swift; sourceTree = "<group>"; };
 		1824C0861B6AA7BA0007840F /* MoreInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreInfoViewController.swift; sourceTree = "<group>"; };
 		183286A81B6806B2007B5134 /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
+		1834845B1B7E347D00EA0D13 /* VenueView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VenueView.xib; sourceTree = "<group>"; };
+		1834845D1B7E352F00EA0D13 /* VenueView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueView.swift; sourceTree = "<group>"; };
+		1834845F1B7E704B00EA0D13 /* ArtistView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistView.swift; sourceTree = "<group>"; };
+		183484611B7E71CF00EA0D13 /* OrganizationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrganizationView.swift; sourceTree = "<group>"; };
 		1835F8F21B5EAD7200FD1BD1 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		1835F8F41B5ECF3500FD1BD1 /* DashBoardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashBoardViewController.swift; sourceTree = "<group>"; };
 		184231F91B5FF173003948F5 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		1872E9EE1B7D258E0099AA36 /* ExplorePanelViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExplorePanelViewTableViewCell.swift; sourceTree = "<group>"; };
 		18A2A11A1B728241005E1DCB /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		18D2169C1B6BF1D9005DAAA8 /* ExploreListPanelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreListPanelViewController.swift; sourceTree = "<group>"; };
 		18E2DD8B1B69537D007C61B5 /* DashLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashLine.swift; sourceTree = "<group>"; };
@@ -303,6 +313,11 @@
 			children = (
 				45FA05921B5D4188004AD819 /* GlobalVariables.swift */,
 				18A2A11A1B728241005E1DCB /* CalendarViewController.swift */,
+				1872E9EE1B7D258E0099AA36 /* ExplorePanelViewTableViewCell.swift */,
+				1834845B1B7E347D00EA0D13 /* VenueView.xib */,
+				1834845D1B7E352F00EA0D13 /* VenueView.swift */,
+				1834845F1B7E704B00EA0D13 /* ArtistView.swift */,
+				183484611B7E71CF00EA0D13 /* OrganizationView.swift */,
 				183286A81B6806B2007B5134 /* Bridging-Header.h */,
 				181EB6041B714B6300B9295E /* CalendarKit */,
 				45AFAF211B60331100BA6854 /* Processing */,
@@ -518,6 +533,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				1834845C1B7E347D00EA0D13 /* VenueView.xib in Resources */,
 				452BC0C61B79118F003E7142 /* ArtistTableViewCell.xib in Resources */,
 				45FA05BA1B5D63EB004AD819 /* Main.storyboard in Resources */,
 				181EB6131B714B7600B9295E /* MonthCollectionCell.xib in Resources */,
@@ -588,11 +604,13 @@
 				452BC0CC1B791251003E7142 /* ArtistTableViewCell.swift in Sources */,
 				45FA05BD1B5D640A004AD819 /* LoginViewController.swift in Sources */,
 				181EB6181B714B7600B9295E /* CalendarLogic.swift in Sources */,
+				183484621B7E71CF00EA0D13 /* OrganizationView.swift in Sources */,
 				1835F8F31B5EAD7200FD1BD1 /* Reachability.swift in Sources */,
 				452BC0CA1B791238003E7142 /* VenueTableViewCell.swift in Sources */,
 				4560C54B1B66D44700AB5382 /* EventCircleView.swift in Sources */,
 				45FA05951B5D4188004AD819 /* Event.swift in Sources */,
 				45FA05971B5D4188004AD819 /* Venue.swift in Sources */,
+				1834845E1B7E352F00EA0D13 /* VenueView.swift in Sources */,
 				45FA05B81B5D432C004AD819 /* SplashViewController.swift in Sources */,
 				181EB61A1B714B7600B9295E /* NSDateAdditions.swift in Sources */,
 				181EB6141B714B7600B9295E /* DayCollectionCell.swift in Sources */,
@@ -620,6 +638,7 @@
 				45FA05961B5D4188004AD819 /* EventDBModel.swift in Sources */,
 				45FA056A1B5D4158004AD819 /* AppDelegate.swift in Sources */,
 				452BC0D01B7937D5003E7142 /* MapFilterPanelViewController.swift in Sources */,
+				183484601B7E704B00EA0D13 /* ArtistView.swift in Sources */,
 				4560C5471B66D09900AB5382 /* SaveData.swift in Sources */,
 				45FA05BE1B5D640A004AD819 /* SignUpViewController.swift in Sources */,
 				45FA059A1B5D4188004AD819 /* VenueDBModel.swift in Sources */,
@@ -627,6 +646,7 @@
 				45D8986F1B5E89E6003ED862 /* RegisterService.swift in Sources */,
 				45FA05A41B5D4190004AD819 /* EventService.swift in Sources */,
 				181EB6121B714B7600B9295E /* MonthCollectionCell.swift in Sources */,
+				1872E9EF1B7D258E0099AA36 /* ExplorePanelViewTableViewCell.swift in Sources */,
 				18E2DD8C1B69537D007C61B5 /* DashLine.swift in Sources */,
 				180F6DFE1B75006800F86BF5 /* MapViewController.swift in Sources */,
 				1835F8F51B5ECF3500FD1BD1 /* DashBoardViewController.swift in Sources */,
