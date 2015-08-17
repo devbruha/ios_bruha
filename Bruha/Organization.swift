@@ -26,6 +26,19 @@ struct Organization {
     let organizationLatitude: Double?
     let organizationLongitude: Double?
     
+    init(fetchResults: OrganizationDBModel){
+        
+        organizationID = fetchResults.id
+        organizationName = fetchResults.name
+        organizationDescription = fetchResults.orgDescription
+        organizationAddress = fetchResults.address
+        
+        primaryCategory = fetchResults.primaryCategory
+        
+        organizationLatitude = fetchResults.latitude as Double
+        organizationLongitude = fetchResults.longitude as Double
+    }
+    
     init(organizationDictionary: [String: AnyObject]) {
         
         var appt = organizationDictionary["appt"] as? String

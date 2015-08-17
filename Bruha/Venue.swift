@@ -19,20 +19,19 @@ struct Venue {
     
     let primaryCategory: String?
     
-    /*
-    let venueCategoryIcon: Int?
-    let venuePicture: Int?
-    
-    let contactName: String?
-    let contactPhoneNumber: String?
-    let contactEmail: String?
-    let contactWebsite: String?
-    let contactAddress: String?
-    */
-    
     let venueLatitude: Double?
     let venueLongitude: Double?
     
+    init(fetchResults: VenueDBModel){
+        
+        venueID = fetchResults.id
+        venueName = fetchResults.name
+        venueDescription = fetchResults.venueDescription
+        venueAddress = fetchResults.address
+        primaryCategory = fetchResults.primaryCategory
+        venueLatitude = fetchResults.latitude as Double
+        venueLongitude = fetchResults.longitude as Double
+    }
     
     init(venueDictionary: [String: AnyObject]) {
         
@@ -46,17 +45,6 @@ struct Venue {
         venueID = venueDictionary["venue_id"] as? String
         venueName = venueDictionary["venue_name"] as?  String
         venueDescription = venueDictionary["venue_desc"] as?  String
-        
-        /*
-        venueCategoryIcon = venueDictionary["location_lat"] as?  Int
-        venuePicture = venueDictionary["location_lat"] as?  Int
-        
-        contactName = venueDictionary["location_lat"] as?  String
-        contactPhoneNumber = venueDictionary["location_lat"] as?  String
-        contactEmail = venueDictionary["location_lat"] as?  String
-        contactWebsite = venueDictionary["location_lat"] as?  String
-        contactAddress = venueDictionary["location_lat"] as?  String
-        */
         
         
         if let venueLatString = venueDictionary["location_lat"] as? String {

@@ -33,43 +33,16 @@ class FetchData {
             
             for(var i = 0; i < fetchResults.count; ++i){
                 
-                var event = Event()
-                
-                event.eventID = fetchResults[i].id
-                event.eventName = fetchResults[i].name
-                event.eventPrice = fetchResults[i].price
-                event.eventDescription = fetchResults[i].eventDescription
-                event.eventStartDate = fetchResults[i].startDate
-                event.eventStartTime = fetchResults[i].startTime
-                event.eventEndDate = fetchResults[i].endDate
-                event.eventEndTime = fetchResults[i].endTime
-                
-                event.eventLatitude = fetchResults[i].latitude as Double
-                event.eventLongitude = fetchResults[i].longitude as Double
-                
-                event.venueID = fetchResults[i].venueID
-                event.eventVenueName = fetchResults[i].venueName
-                event.eventVenueAddress = fetchResults[i].venueAddress
-                event.eventVenueCity = fetchResults[i].venueCity
-                
-                event.userID = fetchResults[i].userID
-                
-                event.primaryCategory = fetchResults[i].primaryCategory
-                
                 let fetchSubRequest = NSFetchRequest(entityName: "EventSubCategoryList")
                 let predicate = NSPredicate(format: "eventID == %@", fetchResults[i].id)
                 fetchSubRequest.predicate = predicate
                 
                 if let fetchSubResults = managedObjectContext!.executeFetchRequest(fetchSubRequest, error: nil) as? [EventSubCategoryDBModel]{
                     
-                    for(var j = 0; j < fetchSubResults.count; ++j){
-                        
-                        event.subCategoryID?.append(fetchSubResults[j].subCategoryID as String)
-                        event.subCategoryName?.append(fetchSubResults[j].subCategoryName as String)
-                    }
+        
+                    var event = Event(fetchResults: fetchResults[i], fetchSubResults: fetchSubResults)
+                    returnedEvent.append(event)
                 }
-                
-                returnedEvent.append(event)
                 
             }
             
@@ -81,7 +54,7 @@ class FetchData {
         }
     }
     
-    func fetchVenues() -> [VenueDBModel]?{
+    func fetchVenues() -> [Venue]?{
         
         var returnedVenue: [Venue] = [Venue]()
         
@@ -91,15 +64,22 @@ class FetchData {
         // Execute the fetch request, and cast the results to an array of LogItem objects
         if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [VenueDBModel] {
             
-            return fetchResults
+            for(var i = 0; i < fetchResults.count; ++i){
+                
+                var venue = Venue(fetchResults: fetchResults[i])
+                
+                returnedVenue.append(venue)
+            }
             
+            return returnedVenue
         }
         else{
+            
             return nil
         }
     }
     
-    func fetchArtists() -> [ArtistDBModel]?{
+    func fetchArtists() -> [Artist]?{
         
         var returnedArtist: [Artist] = [Artist]()
         
@@ -109,7 +89,14 @@ class FetchData {
         // Execute the fetch request, and cast the results to an array of LogItem objects
         if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [ArtistDBModel] {
             
-            return fetchResults
+            for(var i = 0; i < fetchResults.count; ++i){
+                
+                var artist = Artist(fetchResults: fetchResults[i])
+                
+                returnedArtist.append(artist)
+            }
+            
+            return returnedArtist
             
         }
         else{
@@ -117,7 +104,7 @@ class FetchData {
         }
     }
     
-    func fetchOrganizations() -> [OrganizationDBModel]?{
+    func fetchOrganizations() -> [Organization]?{
         
         var returnedOrganization: [Organization] = [Organization]()
         
@@ -127,7 +114,14 @@ class FetchData {
         // Execute the fetch request, and cast the results to an array of LogItem objects
         if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [OrganizationDBModel] {
             
-            return fetchResults
+            for(var i = 0; i < fetchResults.count; ++i){
+                
+                var organization = Organization(fetchResults: fetchResults[i])
+                
+                returnedOrganization.append(organization)
+            }
+            
+            return returnedOrganization
             
         }
         else{
@@ -135,7 +129,9 @@ class FetchData {
         }
     }
     
-    func fetchUserInfo() -> [UserDBModel]?{
+    func fetchUserInfo() -> [User]?{
+        
+        var returnedUser: [User] = [User]()
         
         // Create a new fetch request using the LogItem entity
         let fetchRequest = NSFetchRequest(entityName: "UserList")
@@ -143,7 +139,14 @@ class FetchData {
         // Execute the fetch request, and cast the results to an array of LogItem objects
         if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [UserDBModel] {
             
-            return fetchResults
+            for(var i = 0; i < fetchResults.count; ++i){
+                
+                var user = User(fetchResults: fetchResults[i])
+                
+                returnedUser.append(user)
+            }
+            
+            return returnedUser
             
         }
         else{

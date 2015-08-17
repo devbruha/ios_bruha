@@ -14,6 +14,7 @@ import CoreData
 class VenueDBModel: NSManagedObject {
     
     @NSManaged var name: String
+    @NSManaged var id: String
     @NSManaged var venueDescription: String
     @NSManaged var primaryCategory: String
     @NSManaged var address: String

@@ -36,36 +36,36 @@ class SaveData {
             
             var newItem = EventDBModel(entity:en!, insertIntoManagedObjectContext: managedObjectContext!)
             
-            newItem.id = event.eventID!
-            newItem.name = event.eventName!
+            newItem.id = event.eventID
+            newItem.name = event.eventName
             newItem.price = event.eventPrice!
-            newItem.eventDescription = event.eventDescription!
-            newItem.primaryCategory = event.primaryCategory!
+            newItem.eventDescription = event.eventDescription
+            newItem.primaryCategory = event.primaryCategory
             
-            for(var i = 0; i < event.subCategoryName!.count; ++i){
+            for(var i = 0; i < event.subCategoryName.count; ++i){
                 
                 var newSubItem = EventSubCategoryDBModel(entity:en2!, insertIntoManagedObjectContext: managedObjectContext!)
                 
-                newSubItem.eventID = event.eventID!
-                newSubItem.subCategoryID = event.subCategoryID![i]
-                newSubItem.subCategoryName = event.subCategoryName![i]
+                newSubItem.eventID = event.eventID
+                newSubItem.subCategoryID = event.subCategoryID[i]
+                newSubItem.subCategoryName = event.subCategoryName[i]
                 
                 managedObjectContext!.save(nil)
             }
             
-            newItem.startTime = event.eventStartTime!
-            newItem.endTime = event.eventEndTime!
-            newItem.startDate = event.eventStartDate!
-            newItem.endDate = event.eventEndDate!
-            newItem.latitude = event.eventLatitude!
-            newItem.longitude = event.eventLongitude!
+            newItem.startTime = event.eventStartTime
+            newItem.endTime = event.eventEndTime
+            newItem.startDate = event.eventStartDate
+            newItem.endDate = event.eventEndDate
+            newItem.latitude = event.eventLatitude
+            newItem.longitude = event.eventLongitude
             
-            newItem.venueID = event.venueID!
-            newItem.venueName = event.eventVenueName!
-            newItem.venueCity = event.eventVenueCity!
-            newItem.venueAddress = event.eventVenueAddress!
+            newItem.venueID = event.venueID
+            newItem.venueName = event.eventVenueName
+            newItem.venueCity = event.eventVenueCity
+            newItem.venueAddress = event.eventVenueAddress
             
-            newItem.userID = event.userID!
+            newItem.userID = event.userID
             
             managedObjectContext!.save(nil)
         }
@@ -85,6 +85,7 @@ class SaveData {
             
             var newItem = VenueDBModel(entity:en!, insertIntoManagedObjectContext: managedObjectContext!)
             
+            newItem.id = venue.venueID!
             newItem.name = venue.venueName!
             newItem.venueDescription = venue.venueDescription!
             newItem.primaryCategory = venue.primaryCategory!
@@ -160,7 +161,7 @@ class SaveData {
         
         var newItem = UserDBModel(entity:en!, insertIntoManagedObjectContext: managedObjectContext!)
         
-        newItem.userName = user.userName!
+        newItem.userName = user.userName
         newItem.firstName = user.userFirstName!
         newItem.city = user.userCity!
         newItem.birthdate = user.userBirthdate!

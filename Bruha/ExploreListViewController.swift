@@ -41,8 +41,8 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         
         GlobalVariables.displayedEvents = FetchData(context: managedObjectContext).fetchEvents()!
         GlobalVariables.displayedVenues = FetchData(context: managedObjectContext).fetchVenues()!
-        GlobalVariables.displayedArtists = FetchData(context: managedObjectContext).fetchEvents()!
-        GlobalVariables.displayedOrganizations = FetchData(context: managedObjectContext).fetchEvents()!
+        GlobalVariables.displayedArtists = FetchData(context: managedObjectContext).fetchArtists()!
+        GlobalVariables.displayedOrganizations = FetchData(context: managedObjectContext).fetchOrganizations()!
         
         // Do any additional setup after loading the view.
     }
@@ -114,7 +114,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             cell.venueName.text = event.eventVenueName
             cell.venueAddress.text = event.eventVenueAddress
             cell.startDate.text = event.eventStartDate
-            cell.startTime.text = "\(event.eventStartTime!) -"
+            cell.startTime.text = "\(event.eventStartTime) -"
             cell.endDate.text = event.eventEndDate
             cell.endTime.text = event.eventEndTime
             // Configure the cell...
@@ -152,10 +152,10 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             
             let strCarName = item[indexPath.row] as String
             cell.venueImage.image = UIImage(named: strCarName)
-            cell.venueName.text = venue.name
+            cell.venueName.text = venue.venueName
             cell.venueDescription.text = venue.venueDescription
-            cell.venueAddress.text = venue.address
-            cell.circVenueName.text = venue.name
+            cell.venueAddress.text = venue.venueAddress
+            cell.circVenueName.text = venue.venueName
             
             var temp: NSMutableArray = NSMutableArray()
             temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Like")
@@ -186,9 +186,9 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             
             let strCarName = item[indexPath.row] as String
             cell.artistsImage.image = UIImage(named: strCarName)
-            cell.artistName.text = artist.name
-            cell.circArtistName.text = artist.name
-            cell.circDescription.text = artist.description
+            cell.artistName.text = artist.artistName
+            cell.circArtistName.text = artist.artistName
+            cell.circDescription.text = artist.artistDescription
             
             var temp: NSMutableArray = NSMutableArray()
             temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Like")
@@ -217,10 +217,10 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             
             let strCarName = item[indexPath.row] as String
             cell.organizationImage.image = UIImage(named: strCarName)
-            cell.organizationName.text = organization.name
-            cell.organizationDescription.text = organization.orgDescription
-            cell.address.text = organization.address
-            cell.circOrgName.text = organization.name
+            cell.organizationName.text = organization.organizationName
+            cell.organizationDescription.text = organization.organizationDescription
+            cell.address.text = organization.organizationAddress
+            cell.circOrgName.text = organization.organizationName
             
             var temp: NSMutableArray = NSMutableArray()
             temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Like")
