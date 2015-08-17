@@ -59,7 +59,7 @@ class VenueView: UIView {
             m_subcellNew.append(UITableViewCell())
             m_subcellNew[i].layer.borderWidth = 0.8
             m_subcellNew[i].layer.borderColor = UIColor.whiteColor().CGColor
-            m_subcellNew[i].backgroundColor = UIColor.blackColor()
+            //m_subcellNew[i].backgroundColor = UIColor.blackColor()
             //  m_subcellNew[i].drawRect(CGRect(x: 80, y: yStart,width: 100, height: 80))
             //m_subcellNew[i].frame = CGRect(x: 0, y: yStart, width: Int(self.bounds.width), height: 30)
             m_subcellNew[i].frame = CGRect(x: 0, y: yStart, width: 304, height: 30)
@@ -67,10 +67,14 @@ class VenueView: UIView {
             m_subcellNew[i].textLabel?.textColor = UIColor.whiteColor()
             m_subcellNew[i].textLabel?.text = name
             view.addSubview(m_subcellNew[i])
+            var selectedCategory = UITapGestureRecognizer(target: self, action: ("changeColor"))
+            m_subcellNew[i].addGestureRecognizer(selectedCategory)
             i++
         }
         addSubview(view)
-        
+    }
+    func changeColor(){
+        self.backgroundColor = UIColor.yellowColor()
     }
     
     func loadViewFromNib() -> UIView {
