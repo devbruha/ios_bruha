@@ -67,6 +67,8 @@ class SaveData {
             
             newItem.userID = event.userID
             
+            newItem.url = event.url
+            
             managedObjectContext!.save(nil)
         }
         

@@ -18,11 +18,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" translatesAutoresizingMaskIntoConstraints="NO" id="Msv-wA-iUi">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" pagingEnabled="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Msv-wA-iUi">
+                                <rect key="frame" x="10" y="50" width="300" height="400"/>
                             </scrollView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="5" translatesAutoresizingMaskIntoConstraints="NO" id="x7p-eL-3qc">
-                                <rect key="frame" x="130" y="400" width="60" height="37"/>
+                                <rect key="frame" x="130" y="460" width="60" height="37"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="x7p-eL-3qc" secondAttribute="height" multiplier="60:37" id="3kv-Qn-4ns"/>
                                 </constraints>
@@ -39,7 +39,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gfX-LU-0nY">
-                                <rect key="frame" x="75" y="450" width="80" height="40"/>
+                                <rect key="frame" x="75" y="500" width="80" height="40"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="1" alpha="0.23000000000000001" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="CCm-zJ-Yno"/>
@@ -53,7 +53,7 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SX6-tU-CNv">
-                                <rect key="frame" x="165" y="450" width="80" height="40"/>
+                                <rect key="frame" x="165" y="500" width="80" height="40"/>
                                 <color key="backgroundColor" red="1" green="0.0" blue="1" alpha="0.23000000000000001" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="40" id="mAe-Gf-3KF"/>
@@ -67,29 +67,28 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Msv-wA-iUi" secondAttribute="bottom" id="02K-rt-JZo"/>
-                            <constraint firstItem="gfX-LU-0nY" firstAttribute="top" secondItem="x7p-eL-3qc" secondAttribute="bottom" constant="13" id="5ff-UE-l34"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Msv-wA-iUi" secondAttribute="bottom" constant="118" id="02K-rt-JZo"/>
+                            <constraint firstItem="x7p-eL-3qc" firstAttribute="top" secondItem="Msv-wA-iUi" secondAttribute="bottom" constant="10" id="2MT-9M-4op"/>
+                            <constraint firstItem="gfX-LU-0nY" firstAttribute="top" secondItem="x7p-eL-3qc" secondAttribute="bottom" constant="3" id="5ff-UE-l34"/>
                             <constraint firstAttribute="trailing" secondItem="V7t-ms-RD9" secondAttribute="trailing" constant="10" id="7Bm-ap-Nkf"/>
                             <constraint firstItem="SX6-tU-CNv" firstAttribute="leading" secondItem="gfX-LU-0nY" secondAttribute="trailing" constant="10" id="BxZ-tN-jXO"/>
                             <constraint firstItem="gfX-LU-0nY" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="75" id="FFS-0H-6VP"/>
                             <constraint firstItem="V7t-ms-RD9" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" constant="10" id="IJy-dh-TMJ"/>
                             <constraint firstItem="gfX-LU-0nY" firstAttribute="width" secondItem="SX6-tU-CNv" secondAttribute="width" id="Kj4-cm-bfW"/>
-                            <constraint firstItem="Msv-wA-iUi" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="LRe-g2-Wlw"/>
-                            <constraint firstAttribute="trailing" secondItem="Msv-wA-iUi" secondAttribute="trailing" id="MUs-Sk-71b"/>
-                            <constraint firstItem="Msv-wA-iUi" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" id="ODk-W9-6HT"/>
-                            <constraint firstItem="Msv-wA-iUi" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="TGd-uU-SuA"/>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="gfX-LU-0nY" secondAttribute="bottom" constant="78" id="W7x-zt-ngi"/>
-                            <constraint firstItem="SX6-tU-CNv" firstAttribute="top" secondItem="x7p-eL-3qc" secondAttribute="bottom" constant="13" id="boU-dE-T79"/>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="x7p-eL-3qc" secondAttribute="bottom" constant="131" id="d2U-cn-lAY"/>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Msv-wA-iUi" secondAttribute="bottom" id="dZq-v8-N9n"/>
-                            <constraint firstAttribute="trailing" secondItem="Msv-wA-iUi" secondAttribute="trailing" id="hj3-KF-knW"/>
-                            <constraint firstItem="Msv-wA-iUi" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" id="jmV-ZD-DOo"/>
+                            <constraint firstItem="Msv-wA-iUi" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="10" id="LRe-g2-Wlw"/>
+                            <constraint firstAttribute="trailing" secondItem="Msv-wA-iUi" secondAttribute="trailing" constant="10" id="MUs-Sk-71b"/>
+                            <constraint firstItem="Msv-wA-iUi" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="10" id="ODk-W9-6HT"/>
+                            <constraint firstItem="Msv-wA-iUi" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" constant="50" id="TGd-uU-SuA"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="gfX-LU-0nY" secondAttribute="bottom" constant="28" id="W7x-zt-ngi"/>
+                            <constraint firstItem="SX6-tU-CNv" firstAttribute="top" secondItem="x7p-eL-3qc" secondAttribute="bottom" constant="3" id="boU-dE-T79"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="Msv-wA-iUi" secondAttribute="bottom" constant="118" id="dZq-v8-N9n"/>
+                            <constraint firstAttribute="trailing" secondItem="Msv-wA-iUi" secondAttribute="trailing" constant="10" id="hj3-KF-knW"/>
+                            <constraint firstItem="Msv-wA-iUi" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" constant="50" id="jmV-ZD-DOo"/>
                             <constraint firstAttribute="centerX" secondItem="x7p-eL-3qc" secondAttribute="centerX" id="mjH-RE-OGr"/>
-                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="SX6-tU-CNv" secondAttribute="bottom" constant="78" id="nda-5B-Zkf"/>
+                            <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="SX6-tU-CNv" secondAttribute="bottom" constant="28" id="nda-5B-Zkf"/>
                             <constraint firstItem="V7t-ms-RD9" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="250" id="o2K-3x-NeK"/>
-                            <constraint firstItem="x7p-eL-3qc" firstAttribute="top" secondItem="jyV-Pf-zRb" secondAttribute="bottom" constant="380" id="r9k-th-P0d"/>
                             <constraint firstAttribute="trailing" secondItem="SX6-tU-CNv" secondAttribute="trailing" constant="75" id="x3z-u4-gIV"/>
                         </constraints>
                     </view>
@@ -1686,10 +1685,10 @@
                         <viewControllerLayoutGuide type="bottom" id="9TW-qp-thc"/>
                     </layoutGuides>
                     <view key="view" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="Km2-2q-wyZ">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="300"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cpl-Ff-QGh">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cpl-Ff-QGh">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="300"/>
                                 <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
@@ -1885,8 +1884,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="zjY-DB-duY"/>
         <segue reference="XwL-ZY-i5c"/>
         <segue reference="uZx-1x-ByM"/>
-        <segue reference="zjY-DB-duY"/>
     </inferredMetricsTieBreakers>
 </document>

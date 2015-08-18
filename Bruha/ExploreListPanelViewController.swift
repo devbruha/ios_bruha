@@ -156,6 +156,7 @@ class ExploreListPanelViewController: UIViewController {
         var indexPaths: Array<NSIndexPath> = []
         if let previous = previousIndexPath{
             indexPaths += [previous]
+            
         }
         if let current = selectedIndexPath {
             indexPaths += [current]
