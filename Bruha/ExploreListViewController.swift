@@ -17,7 +17,6 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
     
     var panelControllerContainer: ARSPContainerController!
     var item = ["Slide 1.jpg","Slide 2.jpg","Slide 3.jpg","Slide 4.jpg","Slide 5.jpg","Slide 6.jpg","Slide 7.jpg","Slide 8.jpg","Slide 8.jpg","Slide 8.jpg","Slide 8.jpg","Slide 8.jpg","Slide 8.jpg","Slide 8.jpg","Slide 8.jpg","Slide 8.jpg","Slide 8.jpg","Slide 8.jpg"]
-    
     var screenWidth: CGFloat = 0.0
     var screenHeight: CGFloat = 0.0
     
@@ -32,7 +31,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         self.panelControllerContainer.visibilityStateDelegate = self
         self.exploreTableView!.allowsMultipleSelection = false
     }
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
@@ -61,10 +60,32 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
-        let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
-        return (eventInfo?.count)!
+        switch (GlobalVariables.selectedDisplay){
+            case "Event":
+                let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
+                println(eventInfo?.count)
+                return (eventInfo?.count)!
+            case "Venue":
+                let venueInfo = FetchData(context: managedObjectContext).fetchVenues()
+                return (venueInfo?.count)!
+            case "Artist":
+                let artistInfo = FetchData(context: managedObjectContext).fetchArtists()
+                return (artistInfo?.count)!
+            case "Organization":
+                let organizationInfo = FetchData(context: managedObjectContext).fetchOrganizations()
+                return (organizationInfo?.count)!
+        default:
+            let venueInfo = FetchData(context: managedObjectContext).fetchVenues()
+            return (venueInfo?.count)!
+        }
+        
     }
-    
+    func getDataFromUrl(urL:NSURL, completion: ((data: NSData?) -> Void)) {
+        NSURLSession.sharedSession().dataTaskWithURL(urL) { (data, response, error) in
+            completion(data: data)
+            }.resume()
+    }
+
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         switch (GlobalVariables.selectedDisplay){
@@ -78,11 +99,33 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 cell = NSBundle.mainBundle().loadNibNamed("Cell", owner: self, options: nil)[0] as! EventTableViewCell;
             }
             
-            let strCarName = item[indexPath.row] as String
-            cell.ExploreImage.image = UIImage(named: strCarName)
+            //let strCarName = item[indexPath.row] as String
+            //cell.ExploreImage.image = UIImage(named: strCarName)
             
             let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
             let event = eventInfo![indexPath.row]
+            
+            println("Begin of code")
+            cell.ExploreImage.contentMode = UIViewContentMode.ScaleToFill
+            if let checkedUrl = NSURL(string:event.url) {
+                println("Started downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
+                getDataFromUrl(checkedUrl) { data in
+                    dispatch_async(dispatch_get_main_queue()) {
+                        println("Finished downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
+                        cell.ExploreImage.image = UIImage(data: data!)
+                    }
+                }
+
+            }
+            println("End of code. The image will continue downloading in the background and it will be loaded when it ends.")
+            //Synchronously:
+            /*if let url = NSURL(string: event.url) {
+                if let data = NSData(contentsOfURL: url){
+                    cell.ExploreImage.contentMode = UIViewContentMode.ScaleToFill
+                    cell.ExploreImage.image = UIImage(data: data)
+                }
+            }*/
+
             
             let circViewWidthConstraint = NSLayoutConstraint (item: cell.circView, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: screenHeight)
             
@@ -150,8 +193,8 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             let venue = venueInfo![indexPath.row]
 
             
-            let strCarName = item[indexPath.row] as String
-            cell.venueImage.image = UIImage(named: strCarName)
+            //let strCarName = item[indexPath.row] as String
+            //cell.venueImage.image = UIImage(named: strCarName)
             cell.venueName.text = venue.venueName
             cell.venueDescription.text = venue.venueDescription
             cell.venueAddress.text = venue.venueAddress
@@ -184,8 +227,8 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             let artistInfo = FetchData(context: managedObjectContext).fetchArtists()
             let artist = artistInfo![indexPath.row]
             
-            let strCarName = item[indexPath.row] as String
-            cell.artistsImage.image = UIImage(named: strCarName)
+            //let strCarName = item[indexPath.row] as String
+            //cell.artistsImage.image = UIImage(named: strCarName)
             cell.artistName.text = artist.artistName
             cell.circArtistName.text = artist.artistName
             cell.circDescription.text = artist.artistDescription
@@ -215,8 +258,8 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             let organizationInfo = FetchData(context: managedObjectContext).fetchOrganizations()
             let organization = organizationInfo![indexPath.row]
             
-            let strCarName = item[indexPath.row] as String
-            cell.organizationImage.image = UIImage(named: strCarName)
+            //let strCarName = item[indexPath.row] as String
+            //cell.organizationImage.image = UIImage(named: strCarName)
             cell.organizationName.text = organization.organizationName
             cell.organizationDescription.text = organization.organizationDescription
             cell.address.text = organization.organizationAddress

@@ -32,8 +32,8 @@ class SplashViewController: UIViewController,UIScrollViewDelegate {
         LoadScreenService(context: self.managedObjectContext).retrieveAll()
 
         self.scrollView.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
-        let scrollViewWidth:CGFloat = self.scrollView.frame.width
-        let scrollViewHeight:CGFloat = self.scrollView.frame.height
+        let scrollViewWidth:CGFloat = self.scrollView.frame.width-20
+        let scrollViewHeight:CGFloat = self.scrollView.frame.height-168
         //2
         self.skipButton.layer.cornerRadius = 4.0
         //3
@@ -54,7 +54,8 @@ class SplashViewController: UIViewController,UIScrollViewDelegate {
         self.scrollView.addSubview(imgFour)
         self.scrollView.addSubview(imgFive)
         //4
-        self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.width * 5, self.scrollView.frame.height)
+        //self.scrollView.contentSize = CGSizeMake(self.scrollView.frame.width * 5, self.scrollView.frame.height)
+        self.scrollView.contentSize = CGSizeMake(scrollViewWidth*5, scrollViewHeight)
         self.scrollView.delegate = self
         self.pageControl.currentPage = 0
         
