@@ -92,15 +92,13 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             
         case "Event":
             
-            var cell : EventTableViewCell! = tableView.dequeueReusableCellWithIdentifier("Cell") as! EventTableViewCell!
+            var cell : EventTableViewCell! = tableView.dequeueReusableCellWithIdentifier("eventTableViewCell") as! EventTableViewCell!
             
             if(cell == nil){
                 
-                cell = NSBundle.mainBundle().loadNibNamed("Cell", owner: self, options: nil)[0] as! EventTableViewCell;
+                cell = NSBundle.mainBundle().loadNibNamed("EventTableViewCell", owner: self, options: nil)[0] as! EventTableViewCell;
             }
             
-            //let strCarName = item[indexPath.row] as String
-            //cell.ExploreImage.image = UIImage(named: strCarName)
             
             let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
             let event = eventInfo![indexPath.row]
@@ -127,26 +125,6 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             }*/
 
             
-            let circViewWidthConstraint = NSLayoutConstraint (item: cell.circView, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1, constant: screenHeight)
-            
-            //cell.circView.addConstraint(circViewWidthConstraint)
-            
-            let xConstraint = NSLayoutConstraint(item: cell.circView, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: cell, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
-            
-            let yConstraint = NSLayoutConstraint(item: cell.circView, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: cell, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0)
-            
-            cell.addConstraint(xConstraint)
-            cell.addConstraint(yConstraint)
-            
-            let rectxConstraint = NSLayoutConstraint(item: cell.rectView, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: cell, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
-            
-            let rectyConstraint = NSLayoutConstraint(item: cell.rectView, attribute: NSLayoutAttribute.CenterY, relatedBy: NSLayoutRelation.Equal, toItem: cell, attribute: NSLayoutAttribute.CenterY, multiplier: 1, constant: 0)
-            
-            let rectWidthConstraint = NSLayoutConstraint(item: cell.rectView, attribute: NSLayoutAttribute.Width, relatedBy: NSLayoutRelation.Equal, toItem: cell, attribute: NSLayoutAttribute.Width, multiplier: 1, constant: 0)
-            
-            cell.addConstraint(rectxConstraint)
-            cell.addConstraint(rectyConstraint)
-            cell.addConstraint(rectWidthConstraint)
             
             cell.circTitle.text = event.eventName
             cell.circDate.text = event.eventStartDate
