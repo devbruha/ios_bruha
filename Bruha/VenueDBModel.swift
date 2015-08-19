@@ -20,6 +20,6 @@ class VenueDBModel: NSManagedObject {
     @NSManaged var address: String
     @NSManaged var latitude: NSNumber
     @NSManaged var longitude: NSNumber
-    
+    @NSManaged var posterUrl: String
 }
 

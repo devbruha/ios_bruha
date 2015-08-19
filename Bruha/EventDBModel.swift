@@ -31,7 +31,7 @@ class EventDBModel: NSManagedObject {
     @NSManaged var venueID: String
     @NSManaged var venueName: String
     @NSManaged var userID: String
-    @NSManaged var url: String
+    @NSManaged var posterUrl: String
     
 }
 

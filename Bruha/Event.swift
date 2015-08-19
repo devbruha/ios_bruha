@@ -47,7 +47,7 @@ struct Event {
     var subCategoryName: [String] = []
     var subCategoryID: [String] = []
     
-    var url: String
+    var posterUrl: String
     
     init(fetchResults: EventDBModel, fetchSubResults: [EventSubCategoryDBModel]){
         
@@ -78,7 +78,7 @@ struct Event {
             subCategoryName.append(fetchSubResults[j].subCategoryName as String)
         }
         
-        url = fetchResults.url
+        posterUrl = fetchResults.posterUrl
     }
     
     init(eventDictionary: [String: AnyObject]) {
@@ -143,6 +143,6 @@ struct Event {
         
         var tempUrl = eventDictionary["image_link"] as! String
         
-        url = "http://www.bruha.com/WorkingWebsite/\(tempUrl)"
+        posterUrl = "http://www.bruha.com/WorkingWebsite/\(tempUrl)"
     }
 }

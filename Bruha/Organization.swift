@@ -14,17 +14,19 @@ struct Organization {
     
     //Event Variables
     
-    let organizationID: String?
-    let organizationName: String?
-    let organizationDescription: String?
-    let organizationAddress: String?
+    let organizationID: String
+    let organizationName: String
+    let organizationDescription: String
+    let organizationAddress: String
     
-    let primaryCategory: String?
+    let primaryCategory: String
     
     //Event location variables
     
-    let organizationLatitude: Double?
-    let organizationLongitude: Double?
+    let organizationLatitude: Double
+    let organizationLongitude: Double
+    
+    var posterUrl: String
     
     init(fetchResults: OrganizationDBModel){
         
@@ -37,24 +39,25 @@ struct Organization {
         
         organizationLatitude = fetchResults.latitude as Double
         organizationLongitude = fetchResults.longitude as Double
+        posterUrl = fetchResults.posterUrl
     }
     
     init(organizationDictionary: [String: AnyObject]) {
         
-        var appt = organizationDictionary["appt"] as? String
-        var streetNo = organizationDictionary["street_no"] as? String
-        var streetName = organizationDictionary["street_name"] as? String
-        var city = organizationDictionary["location_city"] as? String
-        var postalCode = organizationDictionary["postal_code"] as? String
+        //var appt = organizationDictionary["appt"] as! String
+        var streetNo = organizationDictionary["street_no"] as! String
+        var streetName = organizationDictionary["street_name"] as! String
+        var city = organizationDictionary["location_city"] as! String
+        var postalCode = organizationDictionary["postal_code"] as! String
         
-        organizationAddress = "\(streetNo!) \(streetName!), \(postalCode!)"
+        organizationAddress = "\(streetNo) \(streetName), \(postalCode)"
         
-        organizationName = organizationDictionary["organization_name"] as? String
+        organizationName = organizationDictionary["organization_name"] as! String
         
-        organizationID = organizationDictionary["organization_id"] as? String
-        organizationDescription = organizationDictionary["organization_desc"] as? String
+        organizationID = organizationDictionary["organization_id"] as! String
+        organizationDescription = organizationDictionary["organization_desc"] as! String
         
-        primaryCategory = organizationDictionary["primary_category"] as? String
+        primaryCategory = organizationDictionary["primary_category"] as! String
         
         
         if let organizationLatString = organizationDictionary["location_lat"] as? String {
@@ -64,7 +67,7 @@ struct Organization {
             
         } else {
             
-            organizationLatitude = nil
+            organizationLatitude = 0.0
         }
         
         if let organizationLngString = organizationDictionary["location_lng"] as? String {
@@ -74,8 +77,11 @@ struct Organization {
             
         } else {
             
-            organizationLongitude = nil
+            organizationLongitude = 0.0
         }
         
+        var tempUrl = organizationDictionary["media"] as! String
+        
+        posterUrl = "http://www.bruha.com/WorkingWebsite/\(tempUrl)"
     }
 }

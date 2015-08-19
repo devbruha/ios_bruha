@@ -105,7 +105,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             
             println("Begin of code")
             cell.ExploreImage.contentMode = UIViewContentMode.ScaleToFill
-            if let checkedUrl = NSURL(string:event.url) {
+            if let checkedUrl = NSURL(string:event.posterUrl) {
                 println("Started downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
                 getDataFromUrl(checkedUrl) { data in
                     dispatch_async(dispatch_get_main_queue()) {
