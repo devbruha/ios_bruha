@@ -43,6 +43,7 @@
 		184231FA1B5FF173003948F5 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184231F91B5FF173003948F5 /* ProfileViewController.swift */; };
 		1872E9EF1B7D258E0099AA36 /* ExplorePanelViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1872E9EE1B7D258E0099AA36 /* ExplorePanelViewTableViewCell.swift */; };
 		18A2A11B1B728241005E1DCB /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2A11A1B728241005E1DCB /* CalendarViewController.swift */; };
+		18A98A751B84C8CF0016AF7E /* EventTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A98A741B84C8CF0016AF7E /* EventTableViewCell.xib */; };
 		18D2169D1B6BF1D9005DAAA8 /* ExploreListPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D2169C1B6BF1D9005DAAA8 /* ExploreListPanelViewController.swift */; };
 		18E2DD8C1B69537D007C61B5 /* DashLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E2DD8B1B69537D007C61B5 /* DashLine.swift */; };
 		3FBD3EDB6177AE183A0340DF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C40848564A9A9ABD06E1BFE /* libPods.a */; };
@@ -140,6 +141,7 @@
 		184231F91B5FF173003948F5 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		1872E9EE1B7D258E0099AA36 /* ExplorePanelViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExplorePanelViewTableViewCell.swift; sourceTree = "<group>"; };
 		18A2A11A1B728241005E1DCB /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
+		18A98A741B84C8CF0016AF7E /* EventTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventTableViewCell.xib; sourceTree = "<group>"; };
 		18D2169C1B6BF1D9005DAAA8 /* ExploreListPanelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreListPanelViewController.swift; sourceTree = "<group>"; };
 		18E2DD8B1B69537D007C61B5 /* DashLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashLine.swift; sourceTree = "<group>"; };
 		452BC0C31B791068003E7142 /* VenueTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VenueTableViewCell.xib; sourceTree = "<group>"; };
@@ -405,6 +407,7 @@
 				18E2DD8B1B69537D007C61B5 /* DashLine.swift */,
 				4560C54C1B66D45100AB5382 /* EventRectangleView.swift */,
 				4560C54A1B66D44700AB5382 /* EventCircleView.swift */,
+				18A98A741B84C8CF0016AF7E /* EventTableViewCell.xib */,
 				452BC0C31B791068003E7142 /* VenueTableViewCell.xib */,
 				452BC0C51B79118F003E7142 /* ArtistTableViewCell.xib */,
 				452BC0C71B79119D003E7142 /* OrganizationTableViewCell.xib */,
@@ -545,6 +548,7 @@
 				45FA05741B5D4158004AD819 /* Images.xcassets in Resources */,
 				180F6E261B75232700F86BF5 /* GoogleMaps.bundle in Resources */,
 				452BC0C81B79119D003E7142 /* OrganizationTableViewCell.xib in Resources */,
+				18A98A751B84C8CF0016AF7E /* EventTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
