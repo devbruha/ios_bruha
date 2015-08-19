@@ -20,6 +20,6 @@ class OrganizationDBModel: NSManagedObject {
     @NSManaged var primaryCategory: String
     @NSManaged var latitude: NSNumber
     @NSManaged var longitude: NSNumber
-    
+    @NSManaged var posterUrl: String
 }
 

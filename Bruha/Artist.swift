@@ -12,11 +12,13 @@ import Foundation
 
 struct Artist {
     
-    let artistID: String?
-    let artistName: String?
-    let artistDescription: String?
+    let artistID: String
+    let artistName: String
+    let artistDescription: String
     
-    let primaryCategory: String?
+    let primaryCategory: String
+    
+    var posterUrl: String
     
     init(fetchResults: ArtistDBModel){
         
@@ -24,14 +26,19 @@ struct Artist {
         artistName = fetchResults.name
         artistDescription = fetchResults.artistDescription
         primaryCategory = fetchResults.primaryCategory
+        posterUrl = fetchResults.posterUrl
     }
     
     init(artistDictionary: [String: AnyObject]) {
         
-        artistID = artistDictionary["Artist_id"] as? String
-        artistName = artistDictionary["Artist_name"] as? String
-        artistDescription = artistDictionary["Artist_desc"] as? String
-        primaryCategory = artistDictionary["primary_category"] as? String
+        artistID = artistDictionary["Artist_id"] as! String
+        artistName = artistDictionary["Artist_name"] as! String
+        artistDescription = artistDictionary["Artist_desc"] as! String
+        primaryCategory = artistDictionary["primary_category"] as! String
     
+        
+        var tempUrl = artistDictionary["Artist_media"] as! String
+        
+        posterUrl = "http://www.bruha.com/WorkingWebsite/\(tempUrl)"
     }
 }

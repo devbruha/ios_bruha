@@ -12,15 +12,17 @@ import Foundation
 
 struct Venue {
     
-    let venueID: String?
-    let venueName: String?
-    let venueDescription: String?
-    let venueAddress: String?
+    let venueID: String
+    let venueName: String
+    let venueDescription: String
+    let venueAddress: String
     
-    let primaryCategory: String?
+    let primaryCategory: String
     
-    let venueLatitude: Double?
-    let venueLongitude: Double?
+    let venueLatitude: Double
+    let venueLongitude: Double
+    
+    var posterUrl: String
     
     init(fetchResults: VenueDBModel){
         
@@ -31,20 +33,21 @@ struct Venue {
         primaryCategory = fetchResults.primaryCategory
         venueLatitude = fetchResults.latitude as Double
         venueLongitude = fetchResults.longitude as Double
+        posterUrl = fetchResults.posterUrl
     }
     
     init(venueDictionary: [String: AnyObject]) {
         
-        var appt = venueDictionary["appt"] as? String
-        var streetNo = venueDictionary["street_no"] as? String
-        var streetName = venueDictionary["street_name"] as? String
-        var city = venueDictionary["location_city"] as? String
-        var postalCode = venueDictionary["postal_code"] as? String
+        var appt = venueDictionary["appt"] as! String
+        var streetNo = venueDictionary["street_no"] as! String
+        var streetName = venueDictionary["street_name"] as! String
+        var city = venueDictionary["location_city"] as! String
+        var postalCode = venueDictionary["postal_code"] as! String
         
-        venueAddress = "\(streetNo!) \(streetName!), \(postalCode!)"
-        venueID = venueDictionary["venue_id"] as? String
-        venueName = venueDictionary["venue_name"] as?  String
-        venueDescription = venueDictionary["venue_desc"] as?  String
+        venueAddress = "\(streetNo) \(streetName), \(postalCode)"
+        venueID = venueDictionary["venue_id"] as! String
+        venueName = venueDictionary["venue_name"] as!  String
+        venueDescription = venueDictionary["venue_desc"] as!  String
         
         
         if let venueLatString = venueDictionary["location_lat"] as? String {
@@ -54,7 +57,7 @@ struct Venue {
             
         } else {
             
-            venueLatitude = nil
+            venueLatitude = 0.0
         }
         
         if let venueLngString = venueDictionary["location_lng"] as? String {
@@ -64,10 +67,14 @@ struct Venue {
             
         } else {
             
-            venueLongitude = nil
+            venueLongitude = 0.0
         }
         
-        primaryCategory = venueDictionary["primary_category"] as? String
+        primaryCategory = venueDictionary["primary_category"] as! String
+        
+        var tempUrl = venueDictionary["media"] as! String
+        
+        posterUrl = "http://www.bruha.com/WorkingWebsite/\(tempUrl)"
         
     }
 }

@@ -67,14 +67,12 @@ class SaveData {
             
             newItem.userID = event.userID
             
-            newItem.url = event.url
+            newItem.posterUrl = event.posterUrl
             
             managedObjectContext!.save(nil)
         }
         
         println("Event Save")
-        
-        //println(FetchData(context: managedObjectContext).fetchEvents()?.count)
     }
     
     func saveVenues(VenueList: [Venue]){
@@ -87,21 +85,19 @@ class SaveData {
             
             var newItem = VenueDBModel(entity:en!, insertIntoManagedObjectContext: managedObjectContext!)
             
-            newItem.id = venue.venueID!
-            newItem.name = venue.venueName!
-            newItem.venueDescription = venue.venueDescription!
-            newItem.primaryCategory = venue.primaryCategory!
-            newItem.address = venue.venueAddress!
-            newItem.latitude = venue.venueLatitude!
-            newItem.longitude = venue.venueLongitude!
+            newItem.id = venue.venueID
+            newItem.name = venue.venueName
+            newItem.venueDescription = venue.venueDescription
+            newItem.primaryCategory = venue.primaryCategory
+            newItem.address = venue.venueAddress
+            newItem.latitude = venue.venueLatitude
+            newItem.longitude = venue.venueLongitude
+            newItem.posterUrl = venue.posterUrl
             
             managedObjectContext!.save(nil)
         }
         
         println("Venue Save")
-        
-        //println(FetchData(context: managedObjectContext).fetchVenues()?.count)
-        
     }
     
     func saveArtists(ArtistList: [Artist]){
@@ -114,18 +110,16 @@ class SaveData {
             
             var newItem = ArtistDBModel(entity:en!, insertIntoManagedObjectContext: managedObjectContext!)
             
-            newItem.name = artist.artistName!
-            newItem.artistDescription = artist.artistDescription!
-            newItem.primaryCategory = artist.primaryCategory!
-            newItem.id = artist.artistID!
+            newItem.name = artist.artistName
+            newItem.artistDescription = artist.artistDescription
+            newItem.primaryCategory = artist.primaryCategory
+            newItem.id = artist.artistID
+            newItem.posterUrl = artist.posterUrl
             
             managedObjectContext!.save(nil)
         }
         
         println("Artist Save")
-        
-        //println(FetchData(context: managedObjectContext).fetchArtists()?.count)
-        
     }
     
     func saveOrganizations(OrganizationList: [Organization]){
@@ -138,21 +132,19 @@ class SaveData {
             
             var newItem = OrganizationDBModel(entity:en!, insertIntoManagedObjectContext: managedObjectContext!)
             
-            newItem.id = organization.organizationID!
-            newItem.name = organization.organizationName!
-            newItem.orgDescription = organization.organizationDescription!
-            newItem.primaryCategory = organization.primaryCategory!
-            newItem.address = organization.organizationAddress!
-            newItem.latitude = organization.organizationLatitude!
-            newItem.longitude = organization.organizationLongitude!
+            newItem.id = organization.organizationID
+            newItem.name = organization.organizationName
+            newItem.orgDescription = organization.organizationDescription
+            newItem.primaryCategory = organization.primaryCategory
+            newItem.address = organization.organizationAddress
+            newItem.latitude = organization.organizationLatitude
+            newItem.longitude = organization.organizationLongitude
+            newItem.posterUrl = organization.posterUrl
             
             managedObjectContext!.save(nil)
         }
         
         println("Organization Save")
-        
-        //println(FetchData(context: managedObjectContext).fetchOrganizations()?.count)
-        
     }
     
     func saveUser(user: User){
@@ -174,7 +166,5 @@ class SaveData {
         
         
         println("User Save")
-        
-        //println(FetchData(context: managedObjectContext).fetchUserInfo()?.count)
     }
 }
