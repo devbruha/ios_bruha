@@ -645,7 +645,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Vbo-1c-KEj">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="8" width="320" height="44"/>
                                 <items>
                                     <navigationItem title="Title" id="DIy-DH-DVv">
                                         <barButtonItem key="leftBarButtonItem" style="plain" id="8yy-lf-dMe">
@@ -694,11 +694,11 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="oaV-wG-kyD" firstAttribute="top" secondItem="Vbo-1c-KEj" secondAttribute="bottom" id="CBE-i8-pWt"/>
+                            <constraint firstItem="oaV-wG-kyD" firstAttribute="top" secondItem="Vbo-1c-KEj" secondAttribute="bottom" constant="-8" id="CBE-i8-pWt"/>
                             <constraint firstItem="MTq-Bf-XPm" firstAttribute="top" secondItem="oaV-wG-kyD" secondAttribute="bottom" id="OOE-iA-dO9"/>
                             <constraint firstItem="Vbo-1c-KEj" firstAttribute="leading" secondItem="oSL-oJ-OZJ" secondAttribute="leading" id="Zuo-zH-XQn"/>
                             <constraint firstAttribute="trailing" secondItem="Vbo-1c-KEj" secondAttribute="trailing" id="aUB-cb-7jM"/>
-                            <constraint firstItem="Vbo-1c-KEj" firstAttribute="top" secondItem="oSL-oJ-OZJ" secondAttribute="top" id="bqz-3V-dts"/>
+                            <constraint firstItem="Vbo-1c-KEj" firstAttribute="top" secondItem="oSL-oJ-OZJ" secondAttribute="top" constant="8" id="bqz-3V-dts"/>
                             <constraint firstItem="oaV-wG-kyD" firstAttribute="leading" secondItem="oSL-oJ-OZJ" secondAttribute="leading" id="pMQ-I2-uPK"/>
                             <constraint firstAttribute="trailing" secondItem="oaV-wG-kyD" secondAttribute="trailing" id="qoH-k7-7dq"/>
                         </constraints>

@@ -169,6 +169,20 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             
             let venueInfo = FetchData(context: managedObjectContext).fetchVenues()
             let venue = venueInfo![indexPath.row]
+            
+            println("Begin of code")
+            cell.venueImage.contentMode = UIViewContentMode.ScaleToFill
+            if let checkedUrl = NSURL(string:venue.posterUrl) {
+                println("Started downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
+                getDataFromUrl(checkedUrl) { data in
+                    dispatch_async(dispatch_get_main_queue()) {
+                        println("Finished downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
+                        cell.venueImage.image = UIImage(data: data!)
+                    }
+                }
+                
+            }
+
 
             
             //let strCarName = item[indexPath.row] as String
@@ -205,6 +219,20 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             let artistInfo = FetchData(context: managedObjectContext).fetchArtists()
             let artist = artistInfo![indexPath.row]
             
+            println("Begin of code")
+            cell.artistsImage.contentMode = UIViewContentMode.ScaleToFill
+            if let checkedUrl = NSURL(string:artist.posterUrl) {
+                println("Started downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
+                getDataFromUrl(checkedUrl) { data in
+                    dispatch_async(dispatch_get_main_queue()) {
+                        println("Finished downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
+                        cell.artistsImage.image = UIImage(data: data!)
+                    }
+                }
+                
+            }
+
+            
             //let strCarName = item[indexPath.row] as String
             //cell.artistsImage.image = UIImage(named: strCarName)
             cell.artistName.text = artist.artistName
@@ -235,6 +263,20 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             
             let organizationInfo = FetchData(context: managedObjectContext).fetchOrganizations()
             let organization = organizationInfo![indexPath.row]
+            
+            println("Begin of code")
+            cell.organizationImage.contentMode = UIViewContentMode.ScaleToFill
+            if let checkedUrl = NSURL(string:organization.posterUrl) {
+                println("Started downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
+                getDataFromUrl(checkedUrl) { data in
+                    dispatch_async(dispatch_get_main_queue()) {
+                        println("Finished downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
+                        cell.organizationImage.image = UIImage(data: data!)
+                    }
+                }
+                
+            }
+
             
             //let strCarName = item[indexPath.row] as String
             //cell.organizationImage.image = UIImage(named: strCarName)
