@@ -96,6 +96,7 @@ class MapFilterPanelViewController: UIViewController {
         //println(panelControllerContainer.visibilityState)
         
     }
+    
     func updateNotificationSent(){
         
     }

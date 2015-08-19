@@ -20,8 +20,21 @@ class MapViewController: UIViewController,CLLocationManagerDelegate, GMSMapViewD
     
     var locationMarker: GMSMarker!
     
+    var eventMarkers: [GMSMarker] = []
+    var venueMarkers: [GMSMarker] = []
+    var artistMarkers: [GMSMarker] = []
+    var organizationMarkers: [GMSMarker] = []
+    
+    var displayedEvents = GlobalVariables.displayedEvents
+    var displayedVenues = GlobalVariables.displayedVenues
+    var displayedOrganizations = GlobalVariables.displayedOrganizations
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        generateMarkers()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateMarkers", name: "itemDisplayChange", object: nil)
         
         // Do any additional setup after loading the view, typically from a nib.
         locationManager.delegate = self
@@ -96,6 +109,116 @@ class MapViewController: UIViewController,CLLocationManagerDelegate, GMSMapViewD
     
     @IBAction func myLocation(sender: AnyObject) {
         //myLocation = viewMap.settings.myLocationButton
+    }
+    
+    func generateMarkers(){
+        
+        for event in displayedEvents{
+            
+            var eventMarker: GMSMarker! = GMSMarker()
+            
+            eventMarker.title = event.eventName
+            eventMarker.position = CLLocationCoordinate2D(latitude: event.eventLatitude,longitude: event.eventLongitude)
+            
+            eventMarkers.append(eventMarker)
+        }
+        
+        
+        
+        for venue in displayedVenues{
+            
+            var venueMarker: GMSMarker! = GMSMarker()
+            
+            venueMarker.title = venue.venueName
+            venueMarker.position = CLLocationCoordinate2D(latitude: venue.venueLatitude,longitude: venue.venueLongitude)
+            
+            venueMarkers.append(venueMarker)
+        }
+        
+        for organization in displayedOrganizations{
+            
+            var organizationMarker: GMSMarker! = GMSMarker()
+            
+            organizationMarker.title = organization.organizationName
+            organizationMarker.position = CLLocationCoordinate2D(latitude: organization.organizationLatitude,longitude: organization.organizationLongitude)
+            
+            organizationMarkers.append(organizationMarker)
+        }
+    }
+    
+    func updateMarkers(){
+        
+        if(GlobalVariables.selectedDisplay == "Event"){
+            
+            for marker in eventMarkers{
+                
+                marker.map = viewMap
+            }
+            
+            for marker in venueMarkers{
+                
+                marker.map = nil
+            }
+            
+            for marker in organizationMarkers{
+                
+                marker.map = nil
+            }
+        }
+        
+        else if(GlobalVariables.selectedDisplay == "Venue"){
+            
+            for marker in eventMarkers{
+                
+                marker.map = nil
+            }
+            
+            for marker in venueMarkers{
+                
+                marker.map = viewMap
+            }
+            
+            for marker in organizationMarkers{
+                
+                marker.map = nil
+            }
+        }
+        
+        else if(GlobalVariables.selectedDisplay == "Artist"){
+            
+            for marker in eventMarkers{
+                
+                marker.map = nil
+            }
+            
+            for marker in venueMarkers{
+                
+                marker.map = nil
+            }
+            
+            for marker in organizationMarkers{
+                
+                marker.map = nil
+            }
+        }
+        
+        else if(GlobalVariables.selectedDisplay == "Organization"){
+            
+            for marker in eventMarkers{
+                
+                marker.map = nil
+            }
+            
+            for marker in venueMarkers{
+                
+                marker.map = nil
+            }
+            
+            for marker in organizationMarkers{
+                
+                marker.map = viewMap
+            }
+        }
     }
     
     

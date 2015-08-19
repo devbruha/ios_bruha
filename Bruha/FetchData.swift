@@ -21,7 +21,7 @@ class FetchData {
     }
 
     
-    func fetchEvents() -> [Event]?{
+    func fetchEvents() -> [Event]!{
         
         var returnedEvent: [Event] = [Event]()
         
