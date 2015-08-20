@@ -61,6 +61,15 @@
 		4560C54F1B66D49800AB5382 /* EventTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4560C54E1B66D49800AB5382 /* EventTableViewCell.swift */; };
 		45AFAF231B60332E00BA6854 /* CredentialCheck.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45AFAF221B60332E00BA6854 /* CredentialCheck.swift */; };
 		45C0F5F91B7BBE780041A1C8 /* EventSubCategoryDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C0F5F81B7BBE780041A1C8 /* EventSubCategoryDBModel.swift */; };
+		45C6D5B71B851A5A00EE4A05 /* VenueCategoriesDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C6D5B61B851A5A00EE4A05 /* VenueCategoriesDBModel.swift */; };
+		45C6D5B91B851A7200EE4A05 /* ArtistCategoriesDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C6D5B81B851A7200EE4A05 /* ArtistCategoriesDBModel.swift */; };
+		45C6D5BC1B851ABC00EE4A05 /* OrganizationCategoriesDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C6D5BB1B851ABC00EE4A05 /* OrganizationCategoriesDBModel.swift */; };
+		45C6D5BE1B851ACE00EE4A05 /* EventPrimaryCategoriesDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C6D5BD1B851ACE00EE4A05 /* EventPrimaryCategoriesDBModel.swift */; };
+		45C6D5C01B851ADE00EE4A05 /* EventSubCategoriesDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C6D5BF1B851ADE00EE4A05 /* EventSubCategoriesDBModel.swift */; };
+		45C93C601B8621AE00F60D9D /* EventCategoryListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C93C5F1B8621AE00F60D9D /* EventCategoryListService.swift */; };
+		45C93C621B8621C100F60D9D /* VenueCategoryListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C93C611B8621C100F60D9D /* VenueCategoryListService.swift */; };
+		45C93C641B8621F600F60D9D /* ArtistCategoryListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C93C631B8621F600F60D9D /* ArtistCategoryListService.swift */; };
+		45C93C661B86225900F60D9D /* OrganizationCategoryListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C93C651B86225900F60D9D /* OrganizationCategoryListService.swift */; };
 		45D8986F1B5E89E6003ED862 /* RegisterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8986E1B5E89E6003ED862 /* RegisterService.swift */; };
 		45FA056A1B5D4158004AD819 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05691B5D4158004AD819 /* AppDelegate.swift */; };
 		45FA056D1B5D4158004AD819 /* Bruha.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 45FA056B1B5D4158004AD819 /* Bruha.xcdatamodeld */; };
@@ -158,6 +167,15 @@
 		4560C54E1B66D49800AB5382 /* EventTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventTableViewCell.swift; sourceTree = "<group>"; };
 		45AFAF221B60332E00BA6854 /* CredentialCheck.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CredentialCheck.swift; sourceTree = "<group>"; };
 		45C0F5F81B7BBE780041A1C8 /* EventSubCategoryDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventSubCategoryDBModel.swift; sourceTree = "<group>"; };
+		45C6D5B61B851A5A00EE4A05 /* VenueCategoriesDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueCategoriesDBModel.swift; sourceTree = "<group>"; };
+		45C6D5B81B851A7200EE4A05 /* ArtistCategoriesDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistCategoriesDBModel.swift; sourceTree = "<group>"; };
+		45C6D5BB1B851ABC00EE4A05 /* OrganizationCategoriesDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrganizationCategoriesDBModel.swift; sourceTree = "<group>"; };
+		45C6D5BD1B851ACE00EE4A05 /* EventPrimaryCategoriesDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPrimaryCategoriesDBModel.swift; sourceTree = "<group>"; };
+		45C6D5BF1B851ADE00EE4A05 /* EventSubCategoriesDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventSubCategoriesDBModel.swift; sourceTree = "<group>"; };
+		45C93C5F1B8621AE00F60D9D /* EventCategoryListService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCategoryListService.swift; sourceTree = "<group>"; };
+		45C93C611B8621C100F60D9D /* VenueCategoryListService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueCategoryListService.swift; sourceTree = "<group>"; };
+		45C93C631B8621F600F60D9D /* ArtistCategoryListService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistCategoryListService.swift; sourceTree = "<group>"; };
+		45C93C651B86225900F60D9D /* OrganizationCategoryListService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrganizationCategoryListService.swift; sourceTree = "<group>"; };
 		45D8986E1B5E89E6003ED862 /* RegisterService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterService.swift; sourceTree = "<group>"; };
 		45FA05641B5D4158004AD819 /* Bruha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bruha.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45FA05681B5D4158004AD819 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -290,6 +308,29 @@
 			name = Processing;
 			sourceTree = "<group>";
 		};
+		45C6D5BA1B851A8000EE4A05 /* CategoryLists */ = {
+			isa = PBXGroup;
+			children = (
+				45C6D5B61B851A5A00EE4A05 /* VenueCategoriesDBModel.swift */,
+				45C6D5B81B851A7200EE4A05 /* ArtistCategoriesDBModel.swift */,
+				45C6D5BB1B851ABC00EE4A05 /* OrganizationCategoriesDBModel.swift */,
+				45C6D5BD1B851ACE00EE4A05 /* EventPrimaryCategoriesDBModel.swift */,
+				45C6D5BF1B851ADE00EE4A05 /* EventSubCategoriesDBModel.swift */,
+			);
+			name = CategoryLists;
+			sourceTree = "<group>";
+		};
+		45C6D5C11B851B9100EE4A05 /* CategoryLists */ = {
+			isa = PBXGroup;
+			children = (
+				45C93C5F1B8621AE00F60D9D /* EventCategoryListService.swift */,
+				45C93C611B8621C100F60D9D /* VenueCategoryListService.swift */,
+				45C93C631B8621F600F60D9D /* ArtistCategoryListService.swift */,
+				45C93C651B86225900F60D9D /* OrganizationCategoryListService.swift */,
+			);
+			name = CategoryLists;
+			sourceTree = "<group>";
+		};
 		45FA055B1B5D4158004AD819 = {
 			isa = PBXGroup;
 			children = (
@@ -377,6 +418,7 @@
 		45FA05B11B5D4280004AD819 /* PHP Calls */ = {
 			isa = PBXGroup;
 			children = (
+				45C6D5C11B851B9100EE4A05 /* CategoryLists */,
 				45FA059E1B5D4190004AD819 /* EventService.swift */,
 				45FA059F1B5D4190004AD819 /* NetworkOperation.swift */,
 				45FA05A01B5D4190004AD819 /* VenueService.swift */,
@@ -422,6 +464,7 @@
 		45FA05C21B5D6FDD004AD819 /* LocalDB */ = {
 			isa = PBXGroup;
 			children = (
+				45C6D5BA1B851A8000EE4A05 /* CategoryLists */,
 				45FA058D1B5D4188004AD819 /* EventDBModel.swift */,
 				45FA05911B5D4188004AD819 /* VenueDBModel.swift */,
 				45FA05931B5D4188004AD819 /* ArtistDBModel.swift */,
@@ -617,6 +660,7 @@
 				1834845E1B7E352F00EA0D13 /* VenueView.swift in Sources */,
 				45FA05B81B5D432C004AD819 /* SplashViewController.swift in Sources */,
 				181EB61A1B714B7600B9295E /* NSDateAdditions.swift in Sources */,
+				45C6D5C01B851ADE00EE4A05 /* EventSubCategoriesDBModel.swift in Sources */,
 				181EB6141B714B7600B9295E /* DayCollectionCell.swift in Sources */,
 				181EB6101B714B7600B9295E /* CalendarView.swift in Sources */,
 				45FA05C11B5D6FCC004AD819 /* LoginService.swift in Sources */,
@@ -626,6 +670,7 @@
 				45FA05A71B5D4190004AD819 /* LoadScreenService.swift in Sources */,
 				45AFAF231B60332E00BA6854 /* CredentialCheck.swift in Sources */,
 				45FA05C61B5D7D9E004AD819 /* UserDBModel.swift in Sources */,
+				45C93C641B8621F600F60D9D /* ArtistCategoryListService.swift in Sources */,
 				184231FA1B5FF173003948F5 /* ProfileViewController.swift in Sources */,
 				45FA05AF1B5D4196004AD819 /* DeleteData.swift in Sources */,
 				452BC0CE1B791260003E7142 /* OrganizationTableViewCell.swift in Sources */,
@@ -638,6 +683,7 @@
 				4560C54D1B66D45100AB5382 /* EventRectangleView.swift in Sources */,
 				18D2169D1B6BF1D9005DAAA8 /* ExploreListPanelViewController.swift in Sources */,
 				1824C0871B6AA7BA0007840F /* MoreInfoViewController.swift in Sources */,
+				45C6D5BE1B851ACE00EE4A05 /* EventPrimaryCategoriesDBModel.swift in Sources */,
 				45FA056D1B5D4158004AD819 /* Bruha.xcdatamodeld in Sources */,
 				45FA05961B5D4188004AD819 /* EventDBModel.swift in Sources */,
 				45FA056A1B5D4158004AD819 /* AppDelegate.swift in Sources */,
@@ -645,13 +691,19 @@
 				183484601B7E704B00EA0D13 /* ArtistView.swift in Sources */,
 				4560C5471B66D09900AB5382 /* SaveData.swift in Sources */,
 				45FA05BE1B5D640A004AD819 /* SignUpViewController.swift in Sources */,
+				45C6D5B91B851A7200EE4A05 /* ArtistCategoriesDBModel.swift in Sources */,
 				45FA059A1B5D4188004AD819 /* VenueDBModel.swift in Sources */,
 				45FA05981B5D4188004AD819 /* Artist.swift in Sources */,
 				45D8986F1B5E89E6003ED862 /* RegisterService.swift in Sources */,
 				45FA05A41B5D4190004AD819 /* EventService.swift in Sources */,
+				45C6D5B71B851A5A00EE4A05 /* VenueCategoriesDBModel.swift in Sources */,
+				45C93C661B86225900F60D9D /* OrganizationCategoryListService.swift in Sources */,
 				181EB6121B714B7600B9295E /* MonthCollectionCell.swift in Sources */,
+				45C93C621B8621C100F60D9D /* VenueCategoryListService.swift in Sources */,
 				1872E9EF1B7D258E0099AA36 /* ExplorePanelViewTableViewCell.swift in Sources */,
+				45C6D5BC1B851ABC00EE4A05 /* OrganizationCategoriesDBModel.swift in Sources */,
 				18E2DD8C1B69537D007C61B5 /* DashLine.swift in Sources */,
+				45C93C601B8621AE00F60D9D /* EventCategoryListService.swift in Sources */,
 				180F6DFE1B75006800F86BF5 /* MapViewController.swift in Sources */,
 				1835F8F51B5ECF3500FD1BD1 /* DashBoardViewController.swift in Sources */,
 				45FA059C1B5D4188004AD819 /* ArtistDBModel.swift in Sources */,

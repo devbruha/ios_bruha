@@ -25,7 +25,7 @@ struct RegisterService{
         emailAddress = emailaddress
     }
     
-    let bruhaBaseURL: NSURL? = NSURL(string: "http://bruha.com/mobile_php/")
+    let bruhaBaseURL: NSURL? = NSURL(string: "http://bruha.com/mobile_php/CredentialsPHP/")
     
     func registerNewUser(completion: (NSString? -> Void)) {
         

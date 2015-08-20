@@ -31,7 +31,7 @@ struct LoginService {
         passWord = password
     }
     
-    let bruhaBaseURL: NSURL? = NSURL(string: "http://bruha.com/mobile_php/")
+    let bruhaBaseURL: NSURL? = NSURL(string: "http://bruha.com/mobile_php/CredentialsPHP/")
     
     func loginCheck(completion: (NSString? -> Void)) {
         
@@ -57,7 +57,9 @@ struct LoginService {
     
     func getUserInformation(completion: (User? -> Void)) {
         
-        if let userInfoURL = NSURL(string: "UserInfo.php?", relativeToURL: bruhaBaseURL) {
+        var userInfoBaseURL: NSURL? = NSURL(string: "http://bruha.com/mobile_php/RetrieveMyPHP/")
+        
+        if let userInfoURL = NSURL(string: "UserInfo.php?", relativeToURL: userInfoBaseURL) {
             
             let networkOperation = NetworkOperation(url: userInfoURL)
             

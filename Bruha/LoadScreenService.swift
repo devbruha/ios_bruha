@@ -47,7 +47,6 @@ class LoadScreenService {
                     dispatch_async(dispatch_get_main_queue()) {
                     
                         SaveData(context: self.managedObjectContext).saveEvents(mEvents)
-                        //SaveData(context: self.managedObjectContext).saveEventSubCategories(mEvents)
                     }
                 }
             }

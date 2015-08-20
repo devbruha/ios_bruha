@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14E46" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="ArtistCategories" representedClassName="Bruha.ArtistCategoriesDBModel" syncable="YES">
+        <attribute name="categoryName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="ArtistList" representedClassName="Bruha.ArtistDBModel" syncable="YES">
         <attribute name="artistDescription" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
@@ -28,10 +32,24 @@
         <attribute name="venueID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="venueName" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="EventPrimaryCategories" representedClassName="Bruha.EventPrimaryCategoriesDBModel" syncable="YES">
+        <attribute name="categoryName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="EventSubCategories" representedClassName="Bruha.EventSubCategoriesDBModel" syncable="YES">
+        <attribute name="primaryCategoryID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="primaryCategoryName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="subCategoryID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="subCategoryName" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="EventSubCategoryList" representedClassName="Bruha.EventSubCategoryDBModel" syncable="YES">
         <attribute name="eventID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="subCategoryID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="subCategoryName" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="OrganizationCategories" representedClassName="Bruha.OrganizationCategoriesDBModel" syncable="YES">
+        <attribute name="categoryName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="OrganizationList" representedClassName="Bruha.OrganizationDBModel" syncable="YES">
         <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
@@ -51,6 +69,10 @@
         <attribute name="gender" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userName" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
+    <entity name="VenueCategories" representedClassName="Bruha.VenueCategoriesDBModel" syncable="YES">
+        <attribute name="categoryName" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
     <entity name="VenueList" representedClassName="Bruha.VenueDBModel" syncable="YES">
         <attribute name="address" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
@@ -62,11 +84,16 @@
         <attribute name="venueDescription" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
+        <element name="ArtistCategories" positionX="-9" positionY="135" width="128" height="75"/>
         <element name="ArtistList" positionX="-27" positionY="126" width="128" height="120"/>
         <element name="EventList" positionX="-63" positionY="-18" width="128" height="330"/>
+        <element name="EventPrimaryCategories" positionX="9" positionY="162" width="128" height="75"/>
+        <element name="EventSubCategories" positionX="18" positionY="171" width="128" height="105"/>
         <element name="EventSubCategoryList" positionX="-18" positionY="126" width="128" height="90"/>
+        <element name="OrganizationCategories" positionX="0" positionY="144" width="128" height="75"/>
         <element name="OrganizationList" positionX="0" positionY="144" width="128" height="165"/>
         <element name="UserList" positionX="27" positionY="171" width="128" height="135"/>
+        <element name="VenueCategories" positionX="-18" positionY="126" width="128" height="75"/>
         <element name="VenueList" positionX="-54" positionY="108" width="128" height="165"/>
     </elements>
 </model>

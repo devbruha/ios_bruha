@@ -1,25 +1,25 @@
 //
-//  EventService.swift
-//  BruhaMobile
+//  EventCategoryListService.swift
+//  Bruha
 //
-//  Created by Ryan O'Neill on 2015-07-07.
+//  Created by Ryan O'Neill on 2015-08-20.
 //  Copyright (c) 2015 Bruha. All rights reserved.
 //
 
 import Foundation
 
-struct EventService {
+struct EventCategoryListService {
     
     let bruhaBaseURL: NSURL? = NSURL(string: "http://bruha.com/mobile_php/RetrievePHP/")
     
     func getEvent(completion: ([Event]? -> Void)) {
         
-        if let eventURL = NSURL(string: "EventList.php", relativeToURL: bruhaBaseURL) {
+        if let eventCategoryURL = NSURL(string: "CategoryList.php", relativeToURL: bruhaBaseURL) {
             
-            let networkOperation = NetworkOperation(url: eventURL)
+            let networkOperation = NetworkOperation(url: eventCategoryURL)
             
             dispatch_async(dispatch_get_main_queue()) {
-            
+                
                 networkOperation.downloadJSONFromURL {
                     (let JSONArray) in
                     
@@ -39,7 +39,7 @@ struct EventService {
             let networkOperation = NetworkOperation(url: eventURL)
             
             dispatch_async(dispatch_get_main_queue()) {
-            
+                
                 networkOperation.downloadJSONFromURLPost("username=TestAccount") {
                     (let JSONArray) in
                     

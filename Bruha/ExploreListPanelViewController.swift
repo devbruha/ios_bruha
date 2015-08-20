@@ -14,6 +14,7 @@ class ExploreListPanelViewController: UIViewController {
     @IBOutlet weak var venueSelectedB: UIButton!
     @IBOutlet weak var artistSelectedB: UIButton!
     @IBOutlet weak var organizationSelectedB: UIButton!
+    
     @IBOutlet weak var venueTable: UITableView!
     @IBOutlet weak var artistTable: UITableView!
     @IBOutlet weak var organizationTable: UITableView!

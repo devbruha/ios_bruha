@@ -10,7 +10,7 @@ import Foundation
 
 struct VenueService {
     
-    let bruhaBaseURL: NSURL? = NSURL(string: "http://bruha.com/mobile_php/")
+    let bruhaBaseURL: NSURL? = NSURL(string: "http://bruha.com/mobile_php/RetrievePHP/")
     
     func getVenue(completion: ([Venue]? -> Void)) {
         
