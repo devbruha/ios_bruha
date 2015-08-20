@@ -12,7 +12,7 @@ struct EventCategoryListService {
     
     let bruhaBaseURL: NSURL? = NSURL(string: "http://bruha.com/mobile_php/RetrievePHP/")
     
-    func getEvent(completion: ([Event]? -> Void)) {
+    func getEventCategoryList(completion: ([String: [[String]]]? -> Void)) {
         
         if let eventCategoryURL = NSURL(string: "CategoryList.php", relativeToURL: bruhaBaseURL) {
             
@@ -20,11 +20,11 @@ struct EventCategoryListService {
             
             dispatch_async(dispatch_get_main_queue()) {
                 
-                networkOperation.downloadJSONFromURL {
+                networkOperation.downloadJSONDictionnaryFromURL {
                     (let JSONArray) in
                     
-                    let mEvent = self.eventFromJSONArray(JSONArray)
-                    completion(mEvent)
+                    let mEventCategories = self.eventCategoriesFromJSONDictionary(JSONArray)
+                    completion(mEventCategories)
                 }
             }
         } else {
@@ -32,38 +32,35 @@ struct EventCategoryListService {
         }
     }
     
-    func getUserEvents(completion: ([Event]? -> Void)) {
+    func eventCategoriesFromJSONDictionary(jsonDictionary: NSDictionary?) -> [String: [[String]]]? {
         
-        if let eventURL = NSURL(string: "UserEventList.php?", relativeToURL: bruhaBaseURL) {
+        var count = 0
+        
+        var eventCategories = [String: [[String]]]()
+        
+        for catType in jsonDictionary!{
             
-            let networkOperation = NetworkOperation(url: eventURL)
-            
-            dispatch_async(dispatch_get_main_queue()) {
+            if(catType.0 as! String == "event_cat"){
                 
-                networkOperation.downloadJSONFromURLPost("username=TestAccount") {
-                    (let JSONArray) in
+                var eventCat = catType.value as! NSArray
+                
+                for primaryCatAny in eventCat{
                     
-                    let mEvent = self.eventFromJSONArray(JSONArray)
-                    completion(mEvent)
+                    var primaryCat = primaryCatAny as! NSDictionary
+                    
+                    //var subCatName = primaryCat.1 as! [String]
+                    //subCatName.removeLast()
+                    //var subCatID = primaryCat.1[primaryCat.1.count-1] as! [String]
+                    
+                    //eventCategories[primaryCat.0] = [subCatID,subCatName]
                 }
             }
-        } else {
-            println("Could not construct a valid URL")
-        }
-    }
-    
-    func eventFromJSONArray(jsonArray: NSArray?) -> [Event]? {
-        
-        var events = [Event]()
-        
-        for e in jsonArray!{
             
-            let e = Event(eventDictionary: e as! [String : AnyObject])
-            
-            events.append(e)
+            ++count
+
         }
         
-        return events
+        return eventCategories
     }
     
 }

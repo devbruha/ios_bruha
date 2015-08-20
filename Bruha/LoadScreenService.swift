@@ -24,10 +24,32 @@ class LoadScreenService {
         
         println("Retrieve All")
         
+        //retrieveEventCategories()
         retrieveEvents()
         retrieveVenues()
         retrieveArtists()
         retrieveOrganizations()
+    }
+    
+    func retrieveEventCategories() {
+        
+        dispatch_async(dispatch_get_main_queue()) {
+            
+            let eventService = EventCategoryListService()
+            eventService.getEventCategoryList() {
+                (let eventList) in
+                
+                if let mEvents = eventList{
+                    
+                    println("Retrieve Events")
+                    
+                    //dispatch_async(dispatch_get_main_queue()) {
+                        
+                        //SaveData(context: self.managedObjectContext).saveEvents(mEvents)
+                    //}
+                }
+            }
+        }
     }
     
     // Returns [Event] from the remote DB and saves to local

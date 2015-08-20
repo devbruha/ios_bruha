@@ -20,6 +20,7 @@ class NetworkOperation {
     
     typealias JSONArrayCompletion = (NSArray?) -> Void
     typealias stringCompletion = (NSString?) -> Void
+    typealias JSONDictionaryCompletion = (NSDictionary?) -> Void
     
     init(url: NSURL){
         
@@ -41,6 +42,8 @@ class NetworkOperation {
                     
                     let json = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as? NSArray
                     
+                    //println(json)
+                    
                     completion(json)
                     
                     //2. Create JSON object with data
@@ -55,6 +58,39 @@ class NetworkOperation {
         
         dataTask.resume()
     }
+    
+    func downloadJSONDictionnaryFromURL(completion: JSONDictionaryCompletion){
+        
+        let dataTask = session.dataTaskWithURL(queryURL) {
+            (let data, let response, let error) in
+            
+            //1. CHeck http response for successful GET request
+            
+            if let httpResponse = response as? NSHTTPURLResponse{
+                
+                switch(httpResponse.statusCode){
+                    
+                case 200:
+                    
+                    let json = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as? NSDictionary
+                    
+                    println(json)
+                    
+                    completion(json)
+                    
+                    //2. Create JSON object with data
+                default:
+                    println("GET request not successful. HTTP status code: \(httpResponse.statusCode)")
+                }
+            }
+            else{
+                println("Error: Not a vaild HTTP response")
+            }
+        }
+        
+        dataTask.resume()
+    }
+
     
     func stringFromURLPost(post: String, completion: stringCompletion){
         
