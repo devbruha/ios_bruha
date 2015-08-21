@@ -142,13 +142,13 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             
             
             var temp: NSMutableArray = NSMutableArray()
-            temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Map")
+            temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Like!")
             cell.leftUtilityButtons = temp as [AnyObject]
             
             
             var temp2: NSMutableArray = NSMutableArray()
             temp2.sw_addUtilityButtonWithColor(UIColor.purpleColor(), title: "Buy Tickets")
-            temp2.sw_addUtilityButtonWithColor(UIColor.grayColor(), title: "Preview")
+            temp2.sw_addUtilityButtonWithColor(UIColor.grayColor(), title: "Map")
             temp2.sw_addUtilityButtonWithColor(UIColor.orangeColor(), title: "More Info")
             cell.rightUtilityButtons = nil
             cell.rightUtilityButtons = temp2 as [AnyObject]
@@ -331,15 +331,13 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         
         switch(index){
         case 0:
-            //Preview
+            //Map
             break
         case 1:
             //Ticket
             break
         case 2:
             //More info
-            
-        
             
             var cellIndexPath = self.exploreTableView.indexPathForCell(cell)
             

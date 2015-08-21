@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SplashView" customModule="Bruha" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="300" height="400"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IZq-bY-6jY">
+                    <rect key="frame" x="30" y="31" width="240" height="217"/>
+                    <color key="backgroundColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="217" id="8hN-QY-JK0"/>
+                    </constraints>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bruha" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="j1U-UD-KjB">
+                    <rect key="frame" x="64" y="302" width="172" height="40"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="40" id="wCW-d5-pij"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="system" pointSize="22"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="IZq-bY-6jY" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="31" id="352-3o-Phj"/>
+                <constraint firstAttribute="trailing" secondItem="j1U-UD-KjB" secondAttribute="trailing" constant="64" id="7rC-bU-EXG"/>
+                <constraint firstItem="j1U-UD-KjB" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="64" id="U6z-Ni-eYr"/>
+                <constraint firstItem="IZq-bY-6jY" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="30" id="pF4-q7-bh4"/>
+                <constraint firstAttribute="centerX" secondItem="j1U-UD-KjB" secondAttribute="centerX" id="qzy-Bg-TKl"/>
+                <constraint firstAttribute="bottom" secondItem="j1U-UD-KjB" secondAttribute="bottom" constant="58" id="rvY-e5-xZ9"/>
+                <constraint firstAttribute="trailing" secondItem="IZq-bY-6jY" secondAttribute="trailing" constant="30" id="uer-mp-eif"/>
+                <constraint firstItem="j1U-UD-KjB" firstAttribute="top" secondItem="IZq-bY-6jY" secondAttribute="bottom" constant="54" id="yMc-gj-szJ"/>
+            </constraints>
+            <simulatedOrientationMetrics key="simulatedOrientationMetrics"/>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="230" y="354"/>
+        </view>
+    </objects>
+    <simulatedMetricsContainer key="defaultSimulatedMetrics">
+        <simulatedStatusBarMetrics key="statusBar"/>
+        <simulatedOrientationMetrics key="orientation"/>
+        <simulatedScreenMetrics key="destination" type="retina4"/>
+    </simulatedMetricsContainer>
+</document>

@@ -37,16 +37,16 @@ class SplashViewController: UIViewController,UIScrollViewDelegate {
         //2
         self.skipButton.layer.cornerRadius = 4.0
         //3
-        var imgOne = UIImageView(frame: CGRectMake(0, 0,scrollViewWidth, scrollViewHeight))
-        imgOne.image = UIImage(named: "Slide 1")
-        var imgTwo = UIImageView(frame: CGRectMake(scrollViewWidth, 0,scrollViewWidth, scrollViewHeight))
-        imgTwo.image = UIImage(named: "Slide 2")
-        var imgThree = UIImageView(frame: CGRectMake(scrollViewWidth*2, 0,scrollViewWidth, scrollViewHeight))
-        imgThree.image = UIImage(named: "Slide 3")
-        var imgFour = UIImageView(frame: CGRectMake(scrollViewWidth*3, 0,scrollViewWidth, scrollViewHeight))
-        imgFour.image = UIImage(named: "Slide 4")
-        var imgFive = UIImageView(frame: CGRectMake(scrollViewWidth*4, 0,scrollViewWidth, scrollViewHeight))
-        imgFive.image = UIImage(named: "Slide 5")
+        var imgOne = SplashView.instanceFromNib1()
+        imgOne.frame = CGRectMake(0, 0, scrollViewWidth, scrollViewHeight)
+        var imgTwo = SplashView.instanceFromNib2()
+        imgTwo.frame = CGRectMake(scrollViewWidth, 0,scrollViewWidth+20, scrollViewHeight+168)
+        var imgThree = SplashView.instanceFromNib3()
+        imgThree.frame = CGRectMake(scrollViewWidth*2, 0,scrollViewWidth+20, scrollViewHeight+168)
+        var imgFour = SplashView.instanceFromNib4()
+        imgFour.frame = CGRectMake(scrollViewWidth*3, 0,scrollViewWidth+20, scrollViewHeight+168)
+        var imgFive = SplashView.instanceFromNib5()
+        imgFive.frame = CGRectMake(scrollViewWidth*4, 0,scrollViewWidth+20, scrollViewHeight+168)
         
         self.scrollView.addSubview(imgOne)
         self.scrollView.addSubview(imgTwo)
