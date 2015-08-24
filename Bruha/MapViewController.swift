@@ -11,7 +11,7 @@ import UIKit
 class MapViewController: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate,ARSPDragDelegate, ARSPVisibilityStateDelegate {
     
     @IBOutlet weak var viewMap: GMSMapView!
-    @IBOutlet weak var myLocation: UIButton!
+    
     
     var panelControllerContainer: ARSPContainerController!
     
@@ -105,10 +105,6 @@ class MapViewController: UIViewController,CLLocationManagerDelegate, GMSMapViewD
     
     func panelControllerWasDragged(panelControllerVisibility : CGFloat) {
         
-    }
-    
-    @IBAction func myLocation(sender: AnyObject) {
-        //myLocation = viewMap.settings.myLocationButton
     }
     
     func generateMarkers(){

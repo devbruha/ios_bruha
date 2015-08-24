@@ -42,8 +42,14 @@
 		1835F8F51B5ECF3500FD1BD1 /* DashBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1835F8F41B5ECF3500FD1BD1 /* DashBoardViewController.swift */; };
 		184231FA1B5FF173003948F5 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184231F91B5FF173003948F5 /* ProfileViewController.swift */; };
 		1872E9EF1B7D258E0099AA36 /* ExplorePanelViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1872E9EE1B7D258E0099AA36 /* ExplorePanelViewTableViewCell.swift */; };
+		1891B2821B86529B000949C8 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1891B2811B86529B000949C8 /* SplashView.swift */; };
+		1891B2841B86530C000949C8 /* SplashOne.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1891B2831B86530C000949C8 /* SplashOne.xib */; };
+		1891B28C1B86618E000949C8 /* SplashTwo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1891B28B1B86618E000949C8 /* SplashTwo.xib */; };
+		1891B28E1B866FFE000949C8 /* SplashThree.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1891B28D1B866FFE000949C8 /* SplashThree.xib */; };
 		18A2A11B1B728241005E1DCB /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2A11A1B728241005E1DCB /* CalendarViewController.swift */; };
 		18A98A751B84C8CF0016AF7E /* EventTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A98A741B84C8CF0016AF7E /* EventTableViewCell.xib */; };
+		18CFAAAB1B876C7A00FE3976 /* SplashFour.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18CFAAAA1B876C7A00FE3976 /* SplashFour.xib */; };
+		18CFAAAF1B876F0C00FE3976 /* SplashFive.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18CFAAAE1B876F0C00FE3976 /* SplashFive.xib */; };
 		18D2169D1B6BF1D9005DAAA8 /* ExploreListPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D2169C1B6BF1D9005DAAA8 /* ExploreListPanelViewController.swift */; };
 		18E2DD8C1B69537D007C61B5 /* DashLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E2DD8B1B69537D007C61B5 /* DashLine.swift */; };
 		3FBD3EDB6177AE183A0340DF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C40848564A9A9ABD06E1BFE /* libPods.a */; };
@@ -149,8 +155,14 @@
 		1835F8F41B5ECF3500FD1BD1 /* DashBoardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashBoardViewController.swift; sourceTree = "<group>"; };
 		184231F91B5FF173003948F5 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		1872E9EE1B7D258E0099AA36 /* ExplorePanelViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExplorePanelViewTableViewCell.swift; sourceTree = "<group>"; };
+		1891B2811B86529B000949C8 /* SplashView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		1891B2831B86530C000949C8 /* SplashOne.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SplashOne.xib; sourceTree = "<group>"; };
+		1891B28B1B86618E000949C8 /* SplashTwo.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SplashTwo.xib; sourceTree = "<group>"; };
+		1891B28D1B866FFE000949C8 /* SplashThree.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SplashThree.xib; sourceTree = "<group>"; };
 		18A2A11A1B728241005E1DCB /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		18A98A741B84C8CF0016AF7E /* EventTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventTableViewCell.xib; sourceTree = "<group>"; };
+		18CFAAAA1B876C7A00FE3976 /* SplashFour.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SplashFour.xib; sourceTree = "<group>"; };
+		18CFAAAE1B876F0C00FE3976 /* SplashFive.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SplashFive.xib; sourceTree = "<group>"; };
 		18D2169C1B6BF1D9005DAAA8 /* ExploreListPanelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreListPanelViewController.swift; sourceTree = "<group>"; };
 		18E2DD8B1B69537D007C61B5 /* DashLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashLine.swift; sourceTree = "<group>"; };
 		452BC0C31B791068003E7142 /* VenueTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VenueTableViewCell.xib; sourceTree = "<group>"; };
@@ -361,6 +373,12 @@
 				1834845D1B7E352F00EA0D13 /* VenueView.swift */,
 				1834845F1B7E704B00EA0D13 /* ArtistView.swift */,
 				183484611B7E71CF00EA0D13 /* OrganizationView.swift */,
+				1891B2811B86529B000949C8 /* SplashView.swift */,
+				1891B2831B86530C000949C8 /* SplashOne.xib */,
+				1891B28B1B86618E000949C8 /* SplashTwo.xib */,
+				1891B28D1B866FFE000949C8 /* SplashThree.xib */,
+				18CFAAAA1B876C7A00FE3976 /* SplashFour.xib */,
+				18CFAAAE1B876F0C00FE3976 /* SplashFive.xib */,
 				183286A81B6806B2007B5134 /* Bridging-Header.h */,
 				181EB6041B714B6300B9295E /* CalendarKit */,
 				45AFAF211B60331100BA6854 /* Processing */,
@@ -580,8 +598,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				1834845C1B7E347D00EA0D13 /* VenueView.xib in Resources */,
+				18CFAAAB1B876C7A00FE3976 /* SplashFour.xib in Resources */,
 				452BC0C61B79118F003E7142 /* ArtistTableViewCell.xib in Resources */,
 				45FA05BA1B5D63EB004AD819 /* Main.storyboard in Resources */,
+				18CFAAAF1B876F0C00FE3976 /* SplashFive.xib in Resources */,
+				1891B28E1B866FFE000949C8 /* SplashThree.xib in Resources */,
+				1891B28C1B86618E000949C8 /* SplashTwo.xib in Resources */,
 				181EB6131B714B7600B9295E /* MonthCollectionCell.xib in Resources */,
 				181EB6171B714B7600B9295E /* WeekHeaderView.xib in Resources */,
 				45FA05771B5D4158004AD819 /* LaunchScreen.xib in Resources */,
@@ -591,6 +613,7 @@
 				45FA05741B5D4158004AD819 /* Images.xcassets in Resources */,
 				180F6E261B75232700F86BF5 /* GoogleMaps.bundle in Resources */,
 				452BC0C81B79119D003E7142 /* OrganizationTableViewCell.xib in Resources */,
+				1891B2841B86530C000949C8 /* SplashOne.xib in Resources */,
 				18A98A751B84C8CF0016AF7E /* EventTableViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -665,6 +688,7 @@
 				181EB6101B714B7600B9295E /* CalendarView.swift in Sources */,
 				45FA05C11B5D6FCC004AD819 /* LoginService.swift in Sources */,
 				45C0F5F91B7BBE780041A1C8 /* EventSubCategoryDBModel.swift in Sources */,
+				1891B2821B86529B000949C8 /* SplashView.swift in Sources */,
 				4560C54F1B66D49800AB5382 /* EventTableViewCell.swift in Sources */,
 				181EB6191B714B7600B9295E /* Date.swift in Sources */,
 				45FA05A71B5D4190004AD819 /* LoadScreenService.swift in Sources */,

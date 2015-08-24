@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="SplashView" customModule="Bruha" customModuleProvider="target"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view alpha="0.80000000000000004" contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="300" height="400"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You Can Get Addicted" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TY6-e6-i8U">
+                    <rect key="frame" x="0.0" y="0.0" width="300" height="26"/>
+                    <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="height" constant="26" id="l1H-s6-87l"/>
+                    </constraints>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="21"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vSE-k1-si6">
+                    <rect key="frame" x="8" y="26" width="284" height="344"/>
+                </imageView>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Like/Follow Events, Venues, Artists and Organizations.)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JKV-gW-0Mh">
+                    <rect key="frame" x="20" y="371" width="260" height="12"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                    <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="TY6-e6-i8U" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="4D9-nf-atq"/>
+                <constraint firstItem="vSE-k1-si6" firstAttribute="top" secondItem="TY6-e6-i8U" secondAttribute="bottom" id="5Jz-XI-UH3"/>
+                <constraint firstAttribute="trailing" secondItem="JKV-gW-0Mh" secondAttribute="trailing" constant="20" id="HE5-J3-ZOx"/>
+                <constraint firstAttribute="bottom" secondItem="JKV-gW-0Mh" secondAttribute="bottom" constant="17" id="L4c-eA-uV2"/>
+                <constraint firstItem="JKV-gW-0Mh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="MJZ-LD-3X5"/>
+                <constraint firstAttribute="trailing" secondItem="vSE-k1-si6" secondAttribute="trailing" constant="8" id="MgU-4C-sfV"/>
+                <constraint firstItem="TY6-e6-i8U" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="SZ1-o8-4ur"/>
+                <constraint firstAttribute="bottom" secondItem="vSE-k1-si6" secondAttribute="bottom" constant="30" id="Ytc-h2-WwM"/>
+                <constraint firstAttribute="trailing" secondItem="TY6-e6-i8U" secondAttribute="trailing" id="hXr-uQ-pLS"/>
+                <constraint firstAttribute="centerX" secondItem="JKV-gW-0Mh" secondAttribute="centerX" id="ji9-qF-HfM"/>
+                <constraint firstItem="JKV-gW-0Mh" firstAttribute="top" secondItem="vSE-k1-si6" secondAttribute="bottom" constant="1" id="pcz-QV-WNC"/>
+                <constraint firstItem="vSE-k1-si6" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="rLC-5x-9c3"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <variation key="default">
+                <mask key="constraints">
+                    <exclude reference="HE5-J3-ZOx"/>
+                    <exclude reference="MJZ-LD-3X5"/>
+                </mask>
+            </variation>
+            <point key="canvasLocation" x="235" y="222"/>
+        </view>
+    </objects>
+</document>
