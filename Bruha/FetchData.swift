@@ -20,6 +20,44 @@ class FetchData {
         self.managedObjectContext = context
     }
 
+    func fetchEventCategories() -> Dictionary<String, [[String]]> {
+     
+        var returnedEventCategories = Dictionary<String, [[String]]>()
+        
+        let fetchRequest = NSFetchRequest(entityName: "EventPrimaryCategories")
+        
+        var descriptor: NSSortDescriptor = NSSortDescriptor(key: "categoryName", ascending: true)
+        
+        fetchRequest.sortDescriptors = [descriptor]
+        
+        // Execute the fetch request, and cast the results to an array of LogItem objects
+        if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [EventPrimaryCategoriesDBModel] {
+            
+            for(var i = 0; i < fetchResults.count; ++i){
+                
+                let fetchSubRequest = NSFetchRequest(entityName: "EventSubCategories")
+                let predicate = NSPredicate(format: "primaryCategoryName == %@", fetchResults[i].categoryName)
+                
+                fetchSubRequest.predicate = predicate
+                
+                var subCatID: [String] = []
+                var subCatName: [String] = []
+                
+                if let fetchSubResults = managedObjectContext!.executeFetchRequest(fetchSubRequest, error: nil) as? [EventSubCategoriesDBModel]{
+                    
+                    for(var j = 0; j < fetchSubResults.count; ++j){
+                        
+                        subCatID.append(fetchSubResults[j].subCategoryID)
+                        subCatName.append(fetchSubResults[j].subCategoryName)
+                    }
+                    
+                    returnedEventCategories[fetchResults[i].categoryName] = [subCatID,subCatName]
+                }
+            }
+        }
+    
+        return returnedEventCategories
+    }
     
     func fetchEvents() -> [Event]!{
         

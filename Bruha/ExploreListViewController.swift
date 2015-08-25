@@ -16,7 +16,6 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     var panelControllerContainer: ARSPContainerController!
-    var item = ["Slide 1.jpg","Slide 2.jpg","Slide 3.jpg","Slide 4.jpg","Slide 5.jpg","Slide 6.jpg","Slide 7.jpg","Slide 8.jpg","Slide 8.jpg","Slide 8.jpg","Slide 8.jpg","Slide 8.jpg","Slide 8.jpg","Slide 8.jpg","Slide 8.jpg","Slide 8.jpg","Slide 8.jpg","Slide 8.jpg"]
     var screenWidth: CGFloat = 0.0
     var screenHeight: CGFloat = 0.0
     
@@ -43,6 +42,8 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         GlobalVariables.displayedArtists = FetchData(context: managedObjectContext).fetchArtists()!
         GlobalVariables.displayedOrganizations = FetchData(context: managedObjectContext).fetchOrganizations()!
         
+        var f = FetchData(context: managedObjectContext).fetchEventCategories()
+        
         // Do any additional setup after loading the view.
     }
 
@@ -63,7 +64,6 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         switch (GlobalVariables.selectedDisplay){
             case "Event":
                 let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
-                println(eventInfo?.count)
                 return (eventInfo?.count)!
             case "Venue":
                 let venueInfo = FetchData(context: managedObjectContext).fetchVenues()
@@ -103,19 +103,19 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
             let event = eventInfo![indexPath.row]
             
-            println("Begin of code")
+            //println("Begin of code")
             cell.ExploreImage.contentMode = UIViewContentMode.ScaleToFill
             if let checkedUrl = NSURL(string:event.posterUrl) {
-                println("Started downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
+                //println("Started downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
                 getDataFromUrl(checkedUrl) { data in
                     dispatch_async(dispatch_get_main_queue()) {
-                        println("Finished downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
+                        //println("Finished downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
                         cell.ExploreImage.image = UIImage(data: data!)
                     }
                 }
 
             }
-            println("End of code. The image will continue downloading in the background and it will be loaded when it ends.")
+            //println("End of code. The image will continue downloading in the background and it will be loaded when it ends.")
             //Synchronously:
             /*if let url = NSURL(string: event.url) {
                 if let data = NSData(contentsOfURL: url){
@@ -170,13 +170,13 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             let venueInfo = FetchData(context: managedObjectContext).fetchVenues()
             let venue = venueInfo![indexPath.row]
             
-            println("Begin of code")
+            //println("Begin of code")
             cell.venueImage.contentMode = UIViewContentMode.ScaleToFill
             if let checkedUrl = NSURL(string:venue.posterUrl) {
-                println("Started downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
+                //println("Started downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
                 getDataFromUrl(checkedUrl) { data in
                     dispatch_async(dispatch_get_main_queue()) {
-                        println("Finished downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
+                        //println("Finished downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
                         cell.venueImage.image = UIImage(data: data!)
                     }
                 }
@@ -219,13 +219,13 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             let artistInfo = FetchData(context: managedObjectContext).fetchArtists()
             let artist = artistInfo![indexPath.row]
             
-            println("Begin of code")
+            //println("Begin of code")
             cell.artistsImage.contentMode = UIViewContentMode.ScaleToFill
             if let checkedUrl = NSURL(string:artist.posterUrl) {
-                println("Started downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
+                //println("Started downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
                 getDataFromUrl(checkedUrl) { data in
                     dispatch_async(dispatch_get_main_queue()) {
-                        println("Finished downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
+                        //println("Finished downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
                         cell.artistsImage.image = UIImage(data: data!)
                     }
                 }
@@ -264,13 +264,13 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             let organizationInfo = FetchData(context: managedObjectContext).fetchOrganizations()
             let organization = organizationInfo![indexPath.row]
             
-            println("Begin of code")
+            //println("Begin of code")
             cell.organizationImage.contentMode = UIViewContentMode.ScaleToFill
             if let checkedUrl = NSURL(string:organization.posterUrl) {
-                println("Started downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
+                //println("Started downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
                 getDataFromUrl(checkedUrl) { data in
                     dispatch_async(dispatch_get_main_queue()) {
-                        println("Finished downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
+                        //println("Finished downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
                         cell.organizationImage.image = UIImage(data: data!)
                     }
                 }

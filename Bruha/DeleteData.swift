@@ -20,6 +20,8 @@ class DeleteData {
     
     func deleteAll() {
         
+        deleteEventCategories()
+        
         deleteEvents()
         deleteVenues()
         deleteArtists()
@@ -28,6 +30,37 @@ class DeleteData {
     
     // Deletes all entries of an object in the Core Data table
     // Does this one entry at a time rather than dropping entire tables
+    
+    func deleteEventCategories(){
+        
+        let fetchRequest = NSFetchRequest(entityName: "EventPrimaryCategories")
+        fetchRequest.includesPropertyValues = false // Only fetch the managedObjectID (not the full object structure)
+        if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [EventPrimaryCategoriesDBModel] {
+            
+            for result in fetchResults {
+                managedObjectContext!.deleteObject(result)
+            }
+            
+        }
+        
+        let fetchRequest2 = NSFetchRequest(entityName: "EventSubCategories")
+        fetchRequest2.includesPropertyValues = false // Only fetch the managedObjectID (not the full object structure)
+        if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest2, error: nil) as? [EventSubCategoriesDBModel] {
+            
+            for result in fetchResults {
+                managedObjectContext!.deleteObject(result)
+            }
+            
+        }
+        
+        var err: NSError?
+        if !managedObjectContext!.save(&err) {
+            println("deleteData - Error : \(err!.localizedDescription)")
+            abort()
+        } else {
+            println("deleteData - Success - Event Categories")
+        }
+    }
     
     func deleteEvents() {
         

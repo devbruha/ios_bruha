@@ -23,6 +23,36 @@ class SaveData {
         self.managedObjectContext = context
     }
     
+    func saveEventCategories(categoryDictionary: Categories){
+        
+        let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let en = NSEntityDescription.entityForName("EventPrimaryCategories", inManagedObjectContext: managedObjectContext!)
+        let en2 = NSEntityDescription.entityForName("EventSubCategories", inManagedObjectContext: managedObjectContext!)
+        
+        for key in categoryDictionary.eventCategories.keys{
+            
+            var newItem = EventPrimaryCategoriesDBModel(entity:en!, insertIntoManagedObjectContext: managedObjectContext!)
+            
+            newItem.categoryName = key
+            
+            managedObjectContext!.save(nil)
+            
+            for( var i = 0; i < categoryDictionary.eventCategories[key]![0].count; ++i ){
+                
+                var newItem2 = EventSubCategoriesDBModel(entity:en2!, insertIntoManagedObjectContext: managedObjectContext!)
+                
+                newItem2.primaryCategoryName = key
+                newItem2.subCategoryID = categoryDictionary.eventCategories[key]![0][i]
+                newItem2.subCategoryName = categoryDictionary.eventCategories[key]![1][i]
+                
+                managedObjectContext!.save(nil)
+            }
+        }
+        
+        println("Event Categories Saved")
+    }
+    
     func saveEvents(EventList: [Event]){
         
         let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate

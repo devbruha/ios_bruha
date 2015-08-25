@@ -12,7 +12,7 @@ struct EventCategoryListService {
     
     let bruhaBaseURL: NSURL? = NSURL(string: "http://bruha.com/mobile_php/RetrievePHP/")
     
-    func getEvent(completion: ([Event]? -> Void)) {
+    func getEventCategoryList(completion: (Categories? -> Void)) {
         
         if let eventCategoryURL = NSURL(string: "CategoryList.php", relativeToURL: bruhaBaseURL) {
             
@@ -20,11 +20,11 @@ struct EventCategoryListService {
             
             dispatch_async(dispatch_get_main_queue()) {
                 
-                networkOperation.downloadJSONFromURL {
-                    (let JSONArray) in
+                networkOperation.downloadJSONDictionaryFromURL {
+                    (let JSONDictionary) in
                     
-                    let mEvent = self.eventFromJSONArray(JSONArray)
-                    completion(mEvent)
+                    let mCategories = self.categoriesFromJSONArray(JSONDictionary!)
+                    completion(mCategories)
                 }
             }
         } else {
@@ -32,38 +32,73 @@ struct EventCategoryListService {
         }
     }
     
-    func getUserEvents(completion: ([Event]? -> Void)) {
+    func categoriesFromJSONArray(jsonArray: NSDictionary) -> Categories {
         
-        if let eventURL = NSURL(string: "UserEventList.php?", relativeToURL: bruhaBaseURL) {
+        //Event Categories
+
+        var returnedEventCategories = Dictionary<String, [[String]]>()
+        
+        var eventCategories = jsonArray["event_cat"] as! NSDictionary
+        
+        var eventKeyset = eventCategories.allKeys as! [String]
+        
+        for key in eventKeyset{
             
-            let networkOperation = NetworkOperation(url: eventURL)
+            var eventSubCat = eventCategories[key] as! NSArray
             
-            dispatch_async(dispatch_get_main_queue()) {
+            var subCatID = eventSubCat.lastObject as! [String]
+            
+            var subCatNames: [String] = []
+            
+            for( var i = 0; i < (eventSubCat.count - 1); ++i ){
                 
-                networkOperation.downloadJSONFromURLPost("username=TestAccount") {
-                    (let JSONArray) in
-                    
-                    let mEvent = self.eventFromJSONArray(JSONArray)
-                    completion(mEvent)
-                }
+                subCatNames.append(eventSubCat[i] as! String)
             }
-        } else {
-            println("Could not construct a valid URL")
-        }
-    }
-    
-    func eventFromJSONArray(jsonArray: NSArray?) -> [Event]? {
-        
-        var events = [Event]()
-        
-        for e in jsonArray!{
             
-            let e = Event(eventDictionary: e as! [String : AnyObject])
-            
-            events.append(e)
+            returnedEventCategories[key] = [subCatID, subCatNames]
         }
         
-        return events
+        // Venue Categories
+        
+        var returnedVenueCategories = [String]()
+        
+        var venueCategories = jsonArray["venue_cat"] as! NSDictionary
+        
+        var venueKeyset = venueCategories.allKeys as! [String]
+        
+        for key in venueKeyset{
+            
+            returnedVenueCategories.append(key)
+        }
+        
+        // Artist Categories
+        
+        var returnedArtistCategories = [String]()
+        
+        var artistCategories = jsonArray["artist_cat"] as! NSDictionary
+        
+        var artistKeyset = artistCategories.allKeys as! [String]
+        
+        for key in artistKeyset{
+            
+            returnedArtistCategories.append(key)
+        }
+        
+        // Organization Categories
+        
+        var returnedOrganizationCategories = [String]()
+        
+        var organizationCategories = jsonArray["organization_cat"] as! NSDictionary
+        
+        var organizationKeyset = organizationCategories.allKeys as! [String]
+        
+        for key in organizationKeyset{
+            
+            returnedOrganizationCategories.append(key)
+        }
+        
+        var returnedCategory = Categories(eventCategory: returnedEventCategories, venueCategory: returnedVenueCategories, artistCategory: returnedArtistCategories, organizationCategory: returnedOrganizationCategories)
+        
+        return returnedCategory
     }
-    
 }
