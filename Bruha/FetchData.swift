@@ -19,6 +19,13 @@ class FetchData {
         
         self.managedObjectContext = context
     }
+    
+    func fetchCategories() -> Categories {
+        
+        var returnedCategories = Categories(eventCategory: fetchEventCategories(), venueCategory: fetchVenueCategories(), artistCategory: fetchArtistCategories(), organizationCategory: fetchOrganizationCategories())
+        
+        return returnedCategories
+    }
 
     func fetchEventCategories() -> Dictionary<String, [[String]]> {
      
@@ -58,6 +65,61 @@ class FetchData {
     
         return returnedEventCategories
     }
+    
+    func fetchVenueCategories() -> [String] {
+        
+        var returnedVenueCategories = [String]()
+        
+        let fetchRequest = NSFetchRequest(entityName: "VenueCategories")
+        
+        // Execute the fetch request, and cast the results to an array of LogItem objects
+        if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [VenueCategoriesDBModel] {
+            
+            for(var i = 0; i < fetchResults.count; ++i){
+                
+                returnedVenueCategories.append(fetchResults[i].categoryName)
+            }
+        }
+        
+        return returnedVenueCategories
+    }
+    
+    func fetchArtistCategories() -> [String] {
+        
+        var returnedArtistCategories = [String]()
+        
+        let fetchRequest = NSFetchRequest(entityName: "ArtistCategories")
+        
+        // Execute the fetch request, and cast the results to an array of LogItem objects
+        if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [ArtistCategoriesDBModel] {
+            
+            for(var i = 0; i < fetchResults.count; ++i){
+                
+                returnedArtistCategories.append(fetchResults[i].categoryName)
+            }
+        }
+        
+        return returnedArtistCategories
+    }
+    
+    func fetchOrganizationCategories() -> [String] {
+        
+        var returnedOrganizationCategories = [String]()
+        
+        let fetchRequest = NSFetchRequest(entityName: "OrganizationCategories")
+        
+        // Execute the fetch request, and cast the results to an array of LogItem objects
+        if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [OrganizationCategoriesDBModel] {
+            
+            for(var i = 0; i < fetchResults.count; ++i){
+                
+                returnedOrganizationCategories.append(fetchResults[i].categoryName)
+            }
+        }
+        
+        return returnedOrganizationCategories
+    }
+
     
     func fetchEvents() -> [Event]!{
         

@@ -62,39 +62,33 @@ struct EventCategoryListService {
         
         var returnedVenueCategories = [String]()
         
-        var venueCategories = jsonArray["venue_cat"] as! NSDictionary
+        var venueCategories = jsonArray["venue_cat"] as! NSArray
         
-        var venueKeyset = venueCategories.allKeys as! [String]
-        
-        for key in venueKeyset{
+        for category in venueCategories{
             
-            returnedVenueCategories.append(key)
+            returnedVenueCategories.append(category as! String)
         }
         
         // Artist Categories
         
         var returnedArtistCategories = [String]()
         
-        var artistCategories = jsonArray["artist_cat"] as! NSDictionary
+        var artistCategories = jsonArray["artist_cat"] as! NSArray
         
-        var artistKeyset = artistCategories.allKeys as! [String]
-        
-        for key in artistKeyset{
+        for category in artistCategories{
             
-            returnedArtistCategories.append(key)
+            returnedArtistCategories.append(category as! String)
         }
         
         // Organization Categories
         
         var returnedOrganizationCategories = [String]()
         
-        var organizationCategories = jsonArray["organization_cat"] as! NSDictionary
+        var organizationCategories = jsonArray["organization_cat"] as! NSArray
         
-        var organizationKeyset = organizationCategories.allKeys as! [String]
-        
-        for key in organizationKeyset{
+        for category in organizationCategories{
             
-            returnedOrganizationCategories.append(key)
+            returnedOrganizationCategories.append(category as! String)
         }
         
         var returnedCategory = Categories(eventCategory: returnedEventCategories, venueCategory: returnedVenueCategories, artistCategory: returnedArtistCategories, organizationCategory: returnedOrganizationCategories)

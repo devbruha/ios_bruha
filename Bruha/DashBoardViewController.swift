@@ -69,6 +69,8 @@ class DashBoardViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        var s = FetchData(context: managedObjectContext).fetchCategories()
     
         if FetchData(context: managedObjectContext).fetchUserInfo()?.count == 0{
             profileImage.alpha = 0.5

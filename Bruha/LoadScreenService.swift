@@ -40,13 +40,13 @@ class LoadScreenService {
             eventCategoryService.getEventCategoryList() {
                 (let eventCategoryList) in
                 
-                if let mEventCategories = eventCategoryList{
+                if let mCategories = eventCategoryList{
                     
                     println("Retrieve Event Categories")
                     
                     dispatch_async(dispatch_get_main_queue()) {
                         
-                        SaveData(context: self.managedObjectContext).saveEventCategories(mEventCategories[0])
+                        SaveData(context: self.managedObjectContext).saveCategories(mCategories)
                     }
                 }
             }
