@@ -23,6 +23,101 @@ class SaveData {
         self.managedObjectContext = context
     }
     
+    func saveCategories(categoryDictionary: Categories){
+        
+        saveEventCategories(categoryDictionary.eventCategories)
+        saveVenueCategories(categoryDictionary.venueCategories)
+        saveArtistCategories(categoryDictionary.artistCategories)
+        saveOrganizationCategories(categoryDictionary.organizationCategories)
+    }
+    
+    func saveEventCategories(eventCategories: Dictionary<String, [[String]]>){
+        
+        let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let en = NSEntityDescription.entityForName("EventPrimaryCategories", inManagedObjectContext: managedObjectContext!)
+        let en2 = NSEntityDescription.entityForName("EventSubCategories", inManagedObjectContext: managedObjectContext!)
+        
+        for key in eventCategories.keys{
+            
+            var newItem = EventPrimaryCategoriesDBModel(entity:en!, insertIntoManagedObjectContext: managedObjectContext!)
+            
+            newItem.categoryName = key
+            
+            managedObjectContext!.save(nil)
+            
+            for( var i = 0; i < eventCategories[key]![0].count; ++i ){
+                
+                var newItem2 = EventSubCategoriesDBModel(entity:en2!, insertIntoManagedObjectContext: managedObjectContext!)
+                
+                newItem2.primaryCategoryName = key
+                newItem2.subCategoryID = eventCategories[key]![0][i]
+                newItem2.subCategoryName = eventCategories[key]![1][i]
+                
+                managedObjectContext!.save(nil)
+            }
+        }
+        
+        println("Event Categories Saved")
+    }
+    
+    func saveVenueCategories(venueCategories: [String]){
+        
+        let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let en = NSEntityDescription.entityForName("VenueCategories", inManagedObjectContext: managedObjectContext!)
+        
+        for category in venueCategories{
+            
+            var newItem = VenueCategoriesDBModel(entity:en!, insertIntoManagedObjectContext: managedObjectContext!)
+            
+            newItem.categoryName = category
+            
+            managedObjectContext!.save(nil)
+            
+        }
+        
+        println("Venue Categories Saved")
+    }
+    
+    func saveArtistCategories(artistCategories: [String]){
+        
+        let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let en = NSEntityDescription.entityForName("ArtistCategories", inManagedObjectContext: managedObjectContext!)
+        
+        for category in artistCategories{
+            
+            var newItem = ArtistCategoriesDBModel(entity:en!, insertIntoManagedObjectContext: managedObjectContext!)
+            
+            newItem.categoryName = category
+            
+            managedObjectContext!.save(nil)
+            
+        }
+        
+        println("Artist Categories Saved")
+    }
+    
+    func saveOrganizationCategories(organizationCategories: [String]){
+        
+        let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let en = NSEntityDescription.entityForName("OrganizationCategories", inManagedObjectContext: managedObjectContext!)
+        
+        for category in organizationCategories{
+            
+            var newItem = OrganizationCategoriesDBModel(entity:en!, insertIntoManagedObjectContext: managedObjectContext!)
+            
+            newItem.categoryName = category
+            
+            managedObjectContext!.save(nil)
+            
+        }
+        
+        println("Organization Categories Saved")
+    }
+    
     func saveEvents(EventList: [Event]){
         
         let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate

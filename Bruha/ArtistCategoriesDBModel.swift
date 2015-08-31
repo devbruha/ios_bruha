@@ -10,8 +10,7 @@ import Foundation
 import CoreData
 
 class ArtistCategoriesDBModel: NSManagedObject {
-
-    @NSManaged var id: String
+    
     @NSManaged var categoryName: String
 
 }

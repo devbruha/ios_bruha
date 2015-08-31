@@ -19,6 +19,106 @@ class FetchData {
         
         self.managedObjectContext = context
     }
+    
+    func fetchCategories() -> Categories {
+        
+        var returnedCategories = Categories(eventCategory: fetchEventCategories(), venueCategory: fetchVenueCategories(), artistCategory: fetchArtistCategories(), organizationCategory: fetchOrganizationCategories())
+        
+        return returnedCategories
+    }
+
+    func fetchEventCategories() -> Dictionary<String, [[String]]> {
+     
+        var returnedEventCategories = Dictionary<String, [[String]]>()
+        
+        let fetchRequest = NSFetchRequest(entityName: "EventPrimaryCategories")
+        
+        var descriptor: NSSortDescriptor = NSSortDescriptor(key: "categoryName", ascending: true)
+        
+        fetchRequest.sortDescriptors = [descriptor]
+        
+        // Execute the fetch request, and cast the results to an array of LogItem objects
+        if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [EventPrimaryCategoriesDBModel] {
+            
+            for(var i = 0; i < fetchResults.count; ++i){
+                
+                let fetchSubRequest = NSFetchRequest(entityName: "EventSubCategories")
+                let predicate = NSPredicate(format: "primaryCategoryName == %@", fetchResults[i].categoryName)
+                
+                fetchSubRequest.predicate = predicate
+                
+                var subCatID: [String] = []
+                var subCatName: [String] = []
+                
+                if let fetchSubResults = managedObjectContext!.executeFetchRequest(fetchSubRequest, error: nil) as? [EventSubCategoriesDBModel]{
+                    
+                    for(var j = 0; j < fetchSubResults.count; ++j){
+                        
+                        subCatID.append(fetchSubResults[j].subCategoryID)
+                        subCatName.append(fetchSubResults[j].subCategoryName)
+                    }
+                    
+                    returnedEventCategories[fetchResults[i].categoryName] = [subCatID,subCatName]
+                }
+            }
+        }
+    
+        return returnedEventCategories
+    }
+    
+    func fetchVenueCategories() -> [String] {
+        
+        var returnedVenueCategories = [String]()
+        
+        let fetchRequest = NSFetchRequest(entityName: "VenueCategories")
+        
+        // Execute the fetch request, and cast the results to an array of LogItem objects
+        if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [VenueCategoriesDBModel] {
+            
+            for(var i = 0; i < fetchResults.count; ++i){
+                
+                returnedVenueCategories.append(fetchResults[i].categoryName)
+            }
+        }
+        
+        return returnedVenueCategories
+    }
+    
+    func fetchArtistCategories() -> [String] {
+        
+        var returnedArtistCategories = [String]()
+        
+        let fetchRequest = NSFetchRequest(entityName: "ArtistCategories")
+        
+        // Execute the fetch request, and cast the results to an array of LogItem objects
+        if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [ArtistCategoriesDBModel] {
+            
+            for(var i = 0; i < fetchResults.count; ++i){
+                
+                returnedArtistCategories.append(fetchResults[i].categoryName)
+            }
+        }
+        
+        return returnedArtistCategories
+    }
+    
+    func fetchOrganizationCategories() -> [String] {
+        
+        var returnedOrganizationCategories = [String]()
+        
+        let fetchRequest = NSFetchRequest(entityName: "OrganizationCategories")
+        
+        // Execute the fetch request, and cast the results to an array of LogItem objects
+        if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [OrganizationCategoriesDBModel] {
+            
+            for(var i = 0; i < fetchResults.count; ++i){
+                
+                returnedOrganizationCategories.append(fetchResults[i].categoryName)
+            }
+        }
+        
+        return returnedOrganizationCategories
+    }
 
     
     func fetchEvents() -> [Event]!{

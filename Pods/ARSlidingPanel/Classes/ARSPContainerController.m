@@ -113,7 +113,7 @@
                                                                             toItem:self.view
                                                                          attribute:NSLayoutAttributeBottom
                                                                         multiplier:1
-                                                                          constant:0];
+                                                                          constant:self.view.frame.size.height*0.33];
     
     NSLayoutConstraint *heightConstraint = [NSLayoutConstraint constraintWithItem:_panelViewController.view
                                                                         attribute:NSLayoutAttributeHeight
@@ -275,7 +275,7 @@
                                                                             toItem:self.view
                                                                          attribute:NSLayoutAttributeTop
                                                                         multiplier:1
-                                                                          constant:0];
+                                                                          constant:self.view.frame.size.height*0.33];
     [self.view addConstraint:self.panelViewControllerTopConstraint];
 }
 

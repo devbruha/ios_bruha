@@ -11,7 +11,6 @@ import CoreData
 
 class EventPrimaryCategoriesDBModel: NSManagedObject {
 
-    @NSManaged var id: String
     @NSManaged var categoryName: String
 
 }

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="7706" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="vXZ-lx-hvc">
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
@@ -29,6 +29,8 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="x7p-eL-3qc" secondAttribute="height" multiplier="60:37" id="3kv-Qn-4ns"/>
                                 </constraints>
+                                <color key="pageIndicatorTintColor" red="1" green="1" blue="0.99607843139999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <color key="currentPageIndicatorTintColor" cocoaTouchSystemColor="darkTextColor"/>
                             </pageControl>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="V7t-ms-RD9">
                                 <rect key="frame" x="250" y="10" width="60" height="30"/>
@@ -1734,9 +1736,9 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
+        <segue reference="R95-Q8-ZSY"/>
+        <segue reference="5DM-Zi-tRH"/>
+        <segue reference="zCE-mg-04b"/>
         <segue reference="VZH-CT-9D2"/>
-        <segue reference="uZx-1x-ByM"/>
-        <segue reference="Rkq-9y-PIT"/>
-        <segue reference="zjY-DB-duY"/>
     </inferredMetricsTieBreakers>
 </document>
