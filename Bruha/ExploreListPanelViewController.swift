@@ -80,9 +80,15 @@ class ExploreListPanelViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        let screenWidth = screenSize.width
+        let screenHeight = screenSize.height
+        
         self.panelControllerContainer = self.parentViewController as! ARSPContainerController
         panelControllerContainer.visibleZoneHeight = visibleZoneHeight
         panelControllerContainer.shouldOverlapMainViewController = true
+        panelControllerContainer.maxPanelHeight = screenHeight*0.66
         //println(panelControllerContainer.visibilityState)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateNotificationSent", name: "itemDisplayChange", object: nil)
