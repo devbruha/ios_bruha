@@ -363,12 +363,9 @@
                                     <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k2h-su-nLy">
                                         <rect key="frame" x="0.0" y="3" width="320" height="491"/>
                                         <subviews>
-                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="24" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="iFQ-6Q-wDh">
-                                                <rect key="frame" x="8" y="8" width="304" height="118"/>
+                                            <tableView clipsSubviews="YES" contentMode="scaleToFill" fixedFrame="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="24" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="iFQ-6Q-wDh">
+                                                <rect key="frame" x="8" y="8" width="304" height="200"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="118" id="CLQ-6Y-3Vt"/>
-                                                </constraints>
                                                 <prototypes>
                                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" rowHeight="24" id="f3R-hZ-h3e">
                                                         <rect key="frame" x="0.0" y="0.0" width="304" height="44"/>
@@ -394,7 +391,6 @@
                     <connections>
                         <outlet property="artistSelectedB" destination="z55-iv-qkW" id="igN-ku-CXd"/>
                         <outlet property="eventCategoriesTable" destination="iFQ-6Q-wDh" id="NAK-e5-mhL"/>
-                        <outlet property="eventCategoryHeightConstraint" destination="CLQ-6Y-3Vt" id="3Hp-rR-jkm"/>
                         <outlet property="eventSelectedB" destination="PXb-4Z-59H" id="b6e-IU-UDa"/>
                         <outlet property="organizationSelectedB" destination="xo5-cm-x41" id="Vsl-hO-9la"/>
                         <outlet property="venueSelectedB" destination="9NE-aT-sYN" id="1nQ-zA-Mec"/>
