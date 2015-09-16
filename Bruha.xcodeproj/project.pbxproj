@@ -107,6 +107,7 @@
 		45FA05C11B5D6FCC004AD819 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05C01B5D6FCC004AD819 /* LoginService.swift */; };
 		45FA05C41B5D7000004AD819 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05C31B5D7000004AD819 /* User.swift */; };
 		45FA05C61B5D7D9E004AD819 /* UserDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05C51B5D7D9E004AD819 /* UserDBModel.swift */; };
+		A1AC695A1BA0AFAD009D7EEB /* CategoryCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1AC69591BA0AFAD009D7EEB /* CategoryCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -226,6 +227,7 @@
 		45FA05C51B5D7D9E004AD819 /* UserDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDBModel.swift; sourceTree = "<group>"; };
 		4C40848564A9A9ABD06E1BFE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6624944801305D440270EA9D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		A1AC69591BA0AFAD009D7EEB /* CategoryCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryCell.swift; sourceTree = "<group>"; };
 		CCB1783DB671A2F9EF9B679A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -486,6 +488,7 @@
 				452BC0C91B791238003E7142 /* VenueTableViewCell.swift */,
 				452BC0CB1B791251003E7142 /* ArtistTableViewCell.swift */,
 				452BC0CD1B791260003E7142 /* OrganizationTableViewCell.swift */,
+				A1AC69591BA0AFAD009D7EEB /* CategoryCell.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -728,6 +731,7 @@
 				183484601B7E704B00EA0D13 /* ArtistView.swift in Sources */,
 				4560C5471B66D09900AB5382 /* SaveData.swift in Sources */,
 				45FA05BE1B5D640A004AD819 /* SignUpViewController.swift in Sources */,
+				A1AC695A1BA0AFAD009D7EEB /* CategoryCell.swift in Sources */,
 				45C6D5B91B851A7200EE4A05 /* ArtistCategoriesDBModel.swift in Sources */,
 				45FA059A1B5D4188004AD819 /* VenueDBModel.swift in Sources */,
 				45FA05981B5D4188004AD819 /* Artist.swift in Sources */,

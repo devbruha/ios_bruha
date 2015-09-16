@@ -42,7 +42,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         GlobalVariables.displayedArtists = FetchData(context: managedObjectContext).fetchArtists()!
         GlobalVariables.displayedOrganizations = FetchData(context: managedObjectContext).fetchOrganizations()!
         
-        var f = FetchData(context: managedObjectContext).fetchEventCategories()
+        //GlobalVariables.itemCategories = FetchData(context: managedObjectContext).fetchCategories()
         
         // Do any additional setup after loading the view.
     }
