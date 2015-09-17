@@ -8,94 +8,42 @@
 
 import UIKit
 
-class ExploreListPanelViewController: UIViewController {
-
+class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+    
     @IBOutlet weak var eventSelectedB: UIButton!
     @IBOutlet weak var venueSelectedB: UIButton!
     @IBOutlet weak var artistSelectedB: UIButton!
     @IBOutlet weak var organizationSelectedB: UIButton!
     
-    @IBOutlet weak var venueTable: UITableView!
-    @IBOutlet weak var artistTable: UITableView!
-    @IBOutlet weak var organizationTable: UITableView!
+    @IBOutlet weak var eventCategoriesTable: UITableView!
     
-    
+    let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     var panelControllerContainer: ARSPContainerController!
     var swipeZoneHeight: CGFloat = 74
     var visibleZoneHeight: CGFloat = 74
     
-    func eventTapped(){
+    var backupEventCategories = [Objects(sectionName: "Event Categories", sectionObjects: [])]
+    
+    struct Objects {
         
-        venueTable.alpha = 0
-        artistTable.alpha = 0
-        organizationTable.alpha = 0
-        /*eventCategories.alpha = 1
-        venueCategories.alpha = 0
-        artistCategories.alpha = 0
-        organizationCategories.alpha = 0*/
-        
-        GlobalVariables.selectedDisplay = "Event"
-        
-        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChange", object: self)
-        
+        var sectionName : String!
+        var sectionObjects : [String] = []
     }
     
-    func venueTapped(){
-        
-        venueTable.alpha = 1
-        artistTable.alpha = 0
-        organizationTable.alpha = 0
-        /*eventCategories.alpha = 0
-        venueCategories.alpha = 1
-        artistCategories.alpha = 0
-        organizationCategories.alpha = 0*/
-        
-        GlobalVariables.selectedDisplay = "Venue"
-        
-        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChange", object: self)
-    }
-    
-    func artistTapped(){
-        
-        venueTable.alpha = 0
-        artistTable.alpha = 1
-        organizationTable.alpha = 0
-        
-        GlobalVariables.selectedDisplay = "Artist"
-        
-        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChange", object: self)
-    }
-    
-    func organizationTapped(){
-        
-        venueTable.alpha = 0
-        artistTable.alpha = 0
-        organizationTable.alpha = 1
-        
-        GlobalVariables.selectedDisplay = "Organization"
-        
-        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChange", object: self)
-    }
+    var eventObject = [Objects()]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let screenSize: CGRect = UIScreen.mainScreen().bounds
-        let screenWidth = screenSize.width
-        let screenHeight = screenSize.height
-        
-        self.panelControllerContainer = self.parentViewController as! ARSPContainerController
-        panelControllerContainer.visibleZoneHeight = visibleZoneHeight
-        panelControllerContainer.shouldOverlapMainViewController = true
-        panelControllerContainer.maxPanelHeight = screenHeight*0.66
-        //println(panelControllerContainer.visibilityState)
+        setupPanel()
+        setupCategoryLists()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateNotificationSent", name: "itemDisplayChange", object: nil)
         
         var eventTgr = UITapGestureRecognizer(target: self, action: ("eventTapped"))
         eventSelectedB.addGestureRecognizer(eventTgr)
-
+        
         var venueTgr = UITapGestureRecognizer(target: self, action: ("venueTapped"))
         venueSelectedB.addGestureRecognizer(venueTgr)
         
@@ -105,14 +53,34 @@ class ExploreListPanelViewController: UIViewController {
         var organizationTgr = UITapGestureRecognizer(target: self, action: ("organizationTapped"))
         organizationSelectedB.addGestureRecognizer(organizationTgr)
         
-        self.venueTable.tableFooterView = UIView()
-        self.artistTable.tableFooterView = UIView()
-        self.organizationTable.tableFooterView = UIView()
-        
     }
     
-    func updateNotificationSent(){
+    func setupCategoryLists(){
         
+        self.eventCategoriesTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
+        self.eventCategoriesTable.dataSource = self
+        
+        eventObject = [Objects(sectionName: "Event Categories", sectionObjects: [])]
+        
+        var f = FetchData(context: managedObjectContext).fetchCategories()
+        
+        for primaryCategory in f.eventCategories.keys{
+            
+            var newPrimary = Objects(sectionName: primaryCategory, sectionObjects: f.eventCategories[primaryCategory]![1])
+            backupEventCategories.append(newPrimary)
+        }
+    }
+    
+    func setupPanel(){
+        
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        let screenWidth = screenSize.width
+        let screenHeight = screenSize.height
+        
+        self.panelControllerContainer = self.parentViewController as! ARSPContainerController
+        panelControllerContainer.visibleZoneHeight = visibleZoneHeight
+        panelControllerContainer.shouldOverlapMainViewController = true
+        panelControllerContainer.maxPanelHeight = screenHeight*0.66
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -125,67 +93,167 @@ class ExploreListPanelViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
     
-    var selectedIndexPath : NSIndexPath?
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Potentially incomplete method implementation.
-        // Return the number of sections.
-        return 1
+    // -------------------------------Onclick Logic-------------------------------
+    
+    func eventTapped(){
+        
+        GlobalVariables.selectedDisplay = "Event"
+        
+        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChange", object: self)
+        
+    }
+    
+    func venueTapped(){
+        
+        GlobalVariables.selectedDisplay = "Venue"
+        
+        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChange", object: self)
+    }
+    
+    func artistTapped(){
+        
+        GlobalVariables.selectedDisplay = "Artist"
+        
+        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChange", object: self)
+    }
+    
+    func organizationTapped(){
+        
+        GlobalVariables.selectedDisplay = "Organization"
+        
+        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChange", object: self)
+    }
+    
+    // -------------------------------Category Table Logic-------------------------------
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        var cell = eventCategoriesTable.dequeueReusableCellWithIdentifier("Cell") as! UITableViewCell!
+        
+        cell.textLabel?.text = eventObject[indexPath.section].sectionObjects[indexPath.row]
+        cell.backgroundColor = UIColor.blackColor()
+        cell.textLabel?.textColor = UIColor.whiteColor()
+        cell.textLabel!.font = UIFont(name: cell.textLabel!.font.fontName, size: 18)
+        
+        return cell
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
-        return 1
+        
+        return eventObject[section].sectionObjects.count
     }
     
-    
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell{
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
-        let cell = tableView.dequeueReusableCellWithIdentifier("Cell", forIndexPath: indexPath) as! ExplorePanelViewTableViewCell
-        
-        cell.selectionStyle = UITableViewCellSelectionStyle.None
-        
-        return cell
-        
-        
-        // Configure the cell...
+        return eventObject.count
     }
     
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        
+        return eventObject[section].sectionName
+    }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let previousIndexPath = selectedIndexPath
-        if indexPath == selectedIndexPath {
-            selectedIndexPath = nil
-        }
-        else{
-            selectedIndexPath = indexPath
-        }
-        var indexPaths: Array<NSIndexPath> = []
-        if let previous = previousIndexPath{
-            indexPaths += [previous]
+    func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        
+        var header = view as! UITableViewHeaderFooterView
+        
+        var sepFrame = CGRectMake(0,header.frame.size.height-1, 320, 1);
+        var seperatorView = UIView(frame: sepFrame)
+        seperatorView.backgroundColor = UIColor.whiteColor()
+        
+        if(section == 0){
+            
+            header.backgroundView?.backgroundColor = UIColor.orangeColor()
+            
+            header.textLabel.textColor = UIColor.whiteColor()
+            header.detailTextLabel.text = "\(section)"
             
         }
-        if let current = selectedIndexPath {
-            indexPaths += [current]
+        else{
+            
+            header.backgroundView?.backgroundColor = UIColor(red: 1.0, green: 0.710, blue: 0.071, alpha: 1.0)
+            
+            header.textLabel.textColor = UIColor.whiteColor()
+            header.detailTextLabel.text = "\(section)"
+            
+            header.addSubview(seperatorView)
         }
-        if indexPaths.count > 0 {
-            tableView.reloadRowsAtIndexPaths(indexPaths, withRowAnimation: UITableViewRowAnimation.Automatic)
-        }
-    }
-    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        (cell as! ExplorePanelViewTableViewCell).watchFrameChanges()
-    }
-    func tableView(tableView: UITableView, didEndDisplayingCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
-        (cell as! ExplorePanelViewTableViewCell).ignoreFrameChanges()
+        
+        header.layer.borderColor = UIColor.whiteColor().CGColor
+        header.textLabel.font = UIFont(name: header.textLabel.font.fontName, size: 18)
+        
+        let tap = UITapGestureRecognizer(target: self, action: Selector("sectionTapped:"))
+        
+        view.addGestureRecognizer(tap)
     }
     
-    func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-        if indexPath == selectedIndexPath {
-            return ExplorePanelViewTableViewCell.expandedHeight
-        } else {
-            return ExplorePanelViewTableViewCell.defaultHeight
+    func sectionTapped(sender: UITapGestureRecognizer){
+        
+        var header = sender.view as! UITableViewHeaderFooterView
+        
+        var index = header.detailTextLabel.text!.toInt()!
+        
+        if(index == 0){
+            
+            if(eventObject.count > 1){
+                
+                eventObject.removeAll(keepCapacity: false)
+                eventObject.append(backupEventCategories[0])
+            }
+            else{
+                
+                eventObject.removeAll(keepCapacity: false)
+                eventObject = (backupEventCategories)
+                
+                for(var i = 0 ; i < eventObject.count ; ++i){
+                    
+                    eventObject[i].sectionObjects.removeAll(keepCapacity: false)
+                }
+            }
         }
+        else{
+            
+            if (eventObject[index].sectionObjects.count == 0){
+                
+                eventObject[index].sectionObjects = (backupEventCategories[index].sectionObjects)
+            }
+                
+            else{
+                
+                eventObject[index].sectionObjects.removeAll(keepCapacity: false)
+            }
+        }
+        
+        eventCategoriesTable.reloadData()
+        
+        //adjustHeightOfTableView(self.eventCategoriesTable, constraint: self.eventCategoryHeightConstraint)
+        
     }
-
-
+    
+    func updateNotificationSent(){
+        
+        if(GlobalVariables.selectedDisplay == "Event"){
+            eventCategoriesTable.alpha = 1;
+        }
+        else{
+            eventCategoriesTable.alpha = 0;
+        }
+        
+    }
+    
+    func adjustHeightOfTableView(uiTableView: UITableView, constraint: NSLayoutConstraint){
+        
+        var height: CGFloat = uiTableView.contentSize.height
+        
+        constraint.constant = height
+        
+        println(height)
+        
+        self.view.setNeedsUpdateConstraints()
+        
+        uiTableView.reloadData()
+        
+    }
+    
+    
 }
