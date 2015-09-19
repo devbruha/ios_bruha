@@ -9,6 +9,9 @@
 import UIKit
 
 class MapViewController: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate,ARSPDragDelegate, ARSPVisibilityStateDelegate {
+    var testLocationMarker: GMSMarker!
+    var testLocation = CLLocationCoordinate2D(latitude: 43.2628662, longitude: -79.86648939999998)
+    
     
     @IBOutlet weak var viewMap: GMSMapView!
     
@@ -27,6 +30,7 @@ class MapViewController: UIViewController,CLLocationManagerDelegate, GMSMapViewD
     
     var displayedEvents = GlobalVariables.displayedEvents
     var displayedVenues = GlobalVariables.displayedVenues
+    var displayedArtists = GlobalVariables.displayedArtists
     var displayedOrganizations = GlobalVariables.displayedOrganizations
     
     override func viewDidLoad() {
@@ -108,6 +112,10 @@ class MapViewController: UIViewController,CLLocationManagerDelegate, GMSMapViewD
     }
     
     func generateMarkers(){
+        testLocationMarker = GMSMarker(position: testLocation)
+        testLocationMarker.title = "Test Marker 1"
+        testLocationMarker.map = viewMap
+        testLocationMarker.icon = UIImage(named: "Business")
         
         for event in displayedEvents{
             
