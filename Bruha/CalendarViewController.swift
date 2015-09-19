@@ -10,6 +10,7 @@ import UIKit
 
 class CalendarViewController: UIViewController,CalendarViewDelegate{
 
+    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var placeholder: UIView!
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,6 +31,26 @@ class CalendarViewController: UIViewController,CalendarViewDelegate{
     func didSelectDate(date: NSDate){
         println("\(date.year)-\(date.month)-\(date.day)")
     }
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        // #warning Potentially incomplete method implementation.
+        // Return the number of sections.
+        return 1
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        // #warning Incomplete method implementation.
+        // Return the number of rows in the section.
+        return 10
+    }
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! UITableViewCell
+        
+        // Configure the cell...
+        
+        return cell
+    }
+
+
     
 
     /*

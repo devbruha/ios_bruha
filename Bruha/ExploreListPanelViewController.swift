@@ -8,14 +8,17 @@
 
 import UIKit
 
-class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,CalendarViewDelegate {
     
     @IBOutlet weak var eventSelectedB: UIButton!
     @IBOutlet weak var venueSelectedB: UIButton!
     @IBOutlet weak var artistSelectedB: UIButton!
     @IBOutlet weak var organizationSelectedB: UIButton!
     
+    @IBOutlet weak var scrollView: UIScrollView!
+    
     @IBOutlet weak var eventCategoriesTable: UITableView!
+    @IBOutlet weak var placeholder: UIView!
     
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
@@ -36,6 +39,12 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        let screenWidth = screenSize.width
+        let screenHeight = screenSize.height
+        scrollView.contentSize.width = screenWidth
+        scrollView.contentSize.height = 1000
+        
         setupPanel()
         setupCategoryLists()
         
@@ -53,6 +62,18 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         var organizationTgr = UITapGestureRecognizer(target: self, action: ("organizationTapped"))
         organizationSelectedB.addGestureRecognizer(organizationTgr)
         
+        let date = NSDate()
+        let calendarView = CalendarView.instance(date, selectedDate: date)
+        calendarView.delegate = self
+        calendarView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        
+        placeholder.addSubview(calendarView)
+        placeholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[calendarView]|", options: NSLayoutFormatOptions(0), metrics: nil, views: ["calendarView": calendarView]))
+        placeholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[calendarView]|", options: NSLayoutFormatOptions(0), metrics: nil, views: ["calendarView": calendarView]))
+        
+    }
+    func didSelectDate(date: NSDate){
+        println("\(date.year)-\(date.month)-\(date.day)")
     }
     
     func setupCategoryLists(){
@@ -98,7 +119,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
     func eventTapped(){
         
         GlobalVariables.selectedDisplay = "Event"
-        
+        placeholder.hidden = false
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChange", object: self)
         
     }
@@ -106,21 +127,21 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
     func venueTapped(){
         
         GlobalVariables.selectedDisplay = "Venue"
-        
+        placeholder.hidden = true
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChange", object: self)
     }
     
     func artistTapped(){
         
         GlobalVariables.selectedDisplay = "Artist"
-        
+        placeholder.hidden = true
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChange", object: self)
     }
     
     func organizationTapped(){
         
         GlobalVariables.selectedDisplay = "Organization"
-        
+        placeholder.hidden = true
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChange", object: self)
     }
     
