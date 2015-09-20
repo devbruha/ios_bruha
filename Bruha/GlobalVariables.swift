@@ -8,7 +8,7 @@
 
 import Foundation
 
-enum FilterState: String {
+public enum FilterState: String {
     
     case Events = "events"
     case Venues = "venues"
