@@ -20,6 +20,8 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
     @IBOutlet weak var eventCategoriesTable: UITableView!
     @IBOutlet weak var placeholder: UIView!
     
+    @IBOutlet weak var eventCategoryTableHeight: NSLayoutConstraint!
+    
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     var panelControllerContainer: ARSPContainerController!
@@ -247,7 +249,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
         eventCategoriesTable.reloadData()
         
-        //adjustHeightOfTableView(self.eventCategoriesTable, constraint: self.eventCategoryHeightConstraint)
+        adjustHeightOfTableView(self.eventCategoriesTable, constraint: self.eventCategoryTableHeight)
         
     }
     

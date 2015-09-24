@@ -81,7 +81,6 @@
 		45FA056A1B5D4158004AD819 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05691B5D4158004AD819 /* AppDelegate.swift */; };
 		45FA056D1B5D4158004AD819 /* Bruha.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 45FA056B1B5D4158004AD819 /* Bruha.xcdatamodeld */; };
 		45FA05741B5D4158004AD819 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45FA05731B5D4158004AD819 /* Images.xcassets */; };
-		45FA05771B5D4158004AD819 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45FA05751B5D4158004AD819 /* LaunchScreen.xib */; };
 		45FA05831B5D4158004AD819 /* BruhaTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05821B5D4158004AD819 /* BruhaTests.swift */; };
 		45FA05951B5D4188004AD819 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA058C1B5D4188004AD819 /* Event.swift */; };
 		45FA05961B5D4188004AD819 /* EventDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA058D1B5D4188004AD819 /* EventDBModel.swift */; };
@@ -618,7 +617,6 @@
 				1891B28C1B86618E000949C8 /* SplashTwo.xib in Resources */,
 				181EB6131B714B7600B9295E /* MonthCollectionCell.xib in Resources */,
 				181EB6171B714B7600B9295E /* WeekHeaderView.xib in Resources */,
-				45FA05771B5D4158004AD819 /* LaunchScreen.xib in Resources */,
 				181EB6111B714B7600B9295E /* CalendarView.xib in Resources */,
 				452BC0C41B791068003E7142 /* VenueTableViewCell.xib in Resources */,
 				181EB6151B714B7600B9295E /* DayCollectionCell.xib in Resources */,

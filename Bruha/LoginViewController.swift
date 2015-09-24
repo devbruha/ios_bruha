@@ -44,8 +44,8 @@ class LoginViewController: UIViewController {
     
     @IBAction func loginPress(sender: AnyObject) {
         
-        var username:String = self.username.text
-        var password:String = self.password.text
+        var username:String = self.username.text!
+        var password:String = self.password.text!
         
         error = "true"
         
