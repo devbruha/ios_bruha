@@ -34,7 +34,13 @@ struct Artist {
         artistID = artistDictionary["Artist_id"] as! String
         artistName = artistDictionary["Artist_name"] as! String
         artistDescription = artistDictionary["Artist_desc"] as! String
-        primaryCategory = artistDictionary["primary_category"] as! String
+        
+        if let categoryName = artistDictionary["primary_category"] as? String {
+            primaryCategory = categoryName
+        } else {
+            primaryCategory = ""
+            println(primaryCategory)
+        }
     
         
         var tempUrl = artistDictionary["Artist_media"] as! String

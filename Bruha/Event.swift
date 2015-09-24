@@ -136,7 +136,12 @@ struct Event {
         
         userID = eventDictionary["user_id"] as! String
         
-        primaryCategory = eventDictionary["primary_category"] as! String
+        if let categoryName = eventDictionary["primary_category"] as? String {
+            primaryCategory = categoryName
+        } else {
+            primaryCategory = ""
+            println(primaryCategory)
+        }
         
         subCategoryName = eventDictionary["sub_category"] as! [String]
         subCategoryID = eventDictionary["sub_category_id"] as! [String]

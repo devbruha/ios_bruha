@@ -57,8 +57,12 @@ struct Organization {
         organizationID = organizationDictionary["organization_id"] as! String
         organizationDescription = organizationDictionary["organization_desc"] as! String
         
-        primaryCategory = organizationDictionary["primary_category"] as! String
-        
+        if let categoryName = organizationDictionary["primary_category"] as? String {
+            primaryCategory = organizationDictionary["primary_category"] as! String
+        } else {
+            primaryCategory = ""
+            println(primaryCategory)
+        }
         
         if let organizationLatString = organizationDictionary["location_lat"] as? String {
             

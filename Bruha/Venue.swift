@@ -70,7 +70,12 @@ struct Venue {
             venueLongitude = 0.0
         }
         
-        primaryCategory = venueDictionary["primary_category"] as! String
+        if let categoryName = venueDictionary["primary_category"] as? String {
+            primaryCategory = categoryName
+        } else {
+            primaryCategory = ""
+            println(primaryCategory)
+        }
         
         var tempUrl = venueDictionary["media"] as! String
         

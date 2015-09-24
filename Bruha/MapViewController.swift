@@ -9,6 +9,10 @@
 import UIKit
 
 class MapViewController: UIViewController,CLLocationManagerDelegate, GMSMapViewDelegate,ARSPDragDelegate, ARSPVisibilityStateDelegate {
+    //
+    var testLocationMarker: GMSMarker!
+    var testLocation = CLLocationCoordinate2D(latitude: 43.2628662, longitude: -79.86648939999998)
+    
     
     @IBOutlet weak var viewMap: GMSMapView!
     
@@ -27,6 +31,7 @@ class MapViewController: UIViewController,CLLocationManagerDelegate, GMSMapViewD
     
     var displayedEvents = GlobalVariables.displayedEvents
     var displayedVenues = GlobalVariables.displayedVenues
+    var displayedArtists = GlobalVariables.displayedArtists
     var displayedOrganizations = GlobalVariables.displayedOrganizations
     
     override func viewDidLoad() {
@@ -104,17 +109,17 @@ class MapViewController: UIViewController,CLLocationManagerDelegate, GMSMapViewD
     }
     
     func panelControllerWasDragged(panelControllerVisibility : CGFloat) {
-        
+        //println("Panel Controller was dragged")
     }
     
     func generateMarkers(){
-        
         for event in displayedEvents{
             
             var eventMarker: GMSMarker! = GMSMarker()
             
             eventMarker.title = event.eventName
             eventMarker.position = CLLocationCoordinate2D(latitude: event.eventLatitude,longitude: event.eventLongitude)
+            eventMarker.icon = UIImage(named: event.primaryCategory)
             
             eventMarkers.append(eventMarker)
         }
@@ -127,9 +132,18 @@ class MapViewController: UIViewController,CLLocationManagerDelegate, GMSMapViewD
             
             venueMarker.title = venue.venueName
             venueMarker.position = CLLocationCoordinate2D(latitude: venue.venueLatitude,longitude: venue.venueLongitude)
+            venueMarker.icon = UIImage(named: venue.primaryCategory)
             
             venueMarkers.append(venueMarker)
         }
+        
+//        for artists in displayedArtists {
+//            var artistsMarker = GMSMarker()
+//            
+//            artistsMarker.title = artists.artistName
+//            artistsMarker.position = CLLocationCoordinate2D(latitude: <#CLLocationDegrees#>, longitude: <#CLLocationDegrees#>)
+//            artistsMarker.icon = UIImage(named: artists.primaryCategory)
+//        }
         
         for organization in displayedOrganizations{
             
@@ -137,6 +151,7 @@ class MapViewController: UIViewController,CLLocationManagerDelegate, GMSMapViewD
             
             organizationMarker.title = organization.organizationName
             organizationMarker.position = CLLocationCoordinate2D(latitude: organization.organizationLatitude,longitude: organization.organizationLongitude)
+            organizationMarker.icon = UIImage(named: organization.primaryCategory)
             
             organizationMarkers.append(organizationMarker)
         }
@@ -216,7 +231,6 @@ class MapViewController: UIViewController,CLLocationManagerDelegate, GMSMapViewD
             }
         }
     }
-    
     
     
 }
