@@ -60,6 +60,7 @@
 		452BC0CC1B791251003E7142 /* ArtistTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452BC0CB1B791251003E7142 /* ArtistTableViewCell.swift */; };
 		452BC0CE1B791260003E7142 /* OrganizationTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452BC0CD1B791260003E7142 /* OrganizationTableViewCell.swift */; };
 		452BC0D01B7937D5003E7142 /* MapFilterPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 452BC0CF1B7937D5003E7142 /* MapFilterPanelViewController.swift */; };
+		453FB81A1BB5A78D00CA0D81 /* CAGradientLayer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 453FB8191BB5A78D00CA0D81 /* CAGradientLayer.swift */; };
 		4560C5471B66D09900AB5382 /* SaveData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4560C5461B66D09900AB5382 /* SaveData.swift */; };
 		4560C5491B66D42000AB5382 /* ExploreListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4560C5481B66D42000AB5382 /* ExploreListViewController.swift */; };
 		4560C54B1B66D44700AB5382 /* EventCircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4560C54A1B66D44700AB5382 /* EventCircleView.swift */; };
@@ -172,6 +173,7 @@
 		452BC0CB1B791251003E7142 /* ArtistTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistTableViewCell.swift; sourceTree = "<group>"; };
 		452BC0CD1B791260003E7142 /* OrganizationTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrganizationTableViewCell.swift; sourceTree = "<group>"; };
 		452BC0CF1B7937D5003E7142 /* MapFilterPanelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapFilterPanelViewController.swift; sourceTree = "<group>"; };
+		453FB8191BB5A78D00CA0D81 /* CAGradientLayer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CAGradientLayer.swift; sourceTree = "<group>"; };
 		4560C5461B66D09900AB5382 /* SaveData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SaveData.swift; sourceTree = "<group>"; };
 		4560C5481B66D42000AB5382 /* ExploreListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreListViewController.swift; sourceTree = "<group>"; };
 		4560C54A1B66D44700AB5382 /* EventCircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventCircleView.swift; sourceTree = "<group>"; };
@@ -485,6 +487,7 @@
 				452BC0C91B791238003E7142 /* VenueTableViewCell.swift */,
 				452BC0CB1B791251003E7142 /* ArtistTableViewCell.swift */,
 				452BC0CD1B791260003E7142 /* OrganizationTableViewCell.swift */,
+				453FB8191BB5A78D00CA0D81 /* CAGradientLayer.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -682,6 +685,7 @@
 				18A2A11B1B728241005E1DCB /* CalendarViewController.swift in Sources */,
 				45FA05C41B5D7000004AD819 /* User.swift in Sources */,
 				452BC0CC1B791251003E7142 /* ArtistTableViewCell.swift in Sources */,
+				453FB81A1BB5A78D00CA0D81 /* CAGradientLayer.swift in Sources */,
 				45FA05BD1B5D640A004AD819 /* LoginViewController.swift in Sources */,
 				181EB6181B714B7600B9295E /* CalendarLogic.swift in Sources */,
 				183484621B7E71CF00EA0D13 /* OrganizationView.swift in Sources */,
