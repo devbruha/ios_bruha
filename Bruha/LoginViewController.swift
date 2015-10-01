@@ -81,6 +81,8 @@ class LoginViewController: UIViewController {
                                 let alertController = UIAlertController(title: "Login Successful", message:nil, preferredStyle: .Alert)
                                 let acceptAction = UIAlertAction(title: "OK", style: .Default) { (_) -> Void in
                                 self.performSegueWithIdentifier("ProceedToDashBoard", sender: self) // Replace SomeSegue with your segue identifier (name)
+                                    
+                                    GlobalVariables.loggedIn = true
                                 }
                                 
                                 alertController.addAction(acceptAction)
