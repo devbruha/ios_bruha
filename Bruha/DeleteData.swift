@@ -29,6 +29,7 @@ class DeleteData {
         deleteVenues()
         deleteArtists()
         deleteOrganizations()
+        deleteAddictions()
     }
     
     // Deletes all entries of an object in the Core Data table
@@ -231,5 +232,26 @@ class DeleteData {
         } else {
             println("deleteData - Success - Organizations")
         }
+    }
+    
+    func deleteAddictions() {
+        let fetchRequest = NSFetchRequest(entityName: "AddictionList")
+        fetchRequest.includesPropertyValues = false // Only fetch the managedObjectID (not the full object structure)
+        if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [AddictionDBModel] {
+            
+            for result in fetchResults {
+                managedObjectContext!.deleteObject(result)
+            }
+            
+        }
+        
+        var err: NSError?
+        if !managedObjectContext!.save(&err) {
+            println("deleteData - Error : \(err!.localizedDescription)")
+            abort()
+        } else {
+            println("deleteData - Success - Addictions")
+        }
+
     }
 }

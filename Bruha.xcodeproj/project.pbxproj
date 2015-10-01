@@ -107,6 +107,8 @@
 		45FA05C11B5D6FCC004AD819 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05C01B5D6FCC004AD819 /* LoginService.swift */; };
 		45FA05C41B5D7000004AD819 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05C31B5D7000004AD819 /* User.swift */; };
 		45FA05C61B5D7D9E004AD819 /* UserDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05C51B5D7D9E004AD819 /* UserDBModel.swift */; };
+		A58A3A211BB9780800601749 /* AddictionDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58A3A201BB9780800601749 /* AddictionDBModel.swift */; };
+		A58A3A261BB980B200601749 /* Addiction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58A3A251BB980B200601749 /* Addiction.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -227,6 +229,8 @@
 		45FA05C51B5D7D9E004AD819 /* UserDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDBModel.swift; sourceTree = "<group>"; };
 		4C40848564A9A9ABD06E1BFE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6624944801305D440270EA9D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		A58A3A201BB9780800601749 /* AddictionDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddictionDBModel.swift; sourceTree = "<group>"; };
+		A58A3A251BB980B200601749 /* Addiction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Addiction.swift; sourceTree = "<group>"; };
 		CCB1783DB671A2F9EF9B679A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -434,6 +438,7 @@
 			isa = PBXGroup;
 			children = (
 				45FA05C21B5D6FDD004AD819 /* LocalDB */,
+				A58A3A251BB980B200601749 /* Addiction.swift */,
 				45FA058C1B5D4188004AD819 /* Event.swift */,
 				45FA058E1B5D4188004AD819 /* Venue.swift */,
 				45FA058F1B5D4188004AD819 /* Artist.swift */,
@@ -502,6 +507,7 @@
 				45FA05941B5D4188004AD819 /* OrganizationDBModel.swift */,
 				45FA05C51B5D7D9E004AD819 /* UserDBModel.swift */,
 				45C0F5F81B7BBE780041A1C8 /* EventSubCategoryDBModel.swift */,
+				A58A3A201BB9780800601749 /* AddictionDBModel.swift */,
 			);
 			name = LocalDB;
 			sourceTree = "<group>";
@@ -678,6 +684,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A58A3A211BB9780800601749 /* AddictionDBModel.swift in Sources */,
 				45FA05A91B5D4190004AD819 /* OrganizationService.swift in Sources */,
 				181EB6161B714B7600B9295E /* WeekHeaderView.swift in Sources */,
 				45FA05A81B5D4190004AD819 /* ArtistService.swift in Sources */,
@@ -736,6 +743,7 @@
 				45D8986F1B5E89E6003ED862 /* RegisterService.swift in Sources */,
 				45FA05A41B5D4190004AD819 /* EventService.swift in Sources */,
 				45C6D5B71B851A5A00EE4A05 /* VenueCategoriesDBModel.swift in Sources */,
+				A58A3A261BB980B200601749 /* Addiction.swift in Sources */,
 				45C93C661B86225900F60D9D /* OrganizationCategoryListService.swift in Sources */,
 				181EB6121B714B7600B9295E /* MonthCollectionCell.swift in Sources */,
 				45C93C621B8621C100F60D9D /* VenueCategoryListService.swift in Sources */,
