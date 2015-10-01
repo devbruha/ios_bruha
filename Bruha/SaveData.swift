@@ -25,6 +25,8 @@ class SaveData {
     
     func saveCategories(categoryDictionary: Categories){
         
+        GlobalVariables.categories = categoryDictionary
+        
         saveEventCategories(categoryDictionary.eventCategories)
         saveVenueCategories(categoryDictionary.venueCategories)
         saveArtistCategories(categoryDictionary.artistCategories)
