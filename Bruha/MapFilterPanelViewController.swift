@@ -14,6 +14,7 @@ class MapFilterPanelViewController: UIViewController {
     @IBOutlet weak var venueSelectedB: UIButton!
     @IBOutlet weak var artistSelectedB: UIButton!
     @IBOutlet weak var organizationSelectedB: UIButton!
+    
     @IBOutlet weak var eventCategories: UILabel!
     @IBOutlet weak var venueCategories: UILabel!
     @IBOutlet weak var artistCategories: UILabel!
@@ -22,6 +23,38 @@ class MapFilterPanelViewController: UIViewController {
     var panelControllerContainer: ARSPContainerController!
     var swipeZoneHeight: CGFloat = 74
     var visibleZoneHeight: CGFloat = 74
+    
+    func setupPanel(){
+        
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        let screenWidth = screenSize.width
+        let screenHeight = screenSize.height
+        
+        self.panelControllerContainer = self.parentViewController as! ARSPContainerController
+        panelControllerContainer.visibleZoneHeight = visibleZoneHeight
+        panelControllerContainer.shouldOverlapMainViewController = true
+        panelControllerContainer.maxPanelHeight = screenHeight*0.66
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        setupPanel()
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateNotificationSent", name: "itemDisplayChange", object: nil)
+        
+        var eventTgr = UITapGestureRecognizer(target: self, action: ("eventTapped"))
+        eventSelectedB.addGestureRecognizer(eventTgr)
+        
+        var venueTgr = UITapGestureRecognizer(target: self, action: ("venueTapped"))
+        venueSelectedB.addGestureRecognizer(venueTgr)
+        
+        var artistTgr = UITapGestureRecognizer(target: self, action: ("artistTapped"))
+        artistSelectedB.addGestureRecognizer(artistTgr)
+        
+        var organizationTgr = UITapGestureRecognizer(target: self, action: ("organizationTapped"))
+        organizationSelectedB.addGestureRecognizer(organizationTgr)
+    }
     
     func eventTapped(){
         
@@ -70,31 +103,6 @@ class MapFilterPanelViewController: UIViewController {
         GlobalVariables.selectedDisplay = "Organization"
         
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChange", object: self)
-    }
-
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        self.panelControllerContainer = self.parentViewController as! ARSPContainerController
-        panelControllerContainer.visibleZoneHeight = visibleZoneHeight
-        panelControllerContainer.shouldOverlapMainViewController = true
-        
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateNotificationSent", name: "itemDisplayChange", object: nil)
-        
-        var eventTgr = UITapGestureRecognizer(target: self, action: ("eventTapped"))
-        eventSelectedB.addGestureRecognizer(eventTgr)
-        
-        var venueTgr = UITapGestureRecognizer(target: self, action: ("venueTapped"))
-        venueSelectedB.addGestureRecognizer(venueTgr)
-        
-        var artistTgr = UITapGestureRecognizer(target: self, action: ("artistTapped"))
-        artistSelectedB.addGestureRecognizer(artistTgr)
-        
-        var organizationTgr = UITapGestureRecognizer(target: self, action: ("organizationTapped"))
-        organizationSelectedB.addGestureRecognizer(organizationTgr)
-
-        //println(panelControllerContainer.visibilityState)
-        
     }
     
     func updateNotificationSent(){

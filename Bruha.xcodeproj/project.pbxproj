@@ -41,7 +41,6 @@
 		1835F8F31B5EAD7200FD1BD1 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1835F8F21B5EAD7200FD1BD1 /* Reachability.swift */; };
 		1835F8F51B5ECF3500FD1BD1 /* DashBoardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1835F8F41B5ECF3500FD1BD1 /* DashBoardViewController.swift */; };
 		184231FA1B5FF173003948F5 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 184231F91B5FF173003948F5 /* ProfileViewController.swift */; };
-		1872E9EF1B7D258E0099AA36 /* ExplorePanelViewTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1872E9EE1B7D258E0099AA36 /* ExplorePanelViewTableViewCell.swift */; };
 		1891B2821B86529B000949C8 /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1891B2811B86529B000949C8 /* SplashView.swift */; };
 		1891B2841B86530C000949C8 /* SplashOne.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1891B2831B86530C000949C8 /* SplashOne.xib */; };
 		1891B28C1B86618E000949C8 /* SplashTwo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1891B28B1B86618E000949C8 /* SplashTwo.xib */; };
@@ -79,6 +78,7 @@
 		45C93C641B8621F600F60D9D /* ArtistCategoryListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C93C631B8621F600F60D9D /* ArtistCategoryListService.swift */; };
 		45C93C661B86225900F60D9D /* OrganizationCategoryListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C93C651B86225900F60D9D /* OrganizationCategoryListService.swift */; };
 		45D8986F1B5E89E6003ED862 /* RegisterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8986E1B5E89E6003ED862 /* RegisterService.swift */; };
+		45F8DF3C1BBD9BAF00886C3F /* UserFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F8DF3B1BBD9BAF00886C3F /* UserFilters.swift */; };
 		45FA056A1B5D4158004AD819 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05691B5D4158004AD819 /* AppDelegate.swift */; };
 		45FA056D1B5D4158004AD819 /* Bruha.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 45FA056B1B5D4158004AD819 /* Bruha.xcdatamodeld */; };
 		45FA05741B5D4158004AD819 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45FA05731B5D4158004AD819 /* Images.xcassets */; };
@@ -163,7 +163,6 @@
 		1835F8F21B5EAD7200FD1BD1 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		1835F8F41B5ECF3500FD1BD1 /* DashBoardViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashBoardViewController.swift; sourceTree = "<group>"; };
 		184231F91B5FF173003948F5 /* ProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
-		1872E9EE1B7D258E0099AA36 /* ExplorePanelViewTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExplorePanelViewTableViewCell.swift; sourceTree = "<group>"; };
 		1891B2811B86529B000949C8 /* SplashView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
 		1891B2831B86530C000949C8 /* SplashOne.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SplashOne.xib; sourceTree = "<group>"; };
 		1891B28B1B86618E000949C8 /* SplashTwo.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SplashTwo.xib; sourceTree = "<group>"; };
@@ -200,6 +199,7 @@
 		45C93C631B8621F600F60D9D /* ArtistCategoryListService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistCategoryListService.swift; sourceTree = "<group>"; };
 		45C93C651B86225900F60D9D /* OrganizationCategoryListService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrganizationCategoryListService.swift; sourceTree = "<group>"; };
 		45D8986E1B5E89E6003ED862 /* RegisterService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterService.swift; sourceTree = "<group>"; };
+		45F8DF3B1BBD9BAF00886C3F /* UserFilters.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserFilters.swift; sourceTree = "<group>"; };
 		45FA05641B5D4158004AD819 /* Bruha.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bruha.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		45FA05681B5D4158004AD819 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		45FA05691B5D4158004AD819 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -399,7 +399,6 @@
 			children = (
 				45FA05921B5D4188004AD819 /* GlobalVariables.swift */,
 				18A2A11A1B728241005E1DCB /* CalendarViewController.swift */,
-				1872E9EE1B7D258E0099AA36 /* ExplorePanelViewTableViewCell.swift */,
 				1834845B1B7E347D00EA0D13 /* VenueView.xib */,
 				1834845D1B7E352F00EA0D13 /* VenueView.swift */,
 				1834845F1B7E704B00EA0D13 /* ArtistView.swift */,
@@ -460,6 +459,7 @@
 				45FA05901B5D4188004AD819 /* Organization.swift */,
 				45FA05C31B5D7000004AD819 /* User.swift */,
 				45C938AB1B8D089800BB0D0C /* Categories.swift */,
+				45F8DF3B1BBD9BAF00886C3F /* UserFilters.swift */,
 			);
 			name = "Object Models";
 			sourceTree = "<group>";
@@ -722,6 +722,7 @@
 				45FA05951B5D4188004AD819 /* Event.swift in Sources */,
 				45FA05971B5D4188004AD819 /* Venue.swift in Sources */,
 				1834845E1B7E352F00EA0D13 /* VenueView.swift in Sources */,
+				45F8DF3C1BBD9BAF00886C3F /* UserFilters.swift in Sources */,
 				45FA05B81B5D432C004AD819 /* SplashViewController.swift in Sources */,
 				181EB61A1B714B7600B9295E /* NSDateAdditions.swift in Sources */,
 				45C6D5C01B851ADE00EE4A05 /* EventSubCategoriesDBModel.swift in Sources */,
@@ -771,7 +772,6 @@
 				181EB6121B714B7600B9295E /* MonthCollectionCell.swift in Sources */,
 				A5D90DFC1BBDD1A600537F72 /* AddictionArtistDBModel.swift in Sources */,
 				45C93C621B8621C100F60D9D /* VenueCategoryListService.swift in Sources */,
-				1872E9EF1B7D258E0099AA36 /* ExplorePanelViewTableViewCell.swift in Sources */,
 				45C6D5BC1B851ABC00EE4A05 /* OrganizationCategoriesDBModel.swift in Sources */,
 				18E2DD8C1B69537D007C61B5 /* DashLine.swift in Sources */,
 				45C93C601B8621AE00F60D9D /* EventCategoryListService.swift in Sources */,

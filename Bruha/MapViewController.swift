@@ -34,6 +34,16 @@ class MapViewController: UIViewController,CLLocationManagerDelegate, GMSMapViewD
     var displayedArtists = GlobalVariables.displayedArtists
     var displayedOrganizations = GlobalVariables.displayedOrganizations
     
+    func configureView(){
+        
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        let screenWidth = screenSize.width
+        let screenHeight = screenSize.height
+        self.panelControllerContainer = self.parentViewController as! ARSPContainerController
+        self.panelControllerContainer.dragDelegate = self
+        self.panelControllerContainer.visibilityStateDelegate = self
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -47,9 +57,7 @@ class MapViewController: UIViewController,CLLocationManagerDelegate, GMSMapViewD
         
         viewMap.addObserver(self, forKeyPath: "myLocation", options: NSKeyValueObservingOptions.New, context: nil)
         
-        self.panelControllerContainer = self.parentViewController as! ARSPContainerController
-        self.panelControllerContainer.dragDelegate = self
-        self.panelControllerContainer.visibilityStateDelegate = self
+        configureView()
         
     }
     

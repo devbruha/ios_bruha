@@ -24,8 +24,12 @@ class GlobalVariables{
     
     static var loggedIn = false
     
+    static var categories: Categories = Categories()
+    
     static var displayedEvents: [Event] = []
     static var displayedVenues: [Venue] = []
     static var displayedArtists: [Artist] = []
     static var displayedOrganizations: [Organization] = []
+    
+    static var UserCustomFilters: UserFilters = UserFilters()
 }

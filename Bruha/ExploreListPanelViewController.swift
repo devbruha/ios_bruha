@@ -28,11 +28,12 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
     var swipeZoneHeight: CGFloat = 74
     var visibleZoneHeight: CGFloat = 74
     
-    var backupEventCategories = [Objects(sectionName: "Event Categories", sectionObjects: [])]
+    var backupEventCategories = [Objects(sectionName: "Event Categories", sectionObjectIDs: [], sectionObjects: [])]
     
     struct Objects {
         
         var sectionName : String!
+        var sectionObjectIDs: [String] = []
         var sectionObjects : [String] = []
     }
     
@@ -75,7 +76,20 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
     }
     func didSelectDate(date: NSDate){
-        println("\(date.year)-\(date.month)-\(date.day)")
+        
+        if contains(GlobalVariables.UserCustomFilters.dateFilter, "\(date.year)-\(date.month)-\(date.day)"){
+            
+            if let index = find(GlobalVariables.UserCustomFilters.dateFilter,"\(date.year)-\(date.month)-\(date.day)"){
+                
+                GlobalVariables.UserCustomFilters.dateFilter.removeAtIndex(index)
+            }
+        }
+        else{
+            
+            GlobalVariables.UserCustomFilters.dateFilter.append("\(date.year)-\(date.month)-\(date.day)")
+        }
+        
+        println(GlobalVariables.UserCustomFilters.dateFilter)
     }
     
     func setupCategoryLists(){
@@ -83,13 +97,13 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         self.eventCategoriesTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         self.eventCategoriesTable.dataSource = self
         
-        eventObject = [Objects(sectionName: "Event Categories", sectionObjects: [])]
+        eventObject = [Objects(sectionName: "Event Categories", sectionObjectIDs: [], sectionObjects: [])]
         
-        var f = FetchData(context: managedObjectContext).fetchCategories()
+        var f = GlobalVariables.categories
         
         for primaryCategory in f.eventCategories.keys{
             
-            var newPrimary = Objects(sectionName: primaryCategory, sectionObjects: f.eventCategories[primaryCategory]![1])
+            var newPrimary = Objects(sectionName: primaryCategory, sectionObjectIDs: f.eventCategories[primaryCategory]![0], sectionObjects: f.eventCategories[primaryCategory]![1])
             backupEventCategories.append(newPrimary)
         }
     }
@@ -154,11 +168,24 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         var cell = eventCategoriesTable.dequeueReusableCellWithIdentifier("Cell") as! UITableViewCell!
         
         cell.textLabel?.text = eventObject[indexPath.section].sectionObjects[indexPath.row]
+        cell.textLabel?.tag = eventObject[indexPath.section].sectionObjectIDs[indexPath.row].toInt()!
         cell.backgroundColor = UIColor.blackColor()
         cell.textLabel?.textColor = UIColor.whiteColor()
         cell.textLabel!.font = UIFont(name: cell.textLabel!.font.fontName, size: 18)
         
         return cell
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        var selectedCell = self.eventCategoriesTable.cellForRowAtIndexPath(indexPath) as UITableViewCell!
+        
+        var headerTitle = eventCategoriesTable.headerViewForSection(indexPath.section)?.textLabel.text!
+        
+        GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].append("\(selectedCell.textLabel!.tag)")
+        GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![1].append("\(selectedCell.textLabel!.text!)")
+        
+        println(selectedCell.textLabel?.tag)
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -216,6 +243,19 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
         var index = header.detailTextLabel.text!.toInt()!
         
+        var headerTitle = header.textLabel.text!
+        
+        if(headerTitle != "Event Categories"){
+            
+            if contains(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.keys, headerTitle){
+                
+                GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.removeValueForKey(headerTitle)
+            }
+            else{
+                GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle] = [[String]]()
+            }
+        }
+        
         if(index == 0){
             
             if(eventObject.count > 1){
@@ -271,8 +311,6 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         constraint.constant = height
         
         scrollView.contentSize.height = 500 + constraint.constant
-        
-        println(height)
         
         self.view.setNeedsUpdateConstraints()
         
