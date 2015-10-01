@@ -254,18 +254,18 @@ class FetchData {
         }
     }
     
-    func fetchAddictions() -> [Addiction]?{
-        var returnedAddiction: [Addiction] = [Addiction]()
+    func fetchAddictions() -> [AddictionEvent]?{
+        var returnedAddiction: [AddictionEvent] = [AddictionEvent]()
         
         // Create a new fetch request using the LogItem entity
-        let fetchRequest = NSFetchRequest(entityName: "AddictionList")
+        let fetchRequest = NSFetchRequest(entityName: "AddictionEvent")
         
         // Execute the fetch request, and cast the results to an array of LogItem objects
-        if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [AddictionDBModel] {
+        if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [AddictionEventDBModel] {
             
             for(var i = 0; i < fetchResults.count; ++i){
                 
-                var addiction = Addiction(fetchResults: fetchResults[i])
+                var addiction = AddictionEvent(fetchResults: fetchResults[i])
                 
                 returnedAddiction.append(addiction)
             }

@@ -1,8 +1,20 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="7701" systemVersion="14F27" minimumToolsVersion="Automatic" macOSVersion="Automatic" iOSVersion="Automatic">
-    <entity name="AddictionList" representedClassName="Bruha.AddictionDBModel" syncable="YES">
+    <entity name="AddictionArtist" representedClassName="Bruha.AddictionArtistDBModel" syncable="YES">
+        <attribute name="artistID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userID" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="AddictionEvent" representedClassName="Bruha.AddictionEventDBModel" syncable="YES">
         <attribute name="eventID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="userID" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="AddictionOrganization" representedClassName="Bruha.AddictionOrganizationDBModel" syncable="YES">
+        <attribute name="organizationID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userID" optional="YES" attributeType="String" syncable="YES"/>
+    </entity>
+    <entity name="AddictionVenue" representedClassName="Bruha.AddictionVenueDBModel" syncable="YES">
+        <attribute name="userID" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="venueID" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <entity name="ArtistCategories" representedClassName="Bruha.ArtistCategoriesDBModel" syncable="YES">
         <attribute name="categoryName" optional="YES" attributeType="String" syncable="YES"/>
@@ -83,7 +95,7 @@
         <attribute name="venueDescription" optional="YES" attributeType="String" syncable="YES"/>
     </entity>
     <elements>
-        <element name="AddictionList" positionX="0" positionY="144" width="128" height="75"/>
+        <element name="AddictionEvent" positionX="0" positionY="144" width="128" height="75"/>
         <element name="ArtistCategories" positionX="-9" positionY="135" width="128" height="60"/>
         <element name="ArtistList" positionX="-27" positionY="126" width="128" height="120"/>
         <element name="EventList" positionX="-63" positionY="-18" width="128" height="330"/>
@@ -95,5 +107,8 @@
         <element name="UserList" positionX="27" positionY="171" width="128" height="135"/>
         <element name="VenueCategories" positionX="-18" positionY="126" width="128" height="60"/>
         <element name="VenueList" positionX="-54" positionY="108" width="128" height="165"/>
+        <element name="AddictionVenue" positionX="-18" positionY="126" width="128" height="75"/>
+        <element name="AddictionArtist" positionX="-9" positionY="135" width="128" height="75"/>
+        <element name="AddictionOrganization" positionX="0" positionY="144" width="128" height="75"/>
     </elements>
 </model>

@@ -106,7 +106,6 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             
             let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
             var event = eventInfo![indexPath.row]
-            println("Display: here are my events \(event)")
             
             //println("Begin of code")
             cell.ExploreImage.contentMode = UIViewContentMode.ScaleToFill
@@ -148,7 +147,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             
             
             var temp: NSMutableArray = NSMutableArray()
-            temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Like!")
+            temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Like")
             cell.leftUtilityButtons = temp as [AnyObject]
             
             
@@ -175,7 +174,6 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             
             let venueInfo = FetchData(context: managedObjectContext).fetchVenues()
             let venue = venueInfo![indexPath.row]
-            println("Display: here are my venues \(venue)")
             
             //println("Begin of code")
             cell.venueImage.contentMode = UIViewContentMode.ScaleToFill
@@ -320,41 +318,58 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         
     }
     
-
-
     
     //Swipe Cells Actions
     func swipeableTableViewCell( cell : SWTableViewCell!,didTriggerLeftUtilityButtonWithIndex index:NSInteger){
         
         switch(index){
         case 0:
-            //map
-            //self.performSegueWithIdentifier("GoToMap", sender: self)
-//            let userInfo = FetchData(context: managedObjectContext).fetchUserInfo()
-//            println(userInfo!)
-            
-            
-            println("Like clicked")
+            //Like
             
             var cellIndexPath = self.exploreTableView.indexPathForCell(cell)
+            var selectedCell = self.exploreTableView.cellForRowAtIndexPath(cellIndexPath!) as! EventTableViewCell
             
-            if (GlobalVariables.selectedDisplay == "Event") {
-                var selectedCell = self.exploreTableView.cellForRowAtIndexPath(cellIndexPath!) as! EventTableViewCell
-                GlobalVariables.eventSelected = selectedCell.circTitle.text!
+            // Check if user is logged in
+            if GlobalVariables.loggedIn == true {
                 
-                let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
-                for event in eventInfo!{
-                    if event.eventName == GlobalVariables.eventSelected{
+                let user = FetchData(context: managedObjectContext).fetchUserInfo()![0].userName
+                
+                //When Event is selected
+                if (GlobalVariables.selectedDisplay == "Event") {
+                    
+                    GlobalVariables.eventSelected = selectedCell.circTitle.text!
+                    
+                    let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
+                    for event in eventInfo!{
                         
-                        let add = Addiction(eventId: event.eventID, userId: "Hahaha")
-                        SaveData(context: managedObjectContext).saveAddiction(add)
-                        
-                        println("Getting Addicted with event id \(event.eventID)")
+                        if event.eventName == GlobalVariables.eventSelected {
+                            
+                            //Like and Unlike
+                            if(cell.leftUtilityButtons[0].titleLabel!!.text! == "Unlike"){
+                                
+                                DeleteData(context: managedObjectContext).deleteAddictionsEvent(event.eventID, deleteUser: user)
+                                println("Removed from addiction(event) \(event.eventID)")
+                                println("REMOVED")
+                                var temp: NSMutableArray = NSMutableArray()
+                                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Like")
+                                cell.leftUtilityButtons = temp as [AnyObject]
+                                
+                            }
+                            else{
+                                
+                                let addEvent = AddictionEvent(eventId: event.eventID, userId: user)
+                                SaveData(context: managedObjectContext).saveAddictionEvent(addEvent)
+                                println("Getting Addicted with event id \(event.eventID)")
+                                println("ADDICTED")
+                                var temp: NSMutableArray = NSMutableArray()
+                                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Unlike")
+                                cell.leftUtilityButtons = temp as [AnyObject]
+                                
+                            }
+                        }
                     }
-                
                 }
             }
-            
             
             
             break
@@ -376,7 +391,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             println("Displaying Addictions from the local database")
             let addictionInfo = FetchData(context: managedObjectContext).fetchAddictions()
             for addict in addictionInfo!{
-                println("the addicted id is\(addict.eventID)\n the user is \(addict.userID)")
+                println("the addicted id is \(addict.eventID)\nthe user is \(addict.userID)")
             }
             
             break
@@ -387,7 +402,6 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             
             var selectedCell = self.exploreTableView.cellForRowAtIndexPath(cellIndexPath!) as! EventTableViewCell
             
-        
             GlobalVariables.eventSelected = selectedCell.circTitle.text!
             
             self.performSegueWithIdentifier("GoToMoreInfo", sender: self)

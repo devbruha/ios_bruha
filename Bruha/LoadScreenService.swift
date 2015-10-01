@@ -24,6 +24,14 @@ class LoadScreenService {
         
         println("Retrieve All")
         
+        if(FetchData(context: managedObjectContext).fetchUserInfo() != nil){
+            
+            GlobalVariables.loggedIn = true
+        }
+        else{
+            GlobalVariables.loggedIn = false
+        }
+        
         retrieveEventCategories()
         
         retrieveEvents()

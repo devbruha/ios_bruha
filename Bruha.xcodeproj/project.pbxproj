@@ -107,8 +107,14 @@
 		45FA05C11B5D6FCC004AD819 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05C01B5D6FCC004AD819 /* LoginService.swift */; };
 		45FA05C41B5D7000004AD819 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05C31B5D7000004AD819 /* User.swift */; };
 		45FA05C61B5D7D9E004AD819 /* UserDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05C51B5D7D9E004AD819 /* UserDBModel.swift */; };
-		A58A3A211BB9780800601749 /* AddictionDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58A3A201BB9780800601749 /* AddictionDBModel.swift */; };
-		A58A3A261BB980B200601749 /* Addiction.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58A3A251BB980B200601749 /* Addiction.swift */; };
+		A58A3A211BB9780800601749 /* AddictionEventDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58A3A201BB9780800601749 /* AddictionEventDBModel.swift */; };
+		A58A3A261BB980B200601749 /* AddictionEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58A3A251BB980B200601749 /* AddictionEvent.swift */; };
+		A5D90DFC1BBDD1A600537F72 /* AddictionArtistDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D90DFB1BBDD1A600537F72 /* AddictionArtistDBModel.swift */; };
+		A5D90DFE1BBDD22000537F72 /* AddictionOrganizationDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D90DFD1BBDD22000537F72 /* AddictionOrganizationDBModel.swift */; };
+		A5D90E001BBDD28700537F72 /* AddictionVenueDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D90DFF1BBDD28700537F72 /* AddictionVenueDBModel.swift */; };
+		A5D90E021BBDD60300537F72 /* AddictionArtist.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D90E011BBDD60300537F72 /* AddictionArtist.swift */; };
+		A5D90E041BBDD72000537F72 /* AddictionOrganization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D90E031BBDD72000537F72 /* AddictionOrganization.swift */; };
+		A5D90E061BBDD79300537F72 /* AddictionVenue.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D90E051BBDD79300537F72 /* AddictionVenue.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -229,8 +235,14 @@
 		45FA05C51B5D7D9E004AD819 /* UserDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDBModel.swift; sourceTree = "<group>"; };
 		4C40848564A9A9ABD06E1BFE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6624944801305D440270EA9D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
-		A58A3A201BB9780800601749 /* AddictionDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddictionDBModel.swift; sourceTree = "<group>"; };
-		A58A3A251BB980B200601749 /* Addiction.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Addiction.swift; sourceTree = "<group>"; };
+		A58A3A201BB9780800601749 /* AddictionEventDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddictionEventDBModel.swift; sourceTree = "<group>"; };
+		A58A3A251BB980B200601749 /* AddictionEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddictionEvent.swift; sourceTree = "<group>"; };
+		A5D90DFB1BBDD1A600537F72 /* AddictionArtistDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddictionArtistDBModel.swift; sourceTree = "<group>"; };
+		A5D90DFD1BBDD22000537F72 /* AddictionOrganizationDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddictionOrganizationDBModel.swift; sourceTree = "<group>"; };
+		A5D90DFF1BBDD28700537F72 /* AddictionVenueDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddictionVenueDBModel.swift; sourceTree = "<group>"; };
+		A5D90E011BBDD60300537F72 /* AddictionArtist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddictionArtist.swift; sourceTree = "<group>"; };
+		A5D90E031BBDD72000537F72 /* AddictionOrganization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddictionOrganization.swift; sourceTree = "<group>"; };
+		A5D90E051BBDD79300537F72 /* AddictionVenue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddictionVenue.swift; sourceTree = "<group>"; };
 		CCB1783DB671A2F9EF9B679A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -438,7 +450,10 @@
 			isa = PBXGroup;
 			children = (
 				45FA05C21B5D6FDD004AD819 /* LocalDB */,
-				A58A3A251BB980B200601749 /* Addiction.swift */,
+				A5D90E011BBDD60300537F72 /* AddictionArtist.swift */,
+				A58A3A251BB980B200601749 /* AddictionEvent.swift */,
+				A5D90E031BBDD72000537F72 /* AddictionOrganization.swift */,
+				A5D90E051BBDD79300537F72 /* AddictionVenue.swift */,
 				45FA058C1B5D4188004AD819 /* Event.swift */,
 				45FA058E1B5D4188004AD819 /* Venue.swift */,
 				45FA058F1B5D4188004AD819 /* Artist.swift */,
@@ -507,7 +522,10 @@
 				45FA05941B5D4188004AD819 /* OrganizationDBModel.swift */,
 				45FA05C51B5D7D9E004AD819 /* UserDBModel.swift */,
 				45C0F5F81B7BBE780041A1C8 /* EventSubCategoryDBModel.swift */,
-				A58A3A201BB9780800601749 /* AddictionDBModel.swift */,
+				A5D90DFB1BBDD1A600537F72 /* AddictionArtistDBModel.swift */,
+				A58A3A201BB9780800601749 /* AddictionEventDBModel.swift */,
+				A5D90DFD1BBDD22000537F72 /* AddictionOrganizationDBModel.swift */,
+				A5D90DFF1BBDD28700537F72 /* AddictionVenueDBModel.swift */,
 			);
 			name = LocalDB;
 			sourceTree = "<group>";
@@ -684,10 +702,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				A58A3A211BB9780800601749 /* AddictionDBModel.swift in Sources */,
+				A58A3A211BB9780800601749 /* AddictionEventDBModel.swift in Sources */,
+				A5D90E041BBDD72000537F72 /* AddictionOrganization.swift in Sources */,
 				45FA05A91B5D4190004AD819 /* OrganizationService.swift in Sources */,
 				181EB6161B714B7600B9295E /* WeekHeaderView.swift in Sources */,
 				45FA05A81B5D4190004AD819 /* ArtistService.swift in Sources */,
+				A5D90E061BBDD79300537F72 /* AddictionVenue.swift in Sources */,
 				45FA05A61B5D4190004AD819 /* VenueService.swift in Sources */,
 				18A2A11B1B728241005E1DCB /* CalendarViewController.swift in Sources */,
 				45FA05C41B5D7000004AD819 /* User.swift in Sources */,
@@ -722,6 +742,7 @@
 				452BC0CE1B791260003E7142 /* OrganizationTableViewCell.swift in Sources */,
 				45FA05991B5D4188004AD819 /* Organization.swift in Sources */,
 				45FA05AD1B5D4196004AD819 /* FetchData.swift in Sources */,
+				A5D90E001BBDD28700537F72 /* AddictionVenueDBModel.swift in Sources */,
 				45FA059D1B5D4188004AD819 /* OrganizationDBModel.swift in Sources */,
 				45FA059B1B5D4188004AD819 /* GlobalVariables.swift in Sources */,
 				45FA05A51B5D4190004AD819 /* NetworkOperation.swift in Sources */,
@@ -742,10 +763,13 @@
 				45FA05981B5D4188004AD819 /* Artist.swift in Sources */,
 				45D8986F1B5E89E6003ED862 /* RegisterService.swift in Sources */,
 				45FA05A41B5D4190004AD819 /* EventService.swift in Sources */,
+				A5D90DFE1BBDD22000537F72 /* AddictionOrganizationDBModel.swift in Sources */,
 				45C6D5B71B851A5A00EE4A05 /* VenueCategoriesDBModel.swift in Sources */,
-				A58A3A261BB980B200601749 /* Addiction.swift in Sources */,
+				A58A3A261BB980B200601749 /* AddictionEvent.swift in Sources */,
+				A5D90E021BBDD60300537F72 /* AddictionArtist.swift in Sources */,
 				45C93C661B86225900F60D9D /* OrganizationCategoryListService.swift in Sources */,
 				181EB6121B714B7600B9295E /* MonthCollectionCell.swift in Sources */,
+				A5D90DFC1BBDD1A600537F72 /* AddictionArtistDBModel.swift in Sources */,
 				45C93C621B8621C100F60D9D /* VenueCategoryListService.swift in Sources */,
 				1872E9EF1B7D258E0099AA36 /* ExplorePanelViewTableViewCell.swift in Sources */,
 				45C6D5BC1B851ABC00EE4A05 /* OrganizationCategoriesDBModel.swift in Sources */,
