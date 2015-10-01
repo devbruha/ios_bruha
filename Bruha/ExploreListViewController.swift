@@ -370,6 +370,9 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                     }
                 }
             }
+            else{
+                println("Please login first before getting addicted")
+            }
             
             
             break
