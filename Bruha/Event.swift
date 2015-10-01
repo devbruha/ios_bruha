@@ -147,7 +147,6 @@ struct Event {
         subCategoryID = eventDictionary["sub_category_id"] as! [String]
         
         var tempUrl = eventDictionary["image_link"] as! String
-        
         posterUrl = "http://www.bruha.com/WorkingWebsite/\(tempUrl)"
     }
 }

@@ -7,11 +7,12 @@
 //
 
 import UIKit
+import CoreData
 
-class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPDragDelegate, ARSPVisibilityStateDelegate{
+class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPDragDelegate, ARSPVisibilityStateDelegate {
     
     @IBOutlet weak var exploreTableView: UITableView!
-    
+
     
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
@@ -61,9 +62,12 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
+        
+        //println("This is global variable on clicking \(GlobalVariables.selectedDisplay)")
         switch (GlobalVariables.selectedDisplay){
             case "Event":
                 let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
+                
                 return (eventInfo?.count)!
             case "Venue":
                 let venueInfo = FetchData(context: managedObjectContext).fetchVenues()
@@ -98,10 +102,11 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 
                 cell = NSBundle.mainBundle().loadNibNamed("EventTableViewCell", owner: self, options: nil)[0] as! EventTableViewCell;
             }
-            
+
             
             let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
-            let event = eventInfo![indexPath.row]
+            var event = eventInfo![indexPath.row]
+            println("Display: here are my events \(event)")
             
             //println("Begin of code")
             cell.ExploreImage.contentMode = UIViewContentMode.ScaleToFill
@@ -112,8 +117,9 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                         //println("Finished downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
                         cell.ExploreImage.image = UIImage(data: data!)
                     }
+                    
                 }
-
+               
             }
             //println("End of code. The image will continue downloading in the background and it will be loaded when it ends.")
             //Synchronously:
@@ -169,6 +175,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             
             let venueInfo = FetchData(context: managedObjectContext).fetchVenues()
             let venue = venueInfo![indexPath.row]
+            println("Display: here are my venues \(venue)")
             
             //println("Begin of code")
             cell.venueImage.contentMode = UIViewContentMode.ScaleToFill
@@ -289,6 +296,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Like")
             cell.leftUtilityButtons = temp as [AnyObject]
             
+            
             var temp2: NSMutableArray = NSMutableArray()
             temp2.sw_addUtilityButtonWithColor(UIColor.grayColor(), title: "Map")
             temp2.sw_addUtilityButtonWithColor(UIColor.orangeColor(), title: "More Info")
@@ -312,6 +320,9 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         
     }
     
+
+
+    
     //Swipe Cells Actions
     func swipeableTableViewCell( cell : SWTableViewCell!,didTriggerLeftUtilityButtonWithIndex index:NSInteger){
         
@@ -319,6 +330,33 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         case 0:
             //map
             //self.performSegueWithIdentifier("GoToMap", sender: self)
+//            let userInfo = FetchData(context: managedObjectContext).fetchUserInfo()
+//            println(userInfo!)
+            
+            
+            println("Like clicked")
+            
+            var cellIndexPath = self.exploreTableView.indexPathForCell(cell)
+            
+            if (GlobalVariables.selectedDisplay == "Event") {
+                var selectedCell = self.exploreTableView.cellForRowAtIndexPath(cellIndexPath!) as! EventTableViewCell
+                GlobalVariables.eventSelected = selectedCell.circTitle.text!
+                
+                let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
+                for event in eventInfo!{
+                    if event.eventName == GlobalVariables.eventSelected{
+                        
+                        let add = Addiction(eventId: event.eventID, userId: "Hahaha")
+                        SaveData(context: managedObjectContext).saveAddiction(add)
+                        
+                        println("Getting Addicted with event id \(event.eventID)")
+                    }
+                
+                }
+            }
+            
+            
+            
             break
         case 1:
             break
@@ -335,6 +373,12 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             break
         case 1:
             //Ticket
+            println("Displaying Addictions from the local database")
+            let addictionInfo = FetchData(context: managedObjectContext).fetchAddictions()
+            for addict in addictionInfo!{
+                println("the addicted id is\(addict.eventID)\n the user is \(addict.userID)")
+            }
+            
             break
         case 2:
             //More info
@@ -343,6 +387,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             
             var selectedCell = self.exploreTableView.cellForRowAtIndexPath(cellIndexPath!) as! EventTableViewCell
             
+        
             GlobalVariables.eventSelected = selectedCell.circTitle.text!
             
             self.performSegueWithIdentifier("GoToMoreInfo", sender: self)
