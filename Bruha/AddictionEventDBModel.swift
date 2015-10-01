@@ -9,7 +9,7 @@
 import Foundation
 import CoreData
 
-class AddictionDBModel: NSManagedObject {
+class AddictionEventDBModel: NSManagedObject {
 
     @NSManaged var userID: String
     @NSManaged var eventID: String

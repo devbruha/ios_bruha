@@ -1,8 +1,8 @@
 //
-//  Addition.swift
+//  AddictionVenue.swift
 //  Bruha
 //
-//  Created by Zhuoheng Wu on 2015-09-28.
+//  Created by Zhuoheng Wu on 2015-10-01.
 //  Copyright (c) 2015 Bruha. All rights reserved.
 //
 
@@ -10,25 +10,25 @@ import Foundation
 
 // Custom object model
 
-struct Addiction {
+struct AddictionVenue {
     let userID: String
-    let eventID: String
+    let venueID: String
     
-    init(fetchResults: AddictionDBModel) {
+    init(fetchResults: AddictionEventDBModel) {
         userID = fetchResults.userID
-        eventID = fetchResults.eventID
+        venueID = fetchResults.eventID
         
     }
     
     init (addictionDictionary: [String: AnyObject]) {
         userID = addictionDictionary["user_id"] as! String
-        eventID = addictionDictionary["event_id"] as! String
+        venueID = addictionDictionary["artist_id"] as! String
         
     }
     
-    init (eventId: String, userId: String) {
+    init (venueId: String, userId: String) {
         userID = userId
-        eventID = eventId
+        venueID = venueId
         
     }
     

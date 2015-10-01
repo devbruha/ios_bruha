@@ -235,9 +235,9 @@ class DeleteData {
     }
     
     func deleteAddictions() {
-        let fetchRequest = NSFetchRequest(entityName: "AddictionList")
+        let fetchRequest = NSFetchRequest(entityName: "AddictionEvent")
         fetchRequest.includesPropertyValues = false // Only fetch the managedObjectID (not the full object structure)
-        if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [AddictionDBModel] {
+        if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [AddictionEventDBModel] {
             
             for result in fetchResults {
                 managedObjectContext!.deleteObject(result)
@@ -254,4 +254,38 @@ class DeleteData {
         }
 
     }
+    
+    func deleteAddictionsEvent(deleteItem: String, deleteUser: String) {
+        
+        let fetchRequest = NSFetchRequest(entityName: "AddictionEvent")
+        fetchRequest.includesPropertyValues = false // Only fetch the managedObjectID (not the full object structure)
+        if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [AddictionEventDBModel] {
+            
+            for result in fetchResults {
+                
+                if (result.eventID == deleteItem){
+                    if(result.userID == deleteUser){
+                        managedObjectContext!.deleteObject(result)
+                    }
+                }
+                /*
+                while result == deleteItem || result == deleteUser {
+                    managedObjectContext!.deleteObject(result)
+                }
+*/
+                
+            }
+            
+        }
+        
+        var err: NSError?
+        if !managedObjectContext!.save(&err) {
+            println("deleteData - Error : \(err!.localizedDescription)")
+            abort()
+        } else {
+            println("deleteData - Success - AddictionsEvent")
+        }
+
+    }
+    
 }

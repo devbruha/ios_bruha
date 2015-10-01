@@ -8,7 +8,7 @@
 
 import UIKit
 
-class LoginViewController: UIViewController {
+class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var username: UITextField!
     @IBOutlet weak var password: UITextField!
@@ -82,13 +82,16 @@ class LoginViewController: UIViewController {
                                 let acceptAction = UIAlertAction(title: "OK", style: .Default) { (_) -> Void in
                                 self.performSegueWithIdentifier("ProceedToDashBoard", sender: self) // Replace SomeSegue with your segue identifier (name)
                                     
-                                    GlobalVariables.loggedIn = true
                                 }
                                 
                                 alertController.addAction(acceptAction)
                                 
+                                
+                                
                                 self.presentViewController(alertController, animated: true, completion: nil)
                             }
+                        
+                            GlobalVariables.loggedIn = true
                         }
                             
                         else{
@@ -119,7 +122,21 @@ class LoginViewController: UIViewController {
             alert.show()
         }
     }
-
+    
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        self.view.endEditing(true)
+        //super.touchesBegan(touches, withEvent: event)
+    }
+    
+//    func textFieldShouldReturn(textField:UITextField) -> Bool {
+//        
+//        username.resignFirstResponder()
+//        password.resignFirstResponder()
+//        
+//        return true
+//        
+//    }
+    
     /*
     // MARK: - Navigation
 

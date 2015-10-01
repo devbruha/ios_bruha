@@ -263,32 +263,13 @@ class SaveData {
         println("User Save")
     }
     
-//    func saveAddiction(AddictionList: [Addiction]) {
-//        let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
-//        
-//        let en = NSEntityDescription.entityForName("AddictionList", inManagedObjectContext: managedObjectContext!)
-//        
-//        for addiction in AddictionList {
-//            
-//            var newItem = AddictionDBModel(entity:en!, insertIntoManagedObjectContext: managedObjectContext!)
-//
-//            newItem.eventID = addiction.eventID
-//            newItem.userID = addiction.userID
-//        
-//            managedObjectContext!.save(nil)
-//        
-//        }
-//        println("Addiction Save")
-//
-//    }
-    
-    func saveAddiction(addiction: Addiction) {
+    func saveAddictionEvent(addiction: AddictionEvent) {
         let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
-        let en = NSEntityDescription.entityForName("AddictionList", inManagedObjectContext: managedObjectContext!)
+        let en = NSEntityDescription.entityForName("AddictionEvent", inManagedObjectContext: managedObjectContext!)
         
             
-            var newItem = AddictionDBModel(entity:en!, insertIntoManagedObjectContext: managedObjectContext!)
+            var newItem = AddictionEventDBModel(entity:en!, insertIntoManagedObjectContext: managedObjectContext!)
             
             newItem.eventID = addiction.eventID
             newItem.userID = addiction.userID
