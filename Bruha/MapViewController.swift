@@ -112,46 +112,75 @@ class MapViewController: UIViewController,CLLocationManagerDelegate, GMSMapViewD
         //println("Panel Controller was dragged")
     }
     
+    func scaleToSize(markerIcon: UIImage, scaledToSize: CGSize) -> UIImage {
+        UIGraphicsBeginImageContext(scaledToSize)
+        markerIcon.drawInRect(CGRectMake(0, 0, scaledToSize.width, scaledToSize.height))
+        let scaledIcon = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return scaledIcon
+    }
+    
     func generateMarkers(){
         for event in displayedEvents{
+            let markerIcon = UIImage(named: event.primaryCategory)
+            let scaledToSize: CGSize = CGSize(width: 30, height: 30)
+            let scaledIcon: UIImage?
             
             var eventMarker: GMSMarker! = GMSMarker()
             
             eventMarker.title = event.eventName
             eventMarker.position = CLLocationCoordinate2D(latitude: event.eventLatitude,longitude: event.eventLongitude)
-            eventMarker.icon = UIImage(named: event.primaryCategory)
+            
+            if let icon = markerIcon {
+                scaledIcon = scaleToSize(markerIcon!, scaledToSize: scaledToSize)
+            } else {
+                scaledIcon = nil
+            }
+            eventMarker.icon = scaledIcon
             
             eventMarkers.append(eventMarker)
         }
         
         
         
+        
         for venue in displayedVenues{
+            let markerIcon = UIImage(named: venue.primaryCategory)
+            let scaledToSize: CGSize = CGSize(width: 30, height: 30)
+            let scaledIcon: UIImage?
             
             var venueMarker: GMSMarker! = GMSMarker()
             
             venueMarker.title = venue.venueName
             venueMarker.position = CLLocationCoordinate2D(latitude: venue.venueLatitude,longitude: venue.venueLongitude)
-            venueMarker.icon = UIImage(named: venue.primaryCategory)
+            
+            if let icon = markerIcon {
+                scaledIcon = scaleToSize(markerIcon!, scaledToSize: scaledToSize)
+            } else {
+                scaledIcon = nil
+            }
+            venueMarker.icon = scaledIcon
             
             venueMarkers.append(venueMarker)
         }
         
-//        for artists in displayedArtists {
-//            var artistsMarker = GMSMarker()
-//            
-//            artistsMarker.title = artists.artistName
-//            artistsMarker.position = CLLocationCoordinate2D(latitude: <#CLLocationDegrees#>, longitude: <#CLLocationDegrees#>)
-//            artistsMarker.icon = UIImage(named: artists.primaryCategory)
-//        }
-        
         for organization in displayedOrganizations{
+            let markerIcon = UIImage(named: organization.primaryCategory)
+            let scaledToSize: CGSize = CGSize(width: 30, height: 30)
+            let scaledIcon: UIImage?
             
             var organizationMarker: GMSMarker! = GMSMarker()
             
             organizationMarker.title = organization.organizationName
             organizationMarker.position = CLLocationCoordinate2D(latitude: organization.organizationLatitude,longitude: organization.organizationLongitude)
-            organizationMarker.icon = UIImage(named: organization.primaryCategory)
+            
+            if let icon = markerIcon {
+                scaledIcon = scaleToSize(markerIcon!, scaledToSize: scaledToSize)
+            } else {
+                scaledIcon = nil
+            }
+            organizationMarker.icon = scaledIcon
             
             organizationMarkers.append(organizationMarker)
         }
@@ -176,7 +205,7 @@ class MapViewController: UIViewController,CLLocationManagerDelegate, GMSMapViewD
                 marker.map = nil
             }
         }
-        
+            
         else if(GlobalVariables.selectedDisplay == "Venue"){
             
             for marker in eventMarkers{
@@ -194,7 +223,7 @@ class MapViewController: UIViewController,CLLocationManagerDelegate, GMSMapViewD
                 marker.map = nil
             }
         }
-        
+            
         else if(GlobalVariables.selectedDisplay == "Artist"){
             
             for marker in eventMarkers{
@@ -212,7 +241,7 @@ class MapViewController: UIViewController,CLLocationManagerDelegate, GMSMapViewD
                 marker.map = nil
             }
         }
-        
+            
         else if(GlobalVariables.selectedDisplay == "Organization"){
             
             for marker in eventMarkers{

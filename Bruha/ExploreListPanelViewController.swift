@@ -45,7 +45,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         let screenWidth = screenSize.width
         let screenHeight = screenSize.height
         scrollView.contentSize.width = screenWidth
-        scrollView.contentSize.height = 1000
+        scrollView.contentSize.height = 600
         
         setupPanel()
         setupCategoryLists()
@@ -269,6 +269,8 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         var height: CGFloat = uiTableView.contentSize.height
         
         constraint.constant = height
+        
+        scrollView.contentSize.height = 500 + constraint.constant
         
         println(height)
         
