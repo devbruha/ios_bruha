@@ -79,6 +79,7 @@
 		45C93C661B86225900F60D9D /* OrganizationCategoryListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45C93C651B86225900F60D9D /* OrganizationCategoryListService.swift */; };
 		45D8986F1B5E89E6003ED862 /* RegisterService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45D8986E1B5E89E6003ED862 /* RegisterService.swift */; };
 		45F8DF3C1BBD9BAF00886C3F /* UserFilters.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45F8DF3B1BBD9BAF00886C3F /* UserFilters.swift */; };
+		45F8DF3D1BBDF00E00886C3F /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 45FA05751B5D4158004AD819 /* LaunchScreen.xib */; };
 		45FA056A1B5D4158004AD819 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05691B5D4158004AD819 /* AppDelegate.swift */; };
 		45FA056D1B5D4158004AD819 /* Bruha.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 45FA056B1B5D4158004AD819 /* Bruha.xcdatamodeld */; };
 		45FA05741B5D4158004AD819 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 45FA05731B5D4158004AD819 /* Images.xcassets */; };
@@ -635,6 +636,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				45F8DF3D1BBDF00E00886C3F /* LaunchScreen.xib in Resources */,
 				1834845C1B7E347D00EA0D13 /* VenueView.xib in Resources */,
 				18CFAAAB1B876C7A00FE3976 /* SplashFour.xib in Resources */,
 				452BC0C61B79118F003E7142 /* ArtistTableViewCell.xib in Resources */,
