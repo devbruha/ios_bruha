@@ -115,6 +115,8 @@
 		A5D90E021BBDD60300537F72 /* AddictionArtist.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D90E011BBDD60300537F72 /* AddictionArtist.swift */; };
 		A5D90E041BBDD72000537F72 /* AddictionOrganization.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D90E031BBDD72000537F72 /* AddictionOrganization.swift */; };
 		A5D90E061BBDD79300537F72 /* AddictionVenue.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D90E051BBDD79300537F72 /* AddictionVenue.swift */; };
+		A5E4EAD11BBEDFE500DAEE9D /* AddictionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E4EAD01BBEDFE500DAEE9D /* AddictionListViewController.swift */; };
+		A5E4EAD31BC2BC3900DAEE9D /* AddictionListPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E4EAD21BC2BC3900DAEE9D /* AddictionListPanelViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -243,6 +245,8 @@
 		A5D90E011BBDD60300537F72 /* AddictionArtist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddictionArtist.swift; sourceTree = "<group>"; };
 		A5D90E031BBDD72000537F72 /* AddictionOrganization.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddictionOrganization.swift; sourceTree = "<group>"; };
 		A5D90E051BBDD79300537F72 /* AddictionVenue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddictionVenue.swift; sourceTree = "<group>"; };
+		A5E4EAD01BBEDFE500DAEE9D /* AddictionListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddictionListViewController.swift; sourceTree = "<group>"; };
+		A5E4EAD21BC2BC3900DAEE9D /* AddictionListPanelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddictionListPanelViewController.swift; sourceTree = "<group>"; };
 		CCB1783DB671A2F9EF9B679A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -318,6 +322,8 @@
 				1824C0861B6AA7BA0007840F /* MoreInfoViewController.swift */,
 				45FA05BB1B5D640A004AD819 /* LoginViewController.swift */,
 				45FA05BC1B5D640A004AD819 /* SignUpViewController.swift */,
+				A5E4EAD01BBEDFE500DAEE9D /* AddictionListViewController.swift */,
+				A5E4EAD21BC2BC3900DAEE9D /* AddictionListPanelViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -517,8 +523,8 @@
 			children = (
 				45C6D5BA1B851A8000EE4A05 /* CategoryLists */,
 				45FA058D1B5D4188004AD819 /* EventDBModel.swift */,
-				45FA05911B5D4188004AD819 /* VenueDBModel.swift */,
 				45FA05931B5D4188004AD819 /* ArtistDBModel.swift */,
+				45FA05911B5D4188004AD819 /* VenueDBModel.swift */,
 				45FA05941B5D4188004AD819 /* OrganizationDBModel.swift */,
 				45FA05C51B5D7D9E004AD819 /* UserDBModel.swift */,
 				45C0F5F81B7BBE780041A1C8 /* EventSubCategoryDBModel.swift */,
@@ -763,6 +769,7 @@
 				45FA05981B5D4188004AD819 /* Artist.swift in Sources */,
 				45D8986F1B5E89E6003ED862 /* RegisterService.swift in Sources */,
 				45FA05A41B5D4190004AD819 /* EventService.swift in Sources */,
+				A5E4EAD11BBEDFE500DAEE9D /* AddictionListViewController.swift in Sources */,
 				A5D90DFE1BBDD22000537F72 /* AddictionOrganizationDBModel.swift in Sources */,
 				45C6D5B71B851A5A00EE4A05 /* VenueCategoriesDBModel.swift in Sources */,
 				A58A3A261BB980B200601749 /* AddictionEvent.swift in Sources */,
@@ -774,6 +781,7 @@
 				1872E9EF1B7D258E0099AA36 /* ExplorePanelViewTableViewCell.swift in Sources */,
 				45C6D5BC1B851ABC00EE4A05 /* OrganizationCategoriesDBModel.swift in Sources */,
 				18E2DD8C1B69537D007C61B5 /* DashLine.swift in Sources */,
+				A5E4EAD31BC2BC3900DAEE9D /* AddictionListPanelViewController.swift in Sources */,
 				45C93C601B8621AE00F60D9D /* EventCategoryListService.swift in Sources */,
 				180F6DFE1B75006800F86BF5 /* MapViewController.swift in Sources */,
 				1835F8F51B5ECF3500FD1BD1 /* DashBoardViewController.swift in Sources */,

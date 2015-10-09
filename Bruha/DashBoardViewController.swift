@@ -13,6 +13,9 @@ class DashBoardViewController: UIViewController {
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var exploreImage: UIImageView!
     @IBOutlet weak var calendarImage: UIImageView!
+    @IBOutlet weak var addictionImage: UIImageView!
+    @IBOutlet weak var uploadImage: UIImageView!
+    @IBOutlet weak var ticketImage: UIImageView!
     
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
@@ -49,8 +52,24 @@ class DashBoardViewController: UIViewController {
     }
     
     func calendarImageTapped(){
-        var storyboard = UIStoryboard(name: "Main", bundle: nil)
-        self.performSegueWithIdentifier("GoToCalendar", sender: self)
+        if FetchData(context: managedObjectContext).fetchUserInfo()?.count == 0{
+            alert()
+        }
+        else{
+            var storyboard = UIStoryboard(name: "Main", bundle: nil)
+            self.performSegueWithIdentifier("GoToCalendar", sender: self)
+        }
+    }
+    
+    func addictionImageTapped(){
+        if FetchData(context: managedObjectContext).fetchUserInfo()?.count == 0{
+            alert()
+        }
+        else{
+            var storyboard = UIStoryboard(name: "Main", bundle: nil)
+            self.performSegueWithIdentifier("GoToAddiction", sender: self)
+            //GoToAddiction
+        }
     }
     
     func performImageSegue(){
@@ -65,6 +84,10 @@ class DashBoardViewController: UIViewController {
         var tgr3 = UITapGestureRecognizer(target:self , action: Selector("calendarImageTapped"))
         calendarImage.addGestureRecognizer(tgr3)
         calendarImage.userInteractionEnabled = true
+    
+        var tgr4 = UITapGestureRecognizer(target:self , action: Selector("addictionImageTapped"))
+        addictionImage.addGestureRecognizer(tgr4)
+        addictionImage.userInteractionEnabled = true
     }
 
     override func viewDidLoad() {
@@ -73,10 +96,13 @@ class DashBoardViewController: UIViewController {
         var s = FetchData(context: managedObjectContext).fetchCategories()
     
         if FetchData(context: managedObjectContext).fetchUserInfo()?.count == 0{
+            addictionImage.alpha = 0.5
+            ticketImage.alpha = 0.5
+            calendarImage.alpha = 0.5
+            uploadImage.alpha = 0.5
             profileImage.alpha = 0.5
         }
         performImageSegue()
-        
         backgroundGradient()
         
         // Do any additional setup after loading the view.

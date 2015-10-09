@@ -254,7 +254,7 @@ class FetchData {
         }
     }
     
-    func fetchAddictions() -> [AddictionEvent]?{
+    func fetchAddictionsEvent() -> [AddictionEvent]?{
         var returnedAddiction: [AddictionEvent] = [AddictionEvent]()
         
         // Create a new fetch request using the LogItem entity
@@ -277,5 +277,55 @@ class FetchData {
             return nil
         }
 
+    }
+    
+    func fetchAddictionsVenue() -> [AddictionVenue]?{
+        var returnedAddiction: [AddictionVenue] = [AddictionVenue]()
+        
+        // Create a new fetch request using the LogItem entity
+        let fetchRequest = NSFetchRequest(entityName: "AddictionVenue")
+        
+        // Execute the fetch request, and cast the results to an array of LogItem objects
+        if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [AddictionVenueDBModel] {
+            
+            for(var i = 0; i < fetchResults.count; ++i){
+                
+                var addiction = AddictionVenue(fetchResults: fetchResults[i])
+                
+                returnedAddiction.append(addiction)
+            }
+            
+            return returnedAddiction
+            
+        }
+        else{
+            return nil
+        }
+        
+    }
+    
+    func fetchAddictionsOrganization() -> [AddictionOrganization]?{
+        var returnedAddiction: [AddictionOrganization] = [AddictionOrganization]()
+        
+        // Create a new fetch request using the LogItem entity
+        let fetchRequest = NSFetchRequest(entityName: "AddictionOrganization")
+        
+        // Execute the fetch request, and cast the results to an array of LogItem objects
+        if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [AddictionOrganizationDBModel] {
+            
+            for(var i = 0; i < fetchResults.count; ++i){
+                
+                var addiction = AddictionOrganization(fetchResults: fetchResults[i])
+                
+                returnedAddiction.append(addiction)
+            }
+            
+            return returnedAddiction
+            
+        }
+        else{
+            return nil
+        }
+        
     }
 }

@@ -14,15 +14,15 @@ struct AddictionOrganization {
     let userID: String
     let organizationID: String
     
-    init(fetchResults: AddictionEventDBModel) {
+    init(fetchResults: AddictionOrganizationDBModel) {
         userID = fetchResults.userID
-        organizationID = fetchResults.eventID
+        organizationID = fetchResults.organizationID
         
     }
     
     init (addictionDictionary: [String: AnyObject]) {
         userID = addictionDictionary["user_id"] as! String
-        organizationID = addictionDictionary["artist_id"] as! String
+        organizationID = addictionDictionary["organization_id"] as! String
         
     }
     

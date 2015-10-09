@@ -63,6 +63,13 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ID" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Hml-zd-hX4">
+                                <rect key="frame" x="59" y="121" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
@@ -71,6 +78,7 @@
             </tableViewCellContentView>
             <connections>
                 <outlet property="address" destination="yLR-Uv-phh" id="jsw-bK-uaD"/>
+                <outlet property="circHiddenID" destination="Hml-zd-hX4" id="18y-FC-Ygh"/>
                 <outlet property="circOrgName" destination="q50-zi-SHY" id="7iW-Tt-7QR"/>
                 <outlet property="circView" destination="AkC-2A-QhO" id="NZ7-mL-BF3"/>
                 <outlet property="organizationDescription" destination="O2l-hu-caU" id="seC-NT-nm4"/>

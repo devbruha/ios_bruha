@@ -24,7 +24,7 @@ class LoadScreenService {
         
         println("Retrieve All")
         
-        if(FetchData(context: managedObjectContext).fetchUserInfo() != nil){
+        if(FetchData(context: managedObjectContext).fetchUserInfo()?.count != 0){
             
             GlobalVariables.loggedIn = true
         }

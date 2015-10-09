@@ -14,9 +14,9 @@ struct AddictionArtist {
     let userID: String
     let artistID: String
     
-    init(fetchResults: AddictionEventDBModel) {
+    init(fetchResults: AddictionArtistDBModel) {
         userID = fetchResults.userID
-        artistID = fetchResults.eventID
+        artistID = fetchResults.artistID
         
     }
     

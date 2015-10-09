@@ -267,7 +267,6 @@ class SaveData {
         let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
         
         let en = NSEntityDescription.entityForName("AddictionEvent", inManagedObjectContext: managedObjectContext!)
-        
             
             var newItem = AddictionEventDBModel(entity:en!, insertIntoManagedObjectContext: managedObjectContext!)
             
@@ -277,16 +276,61 @@ class SaveData {
             managedObjectContext!.save(nil)
             
         
-        println("Addiction Save")
+        println("Addiction Event Save")
+        
+    }
+    
+    func saveAddictionVenue(addiction: AddictionVenue) {
+        let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let en = NSEntityDescription.entityForName("AddictionVenue", inManagedObjectContext: managedObjectContext!)
+        
+        var newItem = AddictionVenueDBModel(entity:en!, insertIntoManagedObjectContext: managedObjectContext!)
+        
+        newItem.venueID = addiction.venueID
+        newItem.userID = addiction.userID
+        
+        managedObjectContext!.save(nil)
+        
+        
+        println("Addiction Venue Save")
+        
+    }
+    
+//    func saveAddictionArtist(addiction: AddictionArtist) {
+//        let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+//        
+//        let en = NSEntityDescription.entityForName("AddictionArtist", inManagedObjectContext: managedObjectContext!)
+//        
+//        var newItem = AddictionArtistDBModel(entity:en!, insertIntoManagedObjectContext: managedObjectContext!)
+//        
+//        newItem.artistID = addiction.artistID
+//        newItem.userID = addiction.userID
+//        
+//        managedObjectContext!.save(nil)
+//        
+//        
+//        println("Addiction Artist Save")
+//        
+//    }
+    
+    func saveAddictionOrganization(addiction: AddictionOrganization) {
+        let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let en = NSEntityDescription.entityForName("AddictionOrganization", inManagedObjectContext: managedObjectContext!)
+        
+        var newItem = AddictionOrganizationDBModel(entity:en!, insertIntoManagedObjectContext: managedObjectContext!)
+        
+        newItem.organizationID = addiction.organizationID
+        newItem.userID = addiction.userID
+        
+        managedObjectContext!.save(nil)
+        
+        
+        println("Addiction Organization Save")
         
     }
     
 }
-
-
-
-
-
-
 
 
