@@ -252,7 +252,13 @@ class SaveData {
         
         newItem.userName = user.userName
         newItem.firstName = user.userFirstName!
-        newItem.city = user.userCity!
+        
+        if let cityString = user.userCity {
+            newItem.city = cityString
+        } else {
+            newItem.city = ""
+        }
+        
         newItem.birthdate = user.userBirthdate!
         newItem.gender = user.userGender!
         newItem.email = user.userEmail!

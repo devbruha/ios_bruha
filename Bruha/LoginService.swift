@@ -67,7 +67,7 @@ struct LoginService {
                 
                 println("Retrieve User Info")
                 
-                networkOperation.downloadJSONFromURLPost("username=TestAccount") {
+                networkOperation.downloadJSONFromURLPost("username=ankurgmail") {
                     (let JSONArray) in
                     
                     if let mUser = self.userFromNSArray(JSONArray){

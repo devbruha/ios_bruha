@@ -105,6 +105,8 @@ class DashBoardViewController: UIViewController {
         performImageSegue()
         backgroundGradient()
         
+        GlobalVariables.selectedDisplay = "Event"
+        
         // Do any additional setup after loading the view.
     }
 
