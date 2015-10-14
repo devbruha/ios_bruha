@@ -101,7 +101,7 @@ struct Event {
         
         eventName = eventDictionary["event_name"] as! String
         
-        eventStartDate = eventDictionary["evnt_start_date"] as! String
+        eventStartDate = eventDictionary["event_start_date"] as! String
         eventEndDate = eventDictionary["event_end_date"] as! String
         eventStartTime = eventDictionary["event_start_time"] as! String
         eventEndTime = eventDictionary["event_end_time"] as! String
@@ -143,7 +143,14 @@ struct Event {
             eventLongitude = 0.0
         }
         
-        userID = eventDictionary["user_id"] as! String
+        if let userString = eventDictionary["user_id"] as? String{
+            
+            userID = userString
+        }
+        else{
+            
+            userID = GlobalVariables.username
+        }
         
         if let categoryName = eventDictionary["primary_category"] as? String {
             primaryCategory = categoryName

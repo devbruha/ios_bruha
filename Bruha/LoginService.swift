@@ -67,10 +67,12 @@ struct LoginService {
                 
                 println("Retrieve User Info")
                 
-                networkOperation.downloadJSONFromURLPost("username=ankurgmail") {
+                networkOperation.downloadJSONFromURLPost("username=\(self.userName)") {
                     (let JSONArray) in
                     
                     if let mUser = self.userFromNSArray(JSONArray){
+                        
+                        GlobalVariables.username = mUser.userName
                     
                         SaveData(context: self.managedObjectContext).saveUser(mUser)
                         

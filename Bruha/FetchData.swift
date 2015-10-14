@@ -242,6 +242,7 @@ class FetchData {
             for(var i = 0; i < fetchResults.count; ++i){
                 
                 var user = User(fetchResults: fetchResults[i])
+                GlobalVariables.username = user.userName
                 
                 returnedUser.append(user)
             }

@@ -11,6 +11,7 @@ import Foundation
 struct EventService {
     
     let bruhaBaseURL: NSURL? = NSURL(string: "http://bruha.com/mobile_php/RetrievePHP/")
+    let bruhaUserBaseURL: NSURL? = NSURL(string: "http://bruha.com/mobile_php/RetrieveMyPHP/")
     
     func getEvent(completion: ([Event]? -> Void)) {
         
@@ -34,13 +35,33 @@ struct EventService {
     
     func getUserEvents(completion: ([Event]? -> Void)) {
         
-        if let eventURL = NSURL(string: "UserEventList.php?", relativeToURL: bruhaBaseURL) {
+        if let eventURL = NSURL(string: "UserEventList.php?", relativeToURL: bruhaUserBaseURL) {
             
             let networkOperation = NetworkOperation(url: eventURL)
             
             dispatch_async(dispatch_get_main_queue()) {
             
-                networkOperation.downloadJSONFromURLPost("username=ankurgmail") {
+                networkOperation.downloadJSONFromURLPost("username=\(GlobalVariables.username)") {
+                    (let JSONArray) in
+                    
+                    let mEvent = self.eventFromJSONArray(JSONArray)
+                    completion(mEvent)
+                }
+            }
+        } else {
+            println("Could not construct a valid URL")
+        }
+    }
+    
+    func getAddictedEvents(completion: ([Event]? -> Void)) {
+        
+        if let eventURL = NSURL(string: "UserEventList.php?", relativeToURL: bruhaUserBaseURL) {
+            
+            let networkOperation = NetworkOperation(url: eventURL)
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                
+                networkOperation.downloadJSONFromURLPost("username=\(GlobalVariables.username)") {
                     (let JSONArray) in
                     
                     let mEvent = self.eventFromJSONArray(JSONArray)

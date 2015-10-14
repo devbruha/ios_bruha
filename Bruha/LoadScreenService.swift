@@ -27,6 +27,8 @@ class LoadScreenService {
         if(FetchData(context: managedObjectContext).fetchUserInfo()?.count != 0){
             
             GlobalVariables.loggedIn = true
+            
+            retrieveUserEvents()
         }
         else{
             GlobalVariables.loggedIn = false
@@ -61,6 +63,8 @@ class LoadScreenService {
         }
     }
     
+    
+    
     // Returns [Event] from the remote DB and saves to local
     
     func retrieveEvents() {
@@ -86,17 +90,23 @@ class LoadScreenService {
     
     func retrieveUserEvents(){
         
-        let eventService = EventService()
-        eventService.getUserEvents() {
-            (let eventList) in
-            
-            if let mEvents = eventList{
+        //dispatch_async(dispatch_get_main_queue()) {
+        
+            let eventService = EventService()
+            eventService.getUserEvents() {
+                (let eventList) in
                 
-                println(mEvents.count)
-                
-                SaveData(context: self.managedObjectContext).saveEvents(mEvents)
+                if let mEvents = eventList{
+                    
+                    println(mEvents.count)
+                    
+                    dispatch_async(dispatch_get_main_queue()) {
+                        
+                        SaveData(context: self.managedObjectContext).saveEvents(mEvents)
+                    }
+                }
             }
-        }
+        //}
     }
     
     // Returns [Venue] from the remote DB and saves to local
