@@ -163,10 +163,10 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             }
             
             cell.leftUtilityButtons = temp as [AnyObject]
-    
+            
             //println(cell.leftUtilityButtons[0].titleLabel!!.text!)
             
-
+            
             var temp2: NSMutableArray = NSMutableArray()
             temp2.sw_addUtilityButtonWithColor(UIColor.purpleColor(), title: "Buy Tickets")
             temp2.sw_addUtilityButtonWithColor(UIColor.grayColor(), title: "Map")
@@ -191,22 +191,16 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             let venueInfo = FetchData(context: managedObjectContext).fetchVenues()
             let venue = venueInfo![indexPath.row]
             
-            //println("Begin of code")
             cell.venueImage.contentMode = UIViewContentMode.ScaleToFill
             if let checkedUrl = NSURL(string:venue.posterUrl) {
-                //println("Started downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
                 getDataFromUrl(checkedUrl) { data in
                     dispatch_async(dispatch_get_main_queue()) {
-                        //println("Finished downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
                         cell.venueImage.image = UIImage(data: data!)
                     }
                 }
                 
             }
             
-            
-            //let strCarName = item[indexPath.row] as String
-            //cell.venueImage.image = UIImage(named: strCarName)
             cell.venueName.text = venue.venueName
             cell.venueDescription.text = venue.venueDescription
             cell.venueAddress.text = venue.venueAddress
@@ -255,22 +249,16 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             let artistInfo = FetchData(context: managedObjectContext).fetchArtists()
             let artist = artistInfo![indexPath.row]
             
-            //println("Begin of code")
             cell.artistsImage.contentMode = UIViewContentMode.ScaleToFill
             if let checkedUrl = NSURL(string:artist.posterUrl) {
-                //println("Started downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
                 getDataFromUrl(checkedUrl) { data in
                     dispatch_async(dispatch_get_main_queue()) {
-                        //println("Finished downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
                         cell.artistsImage.image = UIImage(data: data!)
                     }
                 }
                 
             }
             
-            
-            //let strCarName = item[indexPath.row] as String
-            //cell.artistsImage.image = UIImage(named: strCarName)
             cell.artistName.text = artist.artistName
             cell.circArtistName.text = artist.artistName
             cell.circDescription.text = artist.artistDescription
@@ -300,22 +288,16 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             let organizationInfo = FetchData(context: managedObjectContext).fetchOrganizations()
             let organization = organizationInfo![indexPath.row]
             
-            //println("Begin of code")
             cell.organizationImage.contentMode = UIViewContentMode.ScaleToFill
             if let checkedUrl = NSURL(string:organization.posterUrl) {
-                //println("Started downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
                 getDataFromUrl(checkedUrl) { data in
                     dispatch_async(dispatch_get_main_queue()) {
-                        //println("Finished downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
                         cell.organizationImage.image = UIImage(data: data!)
                     }
                 }
                 
             }
             
-            
-            //let strCarName = item[indexPath.row] as String
-            //cell.organizationImage.image = UIImage(named: strCarName)
             cell.organizationName.text = organization.organizationName
             cell.organizationDescription.text = organization.organizationDescription
             cell.address.text = organization.organizationAddress
@@ -393,7 +375,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                 cell.leftUtilityButtons = temp as [AnyObject]
                                 
                             } else if(cell.leftUtilityButtons[0].titleLabel!!.text! == "Like") {
-    
+                                
                                 let addEvent = AddictionEvent(eventId: event.eventID, userId: user)
                                 SaveData(context: managedObjectContext).saveAddictionEvent(addEvent)
                                 println("Getting Addicted with event id \(event.eventID)")
@@ -424,7 +406,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                 var temp: NSMutableArray = NSMutableArray()
                                 temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Like")
                                 cell.leftUtilityButtons = temp as [AnyObject]
-                            
+                                
                             } else if(cell.leftUtilityButtons[0].titleLabel!!.text! == "Like") {
                                 
                                 let addVenue = AddictionVenue(venueId: venue.venueID, userId: user)
@@ -438,40 +420,40 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                         }
                     }
                 }
-
-//                //When Artist is selected
-//                if (GlobalVariables.selectedDisplay == "Artist") {
-//                    println("artitititi")
-//                    var cellIndexPath = self.exploreTableView.indexPathForCell(cell)
-//                    var selectedCell = self.exploreTableView.cellForRowAtIndexPath(cellIndexPath!) as! ArtistTableViewCell
-//                    GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
-//                    
-//                    let artistInfo = FetchData(context: managedObjectContext).fetchArtists()
-//                    for artist in artistInfo!{
-//                        if artist.artistID == GlobalVariables.eventSelected {
-//                            //Like and Unlike
-//                            if(cell.leftUtilityButtons[0].titleLabel!!.text! == "Unlike"){
-//                                
-//                                DeleteData(context: managedObjectContext).deleteAddictionsArtist(artist.artistID, deleteUser: user)
-//                                println("Removed from addiction(artist) \(artist.artistID)")
-//                                println("REMOVED")
-//                                var temp: NSMutableArray = NSMutableArray()
-//                                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Like")
-//                                cell.leftUtilityButtons = temp as [AnyObject]
-//                                
-//                            } else if(cell.leftUtilityButtons[0].titleLabel!!.text! == "Like") {
-//                                
-//                                let addArtist = AddictionArtist(artistId: artist.artistID, userId: user)
-//                                SaveData(context: managedObjectContext).saveAddictionArtist(addArtist)
-//                                println("Getting Addicted with artist id \(artist.artistID)")
-//                                println("ADDICTED")
-//                                var temp: NSMutableArray = NSMutableArray()
-//                                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Unlike")
-//                                cell.leftUtilityButtons = temp as [AnyObject]
-//                            }
-//                        }
-//                    }
-//                }
+                
+                //                //When Artist is selected
+                //                if (GlobalVariables.selectedDisplay == "Artist") {
+                //                    println("artitititi")
+                //                    var cellIndexPath = self.exploreTableView.indexPathForCell(cell)
+                //                    var selectedCell = self.exploreTableView.cellForRowAtIndexPath(cellIndexPath!) as! ArtistTableViewCell
+                //                    GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
+                //
+                //                    let artistInfo = FetchData(context: managedObjectContext).fetchArtists()
+                //                    for artist in artistInfo!{
+                //                        if artist.artistID == GlobalVariables.eventSelected {
+                //                            //Like and Unlike
+                //                            if(cell.leftUtilityButtons[0].titleLabel!!.text! == "Unlike"){
+                //
+                //                                DeleteData(context: managedObjectContext).deleteAddictionsArtist(artist.artistID, deleteUser: user)
+                //                                println("Removed from addiction(artist) \(artist.artistID)")
+                //                                println("REMOVED")
+                //                                var temp: NSMutableArray = NSMutableArray()
+                //                                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Like")
+                //                                cell.leftUtilityButtons = temp as [AnyObject]
+                //
+                //                            } else if(cell.leftUtilityButtons[0].titleLabel!!.text! == "Like") {
+                //
+                //                                let addArtist = AddictionArtist(artistId: artist.artistID, userId: user)
+                //                                SaveData(context: managedObjectContext).saveAddictionArtist(addArtist)
+                //                                println("Getting Addicted with artist id \(artist.artistID)")
+                //                                println("ADDICTED")
+                //                                var temp: NSMutableArray = NSMutableArray()
+                //                                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Unlike")
+                //                                cell.leftUtilityButtons = temp as [AnyObject]
+                //                            }
+                //                        }
+                //                    }
+                //                }
                 
                 //When Oragnization is selected
                 if (GlobalVariables.selectedDisplay == "Organization") {
@@ -515,14 +497,6 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 alert.dismissWithClickedButtonIndex(-1, animated: true)
                 
             }
-<<<<<<< HEAD
-            else{
-                println("Please login first before getting addicted")
-            }
-            
-            
-=======
->>>>>>> ZhuoHeng
             break
         case 1:
             break

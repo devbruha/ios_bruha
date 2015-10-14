@@ -32,8 +32,6 @@ class LoadScreenService {
             GlobalVariables.loggedIn = false
         }
         
-        println(GlobalVariables.loggedIn)
-        
         retrieveEventCategories()
         
         retrieveEvents()

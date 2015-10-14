@@ -54,7 +54,7 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
         // Return the number of rows in the section.
         
         //println("This is global variable on clicking \(GlobalVariables.selectedDisplay)")
-        switch (GlobalVariables.selectedDisplay){
+        switch (GlobalVariables.addictedDisplay){
         case "Event":
             let addictedEventInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
             return (addictedEventInfo?.count)!
@@ -82,7 +82,7 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        switch (GlobalVariables.selectedDisplay){
+        switch (GlobalVariables.addictedDisplay){
         case "Event":
             var cell : EventTableViewCell! = tableView.dequeueReusableCellWithIdentifier("eventTableViewCell") as! EventTableViewCell!
             
@@ -235,7 +235,7 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
             let user = FetchData(context: managedObjectContext).fetchUserInfo()![0].userName
             
             //When Event is selected
-            if (GlobalVariables.selectedDisplay == "Event") {
+            if (GlobalVariables.addictedDisplay == "Event") {
                 var cellIndexPath = self.addictionTableView.indexPathForCell(cell)
                 var selectedCell = self.addictionTableView.cellForRowAtIndexPath(cellIndexPath!) as! EventTableViewCell
                 GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
@@ -258,7 +258,7 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
             }
             
             //When Venue is selected
-            if (GlobalVariables.selectedDisplay == "Venue") {
+            if (GlobalVariables.addictedDisplay == "Venue") {
                 var cellIndexPath = self.addictionTableView.indexPathForCell(cell)
                 var selectedCell = self.addictionTableView.cellForRowAtIndexPath(cellIndexPath!) as! VenueTableViewCell
                 GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
@@ -281,7 +281,7 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
             }
             
             //When Organization is selected
-            if (GlobalVariables.selectedDisplay == "Organization") {
+            if (GlobalVariables.addictedDisplay == "Organization") {
                 var cellIndexPath = self.addictionTableView.indexPathForCell(cell)
                 var selectedCell = self.addictionTableView.cellForRowAtIndexPath(cellIndexPath!) as! OrganizationTableViewCell
                 GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
@@ -318,25 +318,25 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
         
         let indexPath = tableView.indexPathForSelectedRow();
         
-        if GlobalVariables.selectedDisplay == "Event"{
+        if GlobalVariables.addictedDisplay == "Event"{
             let currentCell = tableView.cellForRowAtIndexPath(indexPath!) as! EventTableViewCell;
             currentCell.tappedView();
             tableView.deselectRowAtIndexPath(indexPath!, animated: false)
             
         }
-        if GlobalVariables.selectedDisplay == "Venue"{
+        if GlobalVariables.addictedDisplay == "Venue"{
             let currentCell = tableView.cellForRowAtIndexPath(indexPath!) as! VenueTableViewCell;
             currentCell.tappedView();
             tableView.deselectRowAtIndexPath(indexPath!, animated: false)
             
         }
-        if GlobalVariables.selectedDisplay == "Artist"{
+        if GlobalVariables.addictedDisplay == "Artist"{
             let currentCell = tableView.cellForRowAtIndexPath(indexPath!) as! ArtistTableViewCell;
             currentCell.tappedView();
             tableView.deselectRowAtIndexPath(indexPath!, animated: false)
             
         }
-        if GlobalVariables.selectedDisplay == "Organization"{
+        if GlobalVariables.addictedDisplay == "Organization"{
             let currentCell = tableView.cellForRowAtIndexPath(indexPath!) as! OrganizationTableViewCell;
             currentCell.tappedView();
             tableView.deselectRowAtIndexPath(indexPath!, animated: false)

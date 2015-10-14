@@ -1864,13 +1864,6 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-<<<<<<< HEAD
-        <segue reference="437-ER-3h7"/>
-        <segue reference="1Xm-3s-taQ"/>
-        <segue reference="5DM-Zi-tRH"/>
-=======
-        <segue reference="l7j-iI-DS2"/>
->>>>>>> ZhuoHeng
         <segue reference="J3w-Nl-jcV"/>
         <segue reference="l1y-Rt-Be8"/>
         <segue reference="5DM-Zi-tRH"/>

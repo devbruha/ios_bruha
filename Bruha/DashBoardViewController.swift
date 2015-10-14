@@ -37,7 +37,7 @@ class DashBoardViewController: UIViewController {
     }
     
     func profileImageTapped(){
-        if FetchData(context: managedObjectContext).fetchUserInfo()?.count == 0{
+        if GlobalVariables.loggedIn == false{
             alert()
         }
         else{
@@ -52,7 +52,7 @@ class DashBoardViewController: UIViewController {
     }
     
     func calendarImageTapped(){
-        if FetchData(context: managedObjectContext).fetchUserInfo()?.count == 0{
+        if GlobalVariables.loggedIn == false{
             alert()
         }
         else{
@@ -62,7 +62,7 @@ class DashBoardViewController: UIViewController {
     }
     
     func addictionImageTapped(){
-        if FetchData(context: managedObjectContext).fetchUserInfo()?.count == 0{
+        if GlobalVariables.loggedIn == false{
             alert()
         }
         else{
@@ -95,17 +95,22 @@ class DashBoardViewController: UIViewController {
         
         var s = FetchData(context: managedObjectContext).fetchCategories()
     
-        if FetchData(context: managedObjectContext).fetchUserInfo()?.count == 0{
+        if GlobalVariables.loggedIn == false{
             addictionImage.alpha = 0.5
             ticketImage.alpha = 0.5
             calendarImage.alpha = 0.5
             uploadImage.alpha = 0.5
             profileImage.alpha = 0.5
         }
+        else{
+            addictionImage.alpha = 1
+            ticketImage.alpha = 1
+            calendarImage.alpha = 1
+            uploadImage.alpha = 1
+            profileImage.alpha = 1
+        }
         performImageSegue()
         backgroundGradient()
-        
-        GlobalVariables.selectedDisplay = "Event"
         
         // Do any additional setup after loading the view.
     }

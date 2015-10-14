@@ -20,9 +20,12 @@ class GlobalVariables{
     
     static var currentFilter = FilterState.Events
     static var eventSelected = "999999"
+    
     static var selectedDisplay = "Event"
+    static var addictedDisplay = "Event"
     
     static var loggedIn = false
+    static var username = ""
     
     static var categories: Categories = Categories()
     

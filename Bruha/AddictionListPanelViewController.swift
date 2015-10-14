@@ -59,26 +59,26 @@ class AddictionListPanelViewController: UIViewController, UITableViewDelegate {
     // -------------------------------Onclick Logic-------------------------------
     func eventTapped(){
         
-        GlobalVariables.selectedDisplay = "Event"
+        GlobalVariables.addictedDisplay = "Event"
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChange", object: self)
         
     }
     
     func venueTapped(){
         
-        GlobalVariables.selectedDisplay = "Venue"
+        GlobalVariables.addictedDisplay = "Venue"
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChange", object: self)
     }
     
     func artistTapped(){
         
-        GlobalVariables.selectedDisplay = "Artist"
+        GlobalVariables.addictedDisplay = "Artist"
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChange", object: self)
     }
     
     func organizationTapped(){
         
-        GlobalVariables.selectedDisplay = "Organization"
+        GlobalVariables.addictedDisplay = "Organization"
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChange", object: self)
     }
 
