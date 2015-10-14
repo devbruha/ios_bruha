@@ -27,6 +27,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        self.username.delegate = self
+        self.password.delegate = self
+    
         var tgr = UITapGestureRecognizer(target:self , action: Selector("continueButtonTapped"))
         continueWithoutLogIn.addGestureRecognizer(tgr)
         continueWithoutLogIn.userInteractionEnabled = true
@@ -128,14 +131,11 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         //super.touchesBegan(touches, withEvent: event)
     }
     
-//    func textFieldShouldReturn(textField:UITextField) -> Bool {
-//        
-//        username.resignFirstResponder()
-//        password.resignFirstResponder()
-//        
-//        return true
-//        
-//    }
+    func textFieldShouldReturn(textField:UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+        
+    }
     
     /*
     // MARK: - Navigation

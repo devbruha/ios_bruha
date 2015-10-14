@@ -280,6 +280,29 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
                 }
             }
             
+            //When Organization is selected
+            if (GlobalVariables.selectedDisplay == "Organization") {
+                var cellIndexPath = self.addictionTableView.indexPathForCell(cell)
+                var selectedCell = self.addictionTableView.cellForRowAtIndexPath(cellIndexPath!) as! OrganizationTableViewCell
+                GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
+                
+                let addictedOrganizationInfo = FetchData(context: managedObjectContext).fetchAddictionsOrganization()
+                for addicted in addictedOrganizationInfo!{
+                    if addicted.organizationID == GlobalVariables.eventSelected {
+                        
+                        //Unlike
+                        DeleteData(context: managedObjectContext).deleteAddictionsOrgainzation(addicted.organizationID, deleteUser: user)
+                        println("Removed from addiction(organization) \(addicted.organizationID)")
+                        println("REMOVED")
+                        
+                        //Remove Cell
+                        var cellToDelete: AnyObject = cellIndexPath as! AnyObject
+                        self.addictionTableView.deleteRowsAtIndexPaths([cellToDelete], withRowAnimation: UITableViewRowAnimation.Fade)
+                        
+                    }
+                }
+            }
+            
             break
         default:
             break
