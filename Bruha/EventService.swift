@@ -40,7 +40,7 @@ struct EventService {
             
             dispatch_async(dispatch_get_main_queue()) {
             
-                networkOperation.downloadJSONFromURLPost("username=TestAccount") {
+                networkOperation.downloadJSONFromURLPost("username=ankurgmail") {
                     (let JSONArray) in
                     
                     let mEvent = self.eventFromJSONArray(JSONArray)

@@ -109,9 +109,18 @@ struct Event {
         eventID = eventDictionary["event_id"] as! String
         eventDescription = eventDictionary["event_desc"] as! String
         
-        venueID = eventDictionary["venue_id"] as! String
+        if let venueIDString = eventDictionary["venue_id"] as? String {
+            venueID = venueIDString
+        }else {
+            venueID = ""
+        }
         
-        eventVenueName = eventDictionary["venue_name"] as! String
+        if let eventVenueNameString = eventDictionary["venue_name"] as? String {
+            eventVenueName = eventVenueNameString
+        } else {
+            eventVenueName = ""
+        }
+        
         eventVenueCity = eventDictionary["location_city"] as! String
         
         if let eventLatString = eventDictionary["location_lat"] as? String {

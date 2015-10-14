@@ -29,7 +29,7 @@ class DeleteData {
         deleteVenues()
         deleteArtists()
         deleteOrganizations()
-        deleteAddictions()
+        //deleteAddictions()
     }
     
     // Deletes all entries of an object in the Core Data table
@@ -235,14 +235,40 @@ class DeleteData {
     }
     
     func deleteAddictions() {
-        let fetchRequest = NSFetchRequest(entityName: "AddictionEvent")
-        fetchRequest.includesPropertyValues = false // Only fetch the managedObjectID (not the full object structure)
-        if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [AddictionEventDBModel] {
-            
+        let fetchRequestE = NSFetchRequest(entityName: "AddictionEvent")
+        fetchRequestE.includesPropertyValues = false // Only fetch the managedObjectID (not the full object structure)
+        if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequestE, error: nil) as? [AddictionEventDBModel] {
             for result in fetchResults {
                 managedObjectContext!.deleteObject(result)
+                println("number of event")
             }
-            
+        }
+        
+        let fetchRequestV = NSFetchRequest(entityName: "AddictionVenue")
+        fetchRequestV.includesPropertyValues = false // Only fetch the managedObjectID (not the full object structure)
+        if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequestV, error: nil) as? [AddictionVenueDBModel] {
+            for result in fetchResults {
+                managedObjectContext!.deleteObject(result)
+                println("number of venue")
+            }
+        }
+        
+        let fetchRequestA = NSFetchRequest(entityName: "AddictionArtist")
+        fetchRequestA.includesPropertyValues = false // Only fetch the managedObjectID (not the full object structure)
+        if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequestA, error: nil) as? [AddictionArtistDBModel] {
+            for result in fetchResults {
+                managedObjectContext!.deleteObject(result)
+                println("number of artist")
+            }
+        }
+        
+        let fetchRequestO = NSFetchRequest(entityName: "AddictionOrganization")
+        fetchRequestO.includesPropertyValues = false // Only fetch the managedObjectID (not the full object structure)
+        if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequestO, error: nil) as? [AddictionOrganizationDBModel] {
+            for result in fetchResults {
+                managedObjectContext!.deleteObject(result)
+                println("number of organization")
+            }
         }
         
         var err: NSError?
@@ -268,14 +294,7 @@ class DeleteData {
                         managedObjectContext!.deleteObject(result)
                     }
                 }
-                /*
-                while result == deleteItem || result == deleteUser {
-                    managedObjectContext!.deleteObject(result)
-                }
-*/
-                
             }
-            
         }
         
         var err: NSError?
@@ -288,4 +307,83 @@ class DeleteData {
 
     }
     
+    func deleteAddictionsVenue(deleteItem: String, deleteUser: String) {
+        
+        let fetchRequest = NSFetchRequest(entityName: "AddictionVenue")
+        fetchRequest.includesPropertyValues = false // Only fetch the managedObjectID (not the full object structure)
+        if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [AddictionVenueDBModel] {
+            
+            for result in fetchResults {
+                
+                if (result.venueID == deleteItem){
+                    if(result.userID == deleteUser){
+                        managedObjectContext!.deleteObject(result)
+                    }
+                }
+            }
+        }
+        
+        var err: NSError?
+        if !managedObjectContext!.save(&err) {
+            println("deleteData - Error : \(err!.localizedDescription)")
+            abort()
+        } else {
+            println("deleteData - Success - AddictionsVenue")
+        }
+        
+    }
+    
+//    func deleteAddictionsArtist(deleteItem: String, deleteUser: String) {
+//        
+//        let fetchRequest = NSFetchRequest(entityName: "AddictionArtist")
+//        fetchRequest.includesPropertyValues = false // Only fetch the managedObjectID (not the full object structure)
+//        if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [AddictionArtistDBModel] {
+//            
+//            for result in fetchResults {
+//                
+//                if (result.artistID == deleteItem){
+//                    if(result.userID == deleteUser){
+//                        managedObjectContext!.deleteObject(result)
+//                    }
+//                }
+//            }
+//        }
+//        
+//        var err: NSError?
+//        if !managedObjectContext!.save(&err) {
+//            println("deleteData - Error : \(err!.localizedDescription)")
+//            abort()
+//        } else {
+//            println("deleteData - Success - AddictionsArtist")
+//        }
+//        
+//    }
+    
+    func deleteAddictionsOrgainzation(deleteItem: String, deleteUser: String) {
+        
+        let fetchRequest = NSFetchRequest(entityName: "AddictionOrgainzation")
+        fetchRequest.includesPropertyValues = false // Only fetch the managedObjectID (not the full object structure)
+        if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [AddictionOrganizationDBModel] {
+            
+            for result in fetchResults {
+                
+                if (result.organizationID == deleteItem){
+                    if(result.userID == deleteUser){
+                        managedObjectContext!.deleteObject(result)
+                    }
+                }
+            }
+        }
+        
+        var err: NSError?
+        if !managedObjectContext!.save(&err) {
+            println("deleteData - Error : \(err!.localizedDescription)")
+            abort()
+        } else {
+            println("deleteData - Success - AddictionsOrgainzation")
+        }
+        
+    }
+    
+
 }

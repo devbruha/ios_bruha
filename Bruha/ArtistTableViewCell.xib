@@ -56,6 +56,13 @@
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ID" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="2Le-KZ-N8e">
+                                <rect key="frame" x="54" y="129" width="42" height="21"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     </view>
@@ -67,6 +74,7 @@
                 <outlet property="artistsImage" destination="fli-BW-IGi" id="hzv-Ds-3T5"/>
                 <outlet property="circArtistName" destination="Efj-hm-ikq" id="3vs-yL-IJm"/>
                 <outlet property="circDescription" destination="MhW-B7-Jpm" id="0vw-fC-DWO"/>
+                <outlet property="circHiddenID" destination="2Le-KZ-N8e" id="muz-HR-XYP"/>
                 <outlet property="circView" destination="xL8-Gh-HNx" id="izE-rI-bSQ"/>
                 <outlet property="rectView" destination="vMS-fq-mgJ" id="Csz-3L-Le4"/>
             </connections>

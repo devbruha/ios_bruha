@@ -17,6 +17,7 @@ class EventTableViewCell: SWTableViewCell {
     @IBOutlet weak var circTitle: UILabel!
     @IBOutlet weak var circDate: UILabel!
     @IBOutlet weak var circPrice: UILabel!
+    @IBOutlet weak var circHiddenID: UILabel!
     
     @IBOutlet weak var rectTitle: UILabel!
     @IBOutlet weak var rectPrice: UILabel!

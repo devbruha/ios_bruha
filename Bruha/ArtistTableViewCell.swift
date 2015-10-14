@@ -16,6 +16,7 @@ class ArtistTableViewCell: SWTableViewCell {
     @IBOutlet weak var circDescription: UILabel!
     @IBOutlet weak var rectView: EventRectangleView!
     @IBOutlet weak var circView: EventCircleView!
+    @IBOutlet weak var circHiddenID: UILabel!
     
     let tapRec = UITapGestureRecognizer()
     
