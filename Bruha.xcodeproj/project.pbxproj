@@ -114,6 +114,7 @@
 		A505C0F11BCEDEDA0067CDD1 /* UserEventSubCategoryDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A505C0F01BCEDEDA0067CDD1 /* UserEventSubCategoryDBModel.swift */; };
 		A505C0F31BCEE8730067CDD1 /* UploadListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A505C0F21BCEE8730067CDD1 /* UploadListViewController.swift */; };
 		A505C0F51BCEE9860067CDD1 /* UploadListPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A505C0F41BCEE9860067CDD1 /* UploadListPanelViewController.swift */; };
+		A505C0F71BD17B910067CDD1 /* LoadScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A505C0F61BD17B910067CDD1 /* LoadScreenViewController.swift */; };
 		A58A3A211BB9780800601749 /* AddictionEventDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58A3A201BB9780800601749 /* AddictionEventDBModel.swift */; };
 		A58A3A261BB980B200601749 /* AddictionEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58A3A251BB980B200601749 /* AddictionEvent.swift */; };
 		A5D90DFC1BBDD1A600537F72 /* AddictionArtistDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D90DFB1BBDD1A600537F72 /* AddictionArtistDBModel.swift */; };
@@ -250,6 +251,7 @@
 		A505C0F01BCEDEDA0067CDD1 /* UserEventSubCategoryDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserEventSubCategoryDBModel.swift; sourceTree = "<group>"; };
 		A505C0F21BCEE8730067CDD1 /* UploadListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadListViewController.swift; sourceTree = "<group>"; };
 		A505C0F41BCEE9860067CDD1 /* UploadListPanelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadListPanelViewController.swift; sourceTree = "<group>"; };
+		A505C0F61BD17B910067CDD1 /* LoadScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadScreenViewController.swift; sourceTree = "<group>"; };
 		A58A3A201BB9780800601749 /* AddictionEventDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddictionEventDBModel.swift; sourceTree = "<group>"; };
 		A58A3A251BB980B200601749 /* AddictionEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddictionEvent.swift; sourceTree = "<group>"; };
 		A5D90DFB1BBDD1A600537F72 /* AddictionArtistDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddictionArtistDBModel.swift; sourceTree = "<group>"; };
@@ -339,6 +341,7 @@
 				A5E4EAD21BC2BC3900DAEE9D /* AddictionListPanelViewController.swift */,
 				A505C0F21BCEE8730067CDD1 /* UploadListViewController.swift */,
 				A505C0F41BCEE9860067CDD1 /* UploadListPanelViewController.swift */,
+				A505C0F61BD17B910067CDD1 /* LoadScreenViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -754,6 +757,7 @@
 				181EB61A1B714B7600B9295E /* NSDateAdditions.swift in Sources */,
 				45C6D5C01B851ADE00EE4A05 /* EventSubCategoriesDBModel.swift in Sources */,
 				181EB6141B714B7600B9295E /* DayCollectionCell.swift in Sources */,
+				A505C0F71BD17B910067CDD1 /* LoadScreenViewController.swift in Sources */,
 				181EB6101B714B7600B9295E /* CalendarView.swift in Sources */,
 				45FA05C11B5D6FCC004AD819 /* LoginService.swift in Sources */,
 				45C0F5F91B7BBE780041A1C8 /* EventSubCategoryDBModel.swift in Sources */,

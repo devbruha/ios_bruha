@@ -6,6 +6,28 @@
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
     </dependencies>
     <scenes>
+        <!--Load Screen View Controller-->
+        <scene sceneID="Fwm-4O-LvL">
+            <objects>
+                <viewController id="6Rr-W4-lJ0" userLabel="Load Screen View Controller" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="bqd-Bq-dsF"/>
+                        <viewControllerLayoutGuide type="bottom" id="HrU-7c-eyS"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="u4H-VX-P2O">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="vXZ-lx-hvc" kind="modal" identifier="toSplashView" id="lw9-PB-bZ2"/>
+                        <segue destination="zh2-4j-mHu" kind="modal" identifier="toDashBoard" id="ch4-Vq-8DI"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xx0-cp-491" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="122" y="280"/>
+        </scene>
         <!--Splash View Controller-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
@@ -2051,7 +2073,8 @@
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
     <inferredMetricsTieBreakers>
-        <segue reference="Rkq-9y-PIT"/>
+        <segue reference="ch4-Vq-8DI"/>
+        <segue reference="lw9-PB-bZ2"/>
         <segue reference="uZx-1x-ByM"/>
         <segue reference="zjY-DB-duY"/>
         <segue reference="l1y-Rt-Be8"/>
