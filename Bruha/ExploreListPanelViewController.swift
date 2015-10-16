@@ -28,16 +28,24 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
     var swipeZoneHeight: CGFloat = 74
     var visibleZoneHeight: CGFloat = 74
     
-    var backupEventCategories = [Objects(sectionName: "Event Categories", sectionObjectIDs: [], sectionObjects: [])]
+    var backupEventCategories = [EventObjects(sectionName: "Event Categories", sectionObjectIDs: [], sectionObjects: [])]
+    var backupVenueCategories: [String] = ["Venue Categories"]
+    var backupOrganizationCategories: [String] = ["Organization Categories"]
+    var backupArtistCategories: [String] = ["Artist Categories"]
+
     
-    struct Objects {
+    struct EventObjects {
         
         var sectionName : String!
         var sectionObjectIDs: [String] = []
         var sectionObjects : [String] = []
     }
     
-    var eventObject = [Objects()]
+    var eventObject = [EventObjects()]
+    var venueObject = [""]
+    var organizationObject = [""]
+    var artistObject = [""]
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -73,6 +81,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         placeholder.addSubview(calendarView)
         placeholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[calendarView]|", options: NSLayoutFormatOptions(0), metrics: nil, views: ["calendarView": calendarView]))
         placeholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[calendarView]|", options: NSLayoutFormatOptions(0), metrics: nil, views: ["calendarView": calendarView]))
+        placeholder.hidden = false
         
     }
     func didSelectDate(date: NSDate){
@@ -97,15 +106,31 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         self.eventCategoriesTable.registerClass(UITableViewCell.self, forCellReuseIdentifier: "cell")
         self.eventCategoriesTable.dataSource = self
         
-        eventObject = [Objects(sectionName: "Event Categories", sectionObjectIDs: [], sectionObjects: [])]
+        eventObject = [EventObjects(sectionName: "Event Categories", sectionObjectIDs: [], sectionObjects: [])]
         
         var f = GlobalVariables.categories
         
         for primaryCategory in f.eventCategories.keys{
             
-            var newPrimary = Objects(sectionName: primaryCategory, sectionObjectIDs: f.eventCategories[primaryCategory]![0], sectionObjects: f.eventCategories[primaryCategory]![1])
+            var newPrimary = EventObjects(sectionName: primaryCategory, sectionObjectIDs: f.eventCategories[primaryCategory]![0], sectionObjects: f.eventCategories[primaryCategory]![1])
             backupEventCategories.append(newPrimary)
         }
+        
+        for categories in f.artistCategories {
+            artistObject = ["Artist Categories"]
+            backupArtistCategories.append(categories)
+        }
+        
+        for categories in f.organizationCategories {
+            organizationObject = ["Organization Categories"]
+            backupOrganizationCategories.append(categories)
+        }
+        
+        for categories in f.venueCategories {
+            venueObject = ["Venue Categories"]
+            backupVenueCategories.append(categories)
+        }
+
     }
     
     func setupPanel(){
@@ -135,30 +160,34 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
     func eventTapped(){
         
         GlobalVariables.selectedDisplay = "Event"
-        placeholder.hidden = false
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
+        clearBackupCategories()
+
         
     }
     
     func venueTapped(){
         
         GlobalVariables.selectedDisplay = "Venue"
-        placeholder.hidden = true
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
+        clearBackupCategories()
+
     }
     
     func artistTapped(){
         
         GlobalVariables.selectedDisplay = "Artist"
-        placeholder.hidden = true
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
+        clearBackupCategories()
+
     }
     
     func organizationTapped(){
         
         GlobalVariables.selectedDisplay = "Organization"
-        placeholder.hidden = true
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
+        clearBackupCategories()
+
     }
     
     // -------------------------------Category Table Logic-------------------------------
@@ -190,17 +219,44 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
-        return eventObject[section].sectionObjects.count
+        if GlobalVariables.selectedDisplay == "Event" {
+            return eventObject[section].sectionObjects.count
+        }
+        else {
+            return 0
+        }
+
+
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
-        return eventObject.count
+        if GlobalVariables.selectedDisplay == "Event" {
+            return eventObject.count
+        } else if GlobalVariables.selectedDisplay == "Venue" {
+            return venueObject.count
+        } else if GlobalVariables.selectedDisplay == "Organization" {
+            return organizationObject.count
+        } else if GlobalVariables.selectedDisplay == "Artist" {
+            return artistObject.count
+        }
+        return 0
+
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
-        return eventObject[section].sectionName
+        if GlobalVariables.selectedDisplay == "Event" {
+            return eventObject[section].sectionName
+        } else if GlobalVariables.selectedDisplay == "Venue" {
+            return venueObject[section]
+        } else if GlobalVariables.selectedDisplay == "Organization" {
+            return organizationObject[section]
+        } else if GlobalVariables.selectedDisplay == "Artist" {
+            return artistObject[section]
+        }
+        return "ERROR"
+
     }
     
     func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -245,6 +301,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
         var headerTitle = header.textLabel.text!
         
+        
         if(headerTitle != "Event Categories"){
             
             if contains(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.keys, headerTitle){
@@ -257,41 +314,84 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         }
         
         if(index == 0){
-            
-            if(eventObject.count > 1){
-                
-                eventObject.removeAll(keepCapacity: false)
-                eventObject.append(backupEventCategories[0])
-            }
-            else{
-                
-                eventObject.removeAll(keepCapacity: false)
-                eventObject = (backupEventCategories)
-                
-                for(var i = 0 ; i < eventObject.count ; ++i){
+            switch (GlobalVariables.selectedDisplay) {
+            case "Event":
+                if(eventObject.count > 1){
                     
-                    eventObject[i].sectionObjects.removeAll(keepCapacity: false)
+                    eventObject.removeAll(keepCapacity: false)
+                    eventObject.append(backupEventCategories[0])
                 }
+                else{
+                    
+                    eventObject.removeAll(keepCapacity: false)
+                    eventObject = (backupEventCategories)
+                    
+                    for(var i = 0 ; i < eventObject.count ; ++i){
+                        
+                        eventObject[i].sectionObjects.removeAll(keepCapacity: false)
+                    }
+                }
+            case "Artist":
+                if (artistObject.count > 1){
+                    artistObject.removeAll(keepCapacity: false)
+                    artistObject.append(backupArtistCategories[0])
+                } else {
+                    artistObject.removeAll(keepCapacity: false)
+                    artistObject = backupArtistCategories
+                }
+            case "Organization":
+                if (organizationObject.count > 1){
+                    organizationObject.removeAll(keepCapacity: false)
+                    organizationObject.append(backupOrganizationCategories[0])
+                } else {
+                    organizationObject.removeAll(keepCapacity: false)
+                    organizationObject = backupOrganizationCategories
+                }
+            case "Venue":
+                if (venueObject.count > 1){
+                    venueObject.removeAll(keepCapacity: false)
+                    venueObject.append(backupVenueCategories[0])
+                } else {
+                    venueObject.removeAll(keepCapacity: false)
+                    venueObject = backupVenueCategories
+                }
+            default:
+                println("SECTION TAPPED ERROR")
+            }
+        } else {
+            switch (GlobalVariables.selectedDisplay) {
+            case "Event":
+                if (eventObject[index].sectionObjects.count == 0){
+                    
+                    eventObject[index].sectionObjects = (backupEventCategories[index].sectionObjects)
+                }
+                    
+                else{
+                    
+                    eventObject[index].sectionObjects.removeAll(keepCapacity: false)
+                }
+                
+            case "Artist":
+                break
+                
+            case "Organization":
+                break
+                
+            case "Venue":
+                break
+                
+            default:
+                break
             }
         }
-        else{
-            
-            if (eventObject[index].sectionObjects.count == 0){
-                
-                eventObject[index].sectionObjects = (backupEventCategories[index].sectionObjects)
-            }
-                
-            else{
-                
-                eventObject[index].sectionObjects.removeAll(keepCapacity: false)
-            }
-        }
+        
         
         eventCategoriesTable.reloadData()
         
         adjustHeightOfTableView(self.eventCategoriesTable, constraint: self.eventCategoryTableHeight)
         
     }
+
     
     func updateNotificationSent(){
         
@@ -299,7 +399,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
             eventCategoriesTable.alpha = 1;
         }
         else{
-            eventCategoriesTable.alpha = 0;
+            eventCategoriesTable.alpha = 1;
         }
         
     }
@@ -318,5 +418,16 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
     }
     
+    
+    func clearBackupCategories() {
+        backupEventCategories = [EventObjects(sectionName: "Event Categories", sectionObjectIDs: [], sectionObjects: [])]
+        backupVenueCategories = ["Venue Categories"]
+        backupOrganizationCategories = ["Organization Categories"]
+        backupArtistCategories = ["Artist Categories"]
+        setupCategoryLists()
+        eventCategoriesTable.reloadData()
+        adjustHeightOfTableView(eventCategoriesTable, constraint: eventCategoryTableHeight)
+    }
+
     
 }
