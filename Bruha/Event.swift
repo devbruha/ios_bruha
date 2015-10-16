@@ -81,6 +81,39 @@ struct Event {
         posterUrl = fetchResults.posterUrl
     }
     
+    init(fetchUserResults: UserEventDBModel, fetchUserSubResults: [UserEventSubCategoryDBModel]){
+        
+        eventID = fetchUserResults.id
+        eventName = fetchUserResults.name
+        eventPrice = fetchUserResults.price
+        eventDescription = fetchUserResults.eventDescription
+        eventStartDate = fetchUserResults.startDate
+        eventStartTime = fetchUserResults.startTime
+        eventEndDate = fetchUserResults.endDate
+        eventEndTime = fetchUserResults.endTime
+        
+        eventLatitude = fetchUserResults.latitude as Double
+        eventLongitude = fetchUserResults.longitude as Double
+        
+        venueID = fetchUserResults.venueID
+        eventVenueName = fetchUserResults.venueName
+        eventVenueAddress = fetchUserResults.venueAddress
+        eventVenueCity = fetchUserResults.venueCity
+        
+        userID = GlobalVariables.username
+        
+        primaryCategory = fetchUserResults.primaryCategory
+        
+        for(var j = 0; j < fetchUserSubResults.count; ++j){
+            
+            subCategoryID.append(fetchUserSubResults[j].subCategoryID as String)
+            subCategoryName.append(fetchUserSubResults[j].subCategoryName as String)
+        }
+        
+        posterUrl = fetchUserResults.posterUrl
+    }
+
+    
     init(eventDictionary: [String: AnyObject]) {
         
         var appt = eventDictionary["appt"] as? String

@@ -172,6 +172,58 @@ class SaveData {
         println("Event Save")
     }
     
+    func saveUserEvents(EventList: [Event]){
+        
+        let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let en = NSEntityDescription.entityForName("UserEventList", inManagedObjectContext: managedObjectContext!)
+        let en2 = NSEntityDescription.entityForName("UserEventSubCategoryList", inManagedObjectContext: managedObjectContext!)
+        
+        for event in EventList{
+            
+            // Creating template object that'll be pushed into the local database
+            
+            var newItem = UserEventDBModel(entity:en!, insertIntoManagedObjectContext: managedObjectContext!)
+            
+            newItem.id = event.eventID
+            newItem.name = event.eventName
+            newItem.price = event.eventPrice!
+            newItem.eventDescription = event.eventDescription
+            newItem.primaryCategory = event.primaryCategory
+            
+            for(var i = 0; i < event.subCategoryName.count; ++i){
+                
+                var newSubItem = UserEventSubCategoryDBModel(entity:en2!, insertIntoManagedObjectContext: managedObjectContext!)
+                
+                newSubItem.eventID = event.eventID
+                newSubItem.subCategoryID = event.subCategoryID[i]
+                newSubItem.subCategoryName = event.subCategoryName[i]
+                
+                managedObjectContext!.save(nil)
+            }
+            
+            newItem.startTime = event.eventStartTime
+            newItem.endTime = event.eventEndTime
+            newItem.startDate = event.eventStartDate
+            newItem.endDate = event.eventEndDate
+            newItem.latitude = event.eventLatitude
+            newItem.longitude = event.eventLongitude
+            
+            newItem.venueID = event.venueID
+            newItem.venueName = event.eventVenueName
+            newItem.venueCity = event.eventVenueCity
+            newItem.venueAddress = event.eventVenueAddress
+            
+            
+            newItem.posterUrl = event.posterUrl
+            
+            managedObjectContext!.save(nil)
+        }
+        
+        println("User Event Save")
+    }
+
+    
     func saveVenues(VenueList: [Venue]){
         
         let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
@@ -195,6 +247,31 @@ class SaveData {
         }
         
         println("Venue Save")
+    }
+    
+    func saveUserVenues(VenueList: [Venue]){
+        
+        let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let en = NSEntityDescription.entityForName("UserVenueList", inManagedObjectContext: managedObjectContext!)
+        
+        for venue in VenueList{
+            
+            var newItem = UserVenueDBModel(entity:en!, insertIntoManagedObjectContext: managedObjectContext!)
+            
+            newItem.id = venue.venueID
+            newItem.name = venue.venueName
+            newItem.venueDescription = venue.venueDescription
+            newItem.primaryCategory = venue.primaryCategory
+            newItem.address = venue.venueAddress
+            newItem.latitude = venue.venueLatitude
+            newItem.longitude = venue.venueLongitude
+            newItem.posterUrl = venue.posterUrl
+            
+            managedObjectContext!.save(nil)
+        }
+        
+        println("User Venue Save")
     }
     
     func saveArtists(ArtistList: [Artist]){
@@ -242,6 +319,31 @@ class SaveData {
         }
         
         println("Organization Save")
+    }
+    
+    func saveUserOrganizations(OrganizationList: [Organization]){
+        
+        let appDel: AppDelegate = UIApplication.sharedApplication().delegate as! AppDelegate
+        
+        let en = NSEntityDescription.entityForName("UserOrganizationList", inManagedObjectContext: managedObjectContext!)
+        
+        for organization in OrganizationList{
+            
+            var newItem = UserOrganizationDBModel(entity:en!, insertIntoManagedObjectContext: managedObjectContext!)
+            
+            newItem.id = organization.organizationID
+            newItem.name = organization.organizationName
+            newItem.orgDescription = organization.organizationDescription
+            newItem.primaryCategory = organization.primaryCategory
+            newItem.address = organization.organizationAddress
+            newItem.latitude = organization.organizationLatitude
+            newItem.longitude = organization.organizationLongitude
+            newItem.posterUrl = organization.posterUrl
+            
+            managedObjectContext!.save(nil)
+        }
+        
+        println("User Organization Save")
     }
     
     func saveUser(user: User){

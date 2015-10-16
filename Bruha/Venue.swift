@@ -36,6 +36,18 @@ struct Venue {
         posterUrl = fetchResults.posterUrl
     }
     
+    init(fetchUserResults: UserVenueDBModel){
+        
+        venueID = fetchUserResults.id
+        venueName = fetchUserResults.name
+        venueDescription = fetchUserResults.venueDescription
+        venueAddress = fetchUserResults.address
+        primaryCategory = fetchUserResults.primaryCategory
+        venueLatitude = fetchUserResults.latitude as Double
+        venueLongitude = fetchUserResults.longitude as Double
+        posterUrl = fetchUserResults.posterUrl
+    }
+    
     init(venueDictionary: [String: AnyObject]) {
         
         var appt = venueDictionary["appt"] as! String

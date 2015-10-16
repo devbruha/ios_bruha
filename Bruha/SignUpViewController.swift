@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SignUpViewController: UIViewController {
+class SignUpViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var username: UITextField!
     @IBOutlet weak var password: UITextField!
@@ -32,6 +32,9 @@ class SignUpViewController: UIViewController {
         continueWithoutRegister.addGestureRecognizer(tgr)
         continueWithoutRegister.userInteractionEnabled = true
 
+        self.username.delegate = self
+        self.password.delegate = self
+        self.emailaddress.delegate = self
         // Do any additional setup after loading the view.
     }
 
@@ -78,6 +81,7 @@ class SignUpViewController: UIViewController {
                                 
                                 let acceptAction = UIAlertAction(title: "OK", style: .Default) { (_) -> Void in
                                     self.performSegueWithIdentifier("ProceedToDashBoard", sender: self) // Replace SomeSegue with your segue identifier (name)
+                                    GlobalVariables.loggedIn = true
                                 }
                                 
                                 alertController.addAction(acceptAction)
@@ -112,6 +116,17 @@ class SignUpViewController: UIViewController {
             var alert = UIAlertView(title: "No Internet Connection", message: error, delegate: nil, cancelButtonTitle: "OK")
             alert.show()
         }
+    }
+    
+    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+        self.view.endEditing(true)
+        //super.touchesBegan(touches, withEvent: event)
+    }
+    
+    func textFieldShouldReturn(textField:UITextField) -> Bool {
+        textField.resignFirstResponder()
+        return true
+        
     }
 
     /*

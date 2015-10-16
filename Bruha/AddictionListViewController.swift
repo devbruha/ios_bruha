@@ -34,7 +34,7 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateNotification", name: "itemDisplayChange", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateNotificationAddiction", name: "itemDisplayChangeAddiction", object: nil)
         // Do any additional setup after loading the view.
     }
 
@@ -65,10 +65,10 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
             let artistInfo = FetchData(context: managedObjectContext).fetchArtists()
             return (artistInfo?.count)!
         case "Organization":
-            let organizationInfo = FetchData(context: managedObjectContext).fetchOrganizations()
+            let organizationInfo = FetchData(context: managedObjectContext).fetchAddictionsOrganization()
             return (organizationInfo?.count)!
         default:
-            let venueInfo = FetchData(context: managedObjectContext).fetchVenues()
+            let venueInfo = FetchData(context: managedObjectContext).fetchAddictionsVenue()
             return (venueInfo?.count)!
         }
         
@@ -212,6 +212,56 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
             
             return cell as VenueTableViewCell
             
+        case "Organization":
+            
+            var cell : OrganizationTableViewCell! = tableView.dequeueReusableCellWithIdentifier("organizationTableViewCell") as! OrganizationTableViewCell!
+            
+            if(cell == nil)
+            {
+                cell = NSBundle.mainBundle().loadNibNamed("OrganizationTableViewCell", owner: self, options: nil)[0] as! OrganizationTableViewCell;
+            }
+            
+            let organizationInfo = FetchData(context: managedObjectContext).fetchOrganizations()
+            let addictedOrganizationInfo = FetchData(context: managedObjectContext).fetchAddictionsOrganization()
+            
+            for organization in organizationInfo! {
+                if organization.organizationID == addictedOrganizationInfo![indexPath.row].organizationID  {
+                    //println("Begin of code")
+                    cell.organizationImage.contentMode = UIViewContentMode.ScaleToFill
+                    if let checkedUrl = NSURL(string:organization.posterUrl) {
+                        //println("Started downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
+                        getDataFromUrl(checkedUrl) { data in
+                            dispatch_async(dispatch_get_main_queue()) {
+                                //println("Finished downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
+                                cell.organizationImage.image = UIImage(data: data!)
+                            }
+                        }
+                        
+                    }
+                    
+                    cell.organizationName.text = organization.organizationName
+                    cell.organizationDescription.text = organization.organizationDescription
+                    cell.address.text = organization.organizationAddress
+                    cell.circOrgName.text = organization.organizationName
+                }
+                
+            }
+            
+            
+            var temp: NSMutableArray = NSMutableArray()
+            temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Unlike")
+            cell.leftUtilityButtons = temp as [AnyObject]
+            
+            
+            var temp2: NSMutableArray = NSMutableArray()
+            temp2.sw_addUtilityButtonWithColor(UIColor.grayColor(), title: "Map")
+            temp2.sw_addUtilityButtonWithColor(UIColor.orangeColor(), title: "More Info")
+            cell.rightUtilityButtons = nil
+            cell.rightUtilityButtons = temp2 as [AnyObject]
+            
+            
+            return cell as OrganizationTableViewCell
+            
         default:
             
             var cell : VenueTableViewCell! = tableView.dequeueReusableCellWithIdentifier("venueTableViewCell") as! VenueTableViewCell!
@@ -228,12 +278,20 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
     
     }
     
+    func deleteAddictedEvent(eventid: String) {
+        let eventService = EventService()
+        eventService.addAddictedEvents(eventid) {
+            (let deleteInfo) in
+            println(deleteInfo)
+        }
+    }
+    
     //Swipe Cells Actions
     func swipeableTableViewCell( cell : SWTableViewCell!,didTriggerLeftUtilityButtonWithIndex index:NSInteger){
         switch(index){
         case 0:
-            let user = FetchData(context: managedObjectContext).fetchUserInfo()![0].userName
-            
+            //let user = FetchData(context: managedObjectContext).fetchUserInfo()![0].userName
+            //println("the user is \(user)")
             //When Event is selected
             if (GlobalVariables.addictedDisplay == "Event") {
                 var cellIndexPath = self.addictionTableView.indexPathForCell(cell)
@@ -245,14 +303,24 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
                     if addicted.eventID == GlobalVariables.eventSelected {
                         
                         //Unlike
-                        DeleteData(context: managedObjectContext).deleteAddictionsEvent(addicted.eventID, deleteUser: user)
-                        println("Removed from addiction(event) \(addicted.eventID)")
+                        DeleteData(context: managedObjectContext).deleteAddictionsEvent(addicted.eventID, deleteUser: GlobalVariables.username)
+                        println("Removed from addiction(event) \(addicted.eventID), user \(GlobalVariables.username)")
                         println("REMOVED")
                         
+                        let eventService = EventService()
+                        
+                        eventService.removeAddictedEvents(addicted.eventID) {
+                            (let removeInfo ) in
+                            println(removeInfo!)
+                        }
+                        
+                        /*
                         //Remove Cell
                         var cellToDelete: AnyObject = cellIndexPath as! AnyObject
                         self.addictionTableView.deleteRowsAtIndexPaths([cellToDelete], withRowAnimation: UITableViewRowAnimation.Fade)
+                        */
                         
+                        addictionTableView.reloadData()
                     }
                 }
             }
@@ -268,13 +336,18 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
                     if addicted.venueID == GlobalVariables.eventSelected {
                         
                         //Unlike
-                        DeleteData(context: managedObjectContext).deleteAddictionsVenue(addicted.venueID, deleteUser: user)
-                        println("Removed from addiction(venue) \(addicted.venueID)")
+                        DeleteData(context: managedObjectContext).deleteAddictionsVenue(addicted.venueID, deleteUser: GlobalVariables.username)
+                        println("Removed from addiction(venue) \(addicted.venueID), user \(GlobalVariables.username)")
                         println("REMOVED")
                         
-                        //Remove Cell
-                        var cellToDelete: AnyObject = cellIndexPath as! AnyObject
-                        self.addictionTableView.deleteRowsAtIndexPaths([cellToDelete], withRowAnimation: UITableViewRowAnimation.Fade)
+                        let venueService = VenueService()
+                        
+                        venueService.removeAddictedVenues(addicted.venueID) {
+                            (let addInfo ) in
+                            println(addInfo!)
+                        }
+                        
+                        addictionTableView.reloadData()
                         
                     }
                 }
@@ -291,13 +364,18 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
                     if addicted.organizationID == GlobalVariables.eventSelected {
                         
                         //Unlike
-                        DeleteData(context: managedObjectContext).deleteAddictionsOrgainzation(addicted.organizationID, deleteUser: user)
-                        println("Removed from addiction(organization) \(addicted.organizationID)")
+                        DeleteData(context: managedObjectContext).deleteAddictionsOrgainzation(addicted.organizationID, deleteUser: GlobalVariables.username)
+                        println("Removed from addiction(organization) \(addicted.organizationID), user \(GlobalVariables.username)")
                         println("REMOVED")
                         
-                        //Remove Cell
-                        var cellToDelete: AnyObject = cellIndexPath as! AnyObject
-                        self.addictionTableView.deleteRowsAtIndexPaths([cellToDelete], withRowAnimation: UITableViewRowAnimation.Fade)
+                        let organizationService = OrganizationService()
+                        
+                        organizationService.removeAddictedOrganizations(addicted.organizationID) {
+                            (let removeInfo ) in
+                            println(removeInfo!)
+                        }
+                        
+                        addictionTableView.reloadData()
                         
                     }
                 }
@@ -361,7 +439,7 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
         
     }
     
-    func updateNotification(){
+    func updateNotificationAddiction(){
         
         self.addictionTableView.reloadData()
     }

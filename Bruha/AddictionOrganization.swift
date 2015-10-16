@@ -20,11 +20,11 @@ struct AddictionOrganization {
         
     }
     
-    init (addictionDictionary: [String: AnyObject]) {
-        userID = addictionDictionary["user_id"] as! String
-        organizationID = addictionDictionary["organization_id"] as! String
-        
-    }
+//    init (addictionDictionary: [String: AnyObject]) {
+//        userID = addictionDictionary["user_id"] as! String
+//        organizationID = addictionDictionary["organization_id"] as! String
+//        
+//    }
     
     init (organizationId: String, userId: String) {
         userID = userId

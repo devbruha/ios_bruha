@@ -42,6 +42,20 @@ struct Organization {
         posterUrl = fetchResults.posterUrl
     }
     
+    init(fetchUserResults: UserOrganizationDBModel){
+        
+        organizationID = fetchUserResults.id
+        organizationName = fetchUserResults.name
+        organizationDescription = fetchUserResults.orgDescription
+        organizationAddress = fetchUserResults.address
+        
+        primaryCategory = fetchUserResults.primaryCategory
+        
+        organizationLatitude = fetchUserResults.latitude as Double
+        organizationLongitude = fetchUserResults.longitude as Double
+        posterUrl = fetchUserResults.posterUrl
+    }
+    
     init(organizationDictionary: [String: AnyObject]) {
         
         //var appt = organizationDictionary["appt"] as! String

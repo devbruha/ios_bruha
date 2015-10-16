@@ -108,6 +108,12 @@
 		45FA05C11B5D6FCC004AD819 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05C01B5D6FCC004AD819 /* LoginService.swift */; };
 		45FA05C41B5D7000004AD819 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05C31B5D7000004AD819 /* User.swift */; };
 		45FA05C61B5D7D9E004AD819 /* UserDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05C51B5D7D9E004AD819 /* UserDBModel.swift */; };
+		A505C0EB1BCEDC6D0067CDD1 /* UserEventDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A505C0EA1BCEDC6D0067CDD1 /* UserEventDBModel.swift */; };
+		A505C0ED1BCEDD4B0067CDD1 /* UserVenueDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A505C0EC1BCEDD4B0067CDD1 /* UserVenueDBModel.swift */; };
+		A505C0EF1BCEDDA20067CDD1 /* UserOrganizationDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A505C0EE1BCEDDA20067CDD1 /* UserOrganizationDBModel.swift */; };
+		A505C0F11BCEDEDA0067CDD1 /* UserEventSubCategoryDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A505C0F01BCEDEDA0067CDD1 /* UserEventSubCategoryDBModel.swift */; };
+		A505C0F31BCEE8730067CDD1 /* UploadListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A505C0F21BCEE8730067CDD1 /* UploadListViewController.swift */; };
+		A505C0F51BCEE9860067CDD1 /* UploadListPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A505C0F41BCEE9860067CDD1 /* UploadListPanelViewController.swift */; };
 		A58A3A211BB9780800601749 /* AddictionEventDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58A3A201BB9780800601749 /* AddictionEventDBModel.swift */; };
 		A58A3A261BB980B200601749 /* AddictionEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58A3A251BB980B200601749 /* AddictionEvent.swift */; };
 		A5D90DFC1BBDD1A600537F72 /* AddictionArtistDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D90DFB1BBDD1A600537F72 /* AddictionArtistDBModel.swift */; };
@@ -238,6 +244,12 @@
 		45FA05C51B5D7D9E004AD819 /* UserDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDBModel.swift; sourceTree = "<group>"; };
 		4C40848564A9A9ABD06E1BFE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6624944801305D440270EA9D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		A505C0EA1BCEDC6D0067CDD1 /* UserEventDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserEventDBModel.swift; sourceTree = "<group>"; };
+		A505C0EC1BCEDD4B0067CDD1 /* UserVenueDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserVenueDBModel.swift; sourceTree = "<group>"; };
+		A505C0EE1BCEDDA20067CDD1 /* UserOrganizationDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserOrganizationDBModel.swift; sourceTree = "<group>"; };
+		A505C0F01BCEDEDA0067CDD1 /* UserEventSubCategoryDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserEventSubCategoryDBModel.swift; sourceTree = "<group>"; };
+		A505C0F21BCEE8730067CDD1 /* UploadListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadListViewController.swift; sourceTree = "<group>"; };
+		A505C0F41BCEE9860067CDD1 /* UploadListPanelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadListPanelViewController.swift; sourceTree = "<group>"; };
 		A58A3A201BB9780800601749 /* AddictionEventDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddictionEventDBModel.swift; sourceTree = "<group>"; };
 		A58A3A251BB980B200601749 /* AddictionEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddictionEvent.swift; sourceTree = "<group>"; };
 		A5D90DFB1BBDD1A600537F72 /* AddictionArtistDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddictionArtistDBModel.swift; sourceTree = "<group>"; };
@@ -325,6 +337,8 @@
 				45FA05BC1B5D640A004AD819 /* SignUpViewController.swift */,
 				A5E4EAD01BBEDFE500DAEE9D /* AddictionListViewController.swift */,
 				A5E4EAD21BC2BC3900DAEE9D /* AddictionListPanelViewController.swift */,
+				A505C0F21BCEE8730067CDD1 /* UploadListViewController.swift */,
+				A505C0F41BCEE9860067CDD1 /* UploadListPanelViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -533,6 +547,10 @@
 				A58A3A201BB9780800601749 /* AddictionEventDBModel.swift */,
 				A5D90DFD1BBDD22000537F72 /* AddictionOrganizationDBModel.swift */,
 				A5D90DFF1BBDD28700537F72 /* AddictionVenueDBModel.swift */,
+				A505C0EA1BCEDC6D0067CDD1 /* UserEventDBModel.swift */,
+				A505C0EC1BCEDD4B0067CDD1 /* UserVenueDBModel.swift */,
+				A505C0EE1BCEDDA20067CDD1 /* UserOrganizationDBModel.swift */,
+				A505C0F01BCEDEDA0067CDD1 /* UserEventSubCategoryDBModel.swift */,
 			);
 			name = LocalDB;
 			sourceTree = "<group>";
@@ -724,6 +742,7 @@
 				45FA05BD1B5D640A004AD819 /* LoginViewController.swift in Sources */,
 				181EB6181B714B7600B9295E /* CalendarLogic.swift in Sources */,
 				183484621B7E71CF00EA0D13 /* OrganizationView.swift in Sources */,
+				A505C0EF1BCEDDA20067CDD1 /* UserOrganizationDBModel.swift in Sources */,
 				1835F8F31B5EAD7200FD1BD1 /* Reachability.swift in Sources */,
 				452BC0CA1B791238003E7142 /* VenueTableViewCell.swift in Sources */,
 				4560C54B1B66D44700AB5382 /* EventCircleView.swift in Sources */,
@@ -738,6 +757,7 @@
 				181EB6101B714B7600B9295E /* CalendarView.swift in Sources */,
 				45FA05C11B5D6FCC004AD819 /* LoginService.swift in Sources */,
 				45C0F5F91B7BBE780041A1C8 /* EventSubCategoryDBModel.swift in Sources */,
+				A505C0ED1BCEDD4B0067CDD1 /* UserVenueDBModel.swift in Sources */,
 				45C938AC1B8D089800BB0D0C /* Categories.swift in Sources */,
 				1891B2821B86529B000949C8 /* SplashView.swift in Sources */,
 				4560C54F1B66D49800AB5382 /* EventTableViewCell.swift in Sources */,
@@ -751,8 +771,10 @@
 				452BC0CE1B791260003E7142 /* OrganizationTableViewCell.swift in Sources */,
 				45FA05991B5D4188004AD819 /* Organization.swift in Sources */,
 				45FA05AD1B5D4196004AD819 /* FetchData.swift in Sources */,
+				A505C0EB1BCEDC6D0067CDD1 /* UserEventDBModel.swift in Sources */,
 				A5D90E001BBDD28700537F72 /* AddictionVenueDBModel.swift in Sources */,
 				45FA059D1B5D4188004AD819 /* OrganizationDBModel.swift in Sources */,
+				A505C0F11BCEDEDA0067CDD1 /* UserEventSubCategoryDBModel.swift in Sources */,
 				45FA059B1B5D4188004AD819 /* GlobalVariables.swift in Sources */,
 				45FA05A51B5D4190004AD819 /* NetworkOperation.swift in Sources */,
 				4560C5491B66D42000AB5382 /* ExploreListViewController.swift in Sources */,
@@ -780,9 +802,11 @@
 				45C93C661B86225900F60D9D /* OrganizationCategoryListService.swift in Sources */,
 				181EB6121B714B7600B9295E /* MonthCollectionCell.swift in Sources */,
 				A5D90DFC1BBDD1A600537F72 /* AddictionArtistDBModel.swift in Sources */,
+				A505C0F31BCEE8730067CDD1 /* UploadListViewController.swift in Sources */,
 				45C93C621B8621C100F60D9D /* VenueCategoryListService.swift in Sources */,
 				45C6D5BC1B851ABC00EE4A05 /* OrganizationCategoriesDBModel.swift in Sources */,
 				18E2DD8C1B69537D007C61B5 /* DashLine.swift in Sources */,
+				A505C0F51BCEE9860067CDD1 /* UploadListPanelViewController.swift in Sources */,
 				A5E4EAD31BC2BC3900DAEE9D /* AddictionListPanelViewController.swift in Sources */,
 				45C93C601B8621AE00F60D9D /* EventCategoryListService.swift in Sources */,
 				180F6DFE1B75006800F86BF5 /* MapViewController.swift in Sources */,

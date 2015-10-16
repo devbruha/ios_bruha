@@ -1,25 +1,23 @@
 //
-//  AddictionListPanelViewController.swift
+//  UploadListPanelViewController.swift
 //  Bruha
 //
-//  Created by Zhuoheng Wu on 2015-10-05.
+//  Created by Zhuoheng Wu on 2015-10-14.
 //  Copyright (c) 2015 Bruha. All rights reserved.
 //
 
 import UIKit
 
 
-class AddictionListPanelViewController: UIViewController, UITableViewDelegate {
+class UploadListPanelViewController: UIViewController, UITableViewDelegate {
     
     @IBOutlet weak var eventSelectedB: UIButton!
-    @IBOutlet weak var venueSelectedB: UIButton!
     @IBOutlet weak var artistSelectedB: UIButton!
     @IBOutlet weak var organizationSelectedB: UIButton!
-    
+    @IBOutlet weak var venueSelectedB: UIButton!
     
     var panelControllerContainer: ARSPContainerController!
     var visibleZoneHeight: CGFloat = 74
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,7 +49,7 @@ class AddictionListPanelViewController: UIViewController, UITableViewDelegate {
         panelControllerContainer.draggingEnabled = false
         
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
@@ -59,28 +57,36 @@ class AddictionListPanelViewController: UIViewController, UITableViewDelegate {
     // -------------------------------Onclick Logic-------------------------------
     func eventTapped(){
         
-        GlobalVariables.addictedDisplay = "Event"
-        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeAddiction", object: self)
+        GlobalVariables.uploadDisplay = "Event"
+        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeUpload", object: self)
         
     }
     
     func venueTapped(){
         
-        GlobalVariables.addictedDisplay = "Venue"
-        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeAddiction", object: self)
+        GlobalVariables.uploadDisplay = "Venue"
+        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeUpload", object: self)
     }
     
     func artistTapped(){
         
-        GlobalVariables.addictedDisplay = "Artist"
-        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeAddiction", object: self)
+        GlobalVariables.uploadDisplay = "Artist"
+        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeUpload", object: self)
     }
     
     func organizationTapped(){
         
-        GlobalVariables.addictedDisplay = "Organization"
-        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeAddiction", object: self)
+        GlobalVariables.uploadDisplay = "Organization"
+        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeUpload", object: self)
     }
 
-
 }
+
+
+
+
+
+
+
+
+
