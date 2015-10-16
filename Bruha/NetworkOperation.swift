@@ -111,12 +111,13 @@ class NetworkOperation {
                 case 200:
                     
                     let json = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as? NSArray
-                    
+                    println(self.queryURL)
                     completion(json)
                     
                     //2. Create JSON object with data
                 default:
                     println("GET request not successful. HTTP status code: \(httpResponse.statusCode)")
+                    println(self.queryURL)
                 }
             }
             else{

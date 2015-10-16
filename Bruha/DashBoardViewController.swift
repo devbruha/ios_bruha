@@ -72,6 +72,16 @@ class DashBoardViewController: UIViewController {
         }
     }
     
+    func uploadImageTapped(){
+        if GlobalVariables.loggedIn == false{
+            alert()
+        }
+        else{
+            var storyboard = UIStoryboard(name: "Main", bundle: nil)
+            self.performSegueWithIdentifier("GoToUpload", sender: self)
+        }
+    }
+    
     func performImageSegue(){
         var tgr1 = UITapGestureRecognizer(target:self , action: Selector("profileImageTapped"))
         profileImage.addGestureRecognizer(tgr1)
@@ -88,6 +98,10 @@ class DashBoardViewController: UIViewController {
         var tgr4 = UITapGestureRecognizer(target:self , action: Selector("addictionImageTapped"))
         addictionImage.addGestureRecognizer(tgr4)
         addictionImage.userInteractionEnabled = true
+        
+        var tgr5 = UITapGestureRecognizer(target:self , action: Selector("uploadImageTapped"))
+        uploadImage.addGestureRecognizer(tgr5)
+        uploadImage.userInteractionEnabled = true
     }
 
     override func viewDidLoad() {

@@ -154,6 +154,39 @@ class FetchData {
         }
     }
     
+    func fetchUserEvents() -> [Event]!{
+        
+        var returnedEvent: [Event] = [Event]()
+        
+        // Create a new fetch request using the LogItem entity
+        let fetchRequest = NSFetchRequest(entityName: "UserEventList")
+        
+        // Execute the fetch request, and cast the results to an array of LogItem objects
+        if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [UserEventDBModel] {
+            
+            for(var i = 0; i < fetchResults.count; ++i){
+                
+                let fetchSubRequest = NSFetchRequest(entityName: "UserEventSubCategoryList")
+                let predicate = NSPredicate(format: "eventID == %@", fetchResults[i].id)
+                fetchSubRequest.predicate = predicate
+                
+                if let fetchSubResults = managedObjectContext!.executeFetchRequest(fetchSubRequest, error: nil) as? [UserEventSubCategoryDBModel]{
+                    
+                    
+                    var event = Event(fetchUserResults: fetchResults[i], fetchUserSubResults: fetchSubResults)
+                    returnedEvent.append(event)
+                }
+                
+            }
+            
+            return returnedEvent
+        }
+            
+        else {
+            return nil
+        }
+    }
+    
     func fetchVenues() -> [Venue]?{
         
         var returnedVenue: [Venue] = [Venue]()
@@ -167,6 +200,31 @@ class FetchData {
             for(var i = 0; i < fetchResults.count; ++i){
                 
                 var venue = Venue(fetchResults: fetchResults[i])
+                
+                returnedVenue.append(venue)
+            }
+            
+            return returnedVenue
+        }
+        else{
+            
+            return nil
+        }
+    }
+    
+    func fetchUserVenues() -> [Venue]?{
+        
+        var returnedVenue: [Venue] = [Venue]()
+        
+        // Create a new fetch request using the LogItem entity
+        let fetchRequest = NSFetchRequest(entityName: "UserVenueList")
+        
+        // Execute the fetch request, and cast the results to an array of LogItem objects
+        if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [UserVenueDBModel] {
+            
+            for(var i = 0; i < fetchResults.count; ++i){
+                
+                var venue = Venue(fetchUserResults: fetchResults[i])
                 
                 returnedVenue.append(venue)
             }
@@ -217,6 +275,31 @@ class FetchData {
             for(var i = 0; i < fetchResults.count; ++i){
                 
                 var organization = Organization(fetchResults: fetchResults[i])
+                
+                returnedOrganization.append(organization)
+            }
+            
+            return returnedOrganization
+            
+        }
+        else{
+            return nil
+        }
+    }
+    
+    func fetchUserOrganizations() -> [Organization]?{
+        
+        var returnedOrganization: [Organization] = [Organization]()
+        
+        // Create a new fetch request using the LogItem entity
+        let fetchRequest = NSFetchRequest(entityName: "UserOrganizationList")
+        
+        // Execute the fetch request, and cast the results to an array of LogItem objects
+        if let fetchResults = managedObjectContext!.executeFetchRequest(fetchRequest, error: nil) as? [UserOrganizationDBModel] {
+            
+            for(var i = 0; i < fetchResults.count; ++i){
+                
+                var organization = Organization(fetchUserResults: fetchResults[i])
                 
                 returnedOrganization.append(organization)
             }
@@ -329,4 +412,6 @@ class FetchData {
         }
         
     }
+    
+    
 }

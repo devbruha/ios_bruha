@@ -53,9 +53,9 @@ struct EventService {
         }
     }
     
-    func getAddictedEvents(completion: ([Event]? -> Void)) {
+    func getAddictedEvents(completion: ([String]? -> Void)) {
         
-        if let eventURL = NSURL(string: "UserEventList.php?", relativeToURL: bruhaUserBaseURL) {
+        if let eventURL = NSURL(string: "getUserAddiction.php?", relativeToURL: bruhaUserBaseURL) {
             
             let networkOperation = NetworkOperation(url: eventURL)
             
@@ -64,10 +64,49 @@ struct EventService {
                 networkOperation.downloadJSONFromURLPost("username=\(GlobalVariables.username)") {
                     (let JSONArray) in
                     
-                    let mEvent = self.eventFromJSONArray(JSONArray)
-                    completion(mEvent)
+                    let addictedEventIDs = self.stringArrayFromJSONArray(JSONArray)
+                    completion(addictedEventIDs)
                 }
             }
+        } else {
+            println("Could not construct a valid URL")
+        }
+    }
+    
+    func addAddictedEvents(eventid: String, completion: (NSString? -> Void)) {
+        
+        if let eventURL = NSURL(string: "EventAddictions.php?", relativeToURL: bruhaUserBaseURL) {
+            
+            let networkOperation = NetworkOperation(url: eventURL)
+            
+            dispatch_async(dispatch_get_main_queue()) {
+            //networkOperation.stringFromURLPost("username=\(self.userName)&password=\(self.passWord)") {
+                
+            networkOperation.stringFromURLPost("user_id=\(GlobalVariables.username)&event_id=\(eventid)"){
+                (let addNotice) in
+                completion(addNotice)
+            }
+            
+            }
+        } else {
+            println("Could not construct a valid URL")
+        }
+    }
+
+    
+    func removeAddictedEvents(eventid: String, completion: (NSString? -> Void)) {
+        
+        if let eventURL = NSURL(string: "deleteEventAddiction.php?", relativeToURL: bruhaUserBaseURL) {
+            
+            let networkOperation = NetworkOperation(url: eventURL)
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                networkOperation.stringFromURLPost("user_id=\(GlobalVariables.username)&event_id=\(eventid)"){
+                    (let deleteNotice) in
+                    completion(deleteNotice)
+                }
+    
+           }
         } else {
             println("Could not construct a valid URL")
         }
@@ -85,6 +124,19 @@ struct EventService {
         }
         
         return events
+    }
+    
+    func stringArrayFromJSONArray(jsonArray: NSArray?) -> [String]?{
+        
+        var stringArray = [String]()
+        
+        for item in jsonArray!{
+        
+            var eventID = item["event_id"] as! String
+            stringArray.append(eventID)
+        }
+        
+        return stringArray
     }
     
 }

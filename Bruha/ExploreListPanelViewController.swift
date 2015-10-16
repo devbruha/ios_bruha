@@ -136,7 +136,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
         GlobalVariables.selectedDisplay = "Event"
         placeholder.hidden = false
-        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChange", object: self)
+        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
         
     }
     
@@ -144,21 +144,21 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
         GlobalVariables.selectedDisplay = "Venue"
         placeholder.hidden = true
-        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChange", object: self)
+        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
     }
     
     func artistTapped(){
         
         GlobalVariables.selectedDisplay = "Artist"
         placeholder.hidden = true
-        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChange", object: self)
+        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
     }
     
     func organizationTapped(){
         
         GlobalVariables.selectedDisplay = "Organization"
         placeholder.hidden = true
-        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChange", object: self)
+        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
     }
     
     // -------------------------------Category Table Logic-------------------------------

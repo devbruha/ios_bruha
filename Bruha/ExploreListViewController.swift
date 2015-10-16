@@ -36,7 +36,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         super.viewDidLoad()
         configureView()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateNotification", name: "itemDisplayChange", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateNotificationEvent", name: "itemDisplayChangeEvent", object: nil)
         
         GlobalVariables.displayedEvents = FetchData(context: managedObjectContext).fetchEvents()!
         GlobalVariables.displayedVenues = FetchData(context: managedObjectContext).fetchVenues()!
@@ -344,6 +344,15 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         
     }
     
+        func deleteAddictedEvent(eventid: String) {
+            let eventService = EventService()
+            eventService.removeAddictedEvents(eventid) {
+                (let deleteInfo) in
+    
+                println(deleteInfo)
+            }
+        }
+    
     
     //Swipe Cells Actions
     func swipeableTableViewCell( cell : SWTableViewCell!,didTriggerLeftUtilityButtonWithIndex index:NSInteger){
@@ -370,9 +379,19 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                 DeleteData(context: managedObjectContext).deleteAddictionsEvent(event.eventID, deleteUser: user)
                                 println("Removed from addiction(event) \(event.eventID)")
                                 println("REMOVED")
+                                
+                                let eventService = EventService()
+                                
+                                eventService.removeAddictedEvents(event.eventID) {
+                                    (let removeInfo ) in
+                                    println(removeInfo!)
+                                }
+                                
                                 var temp: NSMutableArray = NSMutableArray()
                                 temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Like")
                                 cell.leftUtilityButtons = temp as [AnyObject]
+                                
+                                
                                 
                             } else if(cell.leftUtilityButtons[0].titleLabel!!.text! == "Like") {
                                 
@@ -380,9 +399,19 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                 SaveData(context: managedObjectContext).saveAddictionEvent(addEvent)
                                 println("Getting Addicted with event id \(event.eventID)")
                                 println("ADDICTED")
+                                
+                                let eventService = EventService()
+                                
+                                eventService.addAddictedEvents(event.eventID) {
+                                    (let addInfo ) in
+                                    println(addInfo!)
+                                }
+                                
                                 var temp: NSMutableArray = NSMutableArray()
                                 temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Unlike")
                                 cell.leftUtilityButtons = temp as [AnyObject]
+                                
+                                
                             }
                         }
                     }
@@ -403,6 +432,15 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                 DeleteData(context: managedObjectContext).deleteAddictionsVenue(venue.venueID, deleteUser: user)
                                 println("Removed from addiction(venue) \(venue.venueID)")
                                 println("REMOVED")
+                                
+                                let venueService = VenueService()
+                                
+                                venueService.removeAddictedVenues(venue.venueID) {
+                                    (let removeInfo ) in
+                                    println(removeInfo!)
+                                }
+
+                                
                                 var temp: NSMutableArray = NSMutableArray()
                                 temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Like")
                                 cell.leftUtilityButtons = temp as [AnyObject]
@@ -413,6 +451,14 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                 SaveData(context: managedObjectContext).saveAddictionVenue(addVenue)
                                 println("Getting Addicted with venue id \(venue.venueID)")
                                 println("ADDICTED")
+                                
+                                let venueService = VenueService()
+                                
+                                venueService.addAddictedVenues(venue.venueID) {
+                                    (let addInfo ) in
+                                    println(addInfo!)
+                                }
+                                
                                 var temp: NSMutableArray = NSMutableArray()
                                 temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Unlike")
                                 cell.leftUtilityButtons = temp as [AnyObject]
@@ -470,6 +516,14 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                 DeleteData(context: managedObjectContext).deleteAddictionsOrgainzation(organization.organizationID, deleteUser: user)
                                 println("Removed from addiction(event) \(organization.organizationID)")
                                 println("REMOVED")
+                                
+                                let organizationService = OrganizationService()
+                                
+                                organizationService.removeAddictedOrganizations(organization.organizationID) {
+                                    (let removeInfo ) in
+                                    println(removeInfo!)
+                                }
+                                
                                 var temp: NSMutableArray = NSMutableArray()
                                 temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Like")
                                 cell.leftUtilityButtons = temp as [AnyObject]
@@ -480,6 +534,14 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                 SaveData(context: managedObjectContext).saveAddictionOrganization(addOrgainzation)
                                 println("Getting Addicted with event id \(organization.organizationID)")
                                 println("ADDICTED")
+                                
+                                let organizationService = OrganizationService()
+                                
+                                organizationService.addAddictedOrganizations(organization.organizationID) {
+                                    (let addInfo ) in
+                                    println(addInfo!)
+                                }
+                                
                                 var temp: NSMutableArray = NSMutableArray()
                                 temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Unlike")
                                 cell.leftUtilityButtons = temp as [AnyObject]
@@ -589,7 +651,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         
     }
     
-    func updateNotification(){
+    func updateNotificationEvent(){
         
         self.exploreTableView.reloadData()
     }

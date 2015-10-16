@@ -23,6 +23,7 @@ class GlobalVariables{
     
     static var selectedDisplay = "Event"
     static var addictedDisplay = "Event"
+    static var uploadDisplay = "Event"
     
     static var loggedIn = false
     static var username = ""
