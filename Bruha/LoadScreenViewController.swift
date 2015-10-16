@@ -11,15 +11,26 @@ import UIKit
 
 class LoadScreenViewController: UIViewController {
     
-    
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     override func viewDidLoad() {
         super.viewDidLoad()
+     
+    }
+    
+    override func viewDidAppear(animated: Bool) {
         
         LoadScreenService(context: self.managedObjectContext).retrieveAll()
         
-        
+        if(FetchData(context: managedObjectContext).fetchUserInfo()?.count != 0) {
+            
+            self.performSegueWithIdentifier("toDashBoard", sender: self)
+            
+        } else {
+            
+            self.performSegueWithIdentifier("toSplashView", sender: self)
+            
+        }
     }
     
     
