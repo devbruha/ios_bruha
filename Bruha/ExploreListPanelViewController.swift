@@ -211,10 +211,22 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
         var headerTitle = eventCategoriesTable.headerViewForSection(indexPath.section)?.textLabel.text!
         
-        GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].append("\(selectedCell.textLabel!.tag)")
-        GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![1].append("\(selectedCell.textLabel!.text!)")
+        var primaryCategory = headerTitle
+        var subCategoryID = String(selectedCell.textLabel!.tag)
+        var subCategoryName = selectedCell.textLabel!.text!
         
-        println(selectedCell.textLabel?.tag)
+        if contains(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0], subCategoryID){
+            
+            GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].append(subCategoryID)
+            GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![1].append(subCategoryName)
+        }
+        else{
+            
+            GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].append(subCategoryID)
+            GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![1].append(subCategoryName)
+        }
+        
+        println(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.keys.array)
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -310,7 +322,12 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
             }
             else{
                 GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle] = [[String]]()
+                GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle] = [[],[]]
             }
+        }
+        else{
+            
+            GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.removeAll(keepCapacity: false)
         }
         
         if(index == 0){
