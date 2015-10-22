@@ -22,7 +22,6 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
     func configureView(){
         
         let screenSize: CGRect = UIScreen.mainScreen().bounds
-        let screenWidth = screenSize.width
         let screenHeight = screenSize.height
         uploadTableView.rowHeight = screenHeight * 0.33
         self.panelControllerContainer = self.parentViewController as! ARSPContainerController
@@ -57,7 +56,7 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
         switch (GlobalVariables.uploadDisplay){
         case "Event":
             let userEventInfo = FetchData(context: managedObjectContext).fetchUserEvents()
-            println("this is THE USER EVEVEVENTTTSSSSS", userEventInfo)
+            print("this is THE USER EVEVEVENTTTSSSSS", userEventInfo)
             return (userEventInfo?.count)!
         case "Venue":
             let userVenueInfo = FetchData(context: managedObjectContext).fetchUserVenues()
@@ -93,7 +92,7 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
             }
             
             let eventInfo = FetchData(context: managedObjectContext).fetchUserEvents()
-            var event = eventInfo![indexPath.row]
+            let event = eventInfo![indexPath.row]
             
             //println("Begin of code")
             cell.ExploreImage.contentMode = UIViewContentMode.ScaleToFill
@@ -135,12 +134,12 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
             // Configure the cell...
 
             
-            var temp: NSMutableArray = NSMutableArray()
+            let temp: NSMutableArray = NSMutableArray()
             temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Delete")
             cell.leftUtilityButtons = temp as [AnyObject]
             
             
-            var temp2: NSMutableArray = NSMutableArray()
+            let temp2: NSMutableArray = NSMutableArray()
             temp2.sw_addUtilityButtonWithColor(UIColor.purpleColor(), title: "Buy Tickets")
             temp2.sw_addUtilityButtonWithColor(UIColor.grayColor(), title: "Map")
             temp2.sw_addUtilityButtonWithColor(UIColor.orangeColor(), title: "More Info")
@@ -182,12 +181,12 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
             cell.circHiddenID.text = venue.venueID
             
             
-            var temp: NSMutableArray = NSMutableArray()
+            let temp: NSMutableArray = NSMutableArray()
             temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Delete")
             cell.leftUtilityButtons = temp as [AnyObject]
             
             
-            var temp2: NSMutableArray = NSMutableArray()
+            let temp2: NSMutableArray = NSMutableArray()
             temp2.sw_addUtilityButtonWithColor(UIColor.purpleColor(), title: "Buy Tickets")
             temp2.sw_addUtilityButtonWithColor(UIColor.grayColor(), title: "Map")
             temp2.sw_addUtilityButtonWithColor(UIColor.orangeColor(), title: "More Info")
@@ -229,12 +228,12 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
             cell.address.text = organization.organizationAddress
             cell.circOrgName.text = organization.organizationName
             
-            var temp: NSMutableArray = NSMutableArray()
+            let temp: NSMutableArray = NSMutableArray()
             temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Delete")
             cell.leftUtilityButtons = temp as [AnyObject]
             
             
-            var temp2: NSMutableArray = NSMutableArray()
+            let temp2: NSMutableArray = NSMutableArray()
             temp2.sw_addUtilityButtonWithColor(UIColor.purpleColor(), title: "Buy Tickets")
             temp2.sw_addUtilityButtonWithColor(UIColor.grayColor(), title: "Map")
             temp2.sw_addUtilityButtonWithColor(UIColor.orangeColor(), title: "More Info")
@@ -278,7 +277,7 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
     //Circ and Rect View changing
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        let indexPath = tableView.indexPathForSelectedRow();
+        let indexPath = tableView.indexPathForSelectedRow;
         
         if GlobalVariables.uploadDisplay == "Event"{
             let currentCell = tableView.cellForRowAtIndexPath(indexPath!) as! EventTableViewCell;
@@ -309,7 +308,7 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
     func panelControllerChangedVisibilityState(state:ARSPVisibilityState) {
         //TODO
         if(panelControllerContainer.shouldOverlapMainViewController){
-            if (state.value == ARSPVisibilityStateMaximized.value) {
+            if (state.rawValue == ARSPVisibilityStateMaximized.rawValue) {
                 self.panelControllerContainer.panelViewController.view.alpha = 1
             }else{
                 self.panelControllerContainer.panelViewController.view.alpha = 1

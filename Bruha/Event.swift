@@ -117,10 +117,10 @@ struct Event {
     init(eventDictionary: [String: AnyObject]) {
         
         var appt = eventDictionary["appt"] as? String
-        var streetNo = eventDictionary["street_no"] as? String
-        var streetName = eventDictionary["street_name"] as? String
+        let streetNo = eventDictionary["street_no"] as? String
+        let streetName = eventDictionary["street_name"] as? String
         var city = eventDictionary["location_city"] as? String
-        var postalCode = eventDictionary["postal_code"] as? String
+        let postalCode = eventDictionary["postal_code"] as? String
         
         eventVenueAddress = "\(streetNo!) \(streetName!), \(postalCode!)"
         
@@ -189,13 +189,13 @@ struct Event {
             primaryCategory = categoryName
         } else {
             primaryCategory = ""
-            println(primaryCategory)
+            print(primaryCategory)
         }
         
         subCategoryName = eventDictionary["sub_category"] as! [String]
         subCategoryID = eventDictionary["sub_category_id"] as! [String]
         
-        var tempUrl = eventDictionary["image_link"] as! String
+        let tempUrl = eventDictionary["image_link"] as! String
         posterUrl = "http://www.bruha.com/WorkingWebsite/\(tempUrl)"
     }
 }

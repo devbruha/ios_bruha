@@ -51,10 +51,10 @@ struct Venue {
     init(venueDictionary: [String: AnyObject]) {
         
         var appt = venueDictionary["appt"] as! String
-        var streetNo = venueDictionary["street_no"] as! String
-        var streetName = venueDictionary["street_name"] as! String
+        let streetNo = venueDictionary["street_no"] as! String
+        let streetName = venueDictionary["street_name"] as! String
         var city = venueDictionary["location_city"] as! String
-        var postalCode = venueDictionary["postal_code"] as! String
+        let postalCode = venueDictionary["postal_code"] as! String
         
         venueAddress = "\(streetNo) \(streetName), \(postalCode)"
         venueID = venueDictionary["venue_id"] as! String
@@ -86,10 +86,10 @@ struct Venue {
             primaryCategory = categoryName
         } else {
             primaryCategory = ""
-            println(primaryCategory)
+            print(primaryCategory)
         }
         
-        var tempUrl = venueDictionary["media"] as! String
+        let tempUrl = venueDictionary["media"] as! String
         
         posterUrl = "http://www.bruha.com/WorkingWebsite/\(tempUrl)"
         

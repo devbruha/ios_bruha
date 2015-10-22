@@ -12,7 +12,7 @@ import UIKit
 class EventRectangleView: UIView {
 
     override func drawRect(rect: CGRect) {
-        var path = UIBezierPath(rect: rect)
+        let path = UIBezierPath(rect: rect)
         UIColor.blueColor().colorWithAlphaComponent(0.5).setFill()
         path.fill()
         

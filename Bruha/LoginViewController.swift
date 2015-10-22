@@ -20,7 +20,6 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     var error: String = "true"
     
     func continueButtonTapped(){
-        var storyboard = UIStoryboard(name: "Main", bundle: nil)
         self.performSegueWithIdentifier("ProceedToDashBoard", sender: self)
     }
 
@@ -30,7 +29,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         self.username.delegate = self
         self.password.delegate = self
     
-        var tgr = UITapGestureRecognizer(target:self , action: Selector("continueButtonTapped"))
+        let tgr = UITapGestureRecognizer(target:self , action: Selector("continueButtonTapped"))
         continueWithoutLogIn.addGestureRecognizer(tgr)
         continueWithoutLogIn.userInteractionEnabled = true
 
@@ -47,8 +46,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func loginPress(sender: AnyObject) {
         
-        var username:String = self.username.text!
-        var password:String = self.password.text!
+        let username:String = self.username.text!
+        let password:String = self.password.text!
         
         error = "true"
         
@@ -102,7 +101,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                             
                             dispatch_async(dispatch_get_main_queue()) {
                                 
-                                var alert = UIAlertView(title: "Login Failed", message: "Password and username pair does not exists", delegate: nil, cancelButtonTitle: "OK")
+                                let alert = UIAlertView(title: "Login Failed", message: "Password and username pair does not exists", delegate: nil, cancelButtonTitle: "OK")
                                 alert.show()
                             }
                         }
@@ -110,24 +109,24 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
 
                 }
                 else{
-                    var alert = UIAlertView(title: "Password Error", message: error, delegate: nil, cancelButtonTitle: "OK")
+                    let alert = UIAlertView(title: "Password Error", message: error, delegate: nil, cancelButtonTitle: "OK")
                     alert.show()
                 }
             }
                 
             else{
-                var alert = UIAlertView(title: "Username Error", message: error, delegate: nil, cancelButtonTitle: "OK")
+                let alert = UIAlertView(title: "Username Error", message: error, delegate: nil, cancelButtonTitle: "OK")
                 alert.show()
             }
         }
             
         else{
-            var alert = UIAlertView(title: "No Internet Connection", message: error, delegate: nil, cancelButtonTitle: "OK")
+            let alert = UIAlertView(title: "No Internet Connection", message: error, delegate: nil, cancelButtonTitle: "OK")
             alert.show()
         }
     }
     
-    override func touchesBegan(touches: Set<NSObject>, withEvent event: UIEvent) {
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)
         //super.touchesBegan(touches, withEvent: event)
     }

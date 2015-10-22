@@ -28,7 +28,7 @@ struct OrganizationService {
                 }
             }
         } else {
-            println("Could not construct a valid URL")
+            print("Could not construct a valid URL")
         }
     }
     
@@ -47,7 +47,7 @@ struct OrganizationService {
                 }
             }
         } else {
-            println("Could not construct a valid URL")
+            print("Could not construct a valid URL")
         }
     }
     
@@ -66,7 +66,7 @@ struct OrganizationService {
                 }
             }
         } else {
-            println("Could not construct a valid URL")
+            print("Could not construct a valid URL")
         }
     }
     
@@ -86,7 +86,7 @@ struct OrganizationService {
                 
             }
         } else {
-            println("Could not construct a valid URL")
+            print("Could not construct a valid URL")
         }
     }
     
@@ -105,7 +105,7 @@ struct OrganizationService {
                 
             }
         } else {
-            println("Could not construct a valid URL")
+            print("Could not construct a valid URL")
         }
     }
     
@@ -129,7 +129,7 @@ struct OrganizationService {
         
         for item in jsonArray!{
             
-            var organizationID = item["organization_id"] as! String
+            let organizationID = item["organization_id"] as! String
             stringArray.append(organizationID)
         }
         

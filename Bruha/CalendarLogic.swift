@@ -51,11 +51,11 @@ class CalendarLogic: Hashable {
     
     func isVisible(date: NSDate) -> Bool {
         let internalDate = Date(date: date)
-        if contains(currentMonthDays!, internalDate) {
+        if (currentMonthDays!).contains(internalDate) {
             return true
-        } else if contains(previousMonthVisibleDays!, internalDate) {
+        } else if (previousMonthVisibleDays!).contains(internalDate) {
             return true
-        } else if contains(nextMonthVisibleDays!, internalDate) {
+        } else if (nextMonthVisibleDays!).contains(internalDate) {
             return true
         }
         return false

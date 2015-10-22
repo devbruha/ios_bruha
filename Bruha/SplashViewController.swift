@@ -37,15 +37,15 @@ class SplashViewController: UIViewController,UIScrollViewDelegate {
         //2
         self.skipButton.layer.cornerRadius = 4.0
         //3
-        var imgOne = SplashView.instanceFromNib1()
+        let imgOne = SplashView.instanceFromNib1()
         imgOne.frame = CGRectMake(0, 0, scrollViewWidth, scrollViewHeight)
-        var imgTwo = SplashView.instanceFromNib2()
+        let imgTwo = SplashView.instanceFromNib2()
         imgTwo.frame = CGRectMake(scrollViewWidth, 0,scrollViewWidth+20, scrollViewHeight+168)
-        var imgThree = SplashView.instanceFromNib3()
+        let imgThree = SplashView.instanceFromNib3()
         imgThree.frame = CGRectMake(scrollViewWidth*2, 0,scrollViewWidth+20, scrollViewHeight+168)
-        var imgFour = SplashView.instanceFromNib4()
+        let imgFour = SplashView.instanceFromNib4()
         imgFour.frame = CGRectMake(scrollViewWidth*3, 0,scrollViewWidth+20, scrollViewHeight+168)
-        var imgFive = SplashView.instanceFromNib5()
+        let imgFive = SplashView.instanceFromNib5()
         imgFive.frame = CGRectMake(scrollViewWidth*4, 0,scrollViewWidth+20, scrollViewHeight+168)
         
         self.scrollView.addSubview(imgOne)
@@ -69,8 +69,8 @@ class SplashViewController: UIViewController,UIScrollViewDelegate {
     }
     func scrollViewDidEndDecelerating(scrollView: UIScrollView){
         // Test the offset and calculate the current page after scrolling ends
-        var pageWidth:CGFloat = CGRectGetWidth(scrollView.frame)
-        var currentPage:CGFloat = floor((scrollView.contentOffset.x-pageWidth/2)/pageWidth)+1
+        let pageWidth:CGFloat = CGRectGetWidth(scrollView.frame)
+        let currentPage:CGFloat = floor((scrollView.contentOffset.x-pageWidth/2)/pageWidth)+1
         // Change the indicator
         self.pageControl.currentPage = Int(currentPage)
     }

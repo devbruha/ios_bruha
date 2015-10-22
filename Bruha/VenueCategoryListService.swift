@@ -28,7 +28,7 @@ struct VenueCategoryListService {
                 }
             }
         } else {
-            println("Could not construct a valid URL")
+            print("Could not construct a valid URL")
         }
     }
     
@@ -36,15 +36,15 @@ struct VenueCategoryListService {
         
         var returnedEventCategories = Dictionary<String, [[String]]>()
         
-        var eventCategories = jsonArray["event_cat"] as! NSDictionary
+        let eventCategories = jsonArray["event_cat"] as! NSDictionary
         
-        var keyset = eventCategories.allKeys as! [String]
+        let keyset = eventCategories.allKeys as! [String]
         
         for key in keyset{
             
-            var eventSubCat = eventCategories[key] as! NSArray
+            let eventSubCat = eventCategories[key] as! NSArray
             
-            var subCatID = eventSubCat.lastObject as! [String]
+            let subCatID = eventSubCat.lastObject as! [String]
             
             var subCatNames: [String] = []
             

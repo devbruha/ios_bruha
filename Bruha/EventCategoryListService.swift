@@ -28,7 +28,7 @@ struct EventCategoryListService {
                 }
             }
         } else {
-            println("Could not construct a valid URL")
+            print("Could not construct a valid URL")
         }
     }
     
@@ -38,15 +38,15 @@ struct EventCategoryListService {
 
         var returnedEventCategories = Dictionary<String, [[String]]>()
         
-        var eventCategories = jsonArray["event_cat"] as! NSDictionary
+        let eventCategories = jsonArray["event_cat"] as! NSDictionary
         
-        var eventKeyset = eventCategories.allKeys as! [String]
+        let eventKeyset = eventCategories.allKeys as! [String]
         
         for key in eventKeyset{
             
-            var eventSubCat = eventCategories[key] as! NSArray
+            let eventSubCat = eventCategories[key] as! NSArray
             
-            var subCatID = eventSubCat.lastObject as! [String]
+            let subCatID = eventSubCat.lastObject as! [String]
             
             var subCatNames: [String] = []
             
@@ -62,7 +62,7 @@ struct EventCategoryListService {
         
         var returnedVenueCategories = [String]()
         
-        var venueCategories = jsonArray["venue_cat"] as! NSArray
+        let venueCategories = jsonArray["venue_cat"] as! NSArray
         
         for category in venueCategories{
             
@@ -73,7 +73,7 @@ struct EventCategoryListService {
         
         var returnedArtistCategories = [String]()
         
-        var artistCategories = jsonArray["artist_cat"] as! NSArray
+        let artistCategories = jsonArray["artist_cat"] as! NSArray
         
         for category in artistCategories{
             
@@ -84,14 +84,14 @@ struct EventCategoryListService {
         
         var returnedOrganizationCategories = [String]()
         
-        var organizationCategories = jsonArray["organization_cat"] as! NSArray
+        let organizationCategories = jsonArray["organization_cat"] as! NSArray
         
         for category in organizationCategories{
             
             returnedOrganizationCategories.append(category as! String)
         }
         
-        var returnedCategory = Categories(eventCategory: returnedEventCategories, venueCategory: returnedVenueCategories, artistCategory: returnedArtistCategories, organizationCategory: returnedOrganizationCategories)
+        let returnedCategory = Categories(eventCategory: returnedEventCategories, venueCategory: returnedVenueCategories, artistCategory: returnedArtistCategories, organizationCategory: returnedOrganizationCategories)
         
         return returnedCategory
     }

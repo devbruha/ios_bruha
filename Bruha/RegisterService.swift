@@ -44,7 +44,7 @@ struct RegisterService{
         }
             
         else {
-            println("Could not construct a valid URL")
+            print("Could not construct a valid URL")
         }
     }
 }

@@ -22,7 +22,7 @@ class LoadScreenService {
     
     func retrieveAll(){
         
-        println("Retrieve All")
+        print("Retrieve All")
         
         if(FetchData(context: managedObjectContext).fetchUserInfo()?.count != 0){
             
@@ -60,7 +60,7 @@ class LoadScreenService {
                 
                 if let mCategories = eventCategoryList{
                     
-                    println("Retrieve Event Categories")
+                    print("Retrieve Event Categories")
                     
                     dispatch_async(dispatch_get_main_queue()) {
                         
@@ -85,7 +85,7 @@ class LoadScreenService {
                 
                 if let mEvents = eventList{
                     
-                    println("Retrieve Events")
+                    print("Retrieve Events")
                     
                     dispatch_async(dispatch_get_main_queue()) {
                     
@@ -106,8 +106,8 @@ class LoadScreenService {
                 
                 if let mEvents = eventList{
                     
-                    println("Retrieve User Events")
-                    println(mEvents.count)
+                    print("Retrieve User Events")
+                    print(mEvents.count)
                     
                     dispatch_async(dispatch_get_main_queue()) {
                         
@@ -129,14 +129,14 @@ class LoadScreenService {
                 
                 if let mEventIDs = eventList{
                     
-                    println("Retrieve Addicted Events")
+                    print("Retrieve Addicted Events")
                     //println(mEventIDs.count)
                     
                     var addictionArray: [AddictionEvent] = []
                     
                     for eventId in mEventIDs{
                         
-                        var mAddiction: AddictionEvent = AddictionEvent(eventId: eventId, userId: GlobalVariables.username)
+                        let mAddiction: AddictionEvent = AddictionEvent(eventId: eventId, userId: GlobalVariables.username)
                         
                         addictionArray.append(mAddiction)
                     }
@@ -165,7 +165,7 @@ class LoadScreenService {
             
             if let mVenues = venueList{
                 
-                println("Retrieve Venues")
+                print("Retrieve Venues")
                 dispatch_async(dispatch_get_main_queue()) {
                 SaveData(context: self.managedObjectContext).saveVenues(mVenues)
                 }
@@ -184,7 +184,7 @@ class LoadScreenService {
                 
                 if let mVenues = venueList{
                     
-                    println("Retrieve User Venues")
+                    print("Retrieve User Venues")
                     dispatch_async(dispatch_get_main_queue()) {
                         SaveData(context: self.managedObjectContext).saveUserVenues(mVenues)
                     }
@@ -203,13 +203,13 @@ class LoadScreenService {
                 
                 if let mVenueIDs = venueList{
                     
-                    println("Retrieve Addicted Venues")
+                    print("Retrieve Addicted Venues")
                     
                     var addictionArray: [AddictionVenue] = []
                     
                     for venueId in mVenueIDs{
                         
-                        var mAddiction: AddictionVenue = AddictionVenue(venueId: venueId, userId: GlobalVariables.username)
+                        let mAddiction: AddictionVenue = AddictionVenue(venueId: venueId, userId: GlobalVariables.username)
                         
                         addictionArray.append(mAddiction)
                     }
@@ -237,7 +237,7 @@ class LoadScreenService {
             
             if let mArtists = artistList{
                 
-                println("Retrieve Artist")
+                print("Retrieve Artist")
                 dispatch_async(dispatch_get_main_queue()) {
                 SaveData(context: self.managedObjectContext).saveArtists(mArtists)
                 }
@@ -256,7 +256,7 @@ class LoadScreenService {
             
             if let mOrganizations = organizationList{
                 
-                println("Retrieve Organizations")
+                print("Retrieve Organizations")
                 dispatch_async(dispatch_get_main_queue()) {
                 SaveData(context: self.managedObjectContext).saveOrganizations(mOrganizations)
                 }
@@ -275,7 +275,7 @@ class LoadScreenService {
                 
                 if let mOrganizations = organizationList{
                     
-                    println("Retrieve User Organizations")
+                    print("Retrieve User Organizations")
                     dispatch_async(dispatch_get_main_queue()) {
                         SaveData(context: self.managedObjectContext).saveUserOrganizations(mOrganizations)
                     }
@@ -294,13 +294,13 @@ class LoadScreenService {
                 
                 if let mOrganizationIDs = organizationList{
                     
-                    println("Retrieve Addicted Organizations")
+                    print("Retrieve Addicted Organizations")
                     
                     var addictionArray: [AddictionOrganization] = []
                     
                     for organizationId in mOrganizationIDs{
                         
-                        var mAddiction: AddictionOrganization = AddictionOrganization(organizationId: organizationId, userId: GlobalVariables.username)
+                        let mAddiction: AddictionOrganization = AddictionOrganization(organizationId: organizationId, userId: GlobalVariables.username)
                         
                         addictionArray.append(mAddiction)
                     }

@@ -40,17 +40,17 @@ class NetworkOperation {
                     
                 case 200:
                     
-                    let json = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as? NSArray
+                    let json = (try? NSJSONSerialization.JSONObjectWithData(data!, options: [])) as? NSArray
                     
                     completion(json)
                     
                     //2. Create JSON object with data
                 default:
-                    println("GET request not successful. HTTP status code: \(httpResponse.statusCode)")
+                    print("GET request not successful. HTTP status code: \(httpResponse.statusCode)")
                 }
             }
             else{
-                println("Error: Not a vaild HTTP response")
+                print("Error: Not a vaild HTTP response")
             }
         }
         
@@ -59,7 +59,7 @@ class NetworkOperation {
     
     func stringFromURLPost(post: String, completion: stringCompletion){
         
-        var request = NSMutableURLRequest(URL: queryURL)
+        let request = NSMutableURLRequest(URL: queryURL)
         request.HTTPMethod = "POST"
         
         let postString = post
@@ -76,15 +76,15 @@ class NetworkOperation {
                     
                 case 200:
                     
-                    completion(NSString(data: data, encoding: NSUTF8StringEncoding))
+                    completion(NSString(data: data!, encoding: NSUTF8StringEncoding))
                     
                     //2. Create JSON object with data
                 default:
-                    println("GET request not successful. HTTP status code: \(httpResponse.statusCode)")
+                    print("GET request not successful. HTTP status code: \(httpResponse.statusCode)")
                 }
             }
             else{
-                println("Error: Not a vaild HTTP response")
+                print("Error: Not a vaild HTTP response")
             }
         }
         
@@ -93,7 +93,7 @@ class NetworkOperation {
     
     func downloadJSONFromURLPost(post: String, completion: JSONArrayCompletion){
         
-        var request = NSMutableURLRequest(URL: queryURL)
+        let request = NSMutableURLRequest(URL: queryURL)
         request.HTTPMethod = "POST"
         
         let postString = post
@@ -110,18 +110,18 @@ class NetworkOperation {
                     
                 case 200:
                     
-                    let json = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as? NSArray
-                    println(self.queryURL)
+                    let json = (try? NSJSONSerialization.JSONObjectWithData(data!, options: [])) as? NSArray
+                    print(self.queryURL)
                     completion(json)
                     
                     //2. Create JSON object with data
                 default:
-                    println("GET request not successful. HTTP status code: \(httpResponse.statusCode)")
-                    println(self.queryURL)
+                    print("GET request not successful. HTTP status code: \(httpResponse.statusCode)")
+                    print(self.queryURL)
                 }
             }
             else{
-                println("Error: Not a vaild HTTP response")
+                print("Error: Not a vaild HTTP response")
             }
         }
         
@@ -141,17 +141,17 @@ class NetworkOperation {
                     
                 case 200:
                     
-                    let json = NSJSONSerialization.JSONObjectWithData(data, options: nil, error: nil) as? NSDictionary
+                    let json = (try? NSJSONSerialization.JSONObjectWithData(data!, options: [])) as? NSDictionary
                     
                     completion(json)
                     
                     //2. Create JSON object with data
                 default:
-                    println("GET request not successful. HTTP status code: \(httpResponse.statusCode)")
+                    print("GET request not successful. HTTP status code: \(httpResponse.statusCode)")
                 }
             }
             else{
-                println("Error: Not a vaild HTTP response")
+                print("Error: Not a vaild HTTP response")
             }
         }
         

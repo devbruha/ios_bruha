@@ -18,18 +18,18 @@ class CalendarViewController: UIViewController,CalendarViewDelegate{
         let date = NSDate()
         let calendarView = CalendarView.instance(date, selectedDate: date)
         calendarView.delegate = self
-        calendarView.setTranslatesAutoresizingMaskIntoConstraints(false)
+        calendarView.translatesAutoresizingMaskIntoConstraints = false
         
         placeholder.addSubview(calendarView)
-        placeholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[calendarView]|", options: NSLayoutFormatOptions(0), metrics: nil, views: ["calendarView": calendarView]))
-        placeholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[calendarView]|", options: NSLayoutFormatOptions(0), metrics: nil, views: ["calendarView": calendarView]))    }
+        placeholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[calendarView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["calendarView": calendarView]))
+        placeholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[calendarView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["calendarView": calendarView]))    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     func didSelectDate(date: NSDate){
-        println("\(date.year)-\(date.month)-\(date.day)")
+        print("\(date.year)-\(date.month)-\(date.day)")
     }
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
@@ -43,7 +43,7 @@ class CalendarViewController: UIViewController,CalendarViewDelegate{
         return 10
     }
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) as! UITableViewCell
+        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) 
         
         // Configure the cell...
         

@@ -26,11 +26,11 @@ class CredentialCheck {
     }
     
     func usernameCheck(username:String) -> String{
-        if count(username) >= 6 && count(username) <= 20{
+        if username.characters.count >= 6 && username.characters.count <= 20{
             
-            let regex = NSRegularExpression(pattern: ".*[^A-Za-z0-9_].*", options: nil, error: nil)!
+            let regex = try! NSRegularExpression(pattern: ".*[^A-Za-z0-9_].*", options: [])
             
-            if regex.firstMatchInString(username, options: nil, range: NSMakeRange(0, count(username))) == nil{
+            if regex.firstMatchInString(username, options: [], range: NSMakeRange(0, username.characters.count)) == nil{
                 
                 return "true"
             }
@@ -48,15 +48,15 @@ class CredentialCheck {
     }
     
     func passwordCheck(password:String) -> String{
-        if count(password) >= 8 && count(password) <= 20 {
+        if password.characters.count >= 8 && password.characters.count <= 20 {
             
-            let characters = NSRegularExpression(pattern: ".*[^A-Za-z0-9_].*", options: nil, error: nil)!
+            let characters = try! NSRegularExpression(pattern: ".*[^A-Za-z0-9_].*", options: [])
             
-            if characters.firstMatchInString(password, options: nil, range: NSMakeRange(0, count(password))) == nil{
+            if characters.firstMatchInString(password, options: [], range: NSMakeRange(0, password.characters.count)) == nil{
                 
-                let capitalLetterRegEx  = NSRegularExpression(pattern: ".*[A-Z]+.*", options: nil, error: nil)!
+                let capitalLetterRegEx  = try! NSRegularExpression(pattern: ".*[A-Z]+.*", options: [])
                 
-                if capitalLetterRegEx.firstMatchInString(password, options: nil, range: NSMakeRange(0,count(password))) != nil{
+                if capitalLetterRegEx.firstMatchInString(password, options: [], range: NSMakeRange(0,password.characters.count)) != nil{
                     
                     return "true"
                 }

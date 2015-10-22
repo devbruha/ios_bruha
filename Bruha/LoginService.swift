@@ -51,13 +51,13 @@ struct LoginService {
         }
         
         else {
-            println("Could not construct a valid URL")
+            print("Could not construct a valid URL")
         }
     }
     
     func getUserInformation(completion: (User? -> Void)) {
         
-        var userInfoBaseURL: NSURL? = NSURL(string: "http://bruha.com/mobile_php/RetrieveMyPHP/")
+        let userInfoBaseURL: NSURL? = NSURL(string: "http://bruha.com/mobile_php/RetrieveMyPHP/")
         
         if let userInfoURL = NSURL(string: "UserInfo.php?", relativeToURL: userInfoBaseURL) {
             
@@ -65,7 +65,7 @@ struct LoginService {
             
             dispatch_async(dispatch_get_main_queue()) {
                 
-                println("Retrieve User Info")
+                print("Retrieve User Info")
                 
                 networkOperation.downloadJSONFromURLPost("username=\(self.userName)") {
                     (let JSONArray) in
@@ -81,13 +81,13 @@ struct LoginService {
                 }
             }
         } else {
-            println("Could not construct a valid URL")
+            print("Could not construct a valid URL")
         }
     }
     
     func userFromNSArray(jsonArray: NSArray?) -> User? {
         
-        var user = User(userDictionary: jsonArray![0] as! [String: AnyObject])
+        let user = User(userDictionary: jsonArray![0] as! [String: AnyObject])
         
         return user
     }

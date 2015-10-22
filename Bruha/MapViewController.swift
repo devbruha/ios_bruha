@@ -37,7 +37,6 @@ class MapViewController: UIViewController,CLLocationManagerDelegate, GMSMapViewD
     func configureView(){
         
         let screenSize: CGRect = UIScreen.mainScreen().bounds
-        let screenWidth = screenSize.width
         let screenHeight = screenSize.height
         self.panelControllerContainer = self.parentViewController as! ARSPContainerController
         self.panelControllerContainer.dragDelegate = self
@@ -67,11 +66,12 @@ class MapViewController: UIViewController,CLLocationManagerDelegate, GMSMapViewD
     }
     
     
-    override func observeValueForKeyPath(keyPath: String, ofObject object: AnyObject, change: [NSObject : AnyObject], context: UnsafeMutablePointer<Void>) {
+    override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>) {
+        
         if !didFindMyLocation {
             
-            let myLocation: CLLocation = change[NSKeyValueChangeNewKey] as! CLLocation
-            viewMap.camera = GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: 13.0)
+            //let myLocation: CLLocation = change[NSKeyValueChangeNewKey] as! CLLocation
+            //viewMap.camera = GMSCameraPosition.cameraWithTarget(myLocation.coordinate, zoom: 13.0)
             //viewMap.settings.myLocationButton = true
             
             didFindMyLocation = true
@@ -79,7 +79,7 @@ class MapViewController: UIViewController,CLLocationManagerDelegate, GMSMapViewD
     }
     // MARK: IBAction method implementation
     
-    func locationManager(manager: CLLocationManager!, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
+    func locationManager(manager: CLLocationManager, didChangeAuthorizationStatus status: CLAuthorizationStatus) {
         if status == CLAuthorizationStatus.AuthorizedWhenInUse {
             
             viewMap.myLocationEnabled = true
@@ -88,15 +88,15 @@ class MapViewController: UIViewController,CLLocationManagerDelegate, GMSMapViewD
         }
         else{
             
-            var defaultLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 43.2500,longitude: -79.8667)
+            let defaultLocation: CLLocationCoordinate2D = CLLocationCoordinate2D(latitude: 43.2500,longitude: -79.8667)
             
             viewMap.camera = GMSCameraPosition.cameraWithTarget(defaultLocation, zoom: 13.0)
         }
     }
     
     // 5
-    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        if let location = locations.first as? CLLocation {
+    func locationManager(manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let location = locations.first as CLLocation! {
             
             viewMap.camera = GMSCameraPosition(target: location.coordinate, zoom: 15, bearing: 0, viewingAngle: 0)
             locationManager.stopUpdatingLocation()
@@ -106,7 +106,7 @@ class MapViewController: UIViewController,CLLocationManagerDelegate, GMSMapViewD
     func panelControllerChangedVisibilityState(state:ARSPVisibilityState) {
         //TODO
         if(panelControllerContainer.shouldOverlapMainViewController){
-            if (state.value == ARSPVisibilityStateMaximized.value) {
+            if (state.rawValue == ARSPVisibilityStateMaximized.rawValue) {
                 self.panelControllerContainer.panelViewController.view.alpha = 1
             }else{
                 self.panelControllerContainer.panelViewController.view.alpha = 1
@@ -135,7 +135,7 @@ class MapViewController: UIViewController,CLLocationManagerDelegate, GMSMapViewD
             let scaledToSize: CGSize = CGSize(width: 30, height: 30)
             let scaledIcon: UIImage?
             
-            var eventMarker: GMSMarker! = GMSMarker()
+            let eventMarker: GMSMarker! = GMSMarker()
             
             eventMarker.title = event.eventName
             eventMarker.position = CLLocationCoordinate2D(latitude: event.eventLatitude,longitude: event.eventLongitude)
@@ -158,7 +158,7 @@ class MapViewController: UIViewController,CLLocationManagerDelegate, GMSMapViewD
             let scaledToSize: CGSize = CGSize(width: 30, height: 30)
             let scaledIcon: UIImage?
             
-            var venueMarker: GMSMarker! = GMSMarker()
+            let venueMarker: GMSMarker! = GMSMarker()
             
             venueMarker.title = venue.venueName
             venueMarker.position = CLLocationCoordinate2D(latitude: venue.venueLatitude,longitude: venue.venueLongitude)
@@ -178,7 +178,7 @@ class MapViewController: UIViewController,CLLocationManagerDelegate, GMSMapViewD
             let scaledToSize: CGSize = CGSize(width: 30, height: 30)
             let scaledIcon: UIImage?
             
-            var organizationMarker: GMSMarker! = GMSMarker()
+            let organizationMarker: GMSMarker! = GMSMarker()
             
             organizationMarker.title = organization.organizationName
             organizationMarker.position = CLLocationCoordinate2D(latitude: organization.organizationLatitude,longitude: organization.organizationLongitude)

@@ -29,7 +29,7 @@ class VenueView: UIView {
         xibSetup()
     }
     
-    required init(coder aDecoder: NSCoder) {
+    required init?(coder aDecoder: NSCoder) {
         // 1. setup any properties here
         
         // 2. call super.init(coder:)
@@ -48,7 +48,7 @@ class VenueView: UIView {
         view.frame = bounds
         
         // Make the view stretch with containing view
-        view.autoresizingMask = UIViewAutoresizing.FlexibleWidth | UIViewAutoresizing.FlexibleHeight
+        view.autoresizingMask = [UIViewAutoresizing.FlexibleWidth, UIViewAutoresizing.FlexibleHeight]
         
         // Adding custom subview on top of our view (over any custom drawing > see note below)
         //m_table.dequeueReusableCellWithIdentifier("subCell")
@@ -67,7 +67,7 @@ class VenueView: UIView {
             m_subcellNew[i].textLabel?.textColor = UIColor.whiteColor()
             m_subcellNew[i].textLabel?.text = name
             view.addSubview(m_subcellNew[i])
-            var selectedCategory = UITapGestureRecognizer(target: self, action: ("changeColor"))
+            let selectedCategory = UITapGestureRecognizer(target: self, action: ("changeColor"))
             m_subcellNew[i].addGestureRecognizer(selectedCategory)
             i++
         }

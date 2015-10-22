@@ -29,7 +29,7 @@ struct EventService {
                 }
             }
         } else {
-            println("Could not construct a valid URL")
+            print("Could not construct a valid URL")
         }
     }
     
@@ -49,7 +49,7 @@ struct EventService {
                 }
             }
         } else {
-            println("Could not construct a valid URL")
+            print("Could not construct a valid URL")
         }
     }
     
@@ -69,7 +69,7 @@ struct EventService {
                 }
             }
         } else {
-            println("Could not construct a valid URL")
+            print("Could not construct a valid URL")
         }
     }
     
@@ -89,7 +89,7 @@ struct EventService {
             
             }
         } else {
-            println("Could not construct a valid URL")
+            print("Could not construct a valid URL")
         }
     }
 
@@ -108,7 +108,7 @@ struct EventService {
     
            }
         } else {
-            println("Could not construct a valid URL")
+            print("Could not construct a valid URL")
         }
     }
     
@@ -132,7 +132,7 @@ struct EventService {
         
         for item in jsonArray!{
         
-            var eventID = item["event_id"] as! String
+            let eventID = item["event_id"] as! String
             stringArray.append(eventID)
         }
         

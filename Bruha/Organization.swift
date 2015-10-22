@@ -59,10 +59,10 @@ struct Organization {
     init(organizationDictionary: [String: AnyObject]) {
         
         //var appt = organizationDictionary["appt"] as! String
-        var streetNo = organizationDictionary["street_no"] as! String
-        var streetName = organizationDictionary["street_name"] as! String
+        let streetNo = organizationDictionary["street_no"] as! String
+        let streetName = organizationDictionary["street_name"] as! String
         var city = organizationDictionary["location_city"] as! String
-        var postalCode = organizationDictionary["postal_code"] as! String
+        let postalCode = organizationDictionary["postal_code"] as! String
         
         organizationAddress = "\(streetNo) \(streetName), \(postalCode)"
         
@@ -75,7 +75,7 @@ struct Organization {
             primaryCategory = organizationDictionary["primary_category"] as! String
         } else {
             primaryCategory = ""
-            println(primaryCategory)
+            print(primaryCategory)
         }
         
         if let organizationLatString = organizationDictionary["location_lat"] as? String {
@@ -98,7 +98,7 @@ struct Organization {
             organizationLongitude = 0.0
         }
         
-        var tempUrl = organizationDictionary["media"] as! String
+        let tempUrl = organizationDictionary["media"] as! String
         
         posterUrl = "http://www.bruha.com/WorkingWebsite/\(tempUrl)"
     }

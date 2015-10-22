@@ -12,7 +12,7 @@ import UIKit
 class EventCircleView: UIView {
 
     override func drawRect(rect: CGRect) {
-        var path = UIBezierPath(ovalInRect: rect)
+        let path = UIBezierPath(ovalInRect: rect)
         UIColor.blueColor().colorWithAlphaComponent(0.65).setFill()
         path.fill()
         

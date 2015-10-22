@@ -41,13 +41,11 @@ class DashBoardViewController: UIViewController {
             alert()
         }
         else{
-            var storyboard = UIStoryboard(name: "Main", bundle: nil)
             self.performSegueWithIdentifier("GoToProfile", sender: self)
         }
     }
     
     func exploreImageTapped(){
-        var storyboard = UIStoryboard(name: "Main", bundle: nil)
         self.performSegueWithIdentifier("GoToExplore", sender: self)
     }
     
@@ -56,7 +54,6 @@ class DashBoardViewController: UIViewController {
             alert()
         }
         else{
-            var storyboard = UIStoryboard(name: "Main", bundle: nil)
             self.performSegueWithIdentifier("GoToCalendar", sender: self)
         }
     }
@@ -66,7 +63,6 @@ class DashBoardViewController: UIViewController {
             alert()
         }
         else{
-            var storyboard = UIStoryboard(name: "Main", bundle: nil)
             self.performSegueWithIdentifier("GoToAddiction", sender: self)
             //GoToAddiction
         }
@@ -77,38 +73,35 @@ class DashBoardViewController: UIViewController {
             alert()
         }
         else{
-            var storyboard = UIStoryboard(name: "Main", bundle: nil)
             self.performSegueWithIdentifier("GoToUpload", sender: self)
         }
     }
     
     func performImageSegue(){
-        var tgr1 = UITapGestureRecognizer(target:self , action: Selector("profileImageTapped"))
+        let tgr1 = UITapGestureRecognizer(target:self , action: Selector("profileImageTapped"))
         profileImage.addGestureRecognizer(tgr1)
         profileImage.userInteractionEnabled = true
         
-        var tgr2 = UITapGestureRecognizer(target:self , action: Selector("exploreImageTapped"))
+        let tgr2 = UITapGestureRecognizer(target:self , action: Selector("exploreImageTapped"))
         exploreImage.addGestureRecognizer(tgr2)
         exploreImage.userInteractionEnabled = true
         
-        var tgr3 = UITapGestureRecognizer(target:self , action: Selector("calendarImageTapped"))
+        let tgr3 = UITapGestureRecognizer(target:self , action: Selector("calendarImageTapped"))
         calendarImage.addGestureRecognizer(tgr3)
         calendarImage.userInteractionEnabled = true
     
-        var tgr4 = UITapGestureRecognizer(target:self , action: Selector("addictionImageTapped"))
+        let tgr4 = UITapGestureRecognizer(target:self , action: Selector("addictionImageTapped"))
         addictionImage.addGestureRecognizer(tgr4)
         addictionImage.userInteractionEnabled = true
         
-        var tgr5 = UITapGestureRecognizer(target:self , action: Selector("uploadImageTapped"))
+        let tgr5 = UITapGestureRecognizer(target:self , action: Selector("uploadImageTapped"))
         uploadImage.addGestureRecognizer(tgr5)
         uploadImage.userInteractionEnabled = true
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        var s = FetchData(context: managedObjectContext).fetchCategories()
-    
+            
         if GlobalVariables.loggedIn == false{
             addictionImage.alpha = 0.5
             ticketImage.alpha = 0.5

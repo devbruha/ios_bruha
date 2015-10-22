@@ -25,24 +25,20 @@ class AddictionListPanelViewController: UIViewController, UITableViewDelegate {
         super.viewDidLoad()
         setupPanel()
         
-        var eventTgr = UITapGestureRecognizer(target: self, action: ("eventTapped"))
+        let eventTgr = UITapGestureRecognizer(target: self, action: ("eventTapped"))
         eventSelectedB.addGestureRecognizer(eventTgr)
         
-        var venueTgr = UITapGestureRecognizer(target: self, action: ("venueTapped"))
+        let venueTgr = UITapGestureRecognizer(target: self, action: ("venueTapped"))
         venueSelectedB.addGestureRecognizer(venueTgr)
         
-        var artistTgr = UITapGestureRecognizer(target: self, action: ("artistTapped"))
+        let artistTgr = UITapGestureRecognizer(target: self, action: ("artistTapped"))
         artistSelectedB.addGestureRecognizer(artistTgr)
         
-        var organizationTgr = UITapGestureRecognizer(target: self, action: ("organizationTapped"))
+        let organizationTgr = UITapGestureRecognizer(target: self, action: ("organizationTapped"))
         organizationSelectedB.addGestureRecognizer(organizationTgr)
     }
     
     func setupPanel(){
-        
-        let screenSize: CGRect = UIScreen.mainScreen().bounds
-        let screenWidth = screenSize.width
-        let screenHeight = screenSize.height
         
         self.panelControllerContainer = self.parentViewController as! ARSPContainerController
         panelControllerContainer.visibleZoneHeight = visibleZoneHeight

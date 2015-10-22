@@ -39,11 +39,11 @@ struct Artist {
             primaryCategory = categoryName
         } else {
             primaryCategory = ""
-            println(primaryCategory)
+            print(primaryCategory)
         }
     
         
-        var tempUrl = artistDictionary["Artist_media"] as! String
+        let tempUrl = artistDictionary["Artist_media"] as! String
         
         posterUrl = "http://www.bruha.com/WorkingWebsite/\(tempUrl)"
     }
