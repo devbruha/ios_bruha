@@ -13,6 +13,8 @@ struct EventService {
     let bruhaBaseURL: NSURL? = NSURL(string: "http://bruha.com/mobile_php/RetrievePHP/")
     let bruhaUserBaseURL: NSURL? = NSURL(string: "http://bruha.com/mobile_php/RetrieveMyPHP/")
     
+    //Explore
+    
     func getEvent(completion: ([Event]? -> Void)) {
         
         if let eventURL = NSURL(string: "EventList.php", relativeToURL: bruhaBaseURL) {
@@ -33,6 +35,8 @@ struct EventService {
         }
     }
     
+    // My Uploads
+    
     func getUserEvents(completion: ([Event]? -> Void)) {
         
         if let eventURL = NSURL(string: "UserEventList.php?", relativeToURL: bruhaUserBaseURL) {
@@ -52,6 +56,26 @@ struct EventService {
             print("Could not construct a valid URL")
         }
     }
+    
+    func removeUserEvents(eventid: String, completion: (NSString? -> Void)) {
+        
+        if let eventURL = NSURL(string: "deleteUserEvent.php?", relativeToURL: bruhaUserBaseURL) {
+            
+            let networkOperation = NetworkOperation(url: eventURL)
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                networkOperation.stringFromURLPost("user_id=\(GlobalVariables.username)&event_id=\(eventid)"){
+                    (let deleteNotice) in
+                    completion(deleteNotice)
+                }
+                
+            }
+        } else {
+            print("Could not construct a valid URL")
+        }
+    }
+    
+    // My Addictions
     
     func getAddictedEvents(completion: ([String]? -> Void)) {
         

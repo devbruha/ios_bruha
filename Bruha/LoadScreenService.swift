@@ -20,6 +20,17 @@ class LoadScreenService {
         managedObjectContext = context
     }
     
+    func retrieveUser() {
+        
+        retrieveUserEvents()
+        retrieveUserVenues()
+        retrieveUserOrganizations()
+        
+        retrieveAddictedEvents()
+        retrieveAddictedVenues()
+        retrieveAddictedOrganizations()
+    }
+    
     func retrieveAll(){
         
         print("Retrieve All")
@@ -28,13 +39,7 @@ class LoadScreenService {
             
             GlobalVariables.loggedIn = true
             
-            retrieveUserEvents()
-            retrieveUserVenues()
-            retrieveUserOrganizations()
-            
-            retrieveAddictedEvents()
-            retrieveAddictedVenues()
-            retrieveAddictedOrganizations()
+            retrieveUser()
             
         }
         else{

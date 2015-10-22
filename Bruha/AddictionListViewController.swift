@@ -242,6 +242,7 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
                     cell.organizationDescription.text = organization.organizationDescription
                     cell.address.text = organization.organizationAddress
                     cell.circOrgName.text = organization.organizationName
+                    cell.circHiddenID.text = organization.organizationID
                 }
                 
             }
@@ -258,6 +259,8 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
             cell.rightUtilityButtons = nil
             cell.rightUtilityButtons = temp2 as [AnyObject]
             
+            cell.delegate = self
+            cell.selectionStyle = .None
             
             return cell as OrganizationTableViewCell
             
@@ -277,14 +280,6 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
     
     }
     
-    func deleteAddictedEvent(eventid: String) {
-        let eventService = EventService()
-        eventService.addAddictedEvents(eventid) {
-            (let deleteInfo) in
-            print(deleteInfo)
-        }
-    }
-    
     //Swipe Cells Actions
     func swipeableTableViewCell( cell : SWTableViewCell!,didTriggerLeftUtilityButtonWithIndex index:NSInteger){
         switch(index){
@@ -301,25 +296,33 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
                 for addicted in addictedEventInfo!{
                     if addicted.eventID == GlobalVariables.eventSelected {
                         
-                        //Unlike
-                        DeleteData(context: managedObjectContext).deleteAddictionsEvent(addicted.eventID, deleteUser: GlobalVariables.username)
-                        print("Removed from addiction(event) \(addicted.eventID), user \(GlobalVariables.username)")
-                        print("REMOVED")
-                        
-                        let eventService = EventService()
-                        
-                        eventService.removeAddictedEvents(addicted.eventID) {
-                            (let removeInfo ) in
-                            print(removeInfo!)
+                        let alertController = UIAlertController(title: "Are you sure you wanna unlike it!", message:nil, preferredStyle: .Alert)
+                        let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+                        let unlikeAction = UIAlertAction(title: "Yes", style: .Default) { (_) -> Void in
+                            
+                            //Unlike
+                            DeleteData(context: self.managedObjectContext).deleteAddictionsEvent(addicted.eventID, deleteUser: GlobalVariables.username)
+                            print("Removed from addiction(event) \(addicted.eventID), user \(GlobalVariables.username)")
+                            print("REMOVED")
+                            
+                            let eventService = EventService()
+                            eventService.removeAddictedEvents(addicted.eventID) {
+                                (let removeInfo ) in
+                                print(removeInfo!)
+                            }
+                            
+                            /*
+                            //Remove Cell
+                            var cellToDelete: AnyObject = cellIndexPath as! AnyObject
+                            self.addictionTableView.deleteRowsAtIndexPaths([cellToDelete], withRowAnimation: UITableViewRowAnimation.Fade)
+                            */
+                            
+                            self.addictionTableView.reloadData()
                         }
+                        alertController.addAction(unlikeAction)
+                        alertController.addAction(cancelAction)
                         
-                        /*
-                        //Remove Cell
-                        var cellToDelete: AnyObject = cellIndexPath as! AnyObject
-                        self.addictionTableView.deleteRowsAtIndexPaths([cellToDelete], withRowAnimation: UITableViewRowAnimation.Fade)
-                        */
-                        
-                        addictionTableView.reloadData()
+                        self.presentViewController(alertController, animated: true, completion: nil)
                     }
                 }
             }
@@ -334,20 +337,27 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
                 for addicted in addictedVenueInfo!{
                     if addicted.venueID == GlobalVariables.eventSelected {
                         
-                        //Unlike
-                        DeleteData(context: managedObjectContext).deleteAddictionsVenue(addicted.venueID, deleteUser: GlobalVariables.username)
-                        print("Removed from addiction(venue) \(addicted.venueID), user \(GlobalVariables.username)")
-                        print("REMOVED")
-                        
-                        let venueService = VenueService()
-                        
-                        venueService.removeAddictedVenues(addicted.venueID) {
-                            (let addInfo ) in
-                            print(addInfo!)
+                        let alertController = UIAlertController(title: "Are you sure you wanna unlike it!", message:nil, preferredStyle: .Alert)
+                        let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+                        let unlikeAction = UIAlertAction(title: "Yes", style: .Default) { (_) -> Void in
+                            
+                            //Unlike
+                            DeleteData(context: self.managedObjectContext).deleteAddictionsVenue(addicted.venueID, deleteUser: GlobalVariables.username)
+                            print("Removed from addiction(venue) \(addicted.venueID), user \(GlobalVariables.username)")
+                            print("REMOVED")
+                            
+                            let venueService = VenueService()
+                            venueService.removeAddictedVenues(addicted.venueID) {
+                                (let addInfo ) in
+                                print(addInfo!)
+                            }
+                            
+                            self.addictionTableView.reloadData()
                         }
+                        alertController.addAction(unlikeAction)
+                        alertController.addAction(cancelAction)
                         
-                        addictionTableView.reloadData()
-                        
+                        self.presentViewController(alertController, animated: true, completion: nil)
                     }
                 }
             }
@@ -362,20 +372,28 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
                 for addicted in addictedOrganizationInfo!{
                     if addicted.organizationID == GlobalVariables.eventSelected {
                         
-                        //Unlike
-                        DeleteData(context: managedObjectContext).deleteAddictionsOrgainzation(addicted.organizationID, deleteUser: GlobalVariables.username)
-                        print("Removed from addiction(organization) \(addicted.organizationID), user \(GlobalVariables.username)")
-                        print("REMOVED")
-                        
-                        let organizationService = OrganizationService()
-                        
-                        organizationService.removeAddictedOrganizations(addicted.organizationID) {
-                            (let removeInfo ) in
-                            print(removeInfo!)
+                        let alertController = UIAlertController(title: "Are you sure you wanna unlike it!", message:nil, preferredStyle: .Alert)
+                        let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+                        let unlikeAction = UIAlertAction(title: "Yes", style: .Default) { (_) -> Void in
+                            
+                            //Unlike
+                            DeleteData(context: self.managedObjectContext).deleteAddictionsOrgainzation(addicted.organizationID, deleteUser: GlobalVariables.username)
+                            print("Removed from addiction(organization) \(addicted.organizationID), user \(GlobalVariables.username)")
+                            print("REMOVED")
+                            
+                            let organizationService = OrganizationService()
+                            
+                            organizationService.removeAddictedOrganizations(addicted.organizationID) {
+                                (let removeInfo ) in
+                                print(removeInfo!)
+                            }
+                            
+                            self.addictionTableView.reloadData()
                         }
+                        alertController.addAction(unlikeAction)
+                        alertController.addAction(cancelAction)
                         
-                        addictionTableView.reloadData()
-                        
+                        self.presentViewController(alertController, animated: true, completion: nil)
                     }
                 }
             }

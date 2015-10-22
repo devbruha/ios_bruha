@@ -80,6 +80,11 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
                                 
                                 let acceptAction = UIAlertAction(title: "OK", style: .Default) { (_) -> Void in
                                     self.performSegueWithIdentifier("ProceedToDashBoard", sender: self) // Replace SomeSegue with your segue identifier (name)
+                                    
+                                    let mUser = User(username: username, userEmail: emailaddress, userCity: "Not Set", userFName: "Not Set", userGender: "Not Set", userBirthdate: "Not Set")
+                                    
+                                    SaveData(context: self.managedObjectContext).saveUser(mUser)
+                                    
                                     GlobalVariables.loggedIn = true
                                 }
                                 

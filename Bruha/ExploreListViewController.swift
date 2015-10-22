@@ -299,6 +299,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             cell.organizationDescription.text = organization.organizationDescription
             cell.address.text = organization.organizationAddress
             cell.circOrgName.text = organization.organizationName
+            cell.circHiddenID.text = organization.organizationID
             
             let temp: NSMutableArray = NSMutableArray()
             var like = 0
@@ -324,6 +325,9 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             cell.rightUtilityButtons = nil
             cell.rightUtilityButtons = temp2 as [AnyObject]
             
+            cell.delegate = self
+            cell.selectionStyle = .None
+            
             
             return cell as OrganizationTableViewCell
             
@@ -341,16 +345,6 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         
     }
     
-        func deleteAddictedEvent(eventid: String) {
-            let eventService = EventService()
-            eventService.removeAddictedEvents(eventid) {
-                (let deleteInfo) in
-    
-                print(deleteInfo)
-            }
-        }
-    
-    
     //Swipe Cells Actions
     func swipeableTableViewCell( cell : SWTableViewCell!,didTriggerLeftUtilityButtonWithIndex index:NSInteger){
         
@@ -363,8 +357,8 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 
                 //When Event is selected
                 if (GlobalVariables.selectedDisplay == "Event") {
-                    let cellIndexPath = self.exploreTableView.indexPathForCell(cell)
-                    let selectedCell = self.exploreTableView.cellForRowAtIndexPath(cellIndexPath!) as! EventTableViewCell
+                    var cellIndexPath = self.exploreTableView.indexPathForCell(cell)
+                    var selectedCell = self.exploreTableView.cellForRowAtIndexPath(cellIndexPath!) as! EventTableViewCell
                     GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
                     
                     let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
@@ -373,21 +367,29 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                             //Like and Unlike
                             if(cell.leftUtilityButtons[0].titleLabel!!.text! == "Unlike"){
                                 
-                                DeleteData(context: managedObjectContext).deleteAddictionsEvent(event.eventID, deleteUser: user)
-                                print("Removed from addiction(event) \(event.eventID)")
-                                print("REMOVED")
-                                
-                                let eventService = EventService()
-                                
-                                eventService.removeAddictedEvents(event.eventID) {
-                                    (let removeInfo ) in
-                                    print(removeInfo!)
+                                let alertController = UIAlertController(title: "Are you sure you wanna unlike it!", message:nil, preferredStyle: .Alert)
+                                let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+                                let unlikeAction = UIAlertAction(title: "Yes", style: .Default) { (_) -> Void in
+                                    
+                                    DeleteData(context: self.managedObjectContext).deleteAddictionsEvent(event.eventID, deleteUser: user)
+                                    print("Removed from addiction(event) \(event.eventID)")
+                                    print("REMOVED")
+                                    
+                                    let eventService = EventService()
+                                    eventService.removeAddictedEvents(event.eventID) {
+                                        (let removeInfo ) in
+                                        print(removeInfo!)
+                                    }
+                                    
+                                    var temp: NSMutableArray = NSMutableArray()
+                                    temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Like")
+                                    cell.leftUtilityButtons = temp as [AnyObject]
+                                    
                                 }
+                                alertController.addAction(unlikeAction)
+                                alertController.addAction(cancelAction)
                                 
-                                let temp: NSMutableArray = NSMutableArray()
-                                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Like")
-                                cell.leftUtilityButtons = temp as [AnyObject]
-                                
+                                self.presentViewController(alertController, animated: true, completion: nil)
                                 
                                 
                             } else if(cell.leftUtilityButtons[0].titleLabel!!.text! == "Like") {
@@ -404,7 +406,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                     print(addInfo!)
                                 }
                                 
-                                let temp: NSMutableArray = NSMutableArray()
+                                var temp: NSMutableArray = NSMutableArray()
                                 temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Unlike")
                                 cell.leftUtilityButtons = temp as [AnyObject]
                                 
@@ -416,8 +418,8 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 
                 //When Venue is selected
                 if (GlobalVariables.selectedDisplay == "Venue") {
-                    let cellIndexPath = self.exploreTableView.indexPathForCell(cell)
-                    let selectedCell = self.exploreTableView.cellForRowAtIndexPath(cellIndexPath!) as! VenueTableViewCell
+                    var cellIndexPath = self.exploreTableView.indexPathForCell(cell)
+                    var selectedCell = self.exploreTableView.cellForRowAtIndexPath(cellIndexPath!) as! VenueTableViewCell
                     GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
                     
                     let venueInfo = FetchData(context: managedObjectContext).fetchVenues()
@@ -426,21 +428,30 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                             //Like and Unlike
                             if(cell.leftUtilityButtons[0].titleLabel!!.text! == "Unlike"){
                                 
-                                DeleteData(context: managedObjectContext).deleteAddictionsVenue(venue.venueID, deleteUser: user)
-                                print("Removed from addiction(venue) \(venue.venueID)")
-                                print("REMOVED")
-                                
-                                let venueService = VenueService()
-                                
-                                venueService.removeAddictedVenues(venue.venueID) {
-                                    (let removeInfo ) in
-                                    print(removeInfo!)
+                                let alertController = UIAlertController(title: "Are you sure you wanna unlike it!", message:nil, preferredStyle: .Alert)
+                                let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+                                let unlikeAction = UIAlertAction(title: "Yes", style: .Default) { (_) -> Void in
+                                    
+                                    DeleteData(context: self.managedObjectContext).deleteAddictionsVenue(venue.venueID, deleteUser: user)
+                                    print("Removed from addiction(venue) \(venue.venueID)")
+                                    print("REMOVED")
+                                    
+                                    let venueService = VenueService()
+                                    venueService.removeAddictedVenues(venue.venueID) {
+                                        (let removeInfo ) in
+                                        print(removeInfo!)
+                                    }
+                                    
+                                    var temp: NSMutableArray = NSMutableArray()
+                                    temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Like")
+                                    cell.leftUtilityButtons = temp as [AnyObject]
+                                    
                                 }
-
+                                alertController.addAction(unlikeAction)
+                                alertController.addAction(cancelAction)
                                 
-                                let temp: NSMutableArray = NSMutableArray()
-                                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Like")
-                                cell.leftUtilityButtons = temp as [AnyObject]
+                                self.presentViewController(alertController, animated: true, completion: nil)
+                                
                                 
                             } else if(cell.leftUtilityButtons[0].titleLabel!!.text! == "Like") {
                                 
@@ -456,7 +467,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                     print(addInfo!)
                                 }
                                 
-                                let temp: NSMutableArray = NSMutableArray()
+                                var temp: NSMutableArray = NSMutableArray()
                                 temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Unlike")
                                 cell.leftUtilityButtons = temp as [AnyObject]
                             }
@@ -498,6 +509,8 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 //                    }
                 //                }
                 
+                
+                
                 //When Oragnization is selected
                 if (GlobalVariables.selectedDisplay == "Organization") {
                     let cellIndexPath = self.exploreTableView.indexPathForCell(cell)
@@ -510,20 +523,31 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                             //Like and Unlike
                             if(cell.leftUtilityButtons[0].titleLabel!!.text! == "Unlike"){
                                 
-                                DeleteData(context: managedObjectContext).deleteAddictionsOrgainzation(organization.organizationID, deleteUser: user)
-                                print("Removed from addiction(event) \(organization.organizationID)")
-                                print("REMOVED")
-                                
-                                let organizationService = OrganizationService()
-                                
-                                organizationService.removeAddictedOrganizations(organization.organizationID) {
-                                    (let removeInfo ) in
-                                    print(removeInfo!)
+                                let alertController = UIAlertController(title: "Are you sure you wanna unlike it!", message:nil, preferredStyle: .Alert)
+                                let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+                                let unlikeAction = UIAlertAction(title: "Yes", style: .Default) { (_) -> Void in
+                                    
+                                    DeleteData(context: self.managedObjectContext).deleteAddictionsOrgainzation(organization.organizationID, deleteUser: user)
+                                    print("Removed from addiction(event) \(organization.organizationID)")
+                                    print("REMOVED")
+                                    
+                                    let organizationService = OrganizationService()
+                                    
+                                    organizationService.removeAddictedOrganizations(organization.organizationID) {
+                                        (let removeInfo ) in
+                                        print(removeInfo!)
+                                    }
+                                    
+                                    let temp: NSMutableArray = NSMutableArray()
+                                    temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Like")
+                                    cell.leftUtilityButtons = temp as [AnyObject]
+                                    
                                 }
+                                alertController.addAction(unlikeAction)
+                                alertController.addAction(cancelAction)
                                 
-                                let temp: NSMutableArray = NSMutableArray()
-                                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Like")
-                                cell.leftUtilityButtons = temp as [AnyObject]
+                                self.presentViewController(alertController, animated: true, completion: nil)
+                                
                                 
                             } else if(cell.leftUtilityButtons[0].titleLabel!!.text! == "Like") {
                                 
@@ -551,6 +575,8 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 
                 let alert = UIAlertView(title: "Please log in for this!!!", message: nil, delegate: nil, cancelButtonTitle: nil)
                 alert.show()
+                let delay = 5.0 * Double(NSEC_PER_SEC)
+                var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
                 alert.dismissWithClickedButtonIndex(-1, animated: true)
                 
             }
@@ -562,6 +588,19 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         }
     }
     
+    func alert() {
+        let alertController = UIAlertController(title: "Are you sure you wanna unlike it!", message:nil, preferredStyle: .Alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+        let unlikeAction = UIAlertAction(title: "Yes", style: .Default) { (_) -> Void in
+            
+        }
+        
+        alertController.addAction(unlikeAction)
+        alertController.addAction(cancelAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+        
+    }
     func swipeableTableViewCell( cell : SWTableViewCell!,didTriggerRightUtilityButtonWithIndex index:NSInteger){
         
         switch(index){

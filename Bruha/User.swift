@@ -21,6 +21,16 @@ struct User {
     let userGender: String?
     let userBirthdate: String?
     
+    init(username: String, userEmail: String, userCity: String, userFName: String, userGender: String, userBirthdate: String){
+        
+        self.userName = username
+        self.userEmail = userEmail
+        self.userCity = userCity
+        self.userFirstName = userFName
+        self.userGender = userGender
+        self.userBirthdate = userBirthdate
+    }
+    
     init(fetchResults: UserDBModel){
         
         userName = fetchResults.userName

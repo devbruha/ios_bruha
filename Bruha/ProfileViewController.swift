@@ -58,7 +58,18 @@ class ProfileViewController: UIViewController {
     
     @IBAction func LogoutPressed(sender: AnyObject) {
         
-        DeleteData(context: managedObjectContext).deleteUserInfo()
+        let alertController = UIAlertController(title: "Are you sure you want to log out?", message:nil, preferredStyle: .Alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+        let yesAction = UIAlertAction(title: "Yes", style: .Default) { (_) -> Void in
+            
+            DeleteData(context: self.managedObjectContext).deleteUserInfo()
+            DeleteData(context: self.managedObjectContext).deleteUser()
+            self.performSegueWithIdentifier("logOutToSplashView", sender: self)
+        }
+        alertController.addAction(yesAction)
+        alertController.addAction(cancelAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
     }
     
     

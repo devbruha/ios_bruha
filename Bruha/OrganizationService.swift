@@ -13,6 +13,7 @@ struct OrganizationService {
     let bruhaBaseURL: NSURL? = NSURL(string: "http://bruha.com/mobile_php/RetrievePHP/")
     let bruhaUserBaseURL: NSURL? = NSURL(string: "http://bruha.com/mobile_php/RetrieveMyPHP/")
     
+    //Explore
     func getOrganization(completion: ([Organization]? -> Void)) {
         
         if let organizationURL = NSURL(string: "OrganizationList.php", relativeToURL: bruhaBaseURL) {
@@ -32,6 +33,7 @@ struct OrganizationService {
         }
     }
     
+    //My Uploads
     func getUserOrganization(completion: ([Organization]? -> Void)) {
         
         if let organizationURL = NSURL(string: "UserOrgList.php?", relativeToURL: bruhaUserBaseURL) {
@@ -50,6 +52,26 @@ struct OrganizationService {
             print("Could not construct a valid URL")
         }
     }
+    
+    func removeUserOrganizations(organizationid: String, completion: (NSString? -> Void)) {
+        
+        if let organizationURL = NSURL(string: "deleteUserOrg.php?", relativeToURL: bruhaUserBaseURL) {
+            
+            let networkOperation = NetworkOperation(url: organizationURL)
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                networkOperation.stringFromURLPost("user_id=\(GlobalVariables.username)&organization_id=\(organizationid)"){
+                    (let deleteNotice) in
+                    completion(deleteNotice)
+                }
+                
+            }
+        } else {
+            print("Could not construct a valid URL")
+        }
+    }
+    
+    //MyAddictions
     
     func getAddictedOrganization(completion: ([String]? -> Void)) {
         
@@ -72,9 +94,9 @@ struct OrganizationService {
     
     func addAddictedOrganizations(organizationid: String, completion: (NSString? -> Void)) {
         
-        if let eventURL = NSURL(string: "OrgAddictions.php?", relativeToURL: bruhaUserBaseURL) {
+        if let organizationURL = NSURL(string: "OrgAddictions.php?", relativeToURL: bruhaUserBaseURL) {
             
-            let networkOperation = NetworkOperation(url: eventURL)
+            let networkOperation = NetworkOperation(url: organizationURL)
             
             dispatch_async(dispatch_get_main_queue()) {
                 //networkOperation.stringFromURLPost("username=\(self.userName)&password=\(self.passWord)") {
@@ -93,9 +115,9 @@ struct OrganizationService {
     
     func removeAddictedOrganizations(organizationid: String, completion: (NSString? -> Void)) {
         
-        if let eventURL = NSURL(string: "deleteOrgAddiction.php?", relativeToURL: bruhaUserBaseURL) {
+        if let organizationURL = NSURL(string: "deleteOrgAddiction.php?", relativeToURL: bruhaUserBaseURL) {
             
-            let networkOperation = NetworkOperation(url: eventURL)
+            let networkOperation = NetworkOperation(url: organizationURL)
             
             dispatch_async(dispatch_get_main_queue()) {
                 networkOperation.stringFromURLPost("user_id=\(GlobalVariables.username)&organization_id=\(organizationid)"){

@@ -13,6 +13,7 @@ struct VenueService {
     let bruhaBaseURL: NSURL? = NSURL(string: "http://bruha.com/mobile_php/RetrievePHP/")
     let bruhaUserBaseURL: NSURL? = NSURL(string: "http://bruha.com/mobile_php/RetrieveMyPHP/")
     
+    //Explore
     func getVenue(completion: ([Venue]? -> Void)) {
         
         if let venueURL = NSURL(string: "VenueList.php", relativeToURL: bruhaBaseURL) {
@@ -33,6 +34,8 @@ struct VenueService {
         }
     }
     
+    //My Uploads
+    
     func getUserVenue(completion: ([Venue]? -> Void)) {
         
         if let venueURL = NSURL(string: "UserVenueList.php?", relativeToURL: bruhaUserBaseURL) {
@@ -52,6 +55,26 @@ struct VenueService {
             print("Could not construct a valid URL")
         }
     }
+    
+    func removeUserVenues(venueid: String, completion: (NSString? -> Void)) {
+        
+        if let venueURL = NSURL(string: "deleteUserVenue.php?", relativeToURL: bruhaUserBaseURL) {
+            
+            let networkOperation = NetworkOperation(url: venueURL)
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                networkOperation.stringFromURLPost("user_id=\(GlobalVariables.username)&venue_id=\(venueid)"){
+                    (let deleteNotice) in
+                    completion(deleteNotice)
+                }
+                
+            }
+        } else {
+            print("Could not construct a valid URL")
+        }
+    }
+    
+    // My Addictions
     
     func getAddictedVenue(completion: ([String]? -> Void)) {
         
@@ -75,9 +98,9 @@ struct VenueService {
     
     func addAddictedVenues(venueid: String, completion: (NSString? -> Void)) {
         
-        if let eventURL = NSURL(string: "VenueAddictions.php?", relativeToURL: bruhaUserBaseURL) {
+        if let venueURL = NSURL(string: "VenueAddictions.php?", relativeToURL: bruhaUserBaseURL) {
             
-            let networkOperation = NetworkOperation(url: eventURL)
+            let networkOperation = NetworkOperation(url: venueURL)
             
             dispatch_async(dispatch_get_main_queue()) {
                 //networkOperation.stringFromURLPost("username=\(self.userName)&password=\(self.passWord)") {
@@ -96,9 +119,9 @@ struct VenueService {
     
     func removeAddictedVenues(venueid: String, completion: (NSString? -> Void)) {
         
-        if let eventURL = NSURL(string: "deleteVenueAddiction.php?", relativeToURL: bruhaUserBaseURL) {
+        if let venueURL = NSURL(string: "deleteVenueAddiction.php?", relativeToURL: bruhaUserBaseURL) {
             
-            let networkOperation = NetworkOperation(url: eventURL)
+            let networkOperation = NetworkOperation(url: venueURL)
             
             dispatch_async(dispatch_get_main_queue()) {
                 networkOperation.stringFromURLPost("user_id=\(GlobalVariables.username)&venue_id=\(venueid)"){

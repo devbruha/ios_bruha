@@ -227,6 +227,7 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
             cell.organizationDescription.text = organization.organizationDescription
             cell.address.text = organization.organizationAddress
             cell.circOrgName.text = organization.organizationName
+            cell.circHiddenID.text = organization.organizationID
             
             let temp: NSMutableArray = NSMutableArray()
             temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Delete")
@@ -240,6 +241,8 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
             cell.rightUtilityButtons = nil
             cell.rightUtilityButtons = temp2 as [AnyObject]
             
+            cell.delegate = self
+            cell.selectionStyle = .None
             
             return cell as OrganizationTableViewCell
             
@@ -263,13 +266,86 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
     func swipeableTableViewCell( cell : SWTableViewCell!,didTriggerLeftUtilityButtonWithIndex index:NSInteger){
         switch(index){
         case 0:
+            if (GlobalVariables.uploadDisplay == "Event") {
+                var cellIndexPath = self.uploadTableView.indexPathForCell(cell)
+                var selectedCell = self.uploadTableView.cellForRowAtIndexPath(cellIndexPath!) as! EventTableViewCell
+                GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
+                
+                let userEventInfo = FetchData(context: managedObjectContext).fetchUserEvents()
+                for userEvent in userEventInfo!{
+                    if userEvent.eventID == GlobalVariables.eventSelected {
                         
+                        //Unlike
+                        DeleteData(context: managedObjectContext).deleteUserEvent(userEvent.eventID)
+                        print("Removed from upload(event) \(userEvent.eventID)")
+                        print("REMOVED")
+                        
+                        let eventService = EventService()
+                        eventService.removeUserEvents(userEvent.eventID) {
+                            (let removeInfo ) in
+                            print(removeInfo!)
+                        }
+                        
+                        uploadTableView.reloadData()
+                    }
+                }
+            }
+                
+            else if (GlobalVariables.uploadDisplay == "Venue") {
+                var cellIndexPath = self.uploadTableView.indexPathForCell(cell)
+                var selectedCell = self.uploadTableView.cellForRowAtIndexPath(cellIndexPath!) as! VenueTableViewCell
+                GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
+                
+                let userVenueInfo = FetchData(context: managedObjectContext).fetchUserVenues()
+                for userVenue in userVenueInfo!{
+                    if userVenue.venueID == GlobalVariables.eventSelected {
+                        
+                        //Unlike
+                        DeleteData(context: managedObjectContext).deleteUserVenue(userVenue.venueID)
+                        print("Removed from upload(venue) \(userVenue.venueID)")
+                        print("REMOVED")
+                        
+                        let venueService = VenueService()
+                        venueService.removeUserVenues(userVenue.venueID) {
+                            (let removeInfo ) in
+                            print(removeInfo!)
+                        }
+                        
+                        uploadTableView.reloadData()
+                    }
+                }
+            }
+                
+            else if (GlobalVariables.uploadDisplay == "Organization") {
+                var cellIndexPath = self.uploadTableView.indexPathForCell(cell)
+                var selectedCell = self.uploadTableView.cellForRowAtIndexPath(cellIndexPath!) as! OrganizationTableViewCell
+                GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
+                
+                let userOrganizationInfo = FetchData(context: managedObjectContext).fetchUserOrganizations()
+                for userOrganization in userOrganizationInfo!{
+                    if userOrganization.organizationID == GlobalVariables.eventSelected {
+                        
+                        //Unlike
+                        DeleteData(context: managedObjectContext).deleteUserOrganization(userOrganization.organizationID)
+                        print("Removed from upload(organization) \(userOrganization.organizationID)")
+                        print("REMOVED")
+                        
+                        let organizationService = OrganizationService()
+                        organizationService.removeUserOrganizations(userOrganization.organizationID) {
+                            (let removeInfo ) in
+                            print(removeInfo!)
+                        }
+                        
+                        uploadTableView.reloadData()
+                    }
+                }
+            }
+            
             break
         default:
             break
         }
     }
-    
     func swipeableTableViewCellShouldHideUtilityButtonsOnSwipe(cell : SWTableViewCell ) -> Bool {
         return true
     }

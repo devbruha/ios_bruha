@@ -84,7 +84,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
                                 let acceptAction = UIAlertAction(title: "OK", style: .Default) { (_) -> Void in
                                 self.performSegueWithIdentifier("ProceedToDashBoard", sender: self) // Replace SomeSegue with your segue identifier (name)
                                     
-                                    LoadScreenService(context: self.managedObjectContext).retrieveAll()
+                                    LoadScreenService(context: self.managedObjectContext).retrieveUser()
                                 }
                                 
                                 alertController.addAction(acceptAction)

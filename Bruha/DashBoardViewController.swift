@@ -121,6 +121,24 @@ class DashBoardViewController: UIViewController {
         
         // Do any additional setup after loading the view.
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        
+        if GlobalVariables.loggedIn == false{
+            addictionImage.alpha = 0.5
+            ticketImage.alpha = 0.5
+            calendarImage.alpha = 0.5
+            uploadImage.alpha = 0.5
+            profileImage.alpha = 0.5
+        }
+        else{
+            addictionImage.alpha = 1
+            ticketImage.alpha = 1
+            calendarImage.alpha = 1
+            uploadImage.alpha = 1
+            profileImage.alpha = 1
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

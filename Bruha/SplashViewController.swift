@@ -22,14 +22,6 @@ class SplashViewController: UIViewController,UIScrollViewDelegate {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
-        // Clearing data from CoreDate to ensure up to date information
-            
-        DeleteData(context: self.managedObjectContext).deleteAll()
-        
-        // Retrieving all events/venues/artists/organizations and storing locally
-            
-        LoadScreenService(context: self.managedObjectContext).retrieveAll()
 
         self.scrollView.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
         let scrollViewWidth:CGFloat = self.scrollView.frame.width-20
@@ -59,7 +51,7 @@ class SplashViewController: UIViewController,UIScrollViewDelegate {
         self.scrollView.delegate = self
         self.pageControl.currentPage = 0
         
-        
+        GlobalVariables.loggedIn = false
         // Do any additional setup after loading the view.
     }
     

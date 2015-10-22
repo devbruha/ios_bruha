@@ -30,7 +30,19 @@ class DeleteData {
         deleteArtists()
         deleteOrganizations()
         deleteAddictions()
+        
         deleteUserEvents()
+        deleteUserVenues()
+        deleteUserOrganizations()
+    }
+    
+    func deleteUser(){
+        
+        deleteAddictions()
+        
+        deleteUserEvents()
+        deleteUserVenues()
+        deleteUserOrganizations()
     }
     
     // Deletes all entries of an object in the Core Data table
@@ -184,6 +196,32 @@ class DeleteData {
         }
     }
     
+    func deleteUserEvent(eventID: String) {
+        
+        let fetchRequest = NSFetchRequest(entityName: "UserEventList")
+        fetchRequest.includesPropertyValues = false // Only fetch the managedObjectID (not the full object structure)
+        if let fetchResults = (try? managedObjectContext!.executeFetchRequest(fetchRequest)) as? [UserEventDBModel] {
+            
+            for result in fetchResults {
+                
+                if(result.id == eventID){
+                    managedObjectContext!.deleteObject(result)
+                }
+            }
+            
+        }
+        
+        var err: NSError?
+        do {
+            try managedObjectContext!.save()
+            print("deleteData - Success - UserEvent")
+        } catch let error as NSError {
+            err = error
+            print("deleteData - Error : \(err!.localizedDescription)")
+            abort()
+        }
+    }
+    
     func deleteUserInfo() {
         
         let fetchRequest = NSFetchRequest(entityName: "UserList")
@@ -253,6 +291,32 @@ class DeleteData {
         }
     }
     
+    func deleteUserVenue(venueID: String) {
+        
+        let fetchRequest = NSFetchRequest(entityName: "UserVenueList")
+        fetchRequest.includesPropertyValues = false // Only fetch the managedObjectID (not the full object structure)
+        if let fetchResults = (try? managedObjectContext!.executeFetchRequest(fetchRequest)) as? [UserVenueDBModel] {
+            
+            for result in fetchResults {
+                
+                if(result.id == venueID){
+                    managedObjectContext!.deleteObject(result)
+                }
+            }
+            
+        }
+        
+        var err: NSError?
+        do {
+            try managedObjectContext!.save()
+            print("deleteData - Success - UserVenue")
+        } catch let error as NSError {
+            err = error
+            print("deleteData - Error : \(err!.localizedDescription)")
+            abort()
+        }
+    }
+    
     func deleteArtists() {
         
         let fetchRequest = NSFetchRequest(entityName: "ArtistList")
@@ -315,6 +379,33 @@ class DeleteData {
         do {
             try managedObjectContext!.save()
             print("deleteData - Success - UserOrganizations")
+        } catch let error as NSError {
+            err = error
+            print("deleteData - Error : \(err!.localizedDescription)")
+            abort()
+        }
+    }
+    
+    func deleteUserOrganization(organizationID: String) {
+        
+        let fetchRequest = NSFetchRequest(entityName: "UserOrganizationList")
+        fetchRequest.includesPropertyValues = false // Only fetch the managedObjectID (not the full object structure)
+        if let fetchResults = (try? managedObjectContext!.executeFetchRequest(fetchRequest)) as? [UserOrganizationDBModel] {
+            
+            for result in fetchResults {
+                
+                if(result.id == organizationID){
+                    
+                    managedObjectContext!.deleteObject(result)
+                }
+            }
+            
+        }
+        
+        var err: NSError?
+        do {
+            try managedObjectContext!.save()
+            print("deleteData - Success - UserOrganization")
         } catch let error as NSError {
             err = error
             print("deleteData - Error : \(err!.localizedDescription)")
@@ -461,7 +552,7 @@ class DeleteData {
     
     func deleteAddictionsOrgainzation(deleteItem: String, deleteUser: String) {
         
-        let fetchRequest = NSFetchRequest(entityName: "AddictionOrgainzation")
+        let fetchRequest = NSFetchRequest(entityName: "AddictionOrganization")
         fetchRequest.includesPropertyValues = false // Only fetch the managedObjectID (not the full object structure)
         if let fetchResults = (try? managedObjectContext!.executeFetchRequest(fetchRequest)) as? [AddictionOrganizationDBModel] {
             
@@ -484,25 +575,5 @@ class DeleteData {
             print("deleteData - Error : \(err!.localizedDescription)")
             abort()
         }
-        
     }
-    
-//    func deleteAddictedEvent(eventid: String) {
-//        let eventService = EventService()
-//        eventService.removeAddictedEvents(eventid) {
-//            (let deleteInfo) in
-//            
-//            println(deleteInfo)
-//        }
-//    }
-    
-    func deleteAddictedVenue() {
-        
-    }
-    
-    func deleteAddictedOrganization() {
-        
-    }
-    
-
 }
