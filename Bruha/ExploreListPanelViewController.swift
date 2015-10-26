@@ -34,6 +34,10 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
     var backupArtistCategories: [String] = ["Artist Categories"]
 
     
+    let priceLabel = UILabel()
+    let slider = UISlider()
+    let priceLabelTitle = UILabel()
+    
     struct EventObjects {
         
         var sectionName : String!
@@ -45,7 +49,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
     var venueObject = [""]
     var organizationObject = [""]
     var artistObject = [""]
-
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -59,7 +63,37 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         setupPanel()
         setupCategoryLists()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateNotificationSent", name: "itemDisplayChange", object: nil)
+        
+        priceLabelTitle.frame = CGRectMake(10,220, screenSize.width - 20, 22)
+        priceLabelTitle.textAlignment = NSTextAlignment.Left
+        priceLabelTitle.backgroundColor = UIColor.orangeColor()
+        priceLabelTitle.textColor = UIColor.whiteColor()
+        priceLabelTitle.font = UIFont(name: ".SFUIText-Semibold", size: 18)
+        priceLabelTitle.text = "   Admission Price"
+        self.scrollView.addSubview(priceLabelTitle)
+        
+        
+        priceLabel.frame = CGRectMake(10, 242+1, screenSize.width - 20, 22)
+        priceLabel.textAlignment = NSTextAlignment.Center
+        priceLabel.backgroundColor = UIColor.clearColor()
+        priceLabel.textColor = UIColor.whiteColor()
+        priceLabel.text = "No Price Filter"
+        self.scrollView.addSubview(priceLabel)
+        
+        
+        slider.minimumValue = 0
+        slider.maximumValue = 99
+        slider.continuous = true
+        slider.tintColor = UIColor.whiteColor()
+        slider.backgroundColor = UIColor.whiteColor()
+        slider.frame = CGRectMake(10, 264+2, screenSize.width - 20, 22)
+        slider.value = 0
+        slider.addTarget(self, action: "sliderValueDidChange:", forControlEvents: .ValueChanged)
+        self.scrollView.addSubview(slider)
+        
+        
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateNotificationSent", name: "itemDisplayChangeEvent", object: nil)
         
         let eventTgr = UITapGestureRecognizer(target: self, action: ("eventTapped"))
         eventSelectedB.addGestureRecognizer(eventTgr)
@@ -84,6 +118,19 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         placeholder.hidden = false
         
     }
+    
+    func sliderValueDidChange(sender:UISlider!) {
+        
+        GlobalVariables.UserCustomFilters.priceFilter = Int(sender.value)
+        
+        if Int(sender.value) == 0 {
+            priceLabel.text = "No Price Filter"
+        } else {
+            priceLabel.text = "\(Int(sender.value))$"
+        }
+        
+    }
+    
     func didSelectDate(date: NSDate){
         
         if GlobalVariables.UserCustomFilters.dateFilter.contains("\(date.year)-\(date.month)-\(date.day)"){
@@ -130,7 +177,6 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
             venueObject = ["Venue Categories"]
             backupVenueCategories.append(categories)
         }
-
     }
     
     func setupPanel(){
@@ -162,7 +208,6 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         GlobalVariables.selectedDisplay = "Event"
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
         clearBackupCategories()
-
         
     }
     
@@ -171,7 +216,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         GlobalVariables.selectedDisplay = "Venue"
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
         clearBackupCategories()
-
+        
     }
     
     func artistTapped(){
@@ -179,7 +224,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         GlobalVariables.selectedDisplay = "Artist"
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
         clearBackupCategories()
-
+        
     }
     
     func organizationTapped(){
@@ -187,7 +232,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         GlobalVariables.selectedDisplay = "Organization"
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
         clearBackupCategories()
-
+        
     }
     
     // -------------------------------Category Table Logic-------------------------------
@@ -218,16 +263,38 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
         if GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].contains(subCategoryID){
             
-            GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].append(subCategoryID)
-            GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![1].append(subCategoryName)
+            let index = GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].indexOf(subCategoryID)
+            
+            GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].removeAtIndex(index!)
+            
+            GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![1].removeAtIndex(index!)
+            
+//            for mValue in GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.values {
+//                for value in mValue{
+//                    for item in value{
+//                        if item == subCategoryID {
+//                            
+//                            let index = GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].indexOf(item)
+//                            
+//                            GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].removeAtIndex(index!)
+//                            
+//                            GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![1].removeAtIndex(index!)
+//                            
+//                        }
+//                    }
+//                }
+//            }
+            print("after removed filter \(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories)")
+            
         }
         else{
             
             GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].append(subCategoryID)
             GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![1].append(subCategoryName)
+            print("after added filter \(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories)")
         }
         
-        //print(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.keys.array)
+        //print(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.keys.elements)
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -238,8 +305,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         else {
             return 0
         }
-
-
+        
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -254,7 +320,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
             return artistObject.count
         }
         return 0
-
+        
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -269,7 +335,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
             return artistObject[section]
         }
         return "ERROR"
-
+        
     }
     
     func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
@@ -408,7 +474,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         adjustHeightOfTableView(self.eventCategoriesTable, constraint: self.eventCategoryTableHeight)
         
     }
-
+    
     
     func updateNotificationSent(){
         
@@ -429,6 +495,10 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
         scrollView.contentSize.height = 500 + constraint.constant
         
+        priceLabelTitle.frame = CGRectMake(10, 220 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 22)
+        priceLabel.frame = CGRectMake(10, 242 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 22)
+        slider.frame = CGRectMake(10, 264 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 22)
+        
         self.view.setNeedsUpdateConstraints()
         
         uiTableView.reloadData()
@@ -445,6 +515,6 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         eventCategoriesTable.reloadData()
         adjustHeightOfTableView(eventCategoriesTable, constraint: eventCategoryTableHeight)
     }
-
+    
     
 }
