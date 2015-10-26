@@ -22,6 +22,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
     
     @IBOutlet weak var eventCategoryTableHeight: NSLayoutConstraint!
     
+    
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     var panelControllerContainer: ARSPContainerController!
@@ -58,7 +59,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         let screenWidth = screenSize.width
         _ = screenSize.height
         scrollView.contentSize.width = screenWidth
-        scrollView.contentSize.height = 600
+        scrollView.contentSize.height = 500
         
         setupPanel()
         setupCategoryLists()
@@ -73,7 +74,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         self.scrollView.addSubview(priceLabelTitle)
         
         
-        priceLabel.frame = CGRectMake(10, 242+1, screenSize.width - 20, 22)
+        priceLabel.frame = CGRectMake(10, 242, screenSize.width - 20, 22)
         priceLabel.textAlignment = NSTextAlignment.Center
         priceLabel.backgroundColor = UIColor.clearColor()
         priceLabel.textColor = UIColor.whiteColor()
@@ -86,7 +87,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         slider.continuous = true
         slider.tintColor = UIColor.whiteColor()
         slider.backgroundColor = UIColor.whiteColor()
-        slider.frame = CGRectMake(10, 264+2, screenSize.width - 20, 22)
+        slider.frame = CGRectMake(10, 264, screenSize.width - 20, 22)
         slider.value = 0
         slider.addTarget(self, action: "sliderValueDidChange:", forControlEvents: .ValueChanged)
         self.scrollView.addSubview(slider)
@@ -129,6 +130,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
             priceLabel.text = "\(Int(sender.value))$"
         }
         
+        print(GlobalVariables.UserCustomFilters.priceFilter)
     }
     
     func didSelectDate(date: NSDate){
@@ -472,7 +474,6 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         eventCategoriesTable.reloadData()
         
         adjustHeightOfTableView(self.eventCategoriesTable, constraint: self.eventCategoryTableHeight)
-        
     }
     
     
@@ -495,9 +496,9 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
         scrollView.contentSize.height = 500 + constraint.constant
         
-        priceLabelTitle.frame = CGRectMake(10, 220 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 22)
-        priceLabel.frame = CGRectMake(10, 242 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 22)
-        slider.frame = CGRectMake(10, 264 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 22)
+        priceLabelTitle.frame = CGRectMake(10, 198 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 22)
+        priceLabel.frame = CGRectMake(10, 220 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 22)
+        slider.frame = CGRectMake(10, 242 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 22)
         
         self.view.setNeedsUpdateConstraints()
         
