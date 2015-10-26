@@ -265,11 +265,12 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
         if GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].contains(subCategoryID){
             
-            let index = GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].indexOf(subCategoryID)
+//            let index = GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].indexOf(subCategoryID)
+//            
+//            GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].removeAtIndex(index!)
+//            
+//            GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![1].removeAtIndex(index!)
             
-            GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].removeAtIndex(index!)
-            
-            GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![1].removeAtIndex(index!)
             
 //            for mValue in GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.values {
 //                for value in mValue{
@@ -286,7 +287,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
 //                    }
 //                }
 //            }
-            print("after removed filter \(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories)")
+//            print("after removed filter \(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories)")
             
         }
         else{
@@ -372,6 +373,42 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         let tap = UITapGestureRecognizer(target: self, action: Selector("sectionTapped:"))
         
         view.addGestureRecognizer(tap)
+        
+        tableView.allowsMultipleSelection = true
+    }
+    
+    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let selectedCell = self.eventCategoriesTable.cellForRowAtIndexPath(indexPath) as UITableViewCell!
+        
+        let headerTitle = eventCategoriesTable.headerViewForSection(indexPath.section)?.textLabel!.text!
+        
+        // Header title is the primary category
+        
+        let subCategoryID = String(selectedCell.textLabel!.tag)
+        let subCategoryName = selectedCell.textLabel!.text!
+        
+        if GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].contains(subCategoryID){
+            
+            let index = GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].indexOf(subCategoryID)
+            
+            GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].removeAtIndex(index!)
+            
+            GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![1].removeAtIndex(index!)
+            
+            print("after removed filter \(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories)")
+            
+        }
+        else{
+            
+            //
+            
+//            GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].append(subCategoryID)
+//            GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![1].append(subCategoryName)
+//            print("after added filter \(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories)")
+        }
+        
+        //print(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.keys.elements)
     }
     
     func sectionTapped(sender: UITapGestureRecognizer){
