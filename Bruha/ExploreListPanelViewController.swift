@@ -265,30 +265,32 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
         if GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].contains(subCategoryID){
             
-//            let index = GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].indexOf(subCategoryID)
-//            
-//            GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].removeAtIndex(index!)
-//            
-//            GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![1].removeAtIndex(index!)
+            //Handled in didDeselectRowAtIndexPath
+        /*
+            let index = GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].indexOf(subCategoryID)
+            
+            GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].removeAtIndex(index!)
+            
+            GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![1].removeAtIndex(index!)
             
             
 //            for mValue in GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.values {
 //                for value in mValue{
 //                    for item in value{
 //                        if item == subCategoryID {
-//                            
+//
 //                            let index = GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].indexOf(item)
-//                            
+//
 //                            GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].removeAtIndex(index!)
-//                            
+//
 //                            GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![1].removeAtIndex(index!)
-//                            
+//
 //                        }
 //                    }
 //                }
 //            }
-//            print("after removed filter \(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories)")
-            
+            print("after removed filter \(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories)")
+        */
         }
         else{
             
@@ -401,11 +403,12 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         }
         else{
             
-            //
-            
-//            GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].append(subCategoryID)
-//            GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![1].append(subCategoryName)
-//            print("after added filter \(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories)")
+            //Handled in didSelectRowAtIndexPath
+        /*
+            GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].append(subCategoryID)
+            GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![1].append(subCategoryName)
+            print("after added filter \(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories)")
+        */
         }
         
         //print(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.keys.elements)

@@ -36,4 +36,8 @@ class GlobalVariables{
     static var displayedOrganizations: [Organization] = []
     
     static var UserCustomFilters: UserFilters = UserFilters()
+    
+    static var displayFilteredEvents: [Event] = []
+    static var displayFilteredVenues: [Venue] = []
+    static var displayFilteredOrganizations: [Organization] = []
 }

@@ -25,6 +25,9 @@ class DeleteData {
         deleteArtistCategories()
         deleteOrganizationCategories()
         
+        deleteEventSubcategories()
+        deleteUserEventSubcategories()
+        
         deleteEvents()
         deleteVenues()
         deleteArtists()
@@ -172,6 +175,54 @@ class DeleteData {
             abort()
         }
     }
+    
+    func deleteEventSubcategories() {
+        
+        let fetchRequest = NSFetchRequest(entityName: "EventSubCategoryList")
+        fetchRequest.includesPropertyValues = false // Only fetch the managedObjectID (not the full object structure)
+        if let fetchResults = (try? managedObjectContext!.executeFetchRequest(fetchRequest)) as? [EventSubCategoryDBModel] {
+            
+            for result in fetchResults {
+                managedObjectContext!.deleteObject(result)
+            }
+            
+        }
+        
+        var err: NSError?
+        do {
+            try managedObjectContext!.save()
+            print("deleteData - Success - Events")
+        } catch let error as NSError {
+            err = error
+            print("deleteData - Error : \(err!.localizedDescription)")
+            abort()
+        }
+    }
+    
+    func deleteUserEventSubcategories() {
+        
+        let fetchRequest = NSFetchRequest(entityName: "UserEventSubCategoryList")
+        fetchRequest.includesPropertyValues = false // Only fetch the managedObjectID (not the full object structure)
+        if let fetchResults = (try? managedObjectContext!.executeFetchRequest(fetchRequest)) as? [UserEventSubCategoryDBModel] {
+            
+            for result in fetchResults {
+                managedObjectContext!.deleteObject(result)
+            }
+            
+        }
+        
+        var err: NSError?
+        do {
+            try managedObjectContext!.save()
+            print("deleteData - Success - Events")
+        } catch let error as NSError {
+            err = error
+            print("deleteData - Error : \(err!.localizedDescription)")
+            abort()
+        }
+    }
+    
+    
     
     func deleteUserEvents() {
         
