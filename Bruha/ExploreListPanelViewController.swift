@@ -34,10 +34,9 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
     var backupOrganizationCategories: [String] = ["Organization Categories"]
     var backupArtistCategories: [String] = ["Artist Categories"]
 
-    
+    let priceLabelTitle = UILabel()
     let priceLabel = UILabel()
     let slider = UISlider()
-    let priceLabelTitle = UILabel()
     
     struct EventObjects {
         
@@ -131,6 +130,8 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         }
         
         print(GlobalVariables.UserCustomFilters.priceFilter)
+        
+        Filtering().filterEvents()
     }
     
     func didSelectDate(date: NSDate){
@@ -140,11 +141,13 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
             if let index = GlobalVariables.UserCustomFilters.dateFilter.indexOf("\(date.year)-\(date.month)-\(date.day)"){
                 
                 GlobalVariables.UserCustomFilters.dateFilter.removeAtIndex(index)
+                Filtering().filterEvents()
             }
         }
         else{
             
             GlobalVariables.UserCustomFilters.dateFilter.append("\(date.year)-\(date.month)-\(date.day)")
+            Filtering().filterEvents()
         }
         
         print(GlobalVariables.UserCustomFilters.dateFilter)
@@ -302,6 +305,42 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         //print(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.keys.elements)
     }
     
+    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
+        
+        let selectedCell = self.eventCategoriesTable.cellForRowAtIndexPath(indexPath) as UITableViewCell!
+        
+        let headerTitle = eventCategoriesTable.headerViewForSection(indexPath.section)?.textLabel!.text!
+        
+        // Header title is the primary category
+        
+        let subCategoryID = String(selectedCell.textLabel!.tag)
+        let subCategoryName = selectedCell.textLabel!.text!
+        
+        if GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].contains(subCategoryID){
+            
+            let index = GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].indexOf(subCategoryID)
+            
+            GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].removeAtIndex(index!)
+            
+            GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![1].removeAtIndex(index!)
+            
+            print("after removed filter \(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories)")
+            
+        }
+        else{
+            
+            //Handled in didSelectRowAtIndexPath
+            /*
+            GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].append(subCategoryID)
+            GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![1].append(subCategoryName)
+            print("after added filter \(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories)")
+            */
+        }
+        
+        //print(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.keys.elements)
+    }
+
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if GlobalVariables.selectedDisplay == "Event" {
@@ -377,41 +416,6 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         view.addGestureRecognizer(tap)
         
         tableView.allowsMultipleSelection = true
-    }
-    
-    func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
-        
-        let selectedCell = self.eventCategoriesTable.cellForRowAtIndexPath(indexPath) as UITableViewCell!
-        
-        let headerTitle = eventCategoriesTable.headerViewForSection(indexPath.section)?.textLabel!.text!
-        
-        // Header title is the primary category
-        
-        let subCategoryID = String(selectedCell.textLabel!.tag)
-        let subCategoryName = selectedCell.textLabel!.text!
-        
-        if GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].contains(subCategoryID){
-            
-            let index = GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].indexOf(subCategoryID)
-            
-            GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].removeAtIndex(index!)
-            
-            GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![1].removeAtIndex(index!)
-            
-            print("after removed filter \(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories)")
-            
-        }
-        else{
-            
-            //Handled in didSelectRowAtIndexPath
-        /*
-            GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].append(subCategoryID)
-            GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![1].append(subCategoryName)
-            print("after added filter \(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories)")
-        */
-        }
-        
-        //print(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.keys.elements)
     }
     
     func sectionTapped(sender: UITapGestureRecognizer){
@@ -503,6 +507,11 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
                 break
                 
             case "Venue":
+                //venueObject[index!] = (backupVenueCategories[index!])
+                //header.backgroundView?.backgroundColor = UIColor.blueColor()
+//                if header.contentView.backgroundColor == 
+//                header.contentView.backgroundColor = UIColor.blueColor()
+                
                 break
                 
             default:
@@ -521,9 +530,17 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
         if(GlobalVariables.selectedDisplay == "Event"){
             eventCategoriesTable.alpha = 1;
+            placeholder.alpha = 1
+            priceLabelTitle.alpha = 1
+            priceLabel.alpha = 1
+            slider.alpha = 1
         }
         else{
             eventCategoriesTable.alpha = 1;
+            placeholder.alpha = 0
+            priceLabelTitle.alpha = 0
+            priceLabel.alpha = 0
+            slider.alpha = 0
         }
         
     }

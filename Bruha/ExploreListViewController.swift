@@ -64,7 +64,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         switch (GlobalVariables.selectedDisplay){
         case "Event":
             let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
-            
+            let event = GlobalVariables.displayFilteredEvents
             return (eventInfo?.count)!
         case "Venue":
             let venueInfo = FetchData(context: managedObjectContext).fetchVenues()
@@ -606,9 +606,13 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         switch(index){
         case 0:
             //Map
+            
             Filtering().filterEvents()
-            Filtering().testing()
-            print(GlobalVariables.displayFilteredEvents.count)
+//            Filtering().testing()
+            
+            //Filtering().filterPrice()
+            //Filtering().filterCalendar()
+            print("gFilter", GlobalVariables.displayFilteredEvents.count)
             break
         case 1:
             //Ticket

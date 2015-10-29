@@ -11,66 +11,71 @@ import UIKit
 
 class Filtering {
     
-    func testing() {
-        for event in GlobalVariables.displayedEvents {
-            //print(event.eventName)
-            if event.eventName == "Red Haven with Betty Supple "{
-                print("Red \(event.subCategoryID.count)")
-                //music, folk/country
-            }
-            
-            if event.eventName == "Nick's Party"{
-                print("Nick \(event.subCategoryID.count)")
-                //party, LGBT
-            }
-            
-        }
-    }
-    
-    func filterCalendar() {
-        
-    }
-    
-    func filterPrice() {
-        
-    }
+    var tempEvent: [Event] = GlobalVariables.displayedEvents
     
     func filterEvents() {
         
-        //  All Events
-        for event in GlobalVariables.displayedEvents {
+        //date filter is not nil, filter out events don't have date
+        if GlobalVariables.UserCustomFilters.dateFilter.count != 0 {
             
-            //  select primary category that is in filter
-            if GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.keys.contains("\(event.primaryCategory)") {
+            for var i = tempEvent.count; i > 0; i-- {
                 
-                
-//                print(event.primaryCategory)
-//                print(event.eventName)
-//                print(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[event.primaryCategory]![0])
-                
-                print("Filter \(event.subCategoryID.count)")
-                
-    
-                
-                //  sub category id
-                for eventSubID in event.subCategoryID {
+                //when events don't match selected date in filter, remove events
+                if !GlobalVariables.UserCustomFilters.dateFilter.contains(tempEvent[i-1].eventStartDate) {
                     
-                    if GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[event.primaryCategory]![0].contains(eventSubID) {
-                        
-                        GlobalVariables.displayFilteredEvents.append(event)
-                        
-                    }
+                    let index = tempEvent.indexOf({$0.eventID == tempEvent[i-1].eventID})
+                    tempEvent.removeAtIndex(index!)
                 }
-                
             }
         }
+        
+        //price filter is not nil, if event price > filter price, filter out events
+        if GlobalVariables.UserCustomFilters.priceFilter != 0 {
+            
+            for var i = tempEvent.count; i > 0; i-- {
+                
+                if GlobalVariables.UserCustomFilters.priceFilter < Int(tempEvent[i-1].eventPrice!) {
+                    
+                    let index = tempEvent.indexOf({$0.eventID == tempEvent[i-1].eventID})
+                    tempEvent.removeAtIndex(index!)
+                }
+            }
+        }
+        
+        //category filter is not nil,
+        if GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.count != 0 {
+            
+            for var i = tempEvent.count; i > 0; i-- {
+                
+                if !GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.keys.contains(tempEvent[i-1].primaryCategory) {
+                    
+                    let index = tempEvent.indexOf({$0.eventID == tempEvent[i-1].eventID})
+                    tempEvent.removeAtIndex(index!)
+                    
+                } else { // goes into selected primary category, filters out events that dont match filter sub category
+                    
+                    if GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[tempEvent[i-1].primaryCategory]![0].count != 0 {
+                        
+                        for var j = tempEvent.count; j > 0; j-- {
+                            
+                        }
+
+                        
+                        print("HAHA", GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[tempEvent[i-1].primaryCategory])
+                    }
+                    
+                }
+            }
+        }
+        
+        
+        
+        
+        
+        GlobalVariables.displayFilteredEvents = tempEvent
     }
-    
-    
+
 }
-
-
-
 
 
 

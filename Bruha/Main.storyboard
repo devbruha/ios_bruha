@@ -19,20 +19,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="u4M-6m-ONi">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="J5c-Ih-djP">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="HrU-7c-eyS" firstAttribute="top" secondItem="u4M-6m-ONi" secondAttribute="bottom" id="Ee2-xd-Ttc"/>
-                            <constraint firstItem="u4M-6m-ONi" firstAttribute="top" secondItem="u4H-VX-P2O" secondAttribute="topMargin" id="HRY-a2-LHf"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="u4M-6m-ONi" secondAttribute="trailing" constant="-16" id="llF-bx-Zpx"/>
-                            <constraint firstItem="u4M-6m-ONi" firstAttribute="leading" secondItem="u4H-VX-P2O" secondAttribute="leadingMargin" constant="-16" id="vuA-2k-lQt"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="J5c-Ih-djP" secondAttribute="trailing" constant="-20" id="O9J-f1-NCH"/>
+                            <constraint firstItem="HrU-7c-eyS" firstAttribute="top" secondItem="J5c-Ih-djP" secondAttribute="bottom" id="OSk-VD-ZEN"/>
+                            <constraint firstItem="J5c-Ih-djP" firstAttribute="top" secondItem="u4H-VX-P2O" secondAttribute="topMargin" id="PE8-en-WLL"/>
+                            <constraint firstItem="J5c-Ih-djP" firstAttribute="leading" secondItem="u4H-VX-P2O" secondAttribute="leadingMargin" constant="-20" id="igl-Ui-mqj"/>
                         </constraints>
                     </view>
                     <connections>
-                        <segue destination="vXZ-lx-hvc" kind="modal" identifier="toSplashView" id="lw9-PB-bZ2"/>
+                        <segue destination="vXZ-lx-hvc" kind="modal" identifier="toSplashView" animates="NO" id="lw9-PB-bZ2"/>
                         <segue destination="zh2-4j-mHu" kind="modal" identifier="toDashBoard" id="ch4-Vq-8DI"/>
                     </connections>
                 </viewController>
@@ -2077,7 +2077,7 @@
     <resources>
         <image name="Calendar_Med" width="512" height="512"/>
         <image name="Explore_Sm" width="256" height="256"/>
-        <image name="Image" width="500" height="900"/>
+        <image name="Image" width="1719" height="3094"/>
         <image name="MyAddictions_Sm" width="31" height="31"/>
         <image name="MyUploads_Sm" width="256" height="256"/>
         <image name="Profile_Sm" width="256" height="256"/>
@@ -2089,8 +2089,8 @@
     <inferredMetricsTieBreakers>
         <segue reference="ch4-Vq-8DI"/>
         <segue reference="lw9-PB-bZ2"/>
-        <segue reference="zjY-DB-duY"/>
         <segue reference="uZx-1x-ByM"/>
+        <segue reference="zjY-DB-duY"/>
         <segue reference="l1y-Rt-Be8"/>
     </inferredMetricsTieBreakers>
 </document>
