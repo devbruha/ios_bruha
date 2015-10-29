@@ -64,7 +64,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         switch (GlobalVariables.selectedDisplay){
         case "Event":
             let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
-            
+            let event = GlobalVariables.displayFilteredEvents
             return (eventInfo?.count)!
         case "Venue":
             let venueInfo = FetchData(context: managedObjectContext).fetchVenues()
@@ -370,7 +370,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                 let alertController = UIAlertController(title: "Are you sure you wanna unlike it!", message:nil, preferredStyle: .Alert)
                                 let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
                                 let unlikeAction = UIAlertAction(title: "Yes", style: .Default) { (_) -> Void in
-                                    
+                                    //print("my idddd \(event.subCategoryID)")
                                     DeleteData(context: self.managedObjectContext).deleteAddictionsEvent(event.eventID, deleteUser: user)
                                     print("Removed from addiction(event) \(event.eventID)")
                                     print("REMOVED")
@@ -606,6 +606,13 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         switch(index){
         case 0:
             //Map
+            
+            Filtering().filterEvents()
+//            Filtering().testing()
+            
+            //Filtering().filterPrice()
+            //Filtering().filterCalendar()
+            print("gFilter", GlobalVariables.displayFilteredEvents.count)
             break
         case 1:
             //Ticket

@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "Face_Concrete_Splash_IOS.jpg",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "Bruha_MED.png",
       "scale" : "2x"
     },
     {

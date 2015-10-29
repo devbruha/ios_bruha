@@ -30,7 +30,7 @@ class SplashViewController: UIViewController,UIScrollViewDelegate {
         self.skipButton.layer.cornerRadius = 4.0
         //3
         let imgOne = SplashView.instanceFromNib1()
-        imgOne.frame = CGRectMake(0, 0, scrollViewWidth, scrollViewHeight)
+        imgOne.frame = CGRectMake(0, 0, scrollViewWidth, scrollViewHeight+30)
         let imgTwo = SplashView.instanceFromNib2()
         imgTwo.frame = CGRectMake(scrollViewWidth, 0,scrollViewWidth+20, scrollViewHeight+168)
         let imgThree = SplashView.instanceFromNib3()
