@@ -40,4 +40,7 @@ class GlobalVariables{
     static var displayFilteredEvents: [Event] = []
     static var displayFilteredVenues: [Venue] = []
     static var displayFilteredOrganizations: [Organization] = []
+    static var filterEventBool = false
+    static var filterVenueBool = false
+    static var filterOrganizationBool = false
 }
