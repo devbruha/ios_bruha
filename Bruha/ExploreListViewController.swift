@@ -42,6 +42,8 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         GlobalVariables.displayedArtists = FetchData(context: managedObjectContext).fetchArtists()!
         GlobalVariables.displayedOrganizations = FetchData(context: managedObjectContext).fetchOrganizations()!
         
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateNotificationEvent", name: "filter", object: nil)
         // Do any additional setup after loading the view.
     }
     
@@ -63,18 +65,39 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         //println("This is global variable on clicking \(GlobalVariables.selectedDisplay)")
         switch (GlobalVariables.selectedDisplay){
         case "Event":
-            let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
-            let event = GlobalVariables.displayFilteredEvents
-            return (eventInfo?.count)!
+            var eventInfo: [Event] = []
+            
+            if GlobalVariables.filterEventBool {
+                eventInfo = GlobalVariables.displayFilteredEvents
+            } else {
+                eventInfo = FetchData(context: managedObjectContext).fetchEvents()
+            }
+            return (eventInfo.count)
+            
         case "Venue":
-            let venueInfo = FetchData(context: managedObjectContext).fetchVenues()
-            return (venueInfo?.count)!
+            var venueInfo: [Venue] = []
+            
+            if GlobalVariables.filterVenueBool {
+                venueInfo = GlobalVariables.displayFilteredVenues
+            } else {
+                venueInfo = FetchData(context: managedObjectContext).fetchVenues()!
+            }
+            return (venueInfo.count)
+            
         case "Artist":
             let artistInfo = FetchData(context: managedObjectContext).fetchArtists()
             return (artistInfo?.count)!
+            
         case "Organization":
-            let organizationInfo = FetchData(context: managedObjectContext).fetchOrganizations()
-            return (organizationInfo?.count)!
+            var organizationInfo: [Organization] = []
+            
+            if GlobalVariables.filterOrganizationBool {
+                organizationInfo = GlobalVariables.displayFilteredOrganizations
+            } else {
+                organizationInfo = FetchData(context: managedObjectContext).fetchOrganizations()!
+            }
+            return (organizationInfo.count)
+            
         default:
             let venueInfo = FetchData(context: managedObjectContext).fetchVenues()
             return (venueInfo?.count)!
@@ -99,51 +122,91 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 
                 cell = NSBundle.mainBundle().loadNibNamed("EventTableViewCell", owner: self, options: nil)[0] as! EventTableViewCell;
             }
-            
-            
-            let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
-            let event = eventInfo![indexPath.row]
-            
-            //println("Begin of code")
-            cell.ExploreImage.contentMode = UIViewContentMode.ScaleToFill
-            if let checkedUrl = NSURL(string:event.posterUrl) {
-                //println("Started downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
-                getDataFromUrl(checkedUrl) { data in
-                    dispatch_async(dispatch_get_main_queue()) {
-                        //println("Finished downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
-                        cell.ExploreImage.image = UIImage(data: data!)
-                    }
+    
                     
+            let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
+            
+            if GlobalVariables.filterEventBool {
+                let filteredEventInfo = GlobalVariables.displayFilteredEvents
+                for event in eventInfo! {
+                    if event.eventID == filteredEventInfo[indexPath.row].eventID {
+                        cell.ExploreImage.contentMode = UIViewContentMode.ScaleToFill
+                        if let checkedUrl = NSURL(string:event.posterUrl) {
+                            
+                            getDataFromUrl(checkedUrl) { data in
+                                dispatch_async(dispatch_get_main_queue()) {
+                                    
+                                    cell.ExploreImage.image = UIImage(data: data!)
+                                }
+                                
+                            }
+                            
+                        }
+                        
+                        cell.circTitle.text = event.eventName
+                        cell.circDate.text = event.eventStartDate
+                        cell.circPrice.text = "$\(event.eventPrice!)"
+                        cell.circHiddenID.text = event.eventID
+                        
+                        cell.rectTitle.text = event.eventDescription
+                        cell.rectPrice.text = "$\(event.eventPrice!)"
+                        cell.venueName.text = event.eventVenueName
+                        cell.venueAddress.text = event.eventVenueAddress
+                        cell.startDate.text = event.eventStartDate
+                        cell.startTime.text = "\(event.eventStartTime) -"
+                        cell.endDate.text = event.eventEndDate
+                        cell.endTime.text = event.eventEndTime
+                        // Configure the cell...
+                    }
                 }
+            
                 
+            } else { // when there is no filtering
+                
+                let event = eventInfo![indexPath.row]
+                
+                //println("Begin of code")
+                cell.ExploreImage.contentMode = UIViewContentMode.ScaleToFill
+                if let checkedUrl = NSURL(string:event.posterUrl) {
+                    //println("Started downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
+                    getDataFromUrl(checkedUrl) { data in
+                        dispatch_async(dispatch_get_main_queue()) {
+                            //println("Finished downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
+                            cell.ExploreImage.image = UIImage(data: data!)
+                        }
+                    
+                    }
+                
+                }
+                //println("End of code. The image will continue downloading in the background and it will be loaded when it ends.")
+                //Synchronously:
+                /*if let url = NSURL(string: event.url) {
+                if let data = NSData(contentsOfURL: url){
+                cell.ExploreImage.contentMode = UIViewContentMode.ScaleToFill
+                cell.ExploreImage.image = UIImage(data: data)
+                }
+                }*/
+            
+            
+            
+                cell.circTitle.text = event.eventName
+                cell.circDate.text = event.eventStartDate
+                cell.circPrice.text = "$\(event.eventPrice!)"
+                cell.circHiddenID.text = event.eventID
+            
+                cell.rectTitle.text = event.eventDescription
+                cell.rectPrice.text = "$\(event.eventPrice!)"
+                cell.venueName.text = event.eventVenueName
+                cell.venueAddress.text = event.eventVenueAddress
+                cell.startDate.text = event.eventStartDate
+                cell.startTime.text = "\(event.eventStartTime) -"
+                cell.endDate.text = event.eventEndDate
+                cell.endTime.text = event.eventEndTime
+                // Configure the cell...
+            
             }
-            //println("End of code. The image will continue downloading in the background and it will be loaded when it ends.")
-            //Synchronously:
-            /*if let url = NSURL(string: event.url) {
-            if let data = NSData(contentsOfURL: url){
-            cell.ExploreImage.contentMode = UIViewContentMode.ScaleToFill
-            cell.ExploreImage.image = UIImage(data: data)
-            }
-            }*/
             
-            
-            
-            cell.circTitle.text = event.eventName
-            cell.circDate.text = event.eventStartDate
-            cell.circPrice.text = "$\(event.eventPrice!)"
-            cell.circHiddenID.text = event.eventID
-            
-            cell.rectTitle.text = event.eventDescription
-            cell.rectPrice.text = "$\(event.eventPrice!)"
-            cell.venueName.text = event.eventVenueName
-            cell.venueAddress.text = event.eventVenueAddress
-            cell.startDate.text = event.eventStartDate
-            cell.startTime.text = "\(event.eventStartTime) -"
-            cell.endDate.text = event.eventEndDate
-            cell.endTime.text = event.eventEndTime
-            // Configure the cell...
-            
-            
+                    
             let temp: NSMutableArray = NSMutableArray()
             var like = 0
             let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
@@ -185,24 +248,52 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 cell = NSBundle.mainBundle().loadNibNamed("VenueTableViewCell", owner: self, options: nil)[0] as! VenueTableViewCell;
             }
             
-            let venueInfo = FetchData(context: managedObjectContext).fetchVenues()
-            let venue = venueInfo![indexPath.row]
             
-            cell.venueImage.contentMode = UIViewContentMode.ScaleToFill
-            if let checkedUrl = NSURL(string:venue.posterUrl) {
-                getDataFromUrl(checkedUrl) { data in
-                    dispatch_async(dispatch_get_main_queue()) {
-                        cell.venueImage.image = UIImage(data: data!)
+            let venueInfo = FetchData(context: managedObjectContext).fetchVenues()
+            
+            if GlobalVariables.filterVenueBool {
+                let filteredVenueInfo = GlobalVariables.displayFilteredVenues
+                for venue in venueInfo! {
+                    if venue.venueID == filteredVenueInfo[indexPath.row].venueID {
+                        cell.venueImage.contentMode = UIViewContentMode.ScaleToFill
+                        if let checkedUrl = NSURL(string:venue.posterUrl) {
+                            
+                            getDataFromUrl(checkedUrl) { data in
+                                dispatch_async(dispatch_get_main_queue()) {
+                                    
+                                    cell.venueImage.image = UIImage(data: data!)
+                                }
+                            }
+                        }
+                        
+                        cell.venueName.text = venue.venueName
+                        cell.venueDescription.text = venue.venueDescription
+                        cell.venueAddress.text = venue.venueAddress
+                        cell.circVenueName.text = venue.venueName
+                        cell.circHiddenID.text = venue.venueID
                     }
                 }
                 
-            }
+            } else { // when there is no filtering
+                                    
+                let venue = venueInfo![indexPath.row]
             
-            cell.venueName.text = venue.venueName
-            cell.venueDescription.text = venue.venueDescription
-            cell.venueAddress.text = venue.venueAddress
-            cell.circVenueName.text = venue.venueName
-            cell.circHiddenID.text = venue.venueID
+                cell.venueImage.contentMode = UIViewContentMode.ScaleToFill
+                if let checkedUrl = NSURL(string:venue.posterUrl) {
+                    getDataFromUrl(checkedUrl) { data in
+                        dispatch_async(dispatch_get_main_queue()) {
+                            cell.venueImage.image = UIImage(data: data!)
+                        }
+                    }
+                
+                }
+            
+                cell.venueName.text = venue.venueName
+                cell.venueDescription.text = venue.venueDescription
+                cell.venueAddress.text = venue.venueAddress
+                cell.circVenueName.text = venue.venueName
+                cell.circHiddenID.text = venue.venueID
+            }
             
             
             let temp: NSMutableArray = NSMutableArray()
@@ -282,24 +373,53 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 cell = NSBundle.mainBundle().loadNibNamed("OrganizationTableViewCell", owner: self, options: nil)[0] as! OrganizationTableViewCell;
             }
             
-            let organizationInfo = FetchData(context: managedObjectContext).fetchOrganizations()
-            let organization = organizationInfo![indexPath.row]
             
-            cell.organizationImage.contentMode = UIViewContentMode.ScaleToFill
-            if let checkedUrl = NSURL(string:organization.posterUrl) {
-                getDataFromUrl(checkedUrl) { data in
-                    dispatch_async(dispatch_get_main_queue()) {
-                        cell.organizationImage.image = UIImage(data: data!)
+            let organizationInfo = FetchData(context: managedObjectContext).fetchOrganizations()
+            
+            if GlobalVariables.filterOrganizationBool {
+                let filteredOrganizationInfo = GlobalVariables.displayFilteredOrganizations
+                for organization in organizationInfo! {
+                    if organization.organizationID == filteredOrganizationInfo[indexPath.row].organizationID {
+                        cell.organizationImage.contentMode = UIViewContentMode.ScaleToFill
+                        if let checkedUrl = NSURL(string:organization.posterUrl) {
+                            
+                            getDataFromUrl(checkedUrl) { data in
+                                dispatch_async(dispatch_get_main_queue()) {
+                                    
+                                    cell.organizationImage.image = UIImage(data: data!)
+                                }
+                            }
+                        }
+                        
+                        cell.organizationName.text = organization.organizationName
+                        cell.organizationDescription.text = organization.organizationDescription
+                        cell.address.text = organization.organizationAddress
+                        cell.circOrgName.text = organization.organizationName
+                        cell.circHiddenID.text = organization.organizationID
                     }
                 }
                 
+            } else { // when there is no filtering
+                let organization = organizationInfo![indexPath.row]
+            
+                cell.organizationImage.contentMode = UIViewContentMode.ScaleToFill
+                if let checkedUrl = NSURL(string:organization.posterUrl) {
+                    getDataFromUrl(checkedUrl) { data in
+                        dispatch_async(dispatch_get_main_queue()) {
+                            cell.organizationImage.image = UIImage(data: data!)
+                        }
+                    }
+                
+                }
+            
+                cell.organizationName.text = organization.organizationName
+                cell.organizationDescription.text = organization.organizationDescription
+                cell.address.text = organization.organizationAddress
+                cell.circOrgName.text = organization.organizationName
+                cell.circHiddenID.text = organization.organizationID
+            
             }
             
-            cell.organizationName.text = organization.organizationName
-            cell.organizationDescription.text = organization.organizationDescription
-            cell.address.text = organization.organizationAddress
-            cell.circOrgName.text = organization.organizationName
-            cell.circHiddenID.text = organization.organizationID
             
             let temp: NSMutableArray = NSMutableArray()
             var like = 0
@@ -607,12 +727,26 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         case 0:
             //Map
             
-            Filtering().filterEvents()
-//            Filtering().testing()
+            print("event filter applied", GlobalVariables.filterEventBool)
+            print("afterFilterEvent", GlobalVariables.displayFilteredEvents.count)
+            for e in GlobalVariables.displayFilteredEvents{
+                print("they are", e.eventName)
+            }
             
-            //Filtering().filterPrice()
-            //Filtering().filterCalendar()
-            print("gFilter", GlobalVariables.displayFilteredEvents.count)
+            
+            print("venue filter applied", GlobalVariables.filterVenueBool)
+            print("afterFilterVenue", GlobalVariables.displayFilteredVenues.count)
+            for v in GlobalVariables.displayFilteredVenues{
+                print("they are", v.venueName)
+            }
+            
+            print("organization filter applied", GlobalVariables.filterOrganizationBool)
+            print("afterFilterOrganization", GlobalVariables.displayFilteredOrganizations.count)
+            for o in GlobalVariables.displayFilteredOrganizations{
+                print("they are", o.organizationName)
+            }
+            
+            
             break
         case 1:
             //Ticket

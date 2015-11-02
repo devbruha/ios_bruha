@@ -141,16 +141,15 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
             if let index = GlobalVariables.UserCustomFilters.dateFilter.indexOf("\(date.year)-\(date.month)-\(date.day)"){
                 
                 GlobalVariables.UserCustomFilters.dateFilter.removeAtIndex(index)
-                Filtering().filterEvents()
             }
         }
         else{
             
             GlobalVariables.UserCustomFilters.dateFilter.append("\(date.year)-\(date.month)-\(date.day)")
-            Filtering().filterEvents()
         }
         
         print(GlobalVariables.UserCustomFilters.dateFilter)
+        Filtering().filterEvents()
     }
     
     func setupCategoryLists(){
@@ -300,6 +299,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
             GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].append(subCategoryID)
             GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![1].append(subCategoryName)
             print("after added filter \(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories)")
+            Filtering().filterEvents()
         }
         
         //print(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.keys.elements)
@@ -325,6 +325,8 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
             GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![1].removeAtIndex(index!)
             
             print("after removed filter \(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories)")
+            
+            Filtering().filterEvents()
             
         }
         else{
@@ -416,6 +418,10 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         view.addGestureRecognizer(tap)
         
         tableView.allowsMultipleSelection = true
+        
+        Filtering().filterEvents()
+        Filtering().filterVenues()
+        Filtering().filterOrganizations()
     }
     
     func sectionTapped(sender: UITapGestureRecognizer){
@@ -425,22 +431,66 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         let index = Int(header.detailTextLabel!.text!)
         let headerTitle = header.textLabel!.text!
         
-        
-        if(headerTitle != "Event Categories"){
+        switch (GlobalVariables.selectedDisplay) {
+        case "Event":
+            if(headerTitle != "Event Categories"){
             
-            if GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.keys.contains(headerTitle){
+                if GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.keys.contains(headerTitle){
                 
-                GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.removeValueForKey(headerTitle)
+                    GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.removeValueForKey(headerTitle)
+                }
+                else{
+                    GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle] = [[String]]()
+                    GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle] = [[],[]]
+                }
             }
             else{
-                GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle] = [[String]]()
-                GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle] = [[],[]]
-            }
-        }
-        else{
             
-            GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.removeAll(keepCapacity: false)
+                GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.removeAll(keepCapacity: false)
+            }
+            print(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories)
+        
+        case "Venue":
+            if(headerTitle != "Venue Categories"){
+                
+                if GlobalVariables.UserCustomFilters.categoryFilter.venueCategories.contains(headerTitle){
+                    
+                    let idx = GlobalVariables.UserCustomFilters.categoryFilter.venueCategories.indexOf(headerTitle)
+                    GlobalVariables.UserCustomFilters.categoryFilter.venueCategories.removeAtIndex(idx!)
+                }
+                else{
+                    GlobalVariables.UserCustomFilters.categoryFilter.venueCategories.append(headerTitle)
+                }
+            }
+            else{
+                
+                GlobalVariables.UserCustomFilters.categoryFilter.venueCategories.removeAll(keepCapacity: false)
+            }
+            print(GlobalVariables.UserCustomFilters.categoryFilter.venueCategories)
+            
+        case "Organization":
+            if(headerTitle != "Organization Categories"){
+                
+                if GlobalVariables.UserCustomFilters.categoryFilter.organizationCategories.contains(headerTitle){
+                    
+                    let idx = GlobalVariables.UserCustomFilters.categoryFilter.organizationCategories.indexOf(headerTitle)
+                    GlobalVariables.UserCustomFilters.categoryFilter.organizationCategories.removeAtIndex(idx!)
+                }
+                else{
+                    GlobalVariables.UserCustomFilters.categoryFilter.organizationCategories.append(headerTitle)
+                }
+            }
+            else{
+                
+                GlobalVariables.UserCustomFilters.categoryFilter.organizationCategories.removeAll(keepCapacity: false)
+            }
+            print(GlobalVariables.UserCustomFilters.categoryFilter.organizationCategories)
+            
+        default:
+            break
         }
+    
+    
         
         if(index == 0){
             switch (GlobalVariables.selectedDisplay) {
@@ -507,11 +557,13 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
                 break
                 
             case "Venue":
-                //venueObject[index!] = (backupVenueCategories[index!])
-                //header.backgroundView?.backgroundColor = UIColor.blueColor()
-//                if header.contentView.backgroundColor == 
-//                header.contentView.backgroundColor = UIColor.blueColor()
-                
+//                if venueObject[index!] == header.textLabel!.text {
+//                    
+//                    venueObject[index!] = (backupVenueCategories[index!])
+//
+//                    header.contentView.backgroundColor = UIColor.blueColor()
+//                }
+//                //header.contentView.backgroundColor = UIColor.blueColor()
                 break
                 
             default:
