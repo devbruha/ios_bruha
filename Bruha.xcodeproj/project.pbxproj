@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		180B05941BE464E800E2F46F /* HorizontalLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180B05931BE464E800E2F46F /* HorizontalLine.swift */; };
 		180F6DFE1B75006800F86BF5 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 180F6DFD1B75006800F86BF5 /* MapViewController.swift */; };
 		180F6E241B75231200F86BF5 /* GoogleMaps.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 180F6E231B75231200F86BF5 /* GoogleMaps.framework */; };
 		180F6E261B75232700F86BF5 /* GoogleMaps.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 180F6E251B75232700F86BF5 /* GoogleMaps.bundle */; };
@@ -139,6 +140,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		180B05931BE464E800E2F46F /* HorizontalLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HorizontalLine.swift; sourceTree = "<group>"; };
 		180F6DFD1B75006800F86BF5 /* MapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		180F6E231B75231200F86BF5 /* GoogleMaps.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = GoogleMaps.framework; sourceTree = "<group>"; };
 		180F6E251B75232700F86BF5 /* GoogleMaps.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = GoogleMaps.bundle; path = GoogleMaps.framework/Versions/A/Resources/GoogleMaps.bundle; sourceTree = "<group>"; };
@@ -524,6 +526,7 @@
 				45FA05751B5D4158004AD819 /* LaunchScreen.xib */,
 				45FA05B91B5D63EB004AD819 /* Main.storyboard */,
 				18E2DD8B1B69537D007C61B5 /* DashLine.swift */,
+				180B05931BE464E800E2F46F /* HorizontalLine.swift */,
 				4560C54C1B66D45100AB5382 /* EventRectangleView.swift */,
 				4560C54A1B66D44700AB5382 /* EventCircleView.swift */,
 				18A98A741B84C8CF0016AF7E /* EventTableViewCell.xib */,
@@ -785,6 +788,7 @@
 				A5D90E001BBDD28700537F72 /* AddictionVenueDBModel.swift in Sources */,
 				45FA059D1B5D4188004AD819 /* OrganizationDBModel.swift in Sources */,
 				A505C0F11BCEDEDA0067CDD1 /* UserEventSubCategoryDBModel.swift in Sources */,
+				180B05941BE464E800E2F46F /* HorizontalLine.swift in Sources */,
 				45FA059B1B5D4188004AD819 /* GlobalVariables.swift in Sources */,
 				45FA05A51B5D4190004AD819 /* NetworkOperation.swift in Sources */,
 				4560C5491B66D42000AB5382 /* ExploreListViewController.swift in Sources */,

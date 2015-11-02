@@ -12,20 +12,18 @@ class ProfileViewController: UIViewController {
     
     // Retreive the managedObjectContext from AppDelegate
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    
+    let gradientLayer = CAGradientLayer()
 
-    @IBOutlet weak var location: UILabel!
-    @IBOutlet weak var sex: UILabel!
-    @IBOutlet weak var birthday: UILabel!
-    @IBOutlet weak var userName: UILabel!
-    @IBOutlet weak var name: UILabel!
     @IBOutlet weak var myImage: UIImageView!
+    @IBOutlet weak var name: UILabel!
     @IBOutlet weak var email: UILabel!
     
     func configureView(){
         
-        myImage.layer.borderWidth = 1
+        myImage.layer.borderWidth = 3
         myImage.layer.masksToBounds = false
-        myImage.layer.borderColor = UIColor.blackColor().CGColor
+        myImage.layer.borderColor = UIColor.whiteColor().CGColor
         myImage.layer.cornerRadius = myImage.frame.height/2
         myImage.clipsToBounds = true
     }
@@ -34,12 +32,8 @@ class ProfileViewController: UIViewController {
         
         let userInfo = FetchData(context: managedObjectContext).fetchUserInfo()
         
-        name.text = (userInfo?.first?.userFirstName)!
-        userName.text = (userInfo?.first?.userName)
-        sex.text = (userInfo?.first?.userGender)!
+        name.text = (userInfo?.first?.userName)!
         email.text = (userInfo?.first?.userEmail)!
-        birthday.text = (userInfo?.first?.userBirthdate)!
-        location.text = (userInfo?.first?.userCity)!
         
         myImage.image = UIImage(named: "Slide 3.png")
     }
@@ -48,6 +42,7 @@ class ProfileViewController: UIViewController {
         super.viewDidLoad()
         configureView()
         loadUserInfo()
+        backgroundGradient()
         // Do any additional setup after loading the view.
     }
     
@@ -56,7 +51,13 @@ class ProfileViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func LogoutPressed(sender: AnyObject) {
+    func backgroundGradient() {
+        let background = CAGradientLayer().profileColor()
+        background.frame = self.view.bounds
+        self.view.layer.insertSublayer(background, atIndex: 0)
+    }
+    
+    /*@IBAction func LogoutPressed(sender: AnyObject) {
         
         let alertController = UIAlertController(title: "Are you sure you want to log out?", message:nil, preferredStyle: .Alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
@@ -70,7 +71,7 @@ class ProfileViewController: UIViewController {
         alertController.addAction(cancelAction)
         
         self.presentViewController(alertController, animated: true, completion: nil)
-    }
+    }*/
     
     
 
