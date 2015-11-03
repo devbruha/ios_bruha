@@ -50,12 +50,6 @@ class LoadScreenViewController: UIViewController {
             
             NSNotificationCenter.defaultCenter().addObserver(self, selector: "performSegue", name:"download complete", object: nil)
             
-//            delay(3.0) {
-//                print("GO TO DASHBOARD")
-//                self.performSegue()
-//            }
-            
-            
         } else {
             
             let alertController = UIAlertController(title: "No Internet Connection Detected!", message:hasInternet(), preferredStyle: .Alert)
@@ -113,9 +107,8 @@ class LoadScreenViewController: UIViewController {
             print("should go to splash")
             NSNotificationCenter.defaultCenter().postNotificationName("download complete", object: nil)
             
-            /* not sure if I have to remove the observers? */
+            /* not sure if I have to remove the observers? if so, they may be removed in 'deinit' */
             //NSNotificationCenter.defaultCenter().removeObserver(self, name:"Event Categories", object: nil)
-            //NSNotificationCenter.defaultCenter().removeObserver(self, name:"Events", object: nil)
             
         } else if generalRetrieved == 4 && loggedinRetrieved == 6 && isNotified {
             
@@ -151,8 +144,20 @@ class LoadScreenViewController: UIViewController {
         }
     }
     
-//    func delay(delay:Double, closure:()->()) {
-//        dispatch_after( dispatch_time( DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC)) ), dispatch_get_main_queue(), closure )
+//    deinit {
+//        
+//        NSNotificationCenter.defaultCenter().removeObserver(self, name:"Event Categories", object: nil)
+//        NSNotificationCenter.defaultCenter().removeObserver(self, name:"Events", object: nil)
+//        NSNotificationCenter.defaultCenter().removeObserver(self, name:"Venues", object: nil)
+//        NSNotificationCenter.defaultCenter().removeObserver(self, name:"Organizations", object: nil)
+//        
+//        NSNotificationCenter.defaultCenter().removeObserver(self, name:"User Events", object: nil)
+//        NSNotificationCenter.defaultCenter().removeObserver(self, name:"Addicted Events", object: nil)
+//        NSNotificationCenter.defaultCenter().removeObserver(self, name:"User Venues", object: nil)
+//        NSNotificationCenter.defaultCenter().removeObserver(self, name:"Addicted Venues", object: nil)
+//        NSNotificationCenter.defaultCenter().removeObserver(self, name:"User Organizations", object: nil)
+//        NSNotificationCenter.defaultCenter().removeObserver(self, name:"Addicted Organizations", object: nil)
+//        print("DEINITED")
 //    }
-    
+
 }
