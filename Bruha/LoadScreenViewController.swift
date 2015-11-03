@@ -14,7 +14,7 @@ class LoadScreenViewController: UIViewController {
     
     var generalRetrieved = 0
     var loggedinRetrieved = 0
-
+    var isNotified: Bool = true
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -107,7 +107,9 @@ class LoadScreenViewController: UIViewController {
         
         generalRetrieved = generalRetrieved + 1
         
-        if generalRetrieved == 4 && FetchData(context: managedObjectContext).fetchUserInfo()?.count == 0 {
+        if generalRetrieved == 4 && FetchData(context: managedObjectContext).fetchUserInfo()?.count == 0 && isNotified {
+            
+            isNotified = false
             print("should go to splash")
             NSNotificationCenter.defaultCenter().postNotificationName("download complete", object: nil)
             
@@ -115,7 +117,9 @@ class LoadScreenViewController: UIViewController {
             //NSNotificationCenter.defaultCenter().removeObserver(self, name:"Event Categories", object: nil)
             //NSNotificationCenter.defaultCenter().removeObserver(self, name:"Events", object: nil)
             
-        } else if generalRetrieved == 4 && loggedinRetrieved == 6 {
+        } else if generalRetrieved == 4 && loggedinRetrieved == 6 && isNotified {
+            
+            isNotified = false
             print("should dashboard")
             NSNotificationCenter.defaultCenter().postNotificationName("download complete", object: nil)
         }
@@ -125,7 +129,9 @@ class LoadScreenViewController: UIViewController {
         
         loggedinRetrieved = loggedinRetrieved + 1
         
-        if loggedinRetrieved == 6 && FetchData(context: managedObjectContext).fetchUserInfo()?.count != 0 && generalRetrieved == 4 {
+        if loggedinRetrieved == 6 && FetchData(context: managedObjectContext).fetchUserInfo()?.count != 0 && generalRetrieved == 4 && isNotified {
+            
+            isNotified = false
             print("should go to dashboard")
             NSNotificationCenter.defaultCenter().postNotificationName("download complete", object: nil)
         }

@@ -25,7 +25,7 @@ class Filtering {
                 //when events don't match selected date in filter, remove events
                 if !GlobalVariables.UserCustomFilters.dateFilter.contains(tempEvent[i-1].eventStartDate) {
                     let index = tempEvent.indexOf({$0.eventID == tempEvent[i-1].eventID})
-                    print(tempEvent[i-1].eventStartDate, "displayedE")
+                    //print(tempEvent[i-1].eventStartDate, "filter out displayedE")
                     tempEvent.removeAtIndex(index!)
                 }
             }
@@ -75,11 +75,9 @@ class Filtering {
                         }
                     
                         else {
-                            
-                            if key == Array(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.keys)[0] {
+                            if key == tempEvent[i-1].primaryCategory {
                                 if !temp.contains({$0.eventID == tempEvent[i-1].eventID}){
                                     temp.append(tempEvent[i-1])
-                                    //print("name", Array(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.keys)[0])
                                 }
                             }
                         }
