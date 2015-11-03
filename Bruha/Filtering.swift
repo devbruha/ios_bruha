@@ -25,6 +25,7 @@ class Filtering {
                 //when events don't match selected date in filter, remove events
                 if !GlobalVariables.UserCustomFilters.dateFilter.contains(tempEvent[i-1].eventStartDate) {
                     let index = tempEvent.indexOf({$0.eventID == tempEvent[i-1].eventID})
+                    print(tempEvent[i-1].eventStartDate, "displayedE")
                     tempEvent.removeAtIndex(index!)
                 }
             }
@@ -99,15 +100,13 @@ class Filtering {
             
                 tempEvent.removeAll()
                 GlobalVariables.filterEventBool = false
-                NSNotificationCenter.defaultCenter().postNotificationName("filter", object: nil)
                 
         } else {
             GlobalVariables.filterEventBool = true
-            NSNotificationCenter.defaultCenter().postNotificationName("filter", object: nil)
         }
         
         GlobalVariables.displayFilteredEvents = tempEvent
-        
+        NSNotificationCenter.defaultCenter().postNotificationName("filter", object: nil)
     }
 
     func filterVenues() {
@@ -123,15 +122,14 @@ class Filtering {
                 }
             }
             GlobalVariables.filterVenueBool = true
-            NSNotificationCenter.defaultCenter().postNotificationName("filter", object: nil)
             
         } else {
             tempVenue.removeAll()
             GlobalVariables.filterVenueBool = false
-            NSNotificationCenter.defaultCenter().postNotificationName("filter", object: nil)
         }
         
         GlobalVariables.displayFilteredVenues = tempVenue
+        NSNotificationCenter.defaultCenter().postNotificationName("filter", object: nil)
         
     }
     
@@ -148,16 +146,15 @@ class Filtering {
                 }
             }
             GlobalVariables.filterOrganizationBool = true
-            NSNotificationCenter.defaultCenter().postNotificationName("filter", object: nil)
             
         } else {
             tempOrganization.removeAll()
             GlobalVariables.filterOrganizationBool = false
-            NSNotificationCenter.defaultCenter().postNotificationName("filter", object: nil)
         }
         
         GlobalVariables.displayFilteredOrganizations = tempOrganization
-        
+        NSNotificationCenter.defaultCenter().postNotificationName("filter", object: nil)
+
     }
     
 }

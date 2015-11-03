@@ -136,16 +136,28 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
     
     func didSelectDate(date: NSDate){
         
-        if GlobalVariables.UserCustomFilters.dateFilter.contains("\(date.year)-\(date.month)-\(date.day)"){
+        var mDay = String(date.day)
+        var mMonth = String(date.month)
+        
+        if date.day < 10 {
+            mDay = "0\(date.day)"
+        }
+        
+        if date.month < 10 {
+            mMonth = "0\(date.month)"
+        }
+        print(mMonth)
+        
+        if GlobalVariables.UserCustomFilters.dateFilter.contains("\(date.year)-\(mMonth)-\(mDay)"){
             
-            if let index = GlobalVariables.UserCustomFilters.dateFilter.indexOf("\(date.year)-\(date.month)-\(date.day)"){
+            if let index = GlobalVariables.UserCustomFilters.dateFilter.indexOf("\(date.year)-\(mMonth)-\(mDay)"){
                 
                 GlobalVariables.UserCustomFilters.dateFilter.removeAtIndex(index)
             }
         }
         else{
             
-            GlobalVariables.UserCustomFilters.dateFilter.append("\(date.year)-\(date.month)-\(date.day)")
+            GlobalVariables.UserCustomFilters.dateFilter.append("\(date.year)-\(mMonth)-\(mDay)")
         }
         
         print(GlobalVariables.UserCustomFilters.dateFilter)
