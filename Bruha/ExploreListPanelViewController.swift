@@ -224,7 +224,8 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         GlobalVariables.selectedDisplay = "Event"
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
         clearBackupCategories()
-        
+        GlobalVariables.UserCustomFilters.categoryFilter.venueCategories.removeAll()
+        GlobalVariables.UserCustomFilters.categoryFilter.organizationCategories.removeAll()
     }
     
     func venueTapped(){
@@ -232,7 +233,8 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         GlobalVariables.selectedDisplay = "Venue"
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
         clearBackupCategories()
-        
+        GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.removeAll()
+        GlobalVariables.UserCustomFilters.categoryFilter.organizationCategories.removeAll()
     }
     
     func artistTapped(){
@@ -248,7 +250,8 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         GlobalVariables.selectedDisplay = "Organization"
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
         clearBackupCategories()
-        
+        GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.removeAll()
+        GlobalVariables.UserCustomFilters.categoryFilter.venueCategories.removeAll()
     }
     
     // -------------------------------Category Table Logic-------------------------------

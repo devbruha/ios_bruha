@@ -104,6 +104,7 @@ class Filtering {
         }
         
         GlobalVariables.displayFilteredEvents = tempEvent
+        
         NSNotificationCenter.defaultCenter().postNotificationName("filter", object: nil)
     }
 
@@ -127,6 +128,7 @@ class Filtering {
         }
         
         GlobalVariables.displayFilteredVenues = tempVenue
+        
         NSNotificationCenter.defaultCenter().postNotificationName("filter", object: nil)
         
     }
@@ -151,8 +153,19 @@ class Filtering {
         }
         
         GlobalVariables.displayFilteredOrganizations = tempOrganization
+        
         NSNotificationCenter.defaultCenter().postNotificationName("filter", object: nil)
 
+    }
+    
+    func clearFilter() {
+        
+        GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.removeAll()
+        GlobalVariables.UserCustomFilters.categoryFilter.venueCategories.removeAll()
+        GlobalVariables.UserCustomFilters.categoryFilter.organizationCategories.removeAll()
+        GlobalVariables.UserCustomFilters.dateFilter.removeAll()
+        GlobalVariables.UserCustomFilters.priceFilter = 0
+        
     }
     
 }

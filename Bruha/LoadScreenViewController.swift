@@ -14,13 +14,17 @@ class LoadScreenViewController: UIViewController {
     
     var generalRetrieved = 0
     var loggedinRetrieved = 0
-    var isNotified: Bool = true
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         DeleteData(context: self.managedObjectContext).deleteAll()
         LoadScreenService(context: self.managedObjectContext).retrieveAll()
+        
+    }
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "segueSplash", name:"Event Categories", object: nil)
         
@@ -41,10 +45,10 @@ class LoadScreenViewController: UIViewController {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "segueDashBoard", name:"User Organizations", object: nil)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "segueDashBoard", name:"Addicted Organizations", object: nil)
-        
     }
     
     override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
         
         if hasInternet() == "true" {
             
@@ -72,8 +76,25 @@ class LoadScreenViewController: UIViewController {
             
             self.presentViewController(alertController, animated: true, completion: nil)
         }
+    }
+    
+    override func viewWillDisappear(animated: Bool) {
         
+        super.viewWillDisappear(animated)
         
+        NSNotificationCenter.defaultCenter().removeObserver(self, name:"Event Categories", object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name:"Events", object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name:"Venues", object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name:"Organizations", object: nil)
+        
+        NSNotificationCenter.defaultCenter().removeObserver(self, name:"User Events", object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name:"Addicted Events", object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name:"User Venues", object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name:"Addicted Venues", object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name:"User Organizations", object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name:"Addicted Organizations", object: nil)
+        
+        print("observer removed")
     }
     
     override func didReceiveMemoryWarning() {
@@ -101,18 +122,13 @@ class LoadScreenViewController: UIViewController {
         
         generalRetrieved = generalRetrieved + 1
         
-        if generalRetrieved == 4 && FetchData(context: managedObjectContext).fetchUserInfo()?.count == 0 && isNotified {
+        if generalRetrieved == 4 && FetchData(context: managedObjectContext).fetchUserInfo()?.count == 0 {
             
-            isNotified = false
             print("should go to splash")
             NSNotificationCenter.defaultCenter().postNotificationName("download complete", object: nil)
             
-            /* not sure if I have to remove the observers? if so, they may be removed in 'deinit' */
-            //NSNotificationCenter.defaultCenter().removeObserver(self, name:"Event Categories", object: nil)
+        } else if generalRetrieved == 4 && loggedinRetrieved == 6 {
             
-        } else if generalRetrieved == 4 && loggedinRetrieved == 6 && isNotified {
-            
-            isNotified = false
             print("should dashboard")
             NSNotificationCenter.defaultCenter().postNotificationName("download complete", object: nil)
         }
@@ -122,9 +138,8 @@ class LoadScreenViewController: UIViewController {
         
         loggedinRetrieved = loggedinRetrieved + 1
         
-        if loggedinRetrieved == 6 && FetchData(context: managedObjectContext).fetchUserInfo()?.count != 0 && generalRetrieved == 4 && isNotified {
+        if loggedinRetrieved == 6 && FetchData(context: managedObjectContext).fetchUserInfo()?.count != 0 && generalRetrieved == 4 {
             
-            isNotified = false
             print("should go to dashboard")
             NSNotificationCenter.defaultCenter().postNotificationName("download complete", object: nil)
         }
@@ -134,30 +149,13 @@ class LoadScreenViewController: UIViewController {
         
         if(FetchData(context: managedObjectContext).fetchUserInfo()?.count != 0) {
             
-            print("DashBoard")
+            print("DashBoard segue")
             self.performSegueWithIdentifier("toDashBoard", sender: self)
             
         } else {
             
-            print("SplashView")
+            print("SplashView segue")
             self.performSegueWithIdentifier("toSplashView", sender: self)
         }
     }
-    
-//    deinit {
-//        
-//        NSNotificationCenter.defaultCenter().removeObserver(self, name:"Event Categories", object: nil)
-//        NSNotificationCenter.defaultCenter().removeObserver(self, name:"Events", object: nil)
-//        NSNotificationCenter.defaultCenter().removeObserver(self, name:"Venues", object: nil)
-//        NSNotificationCenter.defaultCenter().removeObserver(self, name:"Organizations", object: nil)
-//        
-//        NSNotificationCenter.defaultCenter().removeObserver(self, name:"User Events", object: nil)
-//        NSNotificationCenter.defaultCenter().removeObserver(self, name:"Addicted Events", object: nil)
-//        NSNotificationCenter.defaultCenter().removeObserver(self, name:"User Venues", object: nil)
-//        NSNotificationCenter.defaultCenter().removeObserver(self, name:"Addicted Venues", object: nil)
-//        NSNotificationCenter.defaultCenter().removeObserver(self, name:"User Organizations", object: nil)
-//        NSNotificationCenter.defaultCenter().removeObserver(self, name:"Addicted Organizations", object: nil)
-//        print("DEINITED")
-//    }
-
 }
