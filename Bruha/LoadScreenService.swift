@@ -70,6 +70,7 @@ class LoadScreenService {
                     dispatch_async(dispatch_get_main_queue()) {
                         
                         SaveData(context: self.managedObjectContext).saveCategories(mCategories)
+                        NSNotificationCenter.defaultCenter().postNotificationName("Event Categories", object: nil)
                     }
                 }
             }
@@ -95,6 +96,7 @@ class LoadScreenService {
                     dispatch_async(dispatch_get_main_queue()) {
                     
                         SaveData(context: self.managedObjectContext).saveEvents(mEvents)
+                        NSNotificationCenter.defaultCenter().postNotificationName("Events", object: nil)
                     }
                 }
             }
@@ -117,6 +119,7 @@ class LoadScreenService {
                     dispatch_async(dispatch_get_main_queue()) {
                         
                         SaveData(context: self.managedObjectContext).saveUserEvents(mEvents)
+                        NSNotificationCenter.defaultCenter().postNotificationName("User Events", object: nil)
                     }
                 }
             }
@@ -148,10 +151,12 @@ class LoadScreenService {
                     
                     //dispatch stuff maybe
                     dispatch_async(dispatch_get_main_queue()) {
-                        for addiction in addictionArray{
                         
+                        for addiction in addictionArray{
                             SaveData(context: self.managedObjectContext).saveAddictionEvent(addiction)
                         }
+                        
+                        NSNotificationCenter.defaultCenter().postNotificationName("Addicted Events", object: nil)
                     }
                 }
             }
@@ -172,7 +177,8 @@ class LoadScreenService {
                 
                 print("Retrieve Venues")
                 dispatch_async(dispatch_get_main_queue()) {
-                SaveData(context: self.managedObjectContext).saveVenues(mVenues)
+                    SaveData(context: self.managedObjectContext).saveVenues(mVenues)
+                    NSNotificationCenter.defaultCenter().postNotificationName("Venues", object: nil)
                 }
             }
         }
@@ -192,6 +198,7 @@ class LoadScreenService {
                     print("Retrieve User Venues")
                     dispatch_async(dispatch_get_main_queue()) {
                         SaveData(context: self.managedObjectContext).saveUserVenues(mVenues)
+                        NSNotificationCenter.defaultCenter().postNotificationName("User Venues", object: nil)
                     }
                 }
             }
@@ -225,6 +232,7 @@ class LoadScreenService {
                             SaveData(context: self.managedObjectContext).saveAddictionVenue(addiction)
                     
                         }
+                        NSNotificationCenter.defaultCenter().postNotificationName("Addicted Venues", object: nil)
                     }
                 }
             }
@@ -263,7 +271,8 @@ class LoadScreenService {
                 
                 print("Retrieve Organizations")
                 dispatch_async(dispatch_get_main_queue()) {
-                SaveData(context: self.managedObjectContext).saveOrganizations(mOrganizations)
+                    SaveData(context: self.managedObjectContext).saveOrganizations(mOrganizations)
+                    NSNotificationCenter.defaultCenter().postNotificationName("Organizations", object: nil)
                 }
             }
         }
@@ -283,6 +292,7 @@ class LoadScreenService {
                     print("Retrieve User Organizations")
                     dispatch_async(dispatch_get_main_queue()) {
                         SaveData(context: self.managedObjectContext).saveUserOrganizations(mOrganizations)
+                        NSNotificationCenter.defaultCenter().postNotificationName("User Organizations", object: nil)
                     }
                 }
             }
@@ -316,6 +326,7 @@ class LoadScreenService {
                         
                             SaveData(context: self.managedObjectContext).saveAddictionOrganization(addiction)
                         }
+                        NSNotificationCenter.defaultCenter().postNotificationName("Addicted Organizations", object: nil)
                     }
                 }
             }

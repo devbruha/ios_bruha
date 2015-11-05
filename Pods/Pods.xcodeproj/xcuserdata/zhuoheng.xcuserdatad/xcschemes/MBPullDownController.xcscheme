@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '56BCDD71B526F773C4E6FB4E'
-               BlueprintName = 'MBCalendarKit'
+               BlueprintIdentifier = '020F7AD5FAA628CE6B455A16'
+               BlueprintName = 'MBPullDownController'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'libMBCalendarKit.a'>
+               BuildableName = 'libMBPullDownController.a'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
