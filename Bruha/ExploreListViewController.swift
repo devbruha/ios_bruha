@@ -749,23 +749,43 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             
             break
         case 1:
-            //Ticket
-            print("Displaying Addictions from the local database")
-            let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
-            for addict in addictionInfo!{
-                print("the addicted event id is \(addict.eventID)\nthe user is \(addict.userID)")
+            //Event Ticket
+            if GlobalVariables.selectedDisplay == "Event"{
+                print("Displaying Addictions from the local database")
+                let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
+                for addict in addictionInfo!{
+                    print("the addicted event id is \(addict.eventID)\nthe user is \(addict.userID)")
+                }
+            }
+            
+            //Venue MoreInfo
+            if (GlobalVariables.selectedDisplay == "Venue"){
+                let cellIndexPath = self.exploreTableView.indexPathForCell(cell)
+                
+                let selectedCell = self.exploreTableView.cellForRowAtIndexPath(cellIndexPath!) as! VenueTableViewCell
+                
+                GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
+                self.performSegueWithIdentifier("GoToMoreInfo", sender: self)
+            }
+            //Organization MoreInfo
+            if (GlobalVariables.selectedDisplay == "Organization"){
+                let cellIndexPath = self.exploreTableView.indexPathForCell(cell)
+                
+                let selectedCell = self.exploreTableView.cellForRowAtIndexPath(cellIndexPath!) as! OrganizationTableViewCell
+                
+                GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
+                self.performSegueWithIdentifier("GoToMoreInfo", sender: self)
             }
             
             break
         case 2:
-            //More info
+            //Event MoreInfo
             
             let cellIndexPath = self.exploreTableView.indexPathForCell(cell)
             
             let selectedCell = self.exploreTableView.cellForRowAtIndexPath(cellIndexPath!) as! EventTableViewCell
             
-            GlobalVariables.eventSelected = selectedCell.circTitle.text!
-            
+            GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
             self.performSegueWithIdentifier("GoToMoreInfo", sender: self)
             break
         default:

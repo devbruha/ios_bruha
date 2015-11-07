@@ -89,8 +89,8 @@ class LoadScreenViewController: UIViewController {
             self.performSegueWithIdentifier("toDashBoard", sender: self)
             
         } else {
-            
-            self.performSegueWithIdentifier("toSplashView", sender: self)
+
+              self.performSegueWithIdentifier("toSplashView", sender: self)
             
         }
     }

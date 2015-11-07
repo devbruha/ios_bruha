@@ -34,7 +34,6 @@
 		181EB6181B714B7600B9295E /* CalendarLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181EB60D1B714B7600B9295E /* CalendarLogic.swift */; };
 		181EB6191B714B7600B9295E /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181EB60E1B714B7600B9295E /* Date.swift */; };
 		181EB61A1B714B7600B9295E /* NSDateAdditions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 181EB60F1B714B7600B9295E /* NSDateAdditions.swift */; };
-		1824C0871B6AA7BA0007840F /* MoreInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1824C0861B6AA7BA0007840F /* MoreInfoViewController.swift */; };
 		1834845C1B7E347D00EA0D13 /* VenueView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1834845B1B7E347D00EA0D13 /* VenueView.xib */; };
 		1834845E1B7E352F00EA0D13 /* VenueView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1834845D1B7E352F00EA0D13 /* VenueView.swift */; };
 		183484601B7E704B00EA0D13 /* ArtistView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1834845F1B7E704B00EA0D13 /* ArtistView.swift */; };
@@ -46,6 +45,8 @@
 		1891B2841B86530C000949C8 /* SplashOne.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1891B2831B86530C000949C8 /* SplashOne.xib */; };
 		1891B28C1B86618E000949C8 /* SplashTwo.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1891B28B1B86618E000949C8 /* SplashTwo.xib */; };
 		1891B28E1B866FFE000949C8 /* SplashThree.xib in Resources */ = {isa = PBXBuildFile; fileRef = 1891B28D1B866FFE000949C8 /* SplashThree.xib */; };
+		1892A8001BEAFADE0063DFBB /* MoreInfoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1892A7FF1BEAFADE0063DFBB /* MoreInfoViewController.swift */; };
+		1892A8021BEAFC5D0063DFBB /* MoreInfoPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 1892A8011BEAFC5D0063DFBB /* MoreInfoPanelViewController.swift */; };
 		18A2A11B1B728241005E1DCB /* CalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18A2A11A1B728241005E1DCB /* CalendarViewController.swift */; };
 		18A98A751B84C8CF0016AF7E /* EventTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18A98A741B84C8CF0016AF7E /* EventTableViewCell.xib */; };
 		18CFAAAB1B876C7A00FE3976 /* SplashFour.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18CFAAAA1B876C7A00FE3976 /* SplashFour.xib */; };
@@ -167,7 +168,6 @@
 		181EB60D1B714B7600B9295E /* CalendarLogic.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarLogic.swift; sourceTree = "<group>"; };
 		181EB60E1B714B7600B9295E /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
 		181EB60F1B714B7600B9295E /* NSDateAdditions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSDateAdditions.swift; sourceTree = "<group>"; };
-		1824C0861B6AA7BA0007840F /* MoreInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreInfoViewController.swift; sourceTree = "<group>"; };
 		183286A81B6806B2007B5134 /* Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Bridging-Header.h"; sourceTree = "<group>"; };
 		1834845B1B7E347D00EA0D13 /* VenueView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VenueView.xib; sourceTree = "<group>"; };
 		1834845D1B7E352F00EA0D13 /* VenueView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VenueView.swift; sourceTree = "<group>"; };
@@ -180,6 +180,8 @@
 		1891B2831B86530C000949C8 /* SplashOne.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SplashOne.xib; sourceTree = "<group>"; };
 		1891B28B1B86618E000949C8 /* SplashTwo.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SplashTwo.xib; sourceTree = "<group>"; };
 		1891B28D1B866FFE000949C8 /* SplashThree.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SplashThree.xib; sourceTree = "<group>"; };
+		1892A7FF1BEAFADE0063DFBB /* MoreInfoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreInfoViewController.swift; sourceTree = "<group>"; };
+		1892A8011BEAFC5D0063DFBB /* MoreInfoPanelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreInfoPanelViewController.swift; sourceTree = "<group>"; };
 		18A2A11A1B728241005E1DCB /* CalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CalendarViewController.swift; sourceTree = "<group>"; };
 		18A98A741B84C8CF0016AF7E /* EventTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = EventTableViewCell.xib; sourceTree = "<group>"; };
 		18CFAAAA1B876C7A00FE3976 /* SplashFour.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SplashFour.xib; sourceTree = "<group>"; };
@@ -338,7 +340,8 @@
 				452BC0CF1B7937D5003E7142 /* MapFilterPanelViewController.swift */,
 				4560C5481B66D42000AB5382 /* ExploreListViewController.swift */,
 				18D2169C1B6BF1D9005DAAA8 /* ExploreListPanelViewController.swift */,
-				1824C0861B6AA7BA0007840F /* MoreInfoViewController.swift */,
+				1892A7FF1BEAFADE0063DFBB /* MoreInfoViewController.swift */,
+				1892A8011BEAFC5D0063DFBB /* MoreInfoPanelViewController.swift */,
 				45FA05BB1B5D640A004AD819 /* LoginViewController.swift */,
 				45FA05BC1B5D640A004AD819 /* SignUpViewController.swift */,
 				A5E4EAD01BBEDFE500DAEE9D /* AddictionListViewController.swift */,
@@ -766,6 +769,7 @@
 				45C6D5C01B851ADE00EE4A05 /* EventSubCategoriesDBModel.swift in Sources */,
 				181EB6141B714B7600B9295E /* DayCollectionCell.swift in Sources */,
 				A505C0F71BD17B910067CDD1 /* LoadScreenViewController.swift in Sources */,
+				1892A8001BEAFADE0063DFBB /* MoreInfoViewController.swift in Sources */,
 				181EB6101B714B7600B9295E /* CalendarView.swift in Sources */,
 				45FA05C11B5D6FCC004AD819 /* LoginService.swift in Sources */,
 				45C0F5F91B7BBE780041A1C8 /* EventSubCategoryDBModel.swift in Sources */,
@@ -794,7 +798,6 @@
 				4560C5491B66D42000AB5382 /* ExploreListViewController.swift in Sources */,
 				4560C54D1B66D45100AB5382 /* EventRectangleView.swift in Sources */,
 				18D2169D1B6BF1D9005DAAA8 /* ExploreListPanelViewController.swift in Sources */,
-				1824C0871B6AA7BA0007840F /* MoreInfoViewController.swift in Sources */,
 				45C6D5BE1B851ACE00EE4A05 /* EventPrimaryCategoriesDBModel.swift in Sources */,
 				45FA056D1B5D4158004AD819 /* Bruha.xcdatamodeld in Sources */,
 				45FA05961B5D4188004AD819 /* EventDBModel.swift in Sources */,
@@ -809,6 +812,7 @@
 				45D8986F1B5E89E6003ED862 /* RegisterService.swift in Sources */,
 				45FA05A41B5D4190004AD819 /* EventService.swift in Sources */,
 				A5E4EAD11BBEDFE500DAEE9D /* AddictionListViewController.swift in Sources */,
+				1892A8021BEAFC5D0063DFBB /* MoreInfoPanelViewController.swift in Sources */,
 				A5D90DFE1BBDD22000537F72 /* AddictionOrganizationDBModel.swift in Sources */,
 				45C6D5B71B851A5A00EE4A05 /* VenueCategoriesDBModel.swift in Sources */,
 				A58A3A261BB980B200601749 /* AddictionEvent.swift in Sources */,
