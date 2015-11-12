@@ -140,11 +140,12 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
             
             
             let temp: NSMutableArray = NSMutableArray()
-            temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Unlike")
+            temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Addicted!")
             cell.leftUtilityButtons = temp as [AnyObject]
             
             
             let temp2: NSMutableArray = NSMutableArray()
+            temp2.sw_addUtilityButtonWithColor(UIColor.purpleColor(), title: "Buy Tickets")
             temp2.sw_addUtilityButtonWithColor(UIColor.grayColor(), title: "Map")
             temp2.sw_addUtilityButtonWithColor(UIColor.orangeColor(), title: "More Info")
             cell.rightUtilityButtons = nil
@@ -196,7 +197,7 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
             
             
             let temp: NSMutableArray = NSMutableArray()
-            temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Unlike")
+            temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Addicted!")
             cell.leftUtilityButtons = temp as [AnyObject]
             
             
@@ -249,7 +250,7 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
             
             
             let temp: NSMutableArray = NSMutableArray()
-            temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Unlike")
+            temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Addicted!")
             cell.leftUtilityButtons = temp as [AnyObject]
             
             
@@ -296,9 +297,9 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
                 for addicted in addictedEventInfo!{
                     if addicted.eventID == GlobalVariables.eventSelected {
                         
-                        let alertController = UIAlertController(title: "Are you sure you wanna unlike it!", message:nil, preferredStyle: .Alert)
+                        let alertController = UIAlertController(title: "Are you no longer addicted?", message:nil, preferredStyle: .Alert)
                         let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
-                        let unlikeAction = UIAlertAction(title: "Yes", style: .Default) { (_) -> Void in
+                        let unlikeAction = UIAlertAction(title: "I'm Over It", style: .Default) { (_) -> Void in
                             
                             //Unlike
                             DeleteData(context: self.managedObjectContext).deleteAddictionsEvent(addicted.eventID, deleteUser: GlobalVariables.username)
@@ -337,9 +338,9 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
                 for addicted in addictedVenueInfo!{
                     if addicted.venueID == GlobalVariables.eventSelected {
                         
-                        let alertController = UIAlertController(title: "Are you sure you wanna unlike it!", message:nil, preferredStyle: .Alert)
+                        let alertController = UIAlertController(title: "Are you no longer addicted?", message:nil, preferredStyle: .Alert)
                         let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
-                        let unlikeAction = UIAlertAction(title: "Yes", style: .Default) { (_) -> Void in
+                        let unlikeAction = UIAlertAction(title: "I'm Over It", style: .Default) { (_) -> Void in
                             
                             //Unlike
                             DeleteData(context: self.managedObjectContext).deleteAddictionsVenue(addicted.venueID, deleteUser: GlobalVariables.username)
@@ -372,9 +373,9 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
                 for addicted in addictedOrganizationInfo!{
                     if addicted.organizationID == GlobalVariables.eventSelected {
                         
-                        let alertController = UIAlertController(title: "Are you sure you wanna unlike it!", message:nil, preferredStyle: .Alert)
+                        let alertController = UIAlertController(title: "Are you no longer addicted?", message:nil, preferredStyle: .Alert)
                         let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
-                        let unlikeAction = UIAlertAction(title: "Yes", style: .Default) { (_) -> Void in
+                        let unlikeAction = UIAlertAction(title: "I'm Over It", style: .Default) { (_) -> Void in
                             
                             //Unlike
                             DeleteData(context: self.managedObjectContext).deleteAddictionsOrgainzation(addicted.organizationID, deleteUser: GlobalVariables.username)
@@ -402,6 +403,39 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
         default:
             break
         }
+    }
+    
+    func swipeableTableViewCell( cell : SWTableViewCell!,didTriggerRightUtilityButtonWithIndex index:NSInteger){
+        
+        switch(index){
+        case 0:
+            if GlobalVariables.addictedDisplay == "Event" {
+                //event ticket
+                print("event ticket")
+            }
+            else if GlobalVariables.addictedDisplay == "Venue" || GlobalVariables.addictedDisplay == "Organization" {
+                //venue and organization map
+                print("venue and org map")
+            }
+            break
+        case 1:
+            if GlobalVariables.addictedDisplay == "Event" {
+                //event map
+                print("event map")
+            }
+            else if GlobalVariables.addictedDisplay == "Venue" || GlobalVariables.addictedDisplay == "Organization" {
+                //venue and organizaiton more info
+                print("venue and org more info")
+            }
+            break
+        case 2:
+            //Event More info
+            print("event more info")
+            break
+        default:
+            break
+        }
+        
     }
     
     func swipeableTableViewCellShouldHideUtilityButtonsOnSwipe(cell : SWTableViewCell ) -> Bool {

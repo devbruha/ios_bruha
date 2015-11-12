@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="6Rr-W4-lJ0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="6Rr-W4-lJ0">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
@@ -1562,7 +1562,35 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wxl-Jp-fhG" customClass="GMSMapView">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" alpha="0.0" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="200" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="S4f-vD-iAs">
+                                        <rect key="frame" x="0.0" y="0.0" width="320" height="200"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="200" id="OQv-ln-4bn"/>
+                                        </constraints>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="DropDownCell" rowHeight="200" id="WVC-Oh-W6B">
+                                                <rect key="frame" x="0.0" y="28" width="320" height="200"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WVC-Oh-W6B" id="Q1f-5L-ZVw">
+                                                    <rect key="frame" x="0.0" y="0.0" width="320" height="199.5"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                </tableViewCellContentView>
+                                            </tableViewCell>
+                                        </prototypes>
+                                        <connections>
+                                            <outlet property="dataSource" destination="oKN-du-QXO" id="Dby-fD-l80"/>
+                                            <outlet property="delegate" destination="oKN-du-QXO" id="lh5-N7-Eem"/>
+                                        </connections>
+                                    </tableView>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="S4f-vD-iAs" firstAttribute="top" secondItem="Wxl-Jp-fhG" secondAttribute="top" id="9zf-q6-Cmz"/>
+                                    <constraint firstItem="S4f-vD-iAs" firstAttribute="leading" secondItem="Wxl-Jp-fhG" secondAttribute="leading" id="FHD-xo-xrr"/>
+                                    <constraint firstAttribute="trailing" secondItem="S4f-vD-iAs" secondAttribute="trailing" id="jGz-y1-68R"/>
+                                </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vMm-n0-f4z">
                                 <rect key="frame" x="16" y="20" width="53" height="35"/>
@@ -1600,6 +1628,9 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="BackButton" destination="xyk-8Q-oD6" id="zTp-jP-Dyx"/>
+                        <outlet property="BruhaButton" destination="vMm-n0-f4z" id="SBD-X9-lCJ"/>
+                        <outlet property="dropDownTable" destination="S4f-vD-iAs" id="ZvN-tY-Dvf"/>
                         <outlet property="viewMap" destination="Wxl-Jp-fhG" id="R3x-kF-OZD"/>
                     </connections>
                 </viewController>
@@ -1828,10 +1859,17 @@
         <image name="Tickets_Sm" width="31" height="31"/>
     </resources>
     <inferredMetricsTieBreakers>
+<<<<<<< HEAD
         <segue reference="E8f-jy-J7J"/>
         <segue reference="n5l-1y-Ypg"/>
         <segue reference="zjY-DB-duY"/>
         <segue reference="uZx-1x-ByM"/>
         <segue reference="gzB-s1-set"/>
+=======
+        <segue reference="1Xm-3s-taQ"/>
+        <segue reference="pIM-BH-lfI"/>
+        <segue reference="J3w-Nl-jcV"/>
+        <segue reference="5DM-Zi-tRH"/>
+>>>>>>> ZhuohengWu
     </inferredMetricsTieBreakers>
 </document>

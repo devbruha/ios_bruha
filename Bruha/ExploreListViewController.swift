@@ -217,9 +217,9 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             }
             
             if like == 0 {
-                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Like")
+                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Get Addicted")
             } else if like == 1 {
-                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Unlike")
+                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Addicted!")
             }
             
             cell.leftUtilityButtons = temp as [AnyObject]
@@ -306,9 +306,9 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             }
             
             if like == 0 {
-                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Like")
+                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Get Addicted")
             } else if like == 1 {
-                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Unlike")
+                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Addicted!")
             }
             
             cell.leftUtilityButtons = temp as [AnyObject]
@@ -431,9 +431,9 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             }
             
             if like == 0 {
-                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Like")
+                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Get Addicted")
             } else if like == 1 {
-                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Unlike")
+                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Addicted!")
             }
             
             cell.leftUtilityButtons = temp as [AnyObject]
@@ -485,11 +485,11 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                     for event in eventInfo!{
                         if event.eventID == GlobalVariables.eventSelected {
                             //Like and Unlike
-                            if(cell.leftUtilityButtons[0].titleLabel!!.text! == "Unlike"){
+                            if(cell.leftUtilityButtons[0].titleLabel!!.text! == "Addicted!"){
                                 
-                                let alertController = UIAlertController(title: "Are you sure you wanna unlike it!", message:nil, preferredStyle: .Alert)
+                                let alertController = UIAlertController(title: "Are you no longer addicted?", message:nil, preferredStyle: .Alert)
                                 let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
-                                let unlikeAction = UIAlertAction(title: "Yes", style: .Default) { (_) -> Void in
+                                let unlikeAction = UIAlertAction(title: "I'm Over It", style: .Default) { (_) -> Void in
                                     //print("my idddd \(event.subCategoryID)")
                                     DeleteData(context: self.managedObjectContext).deleteAddictionsEvent(event.eventID, deleteUser: user)
                                     print("Removed from addiction(event) \(event.eventID)")
@@ -502,7 +502,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                     }
                                     
                                     var temp: NSMutableArray = NSMutableArray()
-                                    temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Like")
+                                    temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Get Addicted")
                                     cell.leftUtilityButtons = temp as [AnyObject]
                                     
                                 }
@@ -512,7 +512,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                 self.presentViewController(alertController, animated: true, completion: nil)
                                 
                                 
-                            } else if(cell.leftUtilityButtons[0].titleLabel!!.text! == "Like") {
+                            } else if(cell.leftUtilityButtons[0].titleLabel!!.text! == "Get Addicted") {
                                 
                                 let addEvent = AddictionEvent(eventId: event.eventID, userId: user)
                                 SaveData(context: managedObjectContext).saveAddictionEvent(addEvent)
@@ -527,7 +527,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                 }
                                 
                                 var temp: NSMutableArray = NSMutableArray()
-                                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Unlike")
+                                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Addicted!")
                                 cell.leftUtilityButtons = temp as [AnyObject]
                                 
                                 
@@ -546,11 +546,11 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                     for venue in venueInfo!{
                         if venue.venueID == GlobalVariables.eventSelected {
                             //Like and Unlike
-                            if(cell.leftUtilityButtons[0].titleLabel!!.text! == "Unlike"){
+                            if(cell.leftUtilityButtons[0].titleLabel!!.text! == "Addicted!"){
                                 
-                                let alertController = UIAlertController(title: "Are you sure you wanna unlike it!", message:nil, preferredStyle: .Alert)
+                                let alertController = UIAlertController(title: "Are you no longer addicted?", message:nil, preferredStyle: .Alert)
                                 let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
-                                let unlikeAction = UIAlertAction(title: "Yes", style: .Default) { (_) -> Void in
+                                let unlikeAction = UIAlertAction(title: "I'm Over It", style: .Default) { (_) -> Void in
                                     
                                     DeleteData(context: self.managedObjectContext).deleteAddictionsVenue(venue.venueID, deleteUser: user)
                                     print("Removed from addiction(venue) \(venue.venueID)")
@@ -563,7 +563,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                     }
                                     
                                     var temp: NSMutableArray = NSMutableArray()
-                                    temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Like")
+                                    temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Get Addicted")
                                     cell.leftUtilityButtons = temp as [AnyObject]
                                     
                                 }
@@ -573,7 +573,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                 self.presentViewController(alertController, animated: true, completion: nil)
                                 
                                 
-                            } else if(cell.leftUtilityButtons[0].titleLabel!!.text! == "Like") {
+                            } else if(cell.leftUtilityButtons[0].titleLabel!!.text! == "Get Addicted") {
                                 
                                 let addVenue = AddictionVenue(venueId: venue.venueID, userId: user)
                                 SaveData(context: managedObjectContext).saveAddictionVenue(addVenue)
@@ -588,7 +588,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                 }
                                 
                                 var temp: NSMutableArray = NSMutableArray()
-                                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Unlike")
+                                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Addicted!")
                                 cell.leftUtilityButtons = temp as [AnyObject]
                             }
                         }
@@ -641,11 +641,11 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                     for organization in organizationInfo!{
                         if organization.organizationID == GlobalVariables.eventSelected {
                             //Like and Unlike
-                            if(cell.leftUtilityButtons[0].titleLabel!!.text! == "Unlike"){
+                            if(cell.leftUtilityButtons[0].titleLabel!!.text! == "Addicted!"){
                                 
-                                let alertController = UIAlertController(title: "Are you sure you wanna unlike it!", message:nil, preferredStyle: .Alert)
+                                let alertController = UIAlertController(title: "Are you no longer addicted?", message:nil, preferredStyle: .Alert)
                                 let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
-                                let unlikeAction = UIAlertAction(title: "Yes", style: .Default) { (_) -> Void in
+                                let unlikeAction = UIAlertAction(title: "I'm Over It", style: .Default) { (_) -> Void in
                                     
                                     DeleteData(context: self.managedObjectContext).deleteAddictionsOrgainzation(organization.organizationID, deleteUser: user)
                                     print("Removed from addiction(event) \(organization.organizationID)")
@@ -659,7 +659,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                     }
                                     
                                     let temp: NSMutableArray = NSMutableArray()
-                                    temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Like")
+                                    temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Get Addicted")
                                     cell.leftUtilityButtons = temp as [AnyObject]
                                     
                                 }
@@ -669,7 +669,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                 self.presentViewController(alertController, animated: true, completion: nil)
                                 
                                 
-                            } else if(cell.leftUtilityButtons[0].titleLabel!!.text! == "Like") {
+                            } else if(cell.leftUtilityButtons[0].titleLabel!!.text! == "Get Addicted") {
                                 
                                 let addOrgainzation = AddictionOrganization(organizationId: organization.organizationID, userId: user)
                                 SaveData(context: managedObjectContext).saveAddictionOrganization(addOrgainzation)
@@ -684,7 +684,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                 }
                                 
                                 let temp: NSMutableArray = NSMutableArray()
-                                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Unlike")
+                                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Addicted!")
                                 cell.leftUtilityButtons = temp as [AnyObject]
                             }
                         }
@@ -695,9 +695,11 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 
                 let alert = UIAlertView(title: "Please log in for this!!!", message: nil, delegate: nil, cancelButtonTitle: nil)
                 alert.show()
-                let delay = 5.0 * Double(NSEC_PER_SEC)
+                let delay = 1.0 * Double(NSEC_PER_SEC)
                 var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-                alert.dismissWithClickedButtonIndex(-1, animated: true)
+                dispatch_after(time, dispatch_get_main_queue(), {
+                    alert.dismissWithClickedButtonIndex(-1, animated: true)
+                })
                 
             }
             break
@@ -725,30 +727,40 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         
         switch(index){
         case 0:
-            //Map
-            
-            print("event filter applied", GlobalVariables.filterEventBool)
-            print("afterFilterEvent", GlobalVariables.displayFilteredEvents.count)
-            for e in GlobalVariables.displayFilteredEvents{
-                print("they are", e.eventName)
+            if GlobalVariables.selectedDisplay == "Event" {
+                //event ticket
+                print("event ticket")
+            }
+            else if GlobalVariables.selectedDisplay == "Venue" || GlobalVariables.selectedDisplay == "Organization" {
+                //venue and organization map
+                print("venue and org map")
             }
             
             
-            print("venue filter applied", GlobalVariables.filterVenueBool)
-            print("afterFilterVenue", GlobalVariables.displayFilteredVenues.count)
-            for v in GlobalVariables.displayFilteredVenues{
-                print("they are", v.venueName)
-            }
             
-            print("organization filter applied", GlobalVariables.filterOrganizationBool)
-            print("afterFilterOrganization", GlobalVariables.displayFilteredOrganizations.count)
-            for o in GlobalVariables.displayFilteredOrganizations{
-                print("they are", o.organizationName)
-            }
+//            print("event filter applied", GlobalVariables.filterEventBool)
+//            print("afterFilterEvent", GlobalVariables.displayFilteredEvents.count)
+//            for e in GlobalVariables.displayFilteredEvents{
+//                print("they are", e.eventName)
+//            }
+//            
+//            
+//            print("venue filter applied", GlobalVariables.filterVenueBool)
+//            print("afterFilterVenue", GlobalVariables.displayFilteredVenues.count)
+//            for v in GlobalVariables.displayFilteredVenues{
+//                print("they are", v.venueName)
+//            }
+//            
+//            print("organization filter applied", GlobalVariables.filterOrganizationBool)
+//            print("afterFilterOrganization", GlobalVariables.displayFilteredOrganizations.count)
+//            for o in GlobalVariables.displayFilteredOrganizations{
+//                print("they are", o.organizationName)
+//            }
             
             
             break
         case 1:
+<<<<<<< HEAD
             //Event Ticket
             if GlobalVariables.selectedDisplay == "Event"{
                 print("Displaying Addictions from the local database")
@@ -775,11 +787,33 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 
                 GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
                 self.performSegueWithIdentifier("GoToMoreInfo", sender: self)
+=======
+            if GlobalVariables.selectedDisplay == "Event" {
+                //event map
+                print("event map")
+>>>>>>> ZhuohengWu
             }
+            else if GlobalVariables.selectedDisplay == "Venue" || GlobalVariables.selectedDisplay == "Organization" {
+                //venue and organizaiton more info
+                print("venue and org more info")
+            }
+            
+            
+            
+//            print("Displaying Addictions from the local database")
+//            let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
+//            for addict in addictionInfo!{
+//                print("the addicted event id is \(addict.eventID)\nthe user is \(addict.userID)")
+//            }
             
             break
         case 2:
+<<<<<<< HEAD
             //Event MoreInfo
+=======
+            //Event More info
+            print("event more info")
+>>>>>>> ZhuohengWu
             
             let cellIndexPath = self.exploreTableView.indexPathForCell(cell)
             

@@ -120,6 +120,8 @@
 		A5820A921BDFB06300D78675 /* Filtering.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5820A911BDFB06300D78675 /* Filtering.swift */; };
 		A58A3A211BB9780800601749 /* AddictionEventDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58A3A201BB9780800601749 /* AddictionEventDBModel.swift */; };
 		A58A3A261BB980B200601749 /* AddictionEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58A3A251BB980B200601749 /* AddictionEvent.swift */; };
+		A5CAB5781BED1ECE007E597B /* MapDropTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5CAB5771BED1ECE007E597B /* MapDropTableViewCell.xib */; };
+		A5CAB57A1BED2145007E597B /* MapDropTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CAB5791BED2145007E597B /* MapDropTableViewCell.swift */; };
 		A5D90DFC1BBDD1A600537F72 /* AddictionArtistDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D90DFB1BBDD1A600537F72 /* AddictionArtistDBModel.swift */; };
 		A5D90DFE1BBDD22000537F72 /* AddictionOrganizationDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D90DFD1BBDD22000537F72 /* AddictionOrganizationDBModel.swift */; };
 		A5D90E001BBDD28700537F72 /* AddictionVenueDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D90DFF1BBDD28700537F72 /* AddictionVenueDBModel.swift */; };
@@ -260,6 +262,8 @@
 		A5820A911BDFB06300D78675 /* Filtering.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Filtering.swift; sourceTree = "<group>"; };
 		A58A3A201BB9780800601749 /* AddictionEventDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddictionEventDBModel.swift; sourceTree = "<group>"; };
 		A58A3A251BB980B200601749 /* AddictionEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddictionEvent.swift; sourceTree = "<group>"; };
+		A5CAB5771BED1ECE007E597B /* MapDropTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapDropTableViewCell.xib; sourceTree = "<group>"; };
+		A5CAB5791BED2145007E597B /* MapDropTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapDropTableViewCell.swift; sourceTree = "<group>"; };
 		A5D90DFB1BBDD1A600537F72 /* AddictionArtistDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddictionArtistDBModel.swift; sourceTree = "<group>"; };
 		A5D90DFD1BBDD22000537F72 /* AddictionOrganizationDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddictionOrganizationDBModel.swift; sourceTree = "<group>"; };
 		A5D90DFF1BBDD28700537F72 /* AddictionVenueDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddictionVenueDBModel.swift; sourceTree = "<group>"; };
@@ -533,6 +537,8 @@
 				4560C54C1B66D45100AB5382 /* EventRectangleView.swift */,
 				4560C54A1B66D44700AB5382 /* EventCircleView.swift */,
 				18A98A741B84C8CF0016AF7E /* EventTableViewCell.xib */,
+				A5CAB5771BED1ECE007E597B /* MapDropTableViewCell.xib */,
+				A5CAB5791BED2145007E597B /* MapDropTableViewCell.swift */,
 				452BC0C31B791068003E7142 /* VenueTableViewCell.xib */,
 				452BC0C51B79118F003E7142 /* ArtistTableViewCell.xib */,
 				452BC0C71B79119D003E7142 /* OrganizationTableViewCell.xib */,
@@ -677,6 +683,7 @@
 			files = (
 				45F8DF3D1BBDF00E00886C3F /* LaunchScreen.xib in Resources */,
 				1834845C1B7E347D00EA0D13 /* VenueView.xib in Resources */,
+				A5CAB5781BED1ECE007E597B /* MapDropTableViewCell.xib in Resources */,
 				18CFAAAB1B876C7A00FE3976 /* SplashFour.xib in Resources */,
 				452BC0C61B79118F003E7142 /* ArtistTableViewCell.xib in Resources */,
 				45FA05BA1B5D63EB004AD819 /* Main.storyboard in Resources */,
@@ -842,6 +849,7 @@
 				18E2DD8C1B69537D007C61B5 /* DashLine.swift in Sources */,
 				A505C0F51BCEE9860067CDD1 /* UploadListPanelViewController.swift in Sources */,
 				A5E4EAD31BC2BC3900DAEE9D /* AddictionListPanelViewController.swift in Sources */,
+				A5CAB57A1BED2145007E597B /* MapDropTableViewCell.swift in Sources */,
 				45C93C601B8621AE00F60D9D /* EventCategoryListService.swift in Sources */,
 				180F6DFE1B75006800F86BF5 /* MapViewController.swift in Sources */,
 				1835F8F51B5ECF3500FD1BD1 /* DashBoardViewController.swift in Sources */,
