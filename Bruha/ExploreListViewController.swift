@@ -760,7 +760,6 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             
             break
         case 1:
-<<<<<<< HEAD
             //Event Ticket
             if GlobalVariables.selectedDisplay == "Event"{
                 print("Displaying Addictions from the local database")
@@ -787,11 +786,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 
                 GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
                 self.performSegueWithIdentifier("GoToMoreInfo", sender: self)
-=======
-            if GlobalVariables.selectedDisplay == "Event" {
-                //event map
-                print("event map")
->>>>>>> ZhuohengWu
+
             }
             else if GlobalVariables.selectedDisplay == "Venue" || GlobalVariables.selectedDisplay == "Organization" {
                 //venue and organizaiton more info
@@ -808,12 +803,9 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             
             break
         case 2:
-<<<<<<< HEAD
-            //Event MoreInfo
-=======
+
             //Event More info
             print("event more info")
->>>>>>> ZhuohengWu
             
             let cellIndexPath = self.exploreTableView.indexPathForCell(cell)
             

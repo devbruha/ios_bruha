@@ -53,6 +53,21 @@ class MapFilterPanelViewController: UIViewController {
         
         let organizationTgr = UITapGestureRecognizer(target: self, action: ("organizationTapped"))
         organizationSelectedB.addGestureRecognizer(organizationTgr)
+        
+        switch(GlobalVariables.selectedDisplay){
+            
+            case "Event":
+            eventTapped()
+            
+            case "Venue":
+            venueTapped()
+            
+            case "Organization":
+            organizationTapped()
+            
+        default:
+            eventTapped()
+        }
     }
     
     func eventTapped(){

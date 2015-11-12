@@ -111,6 +111,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         let calendarView = CalendarView.instance(date, selectedDate: date)
         calendarView.delegate = self
         calendarView.translatesAutoresizingMaskIntoConstraints = false
+        //calendarView.selectedDate = date
         
         placeholder.addSubview(calendarView)
         placeholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[calendarView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["calendarView": calendarView]))
