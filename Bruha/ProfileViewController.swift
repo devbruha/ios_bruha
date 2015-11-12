@@ -57,7 +57,7 @@ class ProfileViewController: UIViewController {
         self.view.layer.insertSublayer(background, atIndex: 0)
     }
     
-    /*@IBAction func LogoutPressed(sender: AnyObject) {
+    @IBAction func LogoutPressed(sender: AnyObject) {
         
         let alertController = UIAlertController(title: "Are you sure you want to log out?", message:nil, preferredStyle: .Alert)
         let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
@@ -71,7 +71,7 @@ class ProfileViewController: UIViewController {
         alertController.addAction(cancelAction)
         
         self.presentViewController(alertController, animated: true, completion: nil)
-    }*/
+    }
     
     
 

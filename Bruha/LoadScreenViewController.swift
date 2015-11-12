@@ -156,6 +156,7 @@ class LoadScreenViewController: UIViewController {
             
             print("SplashView segue")
             self.performSegueWithIdentifier("toSplashView", sender: self)
+
         }
     }
 }

@@ -2,52 +2,71 @@
 //  MoreInfoViewController.swift
 //  Bruha
 //
-//  Created by lye on 15/7/30.
-//  Copyright (c) 2015年 Bruha. All rights reserved.
+//  Created by lye on 15/11/4.
+//  Copyright © 2015年 Bruha. All rights reserved.
 //
 
 import UIKit
 
-class MoreInfoViewController: UIViewController {
-
-    @IBOutlet weak var verticalScroll: UIScrollView!
-    @IBOutlet weak var largeImage: UIImageView!
-    @IBOutlet weak var smallImage: UIImageView!
-    @IBOutlet weak var price: UILabel!
-    @IBOutlet weak var eventTitle: UILabel!
-    @IBOutlet weak var startTime: UILabel!
-    @IBOutlet weak var startDate: UILabel!
-    @IBOutlet weak var venue: UILabel!
-    @IBOutlet weak var location: UILabel!
-    @IBOutlet weak var endTime: UILabel!
-    @IBOutlet weak var ticketPrice: UILabel!
+class MoreInfoViewController: UIViewController,ARSPDragDelegate, ARSPVisibilityStateDelegate {
+    @IBOutlet weak var Image: UIImageView!
     
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-    
+    var panelControllerContainer: ARSPContainerController!
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        let screenSize: CGRect = UIScreen.mainScreen().bounds
-        let screenWidth = screenSize.width
-        verticalScroll.contentSize.width = screenWidth
-        verticalScroll.contentSize.height = 800
+        self.panelControllerContainer = self.parentViewController as! ARSPContainerController
+        self.panelControllerContainer.dragDelegate = self
+        self.panelControllerContainer.visibilityStateDelegate = self
         
-       // GlobalVariables.eventSelected.
-        
-        let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
-        for event in eventInfo!{
-            if event.eventName == GlobalVariables.eventSelected{
-                eventTitle.text = GlobalVariables.eventSelected
-                price.text = "$\(event.eventPrice)"
-                startTime.text = event.eventStartTime
-                startDate.text = event.eventStartDate
-                venue.text = event.eventVenueName
-                location.text = event.eventVenueAddress
-                endTime.text = event.eventEndDate + "  \(event.eventEndTime)"
-                ticketPrice.text = "$\(event.eventPrice)"
-                
+        if GlobalVariables.selectedDisplay == "Event"{
+            let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
+            for event in eventInfo{
+                if event.eventID == GlobalVariables.eventSelected{
+                    if let checkedUrl = NSURL(string: event.posterUrl){
+                    getDataFromUrl(checkedUrl){
+                        data in
+                        dispatch_async(dispatch_get_main_queue()){
+                            self.Image.image = UIImage(data: data!)
+                            }
+                        }
+                    }
+                }
             }
         }
         
+        if GlobalVariables.selectedDisplay == "Venue"{
+            let venueInfo = FetchData(context: managedObjectContext).fetchVenues()!
+            for venue in venueInfo{
+                if venue.venueID == GlobalVariables.eventSelected{
+                    if let checkedUrl = NSURL(string: venue.posterUrl){
+                        getDataFromUrl(checkedUrl){
+                            data in
+                            dispatch_async(dispatch_get_main_queue()){
+                                self.Image.image = UIImage(data: data!)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        if GlobalVariables.selectedDisplay == "Organization"{
+            let organizationInfo = FetchData(context: managedObjectContext).fetchOrganizations()!
+            for organization in organizationInfo{
+                if organization.organizationID == GlobalVariables.eventSelected{
+                    if let checkedUrl = NSURL(string: organization.posterUrl){
+                        getDataFromUrl(checkedUrl){
+                            data in
+                            dispatch_async(dispatch_get_main_queue()){
+                                self.Image.image = UIImage(data: data!)
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
 
         // Do any additional setup after loading the view.
     }
@@ -56,6 +75,30 @@ class MoreInfoViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    func getDataFromUrl(urL:NSURL, completion: ((data: NSData?) -> Void)) {
+        NSURLSession.sharedSession().dataTaskWithURL(urL) { (data, response, error) in
+            completion(data: data)
+            }.resume()
+    }
+    
+    func panelControllerChangedVisibilityState(state:ARSPVisibilityState) {
+        //TODO
+        if(panelControllerContainer.shouldOverlapMainViewController){
+            if (state.rawValue == ARSPVisibilityStateMaximized.rawValue) {
+                self.panelControllerContainer.panelViewController.view.alpha = 1
+            }else{
+                self.panelControllerContainer.panelViewController.view.alpha = 1
+            }
+        }else{
+            self.panelControllerContainer.panelViewController.view.alpha = 1
+        }
+    }
+    
+    func panelControllerWasDragged(panelControllerVisibility : CGFloat) {
+        
+    }
+
     
 
     /*
