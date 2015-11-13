@@ -51,6 +51,7 @@ class MoreInfoPanelViewController: UIViewController {
                     Address.text = event.eventVenueAddress
                     Price.text = event.eventPrice
                     Date.text = event.eventStartDate
+                    smallImage.image = UIImage(named: event.primaryCategory)
                 }
             }
         }
@@ -62,6 +63,7 @@ class MoreInfoPanelViewController: UIViewController {
                     Address.text = venue.venueAddress
                     Price.text = "-"
                     Date.text = "-"
+                    smallImage.image = UIImage(named: venue.primaryCategory)
                 }
             }
 
@@ -74,6 +76,7 @@ class MoreInfoPanelViewController: UIViewController {
                     Address.text = organization.organizationAddress
                     Price.text = "-"
                     Date.text = "-"
+                    smallImage.image = UIImage(named: organization.primaryCategory)
                 }
             }
             
