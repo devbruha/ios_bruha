@@ -227,6 +227,8 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         clearBackupCategories()
         GlobalVariables.UserCustomFilters.categoryFilter.venueCategories.removeAll()
         GlobalVariables.UserCustomFilters.categoryFilter.organizationCategories.removeAll()
+        resetSliderValue()
+        
     }
     
     func venueTapped(){
@@ -236,6 +238,8 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         clearBackupCategories()
         GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.removeAll()
         GlobalVariables.UserCustomFilters.categoryFilter.organizationCategories.removeAll()
+        resetSliderValue()
+        
     }
     
     func artistTapped(){
@@ -243,6 +247,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         GlobalVariables.selectedDisplay = "Artist"
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
         clearBackupCategories()
+        resetSliderValue()
         
     }
     
@@ -253,6 +258,8 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         clearBackupCategories()
         GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.removeAll()
         GlobalVariables.UserCustomFilters.categoryFilter.venueCategories.removeAll()
+        resetSliderValue()
+        
     }
     
     // -------------------------------Category Table Logic-------------------------------
@@ -595,8 +602,9 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
     
     
     func updateNotificationSent(){
+        let tabSelected = GlobalVariables.selectedDisplay
         
-        if(GlobalVariables.selectedDisplay == "Event"){
+        if(tabSelected == "Event" || tabSelected == "Venue" || tabSelected == "Organization"){
             eventCategoriesTable.alpha = 1;
             placeholder.alpha = 1
             priceLabelTitle.alpha = 1
@@ -640,6 +648,12 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         setupCategoryLists()
         eventCategoriesTable.reloadData()
         adjustHeightOfTableView(eventCategoriesTable, constraint: eventCategoryTableHeight)
+    }
+    
+    func resetSliderValue() {
+        GlobalVariables.UserCustomFilters.priceFilter = 0
+        slider.value = 0
+        sliderValueDidChange(slider)
     }
     
     
