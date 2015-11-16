@@ -649,7 +649,7 @@
 				TargetAttributes = {
 					45FA05631B5D4158004AD819 = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = PS3272THNU;
+						DevelopmentTeam = 2XYHY4M8GS;
 					};
 					45FA057B1B5D4158004AD819 = {
 						CreatedOnToolsVersion = 6.4;
@@ -990,7 +990,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Bruha/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bruha.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1012,7 +1012,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Bruha/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bruha.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
