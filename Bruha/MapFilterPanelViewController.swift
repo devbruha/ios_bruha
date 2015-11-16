@@ -89,17 +89,17 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         self.scrollView.addSubview(priceLabel)
         
         
-        slider.minimumValue = 0
+        slider.minimumValue = -1
         slider.maximumValue = 99
         slider.continuous = true
         slider.tintColor = UIColor.whiteColor()
         slider.backgroundColor = UIColor.whiteColor()
         slider.frame = CGRectMake(10, 264, screenSize.width - 20, 22)
-        slider.value = 0
+        slider.value = -1
         slider.addTarget(self, action: "sliderValueDidChange:", forControlEvents: .ValueChanged)
         self.scrollView.addSubview(slider)
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateNotificationSent", name: "itemDisplayChange", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateNotificationSent", name: "itemDisplayChangeEvent", object: nil)
         
         let eventTgr = UITapGestureRecognizer(target: self, action: ("eventTapped"))
         eventSelectedB.addGestureRecognizer(eventTgr)
@@ -144,6 +144,8 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         GlobalVariables.UserCustomFilters.priceFilter = Int(sender.value)
         
         if Int(sender.value) == 0 {
+            priceLabel.text = "Free"
+        } else if Int(sender.value) == -1 {
             priceLabel.text = "No Price Filter"
         } else {
             priceLabel.text = "\(Int(sender.value))$"
@@ -216,9 +218,8 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func updateNotificationSent(){
-        let tabSelected = GlobalVariables.selectedDisplay
         
-        if(tabSelected == "Event" || tabSelected == "Venue" || tabSelected == "Organization"){
+        if(GlobalVariables.selectedDisplay == "Event"){
             categoryTableView.alpha = 1;
             placeholder.alpha = 1
             priceLabelTitle.alpha = 1
@@ -656,8 +657,8 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func resetSliderValue() {
-        GlobalVariables.UserCustomFilters.priceFilter = 0
-        slider.value = 0
+        GlobalVariables.UserCustomFilters.priceFilter = -1
+        slider.value = -1
         sliderValueDidChange(slider)
     }
 }

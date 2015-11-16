@@ -87,6 +87,9 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
         dropDownTable.delegate = self
         dropDownTable.allowsSelection = false
         
+        //dropDownTable.showsVerticalScrollIndicator = true
+        dropDownTable.indicatorStyle = UIScrollViewIndicatorStyle.White
+        
         let nib = UINib(nibName: "MapDropTableViewCell", bundle: nil)
         dropDownTable.registerNib(nib, forCellReuseIdentifier: "DropCell")
     }
@@ -124,6 +127,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
         dropDownTable.reloadData()
         viewMap.bringSubviewToFront(dropDownTable)
         dropDownTable.fadeIn()
+        dropDownTable.flashScrollIndicators()
         
         return false
     }
