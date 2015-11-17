@@ -491,13 +491,6 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
                 }
             }
             
-            for marker in venueMarkers{
-                marker.map = nil
-            }
-            for marker in organizationMarkers{
-                marker.map = nil
-            }
-            
         case "Venue":
             if GlobalVariables.filterVenueBool {
                 
@@ -511,13 +504,6 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
                 for marker in venueMarkers{
                     marker.map = viewMap
                 }
-            }
-            
-            for marker in eventMarkers{
-                marker.map = nil
-            }
-            for marker in organizationMarkers{
-                marker.map = nil
             }
             
         case "Organization":
@@ -534,15 +520,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
                     marker.map = viewMap
                 }
             }
-            
-            for marker in eventMarkers{
-                marker.map = nil
-            }
-            for marker in venueMarkers{
-                marker.map = nil
-            }
 
-            
         default:
             for marker in eventMarkers{
                 marker.map = nil
