@@ -15,6 +15,8 @@ class MoreInfoPanelViewController: UIViewController {
     @IBOutlet weak var Price: UILabel!
     @IBOutlet weak var Date: UILabel!
     @IBOutlet weak var smallImage: UIImageView!
+    @IBOutlet var getAddictedButton: UIButton!
+    @IBOutlet var getAddictedLabel: UILabel!
     
     
     var panelControllerContainer: ARSPContainerController!
@@ -23,13 +25,7 @@ class MoreInfoPanelViewController: UIViewController {
 
 
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupPanel()
-        labelDisplay()
-
-        // Do any additional setup after loading the view.
-    }
+    
     func setupPanel(){
         
         let screenSize:CGRect = UIScreen.mainScreen().bounds
@@ -45,6 +41,7 @@ class MoreInfoPanelViewController: UIViewController {
     func labelDisplay(){
         if GlobalVariables.selectedDisplay == "Event"{
             let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
+            let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
             for event in eventInfo{
                 if event.eventID == GlobalVariables.eventSelected{
                     Name.text = event.eventName
@@ -53,10 +50,17 @@ class MoreInfoPanelViewController: UIViewController {
                     Date.text = event.eventStartDate
                     smallImage.image = UIImage(named: event.primaryCategory)
                 }
+                if event.eventID == GlobalVariables.eventSelected && addictionInfo!.contains({$0.eventID == GlobalVariables.eventSelected}) {
+
+                    getAddictedButton.backgroundColor = UIColor.orangeColor()
+                    getAddictedLabel.text = "You are addicted"
+                }
             }
+            
         }
         if GlobalVariables.selectedDisplay == "Venue"{
             let venueInfo = FetchData(context: managedObjectContext).fetchVenues()!
+            let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsVenue()
             for venue in venueInfo{
                 if venue.venueID == GlobalVariables.eventSelected{
                     Name.text = venue.venueName
@@ -65,11 +69,17 @@ class MoreInfoPanelViewController: UIViewController {
                     Date.text = "-"
                     smallImage.image = UIImage(named: venue.primaryCategory)
                 }
+                if venue.venueID == GlobalVariables.eventSelected && addictionInfo!.contains({$0.venueID == GlobalVariables.eventSelected}) {
+                    
+                    getAddictedButton.backgroundColor = UIColor.orangeColor()
+                    getAddictedLabel.text = "You are addicted"
+                }
             }
 
         }
         if GlobalVariables.selectedDisplay == "Organization"{
             let organizationInfo = FetchData(context: managedObjectContext).fetchOrganizations()
+            let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsOrganization()
             for organization in organizationInfo!{
                 if organization.organizationID == GlobalVariables.eventSelected{
                     Name.text = organization.organizationName
@@ -78,23 +88,36 @@ class MoreInfoPanelViewController: UIViewController {
                     Date.text = "-"
                     smallImage.image = UIImage(named: organization.primaryCategory)
                 }
+                if organization.organizationID == GlobalVariables.eventSelected && addictionInfo!.contains({$0.organizationID == GlobalVariables.eventSelected}) {
+                    
+                    getAddictedButton.backgroundColor = UIColor.orangeColor()
+                    getAddictedLabel.text = "You are addicted"
+                }
             }
             
         }
         
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
-    }
     
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        setupPanel()
+        labelDisplay()
+        
+        // Do any additional setup after loading the view.
+    }
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.swipeZoneHeight = self.panelControllerContainer.swipableZoneHeight
         self.visibleZoneHeight = self.panelControllerContainer.visibleZoneHeight
         
     }
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+    
+    
     //Logic of getting addicted
     @IBAction func getAddicted(sender: AnyObject) {
         //LoggedIn
@@ -103,8 +126,9 @@ class MoreInfoPanelViewController: UIViewController {
             //Event
             if GlobalVariables.selectedDisplay == "Event"{
                 let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
+                let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
                 for event in eventInfo!{
-                    if event.eventID == GlobalVariables.eventSelected{
+                    if event.eventID == GlobalVariables.eventSelected && !addictionInfo!.contains({$0.eventID == GlobalVariables.eventSelected}) {
                         let addEvent = AddictionEvent(eventId: event.eventID, userId: user)
                         SaveData(context: managedObjectContext).saveAddictionEvent(addEvent)
                         print("new getaddicted success!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
@@ -113,14 +137,51 @@ class MoreInfoPanelViewController: UIViewController {
                             (let addInfo) in
                             print(addInfo!)
                         }
+                        
+                        getAddictedButton.backgroundColor = UIColor.orangeColor()
+                        getAddictedLabel.text = "You are addicted"
+                        
+                    } else if event.eventID == GlobalVariables.eventSelected && addictionInfo!.contains({$0.eventID == GlobalVariables.eventSelected}) {
+                        
+                        let alertController = UIAlertController(title: "Are you no longer addicted?", message:nil, preferredStyle: .Alert)
+                        let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+                        let unlikeAction = UIAlertAction(title: "I'm Over It", style: .Default) { (_) -> Void in
+                
+                            DeleteData(context: self.managedObjectContext).deleteAddictionsEvent(event.eventID, deleteUser: user)
+                            print("Removed from addiction(event) \(event.eventID)")
+                            print("REMOVED")
+                            
+                            let eventService = EventService()
+                            eventService.removeAddictedEvents(event.eventID) {
+                                (let removeInfo ) in
+                                print(removeInfo!)
+                            }
+                            
+                            self.getAddictedButton.backgroundColor = UIColor.cyanColor()
+                            self.getAddictedLabel.text = "Get addicted"
+                            
+                        }
+                        alertController.addAction(unlikeAction)
+                        alertController.addAction(cancelAction)
+                        
+                        self.presentViewController(alertController, animated: true, completion: nil)
+                        
+//                        let alert = UIAlertView(title: "You are addicted", message: nil, delegate: nil, cancelButtonTitle: nil)
+//                        alert.show()
+//                        let delay = 1.0 * Double(NSEC_PER_SEC)
+//                        var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+//                        dispatch_after(time, dispatch_get_main_queue(), {
+//                            alert.dismissWithClickedButtonIndex(-1, animated: true)
+//                        })
                     }
                 }
             }
             //Venue
             if GlobalVariables.selectedDisplay == "Venue"{
                 let venueInfo = FetchData(context: managedObjectContext).fetchVenues()
+                let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsVenue()
                 for venue in venueInfo!{
-                    if venue.venueID == GlobalVariables.eventSelected{
+                    if venue.venueID == GlobalVariables.eventSelected && !addictionInfo!.contains({$0.venueID == GlobalVariables.eventSelected}) {
                         let addVenue = AddictionVenue(venueId: venue.venueID, userId: user)
                         SaveData(context: managedObjectContext).saveAddictionVenue(addVenue)
                         print("new Venue getaddicted success!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
@@ -129,12 +190,41 @@ class MoreInfoPanelViewController: UIViewController {
                             (let addInfo) in
                             print(addInfo!)
                         }
+                        
+                        getAddictedButton.backgroundColor = UIColor.orangeColor()
+                        getAddictedLabel.text = "You are addicted"
+                        
+                    } else if venue.venueID == GlobalVariables.eventSelected && addictionInfo!.contains({$0.venueID == GlobalVariables.eventSelected}) {
+                        
+                        let alertController = UIAlertController(title: "Are you no longer addicted?", message:nil, preferredStyle: .Alert)
+                        let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+                        let unlikeAction = UIAlertAction(title: "I'm Over It", style: .Default) { (_) -> Void in
+                            
+                            DeleteData(context: self.managedObjectContext).deleteAddictionsVenue(venue.venueID, deleteUser: user)
+                            print("Removed from addiction(venue) \(venue.venueID)")
+                            print("REMOVED")
+                            
+                            let venueService = VenueService()
+                            venueService.removeAddictedVenues(venue.venueID) {
+                                (let removeInfo ) in
+                                print(removeInfo!)
+                            }
+                            
+                            self.getAddictedButton.backgroundColor = UIColor.cyanColor()
+                            self.getAddictedLabel.text = "Get addicted"
+                            
+                        }
+                        alertController.addAction(unlikeAction)
+                        alertController.addAction(cancelAction)
+                        
+                        self.presentViewController(alertController, animated: true, completion: nil)
                     }
                 }
             }
             //Organization
             if GlobalVariables.selectedDisplay == "Organization"{
                 let organizationInfo = FetchData(context: managedObjectContext).fetchOrganizations()
+                let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsOrganization()
                 for organization in organizationInfo!{
                     if organization.organizationID == GlobalVariables.eventSelected{
                         let addOrganization = AddictionOrganization(organizationId: organization.organizationID, userId: user)
@@ -145,6 +235,33 @@ class MoreInfoPanelViewController: UIViewController {
                             (let addInfo) in
                             print(addInfo!)
                         }
+                        
+                        getAddictedButton.backgroundColor = UIColor.orangeColor()
+                        getAddictedLabel.text = "You are addicted"
+                        
+                    } else if organization.organizationID == GlobalVariables.eventSelected && addictionInfo!.contains({$0.organizationID == GlobalVariables.eventSelected}) {
+                        
+                        let alertController = UIAlertController(title: "Are you no longer addicted?", message:nil, preferredStyle: .Alert)
+                        let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+                        let unlikeAction = UIAlertAction(title: "I'm Over It", style: .Default) { (_) -> Void in
+                            
+                            DeleteData(context: self.managedObjectContext).deleteAddictionsOrgainzation(organization.organizationID, deleteUser: user)
+                            print("Removed from addiction(event) \(organization.organizationID)")
+                            print("REMOVED")
+                            
+                            let organizationService = OrganizationService()
+                            
+                            organizationService.removeAddictedOrganizations(organization.organizationID) {
+                                (let removeInfo ) in
+                                print(removeInfo!)
+                            }
+                            
+                            self.getAddictedButton.backgroundColor = UIColor.cyanColor()
+                            self.getAddictedLabel.text = "Get addicted"
+                            
+                        }
+                        alertController.addAction(unlikeAction)
+                        alertController.addAction(cancelAction)
                     }
                 }
             }

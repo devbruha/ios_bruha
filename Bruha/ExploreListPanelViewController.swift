@@ -81,13 +81,13 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         self.scrollView.addSubview(priceLabel)
         
         
-        slider.minimumValue = 0
+        slider.minimumValue = -1
         slider.maximumValue = 99
         slider.continuous = true
         slider.tintColor = UIColor.whiteColor()
         slider.backgroundColor = UIColor.whiteColor()
         slider.frame = CGRectMake(10, 264, screenSize.width - 20, 22)
-        slider.value = 0
+        slider.value = -1
         slider.addTarget(self, action: "sliderValueDidChange:", forControlEvents: .ValueChanged)
         self.scrollView.addSubview(slider)
         
@@ -125,6 +125,8 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         GlobalVariables.UserCustomFilters.priceFilter = Int(sender.value)
         
         if Int(sender.value) == 0 {
+            priceLabel.text = "Free"
+        } else if Int(sender.value) == -1 {
             priceLabel.text = "No Price Filter"
         } else {
             priceLabel.text = "\(Int(sender.value))$"
@@ -602,9 +604,8 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
     
     
     func updateNotificationSent(){
-        let tabSelected = GlobalVariables.selectedDisplay
         
-        if(tabSelected == "Event" || tabSelected == "Venue" || tabSelected == "Organization"){
+        if(GlobalVariables.selectedDisplay == "Event"){
             eventCategoriesTable.alpha = 1;
             placeholder.alpha = 1
             priceLabelTitle.alpha = 1
@@ -651,8 +652,8 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     func resetSliderValue() {
-        GlobalVariables.UserCustomFilters.priceFilter = 0
-        slider.value = 0
+        GlobalVariables.UserCustomFilters.priceFilter = -1
+        slider.value = -1
         sliderValueDidChange(slider)
     }
     
