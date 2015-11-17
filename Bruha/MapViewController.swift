@@ -72,8 +72,9 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
         
         generateMarkers()
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateMarkers", name: "itemDisplayChange", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "clearDrop", name: "itemDisplayChange", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateMarkers", name: "itemDisplayChangeEvent", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "clearDrop", name: "itemDisplayChangeEvent", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateMarkers", name: "filter", object: nil)
         
         // Do any additional setup after loading the view, typically from a nib.
         locationManager.delegate = self
@@ -133,7 +134,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
     }
     
     func mapView(mapView: GMSMapView!, didTapAtCoordinate coordinate: CLLocationCoordinate2D) {
-        
+        print(FetchData(context: managedObjectContext).fetchEvents()!.count)
         hideDrop()
     }
     
@@ -406,6 +407,8 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             }
             eventMarker.icon = scaledIcon
             
+            eventMarker.userData = event.eventID
+            
             eventMarkers.append(eventMarker)
         }
         
@@ -429,6 +432,8 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             }
             venueMarker.icon = scaledIcon
             
+            venueMarker.userData = venue.venueID
+            
             venueMarkers.append(venueMarker)
         }
         
@@ -449,83 +454,106 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             }
             organizationMarker.icon = scaledIcon
             
+            organizationMarker.userData = organization.organizationID
+            
             organizationMarkers.append(organizationMarker)
         }
     }
     
     func updateMarkers(){
         
-        if(GlobalVariables.selectedDisplay == "Event"){
+        //clears markers
+        for marker in eventMarkers{
+            marker.map = nil
+        }
+        for marker in venueMarkers{
+            marker.map = nil
+        }
+        for marker in organizationMarkers{
+            marker.map = nil
+        }
+        
+        //updates according to filter
+        switch (GlobalVariables.selectedDisplay){
             
-            for marker in eventMarkers{
+        case "Event":
+            if GlobalVariables.filterEventBool {
                 
-                marker.map = viewMap
+                for var i = eventMarkers.count; i > 0; i-- {
+                    if GlobalVariables.displayFilteredEvents.contains({$0.eventID == eventMarkers[i-1].userData as! String}) {
+                        
+                        eventMarkers[i-1].map = viewMap
+                    }
+                }
+            } else {
+                for marker in eventMarkers{
+                    marker.map = viewMap
+                }
             }
             
             for marker in venueMarkers{
-                
                 marker.map = nil
             }
-            
             for marker in organizationMarkers{
-                
                 marker.map = nil
             }
-        }
             
-        else if(GlobalVariables.selectedDisplay == "Venue"){
+        case "Venue":
+            if GlobalVariables.filterVenueBool {
+                
+                for var i = venueMarkers.count; i > 0; i-- {
+                    if GlobalVariables.displayFilteredVenues.contains({$0.venueID == venueMarkers[i-1].userData as! String}) {
+                        
+                        venueMarkers[i-1].map = viewMap
+                    }
+                }
+            } else {
+                for marker in venueMarkers{
+                    marker.map = viewMap
+                }
+            }
             
             for marker in eventMarkers{
-                
                 marker.map = nil
             }
-            
-            for marker in venueMarkers{
-                
-                marker.map = viewMap
-            }
-            
             for marker in organizationMarkers{
-                
                 marker.map = nil
             }
-        }
             
-        else if(GlobalVariables.selectedDisplay == "Artist"){
+        case "Organization":
+            if GlobalVariables.filterOrganizationBool {
+                
+                for var i = organizationMarkers.count; i > 0; i-- {
+                    if GlobalVariables.displayFilteredOrganizations.contains({$0.organizationID == organizationMarkers[i-1].userData as! String}) {
+                        
+                        organizationMarkers[i-1].map = viewMap
+                    }
+                }
+            } else {
+                for marker in organizationMarkers{
+                    marker.map = viewMap
+                }
+            }
             
             for marker in eventMarkers{
-                
                 marker.map = nil
             }
-            
             for marker in venueMarkers{
-                
                 marker.map = nil
             }
+
             
-            for marker in organizationMarkers{
-                
-                marker.map = nil
-            }
-        }
-            
-        else if(GlobalVariables.selectedDisplay == "Organization"){
-            
+        default:
             for marker in eventMarkers{
-                
                 marker.map = nil
             }
-            
             for marker in venueMarkers{
-                
                 marker.map = nil
             }
-            
             for marker in organizationMarkers{
-                
-                marker.map = viewMap
+                marker.map = nil
             }
-        }
+        }        
     }
     
     //Swipe Cells Actions

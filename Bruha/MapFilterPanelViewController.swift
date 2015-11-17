@@ -113,21 +113,6 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         let organizationTgr = UITapGestureRecognizer(target: self, action: ("organizationTapped"))
         organizationSelectedB.addGestureRecognizer(organizationTgr)
         
-        switch(GlobalVariables.selectedDisplay){
-            
-            case "Event":
-            eventTapped()
-            
-            case "Venue":
-            venueTapped()
-            
-            case "Organization":
-            organizationTapped()
-            
-        default:
-            eventTapped()
-        } //IS THIS BLOCK NEEDED?
-        
         let date = NSDate()
         let calendarView = CalendarView.instance(date, selectedDate: date)
         calendarView.delegate = self
@@ -137,6 +122,22 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         placeholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[calendarView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["calendarView": calendarView]))
         placeholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[calendarView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["calendarView": calendarView]))
         placeholder.hidden = false
+        
+        
+        switch(GlobalVariables.selectedDisplay){
+            
+        case "Event":
+            eventTapped()
+            
+        case "Venue":
+            venueTapped()
+            
+        case "Organization":
+            organizationTapped()
+            
+        default:
+            eventTapped()
+        } //IS THIS BLOCK NEEDED?
     }
     
     func sliderValueDidChange(sender:UISlider!) {
