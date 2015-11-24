@@ -13,7 +13,7 @@ class AddictionListPanelViewController: UIViewController, UITableViewDelegate {
     
     @IBOutlet weak var eventSelectedB: UIButton!
     @IBOutlet weak var venueSelectedB: UIButton!
-    @IBOutlet weak var artistSelectedB: UIButton!
+    @IBOutlet weak var discoverableSelectedB: UIButton!
     @IBOutlet weak var organizationSelectedB: UIButton!
     
     
@@ -31,8 +31,8 @@ class AddictionListPanelViewController: UIViewController, UITableViewDelegate {
         let venueTgr = UITapGestureRecognizer(target: self, action: ("venueTapped"))
         venueSelectedB.addGestureRecognizer(venueTgr)
         
-        let artistTgr = UITapGestureRecognizer(target: self, action: ("artistTapped"))
-        artistSelectedB.addGestureRecognizer(artistTgr)
+        let discoverableTgr = UITapGestureRecognizer(target: self, action: ("discoverableTapped"))
+        discoverableSelectedB.addGestureRecognizer(discoverableTgr)
         
         let organizationTgr = UITapGestureRecognizer(target: self, action: ("organizationTapped"))
         organizationSelectedB.addGestureRecognizer(organizationTgr)

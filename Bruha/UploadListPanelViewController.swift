@@ -12,9 +12,11 @@ import UIKit
 class UploadListPanelViewController: UIViewController, UITableViewDelegate {
     
     @IBOutlet weak var eventSelectedB: UIButton!
-    @IBOutlet weak var artistSelectedB: UIButton!
+    @IBOutlet weak var discoverableSelectedB: UIButton!
     @IBOutlet weak var organizationSelectedB: UIButton!
     @IBOutlet weak var venueSelectedB: UIButton!
+    
+    
     
     var panelControllerContainer: ARSPContainerController!
     var visibleZoneHeight: CGFloat = 74
@@ -29,8 +31,8 @@ class UploadListPanelViewController: UIViewController, UITableViewDelegate {
         let venueTgr = UITapGestureRecognizer(target: self, action: ("venueTapped"))
         venueSelectedB.addGestureRecognizer(venueTgr)
         
-        let artistTgr = UITapGestureRecognizer(target: self, action: ("artistTapped"))
-        artistSelectedB.addGestureRecognizer(artistTgr)
+        let discoverableTgr = UITapGestureRecognizer(target: self, action: ("discoverableTapped"))
+        discoverableSelectedB.addGestureRecognizer(discoverableTgr)
         
         let organizationTgr = UITapGestureRecognizer(target: self, action: ("organizationTapped"))
         organizationSelectedB.addGestureRecognizer(organizationTgr)
@@ -64,9 +66,9 @@ class UploadListPanelViewController: UIViewController, UITableViewDelegate {
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeUpload", object: self)
     }
     
-    func artistTapped(){
+    func discoverableTapped(){
         
-        GlobalVariables.uploadDisplay = "Artist"
+        GlobalVariables.uploadDisplay = "Discoverable"
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeUpload", object: self)
     }
     

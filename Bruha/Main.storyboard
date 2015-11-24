@@ -426,12 +426,12 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JeB-Wo-Mfc">
+                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="JeB-Wo-Mfc">
                                         <rect key="frame" x="161" y="3" width="73" height="68"/>
                                         <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
-                                        <state key="normal" title="Artists">
+                                        <state key="normal" title="Discoverable">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -482,7 +482,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="artistSelectedB" destination="JeB-Wo-Mfc" id="7IT-Ox-UdW"/>
+                        <outlet property="discoverableSelectedB" destination="JeB-Wo-Mfc" id="vvi-Qx-uTN"/>
                         <outlet property="eventSelectedB" destination="dyV-Nc-Xca" id="EOo-5S-7EA"/>
                         <outlet property="organizationSelectedB" destination="oov-l7-Qrm" id="8jU-32-Dr1"/>
                         <outlet property="venueSelectedB" destination="UOF-Jy-O5t" id="XUZ-gK-j4v"/>
@@ -641,7 +641,7 @@
                                         <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
-                                        <state key="normal" title="Artists">
+                                        <state key="normal" title="Discoverable">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -702,7 +702,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="artistSelectedB" destination="fON-b0-WAu" id="GyA-cz-iKK"/>
+                        <outlet property="discoverableSelectedB" destination="fON-b0-WAu" id="Adg-rK-yJu"/>
                         <outlet property="eventSelectedB" destination="WFm-SP-nYb" id="Ju1-HG-Pd1"/>
                         <outlet property="organizationSelectedB" destination="Xan-n6-WJ8" id="p1f-Qd-yLn"/>
                         <outlet property="venueSelectedB" destination="dU4-py-zfL" id="2Fd-4E-jXa"/>
@@ -980,12 +980,12 @@
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="z55-iv-qkW">
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="z55-iv-qkW">
                                         <rect key="frame" x="161" y="3" width="73" height="68"/>
                                         <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
-                                        <state key="normal" title="Artists">
+                                        <state key="normal" title="Discoverable">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -1026,10 +1026,10 @@
                                     <constraint firstItem="9NE-aT-sYN" firstAttribute="width" secondItem="xo5-cm-x41" secondAttribute="width" id="oLt-9L-ft8"/>
                                 </constraints>
                             </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="KyL-l5-h1Y">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KyL-l5-h1Y">
                                 <rect key="frame" x="0.0" y="74" width="320" height="494"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="22" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="FaC-0A-mNq">
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="22" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="FaC-0A-mNq">
                                         <rect key="frame" x="8" y="8" width="304" height="22"/>
                                         <animations/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1054,7 +1054,7 @@
                                             <outlet property="delegate" destination="pkM-Nq-gx3" id="Crf-dS-e6N"/>
                                         </connections>
                                     </tableView>
-                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="IMa-si-HK8">
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="IMa-si-HK8">
                                         <rect key="frame" x="8" y="38" width="304" height="170"/>
                                         <animations/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -1066,9 +1066,12 @@
                                 <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
+                                    <constraint firstItem="FaC-0A-mNq" firstAttribute="top" secondItem="KyL-l5-h1Y" secondAttribute="topMargin" id="4dq-0G-6to"/>
                                     <constraint firstItem="IMa-si-HK8" firstAttribute="leading" secondItem="KyL-l5-h1Y" secondAttribute="leading" constant="8" id="Iwc-D2-OdJ"/>
                                     <constraint firstItem="IMa-si-HK8" firstAttribute="top" secondItem="FaC-0A-mNq" secondAttribute="bottom" constant="8" id="O3J-8a-IOJ"/>
                                     <constraint firstItem="FaC-0A-mNq" firstAttribute="leading" secondItem="KyL-l5-h1Y" secondAttribute="leading" constant="8" id="a0W-LV-zEr"/>
+                                    <constraint firstItem="FaC-0A-mNq" firstAttribute="trailing" secondItem="KyL-l5-h1Y" secondAttribute="trailingMargin" id="bBx-nN-Io9"/>
+                                    <constraint firstAttribute="bottom" secondItem="IMa-si-HK8" secondAttribute="bottom" constant="286" id="eac-lZ-1aq"/>
                                     <constraint firstAttribute="centerX" secondItem="FaC-0A-mNq" secondAttribute="centerX" id="tkF-VP-faP"/>
                                     <constraint firstAttribute="centerX" secondItem="IMa-si-HK8" secondAttribute="centerX" id="zAH-xG-NUE"/>
                                 </constraints>
@@ -1087,7 +1090,7 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="artistSelectedB" destination="z55-iv-qkW" id="igN-ku-CXd"/>
+                        <outlet property="discoverableSelectedB" destination="z55-iv-qkW" id="IWE-bR-JgV"/>
                         <outlet property="eventCategoriesTable" destination="FaC-0A-mNq" id="8Xb-LC-uGS"/>
                         <outlet property="eventCategoryTableHeight" destination="YQc-2L-a5X" id="UQn-1v-I6X"/>
                         <outlet property="eventSelectedB" destination="PXb-4Z-59H" id="b6e-IU-UDa"/>
@@ -1884,7 +1887,7 @@
                                         <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
-                                        <state key="normal" title="Artists">
+                                        <state key="normal" title="Discoverable">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
@@ -1988,9 +1991,9 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="artistSelectedB" destination="dfZ-g2-9Za" id="6fC-AU-Rg7"/>
                         <outlet property="categoryTableHeight" destination="jox-9X-I1E" id="tEW-Eu-rpk"/>
                         <outlet property="categoryTableView" destination="NoZ-Mg-783" id="MZo-jF-qsQ"/>
+                        <outlet property="discoverableSelectedB" destination="dfZ-g2-9Za" id="fXo-0A-gJR"/>
                         <outlet property="eventSelectedB" destination="2k7-nw-dEr" id="Dwm-H2-Ofz"/>
                         <outlet property="organizationSelectedB" destination="80X-8D-6ia" id="SDv-gs-l94"/>
                         <outlet property="placeholder" destination="dZ8-L6-oEc" id="JVl-Ik-6Ot"/>
@@ -2042,7 +2045,7 @@
         <segue reference="pIM-BH-lfI"/>
         <segue reference="1Xm-3s-taQ"/>
         <segue reference="eyG-eD-cCw"/>
-        <segue reference="neY-bQ-vsw"/>
         <segue reference="zCE-mg-04b"/>
+        <segue reference="neY-bQ-vsw"/>
     </inferredMetricsTieBreakers>
 </document>
