@@ -712,6 +712,45 @@
             </objects>
             <point key="canvasLocation" x="2412" y="-1090"/>
         </scene>
+        <!--ShowOnMap View Controller-->
+        <scene sceneID="rgb-i9-A3Z">
+            <objects>
+                <viewController title="ShowOnMap View Controller" id="8Gj-d3-yhz" customClass="ShowOnMapViewController" customModule="Bruha" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="kvM-IL-Y91"/>
+                        <viewControllerLayoutGuide type="bottom" id="Oif-jY-P8e"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="vMo-Vy-AIm">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="3kl-ea-7xz" customClass="GMSMapView">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <animations/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u8J-hI-Dff">
+                                <rect key="frame" x="17" y="18" width="41" height="33"/>
+                                <animations/>
+                                <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
+                                <state key="normal" title="Back"/>
+                                <connections>
+                                    <segue destination="2fB-2K-YbP" kind="modal" id="b2b-Uo-N5Q"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <animations/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="8QX-5Z-Dom"/>
+                    <connections>
+                        <outlet property="mapView" destination="3kl-ea-7xz" id="sNF-ke-dgU"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="8XM-wW-kJe" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2892" y="-1090"/>
+        </scene>
         <!--Sign Up View Controller-->
         <scene sceneID="mcJ-hz-2As">
             <objects>
@@ -1193,6 +1232,7 @@
                     </view>
                     <connections>
                         <outlet property="exploreTableView" destination="oaV-wG-kyD" id="2tT-Ma-OdX"/>
+                        <segue destination="8Gj-d3-yhz" kind="modal" identifier="ShowOnMap" id="thc-CS-1cg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wTm-IP-AoX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2043,8 +2083,8 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="pIM-BH-lfI"/>
-        <segue reference="1Xm-3s-taQ"/>
-        <segue reference="eyG-eD-cCw"/>
+        <segue reference="b2b-Uo-N5Q"/>
+        <segue reference="lw9-PB-bZ2"/>
         <segue reference="zCE-mg-04b"/>
         <segue reference="neY-bQ-vsw"/>
     </inferredMetricsTieBreakers>

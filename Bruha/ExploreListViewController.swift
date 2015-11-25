@@ -731,9 +731,18 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 //event ticket
                 print("event ticket")
             }
-            else if GlobalVariables.selectedDisplay == "Venue" || GlobalVariables.selectedDisplay == "Organization" {
                 //venue and organization map
-                print("venue and org map")
+            else if GlobalVariables.selectedDisplay == "Venue" {
+                let cellIndexPath = self.exploreTableView.indexPathForCell(cell)
+                let selectedCell = self.exploreTableView.cellForRowAtIndexPath(cellIndexPath!) as! VenueTableViewCell
+                GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
+                self.performSegueWithIdentifier("ShowOnMap", sender: self)
+            }
+            else if GlobalVariables.selectedDisplay == "Organization" {
+                let cellIndexPath = self.exploreTableView.indexPathForCell(cell)
+                let selectedCell = self.exploreTableView.cellForRowAtIndexPath(cellIndexPath!) as! OrganizationTableViewCell
+                GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
+                self.performSegueWithIdentifier("ShowOnMap", sender: self)
             }
             
             
@@ -762,11 +771,12 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         case 1:
             //Event Ticket
             if GlobalVariables.selectedDisplay == "Event"{
-                print("Displaying Addictions from the local database")
-                let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
-                for addict in addictionInfo!{
-                    print("the addicted event id is \(addict.eventID)\nthe user is \(addict.userID)")
-                }
+
+                let cellIndexPath = self.exploreTableView.indexPathForCell(cell)
+                let selectedCell = self.exploreTableView.cellForRowAtIndexPath(cellIndexPath!) as! EventTableViewCell
+                GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
+                self.performSegueWithIdentifier("ShowOnMap", sender: self)
+                
             }
             
             //Venue MoreInfo

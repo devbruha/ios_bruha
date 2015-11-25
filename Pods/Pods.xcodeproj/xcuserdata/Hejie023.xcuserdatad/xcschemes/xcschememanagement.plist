@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>SchemeUserState</key>
+	<dict>
+		<key>ARSlidingPanel.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>MBCalendarKit.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>2</integer>
+		</dict>
+		<key>Pods.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>3</integer>
+		</dict>
+		<key>SWTableViewCell.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>4</integer>
+		</dict>
+	</dict>
+	<key>SuppressBuildableAutocreation</key>
+	<dict>
+		<key>6396ADABB05EC8890CF759300D8AF13C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>AA226A506563D3D2096B11FDF6B6766E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B87255E6033E16C88EB33732A60CD94A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BE1E95BECAB84919B9D238CCDD8A10D3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+	</dict>
+</dict>
+</plist>

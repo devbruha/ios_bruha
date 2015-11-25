@@ -53,6 +53,7 @@
 		18CFAAAF1B876F0C00FE3976 /* SplashFive.xib in Resources */ = {isa = PBXBuildFile; fileRef = 18CFAAAE1B876F0C00FE3976 /* SplashFive.xib */; };
 		18D2169D1B6BF1D9005DAAA8 /* ExploreListPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18D2169C1B6BF1D9005DAAA8 /* ExploreListPanelViewController.swift */; };
 		18E2DD8C1B69537D007C61B5 /* DashLine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 18E2DD8B1B69537D007C61B5 /* DashLine.swift */; };
+		3C4FA13F1C04EE150034610E /* ShowOnMapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3C4FA13E1C04EE150034610E /* ShowOnMapViewController.swift */; };
 		3FBD3EDB6177AE183A0340DF /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 4C40848564A9A9ABD06E1BFE /* libPods.a */; };
 		452BC0C41B791068003E7142 /* VenueTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 452BC0C31B791068003E7142 /* VenueTableViewCell.xib */; };
 		452BC0C61B79118F003E7142 /* ArtistTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 452BC0C51B79118F003E7142 /* ArtistTableViewCell.xib */; };
@@ -190,6 +191,7 @@
 		18CFAAAE1B876F0C00FE3976 /* SplashFive.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SplashFive.xib; sourceTree = "<group>"; };
 		18D2169C1B6BF1D9005DAAA8 /* ExploreListPanelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ExploreListPanelViewController.swift; sourceTree = "<group>"; };
 		18E2DD8B1B69537D007C61B5 /* DashLine.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DashLine.swift; sourceTree = "<group>"; };
+		3C4FA13E1C04EE150034610E /* ShowOnMapViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShowOnMapViewController.swift; sourceTree = "<group>"; };
 		452BC0C31B791068003E7142 /* VenueTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VenueTableViewCell.xib; sourceTree = "<group>"; };
 		452BC0C51B79118F003E7142 /* ArtistTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ArtistTableViewCell.xib; sourceTree = "<group>"; };
 		452BC0C71B79119D003E7142 /* OrganizationTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = OrganizationTableViewCell.xib; sourceTree = "<group>"; };
@@ -353,6 +355,7 @@
 				A505C0F21BCEE8730067CDD1 /* UploadListViewController.swift */,
 				A505C0F41BCEE9860067CDD1 /* UploadListPanelViewController.swift */,
 				A505C0F61BD17B910067CDD1 /* LoadScreenViewController.swift */,
+				3C4FA13E1C04EE150034610E /* ShowOnMapViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -854,6 +857,7 @@
 				180F6DFE1B75006800F86BF5 /* MapViewController.swift in Sources */,
 				1835F8F51B5ECF3500FD1BD1 /* DashBoardViewController.swift in Sources */,
 				45FA059C1B5D4188004AD819 /* ArtistDBModel.swift in Sources */,
+				3C4FA13F1C04EE150034610E /* ShowOnMapViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

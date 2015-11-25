@@ -23,9 +23,6 @@ extension UITableView {
 }
 
 class MapViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,CLLocationManagerDelegate, GMSMapViewDelegate,ARSPDragDelegate, ARSPVisibilityStateDelegate, SWTableViewCellDelegate {
-    //
-    var testLocationMarker: GMSMarker!
-    var testLocation = CLLocationCoordinate2D(latitude: 43.2628662, longitude: -79.86648939999998)
     
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
@@ -386,8 +383,8 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
     func generateMarkers(){
         for event in displayedEvents{
             let markerIcon = UIImage(named: event.primaryCategory)
-            let scaledToSize: CGSize = CGSize(width: 30, height: 30)
-            let scaledIcon: UIImage?
+//            let scaledToSize: CGSize = CGSize(width: 30, height: 30)
+//            let scaledIcon: UIImage?
             
             let eventMarker: GMSMarker! = GMSMarker()
             
@@ -395,12 +392,12 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             
             eventMarker.position = CLLocationCoordinate2D(latitude: event.eventLatitude,longitude: event.eventLongitude)
             
-            if let icon = markerIcon {
-                scaledIcon = scaleToSize(markerIcon!, scaledToSize: scaledToSize)
-            } else {
-                scaledIcon = nil
-            }
-            eventMarker.icon = scaledIcon
+//            if let icon = markerIcon {
+//                scaledIcon = scaleToSize(markerIcon!, scaledToSize: scaledToSize)
+//            } else {
+//                scaledIcon = nil
+//            }
+            eventMarker.icon = markerIcon
             
             eventMarkers.append(eventMarker)
         }
@@ -410,40 +407,40 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
         
         for venue in displayedVenues{
             let markerIcon = UIImage(named: venue.primaryCategory)
-            let scaledToSize: CGSize = CGSize(width: 30, height: 30)
-            let scaledIcon: UIImage?
+//            let scaledToSize: CGSize = CGSize(width: 30, height: 30)
+//            let scaledIcon: UIImage?
             
             let venueMarker: GMSMarker! = GMSMarker()
             
             venueMarker.title = venue.venueName
             venueMarker.position = CLLocationCoordinate2D(latitude: venue.venueLatitude,longitude: venue.venueLongitude)
             
-            if let icon = markerIcon {
-                scaledIcon = scaleToSize(markerIcon!, scaledToSize: scaledToSize)
-            } else {
-                scaledIcon = nil
-            }
-            venueMarker.icon = scaledIcon
+//            if let icon = markerIcon {
+//                scaledIcon = scaleToSize(markerIcon!, scaledToSize: scaledToSize)
+//            } else {
+//                scaledIcon = nil
+//            }
+            venueMarker.icon = markerIcon
             
             venueMarkers.append(venueMarker)
         }
         
         for organization in displayedOrganizations{
             let markerIcon = UIImage(named: organization.primaryCategory)
-            let scaledToSize: CGSize = CGSize(width: 30, height: 30)
-            let scaledIcon: UIImage?
+//            let scaledToSize: CGSize = CGSize(width: 30, height: 30)
+//            let scaledIcon: UIImage?
             
             let organizationMarker: GMSMarker! = GMSMarker()
             
             organizationMarker.title = organization.organizationName
             organizationMarker.position = CLLocationCoordinate2D(latitude: organization.organizationLatitude,longitude: organization.organizationLongitude)
             
-            if let icon = markerIcon {
-                scaledIcon = scaleToSize(markerIcon!, scaledToSize: scaledToSize)
-            } else {
-                scaledIcon = nil
-            }
-            organizationMarker.icon = scaledIcon
+//            if let icon = markerIcon {
+//                scaledIcon = scaleToSize(markerIcon!, scaledToSize: scaledToSize)
+//            } else {
+//                scaledIcon = nil
+//            }
+            organizationMarker.icon = markerIcon
             
             organizationMarkers.append(organizationMarker)
         }
