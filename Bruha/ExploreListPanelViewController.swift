@@ -259,7 +259,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
                 if(category.sectionName != "Event Categories"){
                     
                     if(!GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.keys.contains(category.sectionName)){
-                        temp.sectionObjectIDs = []
+                        //temp.sectionObjectIDs = []
                         temp.sectionObjects = []
                     }
                 }

@@ -256,7 +256,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
                 if(category.sectionName != "Event Categories"){
                     
                     if(!GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.keys.contains(category.sectionName)){
-                        temp.sectionObjectIDs = []
+                        //temp.sectionObjectIDs = []
                         temp.sectionObjects = []
                     }
                 }
@@ -372,7 +372,8 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         let selectedCell = self.categoryTableView.cellForRowAtIndexPath(indexPath) as UITableViewCell!
          selectedCell.backgroundColor = UIColor.grayColor()
         
-        let headerTitle = categoryTableView.headerViewForSection(indexPath.section)?.textLabel!.text!
+        let headerTitle = eventObject[indexPath.section].sectionName
+        //categoryTableView.headerViewForSection(indexPath.section)?.textLabel!.text!
         
         // Header title is the primary category
         
@@ -410,7 +411,8 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         let selectedCell = self.categoryTableView.cellForRowAtIndexPath(indexPath) as UITableViewCell!
          selectedCell.backgroundColor = UIColor.blackColor()
         
-        let headerTitle = categoryTableView.headerViewForSection(indexPath.section)?.textLabel!.text!
+        let headerTitle = eventObject[indexPath.section].sectionName
+        //categoryTableView.headerViewForSection(indexPath.section)?.textLabel!.text!
         
         // Header title is the primary category
         
