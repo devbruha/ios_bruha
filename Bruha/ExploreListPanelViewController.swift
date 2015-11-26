@@ -133,21 +133,20 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
 //            eventCategoriesTable.reloadData()
 //        }
         
-//        switch(GlobalVariables.selectedDisplay){
-//            
-//        case "Event":
-//            eventTapped()
-//            
-//        case "Venue":
-//            venueTapped()
-//            
-//        case "Organization":
-//            organizationTapped()
-//            
-//        default:
-//            eventTapped()
-//        }
-        
+        switch(GlobalVariables.selectedDisplay){
+            
+        case "Event":
+            eventTapped()
+            
+        case "Venue":
+            venueTapped()
+            
+        case "Organization":
+            organizationTapped()
+            
+        default:
+            eventTapped()
+        }
     }
     
     func sliderValueDidChange(sender:UISlider!) {
@@ -249,11 +248,11 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
 //            eventCategoriesTable.reloadRowsAtIndexPaths([i], withRowAnimation: UITableViewRowAnimation.None)
 //        }
         
-        if GlobalVariables.UIIdxPath.count != 0 {
-            uiCustomSelection()
-            //eventCategoriesTable.endUpdates()
-            eventCategoriesTable.reloadData()
-        }
+//        if GlobalVariables.UIIdxPath.count != 0 {
+//            uiCustomSelection()
+//            //eventCategoriesTable.endUpdates()
+//            eventCategoriesTable.reloadData()
+//        }
     }
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
@@ -263,9 +262,9 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
     }
     override func viewWillDisappear(animated: Bool) {
         super.viewWillDisappear(animated)
-        if eventCategoriesTable.indexPathsForSelectedRows != nil{
-            GlobalVariables.UIIdxPath = eventCategoriesTable.indexPathsForSelectedRows!
-        }
+//        if eventCategoriesTable.indexPathsForSelectedRows != nil{
+//            GlobalVariables.UIIdxPath = eventCategoriesTable.indexPathsForSelectedRows!
+//        }
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -277,10 +276,11 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
         GlobalVariables.selectedDisplay = "Event"
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
-        clearBackupCategories()
-        GlobalVariables.UserCustomFilters.categoryFilter.venueCategories.removeAll()
-        GlobalVariables.UserCustomFilters.categoryFilter.organizationCategories.removeAll()
+        //clearBackupCategories()
         resetSliderValue()
+        eventCategoriesTable.reloadData()
+        adjustHeightOfTableView(eventCategoriesTable, constraint: eventCategoryTableHeight)
+        updateNotificationSent()
         
     }
     
@@ -288,18 +288,18 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
         GlobalVariables.selectedDisplay = "Venue"
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
-        clearBackupCategories()
-        GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.removeAll()
-        GlobalVariables.UserCustomFilters.categoryFilter.organizationCategories.removeAll()
+        //clearBackupCategories()
         resetSliderValue()
-        
+        eventCategoriesTable.reloadData()
+        adjustHeightOfTableView(eventCategoriesTable, constraint: eventCategoryTableHeight)
+        updateNotificationSent()
     }
     
     func discoverableTapped(){
         
         GlobalVariables.selectedDisplay = ""
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
-        clearBackupCategories()
+        //clearBackupCategories()
         resetSliderValue()
         
     }
@@ -308,11 +308,11 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
         GlobalVariables.selectedDisplay = "Organization"
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
-        clearBackupCategories()
-        GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.removeAll()
-        GlobalVariables.UserCustomFilters.categoryFilter.venueCategories.removeAll()
+        //clearBackupCategories()
         resetSliderValue()
-        
+        eventCategoriesTable.reloadData()
+        adjustHeightOfTableView(eventCategoriesTable, constraint: eventCategoryTableHeight)
+        updateNotificationSent()
     }
     
     // -------------------------------Category Table Logic-------------------------------
@@ -328,6 +328,15 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         cell.backgroundColor = UIColor.blackColor()
         cell.textLabel?.textColor = UIColor.whiteColor()
         cell.textLabel!.font = UIFont(name: cell.textLabel!.font.fontName, size: 18)
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
+        
+        if(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.keys.contains(eventObject[indexPath.section].sectionName)){
+            
+            if(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[eventObject[indexPath.section].sectionName]![0].contains(eventObject[indexPath.section].sectionObjectIDs[indexPath.row])){
+                
+                cell.backgroundColor = UIColor.grayColor()
+            }
+        }
         
         return cell
     }
@@ -335,6 +344,8 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         let selectedCell = self.eventCategoriesTable.cellForRowAtIndexPath(indexPath) as UITableViewCell!
+        
+        selectedCell.backgroundColor = UIColor.grayColor()
     
         let headerTitle = eventObject[indexPath.section].sectionName
         //self.eventCategoriesTable.headerViewForSection(headerCell.headerCellSection!)?.textLabel?.text
@@ -346,8 +357,10 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
         if GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].contains(subCategoryID){
             
+            selectedCell.backgroundColor = UIColor.blackColor()
+            
             //Handled in didDeselectRowAtIndexPath
-        /*
+        
             let index = GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].indexOf(subCategoryID)
             
             GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].removeAtIndex(index!)
@@ -371,7 +384,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
 //                }
 //            }
             print("after removed filter \(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories)")
-        */
+        
         }
         else{
             
@@ -388,6 +401,8 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
         
         let selectedCell = self.eventCategoriesTable.cellForRowAtIndexPath(indexPath) as UITableViewCell!
+        
+         selectedCell.backgroundColor = UIColor.blackColor()
         
         let headerTitle = eventObject[indexPath.section].sectionName
         //eventCategoriesTable.headerViewForSection(indexPath.section)?.textLabel!.text!
@@ -413,11 +428,13 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         else{
             
             //Handled in didSelectRowAtIndexPath
-            /*
+            
+            selectedCell.backgroundColor = UIColor.grayColor()
+            
             GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].append(subCategoryID)
             GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![1].append(subCategoryName)
             print("after added filter \(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories)")
-            */
+            
         }
         
         //print(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.keys.elements)
@@ -538,7 +555,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
             }
             else{
             
-                GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.removeAll(keepCapacity: false)
+                //GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.removeAll(keepCapacity: false)
             }
             print(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories)
         
@@ -556,7 +573,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
             }
             else{
                 
-                GlobalVariables.UserCustomFilters.categoryFilter.venueCategories.removeAll(keepCapacity: false)
+                //GlobalVariables.UserCustomFilters.categoryFilter.venueCategories.removeAll(keepCapacity: false)
             }
             print(GlobalVariables.UserCustomFilters.categoryFilter.venueCategories)
             
@@ -574,7 +591,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
             }
             else{
                 
-                GlobalVariables.UserCustomFilters.categoryFilter.organizationCategories.removeAll(keepCapacity: false)
+                //GlobalVariables.UserCustomFilters.categoryFilter.organizationCategories.removeAll(keepCapacity: false)
             }
             print(GlobalVariables.UserCustomFilters.categoryFilter.organizationCategories)
             
@@ -599,7 +616,12 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
                     
                     for(var i = 0 ; i < eventObject.count ; ++i){
                         
-                        eventObject[i].sectionObjects.removeAll(keepCapacity: false)
+                        if(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.keys.contains(eventObject[i].sectionName)){
+                            
+                        }
+                        else{
+                            eventObject[i].sectionObjects.removeAll(keepCapacity: false)
+                        }
                     }
                 }
 //            case "Artist":
@@ -629,6 +651,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
             default:
                 print("SECTION TAPPED ERROR")
             }
+            
         } else {
             switch (GlobalVariables.selectedDisplay) {
             case "Event":
@@ -818,14 +841,14 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         print("IM RUN ____-----~~~~~~~~~~", GlobalVariables.UIIdxPath[0].section)
         
         
-        eventObject.removeAll(keepCapacity: false)
-        eventObject = (backupEventCategories)
-        
-        for(var i = 0 ; i < eventObject.count ; ++i){
-            
-            eventObject[i].sectionObjects.removeAll(keepCapacity: false)
-            print(eventObject[i].sectionObjects)
-        }
+//        eventObject.removeAll(keepCapacity: false)
+//        eventObject = (backupEventCategories)
+//        
+//        for(var i = 0 ; i < eventObject.count ; ++i){
+//            
+//            eventObject[i].sectionObjects.removeAll(keepCapacity: false)
+//            print(eventObject[i].sectionObjects)
+//        }
     
 //        for var i = 0; i < GlobalVariables.UISection.count; i++ {
 //            eventObject[GlobalVariables.UISection[i]].sectionObjects = (backupEventCategories[GlobalVariables.UISection[i]].sectionObjects)

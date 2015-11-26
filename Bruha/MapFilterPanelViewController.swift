@@ -124,6 +124,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         placeholder.hidden = false
         
         
+        
         switch(GlobalVariables.selectedDisplay){
             
         case "Event":
@@ -139,6 +140,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
             eventTapped()
         } //IS THIS BLOCK NEEDED?
     }
+    
     
     func sliderValueDidChange(sender:UISlider!) {
         
@@ -243,22 +245,24 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         
         GlobalVariables.selectedDisplay = "Event"
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChange", object: self)
-        clearBackupCategories()
-        GlobalVariables.UserCustomFilters.categoryFilter.venueCategories.removeAll()
-        GlobalVariables.UserCustomFilters.categoryFilter.organizationCategories.removeAll()
+        //clearBackupCategories()
         resetSliderValue()
+        updateNotificationSent()
+        categoryTableView.reloadData()
         
+        adjustHeightOfTableView(self.categoryTableView, constraint: self.categoryTableHeight)
     }
     
     func venueTapped(){
         
         GlobalVariables.selectedDisplay = "Venue"
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChange", object: self)
-        clearBackupCategories()
-        GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.removeAll()
-        GlobalVariables.UserCustomFilters.categoryFilter.organizationCategories.removeAll()
+        //clearBackupCategories()
         resetSliderValue()
+        updateNotificationSent()
+        categoryTableView.reloadData()
         
+        adjustHeightOfTableView(self.categoryTableView, constraint: self.categoryTableHeight)
     }
     
     func discoverableTapped(){
@@ -267,18 +271,18 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChange", object: self)
         clearBackupCategories()
         resetSliderValue()
-        
     }
     
     func organizationTapped(){
         
         GlobalVariables.selectedDisplay = "Organization"
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChange", object: self)
-        clearBackupCategories()
-        GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.removeAll()
-        GlobalVariables.UserCustomFilters.categoryFilter.venueCategories.removeAll()
+        //clearBackupCategories()
         resetSliderValue()
+        updateNotificationSent()
+        categoryTableView.reloadData()
         
+        adjustHeightOfTableView(self.categoryTableView, constraint: self.categoryTableHeight)
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -309,12 +313,24 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         cell.textLabel?.textColor = UIColor.whiteColor()
         cell.textLabel!.font = UIFont(name: cell.textLabel!.font.fontName, size: 18)
         
+        cell.selectionStyle = UITableViewCellSelectionStyle.None
+        
+        if(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.keys.contains(eventObject[indexPath.section].sectionName)){
+            
+            if(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[eventObject[indexPath.section].sectionName]![0].contains(eventObject[indexPath.section].sectionObjectIDs[indexPath.row])){
+                
+                cell.backgroundColor = UIColor.grayColor()
+            }
+    
+        }
+        
         return cell
     }
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         let selectedCell = self.categoryTableView.cellForRowAtIndexPath(indexPath) as UITableViewCell!
+         selectedCell.backgroundColor = UIColor.grayColor()
         
         let headerTitle = categoryTableView.headerViewForSection(indexPath.section)?.textLabel!.text!
         
@@ -326,7 +342,9 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         if GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].contains(subCategoryID){
             
             //Handled in didDeselectRowAtIndexPath
-            /*
+            
+            selectedCell.backgroundColor = UIColor.blackColor()
+            
             let index = GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].indexOf(subCategoryID)
             
             GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].removeAtIndex(index!)
@@ -350,7 +368,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
             //                }
             //            }
             print("after removed filter \(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories)")
-            */
+            
         }
         else{
             
@@ -366,6 +384,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
         
         let selectedCell = self.categoryTableView.cellForRowAtIndexPath(indexPath) as UITableViewCell!
+         selectedCell.backgroundColor = UIColor.blackColor()
         
         let headerTitle = categoryTableView.headerViewForSection(indexPath.section)?.textLabel!.text!
         
@@ -390,11 +409,13 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         else{
             
             //Handled in didSelectRowAtIndexPath
-            /*
+            
+            selectedCell.backgroundColor = UIColor.grayColor()
+            
             GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].append(subCategoryID)
             GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![1].append(subCategoryName)
             print("after added filter \(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories)")
-            */
+            
         }
         
         //print(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.keys.elements)
@@ -504,7 +525,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
             }
             else{
                 
-                GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.removeAll(keepCapacity: false)
+                //GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.removeAll(keepCapacity: false)
             }
             print(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories)
             
@@ -522,7 +543,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
             }
             else{
                 
-                GlobalVariables.UserCustomFilters.categoryFilter.venueCategories.removeAll(keepCapacity: false)
+                //GlobalVariables.UserCustomFilters.categoryFilter.venueCategories.removeAll(keepCapacity: false)
             }
             print(GlobalVariables.UserCustomFilters.categoryFilter.venueCategories)
             
@@ -540,7 +561,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
             }
             else{
                 
-                GlobalVariables.UserCustomFilters.categoryFilter.organizationCategories.removeAll(keepCapacity: false)
+                //GlobalVariables.UserCustomFilters.categoryFilter.organizationCategories.removeAll(keepCapacity: false)
             }
             print(GlobalVariables.UserCustomFilters.categoryFilter.organizationCategories)
             
@@ -565,7 +586,12 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
                     
                     for(var i = 0 ; i < eventObject.count ; ++i){
                         
-                        eventObject[i].sectionObjects.removeAll(keepCapacity: false)
+                        if(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.keys.contains(eventObject[i].sectionName)){
+                            
+                        }
+                        else{
+                            eventObject[i].sectionObjects.removeAll(keepCapacity: false)
+                        }
                     }
                 }
 //            case "Artist":
