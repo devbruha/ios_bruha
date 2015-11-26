@@ -10,6 +10,10 @@ import UIKit
 
 class LoadScreenViewController: UIViewController {
     
+    @IBOutlet var progressView: UIProgressView!
+    var done: Bool = false
+    var progressTimer: NSTimer = NSTimer()
+
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     var generalRetrieved = 0
@@ -18,6 +22,9 @@ class LoadScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        progressView.tintColor = UIColor.purpleColor()
+        progressView.progressViewStyle = UIProgressViewStyle.Bar
+        progressView.backgroundColor = UIColor.orangeColor()
         
 //        DeleteData(context: self.managedObjectContext).deleteAll()
 //        LoadScreenService(context: self.managedObjectContext).retrieveAll()
@@ -56,7 +63,9 @@ class LoadScreenViewController: UIViewController {
         
         if hasInternet() == "true" {
             
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: "performSegue", name:"download complete", object: nil)
+            startLoadingProgress()
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "saveImages", name:"complete", object: nil)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "performSegue", name:"complete", object: nil)
             let timer = NSTimer.scheduledTimerWithTimeInterval(15.0, target: self, selector: "timeOutCheck", userInfo: nil, repeats: false)
             
         } else {
@@ -99,6 +108,8 @@ class LoadScreenViewController: UIViewController {
         NSNotificationCenter.defaultCenter().removeObserver(self, name:"User Organizations", object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name:"Addicted Organizations", object: nil)
         
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: "complete", object: nil)
+        
         print("observer removed")
     }
     
@@ -107,6 +118,60 @@ class LoadScreenViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    // MARK: - Download Image
+    func saveImages() {
+        let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
+        let venueInfo = FetchData(context: managedObjectContext).fetchVenues()
+        let organizationInfo = FetchData(context: managedObjectContext).fetchOrganizations()
+        
+        for event in eventInfo {
+            if let checkedUrl = NSURL(string:event.posterUrl) {
+                
+                self.getDataFromUrl(checkedUrl) { data in
+                    dispatch_async(dispatch_get_main_queue()) {
+                        if let downloadImg = UIImage(data: data!) {
+                            GlobalVariables.ImageArray.append((event.eventID, downloadImg))
+                            //print("event")
+                        }
+                        
+                    }
+                }
+            }
+        }
+        for venue in venueInfo! {
+            if let checkedUrl = NSURL(string:venue.posterUrl) {
+                
+                self.getDataFromUrl(checkedUrl) { data in
+                    dispatch_async(dispatch_get_main_queue()) {
+                        if let downloadImg = UIImage(data: data!) {
+                            GlobalVariables.ImageArray.append((venue.venueID, downloadImg))
+                        }
+                    }
+                }
+            }
+        }
+        for organization in organizationInfo! {
+            if let checkedUrl = NSURL(string:organization.posterUrl) {
+                
+                self.getDataFromUrl(checkedUrl) { data in
+                    dispatch_async(dispatch_get_main_queue()) {
+                        if let downloadImg = UIImage(data: data!) {
+                            GlobalVariables.ImageArray.append((organization.organizationID, downloadImg))
+                        }
+                    }
+                }
+            }
+        }
+        
+    }
+    
+    func getDataFromUrl(urL:NSURL, completion: ((data: NSData?) -> Void)) {
+        NSURLSession.sharedSession().dataTaskWithURL(urL) { (data, response, error) in
+            completion(data: data)
+            }.resume()
+    }
+    
+    // MARK: - Internet
     func hasInternet() -> String {
         
         var error :String = "No Error"
@@ -122,7 +187,7 @@ class LoadScreenViewController: UIViewController {
         
         return error
     }
-    
+    // MARK: - prepare segue
     func segueSplash() {
         
         generalRetrieved = generalRetrieved + 1
@@ -130,12 +195,12 @@ class LoadScreenViewController: UIViewController {
         if generalRetrieved == 4 && FetchData(context: managedObjectContext).fetchUserInfo()?.count == 0 {
             
             print("should go to splash")
-            NSNotificationCenter.defaultCenter().postNotificationName("download complete", object: nil)
+            NSNotificationCenter.defaultCenter().postNotificationName("complete", object: nil)
             
         } else if generalRetrieved == 4 && loggedinRetrieved == 6 {
             
             print("should dashboard")
-            NSNotificationCenter.defaultCenter().postNotificationName("download complete", object: nil)
+            NSNotificationCenter.defaultCenter().postNotificationName("complete", object: nil)
         }
     }
     
@@ -146,22 +211,50 @@ class LoadScreenViewController: UIViewController {
         if loggedinRetrieved == 6 && FetchData(context: managedObjectContext).fetchUserInfo()?.count != 0 && generalRetrieved == 4 {
             
             print("should go to dashboard")
-            NSNotificationCenter.defaultCenter().postNotificationName("download complete", object: nil)
+            NSNotificationCenter.defaultCenter().postNotificationName("complete", object: nil)
         }
     }
     
     func performSegue() {
         
+        finishesLoadingProgress()
+        
         if(FetchData(context: managedObjectContext).fetchUserInfo()?.count != 0) {
             
-            print("DashBoard segue")
-            self.performSegueWithIdentifier("toDashBoard", sender: self)
+            delay(1.5){
+                print("DashBoard segue")
+                self.performSegueWithIdentifier("toDashBoard", sender: self)
+            }
             
         } else {
             
-            print("SplashView segue")
-            self.performSegueWithIdentifier("toSplashView", sender: self)
-
+            delay(1.5){
+                print("SplashView segue")
+                self.performSegueWithIdentifier("toSplashView", sender: self)
+            }
+        }
+    }
+    // MARK: - timing
+    func startLoadingProgress() {
+        self.progressView.progress = 0.0
+        self.done = false
+        self.progressTimer = NSTimer.scheduledTimerWithTimeInterval(0.1067, target: self, selector: "timerCallback", userInfo: nil, repeats: true)
+    }
+    func finishesLoadingProgress() {
+        self.done = true
+    }
+    func timerCallback() {
+        if self.done {
+            if self.progressView.progress >= 1 {
+                self.progressTimer.invalidate()
+            } else {
+                self.progressView.progress += 0.20
+            }
+        } else {
+            self.progressView.progress += 0.05
+            if self.progressView.progress >= 0.80 {
+                self.progressView.progress = 0.80
+            }
         }
     }
     
@@ -171,13 +264,20 @@ class LoadScreenViewController: UIViewController {
             
             let alert = UIAlertView(title: "Error while loading, some functionality may not work, please restart the app to get full functionality", message: nil, delegate: nil, cancelButtonTitle: nil)
             alert.show()
-            let delay = 5.0 * Double(NSEC_PER_SEC)
-            var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-            dispatch_after(time, dispatch_get_main_queue(), {
+            self.delay(5.0){
                 alert.dismissWithClickedButtonIndex(-1, animated: true)
-                //self.performSegueWithIdentifier("toSplashView", sender: self)
-            })
+            }
+//            let delay = 5.0 * Double(NSEC_PER_SEC)
+//            var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+//            dispatch_after(time, dispatch_get_main_queue(), {
+//                alert.dismissWithClickedButtonIndex(-1, animated: true)
+//                //self.performSegueWithIdentifier("toSplashView", sender: self)
+//            })
             
         }
+    }
+    
+    func delay(delay:Double, closure:()->()) {
+        dispatch_after( dispatch_time( DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC)) ), dispatch_get_main_queue(), closure )
     }
 }

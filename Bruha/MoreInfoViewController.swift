@@ -14,6 +14,10 @@ class MoreInfoViewController: UIViewController,ARSPDragDelegate, ARSPVisibilityS
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     var panelControllerContainer: ARSPContainerController!
 
+    @IBAction func backToExploreButton(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.panelControllerContainer = self.parentViewController as! ARSPContainerController
@@ -23,7 +27,7 @@ class MoreInfoViewController: UIViewController,ARSPDragDelegate, ARSPVisibilityS
         if GlobalVariables.selectedDisplay == "Event"{
             let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
             for event in eventInfo{
-                if event.eventID == GlobalVariables.eventSelected{
+                if event.eventID == GlobalVariables.eventSelected {
                     if let checkedUrl = NSURL(string: event.posterUrl){
                     getDataFromUrl(checkedUrl){
                         data in

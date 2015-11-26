@@ -32,7 +32,7 @@ class Filtering {
         }
         
         //price filter is not nil, if event price > filter price, filter out events
-        if GlobalVariables.UserCustomFilters.priceFilter != 0 {
+        if GlobalVariables.UserCustomFilters.priceFilter != -1 {
             
             for var i = tempEvent.count; i > 0; i-- {
                 
@@ -93,7 +93,7 @@ class Filtering {
         }
         
         if GlobalVariables.UserCustomFilters.dateFilter.count == 0 &&
-            GlobalVariables.UserCustomFilters.priceFilter == 0 &&
+            GlobalVariables.UserCustomFilters.priceFilter == -1 &&
             GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.count == 0 {
             
                 tempEvent.removeAll()
@@ -164,8 +164,11 @@ class Filtering {
         GlobalVariables.UserCustomFilters.categoryFilter.venueCategories.removeAll()
         GlobalVariables.UserCustomFilters.categoryFilter.organizationCategories.removeAll()
         GlobalVariables.UserCustomFilters.dateFilter.removeAll()
-        GlobalVariables.UserCustomFilters.priceFilter = 0
+        GlobalVariables.UserCustomFilters.priceFilter = -1
         
+        GlobalVariables.filterEventBool = false
+        GlobalVariables.filterVenueBool = false
+        GlobalVariables.filterOrganizationBool = false
     }
     
 }

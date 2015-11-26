@@ -25,7 +25,7 @@ struct EventService {
             
                 networkOperation.downloadJSONFromURL {
                     (let JSONArray) in
-                    
+                    //print(JSONArray?.count)
                     let mEvent = self.eventFromJSONArray(JSONArray)
                     completion(mEvent)
                 }
@@ -140,11 +140,17 @@ struct EventService {
         
         var events = [Event]()
         
-        for e in jsonArray!{
+        if(jsonArray == nil){
             
-            let e = Event(eventDictionary: e as! [String : AnyObject])
+        }
+        else{
             
-            events.append(e)
+            for e in jsonArray!{
+                
+                let e = Event(eventDictionary: e as! [String : AnyObject])
+                
+                events.append(e)
+            }
         }
         
         return events

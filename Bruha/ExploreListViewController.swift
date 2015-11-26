@@ -128,20 +128,28 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             
             if GlobalVariables.filterEventBool {
                 let filteredEventInfo = GlobalVariables.displayFilteredEvents
+                
+                cell.ExploreImage.contentMode = UIViewContentMode.ScaleToFill
+                for img in GlobalVariables.ImageArray {
+                    if img.0 == filteredEventInfo[indexPath.row].eventID {
+                        cell.ExploreImage.image = img.1
+                    }
+                }
+                
                 for event in eventInfo! {
                     if event.eventID == filteredEventInfo[indexPath.row].eventID {
-                        cell.ExploreImage.contentMode = UIViewContentMode.ScaleToFill
-                        if let checkedUrl = NSURL(string:event.posterUrl) {
-                            
-                            getDataFromUrl(checkedUrl) { data in
-                                dispatch_async(dispatch_get_main_queue()) {
-                                    
-                                    cell.ExploreImage.image = UIImage(data: data!)
-                                }
-                                
-                            }
-                            
-                        }
+
+//                        if let checkedUrl = NSURL(string:event.posterUrl) {
+//                            
+//                            getDataFromUrl(checkedUrl) { data in
+//                                dispatch_async(dispatch_get_main_queue()) {
+//                                    
+//                                    cell.ExploreImage.image = UIImage(data: data!)
+//                                }
+//                                
+//                            }
+//                            
+//                        }
                         
                         cell.circTitle.text = event.eventName
                         cell.circDate.text = event.eventStartDate
@@ -167,17 +175,22 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 
                 //println("Begin of code")
                 cell.ExploreImage.contentMode = UIViewContentMode.ScaleToFill
-                if let checkedUrl = NSURL(string:event.posterUrl) {
-                    //println("Started downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
-                    getDataFromUrl(checkedUrl) { data in
-                        dispatch_async(dispatch_get_main_queue()) {
-                            //println("Finished downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
-                            cell.ExploreImage.image = UIImage(data: data!)
-                        }
-                    
+                for img in GlobalVariables.ImageArray {
+                    if img.0 == event.eventID {
+                        cell.ExploreImage.image = img.1
                     }
-                
                 }
+//                if let checkedUrl = NSURL(string:event.posterUrl) {
+//                    //println("Started downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
+//                    getDataFromUrl(checkedUrl) { data in
+//                        dispatch_async(dispatch_get_main_queue()) {
+//                            //println("Finished downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
+//                            cell.ExploreImage.image = UIImage(data: data!)
+//                        }
+//                    
+//                    }
+//                
+//                }
                 //println("End of code. The image will continue downloading in the background and it will be loaded when it ends.")
                 //Synchronously:
                 /*if let url = NSURL(string: event.url) {
@@ -253,18 +266,26 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             
             if GlobalVariables.filterVenueBool {
                 let filteredVenueInfo = GlobalVariables.displayFilteredVenues
+                
+                cell.venueImage.contentMode = UIViewContentMode.ScaleToFill
+                for img in GlobalVariables.ImageArray {
+                    if img.0 == filteredVenueInfo[indexPath.row].venueID {
+                        cell.venueImage.image = img.1
+                    }
+                }
+                
                 for venue in venueInfo! {
                     if venue.venueID == filteredVenueInfo[indexPath.row].venueID {
-                        cell.venueImage.contentMode = UIViewContentMode.ScaleToFill
-                        if let checkedUrl = NSURL(string:venue.posterUrl) {
-                            
-                            getDataFromUrl(checkedUrl) { data in
-                                dispatch_async(dispatch_get_main_queue()) {
-                                    
-                                    cell.venueImage.image = UIImage(data: data!)
-                                }
-                            }
-                        }
+//                        cell.venueImage.contentMode = UIViewContentMode.ScaleToFill
+//                        if let checkedUrl = NSURL(string:venue.posterUrl) {
+//                            
+//                            getDataFromUrl(checkedUrl) { data in
+//                                dispatch_async(dispatch_get_main_queue()) {
+//                                    
+//                                    cell.venueImage.image = UIImage(data: data!)
+//                                }
+//                            }
+//                        }
                         
                         cell.venueName.text = venue.venueName
                         cell.venueDescription.text = venue.venueDescription
@@ -279,14 +300,19 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 let venue = venueInfo![indexPath.row]
             
                 cell.venueImage.contentMode = UIViewContentMode.ScaleToFill
-                if let checkedUrl = NSURL(string:venue.posterUrl) {
-                    getDataFromUrl(checkedUrl) { data in
-                        dispatch_async(dispatch_get_main_queue()) {
-                            cell.venueImage.image = UIImage(data: data!)
-                        }
+                for img in GlobalVariables.ImageArray {
+                    if img.0 == venue.venueID {
+                        cell.venueImage.image = img.1
                     }
-                
                 }
+//                if let checkedUrl = NSURL(string:venue.posterUrl) {
+//                    getDataFromUrl(checkedUrl) { data in
+//                        dispatch_async(dispatch_get_main_queue()) {
+//                            cell.venueImage.image = UIImage(data: data!)
+//                        }
+//                    }
+//                
+//                }
             
                 cell.venueName.text = venue.venueName
                 cell.venueDescription.text = venue.venueDescription
@@ -378,18 +404,26 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             
             if GlobalVariables.filterOrganizationBool {
                 let filteredOrganizationInfo = GlobalVariables.displayFilteredOrganizations
+                
+                cell.organizationImage.contentMode = UIViewContentMode.ScaleToFill
+                for img in GlobalVariables.ImageArray {
+                    if img.0 == filteredOrganizationInfo[indexPath.row].organizationID {
+                        cell.organizationImage.image = img.1
+                    }
+                }
+                
                 for organization in organizationInfo! {
                     if organization.organizationID == filteredOrganizationInfo[indexPath.row].organizationID {
-                        cell.organizationImage.contentMode = UIViewContentMode.ScaleToFill
-                        if let checkedUrl = NSURL(string:organization.posterUrl) {
-                            
-                            getDataFromUrl(checkedUrl) { data in
-                                dispatch_async(dispatch_get_main_queue()) {
-                                    
-                                    cell.organizationImage.image = UIImage(data: data!)
-                                }
-                            }
-                        }
+//                        cell.organizationImage.contentMode = UIViewContentMode.ScaleToFill
+//                        if let checkedUrl = NSURL(string:organization.posterUrl) {
+//                            
+//                            getDataFromUrl(checkedUrl) { data in
+//                                dispatch_async(dispatch_get_main_queue()) {
+//                                    
+//                                    cell.organizationImage.image = UIImage(data: data!)
+//                                }
+//                            }
+//                        }
                         
                         cell.organizationName.text = organization.organizationName
                         cell.organizationDescription.text = organization.organizationDescription
@@ -403,14 +437,19 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 let organization = organizationInfo![indexPath.row]
             
                 cell.organizationImage.contentMode = UIViewContentMode.ScaleToFill
-                if let checkedUrl = NSURL(string:organization.posterUrl) {
-                    getDataFromUrl(checkedUrl) { data in
-                        dispatch_async(dispatch_get_main_queue()) {
-                            cell.organizationImage.image = UIImage(data: data!)
-                        }
+                for img in GlobalVariables.ImageArray {
+                    if img.0 == organization.organizationID {
+                        cell.organizationImage.image = img.1
                     }
-                
                 }
+//                if let checkedUrl = NSURL(string:organization.posterUrl) {
+//                    getDataFromUrl(checkedUrl) { data in
+//                        dispatch_async(dispatch_get_main_queue()) {
+//                            cell.organizationImage.image = UIImage(data: data!)
+//                        }
+//                    }
+//                
+//                }
             
                 cell.organizationName.text = organization.organizationName
                 cell.organizationDescription.text = organization.organizationDescription

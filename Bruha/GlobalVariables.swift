@@ -43,4 +43,9 @@ class GlobalVariables{
     static var filterEventBool = false
     static var filterVenueBool = false
     static var filterOrganizationBool = false
+    
+    static var UIIdxPath: [NSIndexPath] = []
+    static var UISection: [Int] = []
+    
+    static var ImageArray: [(String, UIImage)] = []
 }

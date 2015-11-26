@@ -137,7 +137,7 @@ struct OrganizationService {
         
         for e in jsonArray!{
             
-            let e = Organization(organizationDictionary: e as! [String : AnyObject])
+            let e = Organization(organizationDictionary: (e as? [String : AnyObject])!)
             
             organizations.append(e)
         }
