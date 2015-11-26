@@ -252,6 +252,8 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
         if(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.keys.count > 0){
             
+            eventObject.removeAll(keepCapacity: false)
+            
             for category in backupEventCategories{
                 
                 var temp = category
@@ -259,7 +261,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
                 if(category.sectionName != "Event Categories"){
                     
                     if(!GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.keys.contains(category.sectionName)){
-                        temp.sectionObjectIDs = []
+                        //temp.sectionObjectIDs = []
                         temp.sectionObjects = []
                     }
                 }
