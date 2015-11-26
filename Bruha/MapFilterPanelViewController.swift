@@ -12,7 +12,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
     
     @IBOutlet weak var eventSelectedB: UIButton!
     @IBOutlet weak var venueSelectedB: UIButton!
-    @IBOutlet weak var artistSelectedB: UIButton!
+    @IBOutlet weak var discoverableSelectedB: UIButton!
     @IBOutlet weak var organizationSelectedB: UIButton!
     
     @IBOutlet weak var scrollView: UIScrollView!
@@ -29,7 +29,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
     var backupEventCategories = [EventObjects(sectionName: "Event Categories", sectionObjectIDs: [], sectionObjects: [])]
     var backupVenueCategories: [String] = ["Venue Categories"]
     var backupOrganizationCategories: [String] = ["Organization Categories"]
-    var backupArtistCategories: [String] = ["Artist Categories"]
+//    var backupArtistCategories: [String] = ["Artist Categories"]
     
     let priceLabelTitle = UILabel()
     let priceLabel = UILabel()
@@ -45,7 +45,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
     var eventObject = [EventObjects()]
     var venueObject = [""]
     var organizationObject = [""]
-    var artistObject = [""]
+//    var artistObject = [""]
     
     func setupPanel(){
         
@@ -107,8 +107,8 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         let venueTgr = UITapGestureRecognizer(target: self, action: ("venueTapped"))
         venueSelectedB.addGestureRecognizer(venueTgr)
         
-        let artistTgr = UITapGestureRecognizer(target: self, action: ("artistTapped"))
-        artistSelectedB.addGestureRecognizer(artistTgr)
+        let discoverableTgr = UITapGestureRecognizer(target: self, action: ("discoverableTapped"))
+        discoverableSelectedB.addGestureRecognizer(discoverableTgr)
         
         let organizationTgr = UITapGestureRecognizer(target: self, action: ("organizationTapped"))
         organizationSelectedB.addGestureRecognizer(organizationTgr)
@@ -202,10 +202,10 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
             backupEventCategories.append(newPrimary)
         }
         
-        for categories in f.artistCategories {
-            artistObject = ["Artist Categories"]
-            backupArtistCategories.append(categories)
-        }
+//        for categories in f.artistCategories {
+//            artistObject = ["Artist Categories"]
+//            backupArtistCategories.append(categories)
+//        }
         
         for categories in f.organizationCategories {
             organizationObject = ["Organization Categories"]
@@ -242,7 +242,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
     func eventTapped(){
         
         GlobalVariables.selectedDisplay = "Event"
-        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
+        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChange", object: self)
         clearBackupCategories()
         GlobalVariables.UserCustomFilters.categoryFilter.venueCategories.removeAll()
         GlobalVariables.UserCustomFilters.categoryFilter.organizationCategories.removeAll()
@@ -253,7 +253,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
     func venueTapped(){
         
         GlobalVariables.selectedDisplay = "Venue"
-        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
+        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChange", object: self)
         clearBackupCategories()
         GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.removeAll()
         GlobalVariables.UserCustomFilters.categoryFilter.organizationCategories.removeAll()
@@ -261,10 +261,10 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         
     }
     
-    func artistTapped(){
+    func discoverableTapped(){
         
-        GlobalVariables.selectedDisplay = "Artist"
-        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
+        GlobalVariables.selectedDisplay = ""
+        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChange", object: self)
         clearBackupCategories()
         resetSliderValue()
         
@@ -273,7 +273,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
     func organizationTapped(){
         
         GlobalVariables.selectedDisplay = "Organization"
-        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
+        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChange", object: self)
         clearBackupCategories()
         GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.removeAll()
         GlobalVariables.UserCustomFilters.categoryFilter.venueCategories.removeAll()
@@ -421,7 +421,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         } else if GlobalVariables.selectedDisplay == "Organization" {
             return organizationObject.count
         } else if GlobalVariables.selectedDisplay == "Artist" {
-            return artistObject.count
+//            return artistObject.count
         }
         return 0
         
@@ -436,7 +436,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         } else if GlobalVariables.selectedDisplay == "Organization" {
             return organizationObject[section]
         } else if GlobalVariables.selectedDisplay == "Artist" {
-            return artistObject[section]
+//            return artistObject[section]
         }
         return "ERROR"
         
@@ -568,14 +568,14 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
                         eventObject[i].sectionObjects.removeAll(keepCapacity: false)
                     }
                 }
-            case "Artist":
-                if (artistObject.count > 1){
-                    artistObject.removeAll(keepCapacity: false)
-                    artistObject.append(backupArtistCategories[0])
-                } else {
-                    artistObject.removeAll(keepCapacity: false)
-                    artistObject = backupArtistCategories
-                }
+//            case "Artist":
+//                if (artistObject.count > 1){
+//                    artistObject.removeAll(keepCapacity: false)
+//                    artistObject.append(backupArtistCategories[0])
+//                } else {
+//                    artistObject.removeAll(keepCapacity: false)
+//                    artistObject = backupArtistCategories
+//                }
             case "Organization":
                 if (organizationObject.count > 1){
                     organizationObject.removeAll(keepCapacity: false)
@@ -657,7 +657,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         backupEventCategories = [EventObjects(sectionName: "Event Categories", sectionObjectIDs: [], sectionObjects: [])]
         backupVenueCategories = ["Venue Categories"]
         backupOrganizationCategories = ["Organization Categories"]
-        backupArtistCategories = ["Artist Categories"]
+//        backupArtistCategories = ["Artist Categories"]
         setupCategoryLists()
         categoryTableView.reloadData()
         adjustHeightOfTableView(categoryTableView, constraint: categoryTableHeight)

@@ -21,7 +21,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
     
     @IBOutlet weak var eventSelectedB: UIButton!
     @IBOutlet weak var venueSelectedB: UIButton!
-    @IBOutlet weak var artistSelectedB: UIButton!
+    @IBOutlet weak var discoverableSelectedB: UIButton!
     @IBOutlet weak var organizationSelectedB: UIButton!
     
     @IBOutlet weak var scrollView: UIScrollView!
@@ -41,7 +41,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
     var backupEventCategories = [EventObjects(sectionName: "Event Categories", sectionObjectIDs: [], sectionObjects: [])]
     var backupVenueCategories: [String] = ["Venue Categories"]
     var backupOrganizationCategories: [String] = ["Organization Categories"]
-    var backupArtistCategories: [String] = ["Artist Categories"]
+    //var backupArtistCategories: [String] = ["Artist Categories"]
 
     let priceLabelTitle = UILabel()
     let priceLabel = UILabel()
@@ -112,8 +112,8 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         let venueTgr = UITapGestureRecognizer(target: self, action: ("venueTapped"))
         venueSelectedB.addGestureRecognizer(venueTgr)
         
-        let artistTgr = UITapGestureRecognizer(target: self, action: ("artistTapped"))
-        artistSelectedB.addGestureRecognizer(artistTgr)
+        let discoverableTgr = UITapGestureRecognizer(target: self, action: ("discoverableTapped"))
+        discoverableSelectedB.addGestureRecognizer(discoverableTgr)
         
         let organizationTgr = UITapGestureRecognizer(target: self, action: ("organizationTapped"))
         organizationSelectedB.addGestureRecognizer(organizationTgr)
@@ -212,10 +212,10 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
             backupEventCategories.append(newPrimary)
         }
         
-        for categories in f.artistCategories {
-            artistObject = ["Artist Categories"]
-            backupArtistCategories.append(categories)
-        }
+//        for categories in f.artistCategories {
+//            artistObject = ["Artist Categories"]
+//            backupArtistCategories.append(categories)
+//        }
         
         for categories in f.organizationCategories {
             organizationObject = ["Organization Categories"]
@@ -295,9 +295,9 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
     }
     
-    func artistTapped(){
+    func discoverableTapped(){
         
-        GlobalVariables.selectedDisplay = "Artist"
+        GlobalVariables.selectedDisplay = ""
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
         clearBackupCategories()
         resetSliderValue()
@@ -447,7 +447,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         } else if GlobalVariables.selectedDisplay == "Organization" {
             return organizationObject.count
         } else if GlobalVariables.selectedDisplay == "Artist" {
-            return artistObject.count
+//            return artistObject.count
         }
         return 0
         
@@ -462,7 +462,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         } else if GlobalVariables.selectedDisplay == "Organization" {
             return organizationObject[section]
         } else if GlobalVariables.selectedDisplay == "Artist" {
-            return artistObject[section]
+//            return artistObject[section]
         }
         return "ERROR"
         
@@ -602,14 +602,14 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
                         eventObject[i].sectionObjects.removeAll(keepCapacity: false)
                     }
                 }
-            case "Artist":
-                if (artistObject.count > 1){
-                    artistObject.removeAll(keepCapacity: false)
-                    artistObject.append(backupArtistCategories[0])
-                } else {
-                    artistObject.removeAll(keepCapacity: false)
-                    artistObject = backupArtistCategories
-                }
+//            case "Artist":
+//                if (artistObject.count > 1){
+//                    artistObject.removeAll(keepCapacity: false)
+//                    artistObject.append(backupArtistCategories[0])
+//                } else {
+//                    artistObject.removeAll(keepCapacity: false)
+//                    artistObject = backupArtistCategories
+//                }
             case "Organization":
                 if (organizationObject.count > 1){
                     organizationObject.removeAll(keepCapacity: false)
@@ -715,7 +715,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         backupEventCategories = [EventObjects(sectionName: "Event Categories", sectionObjectIDs: [], sectionObjects: [])]
         backupVenueCategories = ["Venue Categories"]
         backupOrganizationCategories = ["Organization Categories"]
-        backupArtistCategories = ["Artist Categories"]
+//        backupArtistCategories = ["Artist Categories"]
         setupCategoryLists()
         eventCategoriesTable.reloadData()
         adjustHeightOfTableView(eventCategoriesTable, constraint: eventCategoryTableHeight)
