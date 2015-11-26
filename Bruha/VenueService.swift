@@ -141,7 +141,7 @@ struct VenueService {
         
         for e in jsonArray!{
             
-            let e = Venue(venueDictionary: e as! [String : AnyObject])
+            let e = Venue(venueDictionary: (e as? [String : AnyObject])!)
             
             venues.append(e)
         }

@@ -166,6 +166,9 @@ class Filtering {
         GlobalVariables.UserCustomFilters.dateFilter.removeAll()
         GlobalVariables.UserCustomFilters.priceFilter = -1
         
+        GlobalVariables.filterEventBool = false
+        GlobalVariables.filterVenueBool = false
+        GlobalVariables.filterOrganizationBool = false
     }
     
 }

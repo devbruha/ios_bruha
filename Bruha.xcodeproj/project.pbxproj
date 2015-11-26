@@ -117,11 +117,17 @@
 		A505C0F31BCEE8730067CDD1 /* UploadListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A505C0F21BCEE8730067CDD1 /* UploadListViewController.swift */; };
 		A505C0F51BCEE9860067CDD1 /* UploadListPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A505C0F41BCEE9860067CDD1 /* UploadListPanelViewController.swift */; };
 		A505C0F71BD17B910067CDD1 /* LoadScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A505C0F61BD17B910067CDD1 /* LoadScreenViewController.swift */; };
+		A580A4E81BFE797300CB6F2E /* CategoryHeaderCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A580A4E71BFE797300CB6F2E /* CategoryHeaderCellTableViewCell.xib */; };
+		A580A4EA1BFE7A8C00CB6F2E /* CategoryHeaderCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A580A4E91BFE7A8C00CB6F2E /* CategoryHeaderCellTableViewCell.swift */; };
 		A5820A921BDFB06300D78675 /* Filtering.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5820A911BDFB06300D78675 /* Filtering.swift */; };
 		A58A3A211BB9780800601749 /* AddictionEventDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58A3A201BB9780800601749 /* AddictionEventDBModel.swift */; };
 		A58A3A261BB980B200601749 /* AddictionEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58A3A251BB980B200601749 /* AddictionEvent.swift */; };
+		A59443A11C03C088000B3969 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59443A01C03C088000B3969 /* Image.swift */; };
 		A5CAB5781BED1ECE007E597B /* MapDropTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5CAB5771BED1ECE007E597B /* MapDropTableViewCell.xib */; };
 		A5CAB57A1BED2145007E597B /* MapDropTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CAB5791BED2145007E597B /* MapDropTableViewCell.swift */; };
+		A5D34D621C06122C005F6236 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5D34D5F1C06122C005F6236 /* FBSDKCoreKit.framework */; };
+		A5D34D631C06122C005F6236 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5D34D601C06122C005F6236 /* FBSDKLoginKit.framework */; };
+		A5D34D641C06122C005F6236 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5D34D611C06122C005F6236 /* FBSDKShareKit.framework */; };
 		A5D90DFC1BBDD1A600537F72 /* AddictionArtistDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D90DFB1BBDD1A600537F72 /* AddictionArtistDBModel.swift */; };
 		A5D90DFE1BBDD22000537F72 /* AddictionOrganizationDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D90DFD1BBDD22000537F72 /* AddictionOrganizationDBModel.swift */; };
 		A5D90E001BBDD28700537F72 /* AddictionVenueDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D90DFF1BBDD28700537F72 /* AddictionVenueDBModel.swift */; };
@@ -259,11 +265,17 @@
 		A505C0F21BCEE8730067CDD1 /* UploadListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadListViewController.swift; sourceTree = "<group>"; };
 		A505C0F41BCEE9860067CDD1 /* UploadListPanelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadListPanelViewController.swift; sourceTree = "<group>"; };
 		A505C0F61BD17B910067CDD1 /* LoadScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadScreenViewController.swift; sourceTree = "<group>"; };
+		A580A4E71BFE797300CB6F2E /* CategoryHeaderCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CategoryHeaderCellTableViewCell.xib; sourceTree = "<group>"; };
+		A580A4E91BFE7A8C00CB6F2E /* CategoryHeaderCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryHeaderCellTableViewCell.swift; sourceTree = "<group>"; };
 		A5820A911BDFB06300D78675 /* Filtering.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Filtering.swift; sourceTree = "<group>"; };
 		A58A3A201BB9780800601749 /* AddictionEventDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddictionEventDBModel.swift; sourceTree = "<group>"; };
 		A58A3A251BB980B200601749 /* AddictionEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddictionEvent.swift; sourceTree = "<group>"; };
+		A59443A01C03C088000B3969 /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		A5CAB5771BED1ECE007E597B /* MapDropTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapDropTableViewCell.xib; sourceTree = "<group>"; };
 		A5CAB5791BED2145007E597B /* MapDropTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapDropTableViewCell.swift; sourceTree = "<group>"; };
+		A5D34D5F1C06122C005F6236 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
+		A5D34D601C06122C005F6236 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
+		A5D34D611C06122C005F6236 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
 		A5D90DFB1BBDD1A600537F72 /* AddictionArtistDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddictionArtistDBModel.swift; sourceTree = "<group>"; };
 		A5D90DFD1BBDD22000537F72 /* AddictionOrganizationDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddictionOrganizationDBModel.swift; sourceTree = "<group>"; };
 		A5D90DFF1BBDD28700537F72 /* AddictionVenueDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddictionVenueDBModel.swift; sourceTree = "<group>"; };
@@ -282,6 +294,7 @@
 			files = (
 				180F6E3E1B7523D200F86BF5 /* SystemConfiguration.framework in Frameworks */,
 				180F6E3C1B7523CA00F86BF5 /* QuartzCore.framework in Frameworks */,
+				A5D34D641C06122C005F6236 /* FBSDKShareKit.framework in Frameworks */,
 				180F6E3A1B7523BF00F86BF5 /* OpenGLES.framework in Frameworks */,
 				180F6E381B7523B700F86BF5 /* libz.dylib in Frameworks */,
 				180F6E361B7523AE00F86BF5 /* libicucore.dylib in Frameworks */,
@@ -290,9 +303,11 @@
 				180F6E301B75239600F86BF5 /* GLKit.framework in Frameworks */,
 				180F6E2E1B75238D00F86BF5 /* CoreText.framework in Frameworks */,
 				180F6E2C1B75238400F86BF5 /* CoreLocation.framework in Frameworks */,
+				A5D34D621C06122C005F6236 /* FBSDKCoreKit.framework in Frameworks */,
 				180F6E2A1B75237B00F86BF5 /* CoreData.framework in Frameworks */,
 				180F6E281B75236E00F86BF5 /* AVFoundation.framework in Frameworks */,
 				180F6E241B75231200F86BF5 /* GoogleMaps.framework in Frameworks */,
+				A5D34D631C06122C005F6236 /* FBSDKLoginKit.framework in Frameworks */,
 				3FBD3EDB6177AE183A0340DF /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -495,6 +510,7 @@
 				45FA05901B5D4188004AD819 /* Organization.swift */,
 				45FA05C31B5D7000004AD819 /* User.swift */,
 				45C938AB1B8D089800BB0D0C /* Categories.swift */,
+				A59443A01C03C088000B3969 /* Image.swift */,
 				45F8DF3B1BBD9BAF00886C3F /* UserFilters.swift */,
 			);
 			name = "Object Models";
@@ -534,6 +550,8 @@
 				45FA05B91B5D63EB004AD819 /* Main.storyboard */,
 				18E2DD8B1B69537D007C61B5 /* DashLine.swift */,
 				180B05931BE464E800E2F46F /* HorizontalLine.swift */,
+				A580A4E71BFE797300CB6F2E /* CategoryHeaderCellTableViewCell.xib */,
+				A580A4E91BFE7A8C00CB6F2E /* CategoryHeaderCellTableViewCell.swift */,
 				4560C54C1B66D45100AB5382 /* EventRectangleView.swift */,
 				4560C54A1B66D44700AB5382 /* EventCircleView.swift */,
 				18A98A741B84C8CF0016AF7E /* EventTableViewCell.xib */,
@@ -576,6 +594,9 @@
 		967CB96399E390486C72E3DF /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				A5D34D5F1C06122C005F6236 /* FBSDKCoreKit.framework */,
+				A5D34D601C06122C005F6236 /* FBSDKLoginKit.framework */,
+				A5D34D611C06122C005F6236 /* FBSDKShareKit.framework */,
 				180F6E3D1B7523D200F86BF5 /* SystemConfiguration.framework */,
 				180F6E3B1B7523CA00F86BF5 /* QuartzCore.framework */,
 				180F6E391B7523BF00F86BF5 /* OpenGLES.framework */,
@@ -649,7 +670,7 @@
 				TargetAttributes = {
 					45FA05631B5D4158004AD819 = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 2XYHY4M8GS;
+						DevelopmentTeam = PS3272THNU;
 					};
 					45FA057B1B5D4158004AD819 = {
 						CreatedOnToolsVersion = 6.4;
@@ -687,6 +708,7 @@
 				18CFAAAB1B876C7A00FE3976 /* SplashFour.xib in Resources */,
 				452BC0C61B79118F003E7142 /* ArtistTableViewCell.xib in Resources */,
 				45FA05BA1B5D63EB004AD819 /* Main.storyboard in Resources */,
+				A580A4E81BFE797300CB6F2E /* CategoryHeaderCellTableViewCell.xib in Resources */,
 				18CFAAAF1B876F0C00FE3976 /* SplashFive.xib in Resources */,
 				1891B28E1B866FFE000949C8 /* SplashThree.xib in Resources */,
 				1891B28C1B86618E000949C8 /* SplashTwo.xib in Resources */,
@@ -841,6 +863,7 @@
 				A58A3A261BB980B200601749 /* AddictionEvent.swift in Sources */,
 				A5D90E021BBDD60300537F72 /* AddictionArtist.swift in Sources */,
 				45C93C661B86225900F60D9D /* OrganizationCategoryListService.swift in Sources */,
+				A580A4EA1BFE7A8C00CB6F2E /* CategoryHeaderCellTableViewCell.swift in Sources */,
 				181EB6121B714B7600B9295E /* MonthCollectionCell.swift in Sources */,
 				A5D90DFC1BBDD1A600537F72 /* AddictionArtistDBModel.swift in Sources */,
 				A505C0F31BCEE8730067CDD1 /* UploadListViewController.swift in Sources */,
@@ -848,6 +871,7 @@
 				45C6D5BC1B851ABC00EE4A05 /* OrganizationCategoriesDBModel.swift in Sources */,
 				18E2DD8C1B69537D007C61B5 /* DashLine.swift in Sources */,
 				A505C0F51BCEE9860067CDD1 /* UploadListPanelViewController.swift in Sources */,
+				A59443A11C03C088000B3969 /* Image.swift in Sources */,
 				A5E4EAD31BC2BC3900DAEE9D /* AddictionListPanelViewController.swift in Sources */,
 				A5CAB57A1BED2145007E597B /* MapDropTableViewCell.swift in Sources */,
 				45C93C601B8621AE00F60D9D /* EventCategoryListService.swift in Sources */,
@@ -990,7 +1014,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Bruha/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bruha.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1012,7 +1036,7 @@
 					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = Bruha/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "com.bruha.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";

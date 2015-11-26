@@ -8,6 +8,15 @@
 
 import UIKit
 
+extension NSDate
+{
+    class func minimumDate() -> NSDate
+    {
+        let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierChinese)!
+        return calendar.dateWithEra(0, year: 0, month: 0, day: 0, hour: 0, minute: 0, second: 0, nanosecond: 0)!
+    }
+}
+
 class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,CalendarViewDelegate {
     
     @IBOutlet weak var eventSelectedB: UIButton!
@@ -63,6 +72,8 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         setupPanel()
         setupCategoryLists()
         
+        let nib = UINib(nibName: "CategoryHeaderCellTableViewCell", bundle: nil)
+        eventCategoriesTable.registerNib(nib, forCellReuseIdentifier: "HeaderCell")
         
         priceLabelTitle.frame = CGRectMake(10,220, screenSize.width - 20, 22)
         priceLabelTitle.textAlignment = NSTextAlignment.Left
@@ -117,6 +128,25 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         placeholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[calendarView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["calendarView": calendarView]))
         placeholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[calendarView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["calendarView": calendarView]))
         placeholder.hidden = false
+//        if GlobalVariables.UIIdxPath.count != 0 {
+//            uiCustomSelection()
+//            eventCategoriesTable.reloadData()
+//        }
+        
+//        switch(GlobalVariables.selectedDisplay){
+//            
+//        case "Event":
+//            eventTapped()
+//            
+//        case "Venue":
+//            venueTapped()
+//            
+//        case "Organization":
+//            organizationTapped()
+//            
+//        default:
+//            eventTapped()
+//        }
         
     }
     
@@ -215,6 +245,27 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         self.swipeZoneHeight = self.panelControllerContainer.swipableZoneHeight
         self.visibleZoneHeight = self.panelControllerContainer.visibleZoneHeight
         
+//        for i in GlobalVariables.UIIdxPath {
+//            eventCategoriesTable.reloadRowsAtIndexPaths([i], withRowAnimation: UITableViewRowAnimation.None)
+//        }
+        
+        if GlobalVariables.UIIdxPath.count != 0 {
+            uiCustomSelection()
+            //eventCategoriesTable.endUpdates()
+            eventCategoriesTable.reloadData()
+        }
+    }
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        //uiCustomSelection()
+        
+    }
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        if eventCategoriesTable.indexPathsForSelectedRows != nil{
+            GlobalVariables.UIIdxPath = eventCategoriesTable.indexPathsForSelectedRows!
+        }
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -267,8 +318,10 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
     // -------------------------------Category Table Logic-------------------------------
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
-        let cell = eventCategoriesTable.dequeueReusableCellWithIdentifier("Cell") as UITableViewCell!
+        //let cell = self.eventCategoriesTable.dequeueReusableHeaderFooterViewWithIdentifier("HeaderCell") as! CategoryHeaderCellTableViewCell
+        let cell = NSBundle.mainBundle().loadNibNamed("CategoryHeaderCellTableViewCell", owner: self, options: nil)[0] as! CategoryHeaderCellTableViewCell
+        //NSBundle.mainBundle().loadNibNamed("CategoryHeaderCellTableViewCell", owner: self, options: nil) as! CategoryHeaderCellTableViewCell
+        //eventCategoriesTable.dequeueReusableCellWithIdentifier("Cell") as UITableViewCell!
         
         cell.textLabel?.text = eventObject[indexPath.section].sectionObjects[indexPath.row]
         cell.textLabel?.tag = Int(eventObject[indexPath.section].sectionObjectIDs[indexPath.row])!
@@ -282,8 +335,9 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         let selectedCell = self.eventCategoriesTable.cellForRowAtIndexPath(indexPath) as UITableViewCell!
-        
-        let headerTitle = eventCategoriesTable.headerViewForSection(indexPath.section)?.textLabel!.text!
+    
+        let headerTitle = eventObject[indexPath.section].sectionName
+        //self.eventCategoriesTable.headerViewForSection(headerCell.headerCellSection!)?.textLabel?.text
         
         // Header title is the primary category
         
@@ -328,13 +382,15 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         }
         
         //print(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.keys.elements)
+        
     }
     
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
         
         let selectedCell = self.eventCategoriesTable.cellForRowAtIndexPath(indexPath) as UITableViewCell!
         
-        let headerTitle = eventCategoriesTable.headerViewForSection(indexPath.section)?.textLabel!.text!
+        let headerTitle = eventObject[indexPath.section].sectionName
+        //eventCategoriesTable.headerViewForSection(indexPath.section)?.textLabel!.text!
         
         // Header title is the primary category
         
@@ -371,6 +427,8 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if GlobalVariables.selectedDisplay == "Event" {
+            print("NUMBER OF ROWS IN SECTION", eventObject[section].sectionObjects.count)
+            //print("NUMBER OF SECTIONS", eventObject.count)
             return eventObject[section].sectionObjects.count
         }
         else {
@@ -382,6 +440,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
         if GlobalVariables.selectedDisplay == "Event" {
+            print("NUMBER OF SECTIONS", eventObject.count)
             return eventObject.count
         } else if GlobalVariables.selectedDisplay == "Venue" {
             return venueObject.count
@@ -393,7 +452,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         return 0
         
     }
-    
+    /*
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         
         if GlobalVariables.selectedDisplay == "Event" {
@@ -407,8 +466,8 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         }
         return "ERROR"
         
-    }
-    
+    }*/
+    /*
     func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         
         let header = view as! UITableViewHeaderFooterView
@@ -447,14 +506,22 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         Filtering().filterEvents()
         Filtering().filterVenues()
         Filtering().filterOrganizations()
-    }
+    }*/
     
     func sectionTapped(sender: UITapGestureRecognizer){
         
-        let header = sender.view as! UITableViewHeaderFooterView
+        let header = sender.view as! CategoryHeaderCellTableViewCell
         
-        let index = Int(header.detailTextLabel!.text!)
+        let index = header.headerCellSection
+        //Int(header.detailTextLabel!.text!)
         let headerTitle = header.textLabel!.text!
+        
+        if GlobalVariables.UISection.contains(index!) {
+            GlobalVariables.UISection.removeAtIndex(GlobalVariables.UISection.indexOf(index!)!)
+        } else {
+            GlobalVariables.UISection.append(index!)
+        }
+        
         
         switch (GlobalVariables.selectedDisplay) {
         case "Event":
@@ -596,6 +663,9 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
             }
         }
         
+        Filtering().filterEvents()
+        Filtering().filterVenues()
+        Filtering().filterOrganizations()
         
         eventCategoriesTable.reloadData()
         
@@ -658,4 +728,144 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        let headerCell = tableView.dequeueReusableCellWithIdentifier("HeaderCell") as! CategoryHeaderCellTableViewCell
+        
+        if GlobalVariables.selectedDisplay == "Event" {
+           headerCell.textLabel?.text = eventObject[section].sectionName
+        } else if GlobalVariables.selectedDisplay == "Venue" {
+            headerCell.textLabel?.text = venueObject[section]
+        } else if GlobalVariables.selectedDisplay == "Organization" {
+            headerCell.textLabel?.text = organizationObject[section]
+        } else if GlobalVariables.selectedDisplay == "Artist" {
+            headerCell.textLabel?.text = artistObject[section]
+        }
+        
+
+        let sepFrame = CGRectMake(0,headerCell.frame.size.height-1, 320, 1);
+        let seperatorView = UIView(frame: sepFrame)
+        seperatorView.backgroundColor = UIColor.whiteColor()
+        
+        if(section == 0){
+            
+            headerCell.backgroundColor = UIColor.orangeColor()
+            //headerCell.contentView.backgroundColor = UIColor.orangeColor()
+            headerCell.textLabel!.textColor = UIColor.whiteColor()
+            headerCell.detailTextLabel?.text = "\(section)"
+            
+        }
+        else{
+            
+            headerCell.backgroundColor = UIColor(red: 1.0, green: 0.710, blue: 0.071, alpha: 1.0)
+            
+            headerCell.textLabel!.textColor = UIColor.whiteColor()
+            headerCell.detailTextLabel?.text = "\(section)"
+            
+            headerCell.addSubview(seperatorView)
+        }
+
+        headerCell.layer.borderColor = UIColor.whiteColor().CGColor
+        headerCell.textLabel!.font = UIFont(name: headerCell.textLabel!.font.fontName, size: 18)
+        
+        // Send section
+        headerCell.headerCellSection = section
+        
+        // Add gesture
+        let headerTapGesture = UITapGestureRecognizer()
+        headerTapGesture.addTarget(self, action: "sectionTapped:")
+        headerCell.addGestureRecognizer(headerTapGesture)
+        
+        tableView.allowsMultipleSelection = true
+        
+        return headerCell
+    }
+    
+    
+    //MARK: Load Custom UI Selection
+    func uiCustomSelection() {
+        
+        // Price Filter
+        slider.value = Float(GlobalVariables.UserCustomFilters.priceFilter)
+        if GlobalVariables.UserCustomFilters.priceFilter == 0 {
+            priceLabel.text = "Free"
+        } else if GlobalVariables.UserCustomFilters.priceFilter == -1 {
+            priceLabel.text = "No Price Filter"
+        } else {
+            priceLabel.text = "\(GlobalVariables.UserCustomFilters.priceFilter)$"
+        }
+        
+        /* //the NSDate is get only
+        // Date Filter
+        let filterDate: NSDate
+        for date in GlobalVariables.UserCustomFilters.dateFilter {
+        print("DDDddDD------------------------", date)
+        let dateArray = date.componentsSeparatedByString("-")
+        filterDate.day = dateArray[2]
+        }
+        //didSelectDate(<#T##date: NSDate##NSDate#>)*/
+        
+        
+        // Category filter
+        customSectionIndexTap()
+        //eventCategoriesTable.reloadData()
+    }
+
+    func customSectionIndexTap() {
+        //eventCategoriesTable.clearsContextBeforeDrawing = true
+        
+        print("section~~~~~~", GlobalVariables.UISection)
+        print("IM RUN ____-----~~~~~~~~~~", GlobalVariables.UIIdxPath[0].section)
+        
+        
+        eventObject.removeAll(keepCapacity: false)
+        eventObject = (backupEventCategories)
+        
+        for(var i = 0 ; i < eventObject.count ; ++i){
+            
+            eventObject[i].sectionObjects.removeAll(keepCapacity: false)
+            print(eventObject[i].sectionObjects)
+        }
+    
+//        for var i = 0; i < GlobalVariables.UISection.count; i++ {
+//            eventObject[GlobalVariables.UISection[i]].sectionObjects = (backupEventCategories[GlobalVariables.UISection[i]].sectionObjects)
+//        }
+        
+        
+//        eventCategoriesTable.beginUpdates()
+//
+//        eventCategoriesTable.endUpdates()
+        
+        
+        
+//        //secondary select
+//        for var i = GlobalVariables.UIIdxPath.count; i > 0; i-- {
+//            print("IM RUN ____-----~~~~~~~~~~", GlobalVariables.UIIdxPath[i-1])
+//            eventCategoriesTable.selectRowAtIndexPath(GlobalVariables.UIIdxPath[i-1], animated: false, scrollPosition: UITableViewScrollPosition.None)
+//        }
+        
+        //eventCategoriesTable.reloadData()
+        
+        //print(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.count)
+        //print("IM TAPPED____-----~~~~~~~~~~")
+    }
+    
+//    //MARK: Primary Category selection color change
+//    func tableView(tableView: UITableView, shouldHighlightRowAtIndexPath indexPath: NSIndexPath) -> Bool {
+//        return true
+//    }
+//
+//    func tableView(tableView: UITableView, didHighlightRowAtIndexPath indexPath: NSIndexPath) {
+//        var cell = tableView.cellForRowAtIndexPath(indexPath)
+//        cell?.contentView.backgroundColor = UIColor.blueColor()
+//        cell?.backgroundColor = UIColor.blueColor()
+//    }
+//
+//    func tableView(tableView: UITableView, didUnhighlightRowAtIndexPath indexPath: NSIndexPath) {
+//        var cell = tableView.cellForRowAtIndexPath(indexPath)
+//        cell?.contentView.backgroundColor = UIColor.blackColor()
+//        cell?.backgroundColor = UIColor.blackColor()
+//    }
+    
+
 }
