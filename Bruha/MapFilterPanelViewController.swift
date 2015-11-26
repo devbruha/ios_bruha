@@ -71,6 +71,8 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         setupPanel()
         setupCategoryLists()
         
+        let nib = UINib(nibName: "CategoryHeaderCellTableViewCell", bundle: nil)
+        categoryTableView.registerNib(nib, forCellReuseIdentifier: "HeaderCell")
         
         priceLabelTitle.frame = CGRectMake(10,220, screenSize.width - 20, 22)
         priceLabelTitle.textAlignment = NSTextAlignment.Left
@@ -244,18 +246,47 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
     func eventTapped(){
         
         GlobalVariables.selectedDisplay = "Event"
-        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChange", object: self)
+        
+        if(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.keys.count > 0){
+            
+            for category in backupEventCategories{
+                
+                var temp = category
+                
+                if(category.sectionName != "Event Categories"){
+                    
+                    if(!GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.keys.contains(category.sectionName)){
+                        temp.sectionObjectIDs = []
+                        temp.sectionObjects = []
+                    }
+                }
+                
+                eventObject.append(temp)
+            }
+        }
+        else{
+            eventObject = [EventObjects(sectionName: "Event Categories", sectionObjectIDs: [], sectionObjects: [])]
+        }
+        
+        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
         //clearBackupCategories()
         resetSliderValue()
-        updateNotificationSent()
         categoryTableView.reloadData()
-        
-        adjustHeightOfTableView(self.categoryTableView, constraint: self.categoryTableHeight)
+        adjustHeightOfTableView(categoryTableView, constraint: categoryTableHeight)
+        updateNotificationSent()
     }
     
     func venueTapped(){
         
         GlobalVariables.selectedDisplay = "Venue"
+        
+        if(GlobalVariables.categories.venueCategories.count != 0){
+            venueObject = backupVenueCategories
+        }
+        else{
+            venueObject = [""]
+        }
+        
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChange", object: self)
         //clearBackupCategories()
         resetSliderValue()
@@ -276,6 +307,14 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
     func organizationTapped(){
         
         GlobalVariables.selectedDisplay = "Organization"
+        
+        if(GlobalVariables.categories.organizationCategories.count != 0){
+            organizationObject = backupOrganizationCategories
+        }
+        else{
+            organizationObject = [""]
+        }
+        
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChange", object: self)
         //clearBackupCategories()
         resetSliderValue()
@@ -305,7 +344,8 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let cell = categoryTableView.dequeueReusableCellWithIdentifier("Cell") as UITableViewCell!
+        let cell = NSBundle.mainBundle().loadNibNamed("CategoryHeaderCellTableViewCell", owner: self, options: nil)[0] as! CategoryHeaderCellTableViewCell
+       // let cell = categoryTableView.dequeueReusableCellWithIdentifier("Cell") as UITableViewCell!
         
         cell.textLabel?.text = eventObject[indexPath.section].sectionObjects[indexPath.row]
         cell.textLabel?.tag = Int(eventObject[indexPath.section].sectionObjectIDs[indexPath.row])!
@@ -350,23 +390,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
             GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].removeAtIndex(index!)
             
             GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![1].removeAtIndex(index!)
-            
-            
-            //            for mValue in GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.values {
-            //                for value in mValue{
-            //                    for item in value{
-            //                        if item == subCategoryID {
-            //
-            //                            let index = GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].indexOf(item)
-            //
-            //                            GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].removeAtIndex(index!)
-            //
-            //                            GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![1].removeAtIndex(index!)
-            //
-            //                        }
-            //                    }
-            //                }
-            //            }
+  
             print("after removed filter \(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories)")
             
         }
@@ -448,66 +472,87 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         
     }
     
-    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        
+        let headerCell = tableView.dequeueReusableCellWithIdentifier("HeaderCell") as! CategoryHeaderCellTableViewCell
         
         if GlobalVariables.selectedDisplay == "Event" {
-            return eventObject[section].sectionName
+            headerCell.textLabel?.text = eventObject[section].sectionName
         } else if GlobalVariables.selectedDisplay == "Venue" {
-            return venueObject[section]
+            headerCell.textLabel?.text = venueObject[section]
         } else if GlobalVariables.selectedDisplay == "Organization" {
-            return organizationObject[section]
-        } else if GlobalVariables.selectedDisplay == "Artist" {
-//            return artistObject[section]
-        }
-        return "ERROR"
+            headerCell.textLabel?.text = organizationObject[section]
+        } 
         
-    }
-    
-    func tableView(tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
         
-        let header = view as! UITableViewHeaderFooterView
-        
-        let sepFrame = CGRectMake(0,header.frame.size.height-1, 320, 1);
+        let sepFrame = CGRectMake(0,headerCell.frame.size.height-1, 320, 1);
         let seperatorView = UIView(frame: sepFrame)
         seperatorView.backgroundColor = UIColor.whiteColor()
         
         if(section == 0){
             
-            header.backgroundView?.backgroundColor = UIColor.orangeColor()
-            
-            header.textLabel!.textColor = UIColor.whiteColor()
-            header.detailTextLabel!.text = "\(section)"
+            headerCell.backgroundColor = UIColor.orangeColor()
+            headerCell.textLabel!.textColor = UIColor.whiteColor()
+            headerCell.detailTextLabel?.text = "\(section)"
             
         }
         else{
             
-            header.backgroundView?.backgroundColor = UIColor(red: 1.0, green: 0.710, blue: 0.071, alpha: 1.0)
+            if GlobalVariables.selectedDisplay == "Event" {
+                
+                if(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.keys.contains((headerCell.textLabel?.text)!)){
+                    headerCell.backgroundColor = UIColor.cyanColor()
+                }
+                else{
+                    headerCell.backgroundColor = UIColor(red: 1.0, green: 0.710, blue: 0.071, alpha: 1.0)
+                }
+                
+            } else if GlobalVariables.selectedDisplay == "Venue" {
+                
+                if(GlobalVariables.UserCustomFilters.categoryFilter.venueCategories.contains((headerCell.textLabel?.text)!)){
+                    headerCell.backgroundColor = UIColor.blueColor()
+                }
+                else{
+                    headerCell.backgroundColor = UIColor.blackColor()
+                }
+                
+            } else if GlobalVariables.selectedDisplay == "Organization" {
+                if(GlobalVariables.UserCustomFilters.categoryFilter.organizationCategories.contains((headerCell.textLabel?.text)!)){
+                    headerCell.backgroundColor = UIColor.blueColor()
+                }
+                else{
+                    headerCell.backgroundColor = UIColor.blackColor()
+                }
+            }
             
-            header.textLabel!.textColor = UIColor.whiteColor()
-            header.detailTextLabel!.text = "\(section)"
+            headerCell.textLabel!.textColor = UIColor.whiteColor()
+            headerCell.detailTextLabel?.text = "\(section)"
             
-            header.addSubview(seperatorView)
+            headerCell.addSubview(seperatorView)
         }
         
-        header.layer.borderColor = UIColor.whiteColor().CGColor
-        header.textLabel!.font = UIFont(name: header.textLabel!.font.fontName, size: 18)
+        headerCell.layer.borderColor = UIColor.whiteColor().CGColor
+        headerCell.textLabel!.font = UIFont(name: headerCell.textLabel!.font.fontName, size: 18)
         
-        let tap = UITapGestureRecognizer(target: self, action: Selector("sectionTapped:"))
+        // Send section
+        headerCell.headerCellSection = section
         
-        view.addGestureRecognizer(tap)
+        // Add gesture
+        let headerTapGesture = UITapGestureRecognizer()
+        headerTapGesture.addTarget(self, action: "sectionTapped:")
+        headerCell.addGestureRecognizer(headerTapGesture)
         
         tableView.allowsMultipleSelection = true
         
-        Filtering().filterEvents()
-        Filtering().filterVenues()
-        Filtering().filterOrganizations()
+        return headerCell
     }
+
     
     func sectionTapped(sender: UITapGestureRecognizer){
         print("Section Tapped")
-        let header = sender.view as! UITableViewHeaderFooterView
-        
-        let index = Int(header.detailTextLabel!.text!)
+        let header = sender.view as! CategoryHeaderCellTableViewCell
+        let index = header.headerCellSection
+        //let index = Int(header.detailTextLabel!.text!)
         let headerTitle = header.textLabel!.text!
         
         switch (GlobalVariables.selectedDisplay) {
@@ -594,14 +639,6 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
                         }
                     }
                 }
-//            case "Artist":
-//                if (artistObject.count > 1){
-//                    artistObject.removeAll(keepCapacity: false)
-//                    artistObject.append(backupArtistCategories[0])
-//                } else {
-//                    artistObject.removeAll(keepCapacity: false)
-//                    artistObject = backupArtistCategories
-//                }
             case "Organization":
                 if (organizationObject.count > 1){
                     organizationObject.removeAll(keepCapacity: false)
@@ -622,7 +659,9 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
                 print("SECTION TAPPED ERROR")
             }
         } else {
+            
             switch (GlobalVariables.selectedDisplay) {
+                
             case "Event":
                 if (eventObject[index!].sectionObjects.count == 0){
                     
@@ -634,20 +673,10 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
                     eventObject[index!].sectionObjects.removeAll(keepCapacity: false)
                 }
                 
-            case "Artist":
-                break
-                
             case "Organization":
                 break
                 
             case "Venue":
-                //                if venueObject[index!] == header.textLabel!.text {
-                //
-                //                    venueObject[index!] = (backupVenueCategories[index!])
-                //
-                //                    header.contentView.backgroundColor = UIColor.blueColor()
-                //                }
-                //                //header.contentView.backgroundColor = UIColor.blueColor()
                 break
                 
             default:
