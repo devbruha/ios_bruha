@@ -602,23 +602,16 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
     
     
     func updateNotificationSent(){
-        let tabSelected = GlobalVariables.selectedDisplay
         
-        if(tabSelected == "Event"){
+        if(GlobalVariables.selectedDisplay == "Event"){
             eventCategoriesTable.alpha = 1;
             placeholder.alpha = 1
             priceLabelTitle.alpha = 1
             priceLabel.alpha = 1
             slider.alpha = 1
-        } else if (tabSelected == "Venue" || tabSelected == "Organization") {
-            eventCategoriesTable.alpha = 1
-            placeholder.alpha = 0
-            priceLabelTitle.alpha = 0
-            priceLabel.alpha = 0
-            slider.alpha = 0
         }
-        else {
-            eventCategoriesTable.alpha = 0;
+        else{
+            eventCategoriesTable.alpha = 1;
             placeholder.alpha = 0
             priceLabelTitle.alpha = 0
             priceLabel.alpha = 0
