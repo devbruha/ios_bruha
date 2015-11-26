@@ -287,6 +287,12 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         self.visibleZoneHeight = self.panelControllerContainer.visibleZoneHeight
         
     }
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+//        if categoryTableView.indexPathsForSelectedRows != nil{
+//            GlobalVariables.UIIdxPath = categoryTableView.indexPathsForSelectedRows!
+//        }
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }

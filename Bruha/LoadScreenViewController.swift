@@ -64,7 +64,8 @@ class LoadScreenViewController: UIViewController {
         if hasInternet() == "true" {
             
             startLoadingProgress()
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: "performSegue", name:"download complete", object: nil)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "saveImages", name:"complete", object: nil)
+            NSNotificationCenter.defaultCenter().addObserver(self, selector: "performSegue", name:"complete", object: nil)
             let timer = NSTimer.scheduledTimerWithTimeInterval(15.0, target: self, selector: "timeOutCheck", userInfo: nil, repeats: false)
             
         } else {
@@ -107,7 +108,7 @@ class LoadScreenViewController: UIViewController {
         NSNotificationCenter.defaultCenter().removeObserver(self, name:"User Organizations", object: nil)
         NSNotificationCenter.defaultCenter().removeObserver(self, name:"Addicted Organizations", object: nil)
         
-        NSNotificationCenter.defaultCenter().removeObserver(self, name: "download complete", object: nil)
+        NSNotificationCenter.defaultCenter().removeObserver(self, name: "complete", object: nil)
         
         print("observer removed")
     }
@@ -116,6 +117,60 @@ class LoadScreenViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    // MARK: - Download Image
+    func saveImages() {
+        let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
+        let venueInfo = FetchData(context: managedObjectContext).fetchVenues()
+        let organizationInfo = FetchData(context: managedObjectContext).fetchOrganizations()
+        
+        for event in eventInfo {
+            if let checkedUrl = NSURL(string:event.posterUrl) {
+                
+                self.getDataFromUrl(checkedUrl) { data in
+                    dispatch_async(dispatch_get_main_queue()) {
+                        if let downloadImg = UIImage(data: data!) {
+                            GlobalVariables.ImageArray.append((event.eventID, downloadImg))
+                            //print("event")
+                        }
+                        
+                    }
+                }
+            }
+        }
+        for venue in venueInfo! {
+            if let checkedUrl = NSURL(string:venue.posterUrl) {
+                
+                self.getDataFromUrl(checkedUrl) { data in
+                    dispatch_async(dispatch_get_main_queue()) {
+                        if let downloadImg = UIImage(data: data!) {
+                            GlobalVariables.ImageArray.append((venue.venueID, downloadImg))
+                        }
+                    }
+                }
+            }
+        }
+        for organization in organizationInfo! {
+            if let checkedUrl = NSURL(string:organization.posterUrl) {
+                
+                self.getDataFromUrl(checkedUrl) { data in
+                    dispatch_async(dispatch_get_main_queue()) {
+                        if let downloadImg = UIImage(data: data!) {
+                            GlobalVariables.ImageArray.append((organization.organizationID, downloadImg))
+                        }
+                    }
+                }
+            }
+        }
+        
+    }
+    
+    func getDataFromUrl(urL:NSURL, completion: ((data: NSData?) -> Void)) {
+        NSURLSession.sharedSession().dataTaskWithURL(urL) { (data, response, error) in
+            completion(data: data)
+            }.resume()
+    }
+    
     // MARK: - Internet
     func hasInternet() -> String {
         
@@ -140,12 +195,12 @@ class LoadScreenViewController: UIViewController {
         if generalRetrieved == 4 && FetchData(context: managedObjectContext).fetchUserInfo()?.count == 0 {
             
             print("should go to splash")
-            NSNotificationCenter.defaultCenter().postNotificationName("download complete", object: nil)
+            NSNotificationCenter.defaultCenter().postNotificationName("complete", object: nil)
             
         } else if generalRetrieved == 4 && loggedinRetrieved == 6 {
             
             print("should dashboard")
-            NSNotificationCenter.defaultCenter().postNotificationName("download complete", object: nil)
+            NSNotificationCenter.defaultCenter().postNotificationName("complete", object: nil)
         }
     }
     
@@ -156,7 +211,7 @@ class LoadScreenViewController: UIViewController {
         if loggedinRetrieved == 6 && FetchData(context: managedObjectContext).fetchUserInfo()?.count != 0 && generalRetrieved == 4 {
             
             print("should go to dashboard")
-            NSNotificationCenter.defaultCenter().postNotificationName("download complete", object: nil)
+            NSNotificationCenter.defaultCenter().postNotificationName("complete", object: nil)
         }
     }
     

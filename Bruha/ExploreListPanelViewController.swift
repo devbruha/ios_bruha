@@ -133,20 +133,20 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
 //            eventCategoriesTable.reloadData()
 //        }
         
-        switch(GlobalVariables.selectedDisplay){
-            
-        case "Event":
-            eventTapped()
-            
-        case "Venue":
-            venueTapped()
-            
-        case "Organization":
-            organizationTapped()
-            
-        default:
-            eventTapped()
-        }
+//        switch(GlobalVariables.selectedDisplay){
+//            
+//        case "Event":
+//            eventTapped()
+//            
+//        case "Venue":
+//            venueTapped()
+//            
+//        case "Organization":
+//            organizationTapped()
+//            
+//        default:
+//            eventTapped()
+//        }
         
     }
     
@@ -258,6 +258,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
+        //uiCustomSelection()
         
     }
     override func viewWillDisappear(animated: Bool) {
@@ -426,7 +427,8 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if GlobalVariables.selectedDisplay == "Event" {
-            print("TABLE SECTION OBJECT", eventObject[section].sectionObjects.count)
+            print("NUMBER OF ROWS IN SECTION", eventObject[section].sectionObjects.count)
+            //print("NUMBER OF SECTIONS", eventObject.count)
             return eventObject[section].sectionObjects.count
         }
         else {
@@ -438,7 +440,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         
         if GlobalVariables.selectedDisplay == "Event" {
-            print("Table event object", eventObject.count)
+            print("NUMBER OF SECTIONS", eventObject.count)
             return eventObject.count
         } else if GlobalVariables.selectedDisplay == "Venue" {
             return venueObject.count
@@ -813,26 +815,25 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         //eventCategoriesTable.clearsContextBeforeDrawing = true
         
         print("section~~~~~~", GlobalVariables.UISection)
-        print("IM RUN ____-----~~~~~~~~~~", GlobalVariables.UIIdxPath)
+        print("IM RUN ____-----~~~~~~~~~~", GlobalVariables.UIIdxPath[0].section)
         
         
-//        eventObject.removeAll(keepCapacity: false)
-//        eventObject = (backupEventCategories)
-//        
-//        for(var i = 0 ; i < eventObject.count ; ++i){
-//            
-//            eventObject[i].sectionObjects.removeAll(keepCapacity: false)
-//            print(eventObject[i].sectionObjects)
-//        }
-//    
+        eventObject.removeAll(keepCapacity: false)
+        eventObject = (backupEventCategories)
+        
+        for(var i = 0 ; i < eventObject.count ; ++i){
+            
+            eventObject[i].sectionObjects.removeAll(keepCapacity: false)
+            print(eventObject[i].sectionObjects)
+        }
+    
 //        for var i = 0; i < GlobalVariables.UISection.count; i++ {
 //            eventObject[GlobalVariables.UISection[i]].sectionObjects = (backupEventCategories[GlobalVariables.UISection[i]].sectionObjects)
 //        }
         
         
 //        eventCategoriesTable.beginUpdates()
-        
-        
+//
 //        eventCategoriesTable.endUpdates()
         
         

@@ -46,4 +46,6 @@ class GlobalVariables{
     
     static var UIIdxPath: [NSIndexPath] = []
     static var UISection: [Int] = []
+    
+    static var ImageArray: [(String, UIImage)] = []
 }
