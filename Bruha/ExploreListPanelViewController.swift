@@ -252,6 +252,8 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
         if(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.keys.count > 0){
             
+            eventObject.removeAll(keepCapacity: false)
+            
             for category in backupEventCategories{
                 
                 var temp = category
