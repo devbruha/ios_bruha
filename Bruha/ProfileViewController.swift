@@ -37,7 +37,14 @@ class ProfileViewController: UIViewController, FBSDKLoginButtonDelegate {
         name.text = (userInfo?.first?.userName)!
         email.text = (userInfo?.first?.userEmail)!
         
-        myImage.image = UIImage(named: "Slide 3.png")
+        
+        if FBSDKAccessToken.currentAccessToken() != nil {
+            
+            getFacebookProfilePic()
+            
+        } else {
+            myImage.image = UIImage(named: "Slide 3.png")
+        }
     }
     
     override func viewDidLoad() {
@@ -88,6 +95,21 @@ class ProfileViewController: UIViewController, FBSDKLoginButtonDelegate {
         print("facebook logged out")
     }
     
+    func getFacebookProfilePic() {
+        let graphRequest = FBSDKGraphRequest(graphPath: "me", parameters: nil)
+        graphRequest.startWithCompletionHandler { (connection, result, error) -> Void in
+            if error == nil {
+                let url = "http://graph.facebook.com/\(result["id"]!! as! NSString)/picture?type=large"
+                
+                if let data = NSData(contentsOfURL: NSURL(string: url)!) {
+                    
+                    self.myImage.contentMode = UIViewContentMode.ScaleToFill
+                    self.myImage.image = UIImage(data: data)
+                }
+                
+            }
+        }
+    }
     
 
     /*
