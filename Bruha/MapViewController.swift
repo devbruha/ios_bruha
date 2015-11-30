@@ -167,15 +167,11 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
         
     }
     
-    func getDataFromUrl(urL:NSURL, completion: ((data: NSData?) -> Void)) {
-        NSURLSession.sharedSession().dataTaskWithURL(urL) { (data, response, error) in
-            completion(data: data)
-            }.resume()
-    }
-    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) ->   UITableViewCell {
         
         let cell: MapDropTableViewCell = self.dropDownTable.dequeueReusableCellWithIdentifier("DropCell") as! MapDropTableViewCell
+        
+        let posterInfo = FetchData(context: managedObjectContext).fetchPosterImages()
         
         switch GlobalVariables.selectedDisplay {
         case "Event":
@@ -183,10 +179,10 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             let e = dropEvents[indexPath.row]
             
             cell.dropImage.contentMode = UIViewContentMode.ScaleToFill
-            if let checkedUrl = NSURL(string:e.posterUrl) {
-                getDataFromUrl(checkedUrl) { data in
-                    dispatch_async(dispatch_get_main_queue()) {
-                        cell.dropImage.image = UIImage(data: data!)
+            if let images = posterInfo {
+                for img in images {
+                    if img.ID == e.eventID {
+                        cell.dropImage.image = UIImage(data: img.Image!)
                     }
                 }
             }
@@ -234,10 +230,10 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             let v = dropVenues[indexPath.row]
             
             cell.dropImage.contentMode = UIViewContentMode.ScaleToFill
-            if let checkedUrl = NSURL(string:v.posterUrl) {
-                getDataFromUrl(checkedUrl) { data in
-                    dispatch_async(dispatch_get_main_queue()) {
-                        cell.dropImage.image = UIImage(data: data!)
+            if let images = posterInfo {
+                for img in images {
+                    if img.ID == v.venueID {
+                        cell.dropImage.image = UIImage(data: img.Image!)
                     }
                 }
             }
@@ -284,10 +280,10 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             let o = dropOrganizations[indexPath.row]
             
             cell.dropImage.contentMode = UIViewContentMode.ScaleToFill
-            if let checkedUrl = NSURL(string:o.posterUrl) {
-                getDataFromUrl(checkedUrl) { data in
-                    dispatch_async(dispatch_get_main_queue()) {
-                        cell.dropImage.image = UIImage(data: data!)
+            if let images = posterInfo {
+                for img in images {
+                    if img.ID == o.organizationID {
+                        cell.dropImage.image = UIImage(data: img.Image!)
                     }
                 }
             }

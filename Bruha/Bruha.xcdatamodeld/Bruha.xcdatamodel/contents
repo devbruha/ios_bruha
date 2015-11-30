@@ -62,7 +62,7 @@
     </entity>
     <entity name="ImageList" representedClassName=".ImageDBModel" syncable="YES">
         <attribute name="id" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="imageData" optional="YES" attributeType="Binary" syncable="YES"/>
+        <attribute name="imageData" optional="YES" attributeType="Binary" allowsExternalBinaryDataStorage="YES" syncable="YES"/>
     </entity>
     <entity name="OrganizationCategories" representedClassName="Bruha.OrganizationCategoriesDBModel" syncable="YES">
         <attribute name="categoryName" optional="YES" attributeType="String" syncable="YES"/>
@@ -154,6 +154,7 @@
         <element name="EventPrimaryCategories" positionX="9" positionY="162" width="128" height="60"/>
         <element name="EventSubCategories" positionX="18" positionY="171" width="128" height="90"/>
         <element name="EventSubCategoryList" positionX="-18" positionY="126" width="128" height="90"/>
+        <element name="ImageList" positionX="-18" positionY="135" width="128" height="75"/>
         <element name="OrganizationCategories" positionX="0" positionY="144" width="128" height="60"/>
         <element name="OrganizationList" positionX="0" positionY="144" width="128" height="165"/>
         <element name="UserEventList" positionX="-18" positionY="126" width="128" height="315"/>
@@ -163,6 +164,5 @@
         <element name="UserVenueList" positionX="-18" positionY="135" width="128" height="165"/>
         <element name="VenueCategories" positionX="-18" positionY="126" width="128" height="60"/>
         <element name="VenueList" positionX="-54" positionY="108" width="128" height="165"/>
-        <element name="ImageList" positionX="-18" positionY="135" width="128" height="75"/>
     </elements>
 </model>

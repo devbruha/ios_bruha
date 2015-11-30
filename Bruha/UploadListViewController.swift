@@ -74,13 +74,9 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
         
     }
     
-    func getDataFromUrl(urL:NSURL, completion: ((data: NSData?) -> Void)) {
-        NSURLSession.sharedSession().dataTaskWithURL(urL) { (data, response, error) in
-            completion(data: data)
-            }.resume()
-    }
-    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        
+        let posterInfo = FetchData(context: managedObjectContext).fetchPosterImages()
         
         switch (GlobalVariables.uploadDisplay){
         case "Event":
@@ -96,19 +92,14 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
             
             //println("Begin of code")
             cell.ExploreImage.contentMode = UIViewContentMode.ScaleToFill
-            if let checkedUrl = NSURL(string:event.posterUrl) {
-                //println("Started downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
-                getDataFromUrl(checkedUrl) { data in
-                    dispatch_async(dispatch_get_main_queue()) {
-                        //println("Finished downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
-                        cell.ExploreImage.image = UIImage(data: data!)
+            if let images = posterInfo {
+                for img in images {
+                    if img.ID == event.eventID {
+                        cell.ExploreImage.image = UIImage(data: img.Image!)
                     }
-                    
                 }
-                
             }
             
-                        
             //println("End of code. The image will continue downloading in the background and it will be loaded when it ends.")
             //Synchronously:
             /*if let url = NSURL(string: event.url) {
@@ -165,13 +156,12 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
             let venue = venueInfo![indexPath.row]
             
             cell.venueImage.contentMode = UIViewContentMode.ScaleToFill
-            if let checkedUrl = NSURL(string:venue.posterUrl) {
-                getDataFromUrl(checkedUrl) { data in
-                    dispatch_async(dispatch_get_main_queue()) {
-                        cell.venueImage.image = UIImage(data: data!)
+            if let images = posterInfo {
+                for img in images {
+                    if img.ID == venue.venueID {
+                        cell.venueImage.image = UIImage(data: img.Image!)
                     }
                 }
-                
             }
             
             cell.venueName.text = venue.venueName
@@ -214,13 +204,12 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
             let organization = organizationInfo![indexPath.row]
             
             cell.organizationImage.contentMode = UIViewContentMode.ScaleToFill
-            if let checkedUrl = NSURL(string:organization.posterUrl) {
-                getDataFromUrl(checkedUrl) { data in
-                    dispatch_async(dispatch_get_main_queue()) {
-                        cell.organizationImage.image = UIImage(data: data!)
+            if let images = posterInfo {
+                for img in images {
+                    if img.ID == organization.organizationID {
+                        cell.organizationImage.image = UIImage(data: img.Image!)
                     }
                 }
-                
             }
             
             cell.organizationName.text = organization.organizationName

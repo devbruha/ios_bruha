@@ -289,7 +289,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
             venueObject = [""]
         }
         
-        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChange", object: self)
+        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
         //clearBackupCategories()
         //resetSliderValue()
         updateNotificationSent()
@@ -301,7 +301,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
     func discoverableTapped(){
         
         GlobalVariables.selectedDisplay = ""
-        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChange", object: self)
+        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
         clearBackupCategories()
         //resetSliderValue()
     }
@@ -317,7 +317,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
             organizationObject = [""]
         }
         
-        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChange", object: self)
+        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
         //clearBackupCategories()
         resetSliderValue()
         updateNotificationSent()
