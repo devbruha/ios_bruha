@@ -80,7 +80,7 @@ class LoadScreenViewController: UIViewController {
             
             let okAction = UIAlertAction(title: "OK", style: .Default) { (_) -> Void in
                 
-                if (FetchData(context: self.managedObjectContext).fetchUserInfo()?.count != 0) {
+                if (self.userLog != 0) {
                     
                     GlobalVariables.loggedIn = true
                 }
@@ -201,7 +201,7 @@ class LoadScreenViewController: UIViewController {
         
         generalRetrieved = generalRetrieved + 1
         
-        if generalRetrieved == 4 && FetchData(context: managedObjectContext).fetchUserInfo()?.count == 0 {
+        if generalRetrieved == 4 && userLog == 0 {
             
             print("should go to splash")
             NSNotificationCenter.defaultCenter().postNotificationName("complete", object: nil)
@@ -217,7 +217,7 @@ class LoadScreenViewController: UIViewController {
         
         loggedinRetrieved = loggedinRetrieved + 1
         
-        if loggedinRetrieved == 6 && FetchData(context: managedObjectContext).fetchUserInfo()?.count != 0 && generalRetrieved == 4 {
+        if loggedinRetrieved == 6 && userLog != 0 && generalRetrieved == 4 {
             
             print("should go to dashboard")
             NSNotificationCenter.defaultCenter().postNotificationName("complete", object: nil)
@@ -228,7 +228,7 @@ class LoadScreenViewController: UIViewController {
         
         finishesLoadingProgress()
         
-        if(FetchData(context: managedObjectContext).fetchUserInfo()?.count != 0) {
+        if(userLog != 0) {
             
             delay(1.5){
                 print("DashBoard segue")
@@ -271,7 +271,7 @@ class LoadScreenViewController: UIViewController {
         
         if !(loggedinRetrieved == 6 && generalRetrieved == 4 || generalRetrieved == 4 && userLog == 0) {
             
-            let alert = UIAlertView(title: "Error while loading, some functionality may not work, please restart the app to get full functionality \(FetchData(context: managedObjectContext).fetchUserInfo()?.count)", message: nil, delegate: nil, cancelButtonTitle: nil)
+            let alert = UIAlertView(title: "Error while loading, some functionality may not work, please restart the app to get full functionality", message: nil, delegate: nil, cancelButtonTitle: nil)
             alert.show()
             self.delay(5.0){
                 alert.dismissWithClickedButtonIndex(-1, animated: true)
