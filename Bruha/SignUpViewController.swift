@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import FBSDKCoreKit
+import FBSDKLoginKit
 
-class SignUpViewController: UIViewController, UITextFieldDelegate {
+class SignUpViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDelegate {
     
     @IBOutlet weak var username: UITextField!
     @IBOutlet weak var password: UITextField!
@@ -34,12 +36,65 @@ class SignUpViewController: UIViewController, UITextFieldDelegate {
         self.username.delegate = self
         self.password.delegate = self
         self.emailaddress.delegate = self
+        
+        // FaceBook
+        let faceLoginButton = FBSDKLoginButton()
+        self.view.addSubview(faceLoginButton)
+        faceLoginButton.delegate = self
+        faceLoginButton.translatesAutoresizingMaskIntoConstraints = false
+        let topConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.TopMargin, relatedBy: NSLayoutRelation.Equal, toItem: self.password, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1.2, constant: 20)
+        let centerConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.password, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
+        NSLayoutConstraint.activateConstraints([topConstraint, centerConstraint])
+
         // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
+        if error != nil {
+            let alertController = UIAlertController(title: "FaceBook Login Failed", message: error.description, preferredStyle: .Alert)
+            let cancelAction = UIAlertAction(title: "Ok", style: .Default, handler: nil)
+            
+            alertController.addAction(cancelAction)
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
+            return
+            
+        } else if result.isCancelled {
+            print("Cancelled")
+            
+        } else {
+            let accessToken = FBSDKAccessToken.currentAccessToken()
+            let req = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"email,name,gender"], tokenString: accessToken.tokenString, version: nil, HTTPMethod: "GET")
+            req.startWithCompletionHandler({ (connection, result, error : NSError!) -> Void in
+                if(error == nil) {
+                    print("email \(result["email"]!!)")
+                    print("name \(result["name"]!!)")
+                    print("gender \(result["gender"]!!)")
+                    print("id \(result["id"]!!)")
+                    
+                    print("ALL \(result)")
+                    
+                    
+                    let user = User(username: result["name"]!! as! String, userEmail: result["email"]!! as! String, userCity: "Not Set", userFName: "Not Set", userGender: "Not Set", userBirthdate: "Not Set")
+                    SaveData(context: self.managedObjectContext).saveUser(user)
+                    GlobalVariables.loggedIn = true
+                    
+                    self.performSegueWithIdentifier("ProceedToDashBoard", sender: self)
+                }
+                else {
+                    print("error getting user information(facebook): \(error)")
+                }
+            })
+        }
+    }
+    
+    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
+        print("logged out")
     }
     
     @IBAction func registerButtonClick(sender: AnyObject) {

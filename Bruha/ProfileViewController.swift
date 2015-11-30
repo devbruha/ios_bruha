@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import FBSDKCoreKit
+import FBSDKLoginKit
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     // Retreive the managedObjectContext from AppDelegate
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
@@ -65,12 +67,25 @@ class ProfileViewController: UIViewController {
             
             DeleteData(context: self.managedObjectContext).deleteUserInfo()
             DeleteData(context: self.managedObjectContext).deleteUser()
+            
+            if FBSDKAccessToken.currentAccessToken() != nil {
+                let loginManager = FBSDKLoginManager()
+                loginManager.logOut()
+            }
+            
             self.performSegueWithIdentifier("logOutToSplashView", sender: self)
         }
         alertController.addAction(yesAction)
         alertController.addAction(cancelAction)
         
         self.presentViewController(alertController, animated: true, completion: nil)
+    }
+    
+    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
+        print("logged in using facebook")
+    }
+    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
+        print("facebook logged out")
     }
     
     

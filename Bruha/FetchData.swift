@@ -24,6 +24,8 @@ class FetchData {
         
         let returnedCategories = Categories(eventCategory: fetchEventCategories(), venueCategory: fetchVenueCategories(), artistCategory: fetchArtistCategories(), organizationCategory: fetchOrganizationCategories())
         
+        GlobalVariables.categories = returnedCategories
+        
         return returnedCategories
     }
 

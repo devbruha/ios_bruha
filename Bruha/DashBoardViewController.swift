@@ -118,6 +118,7 @@ class DashBoardViewController: UIViewController {
         }
         performImageSegue()
         backgroundGradient()
+        FetchData(context: managedObjectContext).fetchCategories()
         Filtering().clearFilter()
         // Do any additional setup after loading the view.
     }

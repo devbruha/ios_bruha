@@ -7,10 +7,11 @@
 //
 
 import UIKit
-import FBSDKCoreKit
-import FBSDKLoginKit
+//import FBSDKCoreKit
+//import FBSDKLoginKit
 
-class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDelegate {
+class LoginViewController: UIViewController, UITextFieldDelegate {
+//, FBSDKLoginButtonDelegate
     
     @IBOutlet weak var username: UITextField!
     @IBOutlet weak var password: UITextField!
@@ -36,26 +37,15 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
         continueWithoutLogIn.userInteractionEnabled = true
         
         
-        // FaceBook
+       /* // FaceBook
         let faceLoginButton = FBSDKLoginButton()
-        faceLoginButton.center = CGPointMake(100, 480)
-            //CGRectMake(password.bounds.midX, password.bounds.midY, password.bounds.width, 30)
-        
-        //faceLoginButton.readPermissions = ["email"]
-        //"public_profile",
         self.view.addSubview(faceLoginButton)
         faceLoginButton.delegate = self
-        
-//        faceLoginButton.translatesAutoresizingMaskIntoConstraints = false
-//        let topConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.TopMargin, relatedBy: NSLayoutRelation.Equal, toItem: self.password, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1, constant: 31)
-//        NSLayoutConstraint.activateConstraints([topConstraint])
-        
-        if FBSDKAccessToken.currentAccessToken() == nil {
-            print("not logged in")
-        } else {
-            print("login ")
-            //getUserData()
-        }
+        faceLoginButton.translatesAutoresizingMaskIntoConstraints = false
+        let topConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.TopMargin, relatedBy: NSLayoutRelation.Equal, toItem: self.password, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1.1, constant: 2)
+        let centerConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.password, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
+        NSLayoutConstraint.activateConstraints([topConstraint, centerConstraint])
+        */
 
         // Do any additional setup after loading the view.
     }
@@ -65,24 +55,25 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
         // Dispose of any resources that can be recreated.
     }
     
-    // Facebook Login
+   /* // Facebook Login
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
         if error != nil {
             let alertController = UIAlertController(title: "FaceBook Login Failed", message: error.description, preferredStyle: .Alert)
             let cancelAction = UIAlertAction(title: "Ok", style: .Default, handler: nil)
-            
             
             alertController.addAction(cancelAction)
             
             self.presentViewController(alertController, animated: true, completion: nil)
             return
             
+        } else if result.isCancelled {
+            print("Cancelled")
+            
         } else {
             let accessToken = FBSDKAccessToken.currentAccessToken()
             let req = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"email,name,gender"], tokenString: accessToken.tokenString, version: nil, HTTPMethod: "GET")
             req.startWithCompletionHandler({ (connection, result, error : NSError!) -> Void in
-                if(error == nil)
-                {
+                if(error == nil) {
                     print("email \(result["email"]!!)")
                     print("name \(result["name"]!!)")
                     print("gender \(result["gender"]!!)")
@@ -97,40 +88,16 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
                     
                     self.performSegueWithIdentifier("ProceedToDashBoard", sender: self)
                 }
-                else
-                {
+                else {
                     print("error getting user information(facebook): \(error)")
                 }
             })
         }
-        
-//        if let userToken = result.token {
-//            let token: FBSDKAccessToken = result.token
-//            print("token is \(FBSDKAccessToken.currentAccessToken().tokenString)")
-//            print("user id is \(FBSDKAccessToken.currentAccessToken().userID)")
-//            print(FBSDKAccessToken.currentAccessToken())
-//            print("tok", result.token)
-//            //self.performSegueWithIdentifier("ProceedToDashBoard", sender: self)
-//        }
-        
-        //print("logged in")
     }
     
     func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
         print("logged out")
-    }
-    
-//    func getUserData() {
-//        let graphRequest = FBSDKGraphRequest(graphPath: "me", parameters: nil)
-//        graphRequest.startWithCompletionHandler { (connection, result, error) -> Void in
-//            if error != nil {
-//                print(error)
-//            } else {
-//                print(result.grantedPermissions)
-//            }
-//        }
-//    }
-    
+    }*/
     
     
     // Login Button Onclick logic
