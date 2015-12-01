@@ -1871,6 +1871,7 @@
                         <outlet property="dropDownTable" destination="S4f-vD-iAs" id="ZvN-tY-Dvf"/>
                         <outlet property="viewMap" destination="Wxl-Jp-fhG" id="R3x-kF-OZD"/>
                         <segue destination="8Gj-d3-yhz" kind="modal" identifier="ShowOnMap" id="haB-2U-z7b"/>
+                        <segue destination="Wi8-Ty-KnD" kind="modal" identifier="GoToMoreInfo" id="bzC-Is-F2I"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H2m-0y-tpY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2096,11 +2097,12 @@
         <image name="Tickets_Sm" width="31" height="31"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="gzB-s1-set"/>
-        <segue reference="haB-2U-z7b"/>
-        <segue reference="Ymx-RJ-M3w"/>
+        <segue reference="1Xm-3s-taQ"/>
+        <segue reference="XwL-ZY-i5c"/>
+        <segue reference="thc-CS-1cg"/>
         <segue reference="eyG-eD-cCw"/>
         <segue reference="zjY-DB-duY"/>
         <segue reference="uZx-1x-ByM"/>
+        <segue reference="bzC-Is-F2I"/>
     </inferredMetricsTieBreakers>
 </document>

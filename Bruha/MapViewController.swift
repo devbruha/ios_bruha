@@ -771,24 +771,51 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
                 //event ticket
                 print("event ticket")
             }
-            else if GlobalVariables.selectedDisplay == "Venue" || GlobalVariables.selectedDisplay == "Organization" {
                 //venue and organization map
-                print("venue and org map")
+            else if GlobalVariables.selectedDisplay == "Venue" {
+                let cellIndexPath = self.dropDownTable.indexPathForCell(cell)
+                let selectedCell = self.dropDownTable.cellForRowAtIndexPath(cellIndexPath!) as! MapDropTableViewCell
+                GlobalVariables.eventSelected = selectedCell.dropHiddenID.text!
+                self.performSegueWithIdentifier("ShowOnMap", sender: self)
+            }
+            else if GlobalVariables.selectedDisplay == "Organization" {
+                let cellIndexPath = self.dropDownTable.indexPathForCell(cell)
+                let selectedCell = self.dropDownTable.cellForRowAtIndexPath(cellIndexPath!) as! MapDropTableViewCell
+                GlobalVariables.eventSelected = selectedCell.dropHiddenID.text!
+                self.performSegueWithIdentifier("ShowOnMap", sender: self)
             }
             break
         case 1:
             if GlobalVariables.selectedDisplay == "Event" {
                 //event map
-                print("event map")
+                let cellIndexPath = self.dropDownTable.indexPathForCell(cell)
+                let selectedCell = self.dropDownTable.cellForRowAtIndexPath(cellIndexPath!) as! MapDropTableViewCell
+                GlobalVariables.eventSelected = selectedCell.dropHiddenID.text!
+                self.performSegueWithIdentifier("ShowOnMap", sender: self)
             }
-            else if GlobalVariables.selectedDisplay == "Venue" || GlobalVariables.selectedDisplay == "Organization" {
-                //venue and organizaiton more info
-                print("venue and org more info")
+            //Venue MoreInfo
+            if (GlobalVariables.selectedDisplay == "Venue"){
+                let cellIndexPath = self.dropDownTable.indexPathForCell(cell)
+                let selectedCell = self.dropDownTable.cellForRowAtIndexPath(cellIndexPath!) as! MapDropTableViewCell
+                GlobalVariables.eventSelected = selectedCell.dropHiddenID.text!
+                self.performSegueWithIdentifier("GoToMoreInfo", sender: self)
+            }
+            //Organization MoreInfo
+            if (GlobalVariables.selectedDisplay == "Organization"){
+                let cellIndexPath = self.dropDownTable.indexPathForCell(cell)
+                let selectedCell = self.dropDownTable.cellForRowAtIndexPath(cellIndexPath!) as! MapDropTableViewCell
+                GlobalVariables.eventSelected = selectedCell.dropHiddenID.text!
+                self.performSegueWithIdentifier("GoToMoreInfo", sender: self)
+                
             }
             break
         case 2:
             //Event More info
             print("event more info")
+            let cellIndexPath = self.dropDownTable.indexPathForCell(cell)
+            let selectedCell = self.dropDownTable.cellForRowAtIndexPath(cellIndexPath!) as! MapDropTableViewCell
+            GlobalVariables.eventSelected = selectedCell.dropHiddenID.text!
+            self.performSegueWithIdentifier("GoToMoreInfo", sender: self)
             break
         default:
             break
