@@ -742,7 +742,7 @@
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <state key="normal" title="Back"/>
                                 <connections>
-                                    <segue destination="2fB-2K-YbP" kind="modal" id="b2b-Uo-N5Q"/>
+                                    <action selector="backToExploreButton:" destination="8Gj-d3-yhz" eventType="touchUpInside" id="kk3-NU-6t6"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -1870,6 +1870,7 @@
                         <outlet property="BruhaButton" destination="vMm-n0-f4z" id="SBD-X9-lCJ"/>
                         <outlet property="dropDownTable" destination="S4f-vD-iAs" id="ZvN-tY-Dvf"/>
                         <outlet property="viewMap" destination="Wxl-Jp-fhG" id="R3x-kF-OZD"/>
+                        <segue destination="8Gj-d3-yhz" kind="modal" identifier="ShowOnMap" id="haB-2U-z7b"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H2m-0y-tpY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2096,9 +2097,10 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="gzB-s1-set"/>
-        <segue reference="zjY-DB-duY"/>
+        <segue reference="haB-2U-z7b"/>
+        <segue reference="Ymx-RJ-M3w"/>
         <segue reference="eyG-eD-cCw"/>
-        <segue reference="Rkq-9y-PIT"/>
+        <segue reference="zjY-DB-duY"/>
         <segue reference="uZx-1x-ByM"/>
     </inferredMetricsTieBreakers>
 </document>
