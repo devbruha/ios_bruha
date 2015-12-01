@@ -178,6 +178,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             
             let e = dropEvents[indexPath.row]
             
+            // Poster Image
             cell.dropImage.contentMode = UIViewContentMode.ScaleToFill
             if let images = posterInfo {
                 for img in images {
@@ -186,12 +187,23 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
                     }
                 }
             }
-            
+            //Title
             cell.dropTitle.text = "\(e.eventName)"
-            cell.dropPrice.text = "\(e.eventPrice!)"
-            cell.dropStartDate.text = "\(e.eventStartDate) At \(e.eventStartTime)"
             
-            cell.dropContent.text = "\(e.eventVenueName)\n\(e.eventVenueAddress.componentsSeparatedByString(", ")[0])\n\(e.eventVenueAddress.componentsSeparatedByString(", ")[1])"
+            //Price
+            if let price = Float(e.eventPrice!) {
+                if price == 0.0 {cell.dropPrice.text = "Free!"}
+                else {cell.dropPrice.text = "$\(e.eventPrice!)"}
+            } else {cell.dropPrice.text = "Free"}
+            
+            //Date
+            cell.dropStartDate.text = convertTimeFormat("\(e.eventStartDate) \(e.eventStartTime)")
+            
+            //Venue Name and Address
+            if e.eventVenueName == "" {
+                cell.dropContent.text = "nil\n\(e.eventVenueAddress.componentsSeparatedByString(", ")[0])\n\(e.eventVenueCity)"
+            } else {cell.dropContent.text = "\(e.eventVenueName)\n\(e.eventVenueAddress.componentsSeparatedByString(", ")[0])\n\(e.eventVenueCity)"}
+            
             
             cell.dropHiddenID.text = "\(e.eventID)"
             
@@ -240,7 +252,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             //cell.dropWebContent.loadHTMLString("<font color=\"white\">\(v.venueDescription)</font>", baseURL: nil)
             
             cell.dropTitle.text = "\(v.venueName)"
-            cell.dropContent.text = "\(v.venueAddress.componentsSeparatedByString(", ")[0])\n\(v.venueAddress.componentsSeparatedByString(", ")[1])\n\(v.venueDescription)"
+            cell.dropContent.text = "\(v.venueAddress.componentsSeparatedByString(", ")[0])"
             cell.dropStartDate.text = ""
             cell.dropPrice.text = ""
             
@@ -289,7 +301,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             }
             
             cell.dropTitle.text = "\(o.organizationName)"
-            cell.dropContent.text = "\(o.organizationAddress.componentsSeparatedByString(", ")[0])\n\(o.organizationAddress.componentsSeparatedByString(", ")[1])\n\(o.organizationDescription)"
+            cell.dropContent.text = "\(o.organizationAddress.componentsSeparatedByString(", ")[0])"
             cell.dropStartDate.text = ""
             cell.dropPrice.text = ""
             
@@ -804,6 +816,22 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
         
         BruhaButton.hidden = false
         BackButton.hidden = false
+    }
+    
+    func convertTimeFormat(date: String) -> String {
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatter.timeZone = NSTimeZone.localTimeZone()
+        
+        if let ndate = dateFormatter.dateFromString(date) {
+            
+            dateFormatter.dateFormat = "EEE, MMM dd, yyyy 'at' h:mma"
+            dateFormatter.timeZone = NSTimeZone.localTimeZone()
+            let timeStamp = dateFormatter.stringFromDate(ndate)
+            return timeStamp
+        }
+        else {return "nil or error times"}
     }
     
 }
