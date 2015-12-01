@@ -273,6 +273,16 @@ class MoreInfoPanelViewController: UIViewController {
                 }
             }
         }
+        else { //user not logged in
+            
+            let alert = UIAlertView(title: "Please log in for this!!!", message: nil, delegate: nil, cancelButtonTitle: nil)
+            alert.show()
+            let delay = 1.0 * Double(NSEC_PER_SEC)
+            var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+            dispatch_after(time, dispatch_get_main_queue(), {
+                alert.dismissWithClickedButtonIndex(-1, animated: true)
+            })
+        }
     }
 
     
