@@ -285,11 +285,11 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
         GlobalVariables.selectedDisplay = "Venue"
         
-        if(GlobalVariables.categories.venueCategories.count != 0){
+        if(GlobalVariables.UserCustomFilters.categoryFilter.venueCategories.count != 0){
             venueObject = backupVenueCategories
         }
         else{
-            venueObject = [""]
+            venueObject = ["Venue Categories"]
         }
         
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
@@ -313,11 +313,11 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
         GlobalVariables.selectedDisplay = "Organization"
         
-        if(GlobalVariables.categories.organizationCategories.count != 0){
+        if(GlobalVariables.UserCustomFilters.categoryFilter.organizationCategories.count != 0){
             organizationObject = backupOrganizationCategories
         }
         else{
-            organizationObject = [""]
+            organizationObject = ["Organization Categories"]
         }
         
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
