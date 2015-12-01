@@ -103,7 +103,7 @@ class ProfileViewController: UIViewController, FBSDKLoginButtonDelegate {
                 
                 if let data = NSData(contentsOfURL: NSURL(string: url)!) {
                     
-                    self.myImage.contentMode = UIViewContentMode.ScaleToFill
+                    self.myImage.contentMode = UIViewContentMode.ScaleAspectFill
                     self.myImage.image = UIImage(data: data)
                 }
                 

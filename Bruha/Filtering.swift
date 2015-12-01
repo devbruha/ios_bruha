@@ -32,11 +32,11 @@ class Filtering {
         }
         
         //price filter is not nil, if event price > filter price, filter out events
-        if GlobalVariables.UserCustomFilters.priceFilter != -1 {
+        if GlobalVariables.UserCustomFilters.priceFilter != -1.0 {
             
             for var i = tempEvent.count; i > 0; i-- {
                 
-                if GlobalVariables.UserCustomFilters.priceFilter < Int(tempEvent[i-1].eventPrice!) {
+                if GlobalVariables.UserCustomFilters.priceFilter < Float(tempEvent[i-1].eventPrice!) {
                     let index = tempEvent.indexOf({$0.eventID == tempEvent[i-1].eventID})
                     tempEvent.removeAtIndex(index!)
                 }
@@ -93,7 +93,7 @@ class Filtering {
         }
         
         if GlobalVariables.UserCustomFilters.dateFilter.count == 0 &&
-            GlobalVariables.UserCustomFilters.priceFilter == -1 &&
+            GlobalVariables.UserCustomFilters.priceFilter == -1.0 &&
             GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.count == 0 {
             
                 tempEvent.removeAll()
@@ -164,7 +164,7 @@ class Filtering {
         GlobalVariables.UserCustomFilters.categoryFilter.venueCategories.removeAll()
         GlobalVariables.UserCustomFilters.categoryFilter.organizationCategories.removeAll()
         GlobalVariables.UserCustomFilters.dateFilter.removeAll()
-        GlobalVariables.UserCustomFilters.priceFilter = -1
+        GlobalVariables.UserCustomFilters.priceFilter = -1.0
         
         GlobalVariables.filterEventBool = false
         GlobalVariables.filterVenueBool = false

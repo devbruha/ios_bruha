@@ -146,7 +146,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
     
     func sliderValueDidChange(sender:UISlider!) {
         
-        GlobalVariables.UserCustomFilters.priceFilter = Int(sender.value)
+        GlobalVariables.UserCustomFilters.priceFilter = Float(sender.value)
         
         if Int(sender.value) == 0 {
             priceLabel.text = "Free"
@@ -725,7 +725,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
     }
     
     func resetSliderValue() {
-        GlobalVariables.UserCustomFilters.priceFilter = -1
+        GlobalVariables.UserCustomFilters.priceFilter = -1.0
         slider.value = -1
         sliderValueDidChange(slider)
     }
