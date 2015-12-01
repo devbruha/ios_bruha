@@ -72,15 +72,20 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, FBSDKLoginBut
             let req = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"email,name,gender"], tokenString: accessToken.tokenString, version: nil, HTTPMethod: "GET")
             req.startWithCompletionHandler({ (connection, result, error : NSError!) -> Void in
                 if(error == nil) {
+                    /*
                     print("email \(result["email"]!!)")
                     print("name \(result["name"]!!)")
                     print("gender \(result["gender"]!!)")
-                    print("id \(result["id"]!!)")
+                    print("id \(result["id"]!!)")*/
                     
                     print("ALL \(result)")
                     
+                    var email = "Not Set"
+                    if let e = result["email"] as! String? {
+                        email = e
+                    }
                     
-                    let user = User(username: result["name"]!! as! String, userEmail: result["email"]!! as! String, userCity: "Not Set", userFName: "Not Set", userGender: "Not Set", userBirthdate: "Not Set")
+                    let user = User(username: result["name"]!! as! String, userEmail: email, userCity: "Not Set", userFName: "Not Set", userGender: "Not Set", userBirthdate: "Not Set")
                     SaveData(context: self.managedObjectContext).saveUser(user)
                     GlobalVariables.loggedIn = true
                     
