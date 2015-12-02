@@ -1677,7 +1677,7 @@
                                     <segue destination="zh2-4j-mHu" kind="modal" identifier="" id="E8f-jy-J7J"/>
                                 </connections>
                             </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Student" translatesAutoresizingMaskIntoConstraints="NO" id="TWM-fA-QSS">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Slide 3" translatesAutoresizingMaskIntoConstraints="NO" id="TWM-fA-QSS">
                                 <rect key="frame" x="70" y="120" width="180" height="180"/>
                                 <animations/>
                                 <constraints>
@@ -2092,8 +2092,8 @@
         <image name="MyUploads_Sm" width="256" height="256"/>
         <image name="Profile_Sm" width="256" height="256"/>
         <image name="Restaurant" width="124" height="124"/>
+        <image name="Slide 3" width="414" height="736"/>
         <image name="Splash Background" width="800" height="1280"/>
-        <image name="Student" width="31" height="31"/>
         <image name="Tickets_Sm" width="31" height="31"/>
     </resources>
     <inferredMetricsTieBreakers>
