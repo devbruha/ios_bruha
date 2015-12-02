@@ -96,9 +96,10 @@ class ProfileViewController: UIViewController, FBSDKLoginButtonDelegate {
     }
     
     func getFacebookProfilePic() {
-        let graphRequest = FBSDKGraphRequest(graphPath: "me", parameters: nil)
+        let graphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id"])
         graphRequest.startWithCompletionHandler { (connection, result, error) -> Void in
             if error == nil {
+                
                 let url = "http://graph.facebook.com/\(result["id"]!! as! NSString)/picture?type=large"
                 
                 if let data = NSData(contentsOfURL: NSURL(string: url)!) {
