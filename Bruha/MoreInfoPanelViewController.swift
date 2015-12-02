@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MoreInfoPanelViewController: UIViewController {
+class MoreInfoPanelViewController: UIViewController, UIWebViewDelegate {
     
     @IBOutlet weak var Name: UILabel!
     @IBOutlet weak var Address: UILabel!
@@ -110,7 +110,7 @@ class MoreInfoPanelViewController: UIViewController {
         super.viewDidLoad()
         setupPanel()
         labelDisplay()
-        
+        webDescriptionContent.delegate = self
         // Do any additional setup after loading the view.
     }
     override func viewWillAppear(animated: Bool) {
@@ -286,6 +286,17 @@ class MoreInfoPanelViewController: UIViewController {
     }
 
     
+    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        switch navigationType {
+        case .LinkClicked:
+            // Open links in Safari
+            UIApplication.sharedApplication().openURL(request.URL!)
+            return false
+        default:
+            // Handle other navigation types...
+            return true
+        }
+    }
 
     /*
     // MARK: - Navigation
