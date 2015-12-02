@@ -146,14 +146,14 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
     
     func sliderValueDidChange(sender:UISlider!) {
         
-        GlobalVariables.UserCustomFilters.priceFilter = Float(sender.value)
+        GlobalVariables.UserCustomFilters.priceFilter = Int(sender.value)
         
-        if Float(sender.value) == 0.0 {
+        if Int(sender.value) == 0 {
             priceLabel.text = "Free"
-        } else if Float(sender.value) == -1.0 {
+        } else if Int(sender.value) == -1 {
             priceLabel.text = "No Price Filter"
         } else {
-            priceLabel.text = "\(Float(sender.value))$"
+            priceLabel.text = "\(Int(sender.value))$"
         }
         
         print(GlobalVariables.UserCustomFilters.priceFilter)
@@ -716,8 +716,8 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     func resetSliderValue() {
-        GlobalVariables.UserCustomFilters.priceFilter = -1.0
-        slider.value = -1.0
+        GlobalVariables.UserCustomFilters.priceFilter = -1
+        slider.value = -1
         sliderValueDidChange(slider)
     }
     
@@ -726,9 +726,9 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
         // Price Filter
         slider.value = Float(GlobalVariables.UserCustomFilters.priceFilter)
-        if GlobalVariables.UserCustomFilters.priceFilter == 0.0 {
+        if GlobalVariables.UserCustomFilters.priceFilter == 0 {
             priceLabel.text = "Free"
-        } else if GlobalVariables.UserCustomFilters.priceFilter == -1.0 {
+        } else if GlobalVariables.UserCustomFilters.priceFilter == -1 {
             priceLabel.text = "No Price Filter"
         } else {
             priceLabel.text = "\(GlobalVariables.UserCustomFilters.priceFilter)$"

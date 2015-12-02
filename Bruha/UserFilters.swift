@@ -13,9 +13,9 @@ struct UserFilters{
     
     var dateFilter: [String]
     var categoryFilter: Categories
-    var priceFilter: Float
+    var priceFilter: Int
     
-    init(dateFilters: [String], categoryFilters: Categories, priceFilters: Float){
+    init(dateFilters: [String], categoryFilters: Categories, priceFilters: Int){
         
         dateFilter = dateFilters
         categoryFilter = categoryFilters
