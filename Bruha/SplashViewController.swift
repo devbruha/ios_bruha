@@ -14,6 +14,8 @@ class SplashViewController: UIViewController,UIScrollViewDelegate, FBSDKLoginBut
     
     // Retreive the managedObjectContext from AppDelegate
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    
+    let faceLoginButton = FBSDKLoginButton()
 
     @IBOutlet weak var scrollView: UIScrollView!
     
@@ -57,7 +59,6 @@ class SplashViewController: UIViewController,UIScrollViewDelegate, FBSDKLoginBut
         
         
         // FaceBook
-        let faceLoginButton = FBSDKLoginButton()
         self.view.addSubview(faceLoginButton)
         faceLoginButton.delegate = self
         faceLoginButton.translatesAutoresizingMaskIntoConstraints = false
@@ -66,7 +67,12 @@ class SplashViewController: UIViewController,UIScrollViewDelegate, FBSDKLoginBut
         NSLayoutConstraint.activateConstraints([topConstraint, centerConstraint])
         // Do any additional setup after loading the view.
     }
-    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        if FBSDKAccessToken.currentAccessToken() != nil {
+            faceLoginButton.hidden = true
+        }
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -97,7 +103,6 @@ class SplashViewController: UIViewController,UIScrollViewDelegate, FBSDKLoginBut
             let req = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"email,name,gender"], tokenString: accessToken.tokenString, version: nil, HTTPMethod: "GET")
             req.startWithCompletionHandler({ (connection, result, error : NSError!) -> Void in
                 if(error == nil) {
-                    
                     /*
                     print("email \(result["email"]!!)")
                     print("name \(result["name"]!!)")
@@ -107,15 +112,66 @@ class SplashViewController: UIViewController,UIScrollViewDelegate, FBSDKLoginBut
                     print("ALL \(result)")
                     
                     var email = "Not Set"
+                    var gender = "Not Set"
+                    var name = "Not Set"
+                    
                     if let e = result["email"] as! String? {
                         email = e
                     }
                     
-                    let user = User(username: result["name"]!! as! String, userEmail: email, userCity: "Not Set", userFName: "Not Set", userGender: "Not Set", userBirthdate: "Not Set")
-                    SaveData(context: self.managedObjectContext).saveUser(user)
-                    GlobalVariables.loggedIn = true
+                    if let g = result["gender"] as! String? {
+                        gender = g
+                    }
                     
-                    self.performSegueWithIdentifier("toDash", sender: self)
+                    if let n = result["name"] as! String? {
+                        name = n
+                    }
+                    
+                    let facebookService = FacebookService(context: self.managedObjectContext, username: result["id"]!! as! String, userfname: name, emailaddress: email, usergender: gender)
+                    
+                    facebookService.registerNewUser{
+                        (let facebookResponse) in
+                        
+                        if facebookResponse! == " sign in success" {
+                            
+                            facebookService.getUserInformation{
+                                (let userInfo) in
+                            }
+                            dispatch_async(dispatch_get_main_queue()){
+                                
+                                let alertController = UIAlertController(title: "Facebook Login Successful", message:nil, preferredStyle: .Alert)
+                                let acceptAction = UIAlertAction(title: "OK", style: .Default) { (_) -> Void in
+                                    self.performSegueWithIdentifier("toDash", sender: self) // Replace SomeSegue with your segue identifier (name)
+                                    
+                                    LoadScreenService(context: self.managedObjectContext).retrieveUser()
+                                }
+                                
+                                alertController.addAction(acceptAction)
+                                
+                                self.presentViewController(alertController, animated: true, completion: nil)
+                            }
+                            
+                            GlobalVariables.loggedIn = true
+                        }
+                            
+                        else { //facebook is not in the database
+                            dispatch_async(dispatch_get_main_queue()){
+                                
+                                let alertController = UIAlertController(title: "Facebook SignUp Successful", message:nil, preferredStyle: .Alert)
+                                
+                                let acceptAction = UIAlertAction(title: "OK", style: .Default) { (_) -> Void in
+                                    self.performSegueWithIdentifier("toDash", sender: self)
+                                    let user = User(username: "\(result["id"]!! as! String)_FB", userEmail: email, userCity: "Not Set", userFName: name, userGender: gender, userBirthdate: "Not Set")
+                                    SaveData(context: self.managedObjectContext).saveUser(user)
+                                    GlobalVariables.loggedIn = true
+                                }
+                                
+                                alertController.addAction(acceptAction)
+                                
+                                self.presentViewController(alertController, animated: true, completion: nil)
+                            }
+                        }
+                    }
                 }
                 else {
                     print("error getting user information(facebook): \(error)")

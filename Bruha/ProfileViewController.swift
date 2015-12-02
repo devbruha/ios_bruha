@@ -34,7 +34,7 @@ class ProfileViewController: UIViewController, FBSDKLoginButtonDelegate {
         
         let userInfo = FetchData(context: managedObjectContext).fetchUserInfo()
         
-        name.text = (userInfo?.first?.userName)!
+        name.text = (userInfo?.first?.userFirstName)!
         email.text = (userInfo?.first?.userEmail)!
         
         

@@ -23,6 +23,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, FBSDKLoginBut
     
     var error: String = "true"
     
+    let faceLoginButton = FBSDKLoginButton()
+    
     func continueButtonTapped(){
         self.performSegueWithIdentifier("ProceedToDashBoard", sender: self)
     }
@@ -38,17 +40,21 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, FBSDKLoginBut
         self.emailaddress.delegate = self
         
         // FaceBook
-        let faceLoginButton = FBSDKLoginButton()
         self.view.addSubview(faceLoginButton)
         faceLoginButton.delegate = self
         faceLoginButton.translatesAutoresizingMaskIntoConstraints = false
         let topConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.TopMargin, relatedBy: NSLayoutRelation.Equal, toItem: self.password, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1.2, constant: 20)
         let centerConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.password, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
         NSLayoutConstraint.activateConstraints([topConstraint, centerConstraint])
-
+        
         // Do any additional setup after loading the view.
     }
-
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        if FBSDKAccessToken.currentAccessToken() != nil {
+            faceLoginButton.hidden = true
+        }
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -81,15 +87,66 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, FBSDKLoginBut
                     print("ALL \(result)")
                     
                     var email = "Not Set"
+                    var gender = "Not Set"
+                    var name = "Not Set"
+                    
                     if let e = result["email"] as! String? {
                         email = e
                     }
                     
-                    let user = User(username: result["name"]!! as! String, userEmail: email, userCity: "Not Set", userFName: "Not Set", userGender: "Not Set", userBirthdate: "Not Set")
-                    SaveData(context: self.managedObjectContext).saveUser(user)
-                    GlobalVariables.loggedIn = true
+                    if let g = result["gender"] as! String? {
+                        gender = g
+                    }
                     
-                    self.performSegueWithIdentifier("ProceedToDashBoard", sender: self)
+                    if let n = result["name"] as! String? {
+                        name = n
+                    }
+                    
+                    let facebookService = FacebookService(context: self.managedObjectContext, username: result["id"]!! as! String, userfname: name, emailaddress: email, usergender: gender)
+                    
+                    facebookService.registerNewUser{
+                        (let facebookResponse) in
+                        
+                        if facebookResponse! == " sign in success" {
+                            
+                            facebookService.getUserInformation{
+                                (let userInfo) in
+                            }
+                            dispatch_async(dispatch_get_main_queue()){
+                                
+                                let alertController = UIAlertController(title: "Facebook Login Successful", message:nil, preferredStyle: .Alert)
+                                let acceptAction = UIAlertAction(title: "OK", style: .Default) { (_) -> Void in
+                                    self.performSegueWithIdentifier("ProceedToDashBoard", sender: self) // Replace SomeSegue with your segue identifier (name)
+                                    
+                                    LoadScreenService(context: self.managedObjectContext).retrieveUser()
+                                }
+                                
+                                alertController.addAction(acceptAction)
+                                
+                                self.presentViewController(alertController, animated: true, completion: nil)
+                            }
+                            
+                            GlobalVariables.loggedIn = true
+                        }
+                        
+                        else { //facebook is not in the database
+                            dispatch_async(dispatch_get_main_queue()){
+                                
+                                let alertController = UIAlertController(title: "Facebook SignUp Successful", message:nil, preferredStyle: .Alert)
+                                
+                                let acceptAction = UIAlertAction(title: "OK", style: .Default) { (_) -> Void in
+                                    self.performSegueWithIdentifier("ProceedToDashBoard", sender: self)
+                                    let user = User(username: "\(result["id"]!! as! String)_FB", userEmail: email, userCity: "Not Set", userFName: name, userGender: gender, userBirthdate: "Not Set")
+                                    SaveData(context: self.managedObjectContext).saveUser(user)
+                                    GlobalVariables.loggedIn = true
+                                }
+                                
+                                alertController.addAction(acceptAction)
+                                
+                                self.presentViewController(alertController, animated: true, completion: nil)
+                            }
+                        }
+                    }
                 }
                 else {
                     print("error getting user information(facebook): \(error)")

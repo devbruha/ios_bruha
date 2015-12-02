@@ -111,6 +111,7 @@
 		45FA05C11B5D6FCC004AD819 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05C01B5D6FCC004AD819 /* LoginService.swift */; };
 		45FA05C41B5D7000004AD819 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05C31B5D7000004AD819 /* User.swift */; };
 		45FA05C61B5D7D9E004AD819 /* UserDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05C51B5D7D9E004AD819 /* UserDBModel.swift */; };
+		A50231701C0F57C600FA4E7F /* FacebookService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A502316F1C0F57C600FA4E7F /* FacebookService.swift */; };
 		A505C0EB1BCEDC6D0067CDD1 /* UserEventDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A505C0EA1BCEDC6D0067CDD1 /* UserEventDBModel.swift */; };
 		A505C0ED1BCEDD4B0067CDD1 /* UserVenueDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A505C0EC1BCEDD4B0067CDD1 /* UserVenueDBModel.swift */; };
 		A505C0EF1BCEDDA20067CDD1 /* UserOrganizationDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A505C0EE1BCEDDA20067CDD1 /* UserOrganizationDBModel.swift */; };
@@ -262,6 +263,7 @@
 		45FA05C51B5D7D9E004AD819 /* UserDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDBModel.swift; sourceTree = "<group>"; };
 		4C40848564A9A9ABD06E1BFE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6624944801305D440270EA9D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		A502316F1C0F57C600FA4E7F /* FacebookService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookService.swift; sourceTree = "<group>"; };
 		A505C0EA1BCEDC6D0067CDD1 /* UserEventDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserEventDBModel.swift; sourceTree = "<group>"; };
 		A505C0EC1BCEDD4B0067CDD1 /* UserVenueDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserVenueDBModel.swift; sourceTree = "<group>"; };
 		A505C0EE1BCEDDA20067CDD1 /* UserOrganizationDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserOrganizationDBModel.swift; sourceTree = "<group>"; };
@@ -535,6 +537,7 @@
 				45FA05A31B5D4190004AD819 /* OrganizationService.swift */,
 				45FA05C01B5D6FCC004AD819 /* LoginService.swift */,
 				45D8986E1B5E89E6003ED862 /* RegisterService.swift */,
+				A502316F1C0F57C600FA4E7F /* FacebookService.swift */,
 			);
 			name = "PHP Calls";
 			sourceTree = "<group>";
@@ -877,6 +880,7 @@
 				A580A4EA1BFE7A8C00CB6F2E /* CategoryHeaderCellTableViewCell.swift in Sources */,
 				181EB6121B714B7600B9295E /* MonthCollectionCell.swift in Sources */,
 				A5D90DFC1BBDD1A600537F72 /* AddictionArtistDBModel.swift in Sources */,
+				A50231701C0F57C600FA4E7F /* FacebookService.swift in Sources */,
 				A505C0F31BCEE8730067CDD1 /* UploadListViewController.swift in Sources */,
 				45C93C621B8621C100F60D9D /* VenueCategoryListService.swift in Sources */,
 				45C6D5BC1B851ABC00EE4A05 /* OrganizationCategoriesDBModel.swift in Sources */,
