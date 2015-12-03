@@ -23,9 +23,17 @@ class LoadScreenViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        progressView.tintColor = UIColor.purpleColor()
+
         progressView.progressViewStyle = UIProgressViewStyle.Bar
-        progressView.backgroundColor = UIColor.orangeColor()
+        progressView.trackTintColor = UIColor.orangeColor()
+        progressView.progressTintColor = UIColor.purpleColor()
+        
+//        progressView.trackImage = UIImage(named: "Arena")
+//        progressView.progressImage = UIImage(named: "Band")
+        
+        let heightContraints = NSLayoutConstraint(item: progressView, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: 30)
+        progressView.addConstraint(heightContraints)
+        
         
         userLog = (FetchData(context: managedObjectContext).fetchUserInfo()?.count)!
         

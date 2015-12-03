@@ -256,7 +256,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, FBSDKLoginBut
     
     func textFieldDidBeginEditing(textField: UITextField) {
         if textField.tag == 0 || textField.tag == 2 {
-            animateViewMoving(true, moveValue: 258)
+            animateViewMoving(true, moveValue: 253)
         }
         else if textField.tag == 1 {
             animateViewMoving(true, moveValue: 216)
@@ -264,7 +264,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, FBSDKLoginBut
     }
     func textFieldDidEndEditing(textField: UITextField) {
         if textField.tag == 0 || textField.tag == 2 {
-            animateViewMoving(false, moveValue: 258)
+            animateViewMoving(false, moveValue: 253)
         }
         else if textField.tag == 1 {
             animateViewMoving(false, moveValue: 216)

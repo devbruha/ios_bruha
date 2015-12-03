@@ -201,7 +201,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     func textFieldDidBeginEditing(textField: UITextField) {
         if textField.tag == 0 {
-            animateViewMoving(true, moveValue: 258)
+            animateViewMoving(true, moveValue: 253)
         }
         else if textField.tag == 1 {
             animateViewMoving(true, moveValue: 216)
@@ -209,7 +209,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     }
     func textFieldDidEndEditing(textField: UITextField) {
         if textField.tag == 0 {
-            animateViewMoving(false, moveValue: 258)
+            animateViewMoving(false, moveValue: 253)
         }
         else if textField.tag == 1 {
             animateViewMoving(false, moveValue: 216)

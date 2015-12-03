@@ -36,7 +36,7 @@ class Filtering {
             
             for var i = tempEvent.count; i > 0; i-- {
                 
-                if GlobalVariables.UserCustomFilters.priceFilter < Int(Float(tempEvent[i-1].eventPrice!)!) {
+                if Float(GlobalVariables.UserCustomFilters.priceFilter) < Float(tempEvent[i-1].eventPrice!) {
                     let index = tempEvent.indexOf({$0.eventID == tempEvent[i-1].eventID})
                     tempEvent.removeAtIndex(index!)
                 }
