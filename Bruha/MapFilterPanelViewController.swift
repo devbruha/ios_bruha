@@ -272,7 +272,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
         //clearBackupCategories()
-        resetSliderValue()
+        //resetSliderValue()
         categoryTableView.reloadData()
         adjustHeightOfTableView(categoryTableView, constraint: categoryTableHeight)
         updateNotificationSent()
@@ -282,16 +282,16 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         
         GlobalVariables.selectedDisplay = "Venue"
         
-        if(GlobalVariables.categories.venueCategories.count != 0){
+        if(GlobalVariables.UserCustomFilters.categoryFilter.venueCategories.count != 0){
             venueObject = backupVenueCategories
         }
         else{
-            venueObject = [""]
+            venueObject = ["Venue Categories"]
         }
         
-        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChange", object: self)
+        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
         //clearBackupCategories()
-        resetSliderValue()
+        //resetSliderValue()
         updateNotificationSent()
         categoryTableView.reloadData()
         
@@ -301,23 +301,23 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
     func discoverableTapped(){
         
         GlobalVariables.selectedDisplay = ""
-        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChange", object: self)
+        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
         clearBackupCategories()
-        resetSliderValue()
+        //resetSliderValue()
     }
     
     func organizationTapped(){
         
         GlobalVariables.selectedDisplay = "Organization"
         
-        if(GlobalVariables.categories.organizationCategories.count != 0){
+        if(GlobalVariables.UserCustomFilters.categoryFilter.organizationCategories.count != 0){
             organizationObject = backupOrganizationCategories
         }
         else{
-            organizationObject = [""]
+            organizationObject = ["Organization Categories"]
         }
         
-        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChange", object: self)
+        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
         //clearBackupCategories()
         resetSliderValue()
         updateNotificationSent()
@@ -332,11 +332,9 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         self.visibleZoneHeight = self.panelControllerContainer.visibleZoneHeight
         
     }
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-//        if categoryTableView.indexPathsForSelectedRows != nil{
-//            GlobalVariables.UIIdxPath = categoryTableView.indexPathsForSelectedRows!
-//        }
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        uiPriceFilter()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -402,8 +400,9 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
             GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].append(subCategoryID)
             GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![1].append(subCategoryName)
             print("after added filter \(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories)")
-            Filtering().filterEvents()
         }
+        
+        Filtering().filterEvents()
         
         //print(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.keys.elements)
     }
@@ -431,8 +430,6 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
             
             print("after removed filter \(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories)")
             
-            Filtering().filterEvents()
-            
         }
         else{
             
@@ -445,6 +442,8 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
             print("after added filter \(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories)")
             
         }
+        
+         Filtering().filterEvents()
         
         //print(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.keys.elements)
     }
@@ -688,6 +687,9 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
             }
         }
         
+        Filtering().filterEvents()
+        Filtering().filterVenues()
+        Filtering().filterOrganizations()
         
         categoryTableView.reloadData()
         
@@ -726,5 +728,18 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         GlobalVariables.UserCustomFilters.priceFilter = -1
         slider.value = -1
         sliderValueDidChange(slider)
+    }
+    
+    func uiPriceFilter() {
+        
+        // Price Filter
+        slider.value = Float(GlobalVariables.UserCustomFilters.priceFilter)
+        if GlobalVariables.UserCustomFilters.priceFilter == 0 {
+            priceLabel.text = "Free"
+        } else if GlobalVariables.UserCustomFilters.priceFilter == -1 {
+            priceLabel.text = "No Price Filter"
+        } else {
+            priceLabel.text = "\(GlobalVariables.UserCustomFilters.priceFilter)$"
+        }
     }
 }

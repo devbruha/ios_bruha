@@ -237,7 +237,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        //uiCustomSelection()
+        uiPriceFilter()
         
     }
     override func didReceiveMemoryWarning() {
@@ -275,7 +275,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
         //clearBackupCategories()
-        resetSliderValue()
+        //resetSliderValue()
         eventCategoriesTable.reloadData()
         adjustHeightOfTableView(eventCategoriesTable, constraint: eventCategoryTableHeight)
         updateNotificationSent()
@@ -285,16 +285,16 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
         GlobalVariables.selectedDisplay = "Venue"
         
-        if(GlobalVariables.categories.venueCategories.count != 0){
+        if(GlobalVariables.UserCustomFilters.categoryFilter.venueCategories.count != 0){
             venueObject = backupVenueCategories
         }
         else{
-            venueObject = [""]
+            venueObject = ["Venue Categories"]
         }
         
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
         //clearBackupCategories()
-        resetSliderValue()
+        //resetSliderValue()
         eventCategoriesTable.reloadData()
         adjustHeightOfTableView(eventCategoriesTable, constraint: eventCategoryTableHeight)
         updateNotificationSent()
@@ -305,7 +305,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         GlobalVariables.selectedDisplay = ""
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
         //clearBackupCategories()
-        resetSliderValue()
+        //resetSliderValue()
         
     }
     
@@ -313,16 +313,16 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
         GlobalVariables.selectedDisplay = "Organization"
         
-        if(GlobalVariables.categories.organizationCategories.count != 0){
+        if(GlobalVariables.UserCustomFilters.categoryFilter.organizationCategories.count != 0){
             organizationObject = backupOrganizationCategories
         }
         else{
-            organizationObject = [""]
+            organizationObject = ["Organization Categories"]
         }
         
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
         //clearBackupCategories()
-        resetSliderValue()
+        //resetSliderValue()
         eventCategoriesTable.reloadData()
         adjustHeightOfTableView(eventCategoriesTable, constraint: eventCategoryTableHeight)
         updateNotificationSent()
@@ -385,8 +385,9 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
             GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].append(subCategoryID)
             GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![1].append(subCategoryName)
             print("after added filter \(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories)")
-            Filtering().filterEvents()
         }
+        
+        Filtering().filterEvents()
     }
     
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
@@ -411,8 +412,6 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
             GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![1].removeAtIndex(index!)
             
             print("after removed filter \(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories)")
-            
-            Filtering().filterEvents()
         }
         else{
             
@@ -423,6 +422,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
             print("after added filter \(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories)")
         }
         
+        Filtering().filterEvents()
     }
 
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -722,7 +722,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     //MARK: Load Custom UI Selection
-    func uiCustomSelection() {
+    func uiPriceFilter() {
         
         // Price Filter
         slider.value = Float(GlobalVariables.UserCustomFilters.priceFilter)

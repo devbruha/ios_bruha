@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MoreInfoPanelViewController: UIViewController {
+class MoreInfoPanelViewController: UIViewController, UIWebViewDelegate {
     
     @IBOutlet weak var Name: UILabel!
     @IBOutlet weak var Address: UILabel!
@@ -17,6 +17,7 @@ class MoreInfoPanelViewController: UIViewController {
     @IBOutlet weak var smallImage: UIImageView!
     @IBOutlet var getAddictedButton: UIButton!
     @IBOutlet var getAddictedLabel: UILabel!
+    @IBOutlet var webDescriptionContent: UIWebView!
     
     
     var panelControllerContainer: ARSPContainerController!
@@ -39,6 +40,9 @@ class MoreInfoPanelViewController: UIViewController {
         
     }
     func labelDisplay(){
+        webDescriptionContent.opaque = false
+        webDescriptionContent.backgroundColor = UIColor.grayColor()
+        
         if GlobalVariables.selectedDisplay == "Event"{
             let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
             let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
@@ -49,6 +53,7 @@ class MoreInfoPanelViewController: UIViewController {
                     Price.text = event.eventPrice
                     Date.text = event.eventStartDate
                     smallImage.image = UIImage(named: event.primaryCategory)
+                    webDescriptionContent.loadHTMLString("<font color=\"black\">\(event.eventDescription)</font>", baseURL: nil)
                 }
                 if event.eventID == GlobalVariables.eventSelected && addictionInfo!.contains({$0.eventID == GlobalVariables.eventSelected}) {
 
@@ -68,6 +73,7 @@ class MoreInfoPanelViewController: UIViewController {
                     Price.text = "-"
                     Date.text = "-"
                     smallImage.image = UIImage(named: venue.primaryCategory)
+                    webDescriptionContent.loadHTMLString("<font color=\"black\">\(venue.venueDescription)</font>", baseURL: nil)
                 }
                 if venue.venueID == GlobalVariables.eventSelected && addictionInfo!.contains({$0.venueID == GlobalVariables.eventSelected}) {
                     
@@ -87,6 +93,7 @@ class MoreInfoPanelViewController: UIViewController {
                     Price.text = "-"
                     Date.text = "-"
                     smallImage.image = UIImage(named: organization.primaryCategory)
+                    webDescriptionContent.loadHTMLString("<font color=\"black\">\(organization.organizationDescription)</font>", baseURL: nil)
                 }
                 if organization.organizationID == GlobalVariables.eventSelected && addictionInfo!.contains({$0.organizationID == GlobalVariables.eventSelected}) {
                     
@@ -103,7 +110,7 @@ class MoreInfoPanelViewController: UIViewController {
         super.viewDidLoad()
         setupPanel()
         labelDisplay()
-        
+        webDescriptionContent.delegate = self
         // Do any additional setup after loading the view.
     }
     override func viewWillAppear(animated: Bool) {
@@ -266,9 +273,30 @@ class MoreInfoPanelViewController: UIViewController {
                 }
             }
         }
+        else { //user not logged in
+            
+            let alert = UIAlertView(title: "Please log in for this!!!", message: nil, delegate: nil, cancelButtonTitle: nil)
+            alert.show()
+            let delay = 1.0 * Double(NSEC_PER_SEC)
+            var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+            dispatch_after(time, dispatch_get_main_queue(), {
+                alert.dismissWithClickedButtonIndex(-1, animated: true)
+            })
+        }
     }
 
     
+    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        switch navigationType {
+        case .LinkClicked:
+            // Open links in Safari
+            UIApplication.sharedApplication().openURL(request.URL!)
+            return false
+        default:
+            // Handle other navigation types...
+            return true
+        }
+    }
 
     /*
     // MARK: - Navigation

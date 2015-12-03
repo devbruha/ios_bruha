@@ -7,11 +7,15 @@
 //
 
 import UIKit
+import FBSDKCoreKit
+import FBSDKLoginKit
 
-class SplashViewController: UIViewController,UIScrollViewDelegate {
+class SplashViewController: UIViewController,UIScrollViewDelegate, FBSDKLoginButtonDelegate{
     
     // Retreive the managedObjectContext from AppDelegate
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
+    
+    let faceLoginButton = FBSDKLoginButton()
 
     @IBOutlet weak var scrollView: UIScrollView!
     
@@ -52,9 +56,23 @@ class SplashViewController: UIViewController,UIScrollViewDelegate {
         self.pageControl.currentPage = 0
         
         GlobalVariables.loggedIn = false
+        
+        
+        // FaceBook
+        self.view.addSubview(faceLoginButton)
+        faceLoginButton.delegate = self
+        faceLoginButton.translatesAutoresizingMaskIntoConstraints = false
+        let topConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.TopMargin, relatedBy: NSLayoutRelation.Equal, toItem: self.scrollView, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1, constant: 100)
+        let centerConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.scrollView, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
+        NSLayoutConstraint.activateConstraints([topConstraint, centerConstraint])
         // Do any additional setup after loading the view.
     }
-    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        if FBSDKAccessToken.currentAccessToken() != nil {
+            faceLoginButton.hidden = true
+        }
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -66,6 +84,109 @@ class SplashViewController: UIViewController,UIScrollViewDelegate {
         // Change the indicator
         self.pageControl.currentPage = Int(currentPage)
     }
+    
+    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
+        if error != nil {
+            let alertController = UIAlertController(title: "FaceBook Login Failed", message: error.description, preferredStyle: .Alert)
+            let cancelAction = UIAlertAction(title: "Ok", style: .Default, handler: nil)
+            
+            alertController.addAction(cancelAction)
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
+            return
+            
+        } else if result.isCancelled {
+            print("Cancelled")
+            
+        } else {
+            let accessToken = FBSDKAccessToken.currentAccessToken()
+            let req = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"email,name,gender"], tokenString: accessToken.tokenString, version: nil, HTTPMethod: "GET")
+            req.startWithCompletionHandler({ (connection, result, error : NSError!) -> Void in
+                if(error == nil) {
+                    /*
+                    print("email \(result["email"]!!)")
+                    print("name \(result["name"]!!)")
+                    print("gender \(result["gender"]!!)")
+                    print("id \(result["id"]!!)")*/
+                    
+                    print("ALL \(result)")
+                    
+                    var email = "Not Set"
+                    var gender = "Not Set"
+                    var name = "Not Set"
+                    
+                    if let e = result["email"] as! String? {
+                        email = e
+                    }
+                    
+                    if let g = result["gender"] as! String? {
+                        gender = g
+                    }
+                    
+                    if let n = result["name"] as! String? {
+                        name = n
+                    }
+                    
+                    let facebookService = FacebookService(context: self.managedObjectContext, username: result["id"]!! as! String, userfname: name, emailaddress: email, usergender: gender)
+                    
+                    facebookService.registerNewUser{
+                        (let facebookResponse) in
+                        
+                        if facebookResponse! == " sign in success" {
+                            
+                            facebookService.getUserInformation{
+                                (let userInfo) in
+                            }
+                            dispatch_async(dispatch_get_main_queue()){
+                                
+                                let alertController = UIAlertController(title: "Facebook Login Successful", message:nil, preferredStyle: .Alert)
+                                let acceptAction = UIAlertAction(title: "OK", style: .Default) { (_) -> Void in
+                                    self.performSegueWithIdentifier("toDash", sender: self) // Replace SomeSegue with your segue identifier (name)
+                                    
+                                    LoadScreenService(context: self.managedObjectContext).retrieveUser()
+                                }
+                                
+                                alertController.addAction(acceptAction)
+                                
+                                self.presentViewController(alertController, animated: true, completion: nil)
+                            }
+                            
+                            GlobalVariables.loggedIn = true
+                        }
+                            
+                        else { //facebook is not in the database
+                            dispatch_async(dispatch_get_main_queue()){
+                                
+                                let alertController = UIAlertController(title: "Facebook SignUp Successful", message:nil, preferredStyle: .Alert)
+                                
+                                let acceptAction = UIAlertAction(title: "OK", style: .Default) { (_) -> Void in
+                                    self.performSegueWithIdentifier("toDash", sender: self)
+                                    let user = User(username: "\(result["id"]!! as! String)_FB", userEmail: email, userCity: "Not Set", userFName: name, userGender: gender, userBirthdate: "Not Set")
+                                    SaveData(context: self.managedObjectContext).saveUser(user)
+                                    GlobalVariables.loggedIn = true
+                                }
+                                
+                                alertController.addAction(acceptAction)
+                                
+                                self.presentViewController(alertController, animated: true, completion: nil)
+                            }
+                        }
+                    }
+                }
+                else {
+                    print("error getting user information(facebook): \(error)")
+                }
+            })
+        }
+
+    }
+    
+    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
+        print("logged out")
+    }
+    
+    
+    
 
     /*
     // MARK: - Navigation

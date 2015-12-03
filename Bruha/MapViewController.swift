@@ -167,35 +167,43 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
         
     }
     
-    func getDataFromUrl(urL:NSURL, completion: ((data: NSData?) -> Void)) {
-        NSURLSession.sharedSession().dataTaskWithURL(urL) { (data, response, error) in
-            completion(data: data)
-            }.resume()
-    }
-    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) ->   UITableViewCell {
         
         let cell: MapDropTableViewCell = self.dropDownTable.dequeueReusableCellWithIdentifier("DropCell") as! MapDropTableViewCell
+        
+        let posterInfo = FetchData(context: managedObjectContext).fetchPosterImages()
         
         switch GlobalVariables.selectedDisplay {
         case "Event":
             
             let e = dropEvents[indexPath.row]
             
+            // Poster Image
             cell.dropImage.contentMode = UIViewContentMode.ScaleToFill
-            if let checkedUrl = NSURL(string:e.posterUrl) {
-                getDataFromUrl(checkedUrl) { data in
-                    dispatch_async(dispatch_get_main_queue()) {
-                        cell.dropImage.image = UIImage(data: data!)
+            if let images = posterInfo {
+                for img in images {
+                    if img.ID == e.eventID {
+                        cell.dropImage.image = UIImage(data: img.Image!)
                     }
                 }
             }
-            
+            //Title
             cell.dropTitle.text = "\(e.eventName)"
-            cell.dropPrice.text = "\(e.eventPrice!)"
-            cell.dropStartDate.text = "\(e.eventStartDate) At \(e.eventStartTime)"
             
-            cell.dropContent.text = "\(e.eventVenueName)\n\(e.eventVenueAddress.componentsSeparatedByString(", ")[0])\n\(e.eventVenueAddress.componentsSeparatedByString(", ")[1])"
+            //Price
+            if let price = Float(e.eventPrice!) {
+                if price == 0.0 {cell.dropPrice.text = "Free!"}
+                else {cell.dropPrice.text = "$\(price)"}
+            } else {cell.dropPrice.text = "Free"}
+            
+            //Date
+            cell.dropStartDate.text = convertTimeFormat("\(e.eventStartDate) \(e.eventStartTime)")
+            
+            //Venue Name and Address
+            if e.eventVenueName == "" {
+                cell.dropContent.text = "nil\n\(e.eventVenueAddress.componentsSeparatedByString(", ")[0])\n\(e.eventVenueCity)"
+            } else {cell.dropContent.text = "\(e.eventVenueName)\n\(e.eventVenueAddress.componentsSeparatedByString(", ")[0])\n\(e.eventVenueCity)"}
+            
             
             cell.dropHiddenID.text = "\(e.eventID)"
             
@@ -234,17 +242,17 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             let v = dropVenues[indexPath.row]
             
             cell.dropImage.contentMode = UIViewContentMode.ScaleToFill
-            if let checkedUrl = NSURL(string:v.posterUrl) {
-                getDataFromUrl(checkedUrl) { data in
-                    dispatch_async(dispatch_get_main_queue()) {
-                        cell.dropImage.image = UIImage(data: data!)
+            if let images = posterInfo {
+                for img in images {
+                    if img.ID == v.venueID {
+                        cell.dropImage.image = UIImage(data: img.Image!)
                     }
                 }
             }
             //cell.dropWebContent.loadHTMLString("<font color=\"white\">\(v.venueDescription)</font>", baseURL: nil)
             
             cell.dropTitle.text = "\(v.venueName)"
-            cell.dropContent.text = "\(v.venueAddress.componentsSeparatedByString(", ")[0])\n\(v.venueAddress.componentsSeparatedByString(", ")[1])\n\(v.venueDescription)"
+            cell.dropContent.text = "\(v.venueAddress.componentsSeparatedByString(", ")[0])"
             cell.dropStartDate.text = ""
             cell.dropPrice.text = ""
             
@@ -284,16 +292,16 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             let o = dropOrganizations[indexPath.row]
             
             cell.dropImage.contentMode = UIViewContentMode.ScaleToFill
-            if let checkedUrl = NSURL(string:o.posterUrl) {
-                getDataFromUrl(checkedUrl) { data in
-                    dispatch_async(dispatch_get_main_queue()) {
-                        cell.dropImage.image = UIImage(data: data!)
+            if let images = posterInfo {
+                for img in images {
+                    if img.ID == o.organizationID {
+                        cell.dropImage.image = UIImage(data: img.Image!)
                     }
                 }
             }
             
             cell.dropTitle.text = "\(o.organizationName)"
-            cell.dropContent.text = "\(o.organizationAddress.componentsSeparatedByString(", ")[0])\n\(o.organizationAddress.componentsSeparatedByString(", ")[1])\n\(o.organizationDescription)"
+            cell.dropContent.text = "\(o.organizationAddress.componentsSeparatedByString(", ")[0])"
             cell.dropStartDate.text = ""
             cell.dropPrice.text = ""
             
@@ -763,24 +771,51 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
                 //event ticket
                 print("event ticket")
             }
-            else if GlobalVariables.selectedDisplay == "Venue" || GlobalVariables.selectedDisplay == "Organization" {
                 //venue and organization map
-                print("venue and org map")
+            else if GlobalVariables.selectedDisplay == "Venue" {
+                let cellIndexPath = self.dropDownTable.indexPathForCell(cell)
+                let selectedCell = self.dropDownTable.cellForRowAtIndexPath(cellIndexPath!) as! MapDropTableViewCell
+                GlobalVariables.eventSelected = selectedCell.dropHiddenID.text!
+                self.performSegueWithIdentifier("ShowOnMap", sender: self)
+            }
+            else if GlobalVariables.selectedDisplay == "Organization" {
+                let cellIndexPath = self.dropDownTable.indexPathForCell(cell)
+                let selectedCell = self.dropDownTable.cellForRowAtIndexPath(cellIndexPath!) as! MapDropTableViewCell
+                GlobalVariables.eventSelected = selectedCell.dropHiddenID.text!
+                self.performSegueWithIdentifier("ShowOnMap", sender: self)
             }
             break
         case 1:
             if GlobalVariables.selectedDisplay == "Event" {
                 //event map
-                print("event map")
+                let cellIndexPath = self.dropDownTable.indexPathForCell(cell)
+                let selectedCell = self.dropDownTable.cellForRowAtIndexPath(cellIndexPath!) as! MapDropTableViewCell
+                GlobalVariables.eventSelected = selectedCell.dropHiddenID.text!
+                self.performSegueWithIdentifier("ShowOnMap", sender: self)
             }
-            else if GlobalVariables.selectedDisplay == "Venue" || GlobalVariables.selectedDisplay == "Organization" {
-                //venue and organizaiton more info
-                print("venue and org more info")
+            //Venue MoreInfo
+            if (GlobalVariables.selectedDisplay == "Venue"){
+                let cellIndexPath = self.dropDownTable.indexPathForCell(cell)
+                let selectedCell = self.dropDownTable.cellForRowAtIndexPath(cellIndexPath!) as! MapDropTableViewCell
+                GlobalVariables.eventSelected = selectedCell.dropHiddenID.text!
+                self.performSegueWithIdentifier("GoToMoreInfo", sender: self)
+            }
+            //Organization MoreInfo
+            if (GlobalVariables.selectedDisplay == "Organization"){
+                let cellIndexPath = self.dropDownTable.indexPathForCell(cell)
+                let selectedCell = self.dropDownTable.cellForRowAtIndexPath(cellIndexPath!) as! MapDropTableViewCell
+                GlobalVariables.eventSelected = selectedCell.dropHiddenID.text!
+                self.performSegueWithIdentifier("GoToMoreInfo", sender: self)
+                
             }
             break
         case 2:
             //Event More info
             print("event more info")
+            let cellIndexPath = self.dropDownTable.indexPathForCell(cell)
+            let selectedCell = self.dropDownTable.cellForRowAtIndexPath(cellIndexPath!) as! MapDropTableViewCell
+            GlobalVariables.eventSelected = selectedCell.dropHiddenID.text!
+            self.performSegueWithIdentifier("GoToMoreInfo", sender: self)
             break
         default:
             break
@@ -808,6 +843,22 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
         
         BruhaButton.hidden = false
         BackButton.hidden = false
+    }
+    
+    func convertTimeFormat(date: String) -> String {
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatter.timeZone = NSTimeZone.localTimeZone()
+        
+        if let ndate = dateFormatter.dateFromString(date) {
+            
+            dateFormatter.dateFormat = "EEE, MMM dd, yyyy 'at' h:mma"
+            dateFormatter.timeZone = NSTimeZone.localTimeZone()
+            let timeStamp = dateFormatter.stringFromDate(ndate)
+            return timeStamp
+        }
+        else {return "nil or error times"}
     }
     
 }

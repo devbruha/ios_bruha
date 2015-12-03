@@ -24,6 +24,8 @@ class FetchData {
         
         let returnedCategories = Categories(eventCategory: fetchEventCategories(), venueCategory: fetchVenueCategories(), artistCategory: fetchArtistCategories(), organizationCategory: fetchOrganizationCategories())
         
+        GlobalVariables.categories = returnedCategories
+        
         return returnedCategories
     }
 
@@ -405,6 +407,31 @@ class FetchData {
             }
             
             return returnedAddiction
+            
+        }
+        else{
+            return nil
+        }
+        
+    }
+    
+    func fetchPosterImages() -> [Image]?{
+        var returnedImage: [Image] = [Image]()
+        
+        // Create a new fetch request using the LogItem entity
+        let fetchRequest = NSFetchRequest(entityName: "ImageList")
+        
+        // Execute the fetch request, and cast the results to an array of LogItem objects
+        if let fetchResults = (try? managedObjectContext!.executeFetchRequest(fetchRequest)) as? [ImageDBModel] {
+            
+            for(var i = 0; i < fetchResults.count; ++i){
+                
+                let addiction = Image(fetchResults: fetchResults[i])
+                
+                returnedImage.append(addiction)
+            }
+            
+            return returnedImage
             
         }
         else{

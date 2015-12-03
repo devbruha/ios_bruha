@@ -7,8 +7,10 @@
 //
 
 import UIKit
+import FBSDKCoreKit
+import FBSDKLoginKit
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     // Retreive the managedObjectContext from AppDelegate
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
@@ -32,10 +34,17 @@ class ProfileViewController: UIViewController {
         
         let userInfo = FetchData(context: managedObjectContext).fetchUserInfo()
         
-        name.text = (userInfo?.first?.userName)!
+        name.text = (userInfo?.first?.userFirstName)!
         email.text = (userInfo?.first?.userEmail)!
         
-        myImage.image = UIImage(named: "Slide 3.png")
+        
+        if FBSDKAccessToken.currentAccessToken() != nil {
+            
+            getFacebookProfilePic()
+            
+        } else {
+            myImage.image = UIImage(named: "Slide 3.png")
+        }
     }
     
     override func viewDidLoad() {
@@ -65,6 +74,12 @@ class ProfileViewController: UIViewController {
             
             DeleteData(context: self.managedObjectContext).deleteUserInfo()
             DeleteData(context: self.managedObjectContext).deleteUser()
+            
+            if FBSDKAccessToken.currentAccessToken() != nil {
+                let loginManager = FBSDKLoginManager()
+                loginManager.logOut()
+            }
+            
             self.performSegueWithIdentifier("logOutToSplashView", sender: self)
         }
         alertController.addAction(yesAction)
@@ -73,6 +88,29 @@ class ProfileViewController: UIViewController {
         self.presentViewController(alertController, animated: true, completion: nil)
     }
     
+    func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
+        print("logged in using facebook")
+    }
+    func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
+        print("facebook logged out")
+    }
+    
+    func getFacebookProfilePic() {
+        let graphRequest = FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id"])
+        graphRequest.startWithCompletionHandler { (connection, result, error) -> Void in
+            if error == nil {
+                
+                let url = "http://graph.facebook.com/\(result["id"]!! as! NSString)/picture?type=large"
+                
+                if let data = NSData(contentsOfURL: NSURL(string: url)!) {
+                    
+                    self.myImage.contentMode = UIViewContentMode.ScaleAspectFill
+                    self.myImage.image = UIImage(data: data)
+                }
+                
+            }
+        }
+    }
     
 
     /*

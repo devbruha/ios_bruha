@@ -111,6 +111,7 @@
 		45FA05C11B5D6FCC004AD819 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05C01B5D6FCC004AD819 /* LoginService.swift */; };
 		45FA05C41B5D7000004AD819 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05C31B5D7000004AD819 /* User.swift */; };
 		45FA05C61B5D7D9E004AD819 /* UserDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05C51B5D7D9E004AD819 /* UserDBModel.swift */; };
+		A50231701C0F57C600FA4E7F /* FacebookService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A502316F1C0F57C600FA4E7F /* FacebookService.swift */; };
 		A505C0EB1BCEDC6D0067CDD1 /* UserEventDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A505C0EA1BCEDC6D0067CDD1 /* UserEventDBModel.swift */; };
 		A505C0ED1BCEDD4B0067CDD1 /* UserVenueDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A505C0EC1BCEDD4B0067CDD1 /* UserVenueDBModel.swift */; };
 		A505C0EF1BCEDDA20067CDD1 /* UserOrganizationDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A505C0EE1BCEDDA20067CDD1 /* UserOrganizationDBModel.swift */; };
@@ -129,6 +130,8 @@
 		A5D34D621C06122C005F6236 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5D34D5F1C06122C005F6236 /* FBSDKCoreKit.framework */; };
 		A5D34D631C06122C005F6236 /* FBSDKLoginKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5D34D601C06122C005F6236 /* FBSDKLoginKit.framework */; };
 		A5D34D641C06122C005F6236 /* FBSDKShareKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5D34D611C06122C005F6236 /* FBSDKShareKit.framework */; };
+		A5D34D671C07B92A005F6236 /* ImageList+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D34D651C07B92A005F6236 /* ImageList+CoreDataProperties.swift */; };
+		A5D34D681C07B92A005F6236 /* ImageDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D34D661C07B92A005F6236 /* ImageDBModel.swift */; };
 		A5D90DFC1BBDD1A600537F72 /* AddictionArtistDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D90DFB1BBDD1A600537F72 /* AddictionArtistDBModel.swift */; };
 		A5D90DFE1BBDD22000537F72 /* AddictionOrganizationDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D90DFD1BBDD22000537F72 /* AddictionOrganizationDBModel.swift */; };
 		A5D90E001BBDD28700537F72 /* AddictionVenueDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D90DFF1BBDD28700537F72 /* AddictionVenueDBModel.swift */; };
@@ -260,6 +263,7 @@
 		45FA05C51B5D7D9E004AD819 /* UserDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDBModel.swift; sourceTree = "<group>"; };
 		4C40848564A9A9ABD06E1BFE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6624944801305D440270EA9D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		A502316F1C0F57C600FA4E7F /* FacebookService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookService.swift; sourceTree = "<group>"; };
 		A505C0EA1BCEDC6D0067CDD1 /* UserEventDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserEventDBModel.swift; sourceTree = "<group>"; };
 		A505C0EC1BCEDD4B0067CDD1 /* UserVenueDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserVenueDBModel.swift; sourceTree = "<group>"; };
 		A505C0EE1BCEDDA20067CDD1 /* UserOrganizationDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserOrganizationDBModel.swift; sourceTree = "<group>"; };
@@ -278,6 +282,8 @@
 		A5D34D5F1C06122C005F6236 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
 		A5D34D601C06122C005F6236 /* FBSDKLoginKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKLoginKit.framework; sourceTree = "<group>"; };
 		A5D34D611C06122C005F6236 /* FBSDKShareKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKShareKit.framework; sourceTree = "<group>"; };
+		A5D34D651C07B92A005F6236 /* ImageList+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "ImageList+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		A5D34D661C07B92A005F6236 /* ImageDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ImageDBModel.swift; sourceTree = "<group>"; };
 		A5D90DFB1BBDD1A600537F72 /* AddictionArtistDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddictionArtistDBModel.swift; sourceTree = "<group>"; };
 		A5D90DFD1BBDD22000537F72 /* AddictionOrganizationDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddictionOrganizationDBModel.swift; sourceTree = "<group>"; };
 		A5D90DFF1BBDD28700537F72 /* AddictionVenueDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddictionVenueDBModel.swift; sourceTree = "<group>"; };
@@ -531,6 +537,7 @@
 				45FA05A31B5D4190004AD819 /* OrganizationService.swift */,
 				45FA05C01B5D6FCC004AD819 /* LoginService.swift */,
 				45D8986E1B5E89E6003ED862 /* RegisterService.swift */,
+				A502316F1C0F57C600FA4E7F /* FacebookService.swift */,
 			);
 			name = "PHP Calls";
 			sourceTree = "<group>";
@@ -590,6 +597,8 @@
 				A505C0EC1BCEDD4B0067CDD1 /* UserVenueDBModel.swift */,
 				A505C0EE1BCEDDA20067CDD1 /* UserOrganizationDBModel.swift */,
 				A505C0F01BCEDEDA0067CDD1 /* UserEventSubCategoryDBModel.swift */,
+				A5D34D651C07B92A005F6236 /* ImageList+CoreDataProperties.swift */,
+				A5D34D661C07B92A005F6236 /* ImageDBModel.swift */,
 			);
 			name = LocalDB;
 			sourceTree = "<group>";
@@ -796,6 +805,7 @@
 				181EB6161B714B7600B9295E /* WeekHeaderView.swift in Sources */,
 				45FA05A81B5D4190004AD819 /* ArtistService.swift in Sources */,
 				A5D90E061BBDD79300537F72 /* AddictionVenue.swift in Sources */,
+				A5D34D671C07B92A005F6236 /* ImageList+CoreDataProperties.swift in Sources */,
 				45FA05A61B5D4190004AD819 /* VenueService.swift in Sources */,
 				18A2A11B1B728241005E1DCB /* CalendarViewController.swift in Sources */,
 				45FA05C41B5D7000004AD819 /* User.swift in Sources */,
@@ -864,11 +874,13 @@
 				A5D90DFE1BBDD22000537F72 /* AddictionOrganizationDBModel.swift in Sources */,
 				45C6D5B71B851A5A00EE4A05 /* VenueCategoriesDBModel.swift in Sources */,
 				A58A3A261BB980B200601749 /* AddictionEvent.swift in Sources */,
+				A5D34D681C07B92A005F6236 /* ImageDBModel.swift in Sources */,
 				A5D90E021BBDD60300537F72 /* AddictionArtist.swift in Sources */,
 				45C93C661B86225900F60D9D /* OrganizationCategoryListService.swift in Sources */,
 				A580A4EA1BFE7A8C00CB6F2E /* CategoryHeaderCellTableViewCell.swift in Sources */,
 				181EB6121B714B7600B9295E /* MonthCollectionCell.swift in Sources */,
 				A5D90DFC1BBDD1A600537F72 /* AddictionArtistDBModel.swift in Sources */,
+				A50231701C0F57C600FA4E7F /* FacebookService.swift in Sources */,
 				A505C0F31BCEE8730067CDD1 /* UploadListViewController.swift in Sources */,
 				45C93C621B8621C100F60D9D /* VenueCategoryListService.swift in Sources */,
 				45C6D5BC1B851ABC00EE4A05 /* OrganizationCategoriesDBModel.swift in Sources */,

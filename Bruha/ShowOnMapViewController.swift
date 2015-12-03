@@ -23,6 +23,10 @@ class ShowOnMapViewController: UIViewController, GMSMapViewDelegate{
     var latitude: Double = 0.0
     var longitude: Double = 0.0
     
+    @IBAction func backToExploreButton(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         mapView.delegate = self
         let mapFrame = mapView.frame.size

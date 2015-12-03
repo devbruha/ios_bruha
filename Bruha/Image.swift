@@ -9,11 +9,26 @@
 import Foundation
 
 struct Image {
-    var ID: String
-    var Image: UIImage
+    var ID: String?
+    var Image: NSData?
     
-    init(id: String, image: UIImage) {
+    init(id: String, image: NSData) {
         ID = id
         Image = image
+    }
+    
+    init(fetchResults: ImageDBModel){
+        if let Id = fetchResults.id {
+            ID = Id
+        } else {
+            ID = ""
+        }
+        
+        if let image = fetchResults.imageData {
+            Image = image
+        } else {
+            Image = nil
+        }
+        
     }
 }

@@ -25,7 +25,7 @@ class SaveData {
     
     func saveCategories(categoryDictionary: Categories){
         
-        GlobalVariables.categories = categoryDictionary
+        //GlobalVariables.categories = categoryDictionary
         
         saveEventCategories(categoryDictionary.eventCategories)
         saveVenueCategories(categoryDictionary.venueCategories)
@@ -465,6 +465,25 @@ class SaveData {
         
         
         print("Addiction Organization Save")
+        
+    }
+    
+    func savePosterImages(image: Image) {
+        
+        let en = NSEntityDescription.entityForName("ImageList", inManagedObjectContext: managedObjectContext!)
+        
+        let newItem = ImageDBModel(entity:en!, insertIntoManagedObjectContext: managedObjectContext!)
+        
+        newItem.id = image.ID
+        newItem.imageData = image.Image
+        
+        do {
+            try managedObjectContext!.save()
+        } catch _ {
+        }
+        
+        
+        print("Poster Image Save")
         
     }
     
