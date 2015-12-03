@@ -67,12 +67,12 @@ class SplashViewController: UIViewController,UIScrollViewDelegate, FBSDKLoginBut
         NSLayoutConstraint.activateConstraints([topConstraint, centerConstraint])
         // Do any additional setup after loading the view.
     }
-    override func viewWillAppear(animated: Bool) {
+    /*override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         if FBSDKAccessToken.currentAccessToken() != nil {
             faceLoginButton.hidden = true
         }
-    }
+    }*/
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

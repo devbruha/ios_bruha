@@ -7,11 +7,10 @@
 //
 
 import UIKit
-//import FBSDKCoreKit
-//import FBSDKLoginKit
+import FBSDKCoreKit
+import FBSDKLoginKit
 
-class LoginViewController: UIViewController, UITextFieldDelegate {
-//, FBSDKLoginButtonDelegate
+class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButtonDelegate {
     
     @IBOutlet weak var username: UITextField!
     @IBOutlet weak var password: UITextField!
@@ -40,7 +39,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         continueWithoutLogIn.userInteractionEnabled = true
         
         
-       /* // FaceBook
+        // FaceBook
         let faceLoginButton = FBSDKLoginButton()
         self.view.addSubview(faceLoginButton)
         faceLoginButton.delegate = self
@@ -48,7 +47,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         let topConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.TopMargin, relatedBy: NSLayoutRelation.Equal, toItem: self.password, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1.1, constant: 2)
         let centerConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.password, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
         NSLayoutConstraint.activateConstraints([topConstraint, centerConstraint])
-        */
+        
 
         // Do any additional setup after loading the view.
     }
@@ -58,7 +57,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
         // Dispose of any resources that can be recreated.
     }
     
-   /* // Facebook Login
+    // Facebook Login
     func loginButton(loginButton: FBSDKLoginButton!, didCompleteWithResult result: FBSDKLoginManagerLoginResult!, error: NSError!) {
         if error != nil {
             let alertController = UIAlertController(title: "FaceBook Login Failed", message: error.description, preferredStyle: .Alert)
@@ -77,19 +76,75 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
             let req = FBSDKGraphRequest(graphPath: "me", parameters: ["fields":"email,name,gender"], tokenString: accessToken.tokenString, version: nil, HTTPMethod: "GET")
             req.startWithCompletionHandler({ (connection, result, error : NSError!) -> Void in
                 if(error == nil) {
+                    /*
                     print("email \(result["email"]!!)")
                     print("name \(result["name"]!!)")
                     print("gender \(result["gender"]!!)")
-                    print("id \(result["id"]!!)")
+                    print("id \(result["id"]!!)")*/
                     
                     print("ALL \(result)")
                     
+                    var email = "Not Set"
+                    var gender = "Not Set"
+                    var name = "Not Set"
                     
-                    let user = User(username: result["name"]!! as! String, userEmail: result["email"]!! as! String, userCity: "Not Set", userFName: "Not Set", userGender: "Not Set", userBirthdate: "Not Set")
-                    SaveData(context: self.managedObjectContext).saveUser(user)
-                    GlobalVariables.loggedIn = true
+                    if let e = result["email"] as! String? {
+                        email = e
+                    }
                     
-                    self.performSegueWithIdentifier("ProceedToDashBoard", sender: self)
+                    if let g = result["gender"] as! String? {
+                        gender = g
+                    }
+                    
+                    if let n = result["name"] as! String? {
+                        name = n
+                    }
+                    
+                    let facebookService = FacebookService(context: self.managedObjectContext, username: result["id"]!! as! String, userfname: name, emailaddress: email, usergender: gender)
+                    
+                    facebookService.registerNewUser{
+                        (let facebookResponse) in
+                        
+                        if facebookResponse! == " sign in success" {
+                            
+                            facebookService.getUserInformation{
+                                (let userInfo) in
+                            }
+                            dispatch_async(dispatch_get_main_queue()){
+                                
+                                let alertController = UIAlertController(title: "Facebook Login Successful", message:nil, preferredStyle: .Alert)
+                                let acceptAction = UIAlertAction(title: "OK", style: .Default) { (_) -> Void in
+                                    self.performSegueWithIdentifier("ProceedToDashBoard", sender: self) // Replace SomeSegue with your segue identifier (name)
+                                    
+                                    LoadScreenService(context: self.managedObjectContext).retrieveUser()
+                                }
+                                
+                                alertController.addAction(acceptAction)
+                                
+                                self.presentViewController(alertController, animated: true, completion: nil)
+                            }
+                            
+                            GlobalVariables.loggedIn = true
+                        }
+                            
+                        else { //facebook is not in the database
+                            dispatch_async(dispatch_get_main_queue()){
+                                
+                                let alertController = UIAlertController(title: "Facebook SignUp Successful", message:nil, preferredStyle: .Alert)
+                                
+                                let acceptAction = UIAlertAction(title: "OK", style: .Default) { (_) -> Void in
+                                    self.performSegueWithIdentifier("ProceedToDashBoard", sender: self)
+                                    let user = User(username: "\(result["id"]!! as! String)_FB", userEmail: email, userCity: "Not Set", userFName: name, userGender: gender, userBirthdate: "Not Set")
+                                    SaveData(context: self.managedObjectContext).saveUser(user)
+                                    GlobalVariables.loggedIn = true
+                                }
+                                
+                                alertController.addAction(acceptAction)
+                                
+                                self.presentViewController(alertController, animated: true, completion: nil)
+                            }
+                        }
+                    }
                 }
                 else {
                     print("error getting user information(facebook): \(error)")
@@ -100,7 +155,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate {
     
     func loginButtonDidLogOut(loginButton: FBSDKLoginButton!) {
         print("logged out")
-    }*/
+    }
     
     
     // Login Button Onclick logic
