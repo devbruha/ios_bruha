@@ -39,6 +39,10 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, FBSDKLoginBut
         self.password.delegate = self
         self.emailaddress.delegate = self
         
+        self.username.tag = 0
+        self.password.tag = 1
+        self.emailaddress.tag = 2
+        
         // FaceBook
         self.view.addSubview(faceLoginButton)
         faceLoginButton.delegate = self
@@ -248,6 +252,32 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, FBSDKLoginBut
         textField.resignFirstResponder()
         return true
         
+    }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        if textField.tag == 0 || textField.tag == 2 {
+            animateViewMoving(true, moveValue: 258)
+        }
+        else if textField.tag == 1 {
+            animateViewMoving(true, moveValue: 216)
+        }
+    }
+    func textFieldDidEndEditing(textField: UITextField) {
+        if textField.tag == 0 || textField.tag == 2 {
+            animateViewMoving(false, moveValue: 258)
+        }
+        else if textField.tag == 1 {
+            animateViewMoving(false, moveValue: 216)
+        }
+    }
+    func animateViewMoving (up:Bool, moveValue :CGFloat){
+        let movementDuration:NSTimeInterval = 0.1
+        let movement:CGFloat = ( up ? -moveValue : moveValue)
+        UIView.beginAnimations( "animateView", context: nil)
+        UIView.setAnimationBeginsFromCurrentState(true)
+        UIView.setAnimationDuration(movementDuration )
+        self.view.frame = CGRectOffset(self.view.frame, 0,  movement)
+        UIView.commitAnimations()
     }
 
     /*
