@@ -128,28 +128,57 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
     }
     
     func mapView(mapView: GMSMapView!, didTapMarker marker: GMSMarker!) -> Bool {
-        
+        //Event
         if GlobalVariables.selectedDisplay == "Event" {
             dropEvents.removeAll()
-            for event in GlobalVariables.displayedEvents{
-                if(event.eventLatitude == marker.position.latitude && event.eventLongitude == marker.position.longitude){
-                    dropEvents.append(event)
+            if GlobalVariables.filterEventBool {
+                for event in GlobalVariables.displayFilteredEvents{
+                    if(event.eventLatitude == marker.position.latitude && event.eventLongitude == marker.position.longitude){
+                        dropEvents.append(event)
+                    }
+                }
+            }
+            else {
+                for event in GlobalVariables.displayedEvents{
+                    if(event.eventLatitude == marker.position.latitude && event.eventLongitude == marker.position.longitude){
+                        dropEvents.append(event)
+                    }
                 }
             }
         }
+        //Venue
         else if GlobalVariables.selectedDisplay == "Venue" {
             dropVenues.removeAll()
-            for venue in GlobalVariables.displayedVenues{
-                if(venue.venueLatitude == marker.position.latitude && venue.venueLongitude == marker.position.longitude){
-                    dropVenues.append(venue)
+            if GlobalVariables.filterVenueBool {
+                for venue in GlobalVariables.displayFilteredVenues{
+                    if(venue.venueLatitude == marker.position.latitude && venue.venueLongitude == marker.position.longitude){
+                        dropVenues.append(venue)
+                    }
+                }
+            }
+            else {
+                for venue in GlobalVariables.displayedVenues{
+                    if(venue.venueLatitude == marker.position.latitude && venue.venueLongitude == marker.position.longitude){
+                        dropVenues.append(venue)
+                    }
                 }
             }
         }
+        //Organization
         else if GlobalVariables.selectedDisplay == "Organization" {
             dropOrganizations.removeAll()
-            for organization in GlobalVariables.displayedOrganizations{
-                if(organization.organizationLatitude == marker.position.latitude && organization.organizationLongitude == marker.position.longitude){
-                    dropOrganizations.append(organization)
+            if GlobalVariables.filterOrganizationBool {
+                for organization in GlobalVariables.displayFilteredOrganizations{
+                    if(organization.organizationLatitude == marker.position.latitude && organization.organizationLongitude == marker.position.longitude){
+                        dropOrganizations.append(organization)
+                    }
+                }
+            }
+            else {
+                for organization in GlobalVariables.displayedOrganizations{
+                    if(organization.organizationLatitude == marker.position.latitude && organization.organizationLongitude == marker.position.longitude){
+                        dropOrganizations.append(organization)
+                    }
                 }
             }
         }
