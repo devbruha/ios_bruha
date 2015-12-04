@@ -104,6 +104,10 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
         
         customStatusBar()
         
+        dropDownTable.separatorColor = UIColor.whiteColor()
+        //dropDownTable.separatorStyle = UITableViewCellSeparatorStyle.SingleLineEtched
+        dropDownTable.backgroundColor = UIColor.blackColor()
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateMarkers", name: "itemDisplayChangeEvent", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "clearDrop", name: "itemDisplayChangeEvent", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateMarkers", name: "filter", object: nil)
