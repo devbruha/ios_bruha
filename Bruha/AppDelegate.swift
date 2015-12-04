@@ -21,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //GMSServices.provideAPIKey("AIzaSyDWPbYMQPFcbFg4yWO-4Rk1Rn9DiaUOn34")
         GMSServices.provideAPIKey("AIzaSyAKkkWxNZfMrQLvsOhBPNxeErdgvhnnKZY")
         
+        application.statusBarStyle = .LightContent
+        
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     

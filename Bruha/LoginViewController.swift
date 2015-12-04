@@ -24,9 +24,18 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
     func continueButtonTapped(){
         self.performSegueWithIdentifier("ProceedToDashBoard", sender: self)
     }
+    
+    func customStatusBar() {
+        let barView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0))
+        barView.backgroundColor = UIColor.grayColor()
+        
+        self.view.addSubview(barView)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        customStatusBar()
         
         self.username.delegate = self
         self.password.delegate = self

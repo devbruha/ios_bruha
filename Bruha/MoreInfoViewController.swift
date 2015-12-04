@@ -10,6 +10,8 @@ import UIKit
 
 class MoreInfoViewController: UIViewController,ARSPDragDelegate, ARSPVisibilityStateDelegate {
     @IBOutlet weak var Image: UIImageView!
+    @IBOutlet weak var bruhaButton: UIButton!
+    @IBOutlet weak var backButton: UIButton!
     
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     var panelControllerContainer: ARSPContainerController!
@@ -18,11 +20,46 @@ class MoreInfoViewController: UIViewController,ARSPDragDelegate, ARSPVisibilityS
         dismissViewControllerAnimated(true, completion: nil)
     }
     
+    func customStatusBar() {
+        let barView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0))
+        barView.backgroundColor = UIColor.grayColor()
+        
+        self.view.addSubview(barView)
+    }
+    
+    func customTopButtons() {
+        
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        
+        bruhaButton.setBackgroundImage(UIImage(named: "Bruha_White"), forState: UIControlState.Normal)
+        let heightContraints = NSLayoutConstraint(item: bruhaButton, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.height/15.5)
+        heightContraints.priority = UILayoutPriorityDefaultHigh
+        
+        let widthContraints = NSLayoutConstraint(item: bruhaButton, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.width/9)
+        widthContraints.priority = UILayoutPriorityDefaultHigh
+        
+        bruhaButton.addConstraints([heightContraints, widthContraints])
+        
+        
+        backButton.setBackgroundImage(UIImage(named: "MapIcon"), forState: UIControlState.Normal)
+        let heightContraint = NSLayoutConstraint(item: backButton, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.height/15.5)
+        heightContraint.priority = UILayoutPriorityDefaultHigh
+        
+        let widthContraint = NSLayoutConstraint(item: backButton, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.width/9)
+        widthContraint.priority = UILayoutPriorityDefaultHigh
+        
+        backButton.addConstraints([heightContraint, widthContraint])
+    }
+
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.panelControllerContainer = self.parentViewController as! ARSPContainerController
         self.panelControllerContainer.dragDelegate = self
         self.panelControllerContainer.visibilityStateDelegate = self
+        
+        customStatusBar()
+        customTopButtons()
         
         if GlobalVariables.selectedDisplay == "Event"{
             let eventInfo = FetchData(context: managedObjectContext).fetchEvents()

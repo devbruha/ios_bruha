@@ -12,6 +12,8 @@ import CoreData
 class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPDragDelegate, ARSPVisibilityStateDelegate {
     
     @IBOutlet weak var exploreTableView: UITableView!
+    @IBOutlet weak var bruhaButton: UIButton!
+    @IBOutlet weak var mapButton: UIButton!
     
     
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
@@ -24,16 +26,67 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         let screenHeight = screenSize.height
-        exploreTableView.rowHeight = screenHeight * 0.33
+        exploreTableView.rowHeight = screenHeight * 0.5
         self.panelControllerContainer = self.parentViewController as! ARSPContainerController
         self.panelControllerContainer.dragDelegate = self
         self.panelControllerContainer.visibilityStateDelegate = self
         self.exploreTableView!.allowsMultipleSelection = false
+        print("OOOOOOOOOOOOOOO", screenHeight, screenSize.width)
+        self.view.bringSubviewToFront(bruhaButton)
+        self.view.bringSubviewToFront(mapButton)
+    }
+    
+    func customTopButtons() {
+        
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        
+        bruhaButton.setBackgroundImage(UIImage(named: "Bruha_White"), forState: UIControlState.Normal)
+        let heightContraints = NSLayoutConstraint(item: bruhaButton, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.height/15.5)
+        heightContraints.priority = UILayoutPriorityDefaultHigh
+        
+        let widthContraints = NSLayoutConstraint(item: bruhaButton, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.width/9)
+        widthContraints.priority = UILayoutPriorityDefaultHigh
+        
+        bruhaButton.addConstraints([heightContraints, widthContraints])
+        
+        
+        mapButton.setBackgroundImage(UIImage(named: "MapIcon"), forState: UIControlState.Normal)
+        let heightContraint = NSLayoutConstraint(item: mapButton, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.height/15.5)
+        heightContraint.priority = UILayoutPriorityDefaultHigh
+        
+        let widthContraint = NSLayoutConstraint(item: mapButton, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.width/9)
+        widthContraint.priority = UILayoutPriorityDefaultHigh
+        
+        mapButton.addConstraints([heightContraint, widthContraint])
+    }
+    
+    func adjustCircSizeOfCell(view: UIView) {
+        
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        
+        let heightContraint = NSLayoutConstraint(item: view, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.height * 0.5)
+        heightContraint.priority = UILayoutPriorityDefaultHigh
+        
+        let widthContraint = NSLayoutConstraint(item: view, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.height * 0.5)
+        widthContraint.priority = UILayoutPriorityDefaultHigh
+        
+        view.addConstraints([heightContraint, widthContraint])
+        
+    }
+    
+    func customStatusBar() {
+        let barView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0))
+        barView.backgroundColor = UIColor.grayColor()
+        
+        self.view.addSubview(barView)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
+        customTopButtons()
+        customStatusBar()
+        
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateNotificationEvent", name: "itemDisplayChangeEvent", object: nil)
         
@@ -109,6 +162,8 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         
         let posterInfo = FetchData(context: managedObjectContext).fetchPosterImages()
         
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        
         switch (GlobalVariables.selectedDisplay){
             
         case "Event":
@@ -119,7 +174,10 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 
                 cell = NSBundle.mainBundle().loadNibNamed("EventTableViewCell", owner: self, options: nil)[0] as! EventTableViewCell;
             }
-    
+//            cell.circView.autoresizingMask = UIViewAutoresizing.FlexibleHeight
+//            cell.circView.autoresizingMask = UIViewAutoresizing.FlexibleWidth
+////            cell.circView.sizeThatFits(circSize)
+//            adjustCircSizeOfCell(cell.circView)
             
             let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
             

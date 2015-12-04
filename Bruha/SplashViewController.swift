@@ -23,15 +23,28 @@ class SplashViewController: UIViewController,UIScrollViewDelegate, FBSDKLoginBut
     
     @IBOutlet weak var pageControl: UIPageControl!
     
+    func customStatusBar() {
+        let barView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0))
+        barView.backgroundColor = UIColor.blackColor()
+        
+        self.view.addSubview(barView)
+    }
+    
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        customStatusBar()
 
         self.scrollView.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
         let scrollViewWidth:CGFloat = self.scrollView.frame.width-20
         let scrollViewHeight:CGFloat = self.scrollView.frame.height-168
         //2
         self.skipButton.layer.cornerRadius = 4.0
+        self.skipButton.layer.borderWidth = 1.0
+        self.skipButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
+        self.skipButton.backgroundColor = UIColor.clearColor()
+        self.skipButton.layer.borderColor = UIColor.orangeColor().CGColor
         //3
         let imgOne = SplashView.instanceFromNib1()
         imgOne.frame = CGRectMake(0, 0, scrollViewWidth, scrollViewHeight+30)
