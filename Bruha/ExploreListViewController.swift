@@ -87,6 +87,8 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         customTopButtons()
         customStatusBar()
         
+        exploreTableView.backgroundColor = UIColor.blackColor()
+        exploreTableView.separatorColor = UIColor.blackColor()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateNotificationEvent", name: "itemDisplayChangeEvent", object: nil)
         
@@ -190,11 +192,15 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 if let images = posterInfo {
                     for img in images {
                         if img.ID == event.eventID {
-                            cell.ExploreImage.image = UIImage(data: img.Image!)
+                            if img.Image?.length > 800 {
+                                cell.ExploreImage.image = UIImage(data: img.Image!)
+                            } else {
+                                cell.ExploreImage.backgroundColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 1)
+                            }
                         }
                     }
                 }
-                    
+                
                 cell.circTitle.text = event.eventName
                 cell.circDate.text = event.eventStartDate
                 cell.circPrice.text = "$\(event.eventPrice!)"
@@ -219,7 +225,11 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 if let images = posterInfo {
                     for img in images {
                         if img.ID == event.eventID {
-                            cell.ExploreImage.image = UIImage(data: img.Image!)
+                            if img.Image?.length > 800 {
+                                cell.ExploreImage.image = UIImage(data: img.Image!)
+                            } else {
+                                cell.ExploreImage.backgroundColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 1)
+                            }
                         }
                     }
                 }
@@ -316,7 +326,12 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 if let images = posterInfo {
                     for img in images {
                         if img.ID == venue.venueID {
-                            cell.venueImage.image = UIImage(data: img.Image!)
+                            
+                            if img.Image?.length > 800 {
+                                cell.venueImage.image = UIImage(data: img.Image!)
+                            } else {
+                                cell.venueImage.backgroundColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 1)
+                            }
                         }
                     }
                 }
@@ -336,12 +351,18 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 if let images = posterInfo {
                     for img in images {
                         if img.ID == venue.venueID {
-                            cell.venueImage.image = UIImage(data: img.Image!)
+                            // 475 bytes when no image
+                            if img.Image?.length > 800 {
+                                cell.venueImage.image = UIImage(data: img.Image!)
+                            } else {
+                                cell.venueImage.backgroundColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 1)
+                            }
                         }
+                        //if img.ID == "venue201512030620212367" {print(img.Image)}
                     }
                 }
-                
-            
+                //if venue.venueName == "zsdf" {print(venue.venueID)}
+                //if venue.venueName == "Niagra" {print(venue.venueID)}
                 cell.venueName.text = venue.venueName
                 cell.venueDescription.text = venue.venueDescription
                 cell.venueAddress.text = venue.venueAddress
@@ -438,7 +459,11 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 if let images = posterInfo {
                     for img in images {
                         if img.ID == organization.organizationID {
-                            cell.organizationImage.image = UIImage(data: img.Image!)
+                            if img.Image?.length > 800 {
+                                cell.organizationImage.image = UIImage(data: img.Image!)
+                            } else {
+                                cell.organizationImage.backgroundColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 1)
+                            }
                         }
                     }
                 }
@@ -457,7 +482,11 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 if let images = posterInfo {
                     for img in images {
                         if img.ID == organization.organizationID {
-                            cell.organizationImage.image = UIImage(data: img.Image!)
+                            if img.Image?.length > 800 {
+                                cell.organizationImage.image = UIImage(data: img.Image!)
+                            } else {
+                                cell.organizationImage.backgroundColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 1)
+                            }
                         }
                     }
                 }

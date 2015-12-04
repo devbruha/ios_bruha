@@ -57,6 +57,10 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
         configureView()
         customTopButtons()
         customStatusBar()
+        
+        addictionTableView.backgroundColor = UIColor.blackColor()
+        addictionTableView.separatorColor = UIColor.blackColor()
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateNotificationAddiction", name: "itemDisplayChangeAddiction", object: nil)
         // Do any additional setup after loading the view.
     }
@@ -121,7 +125,11 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
                     if let images = posterInfo {
                         for img in images {
                             if img.ID == event.eventID {
-                                cell.ExploreImage.image = UIImage(data: img.Image!)
+                                if img.Image?.length > 800 {
+                                    cell.ExploreImage.image = UIImage(data: img.Image!)
+                                } else {
+                                    cell.ExploreImage.backgroundColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 1)
+                                }
                             }
                         }
                     }
@@ -203,7 +211,11 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
                     if let images = posterInfo {
                         for img in images {
                             if img.ID == venue.venueID {
-                                cell.venueImage.image = UIImage(data: img.Image!)
+                                if img.Image?.length > 800 {
+                                    cell.venueImage.image = UIImage(data: img.Image!)
+                                } else {
+                                    cell.venueImage.backgroundColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 1)
+                                }
                             }
                         }
                     }
@@ -255,7 +267,11 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
                     if let images = posterInfo {
                         for img in images {
                             if img.ID == organization.organizationID {
-                                cell.organizationImage.image = UIImage(data: img.Image!)
+                                if img.Image?.length > 800 {
+                                    cell.organizationImage.image = UIImage(data: img.Image!)
+                                } else {
+                                    cell.organizationImage.backgroundColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 1)
+                                }
                             }
                         }
                     }
