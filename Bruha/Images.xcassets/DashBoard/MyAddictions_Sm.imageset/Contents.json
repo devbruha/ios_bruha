@@ -2,18 +2,18 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "MyAddictions_Sm.png"
+      "filename" : "Addicted-02-Sm.png",
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "MyAddictions_Med.png"
+      "filename" : "Addicted-02-Med.png",
+      "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x",
-      "filename" : "MyAddictions_Lrg.png"
+      "filename" : "Addicted-02-Lrg.png",
+      "scale" : "3x"
     }
   ],
   "info" : {
