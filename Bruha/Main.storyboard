@@ -1496,42 +1496,42 @@
                                 <rect key="frame" x="67" y="172" width="62" height="20.5"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" red="0.27450980392156865" green="0.74509803921568629" blue="0.76078431372549016" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Tickets" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kk6-Q9-s1r">
                                 <rect key="frame" x="53.5" y="334" width="89" height="20.5"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" red="0.27450980392156865" green="0.74509803921568629" blue="0.76078431372549016" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Uploads" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BRY-VT-Ogc">
                                 <rect key="frame" x="50" y="496" width="96.5" height="20.5"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" red="0.27450980392156865" green="0.74509803921568629" blue="0.76078431372549016" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Calendar" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Yf2-2S-u52">
                                 <rect key="frame" x="185" y="333.5" width="74" height="20.5"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" red="0.27450980392156865" green="0.74509803921568629" blue="0.76078431372549016" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Addictions" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="f3l-47-jeH">
                                 <rect key="frame" x="163" y="172" width="117" height="20.5"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" red="0.27450980392156865" green="0.74509803921568629" blue="0.76078431372549016" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Profile" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Agw-Bd-lK9">
                                 <rect key="frame" x="195" y="496" width="53.5" height="20.5"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="textColor" red="0.27450980392156865" green="0.74509803921568629" blue="0.76078431372549016" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" layoutMarginsFollowReadableWidth="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ypt-Ql-HWE">
@@ -2029,25 +2029,25 @@
     <resources>
         <image name="Addictions_Splash" width="124" height="124"/>
         <image name="Brüha_Face_Purple_med" width="250" height="250"/>
-        <image name="Calendar_Med" width="512" height="512"/>
+        <image name="Calendar_Med" width="250" height="250"/>
         <image name="Club" width="48" height="48"/>
-        <image name="Explore_Sm" width="256" height="256"/>
+        <image name="Explore_Sm" width="250" height="250"/>
         <image name="Image" width="1719" height="3094"/>
-        <image name="MyAddictions_Sm" width="31" height="31"/>
-        <image name="MyUploads_Sm" width="256" height="256"/>
-        <image name="Profile_Sm" width="256" height="256"/>
+        <image name="MyAddictions_Sm" width="250" height="250"/>
+        <image name="MyUploads_Sm" width="250" height="250"/>
+        <image name="Profile_Sm" width="250" height="250"/>
         <image name="Restaurant" width="124" height="124"/>
         <image name="Slide 3" width="414" height="736"/>
         <image name="Splash Background" width="800" height="1280"/>
-        <image name="Tickets_Sm" width="31" height="31"/>
+        <image name="Tickets_Sm" width="250" height="250"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="l1y-Rt-Be8"/>
         <segue reference="hcA-O0-ozG"/>
         <segue reference="bzC-Is-F2I"/>
+        <segue reference="l1y-Rt-Be8"/>
         <segue reference="haB-2U-z7b"/>
+        <segue reference="5DM-Zi-tRH"/>
+        <segue reference="J3w-Nl-jcV"/>
         <segue reference="lw9-PB-bZ2"/>
-        <segue reference="zjY-DB-duY"/>
-        <segue reference="uZx-1x-ByM"/>
     </inferredMetricsTieBreakers>
 </document>
