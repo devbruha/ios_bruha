@@ -60,7 +60,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         mapButton.addConstraints([heightContraint, widthContraint])
     }
     
-    func adjustCircSizeOfCell(view: UIView) {
+    /*func adjustCircSizeOfCell(view: UIView) {
         
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         
@@ -72,7 +72,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         
         view.addConstraints([heightContraint, widthContraint])
         
-    }
+    }*/
     
     func customStatusBar() {
         let barView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0))
@@ -181,6 +181,11 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
 ////            cell.circView.sizeThatFits(circSize)
 //            adjustCircSizeOfCell(cell.circView)
             
+//            let c = cell.convertPoint(cell.circView.center, fromView: self.view)
+//            print(c.y, "mYSIDONs")
+//            cell.circView.frame = CGRectMake(0, 0, screenSize.height * 0.33, screenSize.height * 0.33)
+
+            
             let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
             
             if GlobalVariables.filterEventBool {
@@ -214,6 +219,11 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 cell.startTime.text = "\(event.eventStartTime) -"
                 cell.endDate.text = event.eventEndDate
                 cell.endTime.text = event.eventEndTime
+                
+                cell.circAddicted.contentMode = UIViewContentMode.ScaleAspectFit
+                cell.circAddicted.image = UIImage(named: "Addictions_Splash")
+                cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
+                cell.circCategory.image = UIImage(named: event.primaryCategory)
                 // Configure the cell...
                 
                 
@@ -268,6 +278,11 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 cell.startTime.text = "\(event.eventStartTime) -"
                 cell.endDate.text = event.eventEndDate
                 cell.endTime.text = event.eventEndTime
+                
+                cell.circAddicted.contentMode = UIViewContentMode.ScaleAspectFit
+                cell.circAddicted.image = UIImage(named: "Addictions_Splash")
+                cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
+                cell.circCategory.image = UIImage(named: event.primaryCategory)
                 // Configure the cell...
             
             }
@@ -284,8 +299,10 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             
             if like == 0 {
                 temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Get Addicted")
+                cell.circAddicted.hidden = true
             } else if like == 1 {
                 temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Addicted!")
+                cell.circAddicted.hidden = false
             }
             
             cell.leftUtilityButtons = temp as [AnyObject]
@@ -342,6 +359,9 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 cell.circVenueName.text = venue.venueName
                 cell.circHiddenID.text = venue.venueID
                 
+                cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
+                cell.circCategory.image = UIImage(named: venue.primaryCategory)
+                
                 
             } else { // when there is no filtering
                                     
@@ -368,6 +388,9 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 cell.venueAddress.text = venue.venueAddress
                 cell.circVenueName.text = venue.venueName
                 cell.circHiddenID.text = venue.venueID
+                
+                cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
+                cell.circCategory.image = UIImage(named: venue.primaryCategory)
             }
             
             
@@ -474,6 +497,9 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 cell.circOrgName.text = organization.organizationName
                 cell.circHiddenID.text = organization.organizationID
                 
+                cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
+                cell.circCategory.image = UIImage(named: organization.primaryCategory)
+                
                 
             } else { // when there is no filtering
                 let organization = organizationInfo![indexPath.row]
@@ -496,6 +522,9 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 cell.address.text = organization.organizationAddress
                 cell.circOrgName.text = organization.organizationName
                 cell.circHiddenID.text = organization.organizationID
+                
+                cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
+                cell.circCategory.image = UIImage(named: organization.primaryCategory)
             
             }
             
@@ -584,6 +613,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                     temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Get Addicted")
                                     cell.leftUtilityButtons = temp as [AnyObject]
                                     
+                                    selectedCell.circAddicted.hidden = true
                                 }
                                 alertController.addAction(unlikeAction)
                                 alertController.addAction(cancelAction)
@@ -609,7 +639,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                 temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Addicted!")
                                 cell.leftUtilityButtons = temp as [AnyObject]
                                 
-                                
+                                selectedCell.circAddicted.hidden = false
                             }
                         }
                     }

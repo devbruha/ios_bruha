@@ -18,6 +18,7 @@ class OrganizationTableViewCell: SWTableViewCell {
     @IBOutlet weak var circOrgName: UILabel!
     @IBOutlet weak var rectView: EventRectangleView!
     @IBOutlet weak var circHiddenID: UILabel!
+    @IBOutlet weak var circCategory: UIImageView!
     
     @IBOutlet weak var circView: EventCircleView!
     

@@ -13,6 +13,8 @@ class EventTableViewCell: SWTableViewCell {
     @IBOutlet weak var ExploreImage: UIImageView!
     @IBOutlet weak var circView: EventCircleView!
     @IBOutlet weak var rectView: EventRectangleView!
+    @IBOutlet weak var circAddicted: UIImageView!
+    @IBOutlet weak var circCategory: UIImageView!
     
     @IBOutlet weak var circTitle: UILabel!
     @IBOutlet weak var circDate: UILabel!

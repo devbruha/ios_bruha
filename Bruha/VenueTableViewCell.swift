@@ -19,6 +19,7 @@ class VenueTableViewCell: SWTableViewCell {
     @IBOutlet weak var circVenueName: UILabel!
     @IBOutlet weak var circView: EventCircleView!
     @IBOutlet weak var circHiddenID: UILabel!
+    @IBOutlet weak var circCategory: UIImageView!
     
     
     let tapRec = UITapGestureRecognizer()
