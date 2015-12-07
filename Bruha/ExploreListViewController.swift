@@ -31,7 +31,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         self.panelControllerContainer.dragDelegate = self
         self.panelControllerContainer.visibilityStateDelegate = self
         self.exploreTableView!.allowsMultipleSelection = false
-        print("OOOOOOOOOOOOOOO", screenHeight, screenSize.width)
+        //print("OOOOOOOOOOOOOOO", screenHeight, screenSize.width)
         self.view.bringSubviewToFront(bruhaButton)
         self.view.bringSubviewToFront(mapButton)
     }
@@ -85,7 +85,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         super.viewDidLoad()
         configureView()
         customTopButtons()
-        customStatusBar()
+        //customStatusBar()
         
         exploreTableView.backgroundColor = UIColor.blackColor()
         exploreTableView.separatorColor = UIColor.blackColor()

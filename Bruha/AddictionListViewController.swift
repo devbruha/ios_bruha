@@ -158,6 +158,11 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
                     cell.startTime.text = "\(event.eventStartTime) -"
                     cell.endDate.text = event.eventEndDate
                     cell.endTime.text = event.eventEndTime
+                    
+                    cell.circAddicted.contentMode = UIViewContentMode.ScaleAspectFit
+                    cell.circAddicted.image = UIImage(named: "Addictions_Splash")
+                    cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
+                    cell.circCategory.image = UIImage(named: event.primaryCategory)
                     // Configure the cell...
                     
                 }
@@ -225,6 +230,9 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
                     cell.venueAddress.text = venue.venueAddress
                     cell.circVenueName.text = venue.venueName
                     cell.circHiddenID.text = venue.venueID
+                    
+                    cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
+                    cell.circCategory.image = UIImage(named: venue.primaryCategory)
                 }
             
             }
@@ -281,6 +289,9 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
                     cell.address.text = organization.organizationAddress
                     cell.circOrgName.text = organization.organizationName
                     cell.circHiddenID.text = organization.organizationID
+                    
+                    cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
+                    cell.circCategory.image = UIImage(named: organization.primaryCategory)
                 }
                 
             }

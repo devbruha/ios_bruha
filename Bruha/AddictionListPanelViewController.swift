@@ -66,9 +66,9 @@ class AddictionListPanelViewController: UIViewController, UITableViewDelegate {
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeAddiction", object: self)
     }
     
-    func artistTapped(){
+    func discoverableTapped(){
         
-        GlobalVariables.addictedDisplay = "Artist"
+        GlobalVariables.addictedDisplay = ""
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeAddiction", object: self)
     }
     
