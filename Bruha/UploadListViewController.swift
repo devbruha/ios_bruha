@@ -146,7 +146,7 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
             cell.circPrice.text = "$\(event.eventPrice!)"
             cell.circHiddenID.text = event.eventID
             
-            cell.rectTitle.text = event.eventDescription
+            cell.rectTitle.text = event.eventName
             cell.rectPrice.text = "$\(event.eventPrice!)"
             cell.venueName.text = event.eventVenueName
             cell.venueAddress.text = event.eventVenueAddress

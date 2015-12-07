@@ -1048,20 +1048,20 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KyL-l5-h1Y">
                                 <rect key="frame" x="0.0" y="74" width="320" height="494"/>
                                 <subviews>
-                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="22" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="FaC-0A-mNq">
-                                        <rect key="frame" x="8" y="8" width="304" height="22"/>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="30" sectionHeaderHeight="30" sectionFooterHeight="30" translatesAutoresizingMaskIntoConstraints="NO" id="FaC-0A-mNq">
+                                        <rect key="frame" x="8" y="8" width="304" height="30"/>
                                         <animations/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="22" id="YQc-2L-a5X"/>
+                                            <constraint firstAttribute="height" constant="30" id="YQc-2L-a5X"/>
                                             <constraint firstAttribute="width" constant="304" id="bGc-eS-ZG4"/>
                                         </constraints>
                                         <prototypes>
                                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="Cell" id="Vug-zu-1Zu">
-                                                <rect key="frame" x="0.0" y="22" width="304" height="22"/>
+                                                <rect key="frame" x="0.0" y="30" width="304" height="30"/>
                                                 <autoresizingMask key="autoresizingMask"/>
                                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Vug-zu-1Zu" id="NZJ-YS-Ntx">
-                                                    <rect key="frame" x="0.0" y="0.0" width="304" height="21.5"/>
+                                                    <rect key="frame" x="0.0" y="0.0" width="304" height="29.5"/>
                                                     <autoresizingMask key="autoresizingMask"/>
                                                     <animations/>
                                                 </tableViewCellContentView>
@@ -1087,7 +1087,7 @@
                                 <constraints>
                                     <constraint firstItem="FaC-0A-mNq" firstAttribute="top" secondItem="KyL-l5-h1Y" secondAttribute="topMargin" id="4dq-0G-6to"/>
                                     <constraint firstItem="IMa-si-HK8" firstAttribute="leading" secondItem="KyL-l5-h1Y" secondAttribute="leading" constant="8" id="Iwc-D2-OdJ"/>
-                                    <constraint firstItem="IMa-si-HK8" firstAttribute="top" secondItem="FaC-0A-mNq" secondAttribute="bottom" constant="8" id="O3J-8a-IOJ"/>
+                                    <constraint firstItem="IMa-si-HK8" firstAttribute="top" secondItem="FaC-0A-mNq" secondAttribute="bottom" id="O3J-8a-IOJ"/>
                                     <constraint firstItem="FaC-0A-mNq" firstAttribute="leading" secondItem="KyL-l5-h1Y" secondAttribute="leading" constant="8" id="a0W-LV-zEr"/>
                                     <constraint firstItem="FaC-0A-mNq" firstAttribute="trailing" secondItem="KyL-l5-h1Y" secondAttribute="trailingMargin" id="bBx-nN-Io9"/>
                                     <constraint firstAttribute="bottom" secondItem="IMa-si-HK8" secondAttribute="bottom" constant="286" id="eac-lZ-1aq"/>
@@ -2042,12 +2042,12 @@
         <image name="Tickets_Sm" width="250" height="250"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="hcA-O0-ozG"/>
-        <segue reference="bzC-Is-F2I"/>
         <segue reference="l1y-Rt-Be8"/>
-        <segue reference="haB-2U-z7b"/>
-        <segue reference="5DM-Zi-tRH"/>
-        <segue reference="J3w-Nl-jcV"/>
+        <segue reference="Rkq-9y-PIT"/>
         <segue reference="lw9-PB-bZ2"/>
+        <segue reference="uZx-1x-ByM"/>
+        <segue reference="zjY-DB-duY"/>
+        <segue reference="bzC-Is-F2I"/>
+        <segue reference="haB-2U-z7b"/>
     </inferredMetricsTieBreakers>
 </document>

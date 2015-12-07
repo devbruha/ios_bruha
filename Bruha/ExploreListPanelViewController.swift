@@ -8,15 +8,6 @@
 
 import UIKit
 
-extension NSDate
-{
-    class func minimumDate() -> NSDate
-    {
-        let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierChinese)!
-        return calendar.dateWithEra(0, year: 0, month: 0, day: 0, hour: 0, minute: 0, second: 0, nanosecond: 0)!
-    }
-}
-
 class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,CalendarViewDelegate {
     
     @IBOutlet weak var eventSelectedB: UIButton!
@@ -74,7 +65,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         let nib = UINib(nibName: "CategoryHeaderCellTableViewCell", bundle: nil)
         eventCategoriesTable.registerNib(nib, forCellReuseIdentifier: "HeaderCell")
         
-        priceLabelTitle.frame = CGRectMake(10,220, screenSize.width - 20, 22)
+        priceLabelTitle.frame = CGRectMake(10,230, screenSize.width - 20, 30)
         priceLabelTitle.textAlignment = NSTextAlignment.Left
         priceLabelTitle.backgroundColor = UIColor.orangeColor()
         priceLabelTitle.textColor = UIColor.whiteColor()
@@ -83,7 +74,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         self.scrollView.addSubview(priceLabelTitle)
         
         
-        priceLabel.frame = CGRectMake(10, 242, screenSize.width - 20, 22)
+        priceLabel.frame = CGRectMake(10, 260, screenSize.width - 20, 20)
         priceLabel.textAlignment = NSTextAlignment.Center
         priceLabel.backgroundColor = UIColor.clearColor()
         priceLabel.textColor = UIColor.whiteColor()
@@ -96,7 +87,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         slider.continuous = true
         slider.tintColor = UIColor.whiteColor()
         slider.backgroundColor = UIColor.whiteColor()
-        slider.frame = CGRectMake(10, 264, screenSize.width - 20, 22)
+        slider.frame = CGRectMake(10, 280, screenSize.width - 20, 20)
         slider.value = -1
         slider.addTarget(self, action: "sliderValueDidChange:", forControlEvents: .ValueChanged)
         self.scrollView.addSubview(slider)
@@ -345,7 +336,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
             
             if(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[eventObject[indexPath.section].sectionName]![0].contains(eventObject[indexPath.section].sectionObjectIDs[indexPath.row])){
                 
-                cell.backgroundColor = UIColor.grayColor()
+                cell.backgroundColor = UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 71/255)
             }
         }
         
@@ -487,7 +478,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
             } else if GlobalVariables.selectedDisplay == "Venue" {
                 
                 if(GlobalVariables.UserCustomFilters.categoryFilter.venueCategories.contains((headerCell.textLabel?.text)!)){
-                    headerCell.backgroundColor = UIColor.blueColor()
+                    headerCell.backgroundColor = UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 71/255)
                 }
                 else{
                     headerCell.backgroundColor = UIColor.blackColor()
@@ -694,10 +685,11 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         constraint.constant = height
         
         scrollView.contentSize.height = 500 + constraint.constant
+        scrollView.contentInset.bottom = 100
         
-        priceLabelTitle.frame = CGRectMake(10, 198 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 22)
-        priceLabel.frame = CGRectMake(10, 220 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 22)
-        slider.frame = CGRectMake(10, 242 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 22)
+        priceLabelTitle.frame = CGRectMake(10, 200 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 30)
+        priceLabel.frame = CGRectMake(10, 230 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 20)
+        slider.frame = CGRectMake(10, 250 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 20)
         
         self.view.setNeedsUpdateConstraints()
         
