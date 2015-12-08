@@ -78,7 +78,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
         BruhaButton.addConstraints([heightContraints, widthContraints])
         
         // need to change to the correct back icon
-        BackButton.setBackgroundImage(UIImage(named: "MapIcon"), forState: UIControlState.Normal)
+        BackButton.setBackgroundImage(UIImage(named: "List"), forState: UIControlState.Normal)
         let heightContraint = NSLayoutConstraint(item: BackButton, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.height/15.5)
         heightContraint.priority = UILayoutPriorityDefaultHigh
         

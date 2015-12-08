@@ -1356,9 +1356,8 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="LgG-fw-FJh">
-                                <rect key="frame" x="278" y="20" width="41" height="33"/>
+                                <rect key="frame" x="289" y="20" width="30" height="33"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
-                                <state key="normal" title="Back"/>
                                 <connections>
                                     <action selector="backToExploreButton:" destination="0nK-di-ixY" eventType="touchUpInside" id="Dg9-J1-g4R"/>
                                 </connections>
@@ -2144,12 +2143,12 @@
         <image name="Tickets_Sm" width="250" height="250"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="bzC-Is-F2I"/>
         <segue reference="l1y-Rt-Be8"/>
-        <segue reference="Rkq-9y-PIT"/>
+        <segue reference="hcA-O0-ozG"/>
+        <segue reference="haB-2U-z7b"/>
         <segue reference="lw9-PB-bZ2"/>
         <segue reference="uZx-1x-ByM"/>
         <segue reference="zjY-DB-duY"/>
-        <segue reference="bzC-Is-F2I"/>
-        <segue reference="haB-2U-z7b"/>
     </inferredMetricsTieBreakers>
 </document>
