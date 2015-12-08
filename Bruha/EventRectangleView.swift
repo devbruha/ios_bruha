@@ -13,7 +13,8 @@ class EventRectangleView: UIView {
 
     override func drawRect(rect: CGRect) {
         let path = UIBezierPath(rect: rect)
-        UIColor.blueColor().colorWithAlphaComponent(0.5).setFill()
+        UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 0.75).setFill()
+        //UIColor.blueColor().colorWithAlphaComponent(0.5).setFill()
         path.fill()
         
         let context = UIGraphicsGetCurrentContext()
