@@ -11,9 +11,12 @@ import UIKit
 class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,CalendarViewDelegate {
     
     @IBOutlet weak var eventSelectedB: UIButton!
+    @IBOutlet weak var eventButtonIcon: UIImageView!
     @IBOutlet weak var venueSelectedB: UIButton!
+    @IBOutlet weak var venueButtonIcon: UIImageView!
     @IBOutlet weak var discoverableSelectedB: UIButton!
     @IBOutlet weak var organizationSelectedB: UIButton!
+    @IBOutlet weak var organizationButtonIcon: UIImageView!
     
     @IBOutlet weak var scrollView: UIScrollView!
     
@@ -61,6 +64,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
         setupPanel()
         setupCategoryLists()
+        setupEVO()
         
         let nib = UINib(nibName: "CategoryHeaderCellTableViewCell", bundle: nil)
         eventCategoriesTable.registerNib(nib, forCellReuseIdentifier: "HeaderCell")
@@ -220,6 +224,95 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         panelControllerContainer.maxPanelHeight = screenHeight*0.66
     }
     
+    func setupEVO() {
+        
+        eventButtonIcon.contentMode = UIViewContentMode.ScaleAspectFit
+        eventButtonIcon.image = UIImage(named: "Events_White")
+        eventSelectedB.setTitle("Event", forState: UIControlState.Normal)
+        eventSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        eventSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+        eventSelectedB.layer.borderWidth = CGFloat(1.5)
+        //eventSelectedB.titleEdgeInsets = UIEdgeInsetsMake(50, 0, 0, 0)
+        
+        venueButtonIcon.contentMode = UIViewContentMode.ScaleAspectFit
+        venueButtonIcon.image = UIImage(named: "Venue_White")
+        venueSelectedB.setTitle("Venue", forState: UIControlState.Normal)
+        venueSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        venueSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+        venueSelectedB.layer.borderWidth = CGFloat(1.5)
+        
+        organizationButtonIcon.contentMode = UIViewContentMode.ScaleAspectFit
+        organizationButtonIcon.image = UIImage(named: "Organization_White")
+        organizationSelectedB.setTitle("Organization", forState: UIControlState.Normal)
+        organizationSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        organizationSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+        organizationSelectedB.layer.borderWidth = CGFloat(1.5)
+    
+    }
+    
+    func updateEVO() {
+        
+        switch(GlobalVariables.selectedDisplay){
+            
+        case "Event":
+            
+            eventButtonIcon.image = UIImage(named: "Events_Orange")
+            eventSelectedB.setTitleColor(UIColor.orangeColor(), forState: UIControlState.Normal)
+            eventSelectedB.layer.borderColor = UIColor.orangeColor().CGColor
+            
+            venueButtonIcon.image = UIImage(named: "Venue_White")
+            venueSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            venueSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+            
+            organizationButtonIcon.image = UIImage(named: "Organization_White")
+            organizationSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            organizationSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+            
+        case "Venue":
+            
+            eventButtonIcon.image = UIImage(named: "Events_White")
+            eventSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            eventSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+            
+            venueButtonIcon.image = UIImage(named: "Venue_Orange")
+            venueSelectedB.setTitleColor(UIColor.orangeColor(), forState: UIControlState.Normal)
+            venueSelectedB.layer.borderColor = UIColor.orangeColor().CGColor
+            
+            organizationButtonIcon.image = UIImage(named: "Organization_White")
+            organizationSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            organizationSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+            
+        case "Organization":
+            
+            eventButtonIcon.image = UIImage(named: "Events_White")
+            eventSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            eventSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+            
+            venueButtonIcon.image = UIImage(named: "Venue_White")
+            venueSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            venueSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+            
+            organizationButtonIcon.image = UIImage(named: "Organization_Orange")
+            organizationSelectedB.setTitleColor(UIColor.orangeColor(), forState: UIControlState.Normal)
+            organizationSelectedB.layer.borderColor = UIColor.orangeColor().CGColor
+            
+        default:
+            
+            eventButtonIcon.image = UIImage(named: "Events_White")
+            eventSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            eventSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+            
+            venueButtonIcon.image = UIImage(named: "Venue_White")
+            venueSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            venueSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+            
+            organizationButtonIcon.image = UIImage(named: "Organization_White")
+            organizationSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            organizationSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+        }
+        
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.swipeZoneHeight = self.panelControllerContainer.swipableZoneHeight
@@ -267,6 +360,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
         //clearBackupCategories()
         //resetSliderValue()
+        updateEVO()
         eventCategoriesTable.reloadData()
         adjustHeightOfTableView(eventCategoriesTable, constraint: eventCategoryTableHeight)
         updateNotificationSent()
@@ -286,6 +380,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
         //clearBackupCategories()
         //resetSliderValue()
+        updateEVO()
         eventCategoriesTable.reloadData()
         adjustHeightOfTableView(eventCategoriesTable, constraint: eventCategoryTableHeight)
         updateNotificationSent()
@@ -314,6 +409,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
         //clearBackupCategories()
         //resetSliderValue()
+        updateEVO()
         eventCategoriesTable.reloadData()
         adjustHeightOfTableView(eventCategoriesTable, constraint: eventCategoryTableHeight)
         updateNotificationSent()
