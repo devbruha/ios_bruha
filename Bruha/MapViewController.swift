@@ -262,7 +262,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             if let price = Float(e.eventPrice!) {
                 if price == 0.0 {cell.dropPrice.text = "Free!"}
                 else {cell.dropPrice.text = "$\(price)"}
-            } else {cell.dropPrice.text = "Free"}
+            } else {cell.dropPrice.text = "No Price"}
             
             //Date
             cell.dropStartDate.text = convertTimeFormat("\(e.eventStartDate) \(e.eventStartTime)")

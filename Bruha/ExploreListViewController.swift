@@ -207,8 +207,13 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 }
                 
                 cell.circTitle.text = event.eventName
-                cell.circDate.text = event.eventStartDate
-                cell.circPrice.text = "$\(event.eventPrice!)"
+                cell.circDate.text = convertTimeFormat("\(event.eventStartDate)")
+                
+                if let price = Float(event.eventPrice!) {
+                    if price == 0.0 {cell.circPrice.text = "Free!"}
+                    else {cell.circPrice.text = "$\(price)"}
+                } else {cell.circPrice.text = "No Price"}
+                
                 cell.circHiddenID.text = event.eventID
             
                 cell.rectTitle.text = event.eventName
@@ -266,8 +271,13 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             
             
                 cell.circTitle.text = event.eventName
-                cell.circDate.text = event.eventStartDate
-                cell.circPrice.text = "$\(event.eventPrice!)"
+                cell.circDate.text = convertTimeFormat("\(event.eventStartDate)")
+                
+                if let price = Float(event.eventPrice!) {
+                    if price == 0.0 {cell.circPrice.text = "Free!"}
+                    else {cell.circPrice.text = "$\(price)"}
+                } else {cell.circPrice.text = "No Price"}
+                
                 cell.circHiddenID.text = event.eventID
             
                 cell.rectTitle.text = event.eventName
@@ -996,5 +1006,20 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         self.exploreTableView.reloadData()
     }
     
+    func convertTimeFormat(date: String) -> String {
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.timeZone = NSTimeZone.localTimeZone()
+        
+        if let ndate = dateFormatter.dateFromString(date) {
+            
+            dateFormatter.dateFormat = "MMM dd, yyyy"
+            dateFormatter.timeZone = NSTimeZone.localTimeZone()
+            let timeStamp = dateFormatter.stringFromDate(ndate)
+            return timeStamp
+        }
+        else {return "nil or error times"}
+    }
     
 }

@@ -23,8 +23,8 @@ class EventCircleView: UIView {
         let components: [CGFloat] = [1.0, 135.0/255, 0.0, 1.0]
         let color = CGColorCreate(colorSpace, components)
         CGContextSetStrokeColorWithColor(context, color)
-        CGContextMoveToPoint(context, 8, 85)
-        CGContextAddLineToPoint(context, 150, 85)
+        CGContextMoveToPoint(context, 8, 55)
+        CGContextAddLineToPoint(context, 150, 55)
         CGContextStrokePath(context)
         
         let ln2 = UIGraphicsGetCurrentContext()
@@ -33,8 +33,8 @@ class EventCircleView: UIView {
         let components2: [CGFloat] = [1.0, 135.0/255, 0.0, 1.0]
         let color2 = CGColorCreate(colorSpace, components)
         CGContextSetStrokeColorWithColor(ln2, color)
-        CGContextMoveToPoint(ln2, 50, 115)
-        CGContextAddLineToPoint(ln2, 110, 115)
+        CGContextMoveToPoint(ln2, 30, 85)
+        CGContextAddLineToPoint(ln2, 130, 85)
         CGContextStrokePath(ln2)
         
     }
