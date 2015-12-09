@@ -102,6 +102,52 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         // Do any additional setup after loading the view.
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if GlobalVariables.selectedDisplay == "Event"{
+            for cell in exploreTableView.visibleCells as! [EventTableViewCell] {
+                cell.animate()
+            }
+            
+        }
+        if GlobalVariables.selectedDisplay == "Venue"{
+            for cell in exploreTableView.visibleCells as! [VenueTableViewCell] {
+                cell.animate()
+            }
+            
+        }
+        if GlobalVariables.selectedDisplay == "Organization"{
+            for cell in exploreTableView.visibleCells as! [OrganizationTableViewCell] {
+                cell.animate()
+            }
+            
+        }
+    }
+    
+    /*override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if GlobalVariables.selectedDisplay == "Event"{
+            for cell in exploreTableView.visibleCells as! [EventTableViewCell] {
+                cell.animate()
+            }
+            
+        }
+        if GlobalVariables.selectedDisplay == "Venue"{
+            for cell in exploreTableView.visibleCells as! [VenueTableViewCell] {
+                cell.animate()
+            }
+            
+        }
+        if GlobalVariables.selectedDisplay == "Organization"{
+            for cell in exploreTableView.visibleCells as! [OrganizationTableViewCell] {
+                cell.animate()
+            }
+            
+        }
+    }*/
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -111,6 +157,28 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
         return 1
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if GlobalVariables.selectedDisplay == "Event"{
+            if let animatedCell = cell as? EventTableViewCell {
+                animatedCell.animate()
+            }
+            
+        }
+        if GlobalVariables.selectedDisplay == "Venue"{
+            if let animatedCell = cell as? VenueTableViewCell {
+                animatedCell.animate()
+            }
+            
+        }
+        if GlobalVariables.selectedDisplay == "Organization"{
+            if let animatedCell = cell as? OrganizationTableViewCell {
+                animatedCell.animate()
+            }
+            
+        }
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -176,6 +244,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 
                 cell = NSBundle.mainBundle().loadNibNamed("EventTableViewCell", owner: self, options: nil)[0] as! EventTableViewCell;
             }
+            
 //            cell.circView.autoresizingMask = UIViewAutoresizing.FlexibleHeight
 //            cell.circView.autoresizingMask = UIViewAutoresizing.FlexibleWidth
 ////            cell.circView.sizeThatFits(circSize)
@@ -207,23 +276,31 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 }
                 
                 cell.circTitle.text = event.eventName
-                cell.circDate.text = convertTimeFormat("\(event.eventStartDate)")
+                cell.circDate.text = convertCircTimeFormat("\(event.eventStartDate)")
                 
                 if let price = Float(event.eventPrice!) {
-                    if price == 0.0 {cell.circPrice.text = "Free!"}
-                    else {cell.circPrice.text = "$\(price)"}
-                } else {cell.circPrice.text = "No Price"}
+                    if price == 0.0 {cell.circPrice.text = "Free!"; cell.rectPrice.text = "Free!"}
+                    else {cell.circPrice.text = "$\(price)"; cell.rectPrice.text = "$\(price)"}
+                } else {cell.circPrice.text = "No Price"; cell.rectPrice.text = "No Price"}
                 
                 cell.circHiddenID.text = event.eventID
             
                 cell.rectTitle.text = event.eventName
-                cell.rectPrice.text = "$\(event.eventPrice!)"
+                
+                //cell.rectPrice.text = "$\(event.eventPrice!)"
                 cell.venueName.text = event.eventVenueName
                 cell.venueAddress.text = event.eventVenueAddress
-                cell.startDate.text = event.eventStartDate
-                cell.startTime.text = "\(event.eventStartTime) -"
-                cell.endDate.text = event.eventEndDate
-                cell.endTime.text = event.eventEndTime
+                
+                let rStart = convertRectTimeFormat("\(event.eventStartDate) \(event.eventStartTime)")
+                let rEnd = convertRectTimeFormat("\(event.eventEndDate) \(event.eventEndTime)")
+                cell.startDate.text = rStart.componentsSeparatedByString(",")[0]
+                cell.startTime.text = rStart.componentsSeparatedByString(",")[1]
+                cell.endDate.text = rEnd.componentsSeparatedByString(",")[0]
+                cell.endTime.text = rEnd.componentsSeparatedByString(",")[1]
+                
+                cell.rectCategory.contentMode = UIViewContentMode.ScaleAspectFill
+                cell.rectCategory.image = UIImage(named: event.primaryCategory)
+                cell.rectCategoryName.text = event.primaryCategory
                 
                 cell.circAddicted.contentMode = UIViewContentMode.ScaleAspectFit
                 cell.circAddicted.image = UIImage(named: "Addictions_Splash")
@@ -271,23 +348,31 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             
             
                 cell.circTitle.text = event.eventName
-                cell.circDate.text = convertTimeFormat("\(event.eventStartDate)")
+                cell.circDate.text = convertCircTimeFormat("\(event.eventStartDate)")
                 
                 if let price = Float(event.eventPrice!) {
-                    if price == 0.0 {cell.circPrice.text = "Free!"}
-                    else {cell.circPrice.text = "$\(price)"}
-                } else {cell.circPrice.text = "No Price"}
+                    if price == 0.0 {cell.circPrice.text = "Free!"; cell.rectPrice.text = "Free!"}
+                    else {cell.circPrice.text = "$\(price)"; cell.rectPrice.text = "$\(price)"}
+                } else {cell.circPrice.text = "No Price"; cell.rectPrice.text = "No Price"}
                 
                 cell.circHiddenID.text = event.eventID
             
                 cell.rectTitle.text = event.eventName
-                cell.rectPrice.text = "$\(event.eventPrice!)"
+                //cell.rectPrice.text = "$\(event.eventPrice!)"
                 cell.venueName.text = event.eventVenueName
                 cell.venueAddress.text = event.eventVenueAddress
-                cell.startDate.text = event.eventStartDate
-                cell.startTime.text = "\(event.eventStartTime) -"
-                cell.endDate.text = event.eventEndDate
-                cell.endTime.text = event.eventEndTime
+                
+                
+                let rStart = convertRectTimeFormat("\(event.eventStartDate) \(event.eventStartTime)")
+                let rEnd = convertRectTimeFormat("\(event.eventEndDate) \(event.eventEndTime)")
+                cell.startDate.text = rStart.componentsSeparatedByString(",")[0]
+                cell.startTime.text = rStart.componentsSeparatedByString(",")[1]
+                cell.endDate.text = rEnd.componentsSeparatedByString(",")[0]
+                cell.endTime.text = rEnd.componentsSeparatedByString(",")[1]
+                
+                cell.rectCategory.contentMode = UIViewContentMode.ScaleAspectFill
+                cell.rectCategory.image = UIImage(named: event.primaryCategory)
+                cell.rectCategoryName.text = event.primaryCategory
                 
                 cell.circAddicted.contentMode = UIViewContentMode.ScaleAspectFit
                 cell.circAddicted.image = UIImage(named: "Addictions_Splash")
@@ -296,7 +381,6 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 // Configure the cell...
             
             }
-            
                     
             let temp: NSMutableArray = NSMutableArray()
             var like = 0
@@ -1006,7 +1090,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         self.exploreTableView.reloadData()
     }
     
-    func convertTimeFormat(date: String) -> String {
+    func convertCircTimeFormat(date: String) -> String {
         
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -1020,6 +1104,22 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             return timeStamp
         }
         else {return "nil or error times"}
+    }
+    
+    func convertRectTimeFormat(date: String) -> String {
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatter.timeZone = NSTimeZone.localTimeZone()
+        
+        if let ndate = dateFormatter.dateFromString(date) {
+            
+            dateFormatter.dateFormat = "MMM dd,h:mma"
+            dateFormatter.timeZone = NSTimeZone.localTimeZone()
+            let timeStamp = dateFormatter.stringFromDate(ndate)
+            return timeStamp
+        }
+        else {return "nil,error times"}
     }
     
 }

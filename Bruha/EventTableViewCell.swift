@@ -29,6 +29,12 @@ class EventTableViewCell: SWTableViewCell {
     @IBOutlet weak var endDate: UILabel!
     @IBOutlet weak var startTime: UILabel!
     @IBOutlet weak var endTime: UILabel!
+    @IBOutlet weak var rectCategory: UIImageView!
+    @IBOutlet weak var rectCategoryName: UILabel!
+    
+    @IBOutlet weak var swipeRight: UIImageView!
+    @IBOutlet weak var swipeLeft: UIImageView!
+   
    
     let tapRec = UITapGestureRecognizer()
 
@@ -39,7 +45,7 @@ class EventTableViewCell: SWTableViewCell {
         rectView.hidden = true
         tapRec.addTarget(self, action: "tappedView:")
         self.addGestureRecognizer(tapRec)
-        
+                
         // Initialization code
 
     }
@@ -64,5 +70,12 @@ class EventTableViewCell: SWTableViewCell {
         }
     }
 
+    func animate() {
+       
+        UIView.animateWithDuration(1.5, delay: 0, options: [.Autoreverse, .Repeat], animations: { () -> Void in
+            self.swipeRight.alpha = 0
+            self.swipeLeft.alpha = 0
+            }, completion: nil)
+    }
 
 }

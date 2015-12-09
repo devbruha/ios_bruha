@@ -22,6 +22,10 @@ class OrganizationTableViewCell: SWTableViewCell {
     
     @IBOutlet weak var circView: EventCircleView!
     
+    @IBOutlet weak var swipeRight: UIImageView!
+    @IBOutlet weak var swipeLeft: UIImageView!
+    
+    
     let tapRec = UITapGestureRecognizer()
     
     override func awakeFromNib() {
@@ -53,5 +57,12 @@ class OrganizationTableViewCell: SWTableViewCell {
         }
     }
 
+    func animate() {
+        
+        UIView.animateWithDuration(1.5, delay: 0, options: [.Autoreverse, .Repeat], animations: { () -> Void in
+            self.swipeRight.alpha = 0
+            self.swipeLeft.alpha = 0
+            }, completion: nil)
+    }
     
 }

@@ -1048,68 +1048,75 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2gi-s1-Qpr">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="74"/>
                                 <subviews>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Swipe-Up" translatesAutoresizingMaskIntoConstraints="NO" id="jzo-it-x7s">
+                                        <rect key="frame" x="140" y="0.0" width="40" height="15"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="15" id="8OC-GU-hY1"/>
+                                            <constraint firstAttribute="width" constant="40" id="Lry-Wy-K5u"/>
+                                        </constraints>
+                                    </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PXb-4Z-59H">
-                                        <rect key="frame" x="11" y="3" width="73" height="68"/>
+                                        <rect key="frame" x="11" y="15" width="73" height="56"/>
                                         <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                        <inset key="titleEdgeInsets" minX="0.0" minY="50" maxX="0.0" maxY="0.0"/>
+                                        <inset key="titleEdgeInsets" minX="0.0" minY="40" maxX="0.0" maxY="0.0"/>
                                         <state key="normal">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                         </state>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="UBZ-eO-Sbb">
-                                        <rect key="frame" x="22" y="4" width="50" height="50"/>
+                                        <rect key="frame" x="27.5" y="16" width="40" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="mAM-J2-7O9"/>
-                                            <constraint firstAttribute="width" constant="50" id="rY6-aq-Uqy"/>
+                                            <constraint firstAttribute="height" constant="40" id="mAM-J2-7O9"/>
+                                            <constraint firstAttribute="width" constant="40" id="rY6-aq-Uqy"/>
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9NE-aT-sYN">
-                                        <rect key="frame" x="86" y="3" width="73" height="68"/>
+                                        <rect key="frame" x="86" y="15" width="73" height="56"/>
                                         <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                        <inset key="titleEdgeInsets" minX="0.0" minY="50" maxX="0.0" maxY="0.0"/>
+                                        <inset key="titleEdgeInsets" minX="0.0" minY="40" maxX="0.0" maxY="0.0"/>
                                         <state key="normal">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="z39-10-HcI">
-                                        <rect key="frame" x="97.5" y="4" width="50" height="50"/>
+                                        <rect key="frame" x="102" y="16" width="40" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="CDN-Ey-d64"/>
-                                            <constraint firstAttribute="width" constant="50" id="JHL-Io-40v"/>
+                                            <constraint firstAttribute="height" constant="40" id="CDN-Ey-d64"/>
+                                            <constraint firstAttribute="width" constant="40" id="JHL-Io-40v"/>
                                         </constraints>
                                     </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="clip" translatesAutoresizingMaskIntoConstraints="NO" id="z55-iv-qkW">
-                                        <rect key="frame" x="161" y="3" width="73" height="68"/>
+                                        <rect key="frame" x="161" y="15" width="73" height="56"/>
                                         <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                        <inset key="titleEdgeInsets" minX="0.0" minY="50" maxX="0.0" maxY="0.0"/>
+                                        <inset key="titleEdgeInsets" minX="0.0" minY="40" maxX="0.0" maxY="0.0"/>
                                         <state key="normal" title="Discoverable">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xo5-cm-x41">
-                                        <rect key="frame" x="236" y="3" width="73" height="68"/>
+                                        <rect key="frame" x="236" y="15" width="73" height="56"/>
                                         <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
-                                        <inset key="titleEdgeInsets" minX="0.0" minY="50" maxX="0.0" maxY="0.0"/>
+                                        <inset key="titleEdgeInsets" minX="0.0" minY="40" maxX="0.0" maxY="0.0"/>
                                         <state key="normal">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="tLn-i7-wyO">
-                                        <rect key="frame" x="247.5" y="4" width="50" height="50"/>
+                                        <rect key="frame" x="252" y="16" width="40" height="40"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="50" id="Osz-pp-sLp"/>
-                                            <constraint firstAttribute="width" constant="50" id="b6V-0C-UWo"/>
+                                            <constraint firstAttribute="height" constant="40" id="Osz-pp-sLp"/>
+                                            <constraint firstAttribute="width" constant="40" id="b6V-0C-UWo"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
@@ -1117,14 +1124,15 @@
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="9NE-aT-sYN" firstAttribute="height" secondItem="PXb-4Z-59H" secondAttribute="height" id="06Y-DC-sMz"/>
-                                    <constraint firstItem="9NE-aT-sYN" firstAttribute="top" secondItem="2gi-s1-Qpr" secondAttribute="top" constant="3" id="28B-9L-dyX"/>
+                                    <constraint firstItem="9NE-aT-sYN" firstAttribute="top" secondItem="2gi-s1-Qpr" secondAttribute="top" constant="15" id="28B-9L-dyX"/>
                                     <constraint firstItem="z55-iv-qkW" firstAttribute="leading" secondItem="9NE-aT-sYN" secondAttribute="trailing" constant="2" id="35E-cM-j8i"/>
                                     <constraint firstItem="xo5-cm-x41" firstAttribute="leading" secondItem="z55-iv-qkW" secondAttribute="trailing" constant="2" id="69E-AH-IHf"/>
-                                    <constraint firstItem="z55-iv-qkW" firstAttribute="top" secondItem="2gi-s1-Qpr" secondAttribute="top" constant="3" id="78y-e9-ayx"/>
+                                    <constraint firstItem="z55-iv-qkW" firstAttribute="top" secondItem="2gi-s1-Qpr" secondAttribute="top" constant="15" id="78y-e9-ayx"/>
                                     <constraint firstAttribute="bottom" secondItem="9NE-aT-sYN" secondAttribute="bottom" constant="3" id="7f3-xH-Wds"/>
                                     <constraint firstItem="z39-10-HcI" firstAttribute="centerX" secondItem="9NE-aT-sYN" secondAttribute="centerX" id="964-Sb-z8b"/>
-                                    <constraint firstItem="xo5-cm-x41" firstAttribute="top" secondItem="2gi-s1-Qpr" secondAttribute="top" constant="3" id="B8p-g5-XGs"/>
-                                    <constraint firstItem="PXb-4Z-59H" firstAttribute="top" secondItem="2gi-s1-Qpr" secondAttribute="top" constant="3" id="BlG-EC-3dZ"/>
+                                    <constraint firstItem="xo5-cm-x41" firstAttribute="top" secondItem="2gi-s1-Qpr" secondAttribute="top" constant="15" id="B8p-g5-XGs"/>
+                                    <constraint firstItem="PXb-4Z-59H" firstAttribute="top" secondItem="2gi-s1-Qpr" secondAttribute="top" constant="15" id="BlG-EC-3dZ"/>
+                                    <constraint firstItem="jzo-it-x7s" firstAttribute="top" secondItem="2gi-s1-Qpr" secondAttribute="top" id="CNm-D8-aBK"/>
                                     <constraint firstItem="9NE-aT-sYN" firstAttribute="height" secondItem="xo5-cm-x41" secondAttribute="height" id="G97-fR-GkK"/>
                                     <constraint firstAttribute="trailing" secondItem="xo5-cm-x41" secondAttribute="trailing" constant="11" id="G9r-b2-iA6"/>
                                     <constraint firstItem="z39-10-HcI" firstAttribute="top" secondItem="9NE-aT-sYN" secondAttribute="top" constant="1" id="Gmq-7Y-VOo"/>
@@ -1142,6 +1150,7 @@
                                     <constraint firstItem="UBZ-eO-Sbb" firstAttribute="centerX" secondItem="PXb-4Z-59H" secondAttribute="centerX" id="lx6-Ls-TYM"/>
                                     <constraint firstItem="9NE-aT-sYN" firstAttribute="leading" secondItem="PXb-4Z-59H" secondAttribute="trailing" constant="2" id="mrb-r2-EC5"/>
                                     <constraint firstItem="9NE-aT-sYN" firstAttribute="width" secondItem="xo5-cm-x41" secondAttribute="width" id="oLt-9L-ft8"/>
+                                    <constraint firstItem="jzo-it-x7s" firstAttribute="centerX" secondItem="2gi-s1-Qpr" secondAttribute="centerX" id="xvW-QT-fUt"/>
                                 </constraints>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KyL-l5-h1Y">
@@ -2140,6 +2149,7 @@
         <image name="Restaurant" width="124" height="124"/>
         <image name="Slide 3" width="414" height="736"/>
         <image name="Splash Background" width="800" height="1280"/>
+        <image name="Swipe-Up" width="200" height="96"/>
         <image name="Tickets_Sm" width="250" height="250"/>
     </resources>
     <inferredMetricsTieBreakers>
