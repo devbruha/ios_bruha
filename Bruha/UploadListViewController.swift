@@ -65,6 +65,11 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
         // Do any additional setup after loading the view.
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        uploadTableView.reloadData()
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -100,6 +105,28 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
             return (venueInfo?.count)!
         }
         
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if GlobalVariables.uploadDisplay == "Event"{
+            if let animatedCell = cell as? EventTableViewCell {
+                animatedCell.animate()
+            }
+            
+        }
+        if GlobalVariables.uploadDisplay == "Venue"{
+            if let animatedCell = cell as? VenueTableViewCell {
+                animatedCell.animate()
+            }
+            
+        }
+        if GlobalVariables.uploadDisplay == "Organization"{
+            if let animatedCell = cell as? OrganizationTableViewCell {
+                animatedCell.animate()
+            }
+            
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

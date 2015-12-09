@@ -64,6 +64,30 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateNotificationAddiction", name: "itemDisplayChangeAddiction", object: nil)
         // Do any additional setup after loading the view.
     }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        addictionTableView.reloadData()
+        
+//        if GlobalVariables.addictedDisplay == "Event"{
+//            for cell in addictionTableView.visibleCells as! [EventTableViewCell] {
+//                cell.animate()
+//            }
+//            
+//        }
+//        if GlobalVariables.addictedDisplay == "Venue"{
+//            for cell in addictionTableView.visibleCells as! [VenueTableViewCell] {
+//                cell.animate()
+//            }
+//            
+//        }
+//        if GlobalVariables.addictedDisplay == "Organization"{
+//            for cell in addictionTableView.visibleCells as! [OrganizationTableViewCell] {
+//                cell.animate()
+//            }
+//            
+//        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -99,6 +123,28 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
             return (venueInfo?.count)!
         }
         
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if GlobalVariables.addictedDisplay == "Event"{
+            if let animatedCell = cell as? EventTableViewCell {
+                animatedCell.animate()
+            }
+            
+        }
+        if GlobalVariables.addictedDisplay == "Venue"{
+            if let animatedCell = cell as? VenueTableViewCell {
+                animatedCell.animate()
+            }
+            
+        }
+        if GlobalVariables.addictedDisplay == "Organization"{
+            if let animatedCell = cell as? OrganizationTableViewCell {
+                animatedCell.animate()
+            }
+            
+        }
     }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

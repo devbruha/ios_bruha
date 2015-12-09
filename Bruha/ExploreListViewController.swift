@@ -105,24 +105,25 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        if GlobalVariables.selectedDisplay == "Event"{
-            for cell in exploreTableView.visibleCells as! [EventTableViewCell] {
-                cell.animate()
-            }
-            
-        }
-        if GlobalVariables.selectedDisplay == "Venue"{
-            for cell in exploreTableView.visibleCells as! [VenueTableViewCell] {
-                cell.animate()
-            }
-            
-        }
-        if GlobalVariables.selectedDisplay == "Organization"{
-            for cell in exploreTableView.visibleCells as! [OrganizationTableViewCell] {
-                cell.animate()
-            }
-            
-        }
+        exploreTableView.reloadData()
+//        if GlobalVariables.selectedDisplay == "Event"{
+//            for cell in exploreTableView.visibleCells as! [EventTableViewCell] {
+//                cell.animate()
+//            }
+//            
+//        }
+//        if GlobalVariables.selectedDisplay == "Venue"{
+//            for cell in exploreTableView.visibleCells as! [VenueTableViewCell] {
+//                cell.animate()
+//            }
+//            
+//        }
+//        if GlobalVariables.selectedDisplay == "Organization"{
+//            for cell in exploreTableView.visibleCells as! [OrganizationTableViewCell] {
+//                cell.animate()
+//            }
+//            
+//        }
     }
     
     /*override func viewWillAppear(animated: Bool) {
