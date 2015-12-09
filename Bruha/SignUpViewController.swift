@@ -17,6 +17,9 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, FBSDKLoginBut
     @IBOutlet weak var emailaddress: UITextField!
     @IBOutlet weak var continueWithoutRegister: UIButton!
     
+    @IBOutlet weak var loginB: UIButton!
+    @IBOutlet weak var bruhaFace: UIImageView!
+    
     // Retreive the managedObjectContext from AppDelegate
     
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
@@ -57,9 +60,14 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, FBSDKLoginBut
         self.view.addSubview(faceLoginButton)
         faceLoginButton.delegate = self
         faceLoginButton.translatesAutoresizingMaskIntoConstraints = false
-        let topConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.TopMargin, relatedBy: NSLayoutRelation.Equal, toItem: self.password, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1.2, constant: 20)
-        let centerConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.password, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
-        NSLayoutConstraint.activateConstraints([topConstraint, centerConstraint])
+        
+        let topConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.TopMargin, relatedBy: NSLayoutRelation.Equal, toItem: self.continueWithoutRegister, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1, constant: 18)
+        
+        let leadingConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.LeftMargin, relatedBy: NSLayoutRelation.Equal, toItem: self.continueWithoutRegister, attribute: NSLayoutAttribute.LeftMargin, multiplier: 1, constant: 0)
+        
+        let trailingConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.RightMargin, relatedBy: NSLayoutRelation.Equal, toItem: self.loginB, attribute: NSLayoutAttribute.RightMargin, multiplier: 1, constant: 0)
+        
+        NSLayoutConstraint.activateConstraints([topConstraint, leadingConstraint, trailingConstraint])
         
         // Do any additional setup after loading the view.
     }
@@ -265,6 +273,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, FBSDKLoginBut
     }
     
     func textFieldDidBeginEditing(textField: UITextField) {
+        bruhaFace.hidden = true
         if textField.tag == 0 || textField.tag == 2 {
             animateViewMoving(true, moveValue: 253)
         }
@@ -273,6 +282,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, FBSDKLoginBut
         }
     }
     func textFieldDidEndEditing(textField: UITextField) {
+        bruhaFace.hidden = false
         if textField.tag == 0 || textField.tag == 2 {
             animateViewMoving(false, moveValue: 253)
         }

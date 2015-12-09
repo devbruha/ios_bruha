@@ -23,6 +23,10 @@ class SplashViewController: UIViewController,UIScrollViewDelegate, FBSDKLoginBut
     
     @IBOutlet weak var pageControl: UIPageControl!
     
+    @IBOutlet weak var loginB: UIButton!
+    
+    @IBOutlet weak var signupB: UIButton!
+    
     func customStatusBar() {
         let barView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0))
         barView.backgroundColor = UIColor.blackColor()
@@ -75,9 +79,15 @@ class SplashViewController: UIViewController,UIScrollViewDelegate, FBSDKLoginBut
         self.view.addSubview(faceLoginButton)
         faceLoginButton.delegate = self
         faceLoginButton.translatesAutoresizingMaskIntoConstraints = false
-        let topConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.TopMargin, relatedBy: NSLayoutRelation.Equal, toItem: self.scrollView, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1, constant: 100)
-        let centerConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.scrollView, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
-        NSLayoutConstraint.activateConstraints([topConstraint, centerConstraint])
+        
+        let topConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.TopMargin, relatedBy: NSLayoutRelation.Equal, toItem: self.loginB, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1, constant: 18)
+        
+        let leadingConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.LeftMargin, relatedBy: NSLayoutRelation.Equal, toItem: self.loginB, attribute: NSLayoutAttribute.LeftMargin, multiplier: 1, constant: 0)
+        
+        let trailingConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.RightMargin, relatedBy: NSLayoutRelation.Equal, toItem: self.signupB, attribute: NSLayoutAttribute.RightMargin, multiplier: 1, constant: 0)
+        
+        NSLayoutConstraint.activateConstraints([topConstraint, leadingConstraint, trailingConstraint])
+        
         // Do any additional setup after loading the view.
     }
     /*override func viewWillAppear(animated: Bool) {
