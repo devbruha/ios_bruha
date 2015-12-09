@@ -71,7 +71,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
         priceLabelTitle.frame = CGRectMake(10,230, screenSize.width - 20, 30)
         priceLabelTitle.textAlignment = NSTextAlignment.Left
-        priceLabelTitle.backgroundColor = UIColor.orangeColor()
+        priceLabelTitle.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1)
         priceLabelTitle.textColor = UIColor.whiteColor()
         priceLabelTitle.font = UIFont(name: ".SFUIText-Semibold", size: 18)
         priceLabelTitle.text = "   Admission Price"
