@@ -287,9 +287,12 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 cell.circHiddenID.text = event.eventID
             
                 cell.rectTitle.text = event.eventName
-                
                 //cell.rectPrice.text = "$\(event.eventPrice!)"
-                cell.venueName.text = event.eventVenueName
+                
+                if event.eventVenueName == "" {
+                    cell.venueName.text = "nil"
+                }else{cell.venueName.text = event.eventVenueName}
+                
                 cell.venueAddress.text = event.eventVenueAddress
                 
                 let rStart = convertRectTimeFormat("\(event.eventStartDate) \(event.eventStartTime)")
@@ -360,7 +363,11 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             
                 cell.rectTitle.text = event.eventName
                 //cell.rectPrice.text = "$\(event.eventPrice!)"
-                cell.venueName.text = event.eventVenueName
+                
+                if event.eventVenueName == "" {
+                    cell.venueName.text = "nil"
+                }else{cell.venueName.text = event.eventVenueName}
+                
                 cell.venueAddress.text = event.eventVenueAddress
                 
                 
