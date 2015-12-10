@@ -413,9 +413,12 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             
             
             let temp2: NSMutableArray = NSMutableArray()
+            //temp2.sw_addUtilityButtonWithColor(UIColor.purpleColor(), icon: UIImage(named: "Slide 5"))
+            
             temp2.sw_addUtilityButtonWithColor(UIColor.purpleColor(), title: "Buy Tickets")
             temp2.sw_addUtilityButtonWithColor(UIColor.grayColor(), title: "Map")
             temp2.sw_addUtilityButtonWithColor(UIColor.orangeColor(), title: "More Info")
+            
             cell.rightUtilityButtons = nil
             cell.rightUtilityButtons = temp2 as [AnyObject]
             
