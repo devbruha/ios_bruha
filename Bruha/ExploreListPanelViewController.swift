@@ -15,6 +15,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
     @IBOutlet weak var venueSelectedB: UIButton!
     @IBOutlet weak var venueButtonIcon: UIImageView!
     @IBOutlet weak var discoverableSelectedB: UIButton!
+    @IBOutlet weak var discoverableButtonIcon: UIImageView!
     @IBOutlet weak var organizationSelectedB: UIButton!
     @IBOutlet weak var organizationButtonIcon: UIImageView!
     
@@ -64,7 +65,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
         setupPanel()
         setupCategoryLists()
-        setupEVO()
+        setupEVOD()
         
         let nib = UINib(nibName: "CategoryHeaderCellTableViewCell", bundle: nil)
         eventCategoriesTable.registerNib(nib, forCellReuseIdentifier: "HeaderCell")
@@ -224,7 +225,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         panelControllerContainer.maxPanelHeight = screenHeight*0.66
     }
     
-    func setupEVO() {
+    func setupEVOD() {
         
         eventButtonIcon.contentMode = UIViewContentMode.ScaleAspectFit
         eventButtonIcon.image = UIImage(named: "Events_White")
@@ -247,10 +248,17 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         organizationSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         organizationSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
         organizationSelectedB.layer.borderWidth = CGFloat(1.5)
+        
+        discoverableButtonIcon.contentMode = UIViewContentMode.ScaleAspectFit
+        discoverableButtonIcon.image = UIImage(named: "Organization_White")
+        discoverableSelectedB.setTitle("Discoverable", forState: UIControlState.Normal)
+        discoverableSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        discoverableSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+        discoverableSelectedB.layer.borderWidth = CGFloat(1.5)
     
     }
     
-    func updateEVO() {
+    func updateEVOD() {
         
         switch(GlobalVariables.selectedDisplay){
             
@@ -268,6 +276,10 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
             organizationSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
             organizationSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
             
+            discoverableButtonIcon.image = UIImage(named: "Organization_White")
+            discoverableSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            discoverableSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+            
         case "Venue":
             
             eventButtonIcon.image = UIImage(named: "Events_White")
@@ -281,6 +293,10 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
             organizationButtonIcon.image = UIImage(named: "Organization_White")
             organizationSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
             organizationSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+            
+            discoverableButtonIcon.image = UIImage(named: "Organization_White")
+            discoverableSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            discoverableSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
             
         case "Organization":
             
@@ -296,6 +312,27 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
             organizationSelectedB.setTitleColor(UIColor.orangeColor(), forState: UIControlState.Normal)
             organizationSelectedB.layer.borderColor = UIColor.orangeColor().CGColor
             
+            discoverableButtonIcon.image = UIImage(named: "Organization_White")
+            discoverableSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            discoverableSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+            
+        case "Discoverable":
+            eventButtonIcon.image = UIImage(named: "Events_White")
+            eventSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            eventSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+            
+            venueButtonIcon.image = UIImage(named: "Venue_White")
+            venueSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            venueSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+            
+            organizationButtonIcon.image = UIImage(named: "Organization_White")
+            organizationSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            organizationSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+            
+            discoverableButtonIcon.image = UIImage(named: "Events_Orange")
+            discoverableSelectedB.setTitleColor(UIColor.orangeColor(), forState: UIControlState.Normal)
+            discoverableSelectedB.layer.borderColor = UIColor.orangeColor().CGColor
+            
         default:
             
             eventButtonIcon.image = UIImage(named: "Events_White")
@@ -309,6 +346,10 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
             organizationButtonIcon.image = UIImage(named: "Organization_White")
             organizationSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
             organizationSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+            
+            discoverableButtonIcon.image = UIImage(named: "Organization_White")
+            discoverableSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            discoverableSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
         }
         
     }
@@ -360,7 +401,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
         //clearBackupCategories()
         //resetSliderValue()
-        updateEVO()
+        updateEVOD()
         eventCategoriesTable.reloadData()
         adjustHeightOfTableView(eventCategoriesTable, constraint: eventCategoryTableHeight)
         updateNotificationSent()
@@ -380,7 +421,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
         //clearBackupCategories()
         //resetSliderValue()
-        updateEVO()
+        updateEVOD()
         eventCategoriesTable.reloadData()
         adjustHeightOfTableView(eventCategoriesTable, constraint: eventCategoryTableHeight)
         updateNotificationSent()
@@ -388,11 +429,9 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
     
     func discoverableTapped(){
         
-        GlobalVariables.selectedDisplay = ""
+        GlobalVariables.selectedDisplay = "Discoverable"
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
-        //clearBackupCategories()
-        //resetSliderValue()
-        
+        updateEVOD()
     }
     
     func organizationTapped(){
@@ -409,7 +448,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
         //clearBackupCategories()
         //resetSliderValue()
-        updateEVO()
+        updateEVOD()
         eventCategoriesTable.reloadData()
         adjustHeightOfTableView(eventCategoriesTable, constraint: eventCategoryTableHeight)
         updateNotificationSent()

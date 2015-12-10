@@ -1097,11 +1097,18 @@
                                         <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="10"/>
                                         <inset key="titleEdgeInsets" minX="0.0" minY="40" maxX="0.0" maxY="0.0"/>
-                                        <state key="normal" title="Discoverable">
+                                        <state key="normal">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="K3u-jM-HC8">
+                                        <rect key="frame" x="177" y="1" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="EDv-9S-rE1"/>
+                                            <constraint firstAttribute="height" constant="40" id="Xms-Cl-cWL"/>
+                                        </constraints>
+                                    </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xo5-cm-x41">
                                         <rect key="frame" x="236" y="0.0" width="73" height="56"/>
                                         <animations/>
@@ -1139,6 +1146,8 @@
                                     <constraint firstItem="PXb-4Z-59H" firstAttribute="leading" secondItem="2gi-s1-Qpr" secondAttribute="leading" constant="11" id="H31-54-Rb4"/>
                                     <constraint firstAttribute="bottom" secondItem="PXb-4Z-59H" secondAttribute="bottom" constant="3" id="LJ6-cg-kFc"/>
                                     <constraint firstItem="9NE-aT-sYN" firstAttribute="width" secondItem="PXb-4Z-59H" secondAttribute="width" id="Nr7-Tc-uSd"/>
+                                    <constraint firstItem="K3u-jM-HC8" firstAttribute="centerX" secondItem="z55-iv-qkW" secondAttribute="centerX" id="RgS-q1-ClR"/>
+                                    <constraint firstItem="K3u-jM-HC8" firstAttribute="top" secondItem="z55-iv-qkW" secondAttribute="top" constant="1" id="WOL-da-TdJ"/>
                                     <constraint firstItem="9NE-aT-sYN" firstAttribute="width" secondItem="z55-iv-qkW" secondAttribute="width" id="XP2-DI-SzF"/>
                                     <constraint firstAttribute="height" constant="59" id="ZNg-lo-RaG"/>
                                     <constraint firstAttribute="bottom" secondItem="z55-iv-qkW" secondAttribute="bottom" constant="3" id="Zvy-zX-Ck1"/>
@@ -1225,13 +1234,14 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="discoverableSelectedB" destination="z55-iv-qkW" id="IWE-bR-JgV"/>
+                        <outlet property="discoverableButtonIcon" destination="tLn-i7-wyO" id="qFU-ho-udg"/>
+                        <outlet property="discoverableSelectedB" destination="xo5-cm-x41" id="FbZ-bV-j02"/>
                         <outlet property="eventButtonIcon" destination="UBZ-eO-Sbb" id="lwg-UD-p4Q"/>
                         <outlet property="eventCategoriesTable" destination="FaC-0A-mNq" id="8Xb-LC-uGS"/>
                         <outlet property="eventCategoryTableHeight" destination="YQc-2L-a5X" id="UQn-1v-I6X"/>
                         <outlet property="eventSelectedB" destination="PXb-4Z-59H" id="b6e-IU-UDa"/>
-                        <outlet property="organizationButtonIcon" destination="tLn-i7-wyO" id="Hp2-hI-Pp2"/>
-                        <outlet property="organizationSelectedB" destination="xo5-cm-x41" id="Vsl-hO-9la"/>
+                        <outlet property="organizationButtonIcon" destination="K3u-jM-HC8" id="MPx-NO-kdw"/>
+                        <outlet property="organizationSelectedB" destination="z55-iv-qkW" id="rVL-Fz-TXb"/>
                         <outlet property="placeholder" destination="IMa-si-HK8" id="ZqK-ba-nK4"/>
                         <outlet property="scrollView" destination="KyL-l5-h1Y" id="vjx-SU-EgU"/>
                         <outlet property="venueButtonIcon" destination="z39-10-HcI" id="SuT-lZ-uNP"/>
@@ -1984,53 +1994,90 @@
                                         <rect key="frame" x="11" y="3" width="73" height="68"/>
                                         <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
-                                        <state key="normal" title="Events">
+                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                        <inset key="titleEdgeInsets" minX="0.0" minY="40" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ch8-di-qQ5">
+                                        <rect key="frame" x="27" y="4" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="am9-kY-Kq7"/>
+                                            <constraint firstAttribute="width" constant="40" id="xog-ke-Yl6"/>
+                                        </constraints>
+                                    </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lCw-4E-69a">
                                         <rect key="frame" x="86" y="3" width="73" height="68"/>
                                         <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
-                                        <state key="normal" title="Venues">
+                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                        <inset key="titleEdgeInsets" minX="0.0" minY="40" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="QgK-1I-jI2">
+                                        <rect key="frame" x="102" y="4" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="Tcz-8D-QdX"/>
+                                            <constraint firstAttribute="height" constant="40" id="tNw-AW-De4"/>
+                                        </constraints>
+                                    </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dfZ-g2-9Za">
                                         <rect key="frame" x="161" y="3" width="73" height="68"/>
                                         <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
-                                        <state key="normal" title="Discoverable">
+                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                        <inset key="titleEdgeInsets" minX="0.0" minY="40" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="fxJ-M1-ts5">
+                                        <rect key="frame" x="177" y="4" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="Mnn-Kz-pte"/>
+                                            <constraint firstAttribute="width" constant="40" id="wRN-GT-8Nc"/>
+                                        </constraints>
+                                    </imageView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="80X-8D-6ia">
                                         <rect key="frame" x="236" y="3" width="73" height="68"/>
                                         <animations/>
                                         <color key="backgroundColor" white="0.0" alpha="0.5" colorSpace="calibratedWhite"/>
-                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="11"/>
-                                        <state key="normal" title="Organizations">
+                                        <fontDescription key="fontDescription" type="system" pointSize="10"/>
+                                        <inset key="titleEdgeInsets" minX="0.0" minY="40" maxX="0.0" maxY="0.0"/>
+                                        <state key="normal">
                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                         </state>
                                     </button>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="AgW-5G-L2X">
+                                        <rect key="frame" x="252.5" y="4" width="40" height="40"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="40" id="CLQ-oJ-pQN"/>
+                                            <constraint firstAttribute="height" constant="40" id="O6P-57-mEx"/>
+                                        </constraints>
+                                    </imageView>
                                 </subviews>
                                 <animations/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="80X-8D-6ia" firstAttribute="width" secondItem="2k7-nw-dEr" secondAttribute="width" id="0Q9-wW-eo5"/>
                                     <constraint firstAttribute="trailing" secondItem="80X-8D-6ia" secondAttribute="trailing" constant="11" id="31f-ZO-3fR"/>
+                                    <constraint firstItem="ch8-di-qQ5" firstAttribute="top" secondItem="2k7-nw-dEr" secondAttribute="top" constant="1" id="6HR-U8-s8I"/>
                                     <constraint firstAttribute="bottom" secondItem="lCw-4E-69a" secondAttribute="bottom" constant="3" id="6f3-mg-oOW"/>
                                     <constraint firstItem="dfZ-g2-9Za" firstAttribute="top" secondItem="65y-gU-zud" secondAttribute="top" constant="3" id="7VJ-Qi-N3G"/>
                                     <constraint firstItem="80X-8D-6ia" firstAttribute="height" secondItem="lCw-4E-69a" secondAttribute="height" id="AGT-oq-mMd"/>
+                                    <constraint firstItem="QgK-1I-jI2" firstAttribute="top" secondItem="lCw-4E-69a" secondAttribute="top" constant="1" id="BHM-zP-YyB"/>
+                                    <constraint firstItem="AgW-5G-L2X" firstAttribute="centerX" secondItem="80X-8D-6ia" secondAttribute="centerX" id="BxV-aT-H9P"/>
+                                    <constraint firstItem="AgW-5G-L2X" firstAttribute="top" secondItem="80X-8D-6ia" secondAttribute="top" constant="1" id="CDQ-5j-WY9"/>
                                     <constraint firstItem="80X-8D-6ia" firstAttribute="leading" secondItem="dfZ-g2-9Za" secondAttribute="trailing" constant="2" id="Fkt-Du-Dg9"/>
                                     <constraint firstItem="80X-8D-6ia" firstAttribute="height" secondItem="dfZ-g2-9Za" secondAttribute="height" id="KVU-Zd-Jsm"/>
+                                    <constraint firstItem="ch8-di-qQ5" firstAttribute="centerX" secondItem="2k7-nw-dEr" secondAttribute="centerX" id="Qpr-29-C2n"/>
                                     <constraint firstItem="lCw-4E-69a" firstAttribute="top" secondItem="65y-gU-zud" secondAttribute="top" constant="3" id="ST5-Un-7h6"/>
                                     <constraint firstItem="80X-8D-6ia" firstAttribute="width" secondItem="lCw-4E-69a" secondAttribute="width" id="UPB-gB-jba"/>
                                     <constraint firstAttribute="height" constant="74" id="Vie-8Q-wya"/>
@@ -2038,9 +2085,12 @@
                                     <constraint firstItem="lCw-4E-69a" firstAttribute="leading" secondItem="2k7-nw-dEr" secondAttribute="trailing" constant="2" id="bWs-pp-sq1"/>
                                     <constraint firstItem="80X-8D-6ia" firstAttribute="top" secondItem="65y-gU-zud" secondAttribute="top" constant="3" id="bbd-y8-cOb"/>
                                     <constraint firstAttribute="bottom" secondItem="80X-8D-6ia" secondAttribute="bottom" constant="3" id="c4P-AU-bMk"/>
+                                    <constraint firstItem="QgK-1I-jI2" firstAttribute="centerX" secondItem="lCw-4E-69a" secondAttribute="centerX" id="dVs-Ha-StY"/>
                                     <constraint firstItem="80X-8D-6ia" firstAttribute="width" secondItem="dfZ-g2-9Za" secondAttribute="width" id="f5I-G9-zVe"/>
                                     <constraint firstAttribute="bottom" secondItem="2k7-nw-dEr" secondAttribute="bottom" constant="3" id="fAo-s6-aoS"/>
                                     <constraint firstItem="2k7-nw-dEr" firstAttribute="leading" secondItem="65y-gU-zud" secondAttribute="leading" constant="11" id="ime-xT-Cjt"/>
+                                    <constraint firstItem="fxJ-M1-ts5" firstAttribute="centerX" secondItem="dfZ-g2-9Za" secondAttribute="centerX" id="kRX-62-bOT"/>
+                                    <constraint firstItem="fxJ-M1-ts5" firstAttribute="top" secondItem="dfZ-g2-9Za" secondAttribute="top" constant="1" id="kXd-sr-CP9"/>
                                     <constraint firstItem="dfZ-g2-9Za" firstAttribute="leading" secondItem="lCw-4E-69a" secondAttribute="trailing" constant="2" id="pMK-mw-4xS"/>
                                     <constraint firstAttribute="bottom" secondItem="dfZ-g2-9Za" secondAttribute="bottom" constant="3" id="sun-Ta-J5a"/>
                                     <constraint firstItem="2k7-nw-dEr" firstAttribute="top" secondItem="65y-gU-zud" secondAttribute="top" constant="3" id="vt7-B5-9ko"/>
@@ -2111,11 +2161,15 @@
                     <connections>
                         <outlet property="categoryTableHeight" destination="jox-9X-I1E" id="tEW-Eu-rpk"/>
                         <outlet property="categoryTableView" destination="NoZ-Mg-783" id="MZo-jF-qsQ"/>
-                        <outlet property="discoverableSelectedB" destination="dfZ-g2-9Za" id="fXo-0A-gJR"/>
+                        <outlet property="discoverableButtonIcon" destination="AgW-5G-L2X" id="Jp0-NO-mBd"/>
+                        <outlet property="discoverableSelectedB" destination="80X-8D-6ia" id="YVR-Ev-ZuM"/>
+                        <outlet property="eventButtonIcon" destination="ch8-di-qQ5" id="Q98-su-G3O"/>
                         <outlet property="eventSelectedB" destination="2k7-nw-dEr" id="Dwm-H2-Ofz"/>
-                        <outlet property="organizationSelectedB" destination="80X-8D-6ia" id="SDv-gs-l94"/>
+                        <outlet property="organizationButtonIcon" destination="fxJ-M1-ts5" id="r6i-Uo-KJt"/>
+                        <outlet property="organizationSelectedB" destination="dfZ-g2-9Za" id="H6o-ZP-ZQO"/>
                         <outlet property="placeholder" destination="dZ8-L6-oEc" id="JVl-Ik-6Ot"/>
                         <outlet property="scrollView" destination="Ta5-2f-oRH" id="TXh-4Z-WgZ"/>
+                        <outlet property="venueButtonIcon" destination="QgK-1I-jI2" id="fjV-Pj-dB7"/>
                         <outlet property="venueSelectedB" destination="lCw-4E-69a" id="boa-Hy-0hV"/>
                     </connections>
                 </viewController>
@@ -2161,12 +2215,12 @@
         <image name="Tickets_Sm" width="250" height="250"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="haB-2U-z7b"/>
-        <segue reference="l1y-Rt-Be8"/>
-        <segue reference="Rkq-9y-PIT"/>
         <segue reference="lw9-PB-bZ2"/>
-        <segue reference="uZx-1x-ByM"/>
         <segue reference="zjY-DB-duY"/>
+        <segue reference="uZx-1x-ByM"/>
+        <segue reference="pIM-BH-lfI"/>
+        <segue reference="1Xm-3s-taQ"/>
         <segue reference="bzC-Is-F2I"/>
+        <segue reference="haB-2U-z7b"/>
     </inferredMetricsTieBreakers>
 </document>
