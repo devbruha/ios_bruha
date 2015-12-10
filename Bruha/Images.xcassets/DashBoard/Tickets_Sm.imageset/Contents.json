@@ -2,18 +2,18 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "Tickets_Sm.png"
+      "filename" : "Tickets-02-Sm.png",
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "Tickets_Med.png"
+      "filename" : "Tickets-02-Med.png",
+      "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x",
-      "filename" : "Tickets_Lrg.png"
+      "filename" : "Tickets-02-Lrg.png",
+      "scale" : "3x"
     }
   ],
   "info" : {

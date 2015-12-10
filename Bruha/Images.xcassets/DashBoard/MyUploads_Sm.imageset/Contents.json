@@ -2,18 +2,18 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "MyUploads_Sm.png"
+      "filename" : "MyUploads-02_Sm.png",
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "scale" : "2x",
-      "filename" : "MyUploads_Med.png"
+      "filename" : "MyUploads-02_Med.png",
+      "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "scale" : "3x",
-      "filename" : "MyUploads_Lrg.png"
+      "filename" : "MyUploads-02_Lrg.png",
+      "scale" : "3x"
     }
   ],
   "info" : {

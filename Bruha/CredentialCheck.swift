@@ -26,7 +26,7 @@ class CredentialCheck {
     }
     
     func usernameCheck(username:String) -> String{
-        if username.characters.count >= 6 && username.characters.count <= 20{
+        if username.characters.count >= 1 && username.characters.count <= 20{
             
             let regex = try! NSRegularExpression(pattern: ".*[^A-Za-z0-9_].*", options: [])
             
@@ -41,7 +41,7 @@ class CredentialCheck {
         }
         else{
             
-            error = "Usernames must have a length between 6 and 20 characters."
+            error = "Usernames must have a length between 1 and 20 characters."
         }
         
         return error
@@ -54,15 +54,23 @@ class CredentialCheck {
             
             if characters.firstMatchInString(password, options: [], range: NSMakeRange(0, password.characters.count)) == nil{
                 
-                let capitalLetterRegEx  = try! NSRegularExpression(pattern: ".*[A-Z]+.*", options: [])
+                var numberCheck = false
+                let passwordArray = [Character](password.characters)
                 
-                if capitalLetterRegEx.firstMatchInString(password, options: [], range: NSMakeRange(0,password.characters.count)) != nil{
+                for character in passwordArray{
+                    
+                    if(Int(String(character)) != nil){
+                        numberCheck = true
+                    }
+                }
+                
+                if (numberCheck){
                     
                     return "true"
                 }
                 else{
                     
-                    error = "Passwords must contain at least one capital letter."
+                    error = "Passwords must contain at least one number."
                 }
                 
             }

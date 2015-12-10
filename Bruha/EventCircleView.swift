@@ -13,7 +13,8 @@ class EventCircleView: UIView {
 
     override func drawRect(rect: CGRect) {
         let path = UIBezierPath(ovalInRect: rect)
-        UIColor.blueColor().colorWithAlphaComponent(0.65).setFill()
+        UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 0.75).setFill()
+        //UIColor.blueColor().colorWithAlphaComponent(0.65).setFill()
         path.fill()
         
         let context = UIGraphicsGetCurrentContext()
@@ -22,8 +23,8 @@ class EventCircleView: UIView {
         let components: [CGFloat] = [1.0, 135.0/255, 0.0, 1.0]
         let color = CGColorCreate(colorSpace, components)
         CGContextSetStrokeColorWithColor(context, color)
-        CGContextMoveToPoint(context, 8, 75)
-        CGContextAddLineToPoint(context, 150, 75)
+        CGContextMoveToPoint(context, 8, 58)
+        CGContextAddLineToPoint(context, 150, 58)
         CGContextStrokePath(context)
         
         let ln2 = UIGraphicsGetCurrentContext()
@@ -32,8 +33,8 @@ class EventCircleView: UIView {
         let components2: [CGFloat] = [1.0, 135.0/255, 0.0, 1.0]
         let color2 = CGColorCreate(colorSpace, components)
         CGContextSetStrokeColorWithColor(ln2, color)
-        CGContextMoveToPoint(ln2, 50, 108)
-        CGContextAddLineToPoint(ln2, 110, 108)
+        CGContextMoveToPoint(ln2, 30, 87)
+        CGContextAddLineToPoint(ln2, 130, 87)
         CGContextStrokePath(ln2)
         
     }

@@ -64,10 +64,49 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
         self.panelControllerContainer.visibilityStateDelegate = self
     }
     
+    func customTopButtons() {
+        
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        
+        BruhaButton.setBackgroundImage(UIImage(named: "Bruha_White"), forState: UIControlState.Normal)
+        let heightContraints = NSLayoutConstraint(item: BruhaButton, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.height/15.5)
+        heightContraints.priority = UILayoutPriorityDefaultHigh
+        
+        let widthContraints = NSLayoutConstraint(item: BruhaButton, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.width/9)
+        widthContraints.priority = UILayoutPriorityDefaultHigh
+        
+        BruhaButton.addConstraints([heightContraints, widthContraints])
+        
+        // need to change to the correct back icon
+        BackButton.setBackgroundImage(UIImage(named: "List"), forState: UIControlState.Normal)
+        let heightContraint = NSLayoutConstraint(item: BackButton, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.height/15.5)
+        heightContraint.priority = UILayoutPriorityDefaultHigh
+        
+        let widthContraint = NSLayoutConstraint(item: BackButton, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.width/9)
+        widthContraint.priority = UILayoutPriorityDefaultHigh
+        
+        BackButton.addConstraints([heightContraint, widthContraint])
+    }
+    
+    func customStatusBar() {
+        let barView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0))
+        barView.backgroundColor = UIColor.grayColor()
+        
+        self.view.addSubview(barView)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         generateMarkers()
+        
+        customTopButtons()
+        
+        customStatusBar()
+        
+        dropDownTable.separatorColor = UIColor.whiteColor()
+        //dropDownTable.separatorStyle = UITableViewCellSeparatorStyle.SingleLineEtched
+        dropDownTable.backgroundColor = UIColor.blackColor()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateMarkers", name: "itemDisplayChangeEvent", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "clearDrop", name: "itemDisplayChangeEvent", object: nil)
@@ -93,28 +132,57 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
     }
     
     func mapView(mapView: GMSMapView!, didTapMarker marker: GMSMarker!) -> Bool {
-        
+        //Event
         if GlobalVariables.selectedDisplay == "Event" {
             dropEvents.removeAll()
-            for event in GlobalVariables.displayedEvents{
-                if(event.eventLatitude == marker.position.latitude && event.eventLongitude == marker.position.longitude){
-                    dropEvents.append(event)
+            if GlobalVariables.filterEventBool {
+                for event in GlobalVariables.displayFilteredEvents{
+                    if(event.eventLatitude == marker.position.latitude && event.eventLongitude == marker.position.longitude){
+                        dropEvents.append(event)
+                    }
+                }
+            }
+            else {
+                for event in GlobalVariables.displayedEvents{
+                    if(event.eventLatitude == marker.position.latitude && event.eventLongitude == marker.position.longitude){
+                        dropEvents.append(event)
+                    }
                 }
             }
         }
+        //Venue
         else if GlobalVariables.selectedDisplay == "Venue" {
             dropVenues.removeAll()
-            for venue in GlobalVariables.displayedVenues{
-                if(venue.venueLatitude == marker.position.latitude && venue.venueLongitude == marker.position.longitude){
-                    dropVenues.append(venue)
+            if GlobalVariables.filterVenueBool {
+                for venue in GlobalVariables.displayFilteredVenues{
+                    if(venue.venueLatitude == marker.position.latitude && venue.venueLongitude == marker.position.longitude){
+                        dropVenues.append(venue)
+                    }
+                }
+            }
+            else {
+                for venue in GlobalVariables.displayedVenues{
+                    if(venue.venueLatitude == marker.position.latitude && venue.venueLongitude == marker.position.longitude){
+                        dropVenues.append(venue)
+                    }
                 }
             }
         }
+        //Organization
         else if GlobalVariables.selectedDisplay == "Organization" {
             dropOrganizations.removeAll()
-            for organization in GlobalVariables.displayedOrganizations{
-                if(organization.organizationLatitude == marker.position.latitude && organization.organizationLongitude == marker.position.longitude){
-                    dropOrganizations.append(organization)
+            if GlobalVariables.filterOrganizationBool {
+                for organization in GlobalVariables.displayFilteredOrganizations{
+                    if(organization.organizationLatitude == marker.position.latitude && organization.organizationLongitude == marker.position.longitude){
+                        dropOrganizations.append(organization)
+                    }
+                }
+            }
+            else {
+                for organization in GlobalVariables.displayedOrganizations{
+                    if(organization.organizationLatitude == marker.position.latitude && organization.organizationLongitude == marker.position.longitude){
+                        dropOrganizations.append(organization)
+                    }
                 }
             }
         }
@@ -131,7 +199,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
     }
     
     func mapView(mapView: GMSMapView!, didTapAtCoordinate coordinate: CLLocationCoordinate2D) {
-        print(FetchData(context: managedObjectContext).fetchEvents()!.count)
+        //print(FetchData(context: managedObjectContext).fetchEvents()!.count)
         hideDrop()
     }
     
@@ -194,7 +262,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             if let price = Float(e.eventPrice!) {
                 if price == 0.0 {cell.dropPrice.text = "Free!"}
                 else {cell.dropPrice.text = "$\(price)"}
-            } else {cell.dropPrice.text = "Free"}
+            } else {cell.dropPrice.text = "No Price"}
             
             //Date
             cell.dropStartDate.text = convertTimeFormat("\(e.eventStartDate) \(e.eventStartTime)")

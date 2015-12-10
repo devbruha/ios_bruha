@@ -17,8 +17,11 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, FBSDKLoginBut
     @IBOutlet weak var emailaddress: UITextField!
     @IBOutlet weak var continueWithoutRegister: UIButton!
     
-    // Retreive the managedObjectContext from AppDelegate
+    @IBOutlet weak var loginB: UIButton!
+    @IBOutlet weak var bruhaFace: UIImageView!
+    @IBOutlet weak var signupB: UIButton!
     
+    // Retreive the managedObjectContext from AppDelegate
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     var error: String = "true"
@@ -28,9 +31,19 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, FBSDKLoginBut
     func continueButtonTapped(){
         self.performSegueWithIdentifier("ProceedToDashBoard", sender: self)
     }
+    
+    func customStatusBar() {
+        let barView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0))
+        barView.backgroundColor = UIColor.grayColor()
+        
+        self.view.addSubview(barView)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        customStatusBar()
+        
         let tgr = UITapGestureRecognizer(target:self , action: Selector("continueButtonTapped"))
         continueWithoutRegister.addGestureRecognizer(tgr)
         continueWithoutRegister.userInteractionEnabled = true
@@ -43,13 +56,26 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, FBSDKLoginBut
         self.password.tag = 1
         self.emailaddress.tag = 2
         
+        signupB.layer.cornerRadius = 2
+        signupB.clipsToBounds = true
+        continueWithoutRegister.layer.cornerRadius = 2
+        continueWithoutRegister.clipsToBounds = true
+        loginB.layer.cornerRadius = 2
+        loginB.clipsToBounds = true
+        
         // FaceBook
         self.view.addSubview(faceLoginButton)
         faceLoginButton.delegate = self
         faceLoginButton.translatesAutoresizingMaskIntoConstraints = false
-        let topConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.TopMargin, relatedBy: NSLayoutRelation.Equal, toItem: self.password, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1.2, constant: 20)
-        let centerConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.password, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
-        NSLayoutConstraint.activateConstraints([topConstraint, centerConstraint])
+        faceLoginButton.alpha = 0.85
+        
+        let topConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.TopMargin, relatedBy: NSLayoutRelation.Equal, toItem: self.continueWithoutRegister, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1, constant: 18)
+        
+        let leadingConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.LeftMargin, relatedBy: NSLayoutRelation.Equal, toItem: self.continueWithoutRegister, attribute: NSLayoutAttribute.LeftMargin, multiplier: 1, constant: 0)
+        
+        let trailingConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.RightMargin, relatedBy: NSLayoutRelation.Equal, toItem: self.loginB, attribute: NSLayoutAttribute.RightMargin, multiplier: 1, constant: 0)
+        
+        NSLayoutConstraint.activateConstraints([topConstraint, leadingConstraint, trailingConstraint])
         
         // Do any additional setup after loading the view.
     }
@@ -255,6 +281,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, FBSDKLoginBut
     }
     
     func textFieldDidBeginEditing(textField: UITextField) {
+        bruhaFace.hidden = true
         if textField.tag == 0 || textField.tag == 2 {
             animateViewMoving(true, moveValue: 253)
         }
@@ -263,6 +290,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, FBSDKLoginBut
         }
     }
     func textFieldDidEndEditing(textField: UITextField) {
+        bruhaFace.hidden = false
         if textField.tag == 0 || textField.tag == 2 {
             animateViewMoving(false, moveValue: 253)
         }

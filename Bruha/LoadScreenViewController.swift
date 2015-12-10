@@ -21,8 +21,17 @@ class LoadScreenViewController: UIViewController {
     
     var userLog: Int = 0
     
+    func customStatusBar() {
+        let barView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0))
+        barView.backgroundColor = UIColor.blackColor()
+        
+        self.view.addSubview(barView)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        customStatusBar()
 
         progressView.progressViewStyle = UIProgressViewStyle.Bar
         progressView.trackTintColor = UIColor.orangeColor()

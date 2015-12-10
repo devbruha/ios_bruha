@@ -16,6 +16,7 @@ class DashBoardViewController: UIViewController {
     @IBOutlet weak var addictionImage: UIImageView!
     @IBOutlet weak var uploadImage: UIImageView!
     @IBOutlet weak var ticketImage: UIImageView!
+    @IBOutlet weak var bruhaButton: UIButton!
     
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
@@ -98,10 +99,59 @@ class DashBoardViewController: UIViewController {
         uploadImage.addGestureRecognizer(tgr5)
         uploadImage.userInteractionEnabled = true
     }
+    
+    func setConstraint(uiimageview: [UIImageView!]) {
+        
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        print(screenSize.height)
+        let height = screenSize.height / 10.0
+        
+        let width = screenSize.width / 5.0
+        
+        print("\(width), \(height)")
+        
+        
+        for mView in uiimageview {
+            
+            let heightContraints = NSLayoutConstraint(item: mView, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: height)
+            heightContraints.priority = UILayoutPriorityDefaultHigh
+            
+            let widthContraints = NSLayoutConstraint(item: mView, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: width)
+            widthContraints.priority = UILayoutPriorityDefaultHigh
+            
+            mView.addConstraints([heightContraints, widthContraints])
+        }
+    }
+    
+    func customBruhaButton() {
+        
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        
+        bruhaButton.setBackgroundImage(UIImage(named: "Bruha_White"), forState: UIControlState.Normal)
+        let heightContraints = NSLayoutConstraint(item: bruhaButton, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.height/15.5)
+        heightContraints.priority = UILayoutPriorityDefaultHigh
+        
+        let widthContraints = NSLayoutConstraint(item: bruhaButton, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.width/9)
+        widthContraints.priority = UILayoutPriorityDefaultHigh
+        
+        bruhaButton.addConstraints([heightContraints, widthContraints])
+    }
+    
+    func customStatusBar() {
+        let barView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0))
+        barView.backgroundColor = UIColor.grayColor()
+        
+        self.view.addSubview(barView)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-            
+        //let imgViews = [exploreImage, addictionImage, ticketImage, calendarImage, uploadImage, profileImage]
+        //setConstraint(imgViews)
+        
+        customBruhaButton()
+        customStatusBar()
+        
         if GlobalVariables.loggedIn == false{
             addictionImage.alpha = 0.5
             ticketImage.alpha = 0.5

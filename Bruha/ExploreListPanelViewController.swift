@@ -8,21 +8,16 @@
 
 import UIKit
 
-extension NSDate
-{
-    class func minimumDate() -> NSDate
-    {
-        let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierChinese)!
-        return calendar.dateWithEra(0, year: 0, month: 0, day: 0, hour: 0, minute: 0, second: 0, nanosecond: 0)!
-    }
-}
-
 class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,CalendarViewDelegate {
     
     @IBOutlet weak var eventSelectedB: UIButton!
+    @IBOutlet weak var eventButtonIcon: UIImageView!
     @IBOutlet weak var venueSelectedB: UIButton!
+    @IBOutlet weak var venueButtonIcon: UIImageView!
     @IBOutlet weak var discoverableSelectedB: UIButton!
+    @IBOutlet weak var discoverableButtonIcon: UIImageView!
     @IBOutlet weak var organizationSelectedB: UIButton!
+    @IBOutlet weak var organizationButtonIcon: UIImageView!
     
     @IBOutlet weak var scrollView: UIScrollView!
     
@@ -70,20 +65,21 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
         setupPanel()
         setupCategoryLists()
+        setupEVOD()
         
         let nib = UINib(nibName: "CategoryHeaderCellTableViewCell", bundle: nil)
         eventCategoriesTable.registerNib(nib, forCellReuseIdentifier: "HeaderCell")
         
-        priceLabelTitle.frame = CGRectMake(10,220, screenSize.width - 20, 22)
+        priceLabelTitle.frame = CGRectMake(10,230, screenSize.width - 20, 30)
         priceLabelTitle.textAlignment = NSTextAlignment.Left
-        priceLabelTitle.backgroundColor = UIColor.orangeColor()
+        priceLabelTitle.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1)
         priceLabelTitle.textColor = UIColor.whiteColor()
         priceLabelTitle.font = UIFont(name: ".SFUIText-Semibold", size: 18)
         priceLabelTitle.text = "   Admission Price"
         self.scrollView.addSubview(priceLabelTitle)
         
         
-        priceLabel.frame = CGRectMake(10, 242, screenSize.width - 20, 22)
+        priceLabel.frame = CGRectMake(10, 260, screenSize.width - 20, 20)
         priceLabel.textAlignment = NSTextAlignment.Center
         priceLabel.backgroundColor = UIColor.clearColor()
         priceLabel.textColor = UIColor.whiteColor()
@@ -96,7 +92,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         slider.continuous = true
         slider.tintColor = UIColor.whiteColor()
         slider.backgroundColor = UIColor.whiteColor()
-        slider.frame = CGRectMake(10, 264, screenSize.width - 20, 22)
+        slider.frame = CGRectMake(10, 280, screenSize.width - 20, 20)
         slider.value = -1
         slider.addTarget(self, action: "sliderValueDidChange:", forControlEvents: .ValueChanged)
         self.scrollView.addSubview(slider)
@@ -229,6 +225,135 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         panelControllerContainer.maxPanelHeight = screenHeight*0.66
     }
     
+    func setupEVOD() {
+        
+        eventButtonIcon.contentMode = UIViewContentMode.ScaleAspectFit
+        eventButtonIcon.image = UIImage(named: "Events_White")
+        eventSelectedB.setTitle("Event", forState: UIControlState.Normal)
+        eventSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        eventSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+        eventSelectedB.layer.borderWidth = CGFloat(1.5)
+        //eventSelectedB.titleEdgeInsets = UIEdgeInsetsMake(50, 0, 0, 0)
+        
+        venueButtonIcon.contentMode = UIViewContentMode.ScaleAspectFit
+        venueButtonIcon.image = UIImage(named: "Venue_White")
+        venueSelectedB.setTitle("Venue", forState: UIControlState.Normal)
+        venueSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        venueSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+        venueSelectedB.layer.borderWidth = CGFloat(1.5)
+        
+        organizationButtonIcon.contentMode = UIViewContentMode.ScaleAspectFit
+        organizationButtonIcon.image = UIImage(named: "Organization_White")
+        organizationSelectedB.setTitle("Organization", forState: UIControlState.Normal)
+        organizationSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        organizationSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+        organizationSelectedB.layer.borderWidth = CGFloat(1.5)
+        
+        discoverableButtonIcon.contentMode = UIViewContentMode.ScaleAspectFit
+        discoverableButtonIcon.image = UIImage(named: "Organization_White")
+        discoverableSelectedB.setTitle("Discoverable", forState: UIControlState.Normal)
+        discoverableSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        discoverableSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+        discoverableSelectedB.layer.borderWidth = CGFloat(1.5)
+    
+    }
+    
+    func updateEVOD() {
+        
+        switch(GlobalVariables.selectedDisplay){
+            
+        case "Event":
+            
+            eventButtonIcon.image = UIImage(named: "Events_Orange")
+            eventSelectedB.setTitleColor(UIColor.orangeColor(), forState: UIControlState.Normal)
+            eventSelectedB.layer.borderColor = UIColor.orangeColor().CGColor
+            
+            venueButtonIcon.image = UIImage(named: "Venue_White")
+            venueSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            venueSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+            
+            organizationButtonIcon.image = UIImage(named: "Organization_White")
+            organizationSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            organizationSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+            
+            discoverableButtonIcon.image = UIImage(named: "Organization_White")
+            discoverableSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            discoverableSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+            
+        case "Venue":
+            
+            eventButtonIcon.image = UIImage(named: "Events_White")
+            eventSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            eventSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+            
+            venueButtonIcon.image = UIImage(named: "Venue_Orange")
+            venueSelectedB.setTitleColor(UIColor.orangeColor(), forState: UIControlState.Normal)
+            venueSelectedB.layer.borderColor = UIColor.orangeColor().CGColor
+            
+            organizationButtonIcon.image = UIImage(named: "Organization_White")
+            organizationSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            organizationSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+            
+            discoverableButtonIcon.image = UIImage(named: "Organization_White")
+            discoverableSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            discoverableSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+            
+        case "Organization":
+            
+            eventButtonIcon.image = UIImage(named: "Events_White")
+            eventSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            eventSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+            
+            venueButtonIcon.image = UIImage(named: "Venue_White")
+            venueSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            venueSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+            
+            organizationButtonIcon.image = UIImage(named: "Organization_Orange")
+            organizationSelectedB.setTitleColor(UIColor.orangeColor(), forState: UIControlState.Normal)
+            organizationSelectedB.layer.borderColor = UIColor.orangeColor().CGColor
+            
+            discoverableButtonIcon.image = UIImage(named: "Organization_White")
+            discoverableSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            discoverableSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+            
+        case "Discoverable":
+            eventButtonIcon.image = UIImage(named: "Events_White")
+            eventSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            eventSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+            
+            venueButtonIcon.image = UIImage(named: "Venue_White")
+            venueSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            venueSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+            
+            organizationButtonIcon.image = UIImage(named: "Organization_White")
+            organizationSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            organizationSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+            
+            discoverableButtonIcon.image = UIImage(named: "Events_Orange")
+            discoverableSelectedB.setTitleColor(UIColor.orangeColor(), forState: UIControlState.Normal)
+            discoverableSelectedB.layer.borderColor = UIColor.orangeColor().CGColor
+            
+        default:
+            
+            eventButtonIcon.image = UIImage(named: "Events_White")
+            eventSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            eventSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+            
+            venueButtonIcon.image = UIImage(named: "Venue_White")
+            venueSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            venueSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+            
+            organizationButtonIcon.image = UIImage(named: "Organization_White")
+            organizationSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            organizationSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+            
+            discoverableButtonIcon.image = UIImage(named: "Organization_White")
+            discoverableSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            discoverableSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+        }
+        
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.swipeZoneHeight = self.panelControllerContainer.swipableZoneHeight
@@ -276,6 +401,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
         //clearBackupCategories()
         //resetSliderValue()
+        updateEVOD()
         eventCategoriesTable.reloadData()
         adjustHeightOfTableView(eventCategoriesTable, constraint: eventCategoryTableHeight)
         updateNotificationSent()
@@ -295,6 +421,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
         //clearBackupCategories()
         //resetSliderValue()
+        updateEVOD()
         eventCategoriesTable.reloadData()
         adjustHeightOfTableView(eventCategoriesTable, constraint: eventCategoryTableHeight)
         updateNotificationSent()
@@ -302,11 +429,9 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
     
     func discoverableTapped(){
         
-        GlobalVariables.selectedDisplay = ""
+        GlobalVariables.selectedDisplay = "Discoverable"
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
-        //clearBackupCategories()
-        //resetSliderValue()
-        
+        updateEVOD()
     }
     
     func organizationTapped(){
@@ -323,6 +448,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
         //clearBackupCategories()
         //resetSliderValue()
+        updateEVOD()
         eventCategoriesTable.reloadData()
         adjustHeightOfTableView(eventCategoriesTable, constraint: eventCategoryTableHeight)
         updateNotificationSent()
@@ -345,7 +471,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
             
             if(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[eventObject[indexPath.section].sectionName]![0].contains(eventObject[indexPath.section].sectionObjectIDs[indexPath.row])){
                 
-                cell.backgroundColor = UIColor.grayColor()
+                cell.backgroundColor = UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
             }
         }
         
@@ -356,7 +482,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
         let selectedCell = self.eventCategoriesTable.cellForRowAtIndexPath(indexPath) as UITableViewCell!
         
-        selectedCell.backgroundColor = UIColor.grayColor()
+        selectedCell.backgroundColor = UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
     
         let headerTitle = eventObject[indexPath.section].sectionName
         
@@ -415,7 +541,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         }
         else{
             
-            selectedCell.backgroundColor = UIColor.grayColor()
+            selectedCell.backgroundColor = UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
             
             GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].append(subCategoryID)
             GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![1].append(subCategoryName)
@@ -463,13 +589,13 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         }
         
         
-        let sepFrame = CGRectMake(0,headerCell.frame.size.height-1, 320, 1);
+        let sepFrame = CGRectMake(0,headerCell.frame.size.height-1, headerCell.frame.size.width, 1);
         let seperatorView = UIView(frame: sepFrame)
         seperatorView.backgroundColor = UIColor.whiteColor()
         
         if(section == 0){
             
-            headerCell.backgroundColor = UIColor.orangeColor()
+            headerCell.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1)
             headerCell.textLabel!.textColor = UIColor.whiteColor()
             headerCell.detailTextLabel?.text = "\(section)"
             
@@ -478,16 +604,16 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
             
             if GlobalVariables.selectedDisplay == "Event" {
                 if(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.keys.contains((headerCell.textLabel?.text)!)){
-                    headerCell.backgroundColor = UIColor.cyanColor()
+                    headerCell.backgroundColor = UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1.0)
                 }
                 else{
-                    headerCell.backgroundColor = UIColor(red: 1.0, green: 0.710, blue: 0.071, alpha: 1.0)
+                    headerCell.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1.0)
                 }
                 
             } else if GlobalVariables.selectedDisplay == "Venue" {
                 
                 if(GlobalVariables.UserCustomFilters.categoryFilter.venueCategories.contains((headerCell.textLabel?.text)!)){
-                    headerCell.backgroundColor = UIColor.blueColor()
+                    headerCell.backgroundColor = UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
                 }
                 else{
                     headerCell.backgroundColor = UIColor.blackColor()
@@ -495,7 +621,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
                 
             } else if GlobalVariables.selectedDisplay == "Organization" {
                 if(GlobalVariables.UserCustomFilters.categoryFilter.organizationCategories.contains((headerCell.textLabel?.text)!)){
-                    headerCell.backgroundColor = UIColor.blueColor()
+                    headerCell.backgroundColor = UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
                 }
                 else{
                     headerCell.backgroundColor = UIColor.blackColor()
@@ -694,10 +820,11 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         constraint.constant = height
         
         scrollView.contentSize.height = 500 + constraint.constant
+        scrollView.contentInset.bottom = 100
         
-        priceLabelTitle.frame = CGRectMake(10, 198 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 22)
-        priceLabel.frame = CGRectMake(10, 220 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 22)
-        slider.frame = CGRectMake(10, 242 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 22)
+        priceLabelTitle.frame = CGRectMake(10, 200 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 30)
+        priceLabel.frame = CGRectMake(10, 230 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 20)
+        slider.frame = CGRectMake(10, 250 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 20)
         
         self.view.setNeedsUpdateConstraints()
         

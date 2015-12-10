@@ -27,7 +27,18 @@ class ShowOnMapViewController: UIViewController, GMSMapViewDelegate{
         dismissViewControllerAnimated(true, completion: nil)
     }
     
+    func customStatusBar() {
+        let barView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0))
+        barView.backgroundColor = UIColor.blackColor()
+        
+        self.view.addSubview(barView)
+    }
+    
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        customStatusBar()
+        
         mapView.delegate = self
         let mapFrame = mapView.frame.size
         let buttonImage = UIImage(named: "GoogleMapsAppIcon")
@@ -35,7 +46,6 @@ class ShowOnMapViewController: UIViewController, GMSMapViewDelegate{
         button.frame = CGRectMake(mapFrame.width - (buttonImage?.size.width)!, mapFrame.height - buttonImage!.size.height, (buttonImage?.size.width)!, buttonImage!.size.height)
         button.addTarget(self, action: "buttonAction:", forControlEvents: UIControlEvents.TouchUpInside)
         
-        super.viewDidLoad()
         
         var name: String? = "Placeholder" // name of event/venue/org
         var cameraPosition: GMSCameraPosition

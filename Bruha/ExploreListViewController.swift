@@ -12,6 +12,8 @@ import CoreData
 class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPDragDelegate, ARSPVisibilityStateDelegate {
     
     @IBOutlet weak var exploreTableView: UITableView!
+    @IBOutlet weak var bruhaButton: UIButton!
+    @IBOutlet weak var mapButton: UIButton!
     
     
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
@@ -24,16 +26,69 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         let screenHeight = screenSize.height
-        exploreTableView.rowHeight = screenHeight * 0.33
+        exploreTableView.rowHeight = screenHeight * 0.5
         self.panelControllerContainer = self.parentViewController as! ARSPContainerController
         self.panelControllerContainer.dragDelegate = self
         self.panelControllerContainer.visibilityStateDelegate = self
         self.exploreTableView!.allowsMultipleSelection = false
+        //print("OOOOOOOOOOOOOOO", screenHeight, screenSize.width)
+        self.view.bringSubviewToFront(bruhaButton)
+        self.view.bringSubviewToFront(mapButton)
+    }
+    
+    func customTopButtons() {
+        
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        
+        bruhaButton.setBackgroundImage(UIImage(named: "Bruha_White"), forState: UIControlState.Normal)
+        let heightContraints = NSLayoutConstraint(item: bruhaButton, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.height/15.5)
+        heightContraints.priority = UILayoutPriorityDefaultHigh
+        
+        let widthContraints = NSLayoutConstraint(item: bruhaButton, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.width/9)
+        widthContraints.priority = UILayoutPriorityDefaultHigh
+        
+        bruhaButton.addConstraints([heightContraints, widthContraints])
+        
+        
+        mapButton.setBackgroundImage(UIImage(named: "MapIcon"), forState: UIControlState.Normal)
+        let heightContraint = NSLayoutConstraint(item: mapButton, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.height/15.5)
+        heightContraint.priority = UILayoutPriorityDefaultHigh
+        
+        let widthContraint = NSLayoutConstraint(item: mapButton, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.width/9)
+        widthContraint.priority = UILayoutPriorityDefaultHigh
+        
+        mapButton.addConstraints([heightContraint, widthContraint])
+    }
+    
+    /*func adjustCircSizeOfCell(view: UIView) {
+        
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        
+        let heightContraint = NSLayoutConstraint(item: view, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.height * 0.5)
+        heightContraint.priority = UILayoutPriorityDefaultHigh
+        
+        let widthContraint = NSLayoutConstraint(item: view, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.height * 0.5)
+        widthContraint.priority = UILayoutPriorityDefaultHigh
+        
+        view.addConstraints([heightContraint, widthContraint])
+        
+    }*/
+    
+    func customStatusBar() {
+        let barView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0))
+        barView.backgroundColor = UIColor.grayColor()
+        
+        self.view.addSubview(barView)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
+        customTopButtons()
+        customStatusBar()
+        
+        exploreTableView.backgroundColor = UIColor.blackColor()
+        exploreTableView.separatorColor = UIColor.blackColor()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateNotificationEvent", name: "itemDisplayChangeEvent", object: nil)
         
@@ -47,6 +102,53 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         // Do any additional setup after loading the view.
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        exploreTableView.reloadData()
+//        if GlobalVariables.selectedDisplay == "Event"{
+//            for cell in exploreTableView.visibleCells as! [EventTableViewCell] {
+//                cell.animate()
+//            }
+//            
+//        }
+//        if GlobalVariables.selectedDisplay == "Venue"{
+//            for cell in exploreTableView.visibleCells as! [VenueTableViewCell] {
+//                cell.animate()
+//            }
+//            
+//        }
+//        if GlobalVariables.selectedDisplay == "Organization"{
+//            for cell in exploreTableView.visibleCells as! [OrganizationTableViewCell] {
+//                cell.animate()
+//            }
+//            
+//        }
+    }
+    
+    /*override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        if GlobalVariables.selectedDisplay == "Event"{
+            for cell in exploreTableView.visibleCells as! [EventTableViewCell] {
+                cell.animate()
+            }
+            
+        }
+        if GlobalVariables.selectedDisplay == "Venue"{
+            for cell in exploreTableView.visibleCells as! [VenueTableViewCell] {
+                cell.animate()
+            }
+            
+        }
+        if GlobalVariables.selectedDisplay == "Organization"{
+            for cell in exploreTableView.visibleCells as! [OrganizationTableViewCell] {
+                cell.animate()
+            }
+            
+        }
+    }*/
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -56,6 +158,28 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
         return 1
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if GlobalVariables.selectedDisplay == "Event"{
+            if let animatedCell = cell as? EventTableViewCell {
+                animatedCell.animate()
+            }
+            
+        }
+        if GlobalVariables.selectedDisplay == "Venue"{
+            if let animatedCell = cell as? VenueTableViewCell {
+                animatedCell.animate()
+            }
+            
+        }
+        if GlobalVariables.selectedDisplay == "Organization"{
+            if let animatedCell = cell as? OrganizationTableViewCell {
+                animatedCell.animate()
+            }
+            
+        }
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -109,6 +233,8 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         
         let posterInfo = FetchData(context: managedObjectContext).fetchPosterImages()
         
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        
         switch (GlobalVariables.selectedDisplay){
             
         case "Event":
@@ -119,7 +245,16 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 
                 cell = NSBundle.mainBundle().loadNibNamed("EventTableViewCell", owner: self, options: nil)[0] as! EventTableViewCell;
             }
-    
+            
+//            cell.circView.autoresizingMask = UIViewAutoresizing.FlexibleHeight
+//            cell.circView.autoresizingMask = UIViewAutoresizing.FlexibleWidth
+////            cell.circView.sizeThatFits(circSize)
+//            adjustCircSizeOfCell(cell.circView)
+            
+//            let c = cell.convertPoint(cell.circView.center, fromView: self.view)
+//            print(c.y, "mYSIDONs")
+//            cell.circView.frame = CGRectMake(0, 0, screenSize.height * 0.33, screenSize.height * 0.33)
+
             
             let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
             
@@ -132,24 +267,49 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 if let images = posterInfo {
                     for img in images {
                         if img.ID == event.eventID {
-                            cell.ExploreImage.image = UIImage(data: img.Image!)
+                            if img.Image?.length > 800 {
+                                cell.ExploreImage.image = UIImage(data: img.Image!)
+                            } else {
+                                cell.ExploreImage.backgroundColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 1)
+                            }
                         }
                     }
                 }
-                    
+                
                 cell.circTitle.text = event.eventName
-                cell.circDate.text = event.eventStartDate
-                cell.circPrice.text = "$\(event.eventPrice!)"
+                cell.circDate.text = convertCircTimeFormat("\(event.eventStartDate)")
+                
+                if let price = Float(event.eventPrice!) {
+                    if price == 0.0 {cell.circPrice.text = "Free!"; cell.rectPrice.text = "Free!"}
+                    else {cell.circPrice.text = "$\(price)"; cell.rectPrice.text = "$\(price)"}
+                } else {cell.circPrice.text = "No Price"; cell.rectPrice.text = "No Price"}
+                
                 cell.circHiddenID.text = event.eventID
             
-                cell.rectTitle.text = event.eventDescription
-                cell.rectPrice.text = "$\(event.eventPrice!)"
-                cell.venueName.text = event.eventVenueName
+                cell.rectTitle.text = event.eventName
+                //cell.rectPrice.text = "$\(event.eventPrice!)"
+                
+                if event.eventVenueName == "" {
+                    cell.venueName.text = "nil"
+                }else{cell.venueName.text = event.eventVenueName}
+                
                 cell.venueAddress.text = event.eventVenueAddress
-                cell.startDate.text = event.eventStartDate
-                cell.startTime.text = "\(event.eventStartTime) -"
-                cell.endDate.text = event.eventEndDate
-                cell.endTime.text = event.eventEndTime
+                
+                let rStart = convertRectTimeFormat("\(event.eventStartDate) \(event.eventStartTime)")
+                let rEnd = convertRectTimeFormat("\(event.eventEndDate) \(event.eventEndTime)")
+                cell.startDate.text = rStart.componentsSeparatedByString(",")[0]
+                cell.startTime.text = rStart.componentsSeparatedByString(",")[1]
+                cell.endDate.text = rEnd.componentsSeparatedByString(",")[0]
+                cell.endTime.text = rEnd.componentsSeparatedByString(",")[1]
+                
+                cell.rectCategory.contentMode = UIViewContentMode.ScaleAspectFill
+                cell.rectCategory.image = UIImage(named: event.primaryCategory)
+                cell.rectCategoryName.text = event.primaryCategory
+                
+                cell.circAddicted.contentMode = UIViewContentMode.ScaleAspectFit
+                cell.circAddicted.image = UIImage(named: "Addictions_Splash")
+                cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
+                cell.circCategory.image = UIImage(named: event.primaryCategory)
                 // Configure the cell...
                 
                 
@@ -161,7 +321,11 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 if let images = posterInfo {
                     for img in images {
                         if img.ID == event.eventID {
-                            cell.ExploreImage.image = UIImage(data: img.Image!)
+                            if img.Image?.length > 800 {
+                                cell.ExploreImage.image = UIImage(data: img.Image!)
+                            } else {
+                                cell.ExploreImage.backgroundColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 1)
+                            }
                         }
                     }
                 }
@@ -188,22 +352,43 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             
             
                 cell.circTitle.text = event.eventName
-                cell.circDate.text = event.eventStartDate
-                cell.circPrice.text = "$\(event.eventPrice!)"
+                cell.circDate.text = convertCircTimeFormat("\(event.eventStartDate)")
+                
+                if let price = Float(event.eventPrice!) {
+                    if price == 0.0 {cell.circPrice.text = "Free!"; cell.rectPrice.text = "Free!"}
+                    else {cell.circPrice.text = "$\(price)"; cell.rectPrice.text = "$\(price)"}
+                } else {cell.circPrice.text = "No Price"; cell.rectPrice.text = "No Price"}
+                
                 cell.circHiddenID.text = event.eventID
             
-                cell.rectTitle.text = event.eventDescription
-                cell.rectPrice.text = "$\(event.eventPrice!)"
-                cell.venueName.text = event.eventVenueName
+                cell.rectTitle.text = event.eventName
+                //cell.rectPrice.text = "$\(event.eventPrice!)"
+                
+                if event.eventVenueName == "" {
+                    cell.venueName.text = "nil"
+                }else{cell.venueName.text = event.eventVenueName}
+                
                 cell.venueAddress.text = event.eventVenueAddress
-                cell.startDate.text = event.eventStartDate
-                cell.startTime.text = "\(event.eventStartTime) -"
-                cell.endDate.text = event.eventEndDate
-                cell.endTime.text = event.eventEndTime
+                
+                
+                let rStart = convertRectTimeFormat("\(event.eventStartDate) \(event.eventStartTime)")
+                let rEnd = convertRectTimeFormat("\(event.eventEndDate) \(event.eventEndTime)")
+                cell.startDate.text = rStart.componentsSeparatedByString(",")[0]
+                cell.startTime.text = rStart.componentsSeparatedByString(",")[1]
+                cell.endDate.text = rEnd.componentsSeparatedByString(",")[0]
+                cell.endTime.text = rEnd.componentsSeparatedByString(",")[1]
+                
+                cell.rectCategory.contentMode = UIViewContentMode.ScaleAspectFill
+                cell.rectCategory.image = UIImage(named: event.primaryCategory)
+                cell.rectCategoryName.text = event.primaryCategory
+                
+                cell.circAddicted.contentMode = UIViewContentMode.ScaleAspectFit
+                cell.circAddicted.image = UIImage(named: "Addictions_Splash")
+                cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
+                cell.circCategory.image = UIImage(named: event.primaryCategory)
                 // Configure the cell...
             
             }
-            
                     
             let temp: NSMutableArray = NSMutableArray()
             var like = 0
@@ -216,8 +401,10 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             
             if like == 0 {
                 temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Get Addicted")
+                cell.circAddicted.hidden = true
             } else if like == 1 {
                 temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Addicted!")
+                cell.circAddicted.hidden = false
             }
             
             cell.leftUtilityButtons = temp as [AnyObject]
@@ -226,9 +413,12 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             
             
             let temp2: NSMutableArray = NSMutableArray()
+            //temp2.sw_addUtilityButtonWithColor(UIColor.purpleColor(), icon: UIImage(named: "Slide 5"))
+            
             temp2.sw_addUtilityButtonWithColor(UIColor.purpleColor(), title: "Buy Tickets")
             temp2.sw_addUtilityButtonWithColor(UIColor.grayColor(), title: "Map")
             temp2.sw_addUtilityButtonWithColor(UIColor.orangeColor(), title: "More Info")
+            
             cell.rightUtilityButtons = nil
             cell.rightUtilityButtons = temp2 as [AnyObject]
             
@@ -258,7 +448,12 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 if let images = posterInfo {
                     for img in images {
                         if img.ID == venue.venueID {
-                            cell.venueImage.image = UIImage(data: img.Image!)
+                            
+                            if img.Image?.length > 800 {
+                                cell.venueImage.image = UIImage(data: img.Image!)
+                            } else {
+                                cell.venueImage.backgroundColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 1)
+                            }
                         }
                     }
                 }
@@ -268,6 +463,9 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 cell.venueAddress.text = venue.venueAddress
                 cell.circVenueName.text = venue.venueName
                 cell.circHiddenID.text = venue.venueID
+                
+                cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
+                cell.circCategory.image = UIImage(named: venue.primaryCategory)
                 
                 
             } else { // when there is no filtering
@@ -278,17 +476,26 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 if let images = posterInfo {
                     for img in images {
                         if img.ID == venue.venueID {
-                            cell.venueImage.image = UIImage(data: img.Image!)
+                            // 475 bytes when no image
+                            if img.Image?.length > 800 {
+                                cell.venueImage.image = UIImage(data: img.Image!)
+                            } else {
+                                cell.venueImage.backgroundColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 1)
+                            }
                         }
+                        //if img.ID == "venue201512030620212367" {print(img.Image)}
                     }
                 }
-                
-            
+                //if venue.venueName == "zsdf" {print(venue.venueID)}
+                //if venue.venueName == "Niagra" {print(venue.venueID)}
                 cell.venueName.text = venue.venueName
                 cell.venueDescription.text = venue.venueDescription
                 cell.venueAddress.text = venue.venueAddress
                 cell.circVenueName.text = venue.venueName
                 cell.circHiddenID.text = venue.venueID
+                
+                cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
+                cell.circCategory.image = UIImage(named: venue.primaryCategory)
             }
             
             
@@ -380,7 +587,11 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 if let images = posterInfo {
                     for img in images {
                         if img.ID == organization.organizationID {
-                            cell.organizationImage.image = UIImage(data: img.Image!)
+                            if img.Image?.length > 800 {
+                                cell.organizationImage.image = UIImage(data: img.Image!)
+                            } else {
+                                cell.organizationImage.backgroundColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 1)
+                            }
                         }
                     }
                 }
@@ -391,6 +602,9 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 cell.circOrgName.text = organization.organizationName
                 cell.circHiddenID.text = organization.organizationID
                 
+                cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
+                cell.circCategory.image = UIImage(named: organization.primaryCategory)
+                
                 
             } else { // when there is no filtering
                 let organization = organizationInfo![indexPath.row]
@@ -399,7 +613,11 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 if let images = posterInfo {
                     for img in images {
                         if img.ID == organization.organizationID {
-                            cell.organizationImage.image = UIImage(data: img.Image!)
+                            if img.Image?.length > 800 {
+                                cell.organizationImage.image = UIImage(data: img.Image!)
+                            } else {
+                                cell.organizationImage.backgroundColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 1)
+                            }
                         }
                     }
                 }
@@ -409,6 +627,9 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 cell.address.text = organization.organizationAddress
                 cell.circOrgName.text = organization.organizationName
                 cell.circHiddenID.text = organization.organizationID
+                
+                cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
+                cell.circCategory.image = UIImage(named: organization.primaryCategory)
             
             }
             
@@ -497,6 +718,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                     temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Get Addicted")
                                     cell.leftUtilityButtons = temp as [AnyObject]
                                     
+                                    selectedCell.circAddicted.hidden = true
                                 }
                                 alertController.addAction(unlikeAction)
                                 alertController.addAction(cancelAction)
@@ -522,7 +744,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                 temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Addicted!")
                                 cell.leftUtilityButtons = temp as [AnyObject]
                                 
-                                
+                                selectedCell.circAddicted.hidden = false
                             }
                         }
                     }
@@ -879,5 +1101,36 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         self.exploreTableView.reloadData()
     }
     
+    func convertCircTimeFormat(date: String) -> String {
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.timeZone = NSTimeZone.localTimeZone()
+        
+        if let ndate = dateFormatter.dateFromString(date) {
+            
+            dateFormatter.dateFormat = "MMM dd, yyyy"
+            dateFormatter.timeZone = NSTimeZone.localTimeZone()
+            let timeStamp = dateFormatter.stringFromDate(ndate)
+            return timeStamp
+        }
+        else {return "nil or error times"}
+    }
+    
+    func convertRectTimeFormat(date: String) -> String {
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatter.timeZone = NSTimeZone.localTimeZone()
+        
+        if let ndate = dateFormatter.dateFromString(date) {
+            
+            dateFormatter.dateFormat = "MMM dd,h:mma"
+            dateFormatter.timeZone = NSTimeZone.localTimeZone()
+            let timeStamp = dateFormatter.stringFromDate(ndate)
+            return timeStamp
+        }
+        else {return "nil,error times"}
+    }
     
 }

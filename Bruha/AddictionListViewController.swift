@@ -12,6 +12,7 @@ import CoreData
 class AddictionListViewController: UIViewController, SWTableViewCellDelegate, ARSPDragDelegate, ARSPVisibilityStateDelegate{
 
     @IBOutlet weak var addictionTableView: UITableView!
+    @IBOutlet weak var bruhaButton: UIButton!
     
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
@@ -23,18 +24,69 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
         
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         let screenHeight = screenSize.height
-        addictionTableView.rowHeight = screenHeight * 0.33
+        addictionTableView.rowHeight = screenHeight * 0.5
         self.panelControllerContainer = self.parentViewController as! ARSPContainerController
         self.panelControllerContainer.dragDelegate = self
         self.panelControllerContainer.visibilityStateDelegate = self
         self.addictionTableView!.allowsMultipleSelection = false
     }
     
+    func customTopButtons() {
+        
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        
+        bruhaButton.setBackgroundImage(UIImage(named: "Bruha_White"), forState: UIControlState.Normal)
+        let heightContraints = NSLayoutConstraint(item: bruhaButton, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.height/15.5)
+        heightContraints.priority = UILayoutPriorityDefaultHigh
+        
+        let widthContraints = NSLayoutConstraint(item: bruhaButton, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.width/9)
+        widthContraints.priority = UILayoutPriorityDefaultHigh
+        
+        bruhaButton.addConstraints([heightContraints, widthContraints])
+    }
+    
+    func customStatusBar() {
+        let barView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0))
+        barView.backgroundColor = UIColor.grayColor()
+        
+        self.view.addSubview(barView)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
+        customTopButtons()
+        customStatusBar()
+        
+        addictionTableView.backgroundColor = UIColor.blackColor()
+        addictionTableView.separatorColor = UIColor.blackColor()
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateNotificationAddiction", name: "itemDisplayChangeAddiction", object: nil)
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        addictionTableView.reloadData()
+        
+//        if GlobalVariables.addictedDisplay == "Event"{
+//            for cell in addictionTableView.visibleCells as! [EventTableViewCell] {
+//                cell.animate()
+//            }
+//            
+//        }
+//        if GlobalVariables.addictedDisplay == "Venue"{
+//            for cell in addictionTableView.visibleCells as! [VenueTableViewCell] {
+//                cell.animate()
+//            }
+//            
+//        }
+//        if GlobalVariables.addictedDisplay == "Organization"{
+//            for cell in addictionTableView.visibleCells as! [OrganizationTableViewCell] {
+//                cell.animate()
+//            }
+//            
+//        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -72,6 +124,28 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
         }
         
     }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if GlobalVariables.addictedDisplay == "Event"{
+            if let animatedCell = cell as? EventTableViewCell {
+                animatedCell.animate()
+            }
+            
+        }
+        if GlobalVariables.addictedDisplay == "Venue"{
+            if let animatedCell = cell as? VenueTableViewCell {
+                animatedCell.animate()
+            }
+            
+        }
+        if GlobalVariables.addictedDisplay == "Organization"{
+            if let animatedCell = cell as? OrganizationTableViewCell {
+                animatedCell.animate()
+            }
+            
+        }
+    }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
@@ -97,7 +171,11 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
                     if let images = posterInfo {
                         for img in images {
                             if img.ID == event.eventID {
-                                cell.ExploreImage.image = UIImage(data: img.Image!)
+                                if img.Image?.length > 800 {
+                                    cell.ExploreImage.image = UIImage(data: img.Image!)
+                                } else {
+                                    cell.ExploreImage.backgroundColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 1)
+                                }
                             }
                         }
                     }
@@ -118,7 +196,7 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
                     cell.circPrice.text = "$\(event.eventPrice!)"
                     cell.circHiddenID.text = event.eventID
                     
-                    cell.rectTitle.text = event.eventDescription
+                    cell.rectTitle.text = event.eventName
                     cell.rectPrice.text = "$\(event.eventPrice!)"
                     cell.venueName.text = event.eventVenueName
                     cell.venueAddress.text = event.eventVenueAddress
@@ -126,6 +204,11 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
                     cell.startTime.text = "\(event.eventStartTime) -"
                     cell.endDate.text = event.eventEndDate
                     cell.endTime.text = event.eventEndTime
+                    
+                    cell.circAddicted.contentMode = UIViewContentMode.ScaleAspectFit
+                    cell.circAddicted.image = UIImage(named: "Addictions_Splash")
+                    cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
+                    cell.circCategory.image = UIImage(named: event.primaryCategory)
                     // Configure the cell...
                     
                 }
@@ -179,7 +262,11 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
                     if let images = posterInfo {
                         for img in images {
                             if img.ID == venue.venueID {
-                                cell.venueImage.image = UIImage(data: img.Image!)
+                                if img.Image?.length > 800 {
+                                    cell.venueImage.image = UIImage(data: img.Image!)
+                                } else {
+                                    cell.venueImage.backgroundColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 1)
+                                }
                             }
                         }
                     }
@@ -189,6 +276,9 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
                     cell.venueAddress.text = venue.venueAddress
                     cell.circVenueName.text = venue.venueName
                     cell.circHiddenID.text = venue.venueID
+                    
+                    cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
+                    cell.circCategory.image = UIImage(named: venue.primaryCategory)
                 }
             
             }
@@ -231,7 +321,11 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
                     if let images = posterInfo {
                         for img in images {
                             if img.ID == organization.organizationID {
-                                cell.organizationImage.image = UIImage(data: img.Image!)
+                                if img.Image?.length > 800 {
+                                    cell.organizationImage.image = UIImage(data: img.Image!)
+                                } else {
+                                    cell.organizationImage.backgroundColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 1)
+                                }
                             }
                         }
                     }
@@ -241,6 +335,9 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
                     cell.address.text = organization.organizationAddress
                     cell.circOrgName.text = organization.organizationName
                     cell.circHiddenID.text = organization.organizationID
+                    
+                    cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
+                    cell.circCategory.image = UIImage(named: organization.primaryCategory)
                 }
                 
             }

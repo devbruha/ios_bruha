@@ -12,6 +12,7 @@ import CoreData
 class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPDragDelegate, ARSPVisibilityStateDelegate{
     
     @IBOutlet weak var uploadTableView: UITableView!
+    @IBOutlet weak var bruhaButton: UIButton!
     
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
@@ -23,18 +24,50 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
         
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         let screenHeight = screenSize.height
-        uploadTableView.rowHeight = screenHeight * 0.33
+        uploadTableView.rowHeight = screenHeight * 0.5
         self.panelControllerContainer = self.parentViewController as! ARSPContainerController
         self.panelControllerContainer.dragDelegate = self
         self.panelControllerContainer.visibilityStateDelegate = self
         self.uploadTableView!.allowsMultipleSelection = false
     }
+    
+    func customTopButtons() {
+        
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        
+        bruhaButton.setBackgroundImage(UIImage(named: "Bruha_White"), forState: UIControlState.Normal)
+        let heightContraints = NSLayoutConstraint(item: bruhaButton, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.height/15.5)
+        heightContraints.priority = UILayoutPriorityDefaultHigh
+        
+        let widthContraints = NSLayoutConstraint(item: bruhaButton, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.width/9)
+        widthContraints.priority = UILayoutPriorityDefaultHigh
+        
+        bruhaButton.addConstraints([heightContraints, widthContraints])
+    }
+    
+    func customStatusBar() {
+        let barView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0))
+        barView.backgroundColor = UIColor.grayColor()
+        
+        self.view.addSubview(barView)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
+        customTopButtons()
+        customStatusBar()
+        
+        uploadTableView.backgroundColor = UIColor.blackColor()
+        uploadTableView.separatorColor = UIColor.blackColor()
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateNotificationUpload", name: "itemDisplayChangeUpload", object: nil)
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        uploadTableView.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -74,6 +107,28 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
         
     }
     
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if GlobalVariables.uploadDisplay == "Event"{
+            if let animatedCell = cell as? EventTableViewCell {
+                animatedCell.animate()
+            }
+            
+        }
+        if GlobalVariables.uploadDisplay == "Venue"{
+            if let animatedCell = cell as? VenueTableViewCell {
+                animatedCell.animate()
+            }
+            
+        }
+        if GlobalVariables.uploadDisplay == "Organization"{
+            if let animatedCell = cell as? OrganizationTableViewCell {
+                animatedCell.animate()
+            }
+            
+        }
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
         let posterInfo = FetchData(context: managedObjectContext).fetchPosterImages()
@@ -95,7 +150,11 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
             if let images = posterInfo {
                 for img in images {
                     if img.ID == event.eventID {
-                        cell.ExploreImage.image = UIImage(data: img.Image!)
+                        if img.Image?.length > 800 {
+                            cell.ExploreImage.image = UIImage(data: img.Image!)
+                        } else {
+                            cell.ExploreImage.backgroundColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 1)
+                        }
                     }
                 }
             }
@@ -114,7 +173,7 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
             cell.circPrice.text = "$\(event.eventPrice!)"
             cell.circHiddenID.text = event.eventID
             
-            cell.rectTitle.text = event.eventDescription
+            cell.rectTitle.text = event.eventName
             cell.rectPrice.text = "$\(event.eventPrice!)"
             cell.venueName.text = event.eventVenueName
             cell.venueAddress.text = event.eventVenueAddress
@@ -159,7 +218,11 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
             if let images = posterInfo {
                 for img in images {
                     if img.ID == venue.venueID {
-                        cell.venueImage.image = UIImage(data: img.Image!)
+                        if img.Image?.length > 800 {
+                            cell.venueImage.image = UIImage(data: img.Image!)
+                        } else {
+                            cell.venueImage.backgroundColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 1)
+                        }
                     }
                 }
             }
@@ -207,7 +270,11 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
             if let images = posterInfo {
                 for img in images {
                     if img.ID == organization.organizationID {
-                        cell.organizationImage.image = UIImage(data: img.Image!)
+                        if img.Image?.length > 800 {
+                            cell.organizationImage.image = UIImage(data: img.Image!)
+                        } else {
+                            cell.organizationImage.backgroundColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 1)
+                        }
                     }
                 }
             }
