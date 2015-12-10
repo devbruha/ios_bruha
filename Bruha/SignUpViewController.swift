@@ -19,9 +19,9 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, FBSDKLoginBut
     
     @IBOutlet weak var loginB: UIButton!
     @IBOutlet weak var bruhaFace: UIImageView!
+    @IBOutlet weak var signupB: UIButton!
     
     // Retreive the managedObjectContext from AppDelegate
-    
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     var error: String = "true"
@@ -56,10 +56,18 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, FBSDKLoginBut
         self.password.tag = 1
         self.emailaddress.tag = 2
         
+        signupB.layer.cornerRadius = 2
+        signupB.clipsToBounds = true
+        continueWithoutRegister.layer.cornerRadius = 2
+        continueWithoutRegister.clipsToBounds = true
+        loginB.layer.cornerRadius = 2
+        loginB.clipsToBounds = true
+        
         // FaceBook
         self.view.addSubview(faceLoginButton)
         faceLoginButton.delegate = self
         faceLoginButton.translatesAutoresizingMaskIntoConstraints = false
+        faceLoginButton.alpha = 0.85
         
         let topConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.TopMargin, relatedBy: NSLayoutRelation.Equal, toItem: self.continueWithoutRegister, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1, constant: 18)
         

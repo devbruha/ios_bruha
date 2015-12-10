@@ -74,20 +74,29 @@ class SplashViewController: UIViewController,UIScrollViewDelegate, FBSDKLoginBut
         
         GlobalVariables.loggedIn = false
         
+        loginB.layer.cornerRadius = 2
+        loginB.clipsToBounds = true
+        signupB.layer.cornerRadius = 2
+        signupB.clipsToBounds = true
+        
         
         // FaceBook
         self.view.addSubview(faceLoginButton)
         faceLoginButton.delegate = self
         faceLoginButton.translatesAutoresizingMaskIntoConstraints = false
+        faceLoginButton.alpha = 0.85
         
         let topConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.TopMargin, relatedBy: NSLayoutRelation.Equal, toItem: self.loginB, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1, constant: 18)
         
-        let leadingConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.LeftMargin, relatedBy: NSLayoutRelation.Equal, toItem: self.loginB, attribute: NSLayoutAttribute.LeftMargin, multiplier: 1, constant: 0)
+        //let centerConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.CenterX, relatedBy: NSLayoutRelation.Equal, toItem: self.scrollView, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 0)
         
-        let trailingConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.RightMargin, relatedBy: NSLayoutRelation.Equal, toItem: self.signupB, attribute: NSLayoutAttribute.RightMargin, multiplier: 1, constant: 0)
+        let leadingConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.LeftMargin, relatedBy: NSLayoutRelation.Equal, toItem: self.loginB, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: -40)
+        
+        let trailingConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.RightMargin, relatedBy: NSLayoutRelation.Equal, toItem: self.signupB, attribute: NSLayoutAttribute.CenterX, multiplier: 1, constant: 40)
         
         NSLayoutConstraint.activateConstraints([topConstraint, leadingConstraint, trailingConstraint])
         
+        print("\(faceLoginButton.frame.size.height), \(faceLoginButton.frame.size.width) ~~~~~~~~~~~ splash")
         // Do any additional setup after loading the view.
     }
     /*override func viewWillAppear(animated: Bool) {

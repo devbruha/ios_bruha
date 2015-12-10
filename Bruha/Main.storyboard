@@ -70,7 +70,7 @@
                                 <animations/>
                             </scrollView>
                             <pageControl opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" numberOfPages="5" translatesAutoresizingMaskIntoConstraints="NO" id="x7p-eL-3qc">
-                                <rect key="frame" x="135.5" y="460" width="49" height="30"/>
+                                <rect key="frame" x="127.5" y="460" width="65" height="40"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="x7p-eL-3qc" secondAttribute="height" multiplier="60:37" id="3kv-Qn-4ns"/>
@@ -90,11 +90,11 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gfX-LU-0nY">
-                                <rect key="frame" x="50" y="493" width="105" height="40"/>
+                                <rect key="frame" x="15" y="503" width="143.5" height="30"/>
                                 <animations/>
-                                <color key="backgroundColor" red="0.14117647058823529" green="0.086274509803921567" blue="0.24705882352941178" alpha="0.65000000000000002" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.14117647058823529" green="0.086274509803921567" blue="0.24705882352941178" alpha="0.75" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="CCm-zJ-Yno"/>
+                                    <constraint firstAttribute="height" constant="30" id="CCm-zJ-Yno"/>
                                 </constraints>
                                 <state key="normal" title="Login">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -105,11 +105,11 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SX6-tU-CNv">
-                                <rect key="frame" x="165" y="493" width="105" height="40"/>
+                                <rect key="frame" x="161.5" y="503" width="143.5" height="30"/>
                                 <animations/>
-                                <color key="backgroundColor" red="0.14117647059999999" green="0.086274509799999996" blue="0.2470588235" alpha="0.65000000000000002" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.14117647059999999" green="0.086274509799999996" blue="0.2470588235" alpha="0.75" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="40" id="mAe-Gf-3KF"/>
+                                    <constraint firstAttribute="height" constant="30" id="mAe-Gf-3KF"/>
                                 </constraints>
                                 <state key="normal" title="SignUp">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -128,8 +128,8 @@
                             <constraint firstAttribute="trailing" secondItem="ffT-ev-ZdR" secondAttribute="trailing" id="37q-sR-DLd"/>
                             <constraint firstItem="gfX-LU-0nY" firstAttribute="top" secondItem="x7p-eL-3qc" secondAttribute="bottom" constant="3" id="5ff-UE-l34"/>
                             <constraint firstAttribute="trailing" secondItem="V7t-ms-RD9" secondAttribute="trailing" constant="10" id="7Bm-ap-Nkf"/>
-                            <constraint firstItem="SX6-tU-CNv" firstAttribute="leading" secondItem="gfX-LU-0nY" secondAttribute="trailing" constant="10" id="BxZ-tN-jXO"/>
-                            <constraint firstItem="gfX-LU-0nY" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="50" id="FFS-0H-6VP"/>
+                            <constraint firstItem="SX6-tU-CNv" firstAttribute="leading" secondItem="gfX-LU-0nY" secondAttribute="trailing" constant="3" id="BxZ-tN-jXO"/>
+                            <constraint firstItem="gfX-LU-0nY" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="15" id="FFS-0H-6VP"/>
                             <constraint firstItem="V7t-ms-RD9" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" constant="20" id="IJy-dh-TMJ"/>
                             <constraint firstItem="gfX-LU-0nY" firstAttribute="width" secondItem="SX6-tU-CNv" secondAttribute="width" id="Kj4-cm-bfW"/>
                             <constraint firstItem="Msv-wA-iUi" firstAttribute="leading" secondItem="kh9-bI-dsS" secondAttribute="leading" constant="10" id="LRe-g2-Wlw"/>
@@ -146,7 +146,7 @@
                             <constraint firstItem="Msv-wA-iUi" firstAttribute="top" secondItem="kh9-bI-dsS" secondAttribute="top" constant="50" id="jmV-ZD-DOo"/>
                             <constraint firstAttribute="centerX" secondItem="x7p-eL-3qc" secondAttribute="centerX" id="mjH-RE-OGr"/>
                             <constraint firstItem="2fi-mo-0CV" firstAttribute="top" secondItem="SX6-tU-CNv" secondAttribute="bottom" constant="35" id="nda-5B-Zkf"/>
-                            <constraint firstAttribute="trailing" secondItem="SX6-tU-CNv" secondAttribute="trailing" constant="50" id="x3z-u4-gIV"/>
+                            <constraint firstAttribute="trailing" secondItem="SX6-tU-CNv" secondAttribute="trailing" constant="15" id="x3z-u4-gIV"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="mnX-Uk-O8W"/>
@@ -205,12 +205,12 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Zpi-gO-MO2">
-                                <rect key="frame" x="15" y="470" width="80" height="35"/>
+                                <rect key="frame" x="15" y="475" width="80" height="30"/>
                                 <animations/>
-                                <color key="backgroundColor" red="0.14117647059999999" green="0.086274509799999996" blue="0.2470588235" alpha="0.65000000000000002" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.14117647059999999" green="0.086274509799999996" blue="0.2470588235" alpha="0.75" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="ZxQ-2B-jxD"/>
-                                    <constraint firstAttribute="height" constant="35" id="fBx-NS-UrO"/>
+                                    <constraint firstAttribute="height" constant="30" id="fBx-NS-UrO"/>
                                 </constraints>
                                 <state key="normal" title="SKIP">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -218,11 +218,11 @@
                                 </state>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YEh-NT-ahx">
-                                <rect key="frame" x="120" y="470" width="80" height="35"/>
+                                <rect key="frame" x="120" y="475" width="80" height="30"/>
                                 <animations/>
-                                <color key="backgroundColor" red="0.14117647059999999" green="0.086274509799999996" blue="0.2470588235" alpha="0.65000000000000002" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.14117647059999999" green="0.086274509799999996" blue="0.2470588235" alpha="0.75" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="N5C-bR-c4e"/>
+                                    <constraint firstAttribute="height" constant="30" id="N5C-bR-c4e"/>
                                     <constraint firstAttribute="width" constant="80" id="fEK-Qc-Mgk"/>
                                 </constraints>
                                 <state key="normal" title="LOGIN!">
@@ -234,11 +234,11 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="IXy-E0-tFC">
-                                <rect key="frame" x="225" y="470" width="80" height="35"/>
+                                <rect key="frame" x="225" y="475" width="80" height="30"/>
                                 <animations/>
-                                <color key="backgroundColor" red="0.14117647059999999" green="0.086274509799999996" blue="0.2470588235" alpha="0.65000000000000002" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.14117647059999999" green="0.086274509799999996" blue="0.2470588235" alpha="0.75" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="35" id="s4o-vG-rNJ"/>
+                                    <constraint firstAttribute="height" constant="30" id="s4o-vG-rNJ"/>
                                     <constraint firstAttribute="width" constant="80" id="xOX-rr-HVx"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -290,6 +290,7 @@
                     <connections>
                         <outlet property="bruhaFace" destination="zuy-f0-nCR" id="dNN-LG-oBS"/>
                         <outlet property="continueWithoutLogIn" destination="Zpi-gO-MO2" id="GOp-Eo-Ybx"/>
+                        <outlet property="loginB" destination="YEh-NT-ahx" id="jHT-mA-wSw"/>
                         <outlet property="password" destination="nq4-LE-yYO" id="Zlj-Ls-Tef"/>
                         <outlet property="registerB" destination="IXy-E0-tFC" id="Jg6-Vx-DwZ"/>
                         <outlet property="username" destination="Zc3-kt-zjd" id="me9-Di-1ZA"/>
@@ -820,7 +821,7 @@
                                 <animations/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter Desired Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lU5-Fa-mPg">
-                                <rect key="frame" x="67" y="269" width="187" height="21"/>
+                                <rect key="frame" x="67" y="269.5" width="187" height="20.5"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
@@ -839,19 +840,19 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter Desired Password" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="pwy-nI-Eqb">
-                                <rect key="frame" x="71" y="335" width="182" height="20"/>
+                                <rect key="frame" x="71" y="335" width="182" height="20.5"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mFX-fe-j8z">
-                                <rect key="frame" x="120" y="470" width="80" height="35"/>
+                                <rect key="frame" x="120" y="475" width="80" height="30"/>
                                 <animations/>
-                                <color key="backgroundColor" red="0.14117647058823529" green="0.086274509803921567" blue="0.24705882352941178" alpha="0.65000000000000002" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.14117647059999999" green="0.086274509799999996" blue="0.2470588235" alpha="0.75" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="MJ1-QS-HA3"/>
-                                    <constraint firstAttribute="height" constant="35" id="phf-5C-5w6"/>
+                                    <constraint firstAttribute="height" constant="30" id="phf-5C-5w6"/>
                                 </constraints>
                                 <state key="normal" title="SIGN UP!">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -862,12 +863,12 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KPh-xi-BKg">
-                                <rect key="frame" x="15" y="470" width="80" height="35"/>
+                                <rect key="frame" x="15" y="475" width="80" height="30"/>
                                 <animations/>
-                                <color key="backgroundColor" red="0.14117647059999999" green="0.086274509799999996" blue="0.2470588235" alpha="0.65000000000000002" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.14117647059999999" green="0.086274509799999996" blue="0.2470588235" alpha="0.75" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="AWU-Vf-7K3"/>
-                                    <constraint firstAttribute="height" constant="35" id="Umj-Fd-2iO"/>
+                                    <constraint firstAttribute="height" constant="30" id="Umj-Fd-2iO"/>
                                 </constraints>
                                 <state key="normal" title="SKIP">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -875,19 +876,19 @@
                                 </state>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="Enter Your Email" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EMK-6Q-P54">
-                                <rect key="frame" x="98" y="400" width="125" height="21"/>
+                                <rect key="frame" x="98" y="400.5" width="125" height="20.5"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="yNP-Bp-eQO">
-                                <rect key="frame" x="225" y="470" width="80" height="35"/>
+                                <rect key="frame" x="225" y="475" width="80" height="30"/>
                                 <animations/>
-                                <color key="backgroundColor" red="0.14117647059999999" green="0.086274509799999996" blue="0.2470588235" alpha="0.65000000000000002" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.14117647059999999" green="0.086274509799999996" blue="0.2470588235" alpha="0.75" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="80" id="43N-3J-3Om"/>
-                                    <constraint firstAttribute="height" constant="35" id="GY0-lX-WDn"/>
+                                    <constraint firstAttribute="height" constant="30" id="GY0-lX-WDn"/>
                                 </constraints>
                                 <state key="normal" title="LOGIN">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -906,7 +907,7 @@
                                 </constraints>
                             </imageView>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="G4a-Df-YW3">
-                                <rect key="frame" x="53" y="360" width="214" height="30"/>
+                                <rect key="frame" x="53" y="360.5" width="214" height="30"/>
                                 <animations/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" secureTextEntry="YES"/>
@@ -952,6 +953,7 @@
                         <outlet property="emailaddress" destination="QJo-sA-aIg" id="pkr-eG-s2T"/>
                         <outlet property="loginB" destination="yNP-Bp-eQO" id="OQa-s3-iY4"/>
                         <outlet property="password" destination="G4a-Df-YW3" id="lIW-f9-DOQ"/>
+                        <outlet property="signupB" destination="mFX-fe-j8z" id="LmD-KU-bkN"/>
                         <outlet property="username" destination="TzN-5r-okt" id="cmH-CJ-K5i"/>
                         <segue destination="zh2-4j-mHu" kind="modal" identifier="ProceedToDashBoard" id="R95-Q8-ZSY"/>
                     </connections>
@@ -2159,12 +2161,12 @@
         <image name="Tickets_Sm" width="250" height="250"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="R95-Q8-ZSY"/>
-        <segue reference="uZx-1x-ByM"/>
-        <segue reference="lw9-PB-bZ2"/>
-        <segue reference="zCE-mg-04b"/>
-        <segue reference="l1y-Rt-Be8"/>
-        <segue reference="bzC-Is-F2I"/>
         <segue reference="haB-2U-z7b"/>
+        <segue reference="l1y-Rt-Be8"/>
+        <segue reference="Rkq-9y-PIT"/>
+        <segue reference="lw9-PB-bZ2"/>
+        <segue reference="uZx-1x-ByM"/>
+        <segue reference="zjY-DB-duY"/>
+        <segue reference="bzC-Is-F2I"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -17,6 +17,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
     @IBOutlet weak var continueWithoutLogIn: UIButton!
     @IBOutlet weak var registerB: UIButton!
     @IBOutlet weak var bruhaFace: UIImageView!
+    @IBOutlet weak var loginB: UIButton!
     
     
     // Retreive the managedObjectContext from AppDelegate
@@ -50,12 +51,19 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
         continueWithoutLogIn.addGestureRecognizer(tgr)
         continueWithoutLogIn.userInteractionEnabled = true
         
+        registerB.layer.cornerRadius = 2
+        registerB.clipsToBounds = true
+        continueWithoutLogIn.layer.cornerRadius = 2
+        continueWithoutLogIn.clipsToBounds = true
+        loginB.layer.cornerRadius = 2
+        loginB.clipsToBounds = true
         
         // FaceBook
         let faceLoginButton = FBSDKLoginButton()
         self.view.addSubview(faceLoginButton)
         faceLoginButton.delegate = self
         faceLoginButton.translatesAutoresizingMaskIntoConstraints = false
+        faceLoginButton.alpha = 0.85
         
         let topConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.TopMargin, relatedBy: NSLayoutRelation.Equal, toItem: self.continueWithoutLogIn, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1, constant: 18)
         
@@ -65,7 +73,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
         
         NSLayoutConstraint.activateConstraints([topConstraint, leadingConstraint, trailingConstraint])
         
-
+        print("\(faceLoginButton.frame.size.height), \(faceLoginButton.frame.size.width) ~~~~~~~~~~~ login")
         // Do any additional setup after loading the view.
     }
 
