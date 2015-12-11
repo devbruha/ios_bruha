@@ -80,16 +80,16 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         let nib = UINib(nibName: "CategoryHeaderCellTableViewCell", bundle: nil)
         categoryTableView.registerNib(nib, forCellReuseIdentifier: "HeaderCell")
         
-        priceLabelTitle.frame = CGRectMake(10,220, screenSize.width - 20, 22)
+        priceLabelTitle.frame = CGRectMake(10,230, screenSize.width - 20, 30)
         priceLabelTitle.textAlignment = NSTextAlignment.Left
-        priceLabelTitle.backgroundColor = UIColor.orangeColor()
+        priceLabelTitle.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1)
         priceLabelTitle.textColor = UIColor.whiteColor()
         priceLabelTitle.font = UIFont(name: ".SFUIText-Semibold", size: 18)
         priceLabelTitle.text = "   Admission Price"
         self.scrollView.addSubview(priceLabelTitle)
         
         
-        priceLabel.frame = CGRectMake(10, 242, screenSize.width - 20, 22)
+        priceLabel.frame = CGRectMake(10, 260, screenSize.width - 20, 20)
         priceLabel.textAlignment = NSTextAlignment.Center
         priceLabel.backgroundColor = UIColor.clearColor()
         priceLabel.textColor = UIColor.whiteColor()
@@ -102,7 +102,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         slider.continuous = true
         slider.tintColor = UIColor.whiteColor()
         slider.backgroundColor = UIColor.whiteColor()
-        slider.frame = CGRectMake(10, 264, screenSize.width - 20, 22)
+        slider.frame = CGRectMake(10, 280, screenSize.width - 20, 20)
         slider.value = -1
         slider.addTarget(self, action: "sliderValueDidChange:", forControlEvents: .ValueChanged)
         self.scrollView.addSubview(slider)
@@ -146,7 +146,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
             
         default:
             eventTapped()
-        } //IS THIS BLOCK NEEDED?
+        }
     }
     
     func setupEVOD() {
@@ -428,10 +428,9 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         updateEVOD()
         //clearBackupCategories()
         //resetSliderValue()
-        updateNotificationSent()
         categoryTableView.reloadData()
-        
         adjustHeightOfTableView(self.categoryTableView, constraint: self.categoryTableHeight)
+        updateNotificationSent()
     }
     
     func discoverableTapped(){
@@ -458,10 +457,9 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         //clearBackupCategories()
         //resetSliderValue()
         updateEVOD()
-        updateNotificationSent()
         categoryTableView.reloadData()
-        
         adjustHeightOfTableView(self.categoryTableView, constraint: self.categoryTableHeight)
+        updateNotificationSent()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -497,7 +495,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
             
             if(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[eventObject[indexPath.section].sectionName]![0].contains(eventObject[indexPath.section].sectionObjectIDs[indexPath.row])){
                 
-                cell.backgroundColor = UIColor.grayColor()
+                cell.backgroundColor = UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
             }
     
         }
@@ -508,7 +506,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         let selectedCell = self.categoryTableView.cellForRowAtIndexPath(indexPath) as UITableViewCell!
-         selectedCell.backgroundColor = UIColor.grayColor()
+         selectedCell.backgroundColor = UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
         
         let headerTitle = eventObject[indexPath.section].sectionName
         //categoryTableView.headerViewForSection(indexPath.section)?.textLabel!.text!
@@ -573,7 +571,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
             
             //Handled in didSelectRowAtIndexPath
             
-            selectedCell.backgroundColor = UIColor.grayColor()
+            selectedCell.backgroundColor = UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
             
             GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].append(subCategoryID)
             GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![1].append(subCategoryName)
@@ -606,8 +604,6 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
             return venueObject.count
         } else if GlobalVariables.selectedDisplay == "Organization" {
             return organizationObject.count
-        } else if GlobalVariables.selectedDisplay == "Artist" {
-//            return artistObject.count
         }
         return 0
         
@@ -626,13 +622,13 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         } 
         
         
-        let sepFrame = CGRectMake(0,headerCell.frame.size.height-1, 320, 1);
+        let sepFrame = CGRectMake(0,headerCell.frame.size.height-1, headerCell.frame.size.width, 1);
         let seperatorView = UIView(frame: sepFrame)
         seperatorView.backgroundColor = UIColor.whiteColor()
         
         if(section == 0){
             
-            headerCell.backgroundColor = UIColor.orangeColor()
+            headerCell.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1)
             headerCell.textLabel!.textColor = UIColor.whiteColor()
             headerCell.detailTextLabel?.text = "\(section)"
             
@@ -642,16 +638,16 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
             if GlobalVariables.selectedDisplay == "Event" {
                 
                 if(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.keys.contains((headerCell.textLabel?.text)!)){
-                    headerCell.backgroundColor = UIColor.cyanColor()
+                    headerCell.backgroundColor = UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1.0)
                 }
                 else{
-                    headerCell.backgroundColor = UIColor(red: 1.0, green: 0.710, blue: 0.071, alpha: 1.0)
+                    headerCell.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1.0)
                 }
                 
             } else if GlobalVariables.selectedDisplay == "Venue" {
                 
                 if(GlobalVariables.UserCustomFilters.categoryFilter.venueCategories.contains((headerCell.textLabel?.text)!)){
-                    headerCell.backgroundColor = UIColor.blueColor()
+                    headerCell.backgroundColor = UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
                 }
                 else{
                     headerCell.backgroundColor = UIColor.blackColor()
@@ -659,7 +655,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
                 
             } else if GlobalVariables.selectedDisplay == "Organization" {
                 if(GlobalVariables.UserCustomFilters.categoryFilter.organizationCategories.contains((headerCell.textLabel?.text)!)){
-                    headerCell.backgroundColor = UIColor.blueColor()
+                    headerCell.backgroundColor = UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
                 }
                 else{
                     headerCell.backgroundColor = UIColor.blackColor()
@@ -841,10 +837,11 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         constraint.constant = height
         
         scrollView.contentSize.height = 500 + constraint.constant
+        scrollView.contentInset.bottom = 100
         
-        priceLabelTitle.frame = CGRectMake(10, 198 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 22)
-        priceLabel.frame = CGRectMake(10, 220 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 22)
-        slider.frame = CGRectMake(10, 242 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 22)
+        priceLabelTitle.frame = CGRectMake(10, 200 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 30)
+        priceLabel.frame = CGRectMake(10, 230 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 20)
+        slider.frame = CGRectMake(10, 250 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 20)
         
         self.view.setNeedsUpdateConstraints()
         

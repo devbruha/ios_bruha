@@ -584,8 +584,6 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
             headerCell.textLabel?.text = venueObject[section]
         } else if GlobalVariables.selectedDisplay == "Organization" {
             headerCell.textLabel?.text = organizationObject[section]
-        } else if GlobalVariables.selectedDisplay == "Artist" {
-            headerCell.textLabel?.text = artistObject[section]
         }
         
         
