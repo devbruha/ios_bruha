@@ -531,11 +531,12 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="discoverableSelectedB" destination="JeB-Wo-Mfc" id="vvi-Qx-uTN"/>
+                        <outlet property="discoverableButtonIcon" destination="x0C-pJ-jqc" id="bVT-Un-BSy"/>
+                        <outlet property="discoverableSelectedB" destination="oov-l7-Qrm" id="WEj-9b-EgM"/>
                         <outlet property="eventButtonIcon" destination="GzJ-cr-Msd" id="0S4-on-rGG"/>
                         <outlet property="eventSelectedB" destination="dyV-Nc-Xca" id="EOo-5S-7EA"/>
-                        <outlet property="organizationButtonIcon" destination="x0C-pJ-jqc" id="DZi-GM-W1n"/>
-                        <outlet property="organizationSelectedB" destination="oov-l7-Qrm" id="8jU-32-Dr1"/>
+                        <outlet property="organizationButtonIcon" destination="Vr9-VD-oQY" id="9AL-gB-wn6"/>
+                        <outlet property="organizationSelectedB" destination="JeB-Wo-Mfc" id="gsD-2G-XxZ"/>
                         <outlet property="venueButtonIcon" destination="gDU-Xy-Fc4" id="nZN-pk-nIn"/>
                         <outlet property="venueSelectedB" destination="UOF-Jy-O5t" id="XUZ-gK-j4v"/>
                     </connections>
