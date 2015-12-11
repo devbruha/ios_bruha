@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIView {
-    func startRotating(duration: Double = 1) {
+    func startRotating(duration: Double = 1.5) {
         let kAnimationKey = "rotation"
         
         if self.layer.animationForKey(kAnimationKey) == nil {
@@ -331,12 +331,12 @@ class LoadScreenViewController: UIViewController {
     }
     
     func startSpinning() {
-        loading.image = UIImage(named:"Organization_Orange")
+        loading.image = UIImage(named:"Events_Orange")
         loading.startRotating()
     }
     
     func stopSpinning() {
         loading.stopRotating()
-        loading.image = UIImage(named:"Events_Orange")
+        loading.image = UIImage(named:"Brüha_Face_Purple_Lrg")
     }
 }

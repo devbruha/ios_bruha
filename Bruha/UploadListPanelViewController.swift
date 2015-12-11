@@ -22,7 +22,7 @@ class UploadListPanelViewController: UIViewController, UITableViewDelegate {
     
     
     var panelControllerContainer: ARSPContainerController!
-    var visibleZoneHeight: CGFloat = 74
+    var visibleZoneHeight: CGFloat = 59
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,10 +46,13 @@ class UploadListPanelViewController: UIViewController, UITableViewDelegate {
     
     func setupPanel(){
         
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        let screenHeight = screenSize.height
+        
         self.panelControllerContainer = self.parentViewController as! ARSPContainerController
         panelControllerContainer.visibleZoneHeight = visibleZoneHeight
         panelControllerContainer.shouldOverlapMainViewController = true
-        panelControllerContainer.maxPanelHeight = visibleZoneHeight
+        panelControllerContainer.maxPanelHeight = screenHeight*0.66
         panelControllerContainer.draggingEnabled = false
         
     }
