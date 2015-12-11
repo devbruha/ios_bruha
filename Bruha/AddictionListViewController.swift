@@ -198,12 +198,20 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
                     
                     cell.rectTitle.text = event.eventName
                     cell.rectPrice.text = "$\(event.eventPrice!)"
-                    cell.venueName.text = event.eventVenueName
-                    cell.venueAddress.text = event.eventVenueAddress
-                    cell.startDate.text = event.eventStartDate
-                    cell.startTime.text = "\(event.eventStartTime) -"
-                    cell.endDate.text = event.eventEndDate
-                    cell.endTime.text = event.eventEndTime
+                    
+                    if event.eventVenueName == "" {
+                        cell.venueName.text = "nil"
+                    }else{cell.venueName.text = event.eventVenueName}
+                    
+                    cell.venueAddress.text = "\(event.eventVenueAddress.componentsSeparatedByString(", ")[0])\n\(event.eventVenueCity)"
+                    
+                    cell.startTime.text = "\(convertRectTimeFormat("\(event.eventStartDate) \(event.eventStartTime)")) -"
+                    cell.endTime.text = convertRectTimeFormat("\(event.eventEndDate) \(event.eventEndTime)")
+                    
+                    //cell.startDate.text = event.eventStartDate
+                    //cell.startTime.text = "\(event.eventStartTime) -"
+                    //cell.endDate.text = event.eventEndDate
+                    //cell.endTime.text = event.eventEndTime
                     
                     cell.circAddicted.contentMode = UIViewContentMode.ScaleAspectFit
                     cell.circAddicted.image = UIImage(named: "Addictions_Splash")
@@ -587,6 +595,38 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
     func updateNotificationAddiction(){
         
         self.addictionTableView.reloadData()
+    }
+    
+    func convertCircTimeFormat(date: String) -> String {
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.timeZone = NSTimeZone.localTimeZone()
+        
+        if let ndate = dateFormatter.dateFromString(date) {
+            
+            dateFormatter.dateFormat = "MMM dd, yyyy"
+            dateFormatter.timeZone = NSTimeZone.localTimeZone()
+            let timeStamp = dateFormatter.stringFromDate(ndate)
+            return timeStamp
+        }
+        else {return "nil or error times"}
+    }
+    
+    func convertRectTimeFormat(date: String) -> String {
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatter.timeZone = NSTimeZone.localTimeZone()
+        
+        if let ndate = dateFormatter.dateFromString(date) {
+            
+            dateFormatter.dateFormat = "EEEE, MMMM dd 'at' h:mma"
+            dateFormatter.timeZone = NSTimeZone.localTimeZone()
+            let timeStamp = dateFormatter.stringFromDate(ndate)
+            return timeStamp
+        }
+        else {return "nil,error times"}
     }
     
     

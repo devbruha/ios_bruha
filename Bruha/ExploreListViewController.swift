@@ -293,14 +293,10 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                     cell.venueName.text = "nil"
                 }else{cell.venueName.text = event.eventVenueName}
                 
-                cell.venueAddress.text = event.eventVenueAddress
+                cell.venueAddress.text = "\(event.eventVenueAddress.componentsSeparatedByString(", ")[0])\n\(event.eventVenueCity)"
                 
-                let rStart = convertRectTimeFormat("\(event.eventStartDate) \(event.eventStartTime)")
-                let rEnd = convertRectTimeFormat("\(event.eventEndDate) \(event.eventEndTime)")
-                cell.startDate.text = rStart.componentsSeparatedByString(",")[0]
-                cell.startTime.text = rStart.componentsSeparatedByString(",")[1]
-                cell.endDate.text = rEnd.componentsSeparatedByString(",")[0]
-                cell.endTime.text = rEnd.componentsSeparatedByString(",")[1]
+                cell.startTime.text = "\(convertRectTimeFormat("\(event.eventStartDate) \(event.eventStartTime)")) -"
+                cell.endTime.text = convertRectTimeFormat("\(event.eventEndDate) \(event.eventEndTime)")
                 
                 cell.rectCategory.contentMode = UIViewContentMode.ScaleAspectFill
                 cell.rectCategory.image = UIImage(named: event.primaryCategory)
@@ -368,15 +364,17 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                     cell.venueName.text = "nil"
                 }else{cell.venueName.text = event.eventVenueName}
                 
-                cell.venueAddress.text = event.eventVenueAddress
+                cell.venueAddress.text = "\(event.eventVenueAddress.componentsSeparatedByString(", ")[0])\n\(event.eventVenueCity)"
                 
+                cell.startTime.text = "\(convertRectTimeFormat("\(event.eventStartDate) \(event.eventStartTime)")) -"
+                cell.endTime.text = convertRectTimeFormat("\(event.eventEndDate) \(event.eventEndTime)")
                 
-                let rStart = convertRectTimeFormat("\(event.eventStartDate) \(event.eventStartTime)")
-                let rEnd = convertRectTimeFormat("\(event.eventEndDate) \(event.eventEndTime)")
-                cell.startDate.text = rStart.componentsSeparatedByString(",")[0]
-                cell.startTime.text = rStart.componentsSeparatedByString(",")[1]
-                cell.endDate.text = rEnd.componentsSeparatedByString(",")[0]
-                cell.endTime.text = rEnd.componentsSeparatedByString(",")[1]
+//                let rStart = convertRectTimeFormat("\(event.eventStartDate) \(event.eventStartTime)")
+//                let rEnd = convertRectTimeFormat("\(event.eventEndDate) \(event.eventEndTime)")
+//                cell.startDate.text = rStart.componentsSeparatedByString(",")[0]
+//                cell.startTime.text = rStart.componentsSeparatedByString(",")[1]
+//                cell.endDate.text = rEnd.componentsSeparatedByString(",")[0]
+//                cell.endTime.text = rEnd.componentsSeparatedByString(",")[1]
                 
                 cell.rectCategory.contentMode = UIViewContentMode.ScaleAspectFill
                 cell.rectCategory.image = UIImage(named: event.primaryCategory)
@@ -1125,7 +1123,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         
         if let ndate = dateFormatter.dateFromString(date) {
             
-            dateFormatter.dateFormat = "MMM dd,h:mma"
+            dateFormatter.dateFormat = "EEEE, MMMM dd 'at' h:mma"
             dateFormatter.timeZone = NSTimeZone.localTimeZone()
             let timeStamp = dateFormatter.stringFromDate(ndate)
             return timeStamp

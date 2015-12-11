@@ -19,13 +19,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="J5c-Ih-djP">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Image" translatesAutoresizingMaskIntoConstraints="NO" id="J5c-Ih-djP">
+                                <rect key="frame" x="-4" y="0.0" width="328" height="568"/>
                                 <animations/>
                             </imageView>
                             <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="2II-dv-faS">
                                 <rect key="frame" x="16" y="446" width="288" height="2"/>
                             </progressView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="ykS-IQ-p7M">
+                                <rect key="frame" x="85" y="378" width="150" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="150" id="MkN-TS-MCD"/>
+                                    <constraint firstAttribute="height" constant="150" id="qcq-f2-6Da"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -33,13 +40,16 @@
                             <constraint firstAttribute="trailingMargin" secondItem="J5c-Ih-djP" secondAttribute="trailing" constant="-20" id="O9J-f1-NCH"/>
                             <constraint firstItem="HrU-7c-eyS" firstAttribute="top" secondItem="J5c-Ih-djP" secondAttribute="bottom" id="OSk-VD-ZEN"/>
                             <constraint firstItem="J5c-Ih-djP" firstAttribute="top" secondItem="u4H-VX-P2O" secondAttribute="topMargin" id="PE8-en-WLL"/>
+                            <constraint firstItem="HrU-7c-eyS" firstAttribute="top" secondItem="ykS-IQ-p7M" secondAttribute="bottom" constant="40" id="V0N-c3-JBL"/>
                             <constraint firstAttribute="trailingMargin" secondItem="2II-dv-faS" secondAttribute="trailing" id="Z1Q-QD-0na"/>
                             <constraint firstItem="2II-dv-faS" firstAttribute="leading" secondItem="u4H-VX-P2O" secondAttribute="leadingMargin" id="dA1-ym-bKj"/>
                             <constraint firstItem="J5c-Ih-djP" firstAttribute="leading" secondItem="u4H-VX-P2O" secondAttribute="leadingMargin" constant="-20" id="igl-Ui-mqj"/>
+                            <constraint firstItem="ykS-IQ-p7M" firstAttribute="centerX" secondItem="u4H-VX-P2O" secondAttribute="centerX" id="kGs-df-cXf"/>
                             <constraint firstItem="HrU-7c-eyS" firstAttribute="top" secondItem="2II-dv-faS" secondAttribute="bottom" constant="120" id="ksY-fp-bq8"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="loading" destination="ykS-IQ-p7M" id="lLK-Lm-YJh"/>
                         <outlet property="progressView" destination="2II-dv-faS" id="JCj-bL-f0o"/>
                         <segue destination="vXZ-lx-hvc" kind="modal" identifier="toSplashView" animates="NO" id="lw9-PB-bZ2"/>
                         <segue destination="zh2-4j-mHu" kind="modal" identifier="toDashBoard" id="ch4-Vq-8DI"/>
@@ -2215,12 +2225,12 @@
         <image name="Tickets_Sm" width="250" height="250"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="lw9-PB-bZ2"/>
-        <segue reference="zjY-DB-duY"/>
-        <segue reference="uZx-1x-ByM"/>
-        <segue reference="pIM-BH-lfI"/>
         <segue reference="1Xm-3s-taQ"/>
         <segue reference="bzC-Is-F2I"/>
         <segue reference="haB-2U-z7b"/>
+        <segue reference="ch4-Vq-8DI"/>
+        <segue reference="lw9-PB-bZ2"/>
+        <segue reference="uZx-1x-ByM"/>
+        <segue reference="zjY-DB-duY"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -25,8 +25,7 @@ class EventTableViewCell: SWTableViewCell {
     @IBOutlet weak var rectPrice: UILabel!
     @IBOutlet weak var venueName: UILabel!
     @IBOutlet weak var venueAddress: UILabel!
-    @IBOutlet weak var startDate: UILabel!
-    @IBOutlet weak var endDate: UILabel!
+    
     @IBOutlet weak var startTime: UILabel!
     @IBOutlet weak var endTime: UILabel!
     @IBOutlet weak var rectCategory: UIImageView!
