@@ -288,9 +288,9 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             }
             
             if like == 0 {
-                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Get Addicted")
+                temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),title: "Get Addicted")
             } else if like == 1 {
-                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Addicted!")
+                temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
             }
             
             cell.leftUtilityButtons = temp as [AnyObject]
@@ -340,9 +340,9 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             }
             
             if like == 0 {
-                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Get Addicted")
+                temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),title: "Get Addicted")
             } else if like == 1 {
-                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Addicted!")
+                temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
             }
             
             cell.leftUtilityButtons = temp as [AnyObject]
@@ -388,9 +388,9 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             }
             
             if like == 0 {
-                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Get Addicted")
+                temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),title: "Get Addicted")
             } else if like == 1 {
-                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Addicted!")
+                temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
             }
             
             cell.leftUtilityButtons = temp as [AnyObject]

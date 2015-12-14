@@ -170,11 +170,17 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
             
             cell.circTitle.text = event.eventName
             cell.circDate.text = event.eventStartDate
-            cell.circPrice.text = "$\(event.eventPrice!)"
+            //cell.circPrice.text = "$\(event.eventPrice!)"
             cell.circHiddenID.text = event.eventID
             
             cell.rectTitle.text = event.eventName
-            cell.rectPrice.text = "$\(event.eventPrice!)"
+            //cell.rectPrice.text = "$\(event.eventPrice!)"
+            
+            if let price = Float(event.eventPrice!) {
+                if price == 0.0 {cell.circPrice.text = "Free!"; cell.rectPrice.text = "Free!"}
+                else {cell.circPrice.text = "$\(price)"; cell.rectPrice.text = "$\(price)"}
+            } else {cell.circPrice.text = "No Price"; cell.rectPrice.text = "No Price"}
+            
             
             if event.eventVenueName == "" {
                 cell.venueName.text = "nil"
@@ -188,11 +194,20 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
             //cell.startTime.text = "\(event.eventStartTime) -"
             //cell.endDate.text = event.eventEndDate
             //cell.endTime.text = event.eventEndTime
+            
+            cell.rectCategory.contentMode = UIViewContentMode.ScaleAspectFill
+            cell.rectCategory.image = UIImage(named: event.primaryCategory)
+            cell.rectCategoryName.text = event.primaryCategory
+            
+            cell.circAddicted.contentMode = UIViewContentMode.ScaleAspectFit
+            cell.circAddicted.image = UIImage(named: "MyUploads_Sm")
+            cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
+            cell.circCategory.image = UIImage(named: event.primaryCategory)
             // Configure the cell...
 
             
             let temp: NSMutableArray = NSMutableArray()
-            temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Delete")
+            temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),title: "Delete")
             cell.leftUtilityButtons = temp as [AnyObject]
             
             
@@ -242,7 +257,7 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
             
             
             let temp: NSMutableArray = NSMutableArray()
-            temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Delete")
+            temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),title: "Delete")
             cell.leftUtilityButtons = temp as [AnyObject]
             
             
@@ -292,7 +307,7 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
             cell.circHiddenID.text = organization.organizationID
             
             let temp: NSMutableArray = NSMutableArray()
-            temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Delete")
+            temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),title: "Delete")
             cell.leftUtilityButtons = temp as [AnyObject]
             
             

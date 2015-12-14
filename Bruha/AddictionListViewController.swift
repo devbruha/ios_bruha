@@ -214,7 +214,7 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
                     //cell.endTime.text = event.eventEndTime
                     
                     cell.circAddicted.contentMode = UIViewContentMode.ScaleAspectFit
-                    cell.circAddicted.image = UIImage(named: "Addictions_Splash")
+                    cell.circAddicted.image = UIImage(named: "MyAddictions_Sm")
                     cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
                     cell.circCategory.image = UIImage(named: event.primaryCategory)
                     // Configure the cell...
@@ -234,7 +234,7 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
             
             
             let temp: NSMutableArray = NSMutableArray()
-            temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Addicted!")
+            temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
             cell.leftUtilityButtons = temp as [AnyObject]
             
             
@@ -295,7 +295,7 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
             
             
             let temp: NSMutableArray = NSMutableArray()
-            temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Addicted!")
+            temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
             cell.leftUtilityButtons = temp as [AnyObject]
             
             
@@ -352,7 +352,7 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
             
             
             let temp: NSMutableArray = NSMutableArray()
-            temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Addicted!")
+            temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
             cell.leftUtilityButtons = temp as [AnyObject]
             
             

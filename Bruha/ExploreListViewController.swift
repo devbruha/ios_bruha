@@ -257,11 +257,19 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
 
             
             let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
+            let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
+            var like = 0
             
             if GlobalVariables.filterEventBool {
                 
                 let filteredEventInfo = GlobalVariables.displayFilteredEvents
                 let event = filteredEventInfo[indexPath.row]
+                
+                for addict in addictionInfo! {
+                    if addict.eventID == event.eventID {
+                        like = 1
+                    }
+                }
                 
                 cell.ExploreImage.contentMode = UIViewContentMode.ScaleToFill
                 if let images = posterInfo {
@@ -312,6 +320,13 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             } else { // when there is no filtering
                 
                 let event = eventInfo![indexPath.row]
+                
+                for addict in addictionInfo! {
+                    if addict.eventID == event.eventID {
+                        like = 1
+                    }
+                }
+
                 
                 cell.ExploreImage.contentMode = UIViewContentMode.ScaleToFill
                 if let images = posterInfo {
@@ -389,19 +404,12 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             }
                     
             let temp: NSMutableArray = NSMutableArray()
-            var like = 0
-            let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
-            for addict in addictionInfo! {
-                if addict.eventID == eventInfo![indexPath.row].eventID {
-                    like = 1
-                }
-            }
             
             if like == 0 {
-                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Get Addicted")
+                temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),title: "Get Addicted")
                 cell.circAddicted.hidden = true
             } else if like == 1 {
-                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Addicted!")
+                temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
                 cell.circAddicted.hidden = false
             }
             
@@ -436,11 +444,20 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             
             
             let venueInfo = FetchData(context: managedObjectContext).fetchVenues()
+            var like = 0
+            let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsVenue()
+            
             
             if GlobalVariables.filterVenueBool {
                 
                 let filteredVenueInfo = GlobalVariables.displayFilteredVenues
                 let venue = filteredVenueInfo[indexPath.row]
+                
+                for addict in addictionInfo! {
+                    if addict.venueID == venue.venueID {
+                        like = 1
+                    }
+                }
                 
                 cell.venueImage.contentMode = UIViewContentMode.ScaleToFill
                 if let images = posterInfo {
@@ -469,6 +486,12 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             } else { // when there is no filtering
                                     
                 let venue = venueInfo![indexPath.row]
+                
+                for addict in addictionInfo! {
+                    if addict.venueID == venue.venueID {
+                        like = 1
+                    }
+                }
             
                 cell.venueImage.contentMode = UIViewContentMode.ScaleToFill
                 if let images = posterInfo {
@@ -498,18 +521,11 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             
             
             let temp: NSMutableArray = NSMutableArray()
-            var like = 0
-            let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsVenue()
-            for addict in addictionInfo! {
-                if addict.venueID == venueInfo![indexPath.row].venueID {
-                    like = 1
-                }
-            }
             
             if like == 0 {
-                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Get Addicted")
+                temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),title: "Get Addicted")
             } else if like == 1 {
-                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Addicted!")
+                temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
             }
             
             cell.leftUtilityButtons = temp as [AnyObject]
@@ -576,10 +592,19 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             
             
             let organizationInfo = FetchData(context: managedObjectContext).fetchOrganizations()
+            var like = 0
+            let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsOrganization()
+            
             
             if GlobalVariables.filterOrganizationBool {
                 let filteredOrganizationInfo = GlobalVariables.displayFilteredOrganizations
                 let organization = filteredOrganizationInfo[indexPath.row]
+                
+                for addict in addictionInfo! {
+                    if addict.organizationID == organization.organizationID {
+                        like = 1
+                    }
+                }
                 
                 cell.organizationImage.contentMode = UIViewContentMode.ScaleToFill
                 if let images = posterInfo {
@@ -606,6 +631,12 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 
             } else { // when there is no filtering
                 let organization = organizationInfo![indexPath.row]
+                
+                for addict in addictionInfo! {
+                    if addict.organizationID == organization.organizationID {
+                        like = 1
+                    }
+                }
             
                 cell.organizationImage.contentMode = UIViewContentMode.ScaleToFill
                 if let images = posterInfo {
@@ -633,18 +664,11 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             
             
             let temp: NSMutableArray = NSMutableArray()
-            var like = 0
-            let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsOrganization()
-            for addict in addictionInfo! {
-                if addict.organizationID == organizationInfo![indexPath.row].organizationID {
-                    like = 1
-                }
-            }
             
             if like == 0 {
-                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Get Addicted")
+                temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),title: "Get Addicted")
             } else if like == 1 {
-                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Addicted!")
+                temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
             }
             
             cell.leftUtilityButtons = temp as [AnyObject]
@@ -713,7 +737,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                     }
                                     
                                     var temp: NSMutableArray = NSMutableArray()
-                                    temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Get Addicted")
+                                    temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),title: "Get Addicted")
                                     cell.leftUtilityButtons = temp as [AnyObject]
                                     
                                     selectedCell.circAddicted.hidden = true
@@ -739,7 +763,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                 }
                                 
                                 var temp: NSMutableArray = NSMutableArray()
-                                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Addicted!")
+                                temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
                                 cell.leftUtilityButtons = temp as [AnyObject]
                                 
                                 selectedCell.circAddicted.hidden = false
@@ -775,7 +799,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                     }
                                     
                                     var temp: NSMutableArray = NSMutableArray()
-                                    temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Get Addicted")
+                                    temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),title: "Get Addicted")
                                     cell.leftUtilityButtons = temp as [AnyObject]
                                     
                                 }
@@ -800,7 +824,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                 }
                                 
                                 var temp: NSMutableArray = NSMutableArray()
-                                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Addicted!")
+                                temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
                                 cell.leftUtilityButtons = temp as [AnyObject]
                             }
                         }
@@ -871,7 +895,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                     }
                                     
                                     let temp: NSMutableArray = NSMutableArray()
-                                    temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Get Addicted")
+                                    temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),title: "Get Addicted")
                                     cell.leftUtilityButtons = temp as [AnyObject]
                                     
                                 }
@@ -896,7 +920,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                 }
                                 
                                 let temp: NSMutableArray = NSMutableArray()
-                                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Addicted!")
+                                temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
                                 cell.leftUtilityButtons = temp as [AnyObject]
                             }
                         }
