@@ -14,6 +14,7 @@ class ShowOnMapViewController: UIViewController, GMSMapViewDelegate{
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     @IBOutlet weak var mapView: GMSMapView!
+    @IBOutlet weak var backButton: UIButton!
     let button = UIButton(type: UIButtonType.Custom)
     
     var locationManager = CLLocationManager()
@@ -34,16 +35,32 @@ class ShowOnMapViewController: UIViewController, GMSMapViewDelegate{
         self.view.addSubview(barView)
     }
     
+    func customTopButtons() {
+        
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        
+        backButton.setBackgroundImage(UIImage(named: "List"), forState: UIControlState.Normal)
+        let heightContraint = NSLayoutConstraint(item: backButton, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.height/15.5)
+        heightContraint.priority = UILayoutPriorityDefaultHigh
+        
+        let widthContraint = NSLayoutConstraint(item: backButton, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.width/9)
+        widthContraint.priority = UILayoutPriorityDefaultHigh
+        
+        backButton.addConstraints([heightContraint, widthContraint])
+        self.view.bringSubviewToFront(backButton)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         customStatusBar()
+        customTopButtons()
         
         mapView.delegate = self
         let mapFrame = mapView.frame.size
         let buttonImage = UIImage(named: "GoogleMapsAppIcon")
         button.setImage(buttonImage, forState: .Normal)
-        button.frame = CGRectMake(mapFrame.width - (buttonImage?.size.width)!, mapFrame.height - buttonImage!.size.height, (buttonImage?.size.width)!, buttonImage!.size.height)
+        button.frame = CGRectMake(self.view.frame.size.width - (buttonImage?.size.width)!, self.view.frame.height - buttonImage!.size.height, (buttonImage?.size.width)!, buttonImage!.size.height)
         button.addTarget(self, action: "buttonAction:", forControlEvents: UIControlEvents.TouchUpInside)
         
         
