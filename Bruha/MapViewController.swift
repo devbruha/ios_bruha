@@ -133,6 +133,12 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
         dropDownTable.registerNib(nib, forCellReuseIdentifier: "DropCell")
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        dropDownTable.reloadData()
+    }
+    
     func mapView(mapView: GMSMapView!, didTapMarker marker: GMSMarker!) -> Bool {
         //Event
         if GlobalVariables.selectedDisplay == "Event" {
@@ -235,6 +241,15 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             return 0
         }
         
+    }
+    
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if let animatedCell = cell as? MapDropTableViewCell {
+            animatedCell.swipeLeft.alpha = 1
+            animatedCell.swipeRight.alpha = 1
+            animatedCell.animate()
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) ->   UITableViewCell {
@@ -407,7 +422,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
         default:
             break
         }
-    
+        
         return cell
     }
     

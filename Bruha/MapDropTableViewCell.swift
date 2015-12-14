@@ -16,6 +16,8 @@ class MapDropTableViewCell: SWTableViewCell {
     @IBOutlet var dropStartDate: UILabel!
     @IBOutlet var dropImage: UIImageView!
     @IBOutlet var dropHiddenID: UILabel!
+    @IBOutlet weak var swipeRight: UIImageView!
+    @IBOutlet weak var swipeLeft: UIImageView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
@@ -26,6 +28,14 @@ class MapDropTableViewCell: SWTableViewCell {
         super.setSelected(selected, animated: animated)
 
         // Configure the view for the selected state
+    }
+    
+    func animate() {
+        
+        UIView.animateWithDuration(1.5, delay: 0, options: [.Autoreverse, .Repeat], animations: { () -> Void in
+            self.swipeRight.alpha = 0
+            self.swipeLeft.alpha = 0
+            }, completion: nil)
     }
 
 }
