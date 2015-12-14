@@ -104,9 +104,11 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
         
         customStatusBar()
         
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
         dropDownTable.separatorColor = UIColor.whiteColor()
         //dropDownTable.separatorStyle = UITableViewCellSeparatorStyle.SingleLineEtched
         dropDownTable.backgroundColor = UIColor.blackColor()
+        //dropDownTable.rowHeight = screenSize.width * 0.4
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateMarkers", name: "itemDisplayChangeEvent", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "clearDrop", name: "itemDisplayChangeEvent", object: nil)
@@ -294,9 +296,9 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             cell.leftUtilityButtons = temp as [AnyObject]
             
             let temp2: NSMutableArray = NSMutableArray()
-            temp2.sw_addUtilityButtonWithColor(UIColor.purpleColor(), title: "Buy Tickets")
-            temp2.sw_addUtilityButtonWithColor(UIColor.grayColor(), title: "Map")
-            temp2.sw_addUtilityButtonWithColor(UIColor.orangeColor(), title: "More Info")
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1), title: "Buy Tickets")
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1), title: "Map")
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1), title: "More Info")
             
             
             cell.rightUtilityButtons = nil
@@ -346,8 +348,8 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             cell.leftUtilityButtons = temp as [AnyObject]
             
             let temp2: NSMutableArray = NSMutableArray()
-            temp2.sw_addUtilityButtonWithColor(UIColor.grayColor(), title: "Map")
-            temp2.sw_addUtilityButtonWithColor(UIColor.orangeColor(), title: "More Info")
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1), title: "Map")
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1), title: "More Info")
             cell.rightUtilityButtons = nil
             cell.rightUtilityButtons = temp2 as [AnyObject]
             
@@ -394,8 +396,8 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             cell.leftUtilityButtons = temp as [AnyObject]
             
             let temp2: NSMutableArray = NSMutableArray()
-            temp2.sw_addUtilityButtonWithColor(UIColor.grayColor(), title: "Map")
-            temp2.sw_addUtilityButtonWithColor(UIColor.orangeColor(), title: "More Info")
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1), title: "Map")
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1), title: "More Info")
             cell.rightUtilityButtons = nil
             cell.rightUtilityButtons = temp2 as [AnyObject]
             

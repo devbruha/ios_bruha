@@ -239,9 +239,9 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
             
             
             let temp2: NSMutableArray = NSMutableArray()
-            temp2.sw_addUtilityButtonWithColor(UIColor.purpleColor(), title: "Buy Tickets")
-            temp2.sw_addUtilityButtonWithColor(UIColor.grayColor(), title: "Map")
-            temp2.sw_addUtilityButtonWithColor(UIColor.orangeColor(), title: "More Info")
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1), title: "Buy Tickets")
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1), title: "Map")
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1), title: "More Info")
             cell.rightUtilityButtons = nil
             cell.rightUtilityButtons = temp2 as [AnyObject]
             
@@ -300,8 +300,8 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
             
             
             let temp2: NSMutableArray = NSMutableArray()
-            temp2.sw_addUtilityButtonWithColor(UIColor.grayColor(), title: "Map")
-            temp2.sw_addUtilityButtonWithColor(UIColor.orangeColor(), title: "More Info")
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1), title: "Map")
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1), title: "More Info")
             cell.rightUtilityButtons = nil
             cell.rightUtilityButtons = temp2 as [AnyObject]
             
@@ -357,8 +357,8 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
             
             
             let temp2: NSMutableArray = NSMutableArray()
-            temp2.sw_addUtilityButtonWithColor(UIColor.grayColor(), title: "Map")
-            temp2.sw_addUtilityButtonWithColor(UIColor.orangeColor(), title: "More Info")
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1), title: "Map")
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1), title: "More Info")
             cell.rightUtilityButtons = nil
             cell.rightUtilityButtons = temp2 as [AnyObject]
             
@@ -515,24 +515,62 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
                 //event ticket
                 print("event ticket")
             }
-            else if GlobalVariables.addictedDisplay == "Venue" || GlobalVariables.addictedDisplay == "Organization" {
                 //venue and organization map
-                print("venue and org map")
+            else if GlobalVariables.addictedDisplay == "Venue" {
+                let cellIndexPath = self.addictionTableView.indexPathForCell(cell)
+                let selectedCell = self.addictionTableView.cellForRowAtIndexPath(cellIndexPath!) as! VenueTableViewCell
+                GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
+                self.performSegueWithIdentifier("ShowOnMap", sender: self)
             }
-            break
+            else if GlobalVariables.addictedDisplay == "Organization" {
+                let cellIndexPath = self.addictionTableView.indexPathForCell(cell)
+                let selectedCell = self.addictionTableView.cellForRowAtIndexPath(cellIndexPath!) as! OrganizationTableViewCell
+                GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
+                self.performSegueWithIdentifier("ShowOnMap", sender: self)
+            }
+           
         case 1:
-            if GlobalVariables.addictedDisplay == "Event" {
-                //event map
-                print("event map")
+            //Event Ticket
+            if GlobalVariables.addictedDisplay == "Event"{
+                
+                let cellIndexPath = self.addictionTableView.indexPathForCell(cell)
+                let selectedCell = self.addictionTableView.cellForRowAtIndexPath(cellIndexPath!) as! EventTableViewCell
+                GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
+                self.performSegueWithIdentifier("ShowOnMap", sender: self)
+                
             }
-            else if GlobalVariables.addictedDisplay == "Venue" || GlobalVariables.addictedDisplay == "Organization" {
-                //venue and organizaiton more info
-                print("venue and org more info")
+            
+            //Venue MoreInfo
+            if (GlobalVariables.addictedDisplay == "Venue"){
+                let cellIndexPath = self.addictionTableView.indexPathForCell(cell)
+                
+                let selectedCell = self.addictionTableView.cellForRowAtIndexPath(cellIndexPath!) as! VenueTableViewCell
+                
+                GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
+                self.performSegueWithIdentifier("GoToMoreInfo", sender: self)
             }
-            break
+            //Organization MoreInfo
+            if (GlobalVariables.addictedDisplay == "Organization"){
+                let cellIndexPath = self.addictionTableView.indexPathForCell(cell)
+                
+                let selectedCell = self.addictionTableView.cellForRowAtIndexPath(cellIndexPath!) as! OrganizationTableViewCell
+                
+                GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
+                self.performSegueWithIdentifier("GoToMoreInfo", sender: self)
+                
+            }
+            
         case 2:
+            
             //Event More info
             print("event more info")
+            
+            let cellIndexPath = self.addictionTableView.indexPathForCell(cell)
+            
+            let selectedCell = self.addictionTableView.cellForRowAtIndexPath(cellIndexPath!) as! EventTableViewCell
+            
+            GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
+            self.performSegueWithIdentifier("GoToMoreInfo", sender: self)
             break
         default:
             break

@@ -197,9 +197,9 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
             
             
             let temp2: NSMutableArray = NSMutableArray()
-            temp2.sw_addUtilityButtonWithColor(UIColor.purpleColor(), title: "Buy Tickets")
-            temp2.sw_addUtilityButtonWithColor(UIColor.grayColor(), title: "Map")
-            temp2.sw_addUtilityButtonWithColor(UIColor.orangeColor(), title: "More Info")
+            //temp2.sw_addUtilityButtonWithColor(UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1), title: "Buy Tickets")
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1), title: "Map")
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1), title: "More Info")
             cell.rightUtilityButtons = nil
             cell.rightUtilityButtons = temp2 as [AnyObject]
             
@@ -247,9 +247,8 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
             
             
             let temp2: NSMutableArray = NSMutableArray()
-            temp2.sw_addUtilityButtonWithColor(UIColor.purpleColor(), title: "Buy Tickets")
-            temp2.sw_addUtilityButtonWithColor(UIColor.grayColor(), title: "Map")
-            temp2.sw_addUtilityButtonWithColor(UIColor.orangeColor(), title: "More Info")
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1), title: "Map")
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1), title: "More Info")
             cell.rightUtilityButtons = nil
             cell.rightUtilityButtons = temp2 as [AnyObject]
             
@@ -298,9 +297,8 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
             
             
             let temp2: NSMutableArray = NSMutableArray()
-            temp2.sw_addUtilityButtonWithColor(UIColor.purpleColor(), title: "Buy Tickets")
-            temp2.sw_addUtilityButtonWithColor(UIColor.grayColor(), title: "Map")
-            temp2.sw_addUtilityButtonWithColor(UIColor.orangeColor(), title: "More Info")
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1), title: "Map")
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1), title: "More Info")
             cell.rightUtilityButtons = nil
             cell.rightUtilityButtons = temp2 as [AnyObject]
             
@@ -409,6 +407,61 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
             break
         }
     }
+    
+    func swipeableTableViewCell( cell : SWTableViewCell!,didTriggerRightUtilityButtonWithIndex index:NSInteger){
+        
+        switch(index){
+        case 0:
+            
+            if GlobalVariables.uploadDisplay == "Event" {
+                let cellIndexPath = self.uploadTableView.indexPathForCell(cell)
+                let selectedCell = self.uploadTableView.cellForRowAtIndexPath(cellIndexPath!) as! EventTableViewCell
+                GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
+                self.performSegueWithIdentifier("ShowOnMap", sender: self)
+            }
+            else if GlobalVariables.uploadDisplay == "Venue" {
+                let cellIndexPath = self.uploadTableView.indexPathForCell(cell)
+                let selectedCell = self.uploadTableView.cellForRowAtIndexPath(cellIndexPath!) as! VenueTableViewCell
+                GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
+                self.performSegueWithIdentifier("ShowOnMap", sender: self)
+            }
+            else if GlobalVariables.uploadDisplay == "Organization" {
+                let cellIndexPath = self.uploadTableView.indexPathForCell(cell)
+                let selectedCell = self.uploadTableView.cellForRowAtIndexPath(cellIndexPath!) as! OrganizationTableViewCell
+                GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
+                self.performSegueWithIdentifier("ShowOnMap", sender: self)
+            }
+            
+            
+        case 1:
+            
+            if GlobalVariables.uploadDisplay == "Event" {
+                let cellIndexPath = self.uploadTableView.indexPathForCell(cell)
+                let selectedCell = self.uploadTableView.cellForRowAtIndexPath(cellIndexPath!) as! EventTableViewCell
+                GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
+                self.performSegueWithIdentifier("GoToMoreInfo", sender: self)
+            }
+            else if GlobalVariables.uploadDisplay == "Venue" {
+                let cellIndexPath = self.uploadTableView.indexPathForCell(cell)
+                let selectedCell = self.uploadTableView.cellForRowAtIndexPath(cellIndexPath!) as! VenueTableViewCell
+                GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
+                self.performSegueWithIdentifier("GoToMoreInfo", sender: self)
+            }
+            else if GlobalVariables.uploadDisplay == "Organization" {
+                let cellIndexPath = self.uploadTableView.indexPathForCell(cell)
+                let selectedCell = self.uploadTableView.cellForRowAtIndexPath(cellIndexPath!) as! OrganizationTableViewCell
+                GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
+                self.performSegueWithIdentifier("GoToMoreInfo", sender: self)
+            }
+            
+            
+            
+        default:
+            break
+        }
+        
+    }
+    
     func swipeableTableViewCellShouldHideUtilityButtonsOnSwipe(cell : SWTableViewCell ) -> Bool {
         return true
     }
