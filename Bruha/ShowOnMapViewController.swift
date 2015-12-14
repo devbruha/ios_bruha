@@ -53,7 +53,7 @@ class ShowOnMapViewController: UIViewController, GMSMapViewDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        customStatusBar()
+        //customStatusBar()
         customTopButtons()
         
         mapView.delegate = self

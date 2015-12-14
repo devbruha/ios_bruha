@@ -77,7 +77,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
     func customStatusBar() {
         let barView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0))
         barView.backgroundColor = UIColor.grayColor()
-        
+        //barView.alpha = 0.5
         self.view.addSubview(barView)
     }
     
@@ -85,8 +85,8 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         super.viewDidLoad()
         configureView()
         customTopButtons()
-        customStatusBar()
-        
+        //customStatusBar()
+            
         exploreTableView.backgroundColor = UIColor.blackColor()
         exploreTableView.separatorColor = UIColor.blackColor()
         
@@ -278,7 +278,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                             if img.Image?.length > 800 {
                                 cell.ExploreImage.image = UIImage(data: img.Image!)
                             } else {
-                                cell.ExploreImage.backgroundColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 1)
+                                cell.ExploreImage.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1)
                             }
                         }
                     }
@@ -335,7 +335,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                             if img.Image?.length > 800 {
                                 cell.ExploreImage.image = UIImage(data: img.Image!)
                             } else {
-                                cell.ExploreImage.backgroundColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 1)
+                                cell.ExploreImage.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1)
                             }
                         }
                     }
@@ -467,7 +467,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                             if img.Image?.length > 800 {
                                 cell.venueImage.image = UIImage(data: img.Image!)
                             } else {
-                                cell.venueImage.backgroundColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 1)
+                                cell.venueImage.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1)
                             }
                         }
                     }
@@ -501,7 +501,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                             if img.Image?.length > 800 {
                                 cell.venueImage.image = UIImage(data: img.Image!)
                             } else {
-                                cell.venueImage.backgroundColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 1)
+                                cell.venueImage.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1)
                             }
                         }
                         //if img.ID == "venue201512030620212367" {print(img.Image)}
@@ -613,7 +613,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                             if img.Image?.length > 800 {
                                 cell.organizationImage.image = UIImage(data: img.Image!)
                             } else {
-                                cell.organizationImage.backgroundColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 1)
+                                cell.organizationImage.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1)
                             }
                         }
                     }
@@ -645,7 +645,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                             if img.Image?.length > 800 {
                                 cell.organizationImage.image = UIImage(data: img.Image!)
                             } else {
-                                cell.organizationImage.backgroundColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 1)
+                                cell.organizationImage.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1)
                             }
                         }
                     }

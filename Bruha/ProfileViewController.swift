@@ -77,7 +77,7 @@ class ProfileViewController: UIViewController, FBSDKLoginButtonDelegate {
         loadUserInfo()
         backgroundGradient()
         customTopButtons()
-        customStatusBar()
+        //customStatusBar()
         // Do any additional setup after loading the view.
     }
     

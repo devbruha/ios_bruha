@@ -54,7 +54,7 @@ class LoadScreenViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         progressView.alpha = 0
-        customStatusBar()
+        //customStatusBar()
 
         progressView.progressViewStyle = UIProgressViewStyle.Bar
         progressView.trackTintColor = UIColor.orangeColor()

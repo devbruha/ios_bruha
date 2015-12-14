@@ -39,7 +39,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        customStatusBar()
+        //customStatusBar()
         
         self.username.delegate = self
         self.password.delegate = self

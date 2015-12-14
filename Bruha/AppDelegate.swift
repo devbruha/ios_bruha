@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         GMSServices.provideAPIKey("AIzaSyAKkkWxNZfMrQLvsOhBPNxeErdgvhnnKZY")
         
         application.statusBarStyle = .LightContent
+        //application.statusBarHidden = true
         
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }

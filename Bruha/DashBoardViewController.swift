@@ -150,7 +150,7 @@ class DashBoardViewController: UIViewController {
         //setConstraint(imgViews)
         
         customBruhaButton()
-        customStatusBar()
+        //customStatusBar()
         
         if GlobalVariables.loggedIn == false{
             addictionImage.alpha = 0.5

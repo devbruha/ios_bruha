@@ -42,7 +42,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, FBSDKLoginBut
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        customStatusBar()
+        //customStatusBar()
         
         let tgr = UITapGestureRecognizer(target:self , action: Selector("continueButtonTapped"))
         continueWithoutRegister.addGestureRecognizer(tgr)

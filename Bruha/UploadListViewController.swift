@@ -56,7 +56,7 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
         super.viewDidLoad()
         configureView()
         customTopButtons()
-        customStatusBar()
+        //customStatusBar()
         
         uploadTableView.backgroundColor = UIColor.blackColor()
         uploadTableView.separatorColor = UIColor.blackColor()
@@ -153,7 +153,7 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
                         if img.Image?.length > 800 {
                             cell.ExploreImage.image = UIImage(data: img.Image!)
                         } else {
-                            cell.ExploreImage.backgroundColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 1)
+                            cell.ExploreImage.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1)
                         }
                     }
                 }
@@ -243,7 +243,7 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
                         if img.Image?.length > 800 {
                             cell.venueImage.image = UIImage(data: img.Image!)
                         } else {
-                            cell.venueImage.backgroundColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 1)
+                            cell.venueImage.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1)
                         }
                     }
                 }
@@ -294,7 +294,7 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
                         if img.Image?.length > 800 {
                             cell.organizationImage.image = UIImage(data: img.Image!)
                         } else {
-                            cell.organizationImage.backgroundColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 1)
+                            cell.organizationImage.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1)
                         }
                     }
                 }

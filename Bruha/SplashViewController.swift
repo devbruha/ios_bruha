@@ -38,7 +38,7 @@ class SplashViewController: UIViewController,UIScrollViewDelegate, FBSDKLoginBut
         
         super.viewDidLoad()
         
-        customStatusBar()
+        //customStatusBar()
 
         self.scrollView.frame = CGRectMake(0, 0, self.view.frame.width, self.view.frame.height)
         let scrollViewWidth:CGFloat = self.scrollView.frame.width-20

@@ -58,7 +58,7 @@ class MoreInfoViewController: UIViewController,ARSPDragDelegate, ARSPVisibilityS
         self.panelControllerContainer.dragDelegate = self
         self.panelControllerContainer.visibilityStateDelegate = self
         
-        customStatusBar()
+        //customStatusBar()
         customTopButtons()
         
         if GlobalVariables.selectedDisplay == "Event"{
