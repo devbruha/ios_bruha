@@ -61,6 +61,7 @@ class MoreInfoViewController: UIViewController,ARSPDragDelegate, ARSPVisibilityS
         //customStatusBar()
         customTopButtons()
         
+        Image.contentMode = UIViewContentMode.ScaleAspectFit
         if GlobalVariables.selectedDisplay == "Event"{
             let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
             for event in eventInfo{
