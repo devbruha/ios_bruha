@@ -332,11 +332,13 @@ class LoadScreenViewController: UIViewController {
     
     func startSpinning() {
         loading.image = UIImage(named:"Events_Orange")
+        loading.alpha = 0.75
         loading.startRotating()
     }
     
     func stopSpinning() {
         loading.stopRotating()
-        loading.image = UIImage(named:"Brüha_Face_Purple_Lrg")
+        loading.alpha = 0
+        //loading.image = UIImage(named:"Brüha_Face_Purple_Lrg")
     }
 }

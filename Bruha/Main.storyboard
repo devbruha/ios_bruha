@@ -1481,7 +1481,7 @@
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Club" translatesAutoresizingMaskIntoConstraints="NO" id="38V-gt-arU">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Club" translatesAutoresizingMaskIntoConstraints="NO" id="38V-gt-arU">
                                         <rect key="frame" x="198" y="0.0" width="122" height="90"/>
                                         <animations/>
                                         <constraints>
@@ -1564,20 +1564,20 @@
                                 <animations/>
                                 <color key="backgroundColor" red="0.5" green="1" blue="0.83162006578947367" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" image="Addictions_Splash" translatesAutoresizingMaskIntoConstraints="NO" id="RKl-Ki-GBA">
-                                <rect key="frame" x="284" y="91" width="36" height="89"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" horizontalCompressionResistancePriority="749" image="MyAddictions_Sm" translatesAutoresizingMaskIntoConstraints="NO" id="RKl-Ki-GBA">
+                                <rect key="frame" x="279" y="91" width="36" height="89"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="36" id="Km7-Eh-vtL"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Get Addicted" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="azJ-nS-jGM">
-                                <rect key="frame" x="210" y="90" width="70" height="90"/>
+                                <rect key="frame" x="210" y="90" width="65" height="90"/>
                                 <animations/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="90" id="tuA-Sc-4Hr"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -1613,7 +1613,7 @@
                             <constraint firstItem="86I-2A-VnZ" firstAttribute="top" secondItem="m5Y-MK-8Wd" secondAttribute="bottom" id="njD-vx-5Jm"/>
                             <constraint firstItem="zCx-HA-17h" firstAttribute="top" secondItem="CQS-J1-JDQ" secondAttribute="bottom" constant="3" id="um8-1W-sxP"/>
                             <constraint firstItem="RKl-Ki-GBA" firstAttribute="centerY" secondItem="CQS-J1-JDQ" secondAttribute="centerY" id="umP-hq-k2l"/>
-                            <constraint firstItem="RKl-Ki-GBA" firstAttribute="trailing" secondItem="CQS-J1-JDQ" secondAttribute="trailing" id="x56-kY-s8z"/>
+                            <constraint firstItem="RKl-Ki-GBA" firstAttribute="trailing" secondItem="CQS-J1-JDQ" secondAttribute="trailing" constant="-5" id="x56-kY-s8z"/>
                             <constraint firstAttribute="trailingMargin" secondItem="zCx-HA-17h" secondAttribute="trailing" constant="-15" id="xnt-a6-AdV"/>
                             <constraint firstAttribute="trailing" secondItem="Ici-lo-Hg3" secondAttribute="trailing" constant="5" id="yg1-Fz-LVe"/>
                             <constraint firstItem="zCx-HA-17h" firstAttribute="leading" secondItem="YYd-Zf-LHG" secondAttribute="leadingMargin" constant="-15" id="zx1-jZ-ufS"/>
@@ -2255,7 +2255,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Addictions_Splash" width="124" height="124"/>
         <image name="Brüha_Face_Purple_Lrg" width="500" height="500"/>
         <image name="Calendar_Med" width="250" height="250"/>
         <image name="Club" width="48" height="48"/>
