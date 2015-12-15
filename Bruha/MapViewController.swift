@@ -86,6 +86,9 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
         widthContraint.priority = UILayoutPriorityDefaultHigh
         
         BackButton.addConstraints([heightContraint, widthContraint])
+        
+        self.view.bringSubviewToFront(BackButton)
+        self.view.bringSubviewToFront(BruhaButton)
     }
     
     func customStatusBar() {

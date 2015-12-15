@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIView {
-    func startRotating(duration: Double = 1.5) {
+    func startRotating(duration: Double = 2.5) {
         let kAnimationKey = "rotation"
         
         if self.layer.animationForKey(kAnimationKey) == nil {

@@ -137,6 +137,7 @@
 		A58A3A211BB9780800601749 /* AddictionEventDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58A3A201BB9780800601749 /* AddictionEventDBModel.swift */; };
 		A58A3A261BB980B200601749 /* AddictionEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58A3A251BB980B200601749 /* AddictionEvent.swift */; };
 		A59443A11C03C088000B3969 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59443A01C03C088000B3969 /* Image.swift */; };
+		A5967F171C2067E700559FC9 /* MoreInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5967F161C2067E700559FC9 /* MoreInformationViewController.swift */; };
 		A5CAB5781BED1ECE007E597B /* MapDropTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5CAB5771BED1ECE007E597B /* MapDropTableViewCell.xib */; };
 		A5CAB57A1BED2145007E597B /* MapDropTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CAB5791BED2145007E597B /* MapDropTableViewCell.swift */; };
 		A5D34D621C06122C005F6236 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5D34D5F1C06122C005F6236 /* FBSDKCoreKit.framework */; };
@@ -301,6 +302,7 @@
 		A58A3A201BB9780800601749 /* AddictionEventDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddictionEventDBModel.swift; sourceTree = "<group>"; };
 		A58A3A251BB980B200601749 /* AddictionEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddictionEvent.swift; sourceTree = "<group>"; };
 		A59443A01C03C088000B3969 /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		A5967F161C2067E700559FC9 /* MoreInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreInformationViewController.swift; sourceTree = "<group>"; };
 		A5CAB5771BED1ECE007E597B /* MapDropTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapDropTableViewCell.xib; sourceTree = "<group>"; };
 		A5CAB5791BED2145007E597B /* MapDropTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapDropTableViewCell.swift; sourceTree = "<group>"; };
 		A5D34D5F1C06122C005F6236 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
@@ -401,6 +403,7 @@
 				A505C0F41BCEE9860067CDD1 /* UploadListPanelViewController.swift */,
 				A505C0F61BD17B910067CDD1 /* LoadScreenViewController.swift */,
 				3C4FA13E1C04EE150034610E /* ShowOnMapViewController.swift */,
+				A5967F161C2067E700559FC9 /* MoreInformationViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -861,6 +864,7 @@
 				181EB6161B714B7600B9295E /* WeekHeaderView.swift in Sources */,
 				45FA05A81B5D4190004AD819 /* ArtistService.swift in Sources */,
 				A5D90E061BBDD79300537F72 /* AddictionVenue.swift in Sources */,
+				A5967F171C2067E700559FC9 /* MoreInformationViewController.swift in Sources */,
 				A5D34D671C07B92A005F6236 /* ImageList+CoreDataProperties.swift in Sources */,
 				45FA05A61B5D4190004AD819 /* VenueService.swift in Sources */,
 				18A2A11B1B728241005E1DCB /* CalendarViewController.swift in Sources */,

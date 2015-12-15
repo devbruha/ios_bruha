@@ -32,8 +32,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         self.panelControllerContainer.visibilityStateDelegate = self
         self.exploreTableView!.allowsMultipleSelection = false
         //print("OOOOOOOOOOOOOOO", screenHeight, screenSize.width)
-        self.view.bringSubviewToFront(bruhaButton)
-        self.view.bringSubviewToFront(mapButton)
+        
     }
     
     func customTopButtons() {
@@ -58,6 +57,9 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         widthContraint.priority = UILayoutPriorityDefaultHigh
         
         mapButton.addConstraints([heightContraint, widthContraint])
+        
+        self.view.bringSubviewToFront(bruhaButton)
+        self.view.bringSubviewToFront(mapButton)
     }
     
     /*func adjustCircSizeOfCell(view: UIView) {
@@ -1022,7 +1024,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 let selectedCell = self.exploreTableView.cellForRowAtIndexPath(cellIndexPath!) as! VenueTableViewCell
                 
                 GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
-                self.performSegueWithIdentifier("GoToMoreInfo", sender: self)
+                self.performSegueWithIdentifier("MoreInfore", sender: self)
             }
             //Organization MoreInfo
             if (GlobalVariables.selectedDisplay == "Organization"){
@@ -1031,7 +1033,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 let selectedCell = self.exploreTableView.cellForRowAtIndexPath(cellIndexPath!) as! OrganizationTableViewCell
                 
                 GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
-                self.performSegueWithIdentifier("GoToMoreInfo", sender: self)
+                self.performSegueWithIdentifier("MoreInfore", sender: self)
 
             }
             else if GlobalVariables.selectedDisplay == "Venue" || GlobalVariables.selectedDisplay == "Organization" {
@@ -1058,7 +1060,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             let selectedCell = self.exploreTableView.cellForRowAtIndexPath(cellIndexPath!) as! EventTableViewCell
             
             GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
-            self.performSegueWithIdentifier("GoToMoreInfo", sender: self)
+            self.performSegueWithIdentifier("MoreInfore", sender: self)
             break
         default:
             break
