@@ -63,6 +63,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, FBSDKLoginBut
         loginB.layer.cornerRadius = 2
         loginB.clipsToBounds = true
         
+        
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
         // FaceBook
         self.view.addSubview(faceLoginButton)
         faceLoginButton.delegate = self
@@ -71,9 +73,10 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, FBSDKLoginBut
         
         let topConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.TopMargin, relatedBy: NSLayoutRelation.Equal, toItem: self.continueWithoutRegister, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1, constant: 18)
         
-        let leadingConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.LeftMargin, relatedBy: NSLayoutRelation.Equal, toItem: self.continueWithoutRegister, attribute: NSLayoutAttribute.LeftMargin, multiplier: 1, constant: 0)
+        let offSet = screenSize.width * 0.1
+        let leadingConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.LeftMargin, relatedBy: NSLayoutRelation.Equal, toItem: self.continueWithoutRegister, attribute: NSLayoutAttribute.LeftMargin, multiplier: 1, constant: offSet)
         
-        let trailingConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.RightMargin, relatedBy: NSLayoutRelation.Equal, toItem: self.loginB, attribute: NSLayoutAttribute.RightMargin, multiplier: 1, constant: 0)
+        let trailingConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.RightMargin, relatedBy: NSLayoutRelation.Equal, toItem: self.loginB, attribute: NSLayoutAttribute.RightMargin, multiplier: 1, constant: -offSet)
         
         NSLayoutConstraint.activateConstraints([topConstraint, leadingConstraint, trailingConstraint])
         

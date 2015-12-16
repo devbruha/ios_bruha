@@ -547,7 +547,7 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
                 let selectedCell = self.addictionTableView.cellForRowAtIndexPath(cellIndexPath!) as! VenueTableViewCell
                 
                 GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
-                self.performSegueWithIdentifier("GoToMoreInfo", sender: self)
+                self.performSegueWithIdentifier("MoreInfore", sender: self)
             }
             //Organization MoreInfo
             if (GlobalVariables.addictedDisplay == "Organization"){
@@ -556,7 +556,7 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
                 let selectedCell = self.addictionTableView.cellForRowAtIndexPath(cellIndexPath!) as! OrganizationTableViewCell
                 
                 GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
-                self.performSegueWithIdentifier("GoToMoreInfo", sender: self)
+                self.performSegueWithIdentifier("MoreInfore", sender: self)
                 
             }
             
@@ -570,7 +570,7 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
             let selectedCell = self.addictionTableView.cellForRowAtIndexPath(cellIndexPath!) as! EventTableViewCell
             
             GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
-            self.performSegueWithIdentifier("GoToMoreInfo", sender: self)
+            self.performSegueWithIdentifier("MoreInfore", sender: self)
             break
         default:
             break

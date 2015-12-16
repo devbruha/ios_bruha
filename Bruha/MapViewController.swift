@@ -886,14 +886,14 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
                 let cellIndexPath = self.dropDownTable.indexPathForCell(cell)
                 let selectedCell = self.dropDownTable.cellForRowAtIndexPath(cellIndexPath!) as! MapDropTableViewCell
                 GlobalVariables.eventSelected = selectedCell.dropHiddenID.text!
-                self.performSegueWithIdentifier("GoToMoreInfo", sender: self)
+                self.performSegueWithIdentifier("MoreInfore", sender: self)
             }
             //Organization MoreInfo
             if (GlobalVariables.selectedDisplay == "Organization"){
                 let cellIndexPath = self.dropDownTable.indexPathForCell(cell)
                 let selectedCell = self.dropDownTable.cellForRowAtIndexPath(cellIndexPath!) as! MapDropTableViewCell
                 GlobalVariables.eventSelected = selectedCell.dropHiddenID.text!
-                self.performSegueWithIdentifier("GoToMoreInfo", sender: self)
+                self.performSegueWithIdentifier("MoreInfore", sender: self)
                 
             }
             break
@@ -903,7 +903,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             let cellIndexPath = self.dropDownTable.indexPathForCell(cell)
             let selectedCell = self.dropDownTable.cellForRowAtIndexPath(cellIndexPath!) as! MapDropTableViewCell
             GlobalVariables.eventSelected = selectedCell.dropHiddenID.text!
-            self.performSegueWithIdentifier("GoToMoreInfo", sender: self)
+            self.performSegueWithIdentifier("MoreInfore", sender: self)
             break
         default:
             break

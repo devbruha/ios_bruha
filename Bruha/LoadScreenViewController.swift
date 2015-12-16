@@ -9,7 +9,7 @@
 import UIKit
 
 extension UIView {
-    func startRotating(duration: Double = 2.5) {
+    func startRotating(duration: Double = 2.0) {
         let kAnimationKey = "rotation"
         
         if self.layer.animationForKey(kAnimationKey) == nil {
@@ -51,11 +51,22 @@ class LoadScreenViewController: UIViewController {
         self.view.addSubview(barView)
     }
     
+    func customLoadingImage() {
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        
+        let heightContraints = NSLayoutConstraint(item: loading, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.height * 0.2)
+        let widthContraints = NSLayoutConstraint(item: loading, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.height * 0.2)
+        
+        loading.addConstraints([heightContraints, widthContraints])
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         progressView.alpha = 0
         //customStatusBar()
-
+        
+        customLoadingImage()
+        
         progressView.progressViewStyle = UIProgressViewStyle.Bar
         progressView.trackTintColor = UIColor.orangeColor()
         progressView.progressTintColor = UIColor.purpleColor()

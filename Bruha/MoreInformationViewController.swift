@@ -66,7 +66,8 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
         
         let posterInfo = FetchData(context: managedObjectContext).fetchPosterImages()
         
-        if GlobalVariables.selectedDisplay == "Event"{
+        if GlobalVariables.selectedDisplay == "Event" || GlobalVariables.addictedDisplay == "Event" || GlobalVariables.uploadDisplay == "Event"{
+            
             let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
             let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
             for event in eventInfo{
@@ -99,7 +100,8 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
             }
             
         }
-        if GlobalVariables.selectedDisplay == "Venue"{
+        if GlobalVariables.selectedDisplay == "Venue" || GlobalVariables.addictedDisplay == "Venue" || GlobalVariables.uploadDisplay == "Venue"{
+
             let venueInfo = FetchData(context: managedObjectContext).fetchVenues()!
             let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsVenue()
             for venue in venueInfo{
@@ -131,7 +133,8 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
             }
             
         }
-        if GlobalVariables.selectedDisplay == "Organization"{
+        if GlobalVariables.selectedDisplay == "Organization" || GlobalVariables.addictedDisplay == "Organization" || GlobalVariables.uploadDisplay == "Organization"{
+
             let organizationInfo = FetchData(context: managedObjectContext).fetchOrganizations()
             let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsOrganization()
             for organization in organizationInfo!{

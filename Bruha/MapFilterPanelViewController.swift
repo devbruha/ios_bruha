@@ -39,6 +39,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
     let priceLabelTitle = UILabel()
     let priceLabel = UILabel()
     let slider = UISlider()
+    let clearFilter = UIButton()
     
     struct EventObjects {
         
@@ -106,6 +107,13 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         slider.value = -1
         slider.addTarget(self, action: "sliderValueDidChange:", forControlEvents: .ValueChanged)
         self.scrollView.addSubview(slider)
+        
+        
+        clearFilter.setTitle("Clear Filter", forState: UIControlState.Normal)
+        clearFilter.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1)
+        clearFilter.addTarget(self, action: "clearFilters:", forControlEvents: UIControlEvents.TouchUpInside)
+        self.scrollView.addSubview(clearFilter)
+        
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateNotificationSent", name: "itemDisplayChangeEvent", object: nil)
         
@@ -276,6 +284,38 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
             discoverableSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
         }
         
+    }
+    
+    func clearFilters(sender: UIButton) {
+        
+        let pulseAnimation = CABasicAnimation(keyPath: "opacity")
+        pulseAnimation.duration = 1
+        pulseAnimation.fromValue = NSNumber(float: 0.7)
+        pulseAnimation.toValue = NSNumber(float: 1.0)
+        pulseAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        pulseAnimation.autoreverses = false
+        pulseAnimation.repeatCount = 1  //FLT_MAX
+        sender.layer.addAnimation(pulseAnimation, forKey: nil)
+        
+        Filtering().clearFilter()
+        resetSliderValue()
+        
+        switch(GlobalVariables.selectedDisplay){
+            
+        case "Event":
+            eventTapped()
+            
+        case "Venue":
+            venueTapped()
+            
+        case "Organization":
+            organizationTapped()
+            
+        default:
+            eventTapped()
+        }
+        
+        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
     }
     
     func sliderValueDidChange(sender:UISlider!) {
@@ -842,6 +882,12 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         priceLabelTitle.frame = CGRectMake(10, 200 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 30)
         priceLabel.frame = CGRectMake(10, 230 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 20)
         slider.frame = CGRectMake(10, 250 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 20)
+        
+        if GlobalVariables.selectedDisplay == "Event" {
+            clearFilter.frame = CGRectMake(UIScreen.mainScreen().bounds.width * 0.7 - 10, 280 + constraint.constant, UIScreen.mainScreen().bounds.width * 0.3, 30)
+        } else {
+            clearFilter.frame = CGRectMake(UIScreen.mainScreen().bounds.width * 0.7 - 10, 30 + constraint.constant, UIScreen.mainScreen().bounds.width * 0.3, 30)
+        }
         
         self.view.setNeedsUpdateConstraints()
         

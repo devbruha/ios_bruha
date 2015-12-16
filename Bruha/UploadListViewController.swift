@@ -454,19 +454,19 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
                 let cellIndexPath = self.uploadTableView.indexPathForCell(cell)
                 let selectedCell = self.uploadTableView.cellForRowAtIndexPath(cellIndexPath!) as! EventTableViewCell
                 GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
-                self.performSegueWithIdentifier("GoToMoreInfo", sender: self)
+                self.performSegueWithIdentifier("MoreInfore", sender: self)
             }
             else if GlobalVariables.uploadDisplay == "Venue" {
                 let cellIndexPath = self.uploadTableView.indexPathForCell(cell)
                 let selectedCell = self.uploadTableView.cellForRowAtIndexPath(cellIndexPath!) as! VenueTableViewCell
                 GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
-                self.performSegueWithIdentifier("GoToMoreInfo", sender: self)
+                self.performSegueWithIdentifier("MoreInfore", sender: self)
             }
             else if GlobalVariables.uploadDisplay == "Organization" {
                 let cellIndexPath = self.uploadTableView.indexPathForCell(cell)
                 let selectedCell = self.uploadTableView.cellForRowAtIndexPath(cellIndexPath!) as! OrganizationTableViewCell
                 GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
-                self.performSegueWithIdentifier("GoToMoreInfo", sender: self)
+                self.performSegueWithIdentifier("MoreInfore", sender: self)
             }
             
             
