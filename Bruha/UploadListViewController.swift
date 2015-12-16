@@ -89,7 +89,7 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
         switch (GlobalVariables.uploadDisplay){
         case "Event":
             let userEventInfo = FetchData(context: managedObjectContext).fetchUserEvents()
-            print("this is THE USER EVEVEVENTTTSSSSS", userEventInfo)
+            //print("this is THE USER EVEVEVENTTTSSSSS", userEventInfo)
             return (userEventInfo?.count)!
         case "Venue":
             let userVenueInfo = FetchData(context: managedObjectContext).fetchUserVenues()
@@ -203,6 +203,10 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
             cell.circAddicted.image = UIImage(named: "MyUploads_Sm")
             cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
             cell.circCategory.image = UIImage(named: event.primaryCategory)
+            
+            cell.rectCategory.contentMode = UIViewContentMode.ScaleAspectFill
+            cell.rectCategory.image = UIImage(named: event.primaryCategory)
+            cell.rectCategoryName.text = event.primaryCategory
             // Configure the cell...
 
             
@@ -250,10 +254,19 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
             }
             
             cell.venueName.text = venue.venueName
-            cell.venueDescription.text = venue.venueDescription
-            cell.venueAddress.text = venue.venueAddress
+            cell.venueDescription.text = venue.venueName
+            cell.venueAddress.text = "\(venue.venueAddress.componentsSeparatedByString(", ")[0])"
             cell.circVenueName.text = venue.venueName
             cell.circHiddenID.text = venue.venueID
+            
+            cell.circAddicted.contentMode = UIViewContentMode.ScaleAspectFit
+            cell.circAddicted.image = UIImage(named: "MyUploads_Sm")
+            cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
+            cell.circCategory.image = UIImage(named: venue.primaryCategory)
+            
+            cell.rectCategory.contentMode = UIViewContentMode.ScaleAspectFill
+            cell.rectCategory.image = UIImage(named: venue.primaryCategory)
+            cell.rectCategoryName.text = venue.primaryCategory
             
             
             let temp: NSMutableArray = NSMutableArray()
@@ -301,10 +314,19 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
             }
             
             cell.organizationName.text = organization.organizationName
-            cell.organizationDescription.text = organization.organizationDescription
-            cell.address.text = organization.organizationAddress
+            cell.organizationDescription.text = organization.organizationName
+            cell.address.text = "\(organization.organizationAddress.componentsSeparatedByString(", ")[0])"
             cell.circOrgName.text = organization.organizationName
             cell.circHiddenID.text = organization.organizationID
+            
+            cell.circAddicted.contentMode = UIViewContentMode.ScaleAspectFit
+            cell.circAddicted.image = UIImage(named: "MyUploads_Sm")
+            cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
+            cell.circCategory.image = UIImage(named: organization.primaryCategory)
+            
+            cell.rectCategory.contentMode = UIViewContentMode.ScaleAspectFill
+            cell.rectCategory.image = UIImage(named: organization.primaryCategory)
+            cell.rectCategoryName.text = organization.primaryCategory
             
             let temp: NSMutableArray = NSMutableArray()
             temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),title: "Delete")

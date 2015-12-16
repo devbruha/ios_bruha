@@ -476,13 +476,19 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 }
                 
                 cell.venueName.text = venue.venueName
-                cell.venueDescription.text = venue.venueDescription
-                cell.venueAddress.text = venue.venueAddress
+                cell.venueDescription.text = venue.venueName
+                cell.venueAddress.text = "\(venue.venueAddress.componentsSeparatedByString(", ")[0])"
                 cell.circVenueName.text = venue.venueName
                 cell.circHiddenID.text = venue.venueID
                 
+                cell.circAddicted.contentMode = UIViewContentMode.ScaleAspectFit
+                cell.circAddicted.image = UIImage(named: "MyAddictions_Sm")
                 cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
                 cell.circCategory.image = UIImage(named: venue.primaryCategory)
+                
+                cell.rectCategory.contentMode = UIViewContentMode.ScaleAspectFill
+                cell.rectCategory.image = UIImage(named: venue.primaryCategory)
+                cell.rectCategoryName.text = venue.primaryCategory
                 
                 
             } else { // when there is no filtering
@@ -512,13 +518,19 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 //if venue.venueName == "zsdf" {print(venue.venueID)}
                 //if venue.venueName == "Niagra" {print(venue.venueID)}
                 cell.venueName.text = venue.venueName
-                cell.venueDescription.text = venue.venueDescription
-                cell.venueAddress.text = venue.venueAddress
+                cell.venueDescription.text = venue.venueName
+                cell.venueAddress.text = "\(venue.venueAddress.componentsSeparatedByString(", ")[0])"
                 cell.circVenueName.text = venue.venueName
                 cell.circHiddenID.text = venue.venueID
                 
+                cell.circAddicted.contentMode = UIViewContentMode.ScaleAspectFit
+                cell.circAddicted.image = UIImage(named: "MyAddictions_Sm")
                 cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
                 cell.circCategory.image = UIImage(named: venue.primaryCategory)
+                
+                cell.rectCategory.contentMode = UIViewContentMode.ScaleAspectFill
+                cell.rectCategory.image = UIImage(named: venue.primaryCategory)
+                cell.rectCategoryName.text = venue.primaryCategory
             }
             
             
@@ -526,8 +538,10 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             
             if like == 0 {
                 temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),title: "Get Addicted")
+                cell.circAddicted.hidden = true
             } else if like == 1 {
                 temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
+                cell.circAddicted.hidden = false
             }
             
             cell.leftUtilityButtons = temp as [AnyObject]
@@ -622,13 +636,19 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 }
                     
                 cell.organizationName.text = organization.organizationName
-                cell.organizationDescription.text = organization.organizationDescription
-                cell.address.text = organization.organizationAddress
+                cell.organizationDescription.text = organization.organizationName
+                cell.address.text = "\(organization.organizationAddress.componentsSeparatedByString(", ")[0])"
                 cell.circOrgName.text = organization.organizationName
                 cell.circHiddenID.text = organization.organizationID
                 
+                cell.circAddicted.contentMode = UIViewContentMode.ScaleAspectFit
+                cell.circAddicted.image = UIImage(named: "MyAddictions_Sm")
                 cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
                 cell.circCategory.image = UIImage(named: organization.primaryCategory)
+                
+                cell.rectCategory.contentMode = UIViewContentMode.ScaleAspectFill
+                cell.rectCategory.image = UIImage(named: organization.primaryCategory)
+                cell.rectCategoryName.text = organization.primaryCategory
                 
                 
             } else { // when there is no filtering
@@ -654,13 +674,19 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 }
             
                 cell.organizationName.text = organization.organizationName
-                cell.organizationDescription.text = organization.organizationDescription
-                cell.address.text = organization.organizationAddress
+                cell.organizationDescription.text = organization.organizationName
+                cell.address.text = "\(organization.organizationAddress.componentsSeparatedByString(", ")[0])"
                 cell.circOrgName.text = organization.organizationName
                 cell.circHiddenID.text = organization.organizationID
                 
+                cell.circAddicted.contentMode = UIViewContentMode.ScaleAspectFit
+                cell.circAddicted.image = UIImage(named: "MyAddictions_Sm")
                 cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
                 cell.circCategory.image = UIImage(named: organization.primaryCategory)
+                
+                cell.rectCategory.contentMode = UIViewContentMode.ScaleAspectFill
+                cell.rectCategory.image = UIImage(named: organization.primaryCategory)
+                cell.rectCategoryName.text = organization.primaryCategory
             
             }
             
@@ -669,8 +695,10 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             
             if like == 0 {
                 temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),title: "Get Addicted")
+                cell.circAddicted.hidden = true
             } else if like == 1 {
                 temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
+                cell.circAddicted.hidden = false
             }
             
             cell.leftUtilityButtons = temp as [AnyObject]
@@ -804,6 +832,8 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                     temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),title: "Get Addicted")
                                     cell.leftUtilityButtons = temp as [AnyObject]
                                     
+                                    selectedCell.circAddicted.hidden = true
+                                    
                                 }
                                 alertController.addAction(unlikeAction)
                                 alertController.addAction(cancelAction)
@@ -828,6 +858,8 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                 var temp: NSMutableArray = NSMutableArray()
                                 temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
                                 cell.leftUtilityButtons = temp as [AnyObject]
+                                
+                                selectedCell.circAddicted.hidden = false
                             }
                         }
                     }
@@ -900,6 +932,8 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                     temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),title: "Get Addicted")
                                     cell.leftUtilityButtons = temp as [AnyObject]
                                     
+                                    selectedCell.circAddicted.hidden = true
+                                    
                                 }
                                 alertController.addAction(unlikeAction)
                                 alertController.addAction(cancelAction)
@@ -924,6 +958,8 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                 let temp: NSMutableArray = NSMutableArray()
                                 temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
                                 cell.leftUtilityButtons = temp as [AnyObject]
+                                
+                                selectedCell.circAddicted.hidden = false
                             }
                         }
                     }

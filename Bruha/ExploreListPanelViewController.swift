@@ -859,16 +859,17 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         constraint.constant = height
         
         scrollView.contentSize.height = 500 + constraint.constant
-        scrollView.contentInset.bottom = 100
         
         priceLabelTitle.frame = CGRectMake(10, 200 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 30)
         priceLabel.frame = CGRectMake(10, 230 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 20)
         slider.frame = CGRectMake(10, 250 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 20)
         
         if GlobalVariables.selectedDisplay == "Event" {
+            scrollView.contentInset.bottom = 100
             clearFilter.frame = CGRectMake(UIScreen.mainScreen().bounds.width * 0.7 - 10, 280 + constraint.constant, UIScreen.mainScreen().bounds.width * 0.3, 30)
         } else {
-            clearFilter.frame = CGRectMake(UIScreen.mainScreen().bounds.width * 0.7 - 10, 30 + constraint.constant, UIScreen.mainScreen().bounds.width * 0.3, 30)
+            scrollView.contentInset.bottom = 0
+            clearFilter.frame = CGRectMake(UIScreen.mainScreen().bounds.width * 0.7 - 10, 20 + constraint.constant, UIScreen.mainScreen().bounds.width * 0.3, 30)
         }
         
         

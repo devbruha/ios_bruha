@@ -13,6 +13,8 @@ class VenueTableViewCell: SWTableViewCell {
     @IBOutlet weak var venueLabel: UILabel!
     @IBOutlet weak var venueImage: UIImageView!
     @IBOutlet weak var rectView: EventRectangleView!
+    @IBOutlet weak var rectCategory: UIImageView!
+    @IBOutlet weak var rectCategoryName: UILabel!
     @IBOutlet weak var venueName: UILabel!
     @IBOutlet weak var venueAddress: UILabel!
     @IBOutlet weak var venueDescription: UILabel!
@@ -20,6 +22,7 @@ class VenueTableViewCell: SWTableViewCell {
     @IBOutlet weak var circView: EventCircleView!
     @IBOutlet weak var circHiddenID: UILabel!
     @IBOutlet weak var circCategory: UIImageView!
+    @IBOutlet weak var circAddicted: UIImageView!
     
     @IBOutlet weak var swipeRight: UIImageView!
     @IBOutlet weak var swipeLeft: UIImageView!

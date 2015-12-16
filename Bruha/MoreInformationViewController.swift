@@ -94,7 +94,7 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                 }
                 if event.eventID == GlobalVariables.eventSelected && addictionInfo!.contains({$0.eventID == GlobalVariables.eventSelected}) {
                     
-                    getAddictedButton.backgroundColor = UIColor.orangeColor()
+                    getAddictedButton.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1)
                     getAddictedLabel.text = "You are addicted"
                 }
             }
@@ -127,7 +127,7 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                 }
                 if venue.venueID == GlobalVariables.eventSelected && addictionInfo!.contains({$0.venueID == GlobalVariables.eventSelected}) {
                     
-                    getAddictedButton.backgroundColor = UIColor.orangeColor()
+                    getAddictedButton.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1)
                     getAddictedLabel.text = "You are addicted"
                 }
             }
@@ -160,7 +160,7 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                 }
                 if organization.organizationID == GlobalVariables.eventSelected && addictionInfo!.contains({$0.organizationID == GlobalVariables.eventSelected}) {
                     
-                    getAddictedButton.backgroundColor = UIColor.orangeColor()
+                    getAddictedButton.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1)
                     getAddictedLabel.text = "You are addicted"
                 }
             }
@@ -195,7 +195,7 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
         if GlobalVariables.loggedIn == true {
             let user = FetchData(context: managedObjectContext).fetchUserInfo()![0].userName
             //Event
-            if GlobalVariables.selectedDisplay == "Event"{
+            if GlobalVariables.selectedDisplay == "Event" || GlobalVariables.addictedDisplay == "Event" || GlobalVariables.uploadDisplay == "Event"{
                 let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
                 let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
                 for event in eventInfo!{
@@ -209,7 +209,7 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                             print(addInfo!)
                         }
                         
-                        getAddictedButton.backgroundColor = UIColor.orangeColor()
+                        getAddictedButton.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1)
                         getAddictedLabel.text = "You are addicted"
                         
                     } else if event.eventID == GlobalVariables.eventSelected && addictionInfo!.contains({$0.eventID == GlobalVariables.eventSelected}) {
@@ -228,7 +228,7 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                                 print(removeInfo!)
                             }
                             
-                            self.getAddictedButton.backgroundColor = UIColor.cyanColor()
+                            self.getAddictedButton.backgroundColor = UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1)
                             self.getAddictedLabel.text = "Get addicted"
                             
                         }
@@ -248,7 +248,7 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                 }
             }
             //Venue
-            if GlobalVariables.selectedDisplay == "Venue"{
+            if GlobalVariables.selectedDisplay == "Venue" || GlobalVariables.addictedDisplay == "Venue" || GlobalVariables.uploadDisplay == "Venue"{
                 let venueInfo = FetchData(context: managedObjectContext).fetchVenues()
                 let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsVenue()
                 for venue in venueInfo!{
@@ -262,7 +262,7 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                             print(addInfo!)
                         }
                         
-                        getAddictedButton.backgroundColor = UIColor.orangeColor()
+                        getAddictedButton.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1)
                         getAddictedLabel.text = "You are addicted"
                         
                     } else if venue.venueID == GlobalVariables.eventSelected && addictionInfo!.contains({$0.venueID == GlobalVariables.eventSelected}) {
@@ -281,7 +281,7 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                                 print(removeInfo!)
                             }
                             
-                            self.getAddictedButton.backgroundColor = UIColor.cyanColor()
+                            self.getAddictedButton.backgroundColor = UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1)
                             self.getAddictedLabel.text = "Get addicted"
                             
                         }
@@ -293,7 +293,7 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                 }
             }
             //Organization
-            if GlobalVariables.selectedDisplay == "Organization"{
+            if GlobalVariables.selectedDisplay == "Organization" || GlobalVariables.addictedDisplay == "Organization" || GlobalVariables.uploadDisplay == "Organization"{
                 let organizationInfo = FetchData(context: managedObjectContext).fetchOrganizations()
                 let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsOrganization()
                 for organization in organizationInfo!{
@@ -307,7 +307,7 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                             print(addInfo!)
                         }
                         
-                        getAddictedButton.backgroundColor = UIColor.orangeColor()
+                        getAddictedButton.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1)
                         getAddictedLabel.text = "You are addicted"
                         
                     } else if organization.organizationID == GlobalVariables.eventSelected && addictionInfo!.contains({$0.organizationID == GlobalVariables.eventSelected}) {
@@ -327,7 +327,7 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                                 print(removeInfo!)
                             }
                             
-                            self.getAddictedButton.backgroundColor = UIColor.cyanColor()
+                            self.getAddictedButton.backgroundColor = UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1)
                             self.getAddictedLabel.text = "Get addicted"
                             
                         }
@@ -368,7 +368,7 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
         
         let height = webView.scrollView.contentSize.height
         
-        scrollView.contentInset.bottom = height + 180 + 20 + UIScreen.mainScreen().bounds.height * 0.33
+        scrollView.contentInset.bottom = height + 180 + 40 + UIScreen.mainScreen().bounds.height * 0.33
     }
     
     

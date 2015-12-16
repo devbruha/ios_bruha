@@ -10,6 +10,8 @@ import UIKit
 
 class OrganizationTableViewCell: SWTableViewCell {
     
+    @IBOutlet weak var rectCategory: UIImageView!
+    @IBOutlet weak var rectCategoryName: UILabel!
     @IBOutlet weak var organizationLabel: UILabel!
     @IBOutlet weak var organizationImage: UIImageView!
     @IBOutlet weak var organizationName: UILabel!
@@ -19,6 +21,7 @@ class OrganizationTableViewCell: SWTableViewCell {
     @IBOutlet weak var rectView: EventRectangleView!
     @IBOutlet weak var circHiddenID: UILabel!
     @IBOutlet weak var circCategory: UIImageView!
+    @IBOutlet weak var circAddicted: UIImageView!
     
     @IBOutlet weak var circView: EventCircleView!
     
