@@ -14,8 +14,10 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var Name: UILabel!
     @IBOutlet weak var Address: UILabel!
-    @IBOutlet weak var Price: UILabel!
-    @IBOutlet weak var Date: UILabel!
+    @IBOutlet weak var DateUpcoming: UIButton!
+    @IBOutlet weak var DateUpcomingLabel: UILabel!
+    @IBOutlet weak var PriceCalendar: UIButton!
+    @IBOutlet weak var PriceCalendarLabel: UILabel!
     @IBOutlet weak var smallImage: UIImageView!
     @IBOutlet var getAddictedButton: UIButton!
     @IBOutlet var getAddictedLabel: UILabel!
@@ -64,6 +66,9 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
         
         Image.contentMode = UIViewContentMode.ScaleToFill
         
+        PriceCalendar.enabled = false
+        DateUpcoming.enabled = false
+        
         let posterInfo = FetchData(context: managedObjectContext).fetchPosterImages()
         
         if GlobalVariables.selectedDisplay == "Event" || GlobalVariables.addictedDisplay == "Event" || GlobalVariables.uploadDisplay == "Event"{
@@ -74,8 +79,13 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                 if event.eventID == GlobalVariables.eventSelected{
                     Name.text = event.eventName
                     Address.text = event.eventVenueAddress
-                    Price.text = event.eventPrice
-                    Date.text = event.eventStartDate
+                    
+                    if let price = Float(event.eventPrice!) {
+                        if price == 0.0 {PriceCalendarLabel.text = "Free!"}
+                        else {PriceCalendarLabel.text = "$\(price)"}
+                    } else {PriceCalendarLabel.text = "No Price"}
+                    
+                    DateUpcomingLabel.text = convertTimeFormat("\(event.eventStartDate)")
                     smallImage.image = UIImage(named: event.primaryCategory)
                     webDescriptionContent.loadHTMLString("<font color=\"black\">\(event.eventDescription)</font>", baseURL: nil)
                     
@@ -85,7 +95,7 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                                 if img.Image?.length > 800 {
                                     Image.image = UIImage(data: img.Image!)
                                 } else {
-                                    Image.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1)
+                                    Image.image = randomImage()
                                 }
                             }
                         }
@@ -108,10 +118,13 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                 if venue.venueID == GlobalVariables.eventSelected{
                     Name.text = venue.venueName
                     Address.text = venue.venueAddress
-                    Price.text = "-"
-                    Date.text = "-"
+                    PriceCalendarLabel.text = "Calendar"
+                    DateUpcomingLabel.text = "Up Coming Events"
                     smallImage.image = UIImage(named: venue.primaryCategory)
                     webDescriptionContent.loadHTMLString("<font color=\"black\">\(venue.venueDescription)</font>", baseURL: nil)
+                    
+                    PriceCalendar.enabled = true
+                    DateUpcoming.enabled = true
                     
                     if let images = posterInfo {
                         for img in images {
@@ -119,7 +132,7 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                                 if img.Image?.length > 800 {
                                     Image.image = UIImage(data: img.Image!)
                                 } else {
-                                    Image.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1)
+                                    Image.image = randomImage()
                                 }
                             }
                         }
@@ -141,10 +154,13 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                 if organization.organizationID == GlobalVariables.eventSelected{
                     Name.text = organization.organizationName
                     Address.text = organization.organizationAddress
-                    Price.text = "-"
-                    Date.text = "-"
+                    PriceCalendarLabel.text = "Calendar"
+                    DateUpcomingLabel.text = "Up Coming Events"
                     smallImage.image = UIImage(named: organization.primaryCategory)
                     webDescriptionContent.loadHTMLString("<font color=\"black\">\(organization.organizationDescription)</font>", baseURL: nil)
+                    
+                    PriceCalendar.enabled = true
+                    DateUpcoming.enabled = true
                     
                     if let images = posterInfo {
                         for img in images {
@@ -152,7 +168,7 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                                 if img.Image?.length > 800 {
                                     Image.image = UIImage(data: img.Image!)
                                 } else {
-                                    Image.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1)
+                                    Image.image = randomImage()
                                 }
                             }
                         }
@@ -169,6 +185,10 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
         
     }
     
+    @IBAction func goUpComing(sender: UIButton) {
+        //GlobalVariables.eventSelected = "passing information"
+        self.performSegueWithIdentifier("UpComing", sender: self)
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -182,6 +202,7 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
         
         // Do any additional setup after loading the view.
     }
+    
    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -190,7 +211,7 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
     
     
     //Logic of getting addicted
-    @IBAction func getAddicted(sender: AnyObject) {
+    @IBAction func getAddicted(sender: UIButton) {
         //LoggedIn
         if GlobalVariables.loggedIn == true {
             let user = FetchData(context: managedObjectContext).fetchUserInfo()![0].userName
@@ -369,6 +390,51 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
         let height = webView.scrollView.contentSize.height
         
         scrollView.contentInset.bottom = height + 180 + 40 + UIScreen.mainScreen().bounds.height * 0.33
+    }
+    
+    func randomImage() -> UIImage {
+        let imgNo = Int(arc4random_uniform(6) + 1)
+        
+        switch(imgNo){
+            
+        case 1:
+            return UIImage(named: "Background1")!
+            
+        case 2:
+            return UIImage(named: "Background2")!
+            
+        case 3:
+            return UIImage(named: "Background3")!
+            
+        case 4:
+            return UIImage(named: "Background4")!
+            
+        case 5:
+            return UIImage(named: "Background5")!
+            
+        case 6:
+            return UIImage(named: "Background6")!
+            
+        default:
+            return UIImage(named: "Background1")!
+        }
+        
+    }
+    
+    func convertTimeFormat(date: String) -> String {
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.timeZone = NSTimeZone.localTimeZone()
+        
+        if let ndate = dateFormatter.dateFromString(date) {
+            
+            dateFormatter.dateFormat = "MMMM dd\nyyyy"
+            dateFormatter.timeZone = NSTimeZone.localTimeZone()
+            let timeStamp = dateFormatter.stringFromDate(ndate)
+            return timeStamp
+        }
+        else {return "nil or error times"}
     }
     
     
