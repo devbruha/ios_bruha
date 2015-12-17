@@ -110,7 +110,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         
         
         clearFilter.setTitle("Clear Filter", forState: UIControlState.Normal)
-        clearFilter.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1)
+        clearFilter.backgroundColor = UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1)
         clearFilter.addTarget(self, action: "clearFilters:", forControlEvents: UIControlEvents.TouchUpInside)
         self.scrollView.addSubview(clearFilter)
         
@@ -182,7 +182,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         organizationSelectedB.layer.borderWidth = CGFloat(1.5)
         
         discoverableButtonIcon.contentMode = UIViewContentMode.ScaleAspectFit
-        discoverableButtonIcon.image = UIImage(named: "Organization_White")
+        discoverableButtonIcon.image = UIImage(named: "Bruha_White")
         discoverableSelectedB.setTitle("Discoverable", forState: UIControlState.Normal)
         discoverableSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         discoverableSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
@@ -192,6 +192,22 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
     
     func updateEVOD() {
         
+        eventButtonIcon.image = UIImage(named: "Events_White")
+        eventSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        eventSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+        
+        venueButtonIcon.image = UIImage(named: "Venue_White")
+        venueSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        venueSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+        
+        organizationButtonIcon.image = UIImage(named: "Organization_White")
+        organizationSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        organizationSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+        
+        discoverableButtonIcon.image = UIImage(named: "Bruha_White")
+        discoverableSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        discoverableSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+        
         switch(GlobalVariables.selectedDisplay){
             
         case "Event":
@@ -200,68 +216,21 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
             eventSelectedB.setTitleColor(UIColor.orangeColor(), forState: UIControlState.Normal)
             eventSelectedB.layer.borderColor = UIColor.orangeColor().CGColor
             
-            venueButtonIcon.image = UIImage(named: "Venue_White")
-            venueSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-            venueSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
-            
-            organizationButtonIcon.image = UIImage(named: "Organization_White")
-            organizationSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-            organizationSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
-            
-            discoverableButtonIcon.image = UIImage(named: "Organization_White")
-            discoverableSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-            discoverableSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
-            
         case "Venue":
-            
-            eventButtonIcon.image = UIImage(named: "Events_White")
-            eventSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-            eventSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
             
             venueButtonIcon.image = UIImage(named: "Venue_Orange")
             venueSelectedB.setTitleColor(UIColor.orangeColor(), forState: UIControlState.Normal)
             venueSelectedB.layer.borderColor = UIColor.orangeColor().CGColor
             
-            organizationButtonIcon.image = UIImage(named: "Organization_White")
-            organizationSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-            organizationSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
-            
-            discoverableButtonIcon.image = UIImage(named: "Organization_White")
-            discoverableSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-            discoverableSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
-            
         case "Organization":
-            
-            eventButtonIcon.image = UIImage(named: "Events_White")
-            eventSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-            eventSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
-            
-            venueButtonIcon.image = UIImage(named: "Venue_White")
-            venueSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-            venueSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
             
             organizationButtonIcon.image = UIImage(named: "Organization_Orange")
             organizationSelectedB.setTitleColor(UIColor.orangeColor(), forState: UIControlState.Normal)
             organizationSelectedB.layer.borderColor = UIColor.orangeColor().CGColor
             
-            discoverableButtonIcon.image = UIImage(named: "Organization_White")
-            discoverableSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-            discoverableSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
-            
         case "Discoverable":
-            eventButtonIcon.image = UIImage(named: "Events_White")
-            eventSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-            eventSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
             
-            venueButtonIcon.image = UIImage(named: "Venue_White")
-            venueSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-            venueSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
-            
-            organizationButtonIcon.image = UIImage(named: "Organization_White")
-            organizationSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-            organizationSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
-            
-            discoverableButtonIcon.image = UIImage(named: "Events_Orange")
+            discoverableButtonIcon.image = UIImage(named: "Venue_Orange")
             discoverableSelectedB.setTitleColor(UIColor.orangeColor(), forState: UIControlState.Normal)
             discoverableSelectedB.layer.borderColor = UIColor.orangeColor().CGColor
             
@@ -279,7 +248,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
             organizationSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
             organizationSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
             
-            discoverableButtonIcon.image = UIImage(named: "Organization_White")
+            discoverableButtonIcon.image = UIImage(named: "Bruha_White")
             discoverableSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
             discoverableSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
         }

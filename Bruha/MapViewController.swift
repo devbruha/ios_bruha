@@ -271,7 +271,11 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             if let images = posterInfo {
                 for img in images {
                     if img.ID == e.eventID {
-                        cell.dropImage.image = UIImage(data: img.Image!)
+                        if img.Image?.length > 800 {
+                            cell.dropImage.image = UIImage(data: img.Image!)
+                        } else {
+                            cell.dropImage.image = randomImage()
+                        }
                     }
                 }
             }
@@ -333,7 +337,11 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             if let images = posterInfo {
                 for img in images {
                     if img.ID == v.venueID {
-                        cell.dropImage.image = UIImage(data: img.Image!)
+                        if img.Image?.length > 800 {
+                            cell.dropImage.image = UIImage(data: img.Image!)
+                        } else {
+                            cell.dropImage.image = randomImage()
+                        }
                     }
                 }
             }
@@ -383,7 +391,11 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             if let images = posterInfo {
                 for img in images {
                     if img.ID == o.organizationID {
-                        cell.dropImage.image = UIImage(data: img.Image!)
+                        if img.Image?.length > 800 {
+                            cell.dropImage.image = UIImage(data: img.Image!)
+                        } else {
+                            cell.dropImage.image = randomImage()
+                        }
                     }
                 }
             }
@@ -947,6 +959,35 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             return timeStamp
         }
         else {return "nil or error times"}
+    }
+    
+    func randomImage() -> UIImage {
+        let imgNo = Int(arc4random_uniform(6) + 1)
+        
+        switch(imgNo){
+            
+        case 1:
+            return UIImage(named: "Background1")!
+            
+        case 2:
+            return UIImage(named: "Background2")!
+            
+        case 3:
+            return UIImage(named: "Background3")!
+            
+        case 4:
+            return UIImage(named: "Background4")!
+            
+        case 5:
+            return UIImage(named: "Background5")!
+            
+        case 6:
+            return UIImage(named: "Background6")!
+            
+        default:
+            return UIImage(named: "Background1")!
+        }
+        
     }
     
 }

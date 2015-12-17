@@ -111,6 +111,7 @@
 		45FA05C11B5D6FCC004AD819 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05C01B5D6FCC004AD819 /* LoginService.swift */; };
 		45FA05C41B5D7000004AD819 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05C31B5D7000004AD819 /* User.swift */; };
 		45FA05C61B5D7D9E004AD819 /* UserDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05C51B5D7D9E004AD819 /* UserDBModel.swift */; };
+		A501998C1C23239B0097624F /* UpComingEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A501998B1C23239B0097624F /* UpComingEventsViewController.swift */; };
 		A50231701C0F57C600FA4E7F /* FacebookService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A502316F1C0F57C600FA4E7F /* FacebookService.swift */; };
 		A505C0EB1BCEDC6D0067CDD1 /* UserEventDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A505C0EA1BCEDC6D0067CDD1 /* UserEventDBModel.swift */; };
 		A505C0ED1BCEDD4B0067CDD1 /* UserVenueDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A505C0EC1BCEDD4B0067CDD1 /* UserVenueDBModel.swift */; };
@@ -276,6 +277,7 @@
 		45FA05C51B5D7D9E004AD819 /* UserDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDBModel.swift; sourceTree = "<group>"; };
 		4C40848564A9A9ABD06E1BFE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6624944801305D440270EA9D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		A501998B1C23239B0097624F /* UpComingEventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpComingEventsViewController.swift; sourceTree = "<group>"; };
 		A502316F1C0F57C600FA4E7F /* FacebookService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookService.swift; sourceTree = "<group>"; };
 		A505C0EA1BCEDC6D0067CDD1 /* UserEventDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserEventDBModel.swift; sourceTree = "<group>"; };
 		A505C0EC1BCEDD4B0067CDD1 /* UserVenueDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserVenueDBModel.swift; sourceTree = "<group>"; };
@@ -404,6 +406,7 @@
 				A505C0F61BD17B910067CDD1 /* LoadScreenViewController.swift */,
 				3C4FA13E1C04EE150034610E /* ShowOnMapViewController.swift */,
 				A5967F161C2067E700559FC9 /* MoreInformationViewController.swift */,
+				A501998B1C23239B0097624F /* UpComingEventsViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -886,6 +889,7 @@
 				181EB61A1B714B7600B9295E /* NSDateAdditions.swift in Sources */,
 				45C6D5C01B851ADE00EE4A05 /* EventSubCategoriesDBModel.swift in Sources */,
 				181EB6141B714B7600B9295E /* DayCollectionCell.swift in Sources */,
+				A501998C1C23239B0097624F /* UpComingEventsViewController.swift in Sources */,
 				A505C0F71BD17B910067CDD1 /* LoadScreenViewController.swift in Sources */,
 				1892A8001BEAFADE0063DFBB /* MoreInfoViewController.swift in Sources */,
 				181EB6101B714B7600B9295E /* CalendarView.swift in Sources */,

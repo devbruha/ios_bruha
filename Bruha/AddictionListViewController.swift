@@ -174,7 +174,7 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
                                 if img.Image?.length > 800 {
                                     cell.ExploreImage.image = UIImage(data: img.Image!)
                                 } else {
-                                    cell.ExploreImage.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1)
+                                    cell.ExploreImage.image = randomImage()
                                 }
                             }
                         }
@@ -277,7 +277,7 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
                                 if img.Image?.length > 800 {
                                     cell.venueImage.image = UIImage(data: img.Image!)
                                 } else {
-                                    cell.venueImage.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1)
+                                    cell.venueImage.image = randomImage()
                                 }
                             }
                         }
@@ -342,7 +342,7 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
                                 if img.Image?.length > 800 {
                                     cell.organizationImage.image = UIImage(data: img.Image!)
                                 } else {
-                                    cell.organizationImage.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1)
+                                    cell.organizationImage.image = randomImage()
                                 }
                             }
                         }
@@ -681,6 +681,35 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
             return timeStamp
         }
         else {return "nil,error times"}
+    }
+    
+    func randomImage() -> UIImage {
+        let imgNo = Int(arc4random_uniform(6) + 1)
+        
+        switch(imgNo){
+            
+        case 1:
+            return UIImage(named: "Background1")!
+            
+        case 2:
+            return UIImage(named: "Background2")!
+            
+        case 3:
+            return UIImage(named: "Background3")!
+            
+        case 4:
+            return UIImage(named: "Background4")!
+            
+        case 5:
+            return UIImage(named: "Background5")!
+            
+        case 6:
+            return UIImage(named: "Background6")!
+            
+        default:
+            return UIImage(named: "Background1")!
+        }
+        
     }
     
     
