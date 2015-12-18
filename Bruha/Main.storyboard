@@ -28,6 +28,7 @@
             <string>OpenSans</string>
             <string>OpenSans</string>
             <string>OpenSans</string>
+            <string>OpenSans</string>
         </mutableArray>
         <mutableArray key="OpenSans-Semibold.ttf">
             <string>OpenSans-Semibold</string>
@@ -2367,10 +2368,7 @@
                                         <rect key="frame" x="0.0" y="197" width="324" height="90"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Event " lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="3UI-GQ-Uvy">
-                                                <rect key="frame" x="5" y="8" width="254" height="45"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="45" id="f3t-j5-7XP"/>
-                                                </constraints>
+                                                <rect key="frame" x="5" y="8" width="254" height="32"/>
                                                 <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="16"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -2382,8 +2380,14 @@
                                                     <constraint firstAttribute="width" constant="50" id="bjM-mQ-xof"/>
                                                 </constraints>
                                             </imageView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Venue Name" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g5v-rT-mCu">
+                                                <rect key="frame" x="5" y="41" width="254" height="19.5"/>
+                                                <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
+                                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Address" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hCF-Bg-anZ">
-                                                <rect key="frame" x="5" y="54" width="254" height="31"/>
+                                                <rect key="frame" x="5" y="61" width="254" height="23.5"/>
                                                 <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="14"/>
                                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -2391,20 +2395,25 @@
                                         </subviews>
                                         <color key="backgroundColor" red="0.27843137254901962" green="0.27843137254901962" blue="0.27843137254901962" alpha="0.5" colorSpace="calibratedRGB"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="90" id="8mK-fp-AbF"/>
+                                            <constraint firstItem="g5v-rT-mCu" firstAttribute="leading" secondItem="sak-u7-Aiv" secondAttribute="leading" constant="5" id="4kr-Oy-Qzs"/>
                                             <constraint firstItem="jf9-OK-F6G" firstAttribute="centerY" secondItem="sak-u7-Aiv" secondAttribute="centerY" id="Fa9-2e-U3T"/>
+                                            <constraint firstItem="jf9-OK-F6G" firstAttribute="leading" secondItem="g5v-rT-mCu" secondAttribute="trailing" constant="5" id="Fvx-uz-eXV"/>
                                             <constraint firstItem="jf9-OK-F6G" firstAttribute="leading" secondItem="hCF-Bg-anZ" secondAttribute="trailing" constant="5" id="N4P-Qi-eao"/>
+                                            <constraint firstAttribute="bottom" secondItem="3UI-GQ-Uvy" secondAttribute="bottom" constant="50" id="OMI-KE-Nw6"/>
                                             <constraint firstItem="3UI-GQ-Uvy" firstAttribute="top" secondItem="sak-u7-Aiv" secondAttribute="top" constant="8" id="T2f-2k-WSd"/>
                                             <constraint firstItem="hCF-Bg-anZ" firstAttribute="leading" secondItem="sak-u7-Aiv" secondAttribute="leading" constant="5" id="VGW-vb-djT"/>
                                             <constraint firstAttribute="bottom" secondItem="hCF-Bg-anZ" secondAttribute="bottom" constant="5" id="Z7A-jn-e6f"/>
                                             <constraint firstItem="jf9-OK-F6G" firstAttribute="leading" secondItem="3UI-GQ-Uvy" secondAttribute="trailing" constant="5" id="buW-dM-Dqc"/>
+                                            <constraint firstItem="g5v-rT-mCu" firstAttribute="top" secondItem="3UI-GQ-Uvy" secondAttribute="bottom" constant="1" id="cIS-dn-ZEm"/>
                                             <constraint firstItem="3UI-GQ-Uvy" firstAttribute="leading" secondItem="sak-u7-Aiv" secondAttribute="leading" constant="5" id="ik3-ky-i5N"/>
+                                            <constraint firstAttribute="bottom" secondItem="g5v-rT-mCu" secondAttribute="bottom" constant="29.5" id="ma9-pT-RK0"/>
+                                            <constraint firstItem="hCF-Bg-anZ" firstAttribute="top" secondItem="g5v-rT-mCu" secondAttribute="bottom" constant="1" id="pcJ-xs-FfU"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="90" id="tuS-cK-hh7"/>
                                             <constraint firstAttribute="trailing" secondItem="jf9-OK-F6G" secondAttribute="trailing" constant="10" id="x10-ca-Lld"/>
-                                            <constraint firstItem="hCF-Bg-anZ" firstAttribute="top" secondItem="3UI-GQ-Uvy" secondAttribute="bottom" constant="1" id="z3w-ar-xHD"/>
                                         </constraints>
                                     </view>
                                     <webView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="S7i-vd-7tx">
-                                        <rect key="frame" x="0.0" y="379" width="324" height="147"/>
+                                        <rect key="frame" x="0.0" y="379" width="320" height="147"/>
                                         <color key="backgroundColor" red="0.36078431370000003" green="0.38823529410000002" blue="0.4039215686" alpha="1" colorSpace="deviceRGB"/>
                                     </webView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="gZh-oM-G1x">
@@ -2538,6 +2547,7 @@
                                 <constraints>
                                     <constraint firstItem="Sjb-Gy-hCT" firstAttribute="leading" secondItem="GUD-dk-j8d" secondAttribute="leading" id="2pW-if-mKX"/>
                                     <constraint firstItem="S7i-vd-7tx" firstAttribute="leading" secondItem="GUD-dk-j8d" secondAttribute="leading" id="7ul-pX-jDz"/>
+                                    <constraint firstItem="S7i-vd-7tx" firstAttribute="centerX" secondItem="GUD-dk-j8d" secondAttribute="centerX" id="CFU-vp-EDR"/>
                                     <constraint firstItem="gZh-oM-G1x" firstAttribute="top" secondItem="S7i-vd-7tx" secondAttribute="bottom" constant="2" id="HCD-4s-dfV"/>
                                     <constraint firstItem="2lA-eb-S49" firstAttribute="top" secondItem="sak-u7-Aiv" secondAttribute="bottom" id="Iy4-KZ-1zd"/>
                                     <constraint firstItem="S7i-vd-7tx" firstAttribute="top" secondItem="2lA-eb-S49" secondAttribute="bottom" constant="2" id="XHb-mr-ugr"/>
@@ -2572,7 +2582,6 @@
                             <constraint firstItem="GUD-dk-j8d" firstAttribute="centerX" secondItem="Let-jo-xKU" secondAttribute="centerX" id="UkO-2y-0o9"/>
                             <constraint firstItem="Js0-WU-th1" firstAttribute="top" secondItem="ieN-z5-odB" secondAttribute="bottom" id="UuR-B1-usr"/>
                             <constraint firstAttribute="trailingMargin" secondItem="gZh-oM-G1x" secondAttribute="trailing" constant="-20" id="aBv-Vx-415"/>
-                            <constraint firstAttribute="trailingMargin" secondItem="S7i-vd-7tx" secondAttribute="trailing" constant="-20" id="e3w-nh-AXs"/>
                             <constraint firstItem="GUD-dk-j8d" firstAttribute="top" secondItem="Let-jo-xKU" secondAttribute="topMargin" id="nBy-KB-aal"/>
                             <constraint firstAttribute="trailingMargin" secondItem="Js0-WU-th1" secondAttribute="trailing" constant="-15" id="xSF-nn-oDh"/>
                         </constraints>
@@ -2586,6 +2595,7 @@
                         <outlet property="Name" destination="3UI-GQ-Uvy" id="Jub-wm-jae"/>
                         <outlet property="PriceCalendar" destination="nxw-hH-ws0" id="tTa-nU-WUw"/>
                         <outlet property="PriceCalendarLabel" destination="zb0-BP-cnh" id="tjY-gC-hJt"/>
+                        <outlet property="VenueName" destination="g5v-rT-mCu" id="Y3u-1W-XQ5"/>
                         <outlet property="backButton" destination="Js0-WU-th1" id="Ze5-60-fG4"/>
                         <outlet property="bruhaButton" destination="4DL-YH-xr6" id="3XS-PU-YzK"/>
                         <outlet property="getAddictedButton" destination="atz-Xy-3qB" id="DwV-Gl-z68"/>
@@ -2685,13 +2695,13 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="l1y-Rt-Be8"/>
-        <segue reference="fNB-TA-9Vh"/>
-        <segue reference="f7C-vE-RdE"/>
-        <segue reference="XHn-5o-VUf"/>
-        <segue reference="rgA-zP-Ee2"/>
+        <segue reference="Rkq-9y-PIT"/>
+        <segue reference="lw9-PB-bZ2"/>
         <segue reference="5DM-Zi-tRH"/>
         <segue reference="J3w-Nl-jcV"/>
         <segue reference="pgm-fT-IMJ"/>
-        <segue reference="lw9-PB-bZ2"/>
+        <segue reference="f7C-vE-RdE"/>
+        <segue reference="XHn-5o-VUf"/>
+        <segue reference="rgA-zP-Ee2"/>
     </inferredMetricsTieBreakers>
 </document>

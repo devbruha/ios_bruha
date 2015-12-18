@@ -13,6 +13,7 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
     @IBOutlet weak var bruhaButton: UIButton!
     @IBOutlet weak var backButton: UIButton!
     @IBOutlet weak var Name: UILabel!
+    @IBOutlet weak var VenueName: UILabel!
     @IBOutlet weak var Address: UILabel!
     @IBOutlet weak var DateUpcoming: UIButton!
     @IBOutlet weak var DateUpcomingLabel: UILabel!
@@ -78,7 +79,14 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
             for event in eventInfo{
                 if event.eventID == GlobalVariables.eventSelected{
                     Name.text = event.eventName
-                    Address.text = event.eventVenueAddress
+                    
+                    if event.eventVenueName == "" {
+                        VenueName.text = "nil"
+                    } else {VenueName.text = event.eventVenueName }
+                    
+                    
+                    Address.text = "\(event.eventVenueAddress.componentsSeparatedByString(", ")[0]), \(event.eventVenueCity)"
+                    
                     
                     if let price = Float(event.eventPrice!) {
                         if price == 0.0 {PriceCalendarLabel.text = "Free!"}
@@ -87,7 +95,7 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                     
                     DateUpcomingLabel.text = convertTimeFormat("\(event.eventStartDate)")
                     smallImage.image = UIImage(named: event.primaryCategory)
-                    webDescriptionContent.loadHTMLString("<font color=\"black\">\(event.eventDescription)</font>", baseURL: nil)
+                    webDescriptionContent.loadHTMLString("<div style=\"color:black;width:100%;word-wrap:break-word;\">\(event.eventDescription)</div>", baseURL: nil)
                     
                     if let images = posterInfo {
                         for img in images {
@@ -117,11 +125,12 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
             for venue in venueInfo{
                 if venue.venueID == GlobalVariables.eventSelected{
                     Name.text = venue.venueName
-                    Address.text = venue.venueAddress
+                    VenueName.text = venue.venueAddress   //this is venue address
+                    Address.text = ""
                     PriceCalendarLabel.text = "Calendar"
                     DateUpcomingLabel.text = "Up Coming Events"
                     smallImage.image = UIImage(named: venue.primaryCategory)
-                    webDescriptionContent.loadHTMLString("<font color=\"black\">\(venue.venueDescription)</font>", baseURL: nil)
+                    webDescriptionContent.loadHTMLString("<div style=\"color:black;width:100%;word-wrap:break-word;\">\(venue.venueDescription)</div>", baseURL: nil)
                     
                     PriceCalendar.enabled = true
                     DateUpcoming.enabled = true
@@ -153,11 +162,12 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
             for organization in organizationInfo!{
                 if organization.organizationID == GlobalVariables.eventSelected{
                     Name.text = organization.organizationName
-                    Address.text = organization.organizationAddress
+                    VenueName.text = organization.organizationAddress  //this is the org address
+                    Address.text = ""
                     PriceCalendarLabel.text = "Calendar"
                     DateUpcomingLabel.text = "Up Coming Events"
                     smallImage.image = UIImage(named: organization.primaryCategory)
-                    webDescriptionContent.loadHTMLString("<font color=\"black\">\(organization.organizationDescription)</font>", baseURL: nil)
+                    webDescriptionContent.loadHTMLString("<div style=\"color:black;width:100%;word-wrap:break-word;\">\(organization.organizationDescription)</div>", baseURL: nil)
                     
                     PriceCalendar.enabled = true
                     DateUpcoming.enabled = true
@@ -389,7 +399,29 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
         
         let height = webView.scrollView.contentSize.height
         
-        scrollView.contentInset.bottom = height + 180 + 40 + UIScreen.mainScreen().bounds.height * 0.33
+        
+        let width = webView.scrollView.contentSize.width
+        
+        let screenWidth = UIScreen.mainScreen().bounds.width
+        
+        if width > screenWidth {
+            //webView.scrollView.contentInset.right = width
+            //scrollView.contentInset.right = width
+            webDescriptionContent.scrollView.alwaysBounceHorizontal = true
+            webDescriptionContent.scrollView.bounces = true
+            //webDescriptionContent.scrollView.scrollIndicatorInsets.right = width
+        } else {
+            //webView.scrollView.contentInset.right = screenWidth
+            //scrollView.contentInset.right = screenWidth
+            
+        }
+        
+        print("the width is", width)
+        print("the screen width is ", UIScreen.mainScreen().bounds.width)
+//        webDescriptionContent.scrollView.scrollIndicatorInsets.right = width
+//        webDescriptionContent.scrollView.scrollIndicatorInsets.left = width
+        
+        scrollView.contentInset.bottom = height + 180 + 40 + UIScreen.mainScreen().bounds.height * 0.33 + 20
     }
     
     func randomImage() -> UIImage {
