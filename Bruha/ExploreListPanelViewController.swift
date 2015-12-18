@@ -478,7 +478,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         cell.textLabel?.textColor = UIColor.whiteColor()
         cell.textLabel!.font = UIFont(name: cell.textLabel!.font.fontName, size: 18)
         cell.selectionStyle = UITableViewCellSelectionStyle.None
-        print(cell.textLabel!.font.fontName)
+        //print(cell.textLabel!.font.fontName)
         if(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.keys.contains(eventObject[indexPath.section].sectionName)){
             
             if(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[eventObject[indexPath.section].sectionName]![0].contains(eventObject[indexPath.section].sectionObjectIDs[indexPath.row])){
@@ -608,7 +608,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
             headerCell.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1)
             headerCell.textLabel!.textColor = UIColor.whiteColor()
             headerCell.detailTextLabel?.text = "\(section)"
-            
+            headerCell.textLabel?.font = UIFont(name: "OpenSans-Semibold", size: 18)
         }
         else{
             
@@ -646,7 +646,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
         headerCell.layer.borderColor = UIColor.whiteColor().CGColor
         headerCell.textLabel!.font = UIFont(name: headerCell.textLabel!.font.fontName, size: 18)
-        
+        //print(headerCell.textLabel!.font.fontName)
         // Send section
         headerCell.headerCellSection = section
         

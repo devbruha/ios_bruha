@@ -17,7 +17,9 @@ class CategoryHeaderCellTableViewCell: UITableViewCell {
         // Initialization code
         //self.selectionStyle = UITableViewCellSelectionStyle.None
         
-        //self.textLabel?.font =
+        self.textLabel?.font = UIFont(name: "OpenSans", size: 18)
+        
+        //printAllFonts()
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -37,4 +39,13 @@ class CategoryHeaderCellTableViewCell: UITableViewCell {
         // Configure the view for the selected state
     }
 
+    func printAllFonts() {
+        let fontFamilyNames = UIFont.familyNames()
+        for familyName in fontFamilyNames {
+            print("------------------------------")
+            print("Font Family Name = [\(familyName)]")
+            let names = UIFont.fontNamesForFamilyName(familyName)
+            print("Font Names = [\(names)]")
+        }
+    }
 }
