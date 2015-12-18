@@ -399,28 +399,6 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
         
         let height = webView.scrollView.contentSize.height
         
-        
-        let width = webView.scrollView.contentSize.width
-        
-        let screenWidth = UIScreen.mainScreen().bounds.width
-        
-        if width > screenWidth {
-            //webView.scrollView.contentInset.right = width
-            //scrollView.contentInset.right = width
-            webDescriptionContent.scrollView.alwaysBounceHorizontal = true
-            webDescriptionContent.scrollView.bounces = true
-            //webDescriptionContent.scrollView.scrollIndicatorInsets.right = width
-        } else {
-            //webView.scrollView.contentInset.right = screenWidth
-            //scrollView.contentInset.right = screenWidth
-            
-        }
-        
-        print("the width is", width)
-        print("the screen width is ", UIScreen.mainScreen().bounds.width)
-//        webDescriptionContent.scrollView.scrollIndicatorInsets.right = width
-//        webDescriptionContent.scrollView.scrollIndicatorInsets.left = width
-        
         scrollView.contentInset.bottom = height + 180 + 40 + UIScreen.mainScreen().bounds.height * 0.33 + 20
     }
     

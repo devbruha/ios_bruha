@@ -43,6 +43,7 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
         widthContraints.priority = UILayoutPriorityDefaultHigh
         
         bruhaButton.addConstraints([heightContraints, widthContraints])
+        
     }
     
     func customStatusBar() {
@@ -192,12 +193,17 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
 //                    }
                     
                     cell.circTitle.text = event.eventName
-                    cell.circDate.text = event.eventStartDate
-                    cell.circPrice.text = "$\(event.eventPrice!)"
+                    cell.circDate.text = convertCircTimeFormat("\(event.eventStartDate)")
+                    
+                    if let price = Float(event.eventPrice!) {
+                        if price == 0.0 {cell.circPrice.text = "Free!"; cell.rectPrice.text = "Free!"}
+                        else {cell.circPrice.text = "$\(price)"; cell.rectPrice.text = "$\(price)"}
+                    } else {cell.circPrice.text = "No Price"; cell.rectPrice.text = "No Price"}
+                    
                     cell.circHiddenID.text = event.eventID
                     
                     cell.rectTitle.text = event.eventName
-                    cell.rectPrice.text = "$\(event.eventPrice!)"
+                    //cell.rectPrice.text = "$\(event.eventPrice!)"
                     
                     if event.eventVenueName == "" {
                         cell.venueName.text = "nil"

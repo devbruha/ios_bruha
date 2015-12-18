@@ -421,12 +421,13 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
         GlobalVariables.selectedDisplay = "Venue"
         
-        if(GlobalVariables.UserCustomFilters.categoryFilter.venueCategories.count != 0){
-            venueObject = backupVenueCategories
-        }
-        else{
-            venueObject = ["Venue Categories"]
-        }
+        venueObject = backupVenueCategories
+//        if(GlobalVariables.UserCustomFilters.categoryFilter.venueCategories.count != 0){
+//            venueObject = backupVenueCategories
+//        }
+//        else{
+//            venueObject = ["Venue Categories"]
+//        }
         
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
         //clearBackupCategories()
@@ -448,12 +449,13 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
         GlobalVariables.selectedDisplay = "Organization"
         
-        if(GlobalVariables.UserCustomFilters.categoryFilter.organizationCategories.count != 0){
-            organizationObject = backupOrganizationCategories
-        }
-        else{
-            organizationObject = ["Organization Categories"]
-        }
+        organizationObject = backupOrganizationCategories
+//        if(GlobalVariables.UserCustomFilters.categoryFilter.organizationCategories.count != 0){
+//            organizationObject = backupOrganizationCategories
+//        }
+//        else{
+//            organizationObject = ["Organization Categories"]
+//        }
         
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
         //clearBackupCategories()
@@ -476,7 +478,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         cell.textLabel?.textColor = UIColor.whiteColor()
         cell.textLabel!.font = UIFont(name: cell.textLabel!.font.fontName, size: 18)
         cell.selectionStyle = UITableViewCellSelectionStyle.None
-        
+        print(cell.textLabel!.font.fontName)
         if(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.keys.contains(eventObject[indexPath.section].sectionName)){
             
             if(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[eventObject[indexPath.section].sectionName]![0].contains(eventObject[indexPath.section].sectionObjectIDs[indexPath.row])){
@@ -827,7 +829,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
         constraint.constant = height
         
-        scrollView.contentSize.height = 500 + constraint.constant
+        //scrollView.contentSize.height = 500 + constraint.constant
         
         priceLabelTitle.frame = CGRectMake(10, 200 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 30)
         priceLabel.frame = CGRectMake(10, 230 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 20)
@@ -837,7 +839,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
             scrollView.contentInset.bottom = 100
             clearFilter.frame = CGRectMake(UIScreen.mainScreen().bounds.width * 0.7 - 10, 280 + constraint.constant, UIScreen.mainScreen().bounds.width * 0.3, 30)
         } else {
-            scrollView.contentInset.bottom = 0
+            scrollView.contentInset.bottom = -150
             clearFilter.frame = CGRectMake(UIScreen.mainScreen().bounds.width * 0.7 - 10, 20 + constraint.constant, UIScreen.mainScreen().bounds.width * 0.3, 30)
         }
         
