@@ -85,7 +85,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         priceLabelTitle.textAlignment = NSTextAlignment.Left
         priceLabelTitle.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1)
         priceLabelTitle.textColor = UIColor.whiteColor()
-        priceLabelTitle.font = UIFont(name: ".SFUIText-Semibold", size: 18)
+        priceLabelTitle.font = UIFont(name: "OpenSans-Semibold", size: 18)
         priceLabelTitle.text = "   Admission Price"
         self.scrollView.addSubview(priceLabelTitle)
         
@@ -641,7 +641,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
             headerCell.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1)
             headerCell.textLabel!.textColor = UIColor.whiteColor()
             headerCell.detailTextLabel?.text = "\(section)"
-            
+            headerCell.textLabel?.font = UIFont(name: "OpenSans-Semibold", size: 18)
         }
         else{
             

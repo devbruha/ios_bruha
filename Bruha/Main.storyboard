@@ -29,6 +29,8 @@
             <string>OpenSans</string>
             <string>OpenSans</string>
             <string>OpenSans</string>
+            <string>OpenSans</string>
+            <string>OpenSans</string>
         </mutableArray>
         <mutableArray key="OpenSans-Semibold.ttf">
             <string>OpenSans-Semibold</string>
@@ -415,6 +417,25 @@
                                     <outlet property="delegate" destination="Nog-NB-5cc" id="L5H-F5-nxY"/>
                                 </connections>
                             </tableView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MyUploads_Sm" translatesAutoresizingMaskIntoConstraints="NO" id="uO1-wl-BzC">
+                                <rect key="frame" x="204" y="30" width="25" height="25"/>
+                                <color key="backgroundColor" red="0.95686274509803915" green="0.45882352941176469" blue="0.12941176470588234" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="25" id="FMd-GV-Hqp"/>
+                                    <constraint firstAttribute="height" constant="25" id="lhu-hg-kSZ"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Uploads" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ac3-d6-kuA">
+                                <rect key="frame" x="117" y="30" width="85" height="25"/>
+                                <color key="backgroundColor" red="0.95686274509803915" green="0.45882352941176469" blue="0.12941176470588234" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="85" id="P4Y-gP-2sc"/>
+                                    <constraint firstAttribute="height" constant="25" id="XgP-v8-FD7"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="12"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="9WL-Up-96w">
                                 <rect key="frame" x="1" y="20" width="30" height="35"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
@@ -430,10 +451,14 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="ydO-sc-8mN" firstAttribute="top" secondItem="pJd-hK-yGY" secondAttribute="bottom" constant="-20" id="1Kh-mM-uHh"/>
+                            <constraint firstItem="uO1-wl-BzC" firstAttribute="leading" secondItem="ac3-d6-kuA" secondAttribute="trailing" constant="2" id="4Ab-8J-UP7"/>
                             <constraint firstAttribute="trailingMargin" secondItem="ydO-sc-8mN" secondAttribute="trailing" constant="-16" id="FvF-aX-RMr"/>
                             <constraint firstItem="9WL-Up-96w" firstAttribute="top" secondItem="pJd-hK-yGY" secondAttribute="bottom" id="HNG-q4-Op5"/>
                             <constraint firstItem="ydO-sc-8mN" firstAttribute="leading" secondItem="3F8-SM-fpX" secondAttribute="leadingMargin" constant="-16" id="IzX-py-xat"/>
+                            <constraint firstItem="ac3-d6-kuA" firstAttribute="centerX" secondItem="3F8-SM-fpX" secondAttribute="centerX" id="QcC-a7-O3h"/>
+                            <constraint firstItem="uO1-wl-BzC" firstAttribute="centerY" secondItem="ac3-d6-kuA" secondAttribute="centerY" id="Qmt-i5-fcj"/>
                             <constraint firstItem="9WL-Up-96w" firstAttribute="leading" secondItem="3F8-SM-fpX" secondAttribute="leadingMargin" constant="-15" id="b1F-lR-11q"/>
+                            <constraint firstItem="ac3-d6-kuA" firstAttribute="bottom" secondItem="9WL-Up-96w" secondAttribute="bottom" id="mol-jd-j6Q"/>
                             <constraint firstItem="hDh-of-4cD" firstAttribute="top" secondItem="ydO-sc-8mN" secondAttribute="bottom" constant="-44" id="n52-kq-1kS"/>
                         </constraints>
                     </view>
@@ -659,15 +684,38 @@
                                     <segue destination="zh2-4j-mHu" kind="modal" id="9UH-YD-G4l"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MyAddictions_Sm" translatesAutoresizingMaskIntoConstraints="NO" id="drx-Tf-Uey">
+                                <rect key="frame" x="204.5" y="30" width="25" height="25"/>
+                                <color key="backgroundColor" red="0.27450980390000002" green="0.74509803919999995" blue="0.76078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="1ke-uv-ZSE"/>
+                                    <constraint firstAttribute="width" constant="25" id="gyF-87-iPI"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Addictions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B70-cO-8Mt">
+                                <rect key="frame" x="117.5" y="30" width="85" height="25"/>
+                                <color key="backgroundColor" red="0.27450980390000002" green="0.74509803919999995" blue="0.76078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="85" id="Tf3-LY-P3s"/>
+                                    <constraint firstAttribute="height" constant="25" id="qvt-Wf-xOm"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="12"/>
+                                <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <animations/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="JYk-Oo-DVb" firstAttribute="top" secondItem="WfF-QY-PZX" secondAttribute="bottom" constant="-20" id="3Eh-Ck-fqm"/>
+                            <constraint firstItem="drx-Tf-Uey" firstAttribute="leading" secondItem="B70-cO-8Mt" secondAttribute="trailing" constant="2" id="Fbs-zY-WZC"/>
                             <constraint firstItem="KsU-gR-P29" firstAttribute="top" secondItem="JYk-Oo-DVb" secondAttribute="bottom" id="Kg8-sZ-Mrl"/>
                             <constraint firstItem="Gtn-zv-8Pb" firstAttribute="leading" secondItem="a5k-ZX-4KL" secondAttribute="leadingMargin" constant="-15" id="Kq4-9O-O2O"/>
+                            <constraint firstItem="drx-Tf-Uey" firstAttribute="centerY" secondItem="B70-cO-8Mt" secondAttribute="centerY" id="LMe-Qf-bfa"/>
                             <constraint firstAttribute="trailingMargin" secondItem="JYk-Oo-DVb" secondAttribute="trailing" constant="-16" id="aSC-3g-gTe"/>
                             <constraint firstItem="Gtn-zv-8Pb" firstAttribute="top" secondItem="WfF-QY-PZX" secondAttribute="bottom" id="gyR-Mf-ITJ"/>
+                            <constraint firstItem="B70-cO-8Mt" firstAttribute="bottom" secondItem="Gtn-zv-8Pb" secondAttribute="bottom" id="jBF-tW-Zs7"/>
+                            <constraint firstItem="B70-cO-8Mt" firstAttribute="centerX" secondItem="a5k-ZX-4KL" secondAttribute="centerX" id="s7X-rV-Iwj"/>
                             <constraint firstItem="JYk-Oo-DVb" firstAttribute="leading" secondItem="a5k-ZX-4KL" secondAttribute="leadingMargin" constant="-16" id="vsx-S8-H5z"/>
                         </constraints>
                     </view>
@@ -2695,10 +2743,10 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="l1y-Rt-Be8"/>
-        <segue reference="9UH-YD-G4l"/>
-        <segue reference="J6B-rB-QcV"/>
-        <segue reference="QLA-oh-xLR"/>
-        <segue reference="aLM-Zh-sU8"/>
+        <segue reference="o7g-QQ-tma"/>
+        <segue reference="QWR-kg-3LZ"/>
+        <segue reference="dJ8-Vb-duU"/>
+        <segue reference="h7c-CJ-gwM"/>
         <segue reference="rgA-zP-Ee2"/>
         <segue reference="5DM-Zi-tRH"/>
         <segue reference="J3w-Nl-jcV"/>
