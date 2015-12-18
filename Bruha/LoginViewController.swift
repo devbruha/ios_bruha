@@ -39,7 +39,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        customStatusBar()
+        //customStatusBar()
         
         self.username.delegate = self
         self.password.delegate = self
@@ -58,6 +58,8 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
         loginB.layer.cornerRadius = 2
         loginB.clipsToBounds = true
         
+        
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
         // FaceBook
         let faceLoginButton = FBSDKLoginButton()
         self.view.addSubview(faceLoginButton)
@@ -67,9 +69,10 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
         
         let topConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.TopMargin, relatedBy: NSLayoutRelation.Equal, toItem: self.continueWithoutLogIn, attribute: NSLayoutAttribute.BottomMargin, multiplier: 1, constant: 18)
         
-        let leadingConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.LeftMargin, relatedBy: NSLayoutRelation.Equal, toItem: self.continueWithoutLogIn, attribute: NSLayoutAttribute.LeftMargin, multiplier: 1, constant: 0)
+        let offSet = screenSize.width * 0.1
+        let leadingConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.LeftMargin, relatedBy: NSLayoutRelation.Equal, toItem: self.continueWithoutLogIn, attribute: NSLayoutAttribute.LeftMargin, multiplier: 1, constant: offSet)
         
-        let trailingConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.RightMargin, relatedBy: NSLayoutRelation.Equal, toItem: self.registerB, attribute: NSLayoutAttribute.RightMargin, multiplier: 1, constant: 0)
+        let trailingConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.RightMargin, relatedBy: NSLayoutRelation.Equal, toItem: self.registerB, attribute: NSLayoutAttribute.RightMargin, multiplier: 1, constant: -offSet)
         
         NSLayoutConstraint.activateConstraints([topConstraint, leadingConstraint, trailingConstraint])
         

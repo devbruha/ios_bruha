@@ -43,6 +43,7 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
         widthContraints.priority = UILayoutPriorityDefaultHigh
         
         bruhaButton.addConstraints([heightContraints, widthContraints])
+        
     }
     
     func customStatusBar() {
@@ -56,7 +57,7 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
         super.viewDidLoad()
         configureView()
         customTopButtons()
-        customStatusBar()
+        //customStatusBar()
         
         addictionTableView.backgroundColor = UIColor.blackColor()
         addictionTableView.separatorColor = UIColor.blackColor()
@@ -174,7 +175,7 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
                                 if img.Image?.length > 800 {
                                     cell.ExploreImage.image = UIImage(data: img.Image!)
                                 } else {
-                                    cell.ExploreImage.backgroundColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 1)
+                                    cell.ExploreImage.image = randomImage()
                                 }
                             }
                         }
@@ -192,23 +193,40 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
 //                    }
                     
                     cell.circTitle.text = event.eventName
-                    cell.circDate.text = event.eventStartDate
-                    cell.circPrice.text = "$\(event.eventPrice!)"
+                    cell.circDate.text = convertCircTimeFormat("\(event.eventStartDate)")
+                    
+                    if let price = Float(event.eventPrice!) {
+                        if price == 0.0 {cell.circPrice.text = "Free!"; cell.rectPrice.text = "Free!"}
+                        else {cell.circPrice.text = "$\(price)"; cell.rectPrice.text = "$\(price)"}
+                    } else {cell.circPrice.text = "No Price"; cell.rectPrice.text = "No Price"}
+                    
                     cell.circHiddenID.text = event.eventID
                     
                     cell.rectTitle.text = event.eventName
-                    cell.rectPrice.text = "$\(event.eventPrice!)"
-                    cell.venueName.text = event.eventVenueName
-                    cell.venueAddress.text = event.eventVenueAddress
-                    cell.startDate.text = event.eventStartDate
-                    cell.startTime.text = "\(event.eventStartTime) -"
-                    cell.endDate.text = event.eventEndDate
-                    cell.endTime.text = event.eventEndTime
+                    //cell.rectPrice.text = "$\(event.eventPrice!)"
+                    
+                    if event.eventVenueName == "" {
+                        cell.venueName.text = "nil"
+                    }else{cell.venueName.text = event.eventVenueName}
+                    
+                    cell.venueAddress.text = "\(event.eventVenueAddress.componentsSeparatedByString(", ")[0])\n\(event.eventVenueCity)"
+                    
+                    cell.startTime.text = "\(convertRectTimeFormat("\(event.eventStartDate) \(event.eventStartTime)")) -"
+                    cell.endTime.text = convertRectTimeFormat("\(event.eventEndDate) \(event.eventEndTime)")
+                    
+                    //cell.startDate.text = event.eventStartDate
+                    //cell.startTime.text = "\(event.eventStartTime) -"
+                    //cell.endDate.text = event.eventEndDate
+                    //cell.endTime.text = event.eventEndTime
                     
                     cell.circAddicted.contentMode = UIViewContentMode.ScaleAspectFit
-                    cell.circAddicted.image = UIImage(named: "Addictions_Splash")
+                    cell.circAddicted.image = UIImage(named: "MyAddictions_Sm")
                     cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
                     cell.circCategory.image = UIImage(named: event.primaryCategory)
+                    
+                    cell.rectCategory.contentMode = UIViewContentMode.ScaleAspectFill
+                    cell.rectCategory.image = UIImage(named: event.primaryCategory)
+                    cell.rectCategoryName.text = event.primaryCategory
                     // Configure the cell...
                     
                 }
@@ -226,14 +244,14 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
             
             
             let temp: NSMutableArray = NSMutableArray()
-            temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Addicted!")
+            temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
             cell.leftUtilityButtons = temp as [AnyObject]
             
             
             let temp2: NSMutableArray = NSMutableArray()
-            temp2.sw_addUtilityButtonWithColor(UIColor.purpleColor(), title: "Buy Tickets")
-            temp2.sw_addUtilityButtonWithColor(UIColor.grayColor(), title: "Map")
-            temp2.sw_addUtilityButtonWithColor(UIColor.orangeColor(), title: "More Info")
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1), title: "Buy Tickets")
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1), title: "Map")
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1), title: "More Info")
             cell.rightUtilityButtons = nil
             cell.rightUtilityButtons = temp2 as [AnyObject]
             
@@ -265,20 +283,26 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
                                 if img.Image?.length > 800 {
                                     cell.venueImage.image = UIImage(data: img.Image!)
                                 } else {
-                                    cell.venueImage.backgroundColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 1)
+                                    cell.venueImage.image = randomImage()
                                 }
                             }
                         }
                     }
                     
                     cell.venueName.text = venue.venueName
-                    cell.venueDescription.text = venue.venueDescription
-                    cell.venueAddress.text = venue.venueAddress
+                    cell.venueDescription.text = venue.venueName
+                    cell.venueAddress.text = "\(venue.venueAddress.componentsSeparatedByString(", ")[0])"
                     cell.circVenueName.text = venue.venueName
                     cell.circHiddenID.text = venue.venueID
                     
+                    cell.circAddicted.contentMode = UIViewContentMode.ScaleAspectFit
+                    cell.circAddicted.image = UIImage(named: "MyAddictions_Sm")
                     cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
                     cell.circCategory.image = UIImage(named: venue.primaryCategory)
+                    
+                    cell.rectCategory.contentMode = UIViewContentMode.ScaleAspectFill
+                    cell.rectCategory.image = UIImage(named: venue.primaryCategory)
+                    cell.rectCategoryName.text = venue.primaryCategory
                 }
             
             }
@@ -287,13 +311,13 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
             
             
             let temp: NSMutableArray = NSMutableArray()
-            temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Addicted!")
+            temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
             cell.leftUtilityButtons = temp as [AnyObject]
             
             
             let temp2: NSMutableArray = NSMutableArray()
-            temp2.sw_addUtilityButtonWithColor(UIColor.grayColor(), title: "Map")
-            temp2.sw_addUtilityButtonWithColor(UIColor.orangeColor(), title: "More Info")
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1), title: "Map")
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1), title: "More Info")
             cell.rightUtilityButtons = nil
             cell.rightUtilityButtons = temp2 as [AnyObject]
             
@@ -324,33 +348,39 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
                                 if img.Image?.length > 800 {
                                     cell.organizationImage.image = UIImage(data: img.Image!)
                                 } else {
-                                    cell.organizationImage.backgroundColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 1)
+                                    cell.organizationImage.image = randomImage()
                                 }
                             }
                         }
                     }
                     
                     cell.organizationName.text = organization.organizationName
-                    cell.organizationDescription.text = organization.organizationDescription
-                    cell.address.text = organization.organizationAddress
+                    cell.organizationDescription.text = organization.organizationName
+                    cell.address.text = "\(organization.organizationAddress.componentsSeparatedByString(", ")[0])"
                     cell.circOrgName.text = organization.organizationName
                     cell.circHiddenID.text = organization.organizationID
                     
+                    cell.circAddicted.contentMode = UIViewContentMode.ScaleAspectFit
+                    cell.circAddicted.image = UIImage(named: "MyAddictions_Sm")
                     cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
                     cell.circCategory.image = UIImage(named: organization.primaryCategory)
+                    
+                    cell.rectCategory.contentMode = UIViewContentMode.ScaleAspectFill
+                    cell.rectCategory.image = UIImage(named: organization.primaryCategory)
+                    cell.rectCategoryName.text = organization.primaryCategory
                 }
                 
             }
             
             
             let temp: NSMutableArray = NSMutableArray()
-            temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Addicted!")
+            temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
             cell.leftUtilityButtons = temp as [AnyObject]
             
             
             let temp2: NSMutableArray = NSMutableArray()
-            temp2.sw_addUtilityButtonWithColor(UIColor.grayColor(), title: "Map")
-            temp2.sw_addUtilityButtonWithColor(UIColor.orangeColor(), title: "More Info")
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1), title: "Map")
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1), title: "More Info")
             cell.rightUtilityButtons = nil
             cell.rightUtilityButtons = temp2 as [AnyObject]
             
@@ -507,24 +537,62 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
                 //event ticket
                 print("event ticket")
             }
-            else if GlobalVariables.addictedDisplay == "Venue" || GlobalVariables.addictedDisplay == "Organization" {
                 //venue and organization map
-                print("venue and org map")
+            else if GlobalVariables.addictedDisplay == "Venue" {
+                let cellIndexPath = self.addictionTableView.indexPathForCell(cell)
+                let selectedCell = self.addictionTableView.cellForRowAtIndexPath(cellIndexPath!) as! VenueTableViewCell
+                GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
+                self.performSegueWithIdentifier("ShowOnMap", sender: self)
             }
-            break
+            else if GlobalVariables.addictedDisplay == "Organization" {
+                let cellIndexPath = self.addictionTableView.indexPathForCell(cell)
+                let selectedCell = self.addictionTableView.cellForRowAtIndexPath(cellIndexPath!) as! OrganizationTableViewCell
+                GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
+                self.performSegueWithIdentifier("ShowOnMap", sender: self)
+            }
+           
         case 1:
-            if GlobalVariables.addictedDisplay == "Event" {
-                //event map
-                print("event map")
+            //Event Ticket
+            if GlobalVariables.addictedDisplay == "Event"{
+                
+                let cellIndexPath = self.addictionTableView.indexPathForCell(cell)
+                let selectedCell = self.addictionTableView.cellForRowAtIndexPath(cellIndexPath!) as! EventTableViewCell
+                GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
+                self.performSegueWithIdentifier("ShowOnMap", sender: self)
+                
             }
-            else if GlobalVariables.addictedDisplay == "Venue" || GlobalVariables.addictedDisplay == "Organization" {
-                //venue and organizaiton more info
-                print("venue and org more info")
+            
+            //Venue MoreInfo
+            if (GlobalVariables.addictedDisplay == "Venue"){
+                let cellIndexPath = self.addictionTableView.indexPathForCell(cell)
+                
+                let selectedCell = self.addictionTableView.cellForRowAtIndexPath(cellIndexPath!) as! VenueTableViewCell
+                
+                GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
+                self.performSegueWithIdentifier("MoreInfore", sender: self)
             }
-            break
+            //Organization MoreInfo
+            if (GlobalVariables.addictedDisplay == "Organization"){
+                let cellIndexPath = self.addictionTableView.indexPathForCell(cell)
+                
+                let selectedCell = self.addictionTableView.cellForRowAtIndexPath(cellIndexPath!) as! OrganizationTableViewCell
+                
+                GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
+                self.performSegueWithIdentifier("MoreInfore", sender: self)
+                
+            }
+            
         case 2:
+            
             //Event More info
             print("event more info")
+            
+            let cellIndexPath = self.addictionTableView.indexPathForCell(cell)
+            
+            let selectedCell = self.addictionTableView.cellForRowAtIndexPath(cellIndexPath!) as! EventTableViewCell
+            
+            GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
+            self.performSegueWithIdentifier("MoreInfore", sender: self)
             break
         default:
             break
@@ -587,6 +655,67 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
     func updateNotificationAddiction(){
         
         self.addictionTableView.reloadData()
+    }
+    
+    func convertCircTimeFormat(date: String) -> String {
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        dateFormatter.timeZone = NSTimeZone.localTimeZone()
+        
+        if let ndate = dateFormatter.dateFromString(date) {
+            
+            dateFormatter.dateFormat = "MMM dd, yyyy"
+            dateFormatter.timeZone = NSTimeZone.localTimeZone()
+            let timeStamp = dateFormatter.stringFromDate(ndate)
+            return timeStamp
+        }
+        else {return "nil or error times"}
+    }
+    
+    func convertRectTimeFormat(date: String) -> String {
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        dateFormatter.timeZone = NSTimeZone.localTimeZone()
+        
+        if let ndate = dateFormatter.dateFromString(date) {
+            
+            dateFormatter.dateFormat = "EEEE, MMMM dd 'at' h:mma"
+            dateFormatter.timeZone = NSTimeZone.localTimeZone()
+            let timeStamp = dateFormatter.stringFromDate(ndate)
+            return timeStamp
+        }
+        else {return "nil,error times"}
+    }
+    
+    func randomImage() -> UIImage {
+        let imgNo = Int(arc4random_uniform(6) + 1)
+        
+        switch(imgNo){
+            
+        case 1:
+            return UIImage(named: "Background1")!
+            
+        case 2:
+            return UIImage(named: "Background2")!
+            
+        case 3:
+            return UIImage(named: "Background3")!
+            
+        case 4:
+            return UIImage(named: "Background4")!
+            
+        case 5:
+            return UIImage(named: "Background5")!
+            
+        case 6:
+            return UIImage(named: "Background6")!
+            
+        default:
+            return UIImage(named: "Background1")!
+        }
+        
     }
     
     

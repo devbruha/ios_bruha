@@ -16,18 +16,19 @@ class AddictionListPanelViewController: UIViewController, UITableViewDelegate {
     @IBOutlet weak var venueSelectedB: UIButton!
     @IBOutlet weak var venueButtonIcon: UIImageView!
     @IBOutlet weak var discoverableSelectedB: UIButton!
+    @IBOutlet weak var discoverableButtonIcon: UIImageView!
     @IBOutlet weak var organizationSelectedB: UIButton!
     @IBOutlet weak var organizationButtonIcon: UIImageView!
     
     
     var panelControllerContainer: ARSPContainerController!
-    var visibleZoneHeight: CGFloat = 74
+    var visibleZoneHeight: CGFloat = 59
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupPanel()
-        setupEVO()
+        setupEVOD()
         
         let eventTgr = UITapGestureRecognizer(target: self, action: ("eventTapped"))
         eventSelectedB.addGestureRecognizer(eventTgr)
@@ -45,16 +46,18 @@ class AddictionListPanelViewController: UIViewController, UITableViewDelegate {
     }
     
     func setupPanel(){
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        let screenHeight = screenSize.height
         
         self.panelControllerContainer = self.parentViewController as! ARSPContainerController
         panelControllerContainer.visibleZoneHeight = visibleZoneHeight
         panelControllerContainer.shouldOverlapMainViewController = true
-        panelControllerContainer.maxPanelHeight = visibleZoneHeight
+        panelControllerContainer.maxPanelHeight = screenHeight*0.66
         panelControllerContainer.draggingEnabled = false
         
     }
     
-    func setupEVO() {
+    func setupEVOD() {
         
         eventButtonIcon.contentMode = UIViewContentMode.ScaleAspectFit
         eventButtonIcon.image = UIImage(named: "Events_White")
@@ -78,9 +81,32 @@ class AddictionListPanelViewController: UIViewController, UITableViewDelegate {
         organizationSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
         organizationSelectedB.layer.borderWidth = CGFloat(1.5)
         
+        discoverableButtonIcon.contentMode = UIViewContentMode.ScaleAspectFit
+        discoverableButtonIcon.image = UIImage(named: "Bruha_White")
+        discoverableSelectedB.setTitle("Discoverable", forState: UIControlState.Normal)
+        discoverableSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        discoverableSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+        discoverableSelectedB.layer.borderWidth = CGFloat(1.5)
+        
     }
     
-    func updateEVO() {
+    func updateEVOD() {
+        
+        eventButtonIcon.image = UIImage(named: "Events_White")
+        eventSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        eventSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+        
+        venueButtonIcon.image = UIImage(named: "Venue_White")
+        venueSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        venueSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+        
+        organizationButtonIcon.image = UIImage(named: "Organization_White")
+        organizationSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        organizationSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+        
+        discoverableButtonIcon.image = UIImage(named: "Bruha_White")
+        discoverableSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        discoverableSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
         
         switch(GlobalVariables.addictedDisplay){
             
@@ -90,41 +116,23 @@ class AddictionListPanelViewController: UIViewController, UITableViewDelegate {
             eventSelectedB.setTitleColor(UIColor.orangeColor(), forState: UIControlState.Normal)
             eventSelectedB.layer.borderColor = UIColor.orangeColor().CGColor
             
-            venueButtonIcon.image = UIImage(named: "Venue_White")
-            venueSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-            venueSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
-            
-            organizationButtonIcon.image = UIImage(named: "Organization_White")
-            organizationSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-            organizationSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
-            
         case "Venue":
-            
-            eventButtonIcon.image = UIImage(named: "Events_White")
-            eventSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-            eventSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
             
             venueButtonIcon.image = UIImage(named: "Venue_Orange")
             venueSelectedB.setTitleColor(UIColor.orangeColor(), forState: UIControlState.Normal)
             venueSelectedB.layer.borderColor = UIColor.orangeColor().CGColor
             
-            organizationButtonIcon.image = UIImage(named: "Organization_White")
-            organizationSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-            organizationSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
-            
         case "Organization":
-            
-            eventButtonIcon.image = UIImage(named: "Events_White")
-            eventSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-            eventSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
-            
-            venueButtonIcon.image = UIImage(named: "Venue_White")
-            venueSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-            venueSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
             
             organizationButtonIcon.image = UIImage(named: "Organization_Orange")
             organizationSelectedB.setTitleColor(UIColor.orangeColor(), forState: UIControlState.Normal)
             organizationSelectedB.layer.borderColor = UIColor.orangeColor().CGColor
+            
+        case "Discoverable":
+            
+            discoverableButtonIcon.image = UIImage(named: "Venue_Orange")
+            discoverableSelectedB.setTitleColor(UIColor.orangeColor(), forState: UIControlState.Normal)
+            discoverableSelectedB.layer.borderColor = UIColor.orangeColor().CGColor
             
         default:
             
@@ -139,6 +147,10 @@ class AddictionListPanelViewController: UIViewController, UITableViewDelegate {
             organizationButtonIcon.image = UIImage(named: "Organization_White")
             organizationSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
             organizationSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+            
+            discoverableButtonIcon.image = UIImage(named: "Bruha_White")
+            discoverableSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+            discoverableSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
         }
         
     }
@@ -151,7 +163,7 @@ class AddictionListPanelViewController: UIViewController, UITableViewDelegate {
     func eventTapped(){
         
         GlobalVariables.addictedDisplay = "Event"
-        updateEVO()
+        updateEVOD()
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeAddiction", object: self)
         
     }
@@ -159,20 +171,21 @@ class AddictionListPanelViewController: UIViewController, UITableViewDelegate {
     func venueTapped(){
         
         GlobalVariables.addictedDisplay = "Venue"
-        updateEVO()
+        updateEVOD()
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeAddiction", object: self)
     }
     
     func discoverableTapped(){
         
-        GlobalVariables.addictedDisplay = ""
+        GlobalVariables.addictedDisplay = "Discoverable"
+        updateEVOD()
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeAddiction", object: self)
     }
     
     func organizationTapped(){
         
         GlobalVariables.addictedDisplay = "Organization"
-        updateEVO()
+        updateEVOD()
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeAddiction", object: self)
     }
 

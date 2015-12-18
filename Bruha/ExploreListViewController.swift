@@ -32,8 +32,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         self.panelControllerContainer.visibilityStateDelegate = self
         self.exploreTableView!.allowsMultipleSelection = false
         //print("OOOOOOOOOOOOOOO", screenHeight, screenSize.width)
-        self.view.bringSubviewToFront(bruhaButton)
-        self.view.bringSubviewToFront(mapButton)
+        
     }
     
     func customTopButtons() {
@@ -58,6 +57,9 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         widthContraint.priority = UILayoutPriorityDefaultHigh
         
         mapButton.addConstraints([heightContraint, widthContraint])
+        
+        self.view.bringSubviewToFront(bruhaButton)
+        self.view.bringSubviewToFront(mapButton)
     }
     
     /*func adjustCircSizeOfCell(view: UIView) {
@@ -77,7 +79,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
     func customStatusBar() {
         let barView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0))
         barView.backgroundColor = UIColor.grayColor()
-        
+        //barView.alpha = 0.5
         self.view.addSubview(barView)
     }
     
@@ -85,8 +87,8 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         super.viewDidLoad()
         configureView()
         customTopButtons()
-        customStatusBar()
-        
+        //customStatusBar()
+            
         exploreTableView.backgroundColor = UIColor.blackColor()
         exploreTableView.separatorColor = UIColor.blackColor()
         
@@ -257,11 +259,19 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
 
             
             let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
+            let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
+            var like = 0
             
             if GlobalVariables.filterEventBool {
                 
                 let filteredEventInfo = GlobalVariables.displayFilteredEvents
                 let event = filteredEventInfo[indexPath.row]
+                
+                for addict in addictionInfo! {
+                    if addict.eventID == event.eventID {
+                        like = 1
+                    }
+                }
                 
                 cell.ExploreImage.contentMode = UIViewContentMode.ScaleToFill
                 if let images = posterInfo {
@@ -270,7 +280,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                             if img.Image?.length > 800 {
                                 cell.ExploreImage.image = UIImage(data: img.Image!)
                             } else {
-                                cell.ExploreImage.backgroundColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 1)
+                                cell.ExploreImage.image = randomImage()
                             }
                         }
                     }
@@ -293,21 +303,17 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                     cell.venueName.text = "nil"
                 }else{cell.venueName.text = event.eventVenueName}
                 
-                cell.venueAddress.text = event.eventVenueAddress
+                cell.venueAddress.text = "\(event.eventVenueAddress.componentsSeparatedByString(", ")[0])\n\(event.eventVenueCity)"
                 
-                let rStart = convertRectTimeFormat("\(event.eventStartDate) \(event.eventStartTime)")
-                let rEnd = convertRectTimeFormat("\(event.eventEndDate) \(event.eventEndTime)")
-                cell.startDate.text = rStart.componentsSeparatedByString(",")[0]
-                cell.startTime.text = rStart.componentsSeparatedByString(",")[1]
-                cell.endDate.text = rEnd.componentsSeparatedByString(",")[0]
-                cell.endTime.text = rEnd.componentsSeparatedByString(",")[1]
+                cell.startTime.text = "\(convertRectTimeFormat("\(event.eventStartDate) \(event.eventStartTime)")) -"
+                cell.endTime.text = convertRectTimeFormat("\(event.eventEndDate) \(event.eventEndTime)")
                 
                 cell.rectCategory.contentMode = UIViewContentMode.ScaleAspectFill
                 cell.rectCategory.image = UIImage(named: event.primaryCategory)
                 cell.rectCategoryName.text = event.primaryCategory
                 
                 cell.circAddicted.contentMode = UIViewContentMode.ScaleAspectFit
-                cell.circAddicted.image = UIImage(named: "Addictions_Splash")
+                cell.circAddicted.image = UIImage(named: "MyAddictions_Sm")
                 cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
                 cell.circCategory.image = UIImage(named: event.primaryCategory)
                 // Configure the cell...
@@ -317,6 +323,13 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 
                 let event = eventInfo![indexPath.row]
                 
+                for addict in addictionInfo! {
+                    if addict.eventID == event.eventID {
+                        like = 1
+                    }
+                }
+
+                
                 cell.ExploreImage.contentMode = UIViewContentMode.ScaleToFill
                 if let images = posterInfo {
                     for img in images {
@@ -324,7 +337,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                             if img.Image?.length > 800 {
                                 cell.ExploreImage.image = UIImage(data: img.Image!)
                             } else {
-                                cell.ExploreImage.backgroundColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 1)
+                                cell.ExploreImage.image = randomImage()
                             }
                         }
                     }
@@ -368,22 +381,24 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                     cell.venueName.text = "nil"
                 }else{cell.venueName.text = event.eventVenueName}
                 
-                cell.venueAddress.text = event.eventVenueAddress
+                cell.venueAddress.text = "\(event.eventVenueAddress.componentsSeparatedByString(", ")[0])\n\(event.eventVenueCity)"
                 
+                cell.startTime.text = "\(convertRectTimeFormat("\(event.eventStartDate) \(event.eventStartTime)")) -"
+                cell.endTime.text = convertRectTimeFormat("\(event.eventEndDate) \(event.eventEndTime)")
                 
-                let rStart = convertRectTimeFormat("\(event.eventStartDate) \(event.eventStartTime)")
-                let rEnd = convertRectTimeFormat("\(event.eventEndDate) \(event.eventEndTime)")
-                cell.startDate.text = rStart.componentsSeparatedByString(",")[0]
-                cell.startTime.text = rStart.componentsSeparatedByString(",")[1]
-                cell.endDate.text = rEnd.componentsSeparatedByString(",")[0]
-                cell.endTime.text = rEnd.componentsSeparatedByString(",")[1]
+//                let rStart = convertRectTimeFormat("\(event.eventStartDate) \(event.eventStartTime)")
+//                let rEnd = convertRectTimeFormat("\(event.eventEndDate) \(event.eventEndTime)")
+//                cell.startDate.text = rStart.componentsSeparatedByString(",")[0]
+//                cell.startTime.text = rStart.componentsSeparatedByString(",")[1]
+//                cell.endDate.text = rEnd.componentsSeparatedByString(",")[0]
+//                cell.endTime.text = rEnd.componentsSeparatedByString(",")[1]
                 
                 cell.rectCategory.contentMode = UIViewContentMode.ScaleAspectFill
                 cell.rectCategory.image = UIImage(named: event.primaryCategory)
                 cell.rectCategoryName.text = event.primaryCategory
                 
                 cell.circAddicted.contentMode = UIViewContentMode.ScaleAspectFit
-                cell.circAddicted.image = UIImage(named: "Addictions_Splash")
+                cell.circAddicted.image = UIImage(named: "MyAddictions_Sm")
                 cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
                 cell.circCategory.image = UIImage(named: event.primaryCategory)
                 // Configure the cell...
@@ -391,19 +406,12 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             }
                     
             let temp: NSMutableArray = NSMutableArray()
-            var like = 0
-            let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
-            for addict in addictionInfo! {
-                if addict.eventID == eventInfo![indexPath.row].eventID {
-                    like = 1
-                }
-            }
             
             if like == 0 {
-                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Get Addicted")
+                temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),title: "Get Addicted")
                 cell.circAddicted.hidden = true
             } else if like == 1 {
-                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Addicted!")
+                temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
                 cell.circAddicted.hidden = false
             }
             
@@ -415,9 +423,9 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             let temp2: NSMutableArray = NSMutableArray()
             //temp2.sw_addUtilityButtonWithColor(UIColor.purpleColor(), icon: UIImage(named: "Slide 5"))
             
-            temp2.sw_addUtilityButtonWithColor(UIColor.purpleColor(), title: "Buy Tickets")
-            temp2.sw_addUtilityButtonWithColor(UIColor.grayColor(), title: "Map")
-            temp2.sw_addUtilityButtonWithColor(UIColor.orangeColor(), title: "More Info")
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1), title: "Buy Tickets")
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1), title: "Map")
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1), title: "More Info")
             
             cell.rightUtilityButtons = nil
             cell.rightUtilityButtons = temp2 as [AnyObject]
@@ -438,11 +446,20 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             
             
             let venueInfo = FetchData(context: managedObjectContext).fetchVenues()
+            var like = 0
+            let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsVenue()
+            
             
             if GlobalVariables.filterVenueBool {
                 
                 let filteredVenueInfo = GlobalVariables.displayFilteredVenues
                 let venue = filteredVenueInfo[indexPath.row]
+                
+                for addict in addictionInfo! {
+                    if addict.venueID == venue.venueID {
+                        like = 1
+                    }
+                }
                 
                 cell.venueImage.contentMode = UIViewContentMode.ScaleToFill
                 if let images = posterInfo {
@@ -452,25 +469,37 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                             if img.Image?.length > 800 {
                                 cell.venueImage.image = UIImage(data: img.Image!)
                             } else {
-                                cell.venueImage.backgroundColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 1)
+                                cell.venueImage.image = randomImage()
                             }
                         }
                     }
                 }
                 
                 cell.venueName.text = venue.venueName
-                cell.venueDescription.text = venue.venueDescription
-                cell.venueAddress.text = venue.venueAddress
+                cell.venueDescription.text = venue.venueName
+                cell.venueAddress.text = "\(venue.venueAddress.componentsSeparatedByString(", ")[0])"
                 cell.circVenueName.text = venue.venueName
                 cell.circHiddenID.text = venue.venueID
                 
+                cell.circAddicted.contentMode = UIViewContentMode.ScaleAspectFit
+                cell.circAddicted.image = UIImage(named: "MyAddictions_Sm")
                 cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
                 cell.circCategory.image = UIImage(named: venue.primaryCategory)
+                
+                cell.rectCategory.contentMode = UIViewContentMode.ScaleAspectFill
+                cell.rectCategory.image = UIImage(named: venue.primaryCategory)
+                cell.rectCategoryName.text = venue.primaryCategory
                 
                 
             } else { // when there is no filtering
                                     
                 let venue = venueInfo![indexPath.row]
+                
+                for addict in addictionInfo! {
+                    if addict.venueID == venue.venueID {
+                        like = 1
+                    }
+                }
             
                 cell.venueImage.contentMode = UIViewContentMode.ScaleToFill
                 if let images = posterInfo {
@@ -480,7 +509,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                             if img.Image?.length > 800 {
                                 cell.venueImage.image = UIImage(data: img.Image!)
                             } else {
-                                cell.venueImage.backgroundColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 1)
+                                cell.venueImage.image = randomImage()
                             }
                         }
                         //if img.ID == "venue201512030620212367" {print(img.Image)}
@@ -489,37 +518,38 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 //if venue.venueName == "zsdf" {print(venue.venueID)}
                 //if venue.venueName == "Niagra" {print(venue.venueID)}
                 cell.venueName.text = venue.venueName
-                cell.venueDescription.text = venue.venueDescription
-                cell.venueAddress.text = venue.venueAddress
+                cell.venueDescription.text = venue.venueName
+                cell.venueAddress.text = "\(venue.venueAddress.componentsSeparatedByString(", ")[0])"
                 cell.circVenueName.text = venue.venueName
                 cell.circHiddenID.text = venue.venueID
                 
+                cell.circAddicted.contentMode = UIViewContentMode.ScaleAspectFit
+                cell.circAddicted.image = UIImage(named: "MyAddictions_Sm")
                 cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
                 cell.circCategory.image = UIImage(named: venue.primaryCategory)
+                
+                cell.rectCategory.contentMode = UIViewContentMode.ScaleAspectFill
+                cell.rectCategory.image = UIImage(named: venue.primaryCategory)
+                cell.rectCategoryName.text = venue.primaryCategory
             }
             
             
             let temp: NSMutableArray = NSMutableArray()
-            var like = 0
-            let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsVenue()
-            for addict in addictionInfo! {
-                if addict.venueID == venueInfo![indexPath.row].venueID {
-                    like = 1
-                }
-            }
             
             if like == 0 {
-                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Get Addicted")
+                temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),title: "Get Addicted")
+                cell.circAddicted.hidden = true
             } else if like == 1 {
-                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Addicted!")
+                temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
+                cell.circAddicted.hidden = false
             }
             
             cell.leftUtilityButtons = temp as [AnyObject]
             
             
             let temp2: NSMutableArray = NSMutableArray()
-            temp2.sw_addUtilityButtonWithColor(UIColor.grayColor(), title: "Map")
-            temp2.sw_addUtilityButtonWithColor(UIColor.orangeColor(), title: "More Info")
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1), title: "Map")
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1), title: "More Info")
             cell.rightUtilityButtons = nil
             cell.rightUtilityButtons = temp2 as [AnyObject]
             
@@ -578,10 +608,19 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             
             
             let organizationInfo = FetchData(context: managedObjectContext).fetchOrganizations()
+            var like = 0
+            let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsOrganization()
+            
             
             if GlobalVariables.filterOrganizationBool {
                 let filteredOrganizationInfo = GlobalVariables.displayFilteredOrganizations
                 let organization = filteredOrganizationInfo[indexPath.row]
+                
+                for addict in addictionInfo! {
+                    if addict.organizationID == organization.organizationID {
+                        like = 1
+                    }
+                }
                 
                 cell.organizationImage.contentMode = UIViewContentMode.ScaleToFill
                 if let images = posterInfo {
@@ -590,24 +629,36 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                             if img.Image?.length > 800 {
                                 cell.organizationImage.image = UIImage(data: img.Image!)
                             } else {
-                                cell.organizationImage.backgroundColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 1)
+                                cell.organizationImage.image = randomImage()
                             }
                         }
                     }
                 }
                     
                 cell.organizationName.text = organization.organizationName
-                cell.organizationDescription.text = organization.organizationDescription
-                cell.address.text = organization.organizationAddress
+                cell.organizationDescription.text = organization.organizationName
+                cell.address.text = "\(organization.organizationAddress.componentsSeparatedByString(", ")[0])"
                 cell.circOrgName.text = organization.organizationName
                 cell.circHiddenID.text = organization.organizationID
                 
+                cell.circAddicted.contentMode = UIViewContentMode.ScaleAspectFit
+                cell.circAddicted.image = UIImage(named: "MyAddictions_Sm")
                 cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
                 cell.circCategory.image = UIImage(named: organization.primaryCategory)
+                
+                cell.rectCategory.contentMode = UIViewContentMode.ScaleAspectFill
+                cell.rectCategory.image = UIImage(named: organization.primaryCategory)
+                cell.rectCategoryName.text = organization.primaryCategory
                 
                 
             } else { // when there is no filtering
                 let organization = organizationInfo![indexPath.row]
+                
+                for addict in addictionInfo! {
+                    if addict.organizationID == organization.organizationID {
+                        like = 1
+                    }
+                }
             
                 cell.organizationImage.contentMode = UIViewContentMode.ScaleToFill
                 if let images = posterInfo {
@@ -616,45 +667,46 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                             if img.Image?.length > 800 {
                                 cell.organizationImage.image = UIImage(data: img.Image!)
                             } else {
-                                cell.organizationImage.backgroundColor = UIColor(red: 210/255, green: 210/255, blue: 210/255, alpha: 1)
+                                cell.organizationImage.image = randomImage()
                             }
                         }
                     }
                 }
             
                 cell.organizationName.text = organization.organizationName
-                cell.organizationDescription.text = organization.organizationDescription
-                cell.address.text = organization.organizationAddress
+                cell.organizationDescription.text = organization.organizationName
+                cell.address.text = "\(organization.organizationAddress.componentsSeparatedByString(", ")[0])"
                 cell.circOrgName.text = organization.organizationName
                 cell.circHiddenID.text = organization.organizationID
                 
+                cell.circAddicted.contentMode = UIViewContentMode.ScaleAspectFit
+                cell.circAddicted.image = UIImage(named: "MyAddictions_Sm")
                 cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
                 cell.circCategory.image = UIImage(named: organization.primaryCategory)
+                
+                cell.rectCategory.contentMode = UIViewContentMode.ScaleAspectFill
+                cell.rectCategory.image = UIImage(named: organization.primaryCategory)
+                cell.rectCategoryName.text = organization.primaryCategory
             
             }
             
             
             let temp: NSMutableArray = NSMutableArray()
-            var like = 0
-            let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsOrganization()
-            for addict in addictionInfo! {
-                if addict.organizationID == organizationInfo![indexPath.row].organizationID {
-                    like = 1
-                }
-            }
             
             if like == 0 {
-                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Get Addicted")
+                temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),title: "Get Addicted")
+                cell.circAddicted.hidden = true
             } else if like == 1 {
-                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Addicted!")
+                temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
+                cell.circAddicted.hidden = false
             }
             
             cell.leftUtilityButtons = temp as [AnyObject]
             
             
             let temp2: NSMutableArray = NSMutableArray()
-            temp2.sw_addUtilityButtonWithColor(UIColor.grayColor(), title: "Map")
-            temp2.sw_addUtilityButtonWithColor(UIColor.orangeColor(), title: "More Info")
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1), title: "Map")
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1), title: "More Info")
             cell.rightUtilityButtons = nil
             cell.rightUtilityButtons = temp2 as [AnyObject]
             
@@ -715,7 +767,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                     }
                                     
                                     var temp: NSMutableArray = NSMutableArray()
-                                    temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Get Addicted")
+                                    temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),title: "Get Addicted")
                                     cell.leftUtilityButtons = temp as [AnyObject]
                                     
                                     selectedCell.circAddicted.hidden = true
@@ -741,7 +793,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                 }
                                 
                                 var temp: NSMutableArray = NSMutableArray()
-                                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Addicted!")
+                                temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
                                 cell.leftUtilityButtons = temp as [AnyObject]
                                 
                                 selectedCell.circAddicted.hidden = false
@@ -777,8 +829,10 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                     }
                                     
                                     var temp: NSMutableArray = NSMutableArray()
-                                    temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Get Addicted")
+                                    temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),title: "Get Addicted")
                                     cell.leftUtilityButtons = temp as [AnyObject]
+                                    
+                                    selectedCell.circAddicted.hidden = true
                                     
                                 }
                                 alertController.addAction(unlikeAction)
@@ -802,8 +856,10 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                 }
                                 
                                 var temp: NSMutableArray = NSMutableArray()
-                                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Addicted!")
+                                temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
                                 cell.leftUtilityButtons = temp as [AnyObject]
+                                
+                                selectedCell.circAddicted.hidden = false
                             }
                         }
                     }
@@ -873,8 +929,10 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                     }
                                     
                                     let temp: NSMutableArray = NSMutableArray()
-                                    temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Get Addicted")
+                                    temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),title: "Get Addicted")
                                     cell.leftUtilityButtons = temp as [AnyObject]
+                                    
+                                    selectedCell.circAddicted.hidden = true
                                     
                                 }
                                 alertController.addAction(unlikeAction)
@@ -898,8 +956,10 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                 }
                                 
                                 let temp: NSMutableArray = NSMutableArray()
-                                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Addicted!")
+                                temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
                                 cell.leftUtilityButtons = temp as [AnyObject]
+                                
+                                selectedCell.circAddicted.hidden = false
                             }
                         }
                     }
@@ -1000,7 +1060,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 let selectedCell = self.exploreTableView.cellForRowAtIndexPath(cellIndexPath!) as! VenueTableViewCell
                 
                 GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
-                self.performSegueWithIdentifier("GoToMoreInfo", sender: self)
+                self.performSegueWithIdentifier("MoreInfore", sender: self)
             }
             //Organization MoreInfo
             if (GlobalVariables.selectedDisplay == "Organization"){
@@ -1009,7 +1069,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 let selectedCell = self.exploreTableView.cellForRowAtIndexPath(cellIndexPath!) as! OrganizationTableViewCell
                 
                 GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
-                self.performSegueWithIdentifier("GoToMoreInfo", sender: self)
+                self.performSegueWithIdentifier("MoreInfore", sender: self)
 
             }
             else if GlobalVariables.selectedDisplay == "Venue" || GlobalVariables.selectedDisplay == "Organization" {
@@ -1036,7 +1096,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             let selectedCell = self.exploreTableView.cellForRowAtIndexPath(cellIndexPath!) as! EventTableViewCell
             
             GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
-            self.performSegueWithIdentifier("GoToMoreInfo", sender: self)
+            self.performSegueWithIdentifier("MoreInfore", sender: self)
             break
         default:
             break
@@ -1125,12 +1185,41 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         
         if let ndate = dateFormatter.dateFromString(date) {
             
-            dateFormatter.dateFormat = "MMM dd,h:mma"
+            dateFormatter.dateFormat = "EEEE, MMMM dd 'at' h:mma"
             dateFormatter.timeZone = NSTimeZone.localTimeZone()
             let timeStamp = dateFormatter.stringFromDate(ndate)
             return timeStamp
         }
         else {return "nil,error times"}
+    }
+    
+    func randomImage() -> UIImage {
+        let imgNo = Int(arc4random_uniform(6) + 1)
+        
+        switch(imgNo){
+            
+        case 1:
+            return UIImage(named: "Background1")!
+            
+        case 2:
+            return UIImage(named: "Background2")!
+            
+        case 3:
+            return UIImage(named: "Background3")!
+            
+        case 4:
+            return UIImage(named: "Background4")!
+            
+        case 5:
+            return UIImage(named: "Background5")!
+            
+        case 6:
+            return UIImage(named: "Background6")!
+            
+        default:
+            return UIImage(named: "Background1")!
+        }
+
     }
     
 }

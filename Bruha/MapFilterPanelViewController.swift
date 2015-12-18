@@ -39,6 +39,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
     let priceLabelTitle = UILabel()
     let priceLabel = UILabel()
     let slider = UISlider()
+    let clearFilter = UIButton()
     
     struct EventObjects {
         
@@ -80,16 +81,16 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         let nib = UINib(nibName: "CategoryHeaderCellTableViewCell", bundle: nil)
         categoryTableView.registerNib(nib, forCellReuseIdentifier: "HeaderCell")
         
-        priceLabelTitle.frame = CGRectMake(10,220, screenSize.width - 20, 22)
+        priceLabelTitle.frame = CGRectMake(10,230, screenSize.width - 20, 30)
         priceLabelTitle.textAlignment = NSTextAlignment.Left
-        priceLabelTitle.backgroundColor = UIColor.orangeColor()
+        priceLabelTitle.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1)
         priceLabelTitle.textColor = UIColor.whiteColor()
         priceLabelTitle.font = UIFont(name: ".SFUIText-Semibold", size: 18)
         priceLabelTitle.text = "   Admission Price"
         self.scrollView.addSubview(priceLabelTitle)
         
         
-        priceLabel.frame = CGRectMake(10, 242, screenSize.width - 20, 22)
+        priceLabel.frame = CGRectMake(10, 260, screenSize.width - 20, 20)
         priceLabel.textAlignment = NSTextAlignment.Center
         priceLabel.backgroundColor = UIColor.clearColor()
         priceLabel.textColor = UIColor.whiteColor()
@@ -102,10 +103,17 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         slider.continuous = true
         slider.tintColor = UIColor.whiteColor()
         slider.backgroundColor = UIColor.whiteColor()
-        slider.frame = CGRectMake(10, 264, screenSize.width - 20, 22)
+        slider.frame = CGRectMake(10, 280, screenSize.width - 20, 20)
         slider.value = -1
         slider.addTarget(self, action: "sliderValueDidChange:", forControlEvents: .ValueChanged)
         self.scrollView.addSubview(slider)
+        
+        
+        clearFilter.setTitle("Clear Filter", forState: UIControlState.Normal)
+        clearFilter.backgroundColor = UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1)
+        clearFilter.addTarget(self, action: "clearFilters:", forControlEvents: UIControlEvents.TouchUpInside)
+        self.scrollView.addSubview(clearFilter)
+        
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateNotificationSent", name: "itemDisplayChangeEvent", object: nil)
         
@@ -146,7 +154,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
             
         default:
             eventTapped()
-        } //IS THIS BLOCK NEEDED?
+        }
     }
     
     func setupEVOD() {
@@ -174,7 +182,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         organizationSelectedB.layer.borderWidth = CGFloat(1.5)
         
         discoverableButtonIcon.contentMode = UIViewContentMode.ScaleAspectFit
-        discoverableButtonIcon.image = UIImage(named: "Organization_White")
+        discoverableButtonIcon.image = UIImage(named: "Bruha_White")
         discoverableSelectedB.setTitle("Discoverable", forState: UIControlState.Normal)
         discoverableSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
         discoverableSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
@@ -184,6 +192,22 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
     
     func updateEVOD() {
         
+        eventButtonIcon.image = UIImage(named: "Events_White")
+        eventSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        eventSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+        
+        venueButtonIcon.image = UIImage(named: "Venue_White")
+        venueSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        venueSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+        
+        organizationButtonIcon.image = UIImage(named: "Organization_White")
+        organizationSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        organizationSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+        
+        discoverableButtonIcon.image = UIImage(named: "Bruha_White")
+        discoverableSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
+        discoverableSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+        
         switch(GlobalVariables.selectedDisplay){
             
         case "Event":
@@ -192,68 +216,21 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
             eventSelectedB.setTitleColor(UIColor.orangeColor(), forState: UIControlState.Normal)
             eventSelectedB.layer.borderColor = UIColor.orangeColor().CGColor
             
-            venueButtonIcon.image = UIImage(named: "Venue_White")
-            venueSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-            venueSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
-            
-            organizationButtonIcon.image = UIImage(named: "Organization_White")
-            organizationSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-            organizationSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
-            
-            discoverableButtonIcon.image = UIImage(named: "Organization_White")
-            discoverableSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-            discoverableSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
-            
         case "Venue":
-            
-            eventButtonIcon.image = UIImage(named: "Events_White")
-            eventSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-            eventSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
             
             venueButtonIcon.image = UIImage(named: "Venue_Orange")
             venueSelectedB.setTitleColor(UIColor.orangeColor(), forState: UIControlState.Normal)
             venueSelectedB.layer.borderColor = UIColor.orangeColor().CGColor
             
-            organizationButtonIcon.image = UIImage(named: "Organization_White")
-            organizationSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-            organizationSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
-            
-            discoverableButtonIcon.image = UIImage(named: "Organization_White")
-            discoverableSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-            discoverableSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
-            
         case "Organization":
-            
-            eventButtonIcon.image = UIImage(named: "Events_White")
-            eventSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-            eventSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
-            
-            venueButtonIcon.image = UIImage(named: "Venue_White")
-            venueSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-            venueSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
             
             organizationButtonIcon.image = UIImage(named: "Organization_Orange")
             organizationSelectedB.setTitleColor(UIColor.orangeColor(), forState: UIControlState.Normal)
             organizationSelectedB.layer.borderColor = UIColor.orangeColor().CGColor
             
-            discoverableButtonIcon.image = UIImage(named: "Organization_White")
-            discoverableSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-            discoverableSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
-            
         case "Discoverable":
-            eventButtonIcon.image = UIImage(named: "Events_White")
-            eventSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-            eventSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
             
-            venueButtonIcon.image = UIImage(named: "Venue_White")
-            venueSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-            venueSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
-            
-            organizationButtonIcon.image = UIImage(named: "Organization_White")
-            organizationSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
-            organizationSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
-            
-            discoverableButtonIcon.image = UIImage(named: "Events_Orange")
+            discoverableButtonIcon.image = UIImage(named: "Venue_Orange")
             discoverableSelectedB.setTitleColor(UIColor.orangeColor(), forState: UIControlState.Normal)
             discoverableSelectedB.layer.borderColor = UIColor.orangeColor().CGColor
             
@@ -271,11 +248,43 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
             organizationSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
             organizationSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
             
-            discoverableButtonIcon.image = UIImage(named: "Organization_White")
+            discoverableButtonIcon.image = UIImage(named: "Bruha_White")
             discoverableSelectedB.setTitleColor(UIColor.whiteColor(), forState: UIControlState.Normal)
             discoverableSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
         }
         
+    }
+    
+    func clearFilters(sender: UIButton) {
+        
+        let pulseAnimation = CABasicAnimation(keyPath: "opacity")
+        pulseAnimation.duration = 1
+        pulseAnimation.fromValue = NSNumber(float: 0.7)
+        pulseAnimation.toValue = NSNumber(float: 1.0)
+        pulseAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        pulseAnimation.autoreverses = false
+        pulseAnimation.repeatCount = 1  //FLT_MAX
+        sender.layer.addAnimation(pulseAnimation, forKey: nil)
+        
+        Filtering().clearFilter()
+        resetSliderValue()
+        
+        switch(GlobalVariables.selectedDisplay){
+            
+        case "Event":
+            eventTapped()
+            
+        case "Venue":
+            venueTapped()
+            
+        case "Organization":
+            organizationTapped()
+            
+        default:
+            eventTapped()
+        }
+        
+        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
     }
     
     func sliderValueDidChange(sender:UISlider!) {
@@ -416,22 +425,21 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
     func venueTapped(){
         
         GlobalVariables.selectedDisplay = "Venue"
-        
-        if(GlobalVariables.UserCustomFilters.categoryFilter.venueCategories.count != 0){
-            venueObject = backupVenueCategories
-        }
-        else{
-            venueObject = ["Venue Categories"]
-        }
+        venueObject = backupVenueCategories
+//        if(GlobalVariables.UserCustomFilters.categoryFilter.venueCategories.count != 0){
+//            venueObject = backupVenueCategories
+//        }
+//        else{
+//            venueObject = ["Venue Categories"]
+//        }
         
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
         updateEVOD()
         //clearBackupCategories()
         //resetSliderValue()
-        updateNotificationSent()
         categoryTableView.reloadData()
-        
         adjustHeightOfTableView(self.categoryTableView, constraint: self.categoryTableHeight)
+        updateNotificationSent()
     }
     
     func discoverableTapped(){
@@ -447,21 +455,21 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         
         GlobalVariables.selectedDisplay = "Organization"
         
-        if(GlobalVariables.UserCustomFilters.categoryFilter.organizationCategories.count != 0){
-            organizationObject = backupOrganizationCategories
-        }
-        else{
-            organizationObject = ["Organization Categories"]
-        }
+        organizationObject = backupOrganizationCategories
+//        if(GlobalVariables.UserCustomFilters.categoryFilter.organizationCategories.count != 0){
+//            organizationObject = backupOrganizationCategories
+//        }
+//        else{
+//            organizationObject = ["Organization Categories"]
+//        }
         
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
         //clearBackupCategories()
         //resetSliderValue()
         updateEVOD()
-        updateNotificationSent()
         categoryTableView.reloadData()
-        
         adjustHeightOfTableView(self.categoryTableView, constraint: self.categoryTableHeight)
+        updateNotificationSent()
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -497,7 +505,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
             
             if(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[eventObject[indexPath.section].sectionName]![0].contains(eventObject[indexPath.section].sectionObjectIDs[indexPath.row])){
                 
-                cell.backgroundColor = UIColor.grayColor()
+                cell.backgroundColor = UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
             }
     
         }
@@ -508,7 +516,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         let selectedCell = self.categoryTableView.cellForRowAtIndexPath(indexPath) as UITableViewCell!
-         selectedCell.backgroundColor = UIColor.grayColor()
+         selectedCell.backgroundColor = UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
         
         let headerTitle = eventObject[indexPath.section].sectionName
         //categoryTableView.headerViewForSection(indexPath.section)?.textLabel!.text!
@@ -573,7 +581,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
             
             //Handled in didSelectRowAtIndexPath
             
-            selectedCell.backgroundColor = UIColor.grayColor()
+            selectedCell.backgroundColor = UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
             
             GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].append(subCategoryID)
             GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![1].append(subCategoryName)
@@ -606,8 +614,6 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
             return venueObject.count
         } else if GlobalVariables.selectedDisplay == "Organization" {
             return organizationObject.count
-        } else if GlobalVariables.selectedDisplay == "Artist" {
-//            return artistObject.count
         }
         return 0
         
@@ -626,13 +632,13 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         } 
         
         
-        let sepFrame = CGRectMake(0,headerCell.frame.size.height-1, 320, 1);
+        let sepFrame = CGRectMake(0,headerCell.frame.size.height-1, headerCell.frame.size.width, 1);
         let seperatorView = UIView(frame: sepFrame)
         seperatorView.backgroundColor = UIColor.whiteColor()
         
         if(section == 0){
             
-            headerCell.backgroundColor = UIColor.orangeColor()
+            headerCell.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1)
             headerCell.textLabel!.textColor = UIColor.whiteColor()
             headerCell.detailTextLabel?.text = "\(section)"
             
@@ -642,16 +648,16 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
             if GlobalVariables.selectedDisplay == "Event" {
                 
                 if(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.keys.contains((headerCell.textLabel?.text)!)){
-                    headerCell.backgroundColor = UIColor.cyanColor()
+                    headerCell.backgroundColor = UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1.0)
                 }
                 else{
-                    headerCell.backgroundColor = UIColor(red: 1.0, green: 0.710, blue: 0.071, alpha: 1.0)
+                    headerCell.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1.0)
                 }
                 
             } else if GlobalVariables.selectedDisplay == "Venue" {
                 
                 if(GlobalVariables.UserCustomFilters.categoryFilter.venueCategories.contains((headerCell.textLabel?.text)!)){
-                    headerCell.backgroundColor = UIColor.blueColor()
+                    headerCell.backgroundColor = UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
                 }
                 else{
                     headerCell.backgroundColor = UIColor.blackColor()
@@ -659,7 +665,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
                 
             } else if GlobalVariables.selectedDisplay == "Organization" {
                 if(GlobalVariables.UserCustomFilters.categoryFilter.organizationCategories.contains((headerCell.textLabel?.text)!)){
-                    headerCell.backgroundColor = UIColor.blueColor()
+                    headerCell.backgroundColor = UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
                 }
                 else{
                     headerCell.backgroundColor = UIColor.blackColor()
@@ -840,11 +846,19 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         
         constraint.constant = height
         
-        scrollView.contentSize.height = 500 + constraint.constant
+        //scrollView.contentSize.height = 500 + constraint.constant
         
-        priceLabelTitle.frame = CGRectMake(10, 198 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 22)
-        priceLabel.frame = CGRectMake(10, 220 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 22)
-        slider.frame = CGRectMake(10, 242 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 22)
+        priceLabelTitle.frame = CGRectMake(10, 200 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 30)
+        priceLabel.frame = CGRectMake(10, 230 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 20)
+        slider.frame = CGRectMake(10, 250 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 20)
+        
+        if GlobalVariables.selectedDisplay == "Event" {
+            scrollView.contentInset.bottom = 100
+            clearFilter.frame = CGRectMake(UIScreen.mainScreen().bounds.width * 0.7 - 10, 280 + constraint.constant, UIScreen.mainScreen().bounds.width * 0.3, 30)
+        } else {
+            scrollView.contentInset.bottom = -150
+            clearFilter.frame = CGRectMake(UIScreen.mainScreen().bounds.width * 0.7 - 10, 30 + constraint.constant, UIScreen.mainScreen().bounds.width * 0.3, 30)
+        }
         
         self.view.setNeedsUpdateConstraints()
         

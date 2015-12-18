@@ -8,9 +8,32 @@
 
 import UIKit
 
+extension UIView {
+    func startRotating(duration: Double = 2.0) {
+        let kAnimationKey = "rotation"
+        
+        if self.layer.animationForKey(kAnimationKey) == nil {
+            let animate = CABasicAnimation(keyPath: "transform.rotation")
+            animate.duration = duration
+            animate.repeatCount = Float.infinity
+            animate.fromValue = 0.0
+            animate.toValue = Float(M_PI * 2.0)
+            self.layer.addAnimation(animate, forKey: kAnimationKey)
+        }
+    }
+    func stopRotating() {
+        let kAnimationKey = "rotation"
+        
+        if self.layer.animationForKey(kAnimationKey) != nil {
+            self.layer.removeAnimationForKey(kAnimationKey)
+        }
+    }
+}
+
 class LoadScreenViewController: UIViewController {
     
     @IBOutlet var progressView: UIProgressView!
+    @IBOutlet weak var loading: UIImageView!
     var done: Bool = false
     var progressTimer: NSTimer = NSTimer()
 
@@ -28,11 +51,22 @@ class LoadScreenViewController: UIViewController {
         self.view.addSubview(barView)
     }
     
+    func customLoadingImage() {
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        
+        let heightContraints = NSLayoutConstraint(item: loading, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.height * 0.2)
+        let widthContraints = NSLayoutConstraint(item: loading, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.height * 0.2)
+        
+        loading.addConstraints([heightContraints, widthContraints])
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        progressView.alpha = 0
+        //customStatusBar()
         
-        customStatusBar()
-
+        customLoadingImage()
+        
         progressView.progressViewStyle = UIProgressViewStyle.Bar
         progressView.trackTintColor = UIColor.orangeColor()
         progressView.progressTintColor = UIColor.purpleColor()
@@ -85,7 +119,7 @@ class LoadScreenViewController: UIViewController {
         super.viewDidAppear(animated)
         
         if hasInternet() == "true" {
-            
+            startSpinning()
             startLoadingProgress()
             NSNotificationCenter.defaultCenter().addObserver(self, selector: "saveImages", name:"complete", object: nil)
             NSNotificationCenter.defaultCenter().addObserver(self, selector: "performSegue", name:"complete", object: nil)
@@ -244,7 +278,7 @@ class LoadScreenViewController: UIViewController {
     func performSegue() {
         
         finishesLoadingProgress()
-        
+        stopSpinning()
         if(userLog != 0) {
             
             delay(1.5){
@@ -305,5 +339,17 @@ class LoadScreenViewController: UIViewController {
     
     func delay(delay:Double, closure:()->()) {
         dispatch_after( dispatch_time( DISPATCH_TIME_NOW, Int64(delay * Double(NSEC_PER_SEC)) ), dispatch_get_main_queue(), closure )
+    }
+    
+    func startSpinning() {
+        loading.image = UIImage(named:"Events_Orange")
+        loading.alpha = 0.75
+        loading.startRotating()
+    }
+    
+    func stopSpinning() {
+        loading.stopRotating()
+        loading.alpha = 0
+        //loading.image = UIImage(named:"Brüha_Face_Purple_Lrg")
     }
 }

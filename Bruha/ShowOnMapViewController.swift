@@ -14,6 +14,7 @@ class ShowOnMapViewController: UIViewController, GMSMapViewDelegate{
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     @IBOutlet weak var mapView: GMSMapView!
+    @IBOutlet weak var backButton: UIButton!
     let button = UIButton(type: UIButtonType.Custom)
     
     var locationManager = CLLocationManager()
@@ -34,16 +35,32 @@ class ShowOnMapViewController: UIViewController, GMSMapViewDelegate{
         self.view.addSubview(barView)
     }
     
+    func customTopButtons() {
+        
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        
+        backButton.setBackgroundImage(UIImage(named: "List"), forState: UIControlState.Normal)
+        let heightContraint = NSLayoutConstraint(item: backButton, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.height/15.5)
+        heightContraint.priority = UILayoutPriorityDefaultHigh
+        
+        let widthContraint = NSLayoutConstraint(item: backButton, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.width/9)
+        widthContraint.priority = UILayoutPriorityDefaultHigh
+        
+        backButton.addConstraints([heightContraint, widthContraint])
+        self.view.bringSubviewToFront(backButton)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        customStatusBar()
+        //customStatusBar()
+        customTopButtons()
         
         mapView.delegate = self
         let mapFrame = mapView.frame.size
         let buttonImage = UIImage(named: "GoogleMapsAppIcon")
         button.setImage(buttonImage, forState: .Normal)
-        button.frame = CGRectMake(mapFrame.width - (buttonImage?.size.width)!, mapFrame.height - buttonImage!.size.height, (buttonImage?.size.width)!, buttonImage!.size.height)
+        button.frame = CGRectMake(self.view.frame.size.width - (buttonImage?.size.width)!, self.view.frame.height - buttonImage!.size.height, (buttonImage?.size.width)!, buttonImage!.size.height)
         button.addTarget(self, action: "buttonAction:", forControlEvents: UIControlEvents.TouchUpInside)
         
         
@@ -58,64 +75,66 @@ class ShowOnMapViewController: UIViewController, GMSMapViewDelegate{
         var primaryCategory: String?
 //        let venueArtist = FetchData(context: managedObjectContext).fetchArtists()
         
-        switch GlobalVariables.selectedDisplay {
-            case "Event":
-
-                for event in eventInfo {
-                    if event.eventID == GlobalVariables.eventSelected {
-                        latitude = event.eventLatitude
-                        longitude = event.eventLongitude
-                        name = event.eventName
-                        primaryCategory = event.primaryCategory
-                    }
+        if GlobalVariables.selectedDisplay == "Event" || GlobalVariables.addictedDisplay == "Event" || GlobalVariables.uploadDisplay == "Event"{
+            
+            for event in eventInfo {
+                if event.eventID == GlobalVariables.eventSelected {
+                    latitude = event.eventLatitude
+                    longitude = event.eventLongitude
+                    name = event.eventName
+                    primaryCategory = event.primaryCategory
+                    
+                    cameraPosition = GMSCameraPosition.cameraWithLatitude(latitude, longitude: longitude, zoom: 15)
+                    mapView.camera = cameraPosition
+                    position = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                    marker = GMSMarker(position: position)
+                    marker.icon = UIImage(named: primaryCategory!)
+                    marker.title = name
+                    marker.map = mapView
                 }
-                cameraPosition = GMSCameraPosition.cameraWithLatitude(latitude, longitude: longitude, zoom: 15)
-                mapView.camera = cameraPosition
-                position = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-                marker = GMSMarker(position: position)
-                marker.icon = UIImage(named: primaryCategory!)
-                marker.title = name
-                marker.map = mapView
-            
-            case "Venue":
-                for venue in venueInfo! {
-                    if venue.venueID == GlobalVariables.eventSelected {
-                        latitude = venue.venueLatitude
-                        longitude = venue.venueLongitude
-                        name = venue.venueName
-                        primaryCategory = venue.primaryCategory
-                    }
-                }
-                cameraPosition = GMSCameraPosition.cameraWithLatitude(latitude, longitude: longitude, zoom: 15)
-                mapView.camera = cameraPosition
-                position = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-                marker = GMSMarker(position: position)
-                marker.icon = UIImage(named: primaryCategory!)
-                marker.title = name
-                marker.map = mapView
-            
-            case "Organization":
-                for organization in organizationInfo! {
-                    if organization.organizationID == GlobalVariables.eventSelected {
-                        latitude = organization.organizationLatitude
-                        longitude = organization.organizationLongitude
-                        name = organization.organizationName
-                        primaryCategory = organization.primaryCategory
-                    }
-                }
-                cameraPosition = GMSCameraPosition.cameraWithLatitude(latitude, longitude: longitude, zoom: 15)
-                mapView.camera = cameraPosition
-                position = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
-                marker = GMSMarker(position: position)
-                marker.icon = UIImage(named: primaryCategory!)
-                marker.title = name
-                marker.map = mapView
-            
-            
-            default:
-                break
-            
+            }
         }
+        
+        if GlobalVariables.selectedDisplay == "Venue" || GlobalVariables.addictedDisplay == "Venue" || GlobalVariables.uploadDisplay == "Venue"{
+            
+            for venue in venueInfo! {
+                if venue.venueID == GlobalVariables.eventSelected {
+                    latitude = venue.venueLatitude
+                    longitude = venue.venueLongitude
+                    name = venue.venueName
+                    primaryCategory = venue.primaryCategory
+                    
+                    cameraPosition = GMSCameraPosition.cameraWithLatitude(latitude, longitude: longitude, zoom: 15)
+                    mapView.camera = cameraPosition
+                    position = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                    marker = GMSMarker(position: position)
+                    marker.icon = UIImage(named: primaryCategory!)
+                    marker.title = name
+                    marker.map = mapView
+                }
+            }
+        }
+        
+        if GlobalVariables.selectedDisplay == "Organization" || GlobalVariables.addictedDisplay == "Organization" || GlobalVariables.uploadDisplay == "Organization"{
+            
+            for organization in organizationInfo! {
+                if organization.organizationID == GlobalVariables.eventSelected {
+                    latitude = organization.organizationLatitude
+                    longitude = organization.organizationLongitude
+                    name = organization.organizationName
+                    primaryCategory = organization.primaryCategory
+                    
+                    cameraPosition = GMSCameraPosition.cameraWithLatitude(latitude, longitude: longitude, zoom: 15)
+                    mapView.camera = cameraPosition
+                    position = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+                    marker = GMSMarker(position: position)
+                    marker.icon = UIImage(named: primaryCategory!)
+                    marker.title = name
+                    marker.map = mapView
+                }
+            }
+        }
+        
     }
     
     func mapView(mapView: GMSMapView!, didTapMarker marker: GMSMarker!) -> Bool {

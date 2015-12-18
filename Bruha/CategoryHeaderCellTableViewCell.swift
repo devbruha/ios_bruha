@@ -16,6 +16,8 @@ class CategoryHeaderCellTableViewCell: UITableViewCell {
         super.awakeFromNib()
         // Initialization code
         //self.selectionStyle = UITableViewCellSelectionStyle.None
+        
+        //self.textLabel?.font =
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

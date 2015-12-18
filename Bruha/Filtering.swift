@@ -158,7 +158,7 @@ class Filtering {
 
     }
     
-    func clearFilter() {
+    func clearAllFilter() {
         
         GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.removeAll()
         GlobalVariables.UserCustomFilters.categoryFilter.venueCategories.removeAll()
@@ -169,6 +169,29 @@ class Filtering {
         GlobalVariables.filterEventBool = false
         GlobalVariables.filterVenueBool = false
         GlobalVariables.filterOrganizationBool = false
+    }
+    
+    func clearFilter() {
+        
+        if GlobalVariables.selectedDisplay == "Event"{
+            
+            GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.removeAll()
+            GlobalVariables.UserCustomFilters.dateFilter.removeAll()
+            GlobalVariables.UserCustomFilters.priceFilter = -1
+            GlobalVariables.filterEventBool = false
+        }
+        
+        if GlobalVariables.selectedDisplay == "Venue"{
+            
+            GlobalVariables.UserCustomFilters.categoryFilter.venueCategories.removeAll()
+            GlobalVariables.filterVenueBool = false
+        }
+        
+        if GlobalVariables.selectedDisplay == "Organization"{
+            
+            GlobalVariables.UserCustomFilters.categoryFilter.organizationCategories.removeAll()
+            GlobalVariables.filterOrganizationBool = false
+        }
     }
     
 }

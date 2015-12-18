@@ -18,6 +18,18 @@ class DashBoardViewController: UIViewController {
     @IBOutlet weak var ticketImage: UIImageView!
     @IBOutlet weak var bruhaButton: UIButton!
     
+    @IBAction func Bruha(sender: UIButton) {
+        
+        let alert = UIAlertView(title: "You are already in dashboard!!!", message: nil, delegate: nil, cancelButtonTitle: nil)
+        alert.show()
+        let delay = 1.0 * Double(NSEC_PER_SEC)
+        var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        dispatch_after(time, dispatch_get_main_queue(), {
+            alert.dismissWithClickedButtonIndex(-1, animated: true)
+        })
+    }
+    
+    
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     func alert() {
@@ -150,7 +162,7 @@ class DashBoardViewController: UIViewController {
         //setConstraint(imgViews)
         
         customBruhaButton()
-        customStatusBar()
+        //customStatusBar()
         
         if GlobalVariables.loggedIn == false{
             addictionImage.alpha = 0.5
@@ -169,7 +181,7 @@ class DashBoardViewController: UIViewController {
         performImageSegue()
         backgroundGradient()
         FetchData(context: managedObjectContext).fetchCategories()
-        Filtering().clearFilter()
+        Filtering().clearAllFilter()
         // Do any additional setup after loading the view.
     }
     

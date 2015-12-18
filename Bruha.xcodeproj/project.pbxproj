@@ -111,6 +111,7 @@
 		45FA05C11B5D6FCC004AD819 /* LoginService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05C01B5D6FCC004AD819 /* LoginService.swift */; };
 		45FA05C41B5D7000004AD819 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05C31B5D7000004AD819 /* User.swift */; };
 		45FA05C61B5D7D9E004AD819 /* UserDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 45FA05C51B5D7D9E004AD819 /* UserDBModel.swift */; };
+		A501998C1C23239B0097624F /* UpComingEventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A501998B1C23239B0097624F /* UpComingEventsViewController.swift */; };
 		A50231701C0F57C600FA4E7F /* FacebookService.swift in Sources */ = {isa = PBXBuildFile; fileRef = A502316F1C0F57C600FA4E7F /* FacebookService.swift */; };
 		A505C0EB1BCEDC6D0067CDD1 /* UserEventDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A505C0EA1BCEDC6D0067CDD1 /* UserEventDBModel.swift */; };
 		A505C0ED1BCEDD4B0067CDD1 /* UserVenueDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A505C0EC1BCEDD4B0067CDD1 /* UserVenueDBModel.swift */; };
@@ -119,12 +120,25 @@
 		A505C0F31BCEE8730067CDD1 /* UploadListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A505C0F21BCEE8730067CDD1 /* UploadListViewController.swift */; };
 		A505C0F51BCEE9860067CDD1 /* UploadListPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A505C0F41BCEE9860067CDD1 /* UploadListPanelViewController.swift */; };
 		A505C0F71BD17B910067CDD1 /* LoadScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A505C0F61BD17B910067CDD1 /* LoadScreenViewController.swift */; };
+		A576579A1C1F6E4300F871A2 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A57657901C1F6E4300F871A2 /* OpenSans-Bold.ttf */; };
+		A576579B1C1F6E4300F871A2 /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A57657911C1F6E4300F871A2 /* OpenSans-BoldItalic.ttf */; };
+		A576579C1C1F6E4300F871A2 /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A57657921C1F6E4300F871A2 /* OpenSans-ExtraBold.ttf */; };
+		A576579D1C1F6E4300F871A2 /* OpenSans-ExtraBoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A57657931C1F6E4300F871A2 /* OpenSans-ExtraBoldItalic.ttf */; };
+		A576579E1C1F6E4300F871A2 /* OpenSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A57657941C1F6E4300F871A2 /* OpenSans-Italic.ttf */; };
+		A576579F1C1F6E4300F871A2 /* OpenSans-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A57657951C1F6E4300F871A2 /* OpenSans-Light.ttf */; };
+		A57657A01C1F6E4300F871A2 /* OpenSans-LightItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A57657961C1F6E4300F871A2 /* OpenSans-LightItalic.ttf */; };
+		A57657A11C1F6E4300F871A2 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A57657971C1F6E4300F871A2 /* OpenSans-Regular.ttf */; };
+		A57657A21C1F6E4300F871A2 /* OpenSans-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A57657981C1F6E4300F871A2 /* OpenSans-Semibold.ttf */; };
+		A57657A31C1F6E4300F871A2 /* OpenSans-SemiboldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A57657991C1F6E4300F871A2 /* OpenSans-SemiboldItalic.ttf */; };
+		A57657A61C1F6E5400F871A2 /* Domine-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A57657A41C1F6E5400F871A2 /* Domine-Bold.ttf */; };
+		A57657A71C1F6E5400F871A2 /* Domine-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A57657A51C1F6E5400F871A2 /* Domine-Regular.ttf */; };
 		A580A4E81BFE797300CB6F2E /* CategoryHeaderCellTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A580A4E71BFE797300CB6F2E /* CategoryHeaderCellTableViewCell.xib */; };
 		A580A4EA1BFE7A8C00CB6F2E /* CategoryHeaderCellTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A580A4E91BFE7A8C00CB6F2E /* CategoryHeaderCellTableViewCell.swift */; };
 		A5820A921BDFB06300D78675 /* Filtering.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5820A911BDFB06300D78675 /* Filtering.swift */; };
 		A58A3A211BB9780800601749 /* AddictionEventDBModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58A3A201BB9780800601749 /* AddictionEventDBModel.swift */; };
 		A58A3A261BB980B200601749 /* AddictionEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58A3A251BB980B200601749 /* AddictionEvent.swift */; };
 		A59443A11C03C088000B3969 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59443A01C03C088000B3969 /* Image.swift */; };
+		A5967F171C2067E700559FC9 /* MoreInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5967F161C2067E700559FC9 /* MoreInformationViewController.swift */; };
 		A5CAB5781BED1ECE007E597B /* MapDropTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5CAB5771BED1ECE007E597B /* MapDropTableViewCell.xib */; };
 		A5CAB57A1BED2145007E597B /* MapDropTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CAB5791BED2145007E597B /* MapDropTableViewCell.swift */; };
 		A5D34D621C06122C005F6236 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5D34D5F1C06122C005F6236 /* FBSDKCoreKit.framework */; };
@@ -263,6 +277,7 @@
 		45FA05C51B5D7D9E004AD819 /* UserDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDBModel.swift; sourceTree = "<group>"; };
 		4C40848564A9A9ABD06E1BFE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		6624944801305D440270EA9D /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		A501998B1C23239B0097624F /* UpComingEventsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpComingEventsViewController.swift; sourceTree = "<group>"; };
 		A502316F1C0F57C600FA4E7F /* FacebookService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookService.swift; sourceTree = "<group>"; };
 		A505C0EA1BCEDC6D0067CDD1 /* UserEventDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserEventDBModel.swift; sourceTree = "<group>"; };
 		A505C0EC1BCEDD4B0067CDD1 /* UserVenueDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserVenueDBModel.swift; sourceTree = "<group>"; };
@@ -271,12 +286,25 @@
 		A505C0F21BCEE8730067CDD1 /* UploadListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadListViewController.swift; sourceTree = "<group>"; };
 		A505C0F41BCEE9860067CDD1 /* UploadListPanelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadListPanelViewController.swift; sourceTree = "<group>"; };
 		A505C0F61BD17B910067CDD1 /* LoadScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadScreenViewController.swift; sourceTree = "<group>"; };
+		A57657901C1F6E4300F871A2 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
+		A57657911C1F6E4300F871A2 /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; };
+		A57657921C1F6E4300F871A2 /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
+		A57657931C1F6E4300F871A2 /* OpenSans-ExtraBoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBoldItalic.ttf"; sourceTree = "<group>"; };
+		A57657941C1F6E4300F871A2 /* OpenSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Italic.ttf"; sourceTree = "<group>"; };
+		A57657951C1F6E4300F871A2 /* OpenSans-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Light.ttf"; sourceTree = "<group>"; };
+		A57657961C1F6E4300F871A2 /* OpenSans-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-LightItalic.ttf"; sourceTree = "<group>"; };
+		A57657971C1F6E4300F871A2 /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Regular.ttf"; sourceTree = "<group>"; };
+		A57657981C1F6E4300F871A2 /* OpenSans-Semibold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Semibold.ttf"; sourceTree = "<group>"; };
+		A57657991C1F6E4300F871A2 /* OpenSans-SemiboldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-SemiboldItalic.ttf"; sourceTree = "<group>"; };
+		A57657A41C1F6E5400F871A2 /* Domine-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Domine-Bold.ttf"; sourceTree = "<group>"; };
+		A57657A51C1F6E5400F871A2 /* Domine-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Domine-Regular.ttf"; sourceTree = "<group>"; };
 		A580A4E71BFE797300CB6F2E /* CategoryHeaderCellTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CategoryHeaderCellTableViewCell.xib; sourceTree = "<group>"; };
 		A580A4E91BFE7A8C00CB6F2E /* CategoryHeaderCellTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CategoryHeaderCellTableViewCell.swift; sourceTree = "<group>"; };
 		A5820A911BDFB06300D78675 /* Filtering.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Filtering.swift; sourceTree = "<group>"; };
 		A58A3A201BB9780800601749 /* AddictionEventDBModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddictionEventDBModel.swift; sourceTree = "<group>"; };
 		A58A3A251BB980B200601749 /* AddictionEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddictionEvent.swift; sourceTree = "<group>"; };
 		A59443A01C03C088000B3969 /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
+		A5967F161C2067E700559FC9 /* MoreInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreInformationViewController.swift; sourceTree = "<group>"; };
 		A5CAB5771BED1ECE007E597B /* MapDropTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapDropTableViewCell.xib; sourceTree = "<group>"; };
 		A5CAB5791BED2145007E597B /* MapDropTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapDropTableViewCell.swift; sourceTree = "<group>"; };
 		A5D34D5F1C06122C005F6236 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
@@ -377,6 +405,8 @@
 				A505C0F41BCEE9860067CDD1 /* UploadListPanelViewController.swift */,
 				A505C0F61BD17B910067CDD1 /* LoadScreenViewController.swift */,
 				3C4FA13E1C04EE150034610E /* ShowOnMapViewController.swift */,
+				A5967F161C2067E700559FC9 /* MoreInformationViewController.swift */,
+				A501998B1C23239B0097624F /* UpComingEventsViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -484,6 +514,7 @@
 				1835F8F21B5EAD7200FD1BD1 /* Reachability.swift */,
 				45FA05691B5D4158004AD819 /* AppDelegate.swift */,
 				45FA05681B5D4158004AD819 /* Info.plist */,
+				A576578F1C1F6E2A00F871A2 /* Font */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -628,6 +659,25 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		A576578F1C1F6E2A00F871A2 /* Font */ = {
+			isa = PBXGroup;
+			children = (
+				A57657A41C1F6E5400F871A2 /* Domine-Bold.ttf */,
+				A57657A51C1F6E5400F871A2 /* Domine-Regular.ttf */,
+				A57657901C1F6E4300F871A2 /* OpenSans-Bold.ttf */,
+				A57657911C1F6E4300F871A2 /* OpenSans-BoldItalic.ttf */,
+				A57657921C1F6E4300F871A2 /* OpenSans-ExtraBold.ttf */,
+				A57657931C1F6E4300F871A2 /* OpenSans-ExtraBoldItalic.ttf */,
+				A57657941C1F6E4300F871A2 /* OpenSans-Italic.ttf */,
+				A57657951C1F6E4300F871A2 /* OpenSans-Light.ttf */,
+				A57657961C1F6E4300F871A2 /* OpenSans-LightItalic.ttf */,
+				A57657971C1F6E4300F871A2 /* OpenSans-Regular.ttf */,
+				A57657981C1F6E4300F871A2 /* OpenSans-Semibold.ttf */,
+				A57657991C1F6E4300F871A2 /* OpenSans-SemiboldItalic.ttf */,
+			);
+			name = Font;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -714,19 +764,30 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				A576579F1C1F6E4300F871A2 /* OpenSans-Light.ttf in Resources */,
 				45F8DF3D1BBDF00E00886C3F /* LaunchScreen.xib in Resources */,
 				1834845C1B7E347D00EA0D13 /* VenueView.xib in Resources */,
+				A57657A61C1F6E5400F871A2 /* Domine-Bold.ttf in Resources */,
 				A5CAB5781BED1ECE007E597B /* MapDropTableViewCell.xib in Resources */,
+				A576579C1C1F6E4300F871A2 /* OpenSans-ExtraBold.ttf in Resources */,
 				18CFAAAB1B876C7A00FE3976 /* SplashFour.xib in Resources */,
 				452BC0C61B79118F003E7142 /* ArtistTableViewCell.xib in Resources */,
 				45FA05BA1B5D63EB004AD819 /* Main.storyboard in Resources */,
+				A57657A71C1F6E5400F871A2 /* Domine-Regular.ttf in Resources */,
+				A576579D1C1F6E4300F871A2 /* OpenSans-ExtraBoldItalic.ttf in Resources */,
+				A576579E1C1F6E4300F871A2 /* OpenSans-Italic.ttf in Resources */,
+				A57657A21C1F6E4300F871A2 /* OpenSans-Semibold.ttf in Resources */,
+				A57657A11C1F6E4300F871A2 /* OpenSans-Regular.ttf in Resources */,
 				A580A4E81BFE797300CB6F2E /* CategoryHeaderCellTableViewCell.xib in Resources */,
 				18CFAAAF1B876F0C00FE3976 /* SplashFive.xib in Resources */,
+				A576579A1C1F6E4300F871A2 /* OpenSans-Bold.ttf in Resources */,
 				1891B28E1B866FFE000949C8 /* SplashThree.xib in Resources */,
+				A57657A31C1F6E4300F871A2 /* OpenSans-SemiboldItalic.ttf in Resources */,
 				1891B28C1B86618E000949C8 /* SplashTwo.xib in Resources */,
 				181EB6131B714B7600B9295E /* MonthCollectionCell.xib in Resources */,
 				181EB6171B714B7600B9295E /* WeekHeaderView.xib in Resources */,
 				181EB6111B714B7600B9295E /* CalendarView.xib in Resources */,
+				A576579B1C1F6E4300F871A2 /* OpenSans-BoldItalic.ttf in Resources */,
 				452BC0C41B791068003E7142 /* VenueTableViewCell.xib in Resources */,
 				181EB6151B714B7600B9295E /* DayCollectionCell.xib in Resources */,
 				45FA05741B5D4158004AD819 /* Images.xcassets in Resources */,
@@ -734,6 +795,7 @@
 				452BC0C81B79119D003E7142 /* OrganizationTableViewCell.xib in Resources */,
 				1891B2841B86530C000949C8 /* SplashOne.xib in Resources */,
 				18A98A751B84C8CF0016AF7E /* EventTableViewCell.xib in Resources */,
+				A57657A01C1F6E4300F871A2 /* OpenSans-LightItalic.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -805,6 +867,7 @@
 				181EB6161B714B7600B9295E /* WeekHeaderView.swift in Sources */,
 				45FA05A81B5D4190004AD819 /* ArtistService.swift in Sources */,
 				A5D90E061BBDD79300537F72 /* AddictionVenue.swift in Sources */,
+				A5967F171C2067E700559FC9 /* MoreInformationViewController.swift in Sources */,
 				A5D34D671C07B92A005F6236 /* ImageList+CoreDataProperties.swift in Sources */,
 				45FA05A61B5D4190004AD819 /* VenueService.swift in Sources */,
 				18A2A11B1B728241005E1DCB /* CalendarViewController.swift in Sources */,
@@ -826,6 +889,7 @@
 				181EB61A1B714B7600B9295E /* NSDateAdditions.swift in Sources */,
 				45C6D5C01B851ADE00EE4A05 /* EventSubCategoriesDBModel.swift in Sources */,
 				181EB6141B714B7600B9295E /* DayCollectionCell.swift in Sources */,
+				A501998C1C23239B0097624F /* UpComingEventsViewController.swift in Sources */,
 				A505C0F71BD17B910067CDD1 /* LoadScreenViewController.swift in Sources */,
 				1892A8001BEAFADE0063DFBB /* MoreInfoViewController.swift in Sources */,
 				181EB6101B714B7600B9295E /* CalendarView.swift in Sources */,

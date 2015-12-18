@@ -58,9 +58,10 @@ class MoreInfoViewController: UIViewController,ARSPDragDelegate, ARSPVisibilityS
         self.panelControllerContainer.dragDelegate = self
         self.panelControllerContainer.visibilityStateDelegate = self
         
-        customStatusBar()
+        //customStatusBar()
         customTopButtons()
         
+        Image.contentMode = UIViewContentMode.ScaleAspectFit
         if GlobalVariables.selectedDisplay == "Event"{
             let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
             for event in eventInfo{

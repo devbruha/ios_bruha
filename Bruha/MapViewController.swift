@@ -77,7 +77,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
         
         BruhaButton.addConstraints([heightContraints, widthContraints])
         
-        // need to change to the correct back icon
+
         BackButton.setBackgroundImage(UIImage(named: "List"), forState: UIControlState.Normal)
         let heightContraint = NSLayoutConstraint(item: BackButton, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.height/15.5)
         heightContraint.priority = UILayoutPriorityDefaultHigh
@@ -86,6 +86,9 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
         widthContraint.priority = UILayoutPriorityDefaultHigh
         
         BackButton.addConstraints([heightContraint, widthContraint])
+        
+        self.view.bringSubviewToFront(BackButton)
+        self.view.bringSubviewToFront(BruhaButton)
     }
     
     func customStatusBar() {
@@ -102,11 +105,13 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
         
         customTopButtons()
         
-        customStatusBar()
-        
+        //customStatusBar()
+        //UIApplication.sharedApplication().statusBarStyle = .Default
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
         dropDownTable.separatorColor = UIColor.whiteColor()
         //dropDownTable.separatorStyle = UITableViewCellSeparatorStyle.SingleLineEtched
         dropDownTable.backgroundColor = UIColor.blackColor()
+        //dropDownTable.rowHeight = screenSize.width * 0.4
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateMarkers", name: "itemDisplayChangeEvent", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "clearDrop", name: "itemDisplayChangeEvent", object: nil)
@@ -129,6 +134,12 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
         
         let nib = UINib(nibName: "MapDropTableViewCell", bundle: nil)
         dropDownTable.registerNib(nib, forCellReuseIdentifier: "DropCell")
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        dropDownTable.reloadData()
     }
     
     func mapView(mapView: GMSMapView!, didTapMarker marker: GMSMarker!) -> Bool {
@@ -235,6 +246,15 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
         
     }
     
+    func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
+        
+        if let animatedCell = cell as? MapDropTableViewCell {
+            animatedCell.swipeLeft.alpha = 1
+            animatedCell.swipeRight.alpha = 1
+            animatedCell.animate()
+        }
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) ->   UITableViewCell {
         
         let cell: MapDropTableViewCell = self.dropDownTable.dequeueReusableCellWithIdentifier("DropCell") as! MapDropTableViewCell
@@ -251,7 +271,11 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             if let images = posterInfo {
                 for img in images {
                     if img.ID == e.eventID {
-                        cell.dropImage.image = UIImage(data: img.Image!)
+                        if img.Image?.length > 800 {
+                            cell.dropImage.image = UIImage(data: img.Image!)
+                        } else {
+                            cell.dropImage.image = randomImage()
+                        }
                     }
                 }
             }
@@ -286,17 +310,17 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             }
             
             if like == 0 {
-                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Get Addicted")
+                temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),title: "Get Addicted")
             } else if like == 1 {
-                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Addicted!")
+                temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
             }
             
             cell.leftUtilityButtons = temp as [AnyObject]
             
             let temp2: NSMutableArray = NSMutableArray()
-            temp2.sw_addUtilityButtonWithColor(UIColor.purpleColor(), title: "Buy Tickets")
-            temp2.sw_addUtilityButtonWithColor(UIColor.grayColor(), title: "Map")
-            temp2.sw_addUtilityButtonWithColor(UIColor.orangeColor(), title: "More Info")
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1), title: "Buy Tickets")
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1), title: "Map")
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1), title: "More Info")
             
             
             cell.rightUtilityButtons = nil
@@ -313,7 +337,11 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             if let images = posterInfo {
                 for img in images {
                     if img.ID == v.venueID {
-                        cell.dropImage.image = UIImage(data: img.Image!)
+                        if img.Image?.length > 800 {
+                            cell.dropImage.image = UIImage(data: img.Image!)
+                        } else {
+                            cell.dropImage.image = randomImage()
+                        }
                     }
                 }
             }
@@ -338,16 +366,16 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             }
             
             if like == 0 {
-                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Get Addicted")
+                temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),title: "Get Addicted")
             } else if like == 1 {
-                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Addicted!")
+                temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
             }
             
             cell.leftUtilityButtons = temp as [AnyObject]
             
             let temp2: NSMutableArray = NSMutableArray()
-            temp2.sw_addUtilityButtonWithColor(UIColor.grayColor(), title: "Map")
-            temp2.sw_addUtilityButtonWithColor(UIColor.orangeColor(), title: "More Info")
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1), title: "Map")
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1), title: "More Info")
             cell.rightUtilityButtons = nil
             cell.rightUtilityButtons = temp2 as [AnyObject]
             
@@ -363,7 +391,11 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             if let images = posterInfo {
                 for img in images {
                     if img.ID == o.organizationID {
-                        cell.dropImage.image = UIImage(data: img.Image!)
+                        if img.Image?.length > 800 {
+                            cell.dropImage.image = UIImage(data: img.Image!)
+                        } else {
+                            cell.dropImage.image = randomImage()
+                        }
                     }
                 }
             }
@@ -386,16 +418,16 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             }
             
             if like == 0 {
-                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Get Addicted")
+                temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),title: "Get Addicted")
             } else if like == 1 {
-                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Addicted!")
+                temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
             }
             
             cell.leftUtilityButtons = temp as [AnyObject]
             
             let temp2: NSMutableArray = NSMutableArray()
-            temp2.sw_addUtilityButtonWithColor(UIColor.grayColor(), title: "Map")
-            temp2.sw_addUtilityButtonWithColor(UIColor.orangeColor(), title: "More Info")
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1), title: "Map")
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1), title: "More Info")
             cell.rightUtilityButtons = nil
             cell.rightUtilityButtons = temp2 as [AnyObject]
             
@@ -405,7 +437,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
         default:
             break
         }
-    
+        
         return cell
     }
     
@@ -866,14 +898,14 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
                 let cellIndexPath = self.dropDownTable.indexPathForCell(cell)
                 let selectedCell = self.dropDownTable.cellForRowAtIndexPath(cellIndexPath!) as! MapDropTableViewCell
                 GlobalVariables.eventSelected = selectedCell.dropHiddenID.text!
-                self.performSegueWithIdentifier("GoToMoreInfo", sender: self)
+                self.performSegueWithIdentifier("MoreInfore", sender: self)
             }
             //Organization MoreInfo
             if (GlobalVariables.selectedDisplay == "Organization"){
                 let cellIndexPath = self.dropDownTable.indexPathForCell(cell)
                 let selectedCell = self.dropDownTable.cellForRowAtIndexPath(cellIndexPath!) as! MapDropTableViewCell
                 GlobalVariables.eventSelected = selectedCell.dropHiddenID.text!
-                self.performSegueWithIdentifier("GoToMoreInfo", sender: self)
+                self.performSegueWithIdentifier("MoreInfore", sender: self)
                 
             }
             break
@@ -883,7 +915,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             let cellIndexPath = self.dropDownTable.indexPathForCell(cell)
             let selectedCell = self.dropDownTable.cellForRowAtIndexPath(cellIndexPath!) as! MapDropTableViewCell
             GlobalVariables.eventSelected = selectedCell.dropHiddenID.text!
-            self.performSegueWithIdentifier("GoToMoreInfo", sender: self)
+            self.performSegueWithIdentifier("MoreInfore", sender: self)
             break
         default:
             break
@@ -927,6 +959,35 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             return timeStamp
         }
         else {return "nil or error times"}
+    }
+    
+    func randomImage() -> UIImage {
+        let imgNo = Int(arc4random_uniform(6) + 1)
+        
+        switch(imgNo){
+            
+        case 1:
+            return UIImage(named: "Background1")!
+            
+        case 2:
+            return UIImage(named: "Background2")!
+            
+        case 3:
+            return UIImage(named: "Background3")!
+            
+        case 4:
+            return UIImage(named: "Background4")!
+            
+        case 5:
+            return UIImage(named: "Background5")!
+            
+        case 6:
+            return UIImage(named: "Background6")!
+            
+        default:
+            return UIImage(named: "Background1")!
+        }
+        
     }
     
 }
