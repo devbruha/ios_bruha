@@ -197,7 +197,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
     }
     
     func didSelectDate(date: NSDate){
-        
+        /*
         var mDay = String(date.day)
         var mMonth = String(date.month)
         
@@ -223,7 +223,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         }
         
         print(GlobalVariables.UserCustomFilters.dateFilter)
-        Filtering().filterEvents()
+        Filtering().filterEvents()*/
     }
     
     func setupCategoryLists(){
