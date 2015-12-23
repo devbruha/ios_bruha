@@ -96,7 +96,7 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                     
                     DateUpcomingLabel.text = convertTimeFormat("\(event.eventStartDate)")
                     smallImage.image = UIImage(named: event.primaryCategory)
-                    webDescriptionContent.loadHTMLString("<div style=\"color:white;width:100%;word-wrap:break-word;\">\(event.eventDescription)</div>", baseURL: nil)
+                    webDescriptionContent.loadHTMLString("<div style=\"font-family:OpenSans;color:white;width:100%;word-wrap:break-word;\">\(event.eventDescription)</div>", baseURL: nil)
                     
                     if let images = posterInfo {
                         for img in images {
@@ -131,7 +131,7 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                     PriceCalendarLabel.text = "Calendar"
                     DateUpcomingLabel.text = "Up Coming Events"
                     smallImage.image = UIImage(named: venue.primaryCategory)
-                    webDescriptionContent.loadHTMLString("<div style=\"color:white;width:100%;word-wrap:break-word;\">\(venue.venueDescription)</div>", baseURL: nil)
+                    webDescriptionContent.loadHTMLString("<div style=\"font-family:OpenSans;color:white;width:100%;word-wrap:break-word;\">\(venue.venueDescription)</div>", baseURL: nil)
                     
                     PriceCalendar.enabled = true
                     DateUpcoming.enabled = true
@@ -168,7 +168,7 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                     PriceCalendarLabel.text = "Calendar"
                     DateUpcomingLabel.text = "Up Coming Events"
                     smallImage.image = UIImage(named: organization.primaryCategory)
-                    webDescriptionContent.loadHTMLString("<div style=\"color:white;width:100%;word-wrap:break-word;\">\(organization.organizationDescription)</div>", baseURL: nil)
+                    webDescriptionContent.loadHTMLString("<div style=\"font-family:OpenSans;color:white;width:100%;word-wrap:break-word;\">\(organization.organizationDescription)</div>", baseURL: nil)
                     
                     PriceCalendar.enabled = true
                     DateUpcoming.enabled = true
@@ -210,6 +210,10 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
         customTopButtons()
         labelDisplay()
         webDescriptionContent.delegate = self
+        
+        scrollView.contentMode = UIViewContentMode.ScaleAspectFit
+        scrollView.backgroundColor = UIColor(patternImage: UIImage(named: "Splash Background")!)
+        
         
         // Do any additional setup after loading the view.
     }
