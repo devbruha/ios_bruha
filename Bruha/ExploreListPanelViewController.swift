@@ -177,8 +177,6 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         default:
             eventTapped()
         }
-        
-        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
     }
     
     func sliderValueDidChange(sender:UISlider!) {
@@ -472,11 +470,11 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
         let cell = NSBundle.mainBundle().loadNibNamed("CategoryHeaderCellTableViewCell", owner: self, options: nil)[0] as! CategoryHeaderCellTableViewCell
         
-        cell.textLabel?.text = eventObject[indexPath.section].sectionObjects[indexPath.row]
-        cell.textLabel?.tag = Int(eventObject[indexPath.section].sectionObjectIDs[indexPath.row])!
+        cell.categoryName?.text = eventObject[indexPath.section].sectionObjects[indexPath.row]
+        cell.categoryName?.tag = Int(eventObject[indexPath.section].sectionObjectIDs[indexPath.row])!
         cell.backgroundColor = UIColor.blackColor()
-        cell.textLabel?.textColor = UIColor.whiteColor()
-        cell.textLabel!.font = UIFont(name: cell.textLabel!.font.fontName, size: 18)
+        cell.categoryName?.textColor = UIColor.whiteColor()
+        cell.categoryName!.font = UIFont(name: cell.textLabel!.font.fontName, size: 18)
         cell.selectionStyle = UITableViewCellSelectionStyle.None
         //print(cell.textLabel!.font.fontName)
         if(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.keys.contains(eventObject[indexPath.section].sectionName)){
@@ -492,7 +490,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
     
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
-        let selectedCell = self.eventCategoriesTable.cellForRowAtIndexPath(indexPath) as UITableViewCell!
+        let selectedCell = self.eventCategoriesTable.cellForRowAtIndexPath(indexPath) as! CategoryHeaderCellTableViewCell!
         
         selectedCell.backgroundColor = UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
     
@@ -500,8 +498,8 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
         // Header title is the primary category
         
-        let subCategoryID = String(selectedCell.textLabel!.tag)
-        let subCategoryName = selectedCell.textLabel!.text!
+        let subCategoryID = String(selectedCell.categoryName!.tag)
+        let subCategoryName = selectedCell.categoryName!.text!
         
         if GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].contains(subCategoryID){
             
@@ -530,7 +528,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
     
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
         
-        let selectedCell = self.eventCategoriesTable.cellForRowAtIndexPath(indexPath) as UITableViewCell!
+        let selectedCell = self.eventCategoriesTable.cellForRowAtIndexPath(indexPath) as! CategoryHeaderCellTableViewCell!
         
          selectedCell.backgroundColor = UIColor.blackColor()
         
@@ -538,8 +536,8 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
         // Header title is the primary category
         
-        let subCategoryID = String(selectedCell.textLabel!.tag)
-        let subCategoryName = selectedCell.textLabel!.text!
+        let subCategoryID = String(selectedCell.categoryName!.tag)
+        let subCategoryName = selectedCell.categoryName!.text!
         
         if GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].contains(subCategoryID){
             
@@ -591,11 +589,11 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         let headerCell = tableView.dequeueReusableCellWithIdentifier("HeaderCell") as! CategoryHeaderCellTableViewCell
         
         if GlobalVariables.selectedDisplay == "Event" {
-            headerCell.textLabel?.text = eventObject[section].sectionName
+            headerCell.categoryName.text = eventObject[section].sectionName
         } else if GlobalVariables.selectedDisplay == "Venue" {
-            headerCell.textLabel?.text = venueObject[section]
+            headerCell.categoryName.text = venueObject[section]
         } else if GlobalVariables.selectedDisplay == "Organization" {
-            headerCell.textLabel?.text = organizationObject[section]
+            headerCell.categoryName.text = organizationObject[section]
         }
         
         
@@ -606,23 +604,33 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         if(section == 0){
             
             headerCell.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1)
-            headerCell.textLabel!.textColor = UIColor.whiteColor()
+            headerCell.categoryName!.textColor = UIColor.whiteColor()
             headerCell.detailTextLabel?.text = "\(section)"
-            headerCell.textLabel?.font = UIFont(name: "OpenSans-Semibold", size: 18)
+            headerCell.categoryName?.font = UIFont(name: "OpenSans-Semibold", size: 18)
+            
+            headerCell.categoryImage.image = UIImage(named: "Events_White")
+            
         }
         else{
             
             if GlobalVariables.selectedDisplay == "Event" {
-                if(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.keys.contains((headerCell.textLabel?.text)!)){
+                
+                headerCell.categoryImage.image = UIImage(named: eventObject[section].sectionName)
+                
+                if(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.keys.contains((headerCell.categoryName?.text)!)){
                     headerCell.backgroundColor = UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1.0)
+                    headerCell.arrowimage.image = UIImage(named: "Events_White")
                 }
                 else{
                     headerCell.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1.0)
+                    headerCell.arrowimage.image = UIImage(named: "SwipeRight_Light")
                 }
                 
             } else if GlobalVariables.selectedDisplay == "Venue" {
                 
-                if(GlobalVariables.UserCustomFilters.categoryFilter.venueCategories.contains((headerCell.textLabel?.text)!)){
+                headerCell.categoryImage.image = UIImage(named: venueObject[section])
+                
+                if(GlobalVariables.UserCustomFilters.categoryFilter.venueCategories.contains((headerCell.categoryName?.text)!)){
                     headerCell.backgroundColor = UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
                 }
                 else{
@@ -630,7 +638,10 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
                 }
                 
             } else if GlobalVariables.selectedDisplay == "Organization" {
-                if(GlobalVariables.UserCustomFilters.categoryFilter.organizationCategories.contains((headerCell.textLabel?.text)!)){
+                
+                headerCell.categoryImage.image = UIImage(named: organizationObject[section])
+                
+                if(GlobalVariables.UserCustomFilters.categoryFilter.organizationCategories.contains((headerCell.categoryName?.text)!)){
                     headerCell.backgroundColor = UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
                 }
                 else{
@@ -638,14 +649,14 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
                 }
             }
             
-            headerCell.textLabel!.textColor = UIColor.whiteColor()
+            headerCell.categoryName!.textColor = UIColor.whiteColor()
             headerCell.detailTextLabel?.text = "\(section)"
             
             headerCell.addSubview(seperatorView)
         }
         
         headerCell.layer.borderColor = UIColor.whiteColor().CGColor
-        headerCell.textLabel!.font = UIFont(name: headerCell.textLabel!.font.fontName, size: 18)
+        headerCell.categoryName!.font = UIFont(name: headerCell.textLabel!.font.fontName, size: 18)
         //print(headerCell.textLabel!.font.fontName)
         // Send section
         headerCell.headerCellSection = section
@@ -665,7 +676,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         let header = sender.view as! CategoryHeaderCellTableViewCell
         
         let index = header.headerCellSection
-        let headerTitle = header.textLabel!.text!
+        let headerTitle = header.categoryName.text!
         
         switch (GlobalVariables.selectedDisplay) {
             

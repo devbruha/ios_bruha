@@ -10,6 +10,10 @@ import UIKit
 
 class CategoryHeaderCellTableViewCell: UITableViewCell {
     
+    @IBOutlet weak var categoryImage: UIImageView!
+    @IBOutlet weak var arrowimage: UIImageView!
+    @IBOutlet weak var categoryName: UILabel!
+    
     var headerCellSection: Int?
 
     override func awakeFromNib() {
@@ -17,7 +21,7 @@ class CategoryHeaderCellTableViewCell: UITableViewCell {
         // Initialization code
         //self.selectionStyle = UITableViewCellSelectionStyle.None
         
-        self.textLabel?.font = UIFont(name: "OpenSans", size: 18)
+        self.categoryName?.font = UIFont(name: "OpenSans", size: 18)
         
         //printAllFonts()
     }
