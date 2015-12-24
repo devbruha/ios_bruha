@@ -24,7 +24,7 @@ class EventRectangleView: UIView {
         let color = CGColorCreate(colorSpace, components)
         CGContextSetStrokeColorWithColor(context, color)
         CGContextMoveToPoint(context, 5, 35)
-        CGContextAddLineToPoint(context, 355, 35)
+        CGContextAddLineToPoint(context, UIScreen.mainScreen().bounds.width - 5, 35)
         CGContextStrokePath(context)
         
     }

@@ -108,7 +108,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
         //customStatusBar()
         //UIApplication.sharedApplication().statusBarStyle = .Default
         let screenSize: CGRect = UIScreen.mainScreen().bounds
-        dropDownTable.separatorColor = UIColor.whiteColor()
+        dropDownTable.separatorColor = UIColor.clearColor()
         //dropDownTable.separatorStyle = UITableViewCellSeparatorStyle.SingleLineEtched
         dropDownTable.backgroundColor = UIColor.blackColor()
         //dropDownTable.rowHeight = screenSize.width * 0.4

@@ -169,7 +169,7 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
             }*/
             
             cell.circTitle.text = event.eventName
-            cell.circDate.text = event.eventStartDate
+            cell.circDate.text = convertCircTimeFormat("\(event.eventStartDate)")
             //cell.circPrice.text = "$\(event.eventPrice!)"
             cell.circHiddenID.text = event.eventID
             
