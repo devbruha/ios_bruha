@@ -2,65 +2,102 @@
 //  CalendarViewController.swift
 //  Bruha
 //
-//  Created by lye on 15/8/5.
-//  Copyright (c) 2015年 Bruha. All rights reserved.
+//  Created by lye on 15/12/25.
+//  Copyright © 2015年 Bruha. All rights reserved.
 //
 
 import UIKit
+import Foundation
 
-class CalendarViewController: UIViewController,CalendarViewDelegate{
+class CalendarViewController: UIViewController, JTCalendarDelegate{
 
-    @IBOutlet weak var tableView: UITableView!
-    @IBOutlet weak var placeholder: UIView!
+    @IBOutlet weak var calendarMenu: JTCalendarMenuView!
+    @IBOutlet weak var calendarContentView: JTHorizontalCalendarView!
+    
+    let calendarManager: JTCalendarManager = JTCalendarManager()
+    let datesSelected = NSMutableArray()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
-        let date = NSDate()
-        let calendarView = CalendarView.instance(date, selectedDate: date)
-        calendarView.delegate = self
-        calendarView.translatesAutoresizingMaskIntoConstraints = false
         
-        placeholder.addSubview(calendarView)
-        placeholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[calendarView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["calendarView": calendarView]))
-        placeholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[calendarView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["calendarView": calendarView]))    }
-
+        calendarManager.delegate = self
+        
+        calendarManager.menuView = calendarMenu
+        calendarManager.contentView = calendarContentView
+        calendarManager.setDate(NSDate())
+    }
+    
+    
+    func calendar(calendar: JTCalendarManager!, prepareDayView dayView: UIView!) {
+        
+        let newDayView = dayView as! JTCalendarDayView
+        
+        
+        newDayView.hidden = false
+        newDayView.backgroundColor = UIColor.blackColor()
+        newDayView.textLabel.textColor = UIColor.whiteColor()
+        
+        newDayView.layer.borderColor = UIColor.grayColor().CGColor
+        newDayView.layer.borderWidth = 0.5
+        
+        
+        if(newDayView.isFromAnotherMonth){
+            newDayView.alpha = 0.5
+        }
+        else if(datesSelected.containsObject(newDayView.date)){
+            newDayView.backgroundColor = UIColor.cyanColor()
+        }
+    }
+    
+    func calendar(calendar: JTCalendarManager!, didTouchDayView dayView: UIView!) {
+        
+        let newDayView = dayView as! JTCalendarDayView
+        
+        if(datesSelected.containsObject(newDayView.date)){
+            
+            datesSelected.removeObject(newDayView.date)
+            newDayView.backgroundColor = UIColor.blackColor()
+        }
+        else{
+            datesSelected.addObject(newDayView.date)
+            newDayView.backgroundColor = UIColor.cyanColor()
+        }
+    }
+    
+    func calendar(calendar: JTCalendarManager!, prepareMenuItemView menuItemView: UIView!, date: NSDate!) {
+        
+        let newMenuItemView = menuItemView as! UILabel
+        
+        let calendar = NSCalendar.currentCalendar()
+        let component = calendar.component(NSCalendarUnit.Year, fromDate: date)
+        let month = calendar.component(NSCalendarUnit.Month, fromDate: date)
+        
+        let dateFormatter: NSDateFormatter = NSDateFormatter()
+        let months = dateFormatter.monthSymbols
+        let monthSymbol = months[month-1]
+        
+        //newMenuItemView.text = component as? String
+        newMenuItemView.text = monthSymbol + " " + String(component)
+        //newMenuItemView.text = monthSymbol
+        //newMenuItemView.backgroundColor = UIColor.cyanColor()
+        //newMenuItemView.textColor = UIColor.blackColor()
+        //newMenuItemView.scrollView
+        
+    }
+    //
+    //    func calendarBuildWeekDayView(calendar: JTCalendarManager!) -> UIView! {
+    //
+    //
+    //    }
+    
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    func didSelectDate(date: NSDate){
-        print("\(date.year)-\(date.month)-\(date.day)")
-    }
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        // #warning Potentially incomplete method implementation.
-        // Return the number of sections.
-        return 1
-    }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // #warning Incomplete method implementation.
-        // Return the number of rows in the section.
-        return 10
-    }
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("cell", forIndexPath: indexPath) 
-        
-        // Configure the cell...
-        
-        return cell
-    }
-
-
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
+    
 }
+

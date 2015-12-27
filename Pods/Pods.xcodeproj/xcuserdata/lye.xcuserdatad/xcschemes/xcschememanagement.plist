@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>JTCalendar.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>MBCalendarKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -27,7 +32,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0FDFEF7AEEA6608736B7054EB637F027</key>
+		<key>1C31D4C29F3D4081EFA77026D9C9C8C3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -37,17 +42,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>730CE8C6E3FEA67ECD15A6C3E0DE80E3</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>AA226A506563D3D2096B11FDF6B6766E</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>AAC92C7740A366DC91C52A86851CBD06</key>
+		<key>6C69033D5CC9FF0D33125070E82E063E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -57,12 +52,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BE1E95BECAB84919B9D238CCDD8A10D3</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>CDE0B7668B6EC1B2BF166A65E070AF5E</key>
+		<key>C3AD7E342840A1BEA026D1D3A2D9C1A7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
