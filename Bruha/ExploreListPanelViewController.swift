@@ -7,8 +7,9 @@
 //
 
 import UIKit
+import Foundation
 
-class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,CalendarViewDelegate {
+class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,CalendarViewDelegate, JTCalendarDelegate{
     
     @IBOutlet weak var eventSelectedB: UIButton!
     @IBOutlet weak var eventButtonIcon: UIImageView!
@@ -22,9 +23,15 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
     @IBOutlet weak var scrollView: UIScrollView!
     
     @IBOutlet weak var eventCategoriesTable: UITableView!
-    @IBOutlet weak var placeholder: UIView!
     
     @IBOutlet weak var eventCategoryTableHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var calendarMenu: JTCalendarMenuView!
+    @IBOutlet weak var calendarContentView: JTHorizontalCalendarView!
+    
+    
+
+    
     
     
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
@@ -36,6 +43,10 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
     var backupEventCategories = [EventObjects(sectionName: "Event Categories", sectionObjectIDs: [], sectionObjects: [])]
     var backupVenueCategories: [String] = ["Venue Categories"]
     var backupOrganizationCategories: [String] = ["Organization Categories"]
+    //Calendar
+    let calendarManager: JTCalendarManager = JTCalendarManager()
+    let datesSelected = NSMutableArray()
+
 
     let priceLabelTitle = UILabel()
     let priceLabel = UILabel()
@@ -122,16 +133,11 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         let organizationTgr = UITapGestureRecognizer(target: self, action: ("organizationTapped"))
         organizationSelectedB.addGestureRecognizer(organizationTgr)
         
-        let date = NSDate()
-        let calendarView = CalendarView.instance(date, selectedDate: date)
-        calendarView.delegate = self
-        calendarView.translatesAutoresizingMaskIntoConstraints = false
-        //calendarView.selectedDate = date
+        calendarManager.delegate = self
         
-        placeholder.addSubview(calendarView)
-        placeholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[calendarView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["calendarView": calendarView]))
-        placeholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[calendarView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["calendarView": calendarView]))
-        placeholder.hidden = false
+        calendarManager.menuView = calendarMenu
+        calendarManager.contentView = calendarContentView
+        calendarManager.setDate(NSDate())
         
         switch(GlobalVariables.selectedDisplay){
             
@@ -148,6 +154,65 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
             eventTapped()
         }
     }
+    
+    func calendar(calendar: JTCalendarManager!, prepareDayView dayView: UIView!) {
+        
+        let newDayView = dayView as! JTCalendarDayView
+        
+        
+        newDayView.hidden = false
+        newDayView.backgroundColor = UIColor.blackColor()
+        newDayView.textLabel.textColor = UIColor.whiteColor()
+        
+        newDayView.layer.borderColor = UIColor.grayColor().CGColor
+        newDayView.layer.borderWidth = 0.5
+        
+        
+        if(newDayView.isFromAnotherMonth){
+            newDayView.alpha = 0.5
+        }
+        else if(datesSelected.containsObject(newDayView.date)){
+            newDayView.backgroundColor = UIColor.cyanColor()
+        }
+    }
+    
+    func calendar(calendar: JTCalendarManager!, didTouchDayView dayView: UIView!) {
+        
+        let newDayView = dayView as! JTCalendarDayView
+        
+        if(datesSelected.containsObject(newDayView.date)){
+            
+            datesSelected.removeObject(newDayView.date)
+            newDayView.backgroundColor = UIColor.blackColor()
+        }
+        else{
+            datesSelected.addObject(newDayView.date)
+            newDayView.backgroundColor = UIColor.cyanColor()
+        }
+    }
+    
+    func calendar(calendar: JTCalendarManager!, prepareMenuItemView menuItemView: UIView!, date: NSDate!) {
+        
+        let newMenuItemView = menuItemView as! UILabel
+        
+        let calendar = NSCalendar.currentCalendar()
+        let component = calendar.component(NSCalendarUnit.Year, fromDate: date)
+        let month = calendar.component(NSCalendarUnit.Month, fromDate: date)
+        
+        let dateFormatter: NSDateFormatter = NSDateFormatter()
+        let months = dateFormatter.monthSymbols
+        let monthSymbol = months[month-1]
+        
+        //newMenuItemView.text = component as? String
+        newMenuItemView.text = monthSymbol + " " + String(component)
+        //newMenuItemView.text = monthSymbol
+        //newMenuItemView.backgroundColor = UIColor.cyanColor()
+        //newMenuItemView.textColor = UIColor.blackColor()
+        //newMenuItemView.scrollView
+        
+    }
+ 
+
     
     func clearFilters(sender: UIButton) {
         
@@ -819,14 +884,18 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
         if(GlobalVariables.selectedDisplay == "Event"){
             eventCategoriesTable.alpha = 1;
-            placeholder.alpha = 1
+            //placeholder.alpha = 1
+            calendarMenu.alpha = 1
+            calendarContentView.alpha = 1
             priceLabelTitle.alpha = 1
             priceLabel.alpha = 1
             slider.alpha = 1
         }
         else{
             eventCategoriesTable.alpha = 1;
-            placeholder.alpha = 0
+            //placeholder.alpha = 0
+            calendarMenu.alpha = 0
+            calendarContentView.alpha = 0
             priceLabelTitle.alpha = 0
             priceLabel.alpha = 0
             slider.alpha = 0

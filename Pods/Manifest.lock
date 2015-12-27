@@ -1,15 +1,18 @@
 PODS:
   - ARSlidingPanel (0.1.0)
+  - JTCalendar (2.1.4)
   - MBCalendarKit (3.0.4)
   - SWTableViewCell (0.3.7)
 
 DEPENDENCIES:
   - ARSlidingPanel
+  - JTCalendar (~> 2.0)
   - MBCalendarKit (~> 3.0.4)
   - SWTableViewCell (~> 0.3.7)
 
 SPEC CHECKSUMS:
   ARSlidingPanel: 3ea5bff37b21fc76fb4cd6bf3768e3f590d28cbc
+  JTCalendar: 9b1352c7ec41cc26b19c189d6608ba48060a53d9
   MBCalendarKit: 2a3a60f902162a03bb4957966a4b795af998211f
   SWTableViewCell: 2a94aadc9d47b2b611fa064566bf57948b95b579
 
