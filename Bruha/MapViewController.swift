@@ -319,7 +319,6 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             
             let temp2: NSMutableArray = NSMutableArray()
             temp2.sw_addUtilityButtonWithColor(UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1), title: "Buy Tickets")
-            temp2.sw_addUtilityButtonWithColor(UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1), title: "Map")
             temp2.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1), title: "More Info")
             
             
@@ -886,37 +885,14 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             }
             break
         case 1:
-            if GlobalVariables.selectedDisplay == "Event" {
-                //event map
-                let cellIndexPath = self.dropDownTable.indexPathForCell(cell)
-                let selectedCell = self.dropDownTable.cellForRowAtIndexPath(cellIndexPath!) as! MapDropTableViewCell
-                GlobalVariables.eventSelected = selectedCell.dropHiddenID.text!
-                self.performSegueWithIdentifier("ShowOnMap", sender: self)
-            }
-            //Venue MoreInfo
-            if (GlobalVariables.selectedDisplay == "Venue"){
-                let cellIndexPath = self.dropDownTable.indexPathForCell(cell)
-                let selectedCell = self.dropDownTable.cellForRowAtIndexPath(cellIndexPath!) as! MapDropTableViewCell
-                GlobalVariables.eventSelected = selectedCell.dropHiddenID.text!
-                self.performSegueWithIdentifier("MoreInfore", sender: self)
-            }
-            //Organization MoreInfo
-            if (GlobalVariables.selectedDisplay == "Organization"){
-                let cellIndexPath = self.dropDownTable.indexPathForCell(cell)
-                let selectedCell = self.dropDownTable.cellForRowAtIndexPath(cellIndexPath!) as! MapDropTableViewCell
-                GlobalVariables.eventSelected = selectedCell.dropHiddenID.text!
-                self.performSegueWithIdentifier("MoreInfore", sender: self)
-                
-            }
-            break
-        case 2:
-            //Event More info
-            print("event more info")
+            //More Info
             let cellIndexPath = self.dropDownTable.indexPathForCell(cell)
             let selectedCell = self.dropDownTable.cellForRowAtIndexPath(cellIndexPath!) as! MapDropTableViewCell
             GlobalVariables.eventSelected = selectedCell.dropHiddenID.text!
             self.performSegueWithIdentifier("MoreInfore", sender: self)
+            
             break
+       
         default:
             break
         }
