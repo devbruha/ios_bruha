@@ -875,13 +875,13 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
                 let cellIndexPath = self.dropDownTable.indexPathForCell(cell)
                 let selectedCell = self.dropDownTable.cellForRowAtIndexPath(cellIndexPath!) as! MapDropTableViewCell
                 GlobalVariables.eventSelected = selectedCell.dropHiddenID.text!
-                self.performSegueWithIdentifier("ShowOnMap", sender: self)
+                self.performSegueWithIdentifier("EventsComing", sender: self)
             }
             else if GlobalVariables.selectedDisplay == "Organization" {
                 let cellIndexPath = self.dropDownTable.indexPathForCell(cell)
                 let selectedCell = self.dropDownTable.cellForRowAtIndexPath(cellIndexPath!) as! MapDropTableViewCell
                 GlobalVariables.eventSelected = selectedCell.dropHiddenID.text!
-                self.performSegueWithIdentifier("ShowOnMap", sender: self)
+                self.performSegueWithIdentifier("EventsComing", sender: self)
             }
             break
         case 1:

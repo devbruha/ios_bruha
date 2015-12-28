@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="6Rr-W4-lJ0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="6Rr-W4-lJ0">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
@@ -2096,9 +2096,8 @@
                         <outlet property="BruhaButton" destination="vMm-n0-f4z" id="SBD-X9-lCJ"/>
                         <outlet property="dropDownTable" destination="S4f-vD-iAs" id="ZvN-tY-Dvf"/>
                         <outlet property="viewMap" destination="Wxl-Jp-fhG" id="R3x-kF-OZD"/>
-                        <segue destination="8Gj-d3-yhz" kind="modal" identifier="ShowOnMap" id="haB-2U-z7b"/>
-                        <segue destination="Wi8-Ty-KnD" kind="modal" identifier="GoToMoreInfo" id="bzC-Is-F2I"/>
                         <segue destination="k0E-gF-uXz" kind="modal" identifier="MoreInfore" id="C5E-mm-bjp"/>
+                        <segue destination="DYv-PS-7yH" kind="modal" identifier="EventsComing" id="QhX-ak-ZUZ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H2m-0y-tpY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2708,13 +2707,14 @@
         <image name="Tickets_Sm" width="250" height="250"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="cjQ-72-o8J"/>
-        <segue reference="l1y-Rt-Be8"/>
+        <segue reference="1Xm-3s-taQ"/>
+        <segue reference="C5E-mm-bjp"/>
+        <segue reference="QhX-ak-ZUZ"/>
+        <segue reference="pIM-BH-lfI"/>
         <segue reference="5DM-Zi-tRH"/>
         <segue reference="J3w-Nl-jcV"/>
-        <segue reference="QWR-kg-3LZ"/>
-        <segue reference="io6-cH-KWY"/>
-        <segue reference="haB-2U-z7b"/>
         <segue reference="eyG-eD-cCw"/>
+        <segue reference="QWR-kg-3LZ"/>
+        <segue reference="thc-CS-1cg"/>
     </inferredMetricsTieBreakers>
 </document>
