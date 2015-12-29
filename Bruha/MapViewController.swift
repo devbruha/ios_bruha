@@ -645,7 +645,24 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
         }        
     }
     
-    //Swipe Cells Actions
+    //MARK: Swipe Cells Actions
+    func alertLogin() {
+        let alertController = UIAlertController(title: "You are not logged in!", message:nil, preferredStyle: .Alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+        let loginAction = UIAlertAction(title: "Login", style: .Default) { (_) -> Void in
+            self.performSegueWithIdentifier("GoToLogin", sender: self) // Replace SomeSegue with your segue identifier (name)
+        }
+        let signupAction = UIAlertAction(title: "Signup", style: .Default) { (_) -> Void in
+            self.performSegueWithIdentifier("GoToSignup", sender: self) // Replace SomeSegue with your segue identifier (name)
+        }
+        alertController.addAction(signupAction)
+        alertController.addAction(loginAction)
+        alertController.addAction(cancelAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+        
+    }
+    
     func swipeableTableViewCell( cell : SWTableViewCell!,didTriggerLeftUtilityButtonWithIndex index:NSInteger){
       
         switch(index){
@@ -848,12 +865,8 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
                 
                 
             } else {
-                
-                let alert = UIAlertView(title: "Please log in for this!!!", message: nil, delegate: nil, cancelButtonTitle: nil)
-                alert.show()
-                let delay = 5.0 * Double(NSEC_PER_SEC)
-                var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-                alert.dismissWithClickedButtonIndex(-1, animated: true)
+
+                alertLogin()
                 
             }
             break
