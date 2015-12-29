@@ -2575,7 +2575,8 @@
                                 <rect key="frame" x="1" y="20" width="30" height="33"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                 <connections>
-                                    <action selector="backToMapButton:" destination="k0E-gF-uXz" eventType="touchUpInside" id="ZZm-MI-Vst"/>
+                                    <action selector="backToExploreButton:" destination="0nK-di-ixY" eventType="touchUpInside" id="9bG-Ne-och"/>
+                                    <segue destination="zh2-4j-mHu" kind="modal" id="fNB-TA-9Vh"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -2616,7 +2617,6 @@
                         <outlet property="smallImage" destination="jf9-OK-F6G" id="VTa-eh-n3i"/>
                         <outlet property="webDescriptionContent" destination="S7i-vd-7tx" id="5CC-6O-fEq"/>
                         <segue destination="DYv-PS-7yH" kind="modal" identifier="UpComing" id="8ee-hZ-bSl"/>
-                        <segue destination="zh2-4j-mHu" kind="modal" identifier="GoToDashBoard" id="R4M-b1-4ch"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qZQ-kw-2Py" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2708,13 +2708,13 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="1Xm-3s-taQ"/>
-        <segue reference="pgm-fT-IMJ"/>
-        <segue reference="io6-cH-KWY"/>
-        <segue reference="thc-CS-1cg"/>
-        <segue reference="R4M-b1-4ch"/>
-        <segue reference="8ee-hZ-bSl"/>
+        <segue reference="C5E-mm-bjp"/>
+        <segue reference="QhX-ak-ZUZ"/>
+        <segue reference="pIM-BH-lfI"/>
         <segue reference="5DM-Zi-tRH"/>
         <segue reference="J3w-Nl-jcV"/>
         <segue reference="eyG-eD-cCw"/>
+        <segue reference="QWR-kg-3LZ"/>
+        <segue reference="thc-CS-1cg"/>
     </inferredMetricsTieBreakers>
 </document>

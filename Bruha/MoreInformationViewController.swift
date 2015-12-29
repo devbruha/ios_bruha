@@ -27,19 +27,10 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
     @IBOutlet weak var ImgeHeight: NSLayoutConstraint!
     @IBOutlet weak var scrollView: UIScrollView!
     
-    var iconForSource: String?
-    
     @IBAction func backToExploreButton(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
-    @IBAction func backToMapButton(sender: AnyObject) {
-        if iconForSource == "MapIcon" {
-            dismissViewControllerAnimated(true, completion: nil)
-        } else {
-            self.performSegueWithIdentifier("GoToDashBoard", sender: self)
-        }
-    }
     
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
@@ -47,19 +38,7 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
         
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         
-        if iconForSource == "MapIcon" {
-            
-            bruhaButton.setBackgroundImage(UIImage(named: "MapIcon"), forState: UIControlState.Normal)
-            backButton.alpha = 0
-            
-        } else {
-            
-            bruhaButton.setBackgroundImage(UIImage(named: "Bruha_White"), forState: UIControlState.Normal)
-            backButton.alpha = 1
-        }
-        
-        
-        //Top Left Button
+        bruhaButton.setBackgroundImage(UIImage(named: "Bruha_White"), forState: UIControlState.Normal)
         let heightContraints = NSLayoutConstraint(item: bruhaButton, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.height/15.5)
         heightContraints.priority = UILayoutPriorityDefaultHigh
         
@@ -69,7 +48,6 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
         bruhaButton.addConstraints([heightContraints, widthContraints])
         
         
-        //Top Right Button
         backButton.setBackgroundImage(UIImage(named: "List"), forState: UIControlState.Normal)
         let heightContraint = NSLayoutConstraint(item: backButton, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.height/15.5)
         heightContraint.priority = UILayoutPriorityDefaultHigh
