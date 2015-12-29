@@ -151,7 +151,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
             organizationTapped()
             
         default:
-            eventTapped()
+            break
         }
     }
     
@@ -240,7 +240,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
             organizationTapped()
             
         default:
-            eventTapped()
+            break
         }
     }
     
@@ -400,11 +400,11 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
             organizationSelectedB.setTitleColor(UIColor.orangeColor(), forState: UIControlState.Normal)
             organizationSelectedB.layer.borderColor = UIColor.orangeColor().CGColor
             
-        case "Discoverable":
-            
-            discoverableButtonIcon.image = UIImage(named: "Venue_Orange")
-            discoverableSelectedB.setTitleColor(UIColor.orangeColor(), forState: UIControlState.Normal)
-            discoverableSelectedB.layer.borderColor = UIColor.orangeColor().CGColor
+//        case "Discoverable":
+//
+//            discoverableButtonIcon.image = UIImage(named: "Bruha_White")
+//            discoverableSelectedB.setTitleColor(UIColor.orangeColor(), forState: UIControlState.Normal)
+//            discoverableSelectedB.layer.borderColor = UIColor.orangeColor().CGColor
             
         default:
             
@@ -503,8 +503,10 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
     
     func discoverableTapped(){
         
-        GlobalVariables.selectedDisplay = "Discoverable"
-        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
+//        GlobalVariables.selectedDisplay = "Discoverable"
+        //NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
+        let alert = UIAlertView(title: "Discoverable Coming Soon", message: nil, delegate: nil, cancelButtonTitle: "OK")
+        alert.show()
         updateEVOD()
     }
     
@@ -883,7 +885,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
     func updateNotificationSent(){
         
         if(GlobalVariables.selectedDisplay == "Event"){
-            eventCategoriesTable.alpha = 1;
+            eventCategoriesTable.alpha = 1
             //placeholder.alpha = 1
             calendarMenu.alpha = 1
             calendarContentView.alpha = 1
@@ -891,14 +893,21 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
             priceLabel.alpha = 1
             slider.alpha = 1
         }
-        else{
-            eventCategoriesTable.alpha = 1;
+        else if (GlobalVariables.selectedDisplay == "Venue" || GlobalVariables.selectedDisplay == "Organization") {
+            eventCategoriesTable.alpha = 1
             //placeholder.alpha = 0
             calendarMenu.alpha = 0
             calendarContentView.alpha = 0
             priceLabelTitle.alpha = 0
             priceLabel.alpha = 0
             slider.alpha = 0
+        } else {
+            eventCategoriesTable.alpha = 0
+//            placeholder.alpha = 0
+            priceLabelTitle.alpha = 0
+            priceLabel.alpha = 0
+            slider.alpha = 0
+            clearFilter.alpha = 0
         }
         
     }
