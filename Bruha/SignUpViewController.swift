@@ -16,6 +16,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, FBSDKLoginBut
     @IBOutlet weak var password: UITextField!
     @IBOutlet weak var emailaddress: UITextField!
     @IBOutlet weak var continueWithoutRegister: UIButton!
+    @IBOutlet weak var verifyPassword: UITextField!
     
     @IBOutlet weak var loginB: UIButton!
     @IBOutlet weak var bruhaFace: UIImageView!
@@ -51,10 +52,14 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, FBSDKLoginBut
         self.username.delegate = self
         self.password.delegate = self
         self.emailaddress.delegate = self
+        self.verifyPassword.delegate = self
+        
+        self.emailaddress.keyboardType = UIKeyboardType.URL
         
         self.username.tag = 0
         self.password.tag = 1
-        self.emailaddress.tag = 2
+        self.verifyPassword.tag = 2
+        self.emailaddress.tag = 3
         
         signupB.layer.cornerRadius = 2
         signupB.clipsToBounds = true
@@ -194,14 +199,17 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, FBSDKLoginBut
     
     @IBAction func registerButtonClick(sender: AnyObject) {
         
-        let username:String = self.username.text!
-        let password:String = self.password.text!
-        let emailaddress:String = self.emailaddress.text!
+        let username: String = self.username.text!
+        let password: String = self.password.text!
+        let verifyPassword: String = self.verifyPassword.text!
+        let emailaddress: String = self.emailaddress.text!
         
+        //error = "true" means that there is no error
         error = "true"
         
         error = CredentialCheck().internetCheck()
         
+        //TODO: CHANGE TO EXCEPTION HANDLING?
         if error == "true"{
             
             error = CredentialCheck().usernameCheck(username)
@@ -210,7 +218,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, FBSDKLoginBut
                 
                 error = CredentialCheck().passwordCheck(password)
                 
-                if error == "true"{
+                if error == "true" && password == verifyPassword{
                     
                     error = CredentialCheck().emailCheck(emailaddress)
                     
@@ -252,10 +260,15 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, FBSDKLoginBut
                     }
                 }
                     
-                else{
-                    
-                    let alert = UIAlertView(title: "Password Error", message: error, delegate: nil, cancelButtonTitle: "OK")
-                    alert.show()
+                else {
+                    if password != verifyPassword {
+                        let alert = UIAlertView(title: "Password Verification Error", message: "Password and verify password do not match", delegate: nil, cancelButtonTitle: "OK")
+                        alert.show()
+                    } else {
+                        let alert = UIAlertView(title: "Password Error", message: error, delegate: nil, cancelButtonTitle: "OK")
+                        alert.show()
+                    }
+
                 }
             }
                 
@@ -272,11 +285,13 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, FBSDKLoginBut
         }
     }
     
+    //responds to taps in UIView
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)
         //super.touchesBegan(touches, withEvent: event)
     }
     
+    //UITextFieldDelegate Functions
     func textFieldShouldReturn(textField:UITextField) -> Bool {
         textField.resignFirstResponder()
         return true
@@ -285,20 +300,22 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, FBSDKLoginBut
     
     func textFieldDidBeginEditing(textField: UITextField) {
         bruhaFace.hidden = true
-        if textField.tag == 0 || textField.tag == 2 {
-            animateViewMoving(true, moveValue: 253)
-        }
-        else if textField.tag == 1 {
-            animateViewMoving(true, moveValue: 216)
+        switch textField.tag {
+            case 0...3:
+                animateViewMoving(true, moveValue: 190)
+                
+            default:
+                break
         }
     }
     func textFieldDidEndEditing(textField: UITextField) {
         bruhaFace.hidden = false
-        if textField.tag == 0 || textField.tag == 2 {
-            animateViewMoving(false, moveValue: 253)
-        }
-        else if textField.tag == 1 {
-            animateViewMoving(false, moveValue: 216)
+        switch textField.tag {
+            case 0...3:
+                animateViewMoving(false, moveValue: 190)
+                
+            default:
+                break
         }
     }
     func animateViewMoving (up:Bool, moveValue :CGFloat){
