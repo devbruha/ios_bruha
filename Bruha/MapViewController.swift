@@ -899,6 +899,13 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
         
     }
     
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "MoreInfore" {
+            let infoController = segue.destinationViewController as! MoreInformationViewController
+            infoController.iconForSource = "MapIcon"
+        }
+    }
+    
     func swipeableTableViewCellShouldHideUtilityButtonsOnSwipe(cell : SWTableViewCell ) -> Bool {
         return true
     }

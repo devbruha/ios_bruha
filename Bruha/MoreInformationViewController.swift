@@ -31,6 +31,7 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
+    var iconForSource: String?
     
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
@@ -48,7 +49,14 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
         bruhaButton.addConstraints([heightContraints, widthContraints])
         
         
-        backButton.setBackgroundImage(UIImage(named: "List"), forState: UIControlState.Normal)
+        
+        if iconForSource == "MapIcon" {
+            backButton.setBackgroundImage(UIImage(named: "MapIcon"), forState: UIControlState.Normal)
+        }
+        else{
+            backButton.setBackgroundImage(UIImage(named: "List"), forState: UIControlState.Normal)
+        }
+        
         let heightContraint = NSLayoutConstraint(item: backButton, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.height/15.5)
         heightContraint.priority = UILayoutPriorityDefaultHigh
         
