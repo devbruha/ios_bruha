@@ -408,10 +408,10 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             let temp: NSMutableArray = NSMutableArray()
             
             if like == 0 {
-                temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),title: "Get Addicted")
+                temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),attributedTitle: swipeCellTitle("Get Addicted"))
                 cell.circAddicted.hidden = true
             } else if like == 1 {
-                temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
+                temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),attributedTitle: swipeCellTitle("Addicted!"))
                 cell.circAddicted.hidden = false
             }
             
@@ -424,9 +424,9 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             let temp2: NSMutableArray = NSMutableArray()
             //temp2.sw_addUtilityButtonWithColor(UIColor.purpleColor(), icon: UIImage(named: "Slide 5"))
             
-            temp2.sw_addUtilityButtonWithColor(UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1), title: "Buy Tickets")
-            temp2.sw_addUtilityButtonWithColor(UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1), title: "Map")
-            temp2.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1), title: "More Info")
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1), attributedTitle: swipeCellTitle("Buy\nTickets"))
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1), attributedTitle: swipeCellTitle("Map"))
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1), attributedTitle: swipeCellTitle("More\nInfo"))
             
             cell.rightUtilityButtons = nil
             cell.setRightUtilityButtons(temp2 as [AnyObject], withButtonWidth: 75)
@@ -539,10 +539,10 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             let temp: NSMutableArray = NSMutableArray()
             
             if like == 0 {
-                temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),title: "Get Addicted")
+                temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),attributedTitle: swipeCellTitle("Get Addicted"))
                 cell.circAddicted.hidden = true
             } else if like == 1 {
-                temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
+                temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),attributedTitle: swipeCellTitle("Addicted!"))
                 cell.circAddicted.hidden = false
             }
             
@@ -551,8 +551,8 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             
             
             let temp2: NSMutableArray = NSMutableArray()
-            temp2.sw_addUtilityButtonWithColor(UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1), title: "Map")
-            temp2.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1), title: "More Info")
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1), attributedTitle: swipeCellTitle("Map"))
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1), attributedTitle: swipeCellTitle("More\nInfo"))
             cell.rightUtilityButtons = nil
             cell.setRightUtilityButtons(temp2 as [AnyObject], withButtonWidth: 75)//must call after assign title and before assigning array to the buttons.
             cell.rightUtilityButtons = temp2 as [AnyObject]
@@ -698,10 +698,10 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             let temp: NSMutableArray = NSMutableArray()
             
             if like == 0 {
-                temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),title: "Get Addicted")
+                temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),attributedTitle: swipeCellTitle("Get Addicted"))
                 cell.circAddicted.hidden = true
             } else if like == 1 {
-                temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
+                temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),attributedTitle: swipeCellTitle("Addicted!"))
                 cell.circAddicted.hidden = false
             }
             cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
@@ -709,8 +709,8 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             
             
             let temp2: NSMutableArray = NSMutableArray()
-            temp2.sw_addUtilityButtonWithColor(UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1), title: "Map")
-            temp2.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1), title: "More Info")
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1), attributedTitle: swipeCellTitle("Map"))
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1), attributedTitle: swipeCellTitle("More\nInfo"))
             cell.rightUtilityButtons = nil
             cell.setRightUtilityButtons(temp2 as [AnyObject], withButtonWidth: 75)
             cell.rightUtilityButtons = temp2 as [AnyObject]
@@ -772,7 +772,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                     }
                                     
                                     var temp: NSMutableArray = NSMutableArray()
-                                    temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),title: "Get Addicted")
+                                    temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),attributedTitle: self.swipeCellTitle("Get Addicted"))
                                     cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
                                     cell.leftUtilityButtons = temp as [AnyObject]
                                     
@@ -799,7 +799,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                 }
                                 
                                 var temp: NSMutableArray = NSMutableArray()
-                                temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
+                                temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),attributedTitle: swipeCellTitle("Addicted!"))
                                 cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
                                 cell.leftUtilityButtons = temp as [AnyObject]
                                 
@@ -836,7 +836,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                     }
                                     
                                     var temp: NSMutableArray = NSMutableArray()
-                                    temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),title: "Get Addicted")
+                                    temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),attributedTitle: self.swipeCellTitle("Get Addicted"))
                                     cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
                                     cell.leftUtilityButtons = temp as [AnyObject]
                                     
@@ -864,7 +864,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                 }
                                 
                                 var temp: NSMutableArray = NSMutableArray()
-                                temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
+                                temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),attributedTitle: swipeCellTitle("Addicted!"))
                                 cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
                                 cell.leftUtilityButtons = temp as [AnyObject]
                                 
@@ -938,7 +938,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                     }
                                     
                                     let temp: NSMutableArray = NSMutableArray()
-                                    temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),title: "Get Addicted")
+                                    temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),attributedTitle: self.swipeCellTitle("Get Addicted"))
                                     cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
                                     cell.leftUtilityButtons = temp as [AnyObject]
                                     
@@ -966,7 +966,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                 }
                                 
                                 let temp: NSMutableArray = NSMutableArray()
-                                temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
+                                temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),attributedTitle: swipeCellTitle("Addicted!"))
                                 cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
                                 cell.leftUtilityButtons = temp as [AnyObject]
                                 
@@ -1231,6 +1231,14 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             return UIImage(named: "Background1")!
         }
 
+    }
+    
+    func swipeCellTitle(title: String) -> NSAttributedString {
+        
+        let mAttribute = [NSFontAttributeName: UIFont(name: "OpenSans", size: 15)!, NSForegroundColorAttributeName : UIColor.whiteColor()]
+        let aString = NSMutableAttributedString(string: title, attributes: mAttribute)
+        
+        return aString
     }
     
 }
