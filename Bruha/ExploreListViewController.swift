@@ -415,6 +415,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 cell.circAddicted.hidden = false
             }
             
+            cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
             cell.leftUtilityButtons = temp as [AnyObject]
             
             //println(cell.leftUtilityButtons[0].titleLabel!!.text!)
@@ -428,6 +429,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             temp2.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1), title: "More Info")
             
             cell.rightUtilityButtons = nil
+            cell.setRightUtilityButtons(temp2 as [AnyObject], withButtonWidth: 75)
             cell.rightUtilityButtons = temp2 as [AnyObject]
             
             cell.delegate = self
@@ -544,6 +546,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 cell.circAddicted.hidden = false
             }
             
+            cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75) //must call after assign title and before assigning array to the buttons.
             cell.leftUtilityButtons = temp as [AnyObject]
             
             
@@ -551,6 +554,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             temp2.sw_addUtilityButtonWithColor(UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1), title: "Map")
             temp2.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1), title: "More Info")
             cell.rightUtilityButtons = nil
+            cell.setRightUtilityButtons(temp2 as [AnyObject], withButtonWidth: 75)//must call after assign title and before assigning array to the buttons.
             cell.rightUtilityButtons = temp2 as [AnyObject]
             
             cell.delegate = self
@@ -700,7 +704,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
                 cell.circAddicted.hidden = false
             }
-            
+            cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
             cell.leftUtilityButtons = temp as [AnyObject]
             
             
@@ -708,6 +712,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             temp2.sw_addUtilityButtonWithColor(UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1), title: "Map")
             temp2.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1), title: "More Info")
             cell.rightUtilityButtons = nil
+            cell.setRightUtilityButtons(temp2 as [AnyObject], withButtonWidth: 75)
             cell.rightUtilityButtons = temp2 as [AnyObject]
             
             cell.delegate = self
@@ -768,6 +773,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                     
                                     var temp: NSMutableArray = NSMutableArray()
                                     temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),title: "Get Addicted")
+                                    cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
                                     cell.leftUtilityButtons = temp as [AnyObject]
                                     
                                     selectedCell.circAddicted.hidden = true
@@ -794,6 +800,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                 
                                 var temp: NSMutableArray = NSMutableArray()
                                 temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
+                                cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
                                 cell.leftUtilityButtons = temp as [AnyObject]
                                 
                                 selectedCell.circAddicted.hidden = false
@@ -830,6 +837,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                     
                                     var temp: NSMutableArray = NSMutableArray()
                                     temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),title: "Get Addicted")
+                                    cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
                                     cell.leftUtilityButtons = temp as [AnyObject]
                                     
                                     selectedCell.circAddicted.hidden = true
@@ -857,6 +865,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                 
                                 var temp: NSMutableArray = NSMutableArray()
                                 temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
+                                cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
                                 cell.leftUtilityButtons = temp as [AnyObject]
                                 
                                 selectedCell.circAddicted.hidden = false
@@ -930,6 +939,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                     
                                     let temp: NSMutableArray = NSMutableArray()
                                     temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),title: "Get Addicted")
+                                    cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
                                     cell.leftUtilityButtons = temp as [AnyObject]
                                     
                                     selectedCell.circAddicted.hidden = true
@@ -957,6 +967,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                 
                                 let temp: NSMutableArray = NSMutableArray()
                                 temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
+                                cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
                                 cell.leftUtilityButtons = temp as [AnyObject]
                                 
                                 selectedCell.circAddicted.hidden = false

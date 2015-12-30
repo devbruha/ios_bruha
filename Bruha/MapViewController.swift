@@ -314,7 +314,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             } else if like == 1 {
                 temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
             }
-            
+            cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
             cell.leftUtilityButtons = temp as [AnyObject]
             
             let temp2: NSMutableArray = NSMutableArray()
@@ -323,6 +323,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             
             
             cell.rightUtilityButtons = nil
+            cell.setRightUtilityButtons(temp2 as [AnyObject], withButtonWidth: 75)
             cell.rightUtilityButtons = temp2 as [AnyObject]
             
             cell.delegate = self
@@ -369,13 +370,14 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             } else if like == 1 {
                 temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
             }
-            
+            cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
             cell.leftUtilityButtons = temp as [AnyObject]
             
             let temp2: NSMutableArray = NSMutableArray()
             temp2.sw_addUtilityButtonWithColor(UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1), title: "Map")
             temp2.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1), title: "More Info")
             cell.rightUtilityButtons = nil
+            cell.setRightUtilityButtons(temp2 as [AnyObject], withButtonWidth: 75)
             cell.rightUtilityButtons = temp2 as [AnyObject]
             
             cell.delegate = self
@@ -421,13 +423,14 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             } else if like == 1 {
                 temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
             }
-            
+            cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
             cell.leftUtilityButtons = temp as [AnyObject]
             
             let temp2: NSMutableArray = NSMutableArray()
             temp2.sw_addUtilityButtonWithColor(UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1), title: "Map")
             temp2.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1), title: "More Info")
             cell.rightUtilityButtons = nil
+            cell.setRightUtilityButtons(temp2 as [AnyObject], withButtonWidth: 75)
             cell.rightUtilityButtons = temp2 as [AnyObject]
             
             cell.delegate = self
@@ -683,6 +686,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
                                     
                                     var temp: NSMutableArray = NSMutableArray()
                                     temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Get Addicted")
+                                    cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
                                     cell.leftUtilityButtons = temp as [AnyObject]
                                     
                                 }
@@ -710,6 +714,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
                                 
                                 var temp: NSMutableArray = NSMutableArray()
                                 temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Addicted!")
+                                cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
                                 cell.leftUtilityButtons = temp as [AnyObject]
                                 
                                 
@@ -748,6 +753,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
                                     
                                     var temp: NSMutableArray = NSMutableArray()
                                     temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Get Addicted")
+                                    cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
                                     cell.leftUtilityButtons = temp as [AnyObject]
                                     
                                 }
@@ -775,6 +781,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
                                 
                                 var temp: NSMutableArray = NSMutableArray()
                                 temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Addicted!")
+                                cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
                                 cell.leftUtilityButtons = temp as [AnyObject]
                             }
                         }
@@ -812,6 +819,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
                                     
                                     let temp: NSMutableArray = NSMutableArray()
                                     temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Get Addicted")
+                                    cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
                                     cell.leftUtilityButtons = temp as [AnyObject]
                                     
                                 }
@@ -839,6 +847,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
                                 
                                 let temp: NSMutableArray = NSMutableArray()
                                 temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Addicted!")
+                                cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
                                 cell.leftUtilityButtons = temp as [AnyObject]
                             }
                         }
