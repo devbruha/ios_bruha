@@ -156,7 +156,6 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         // Dispose of any resources that can be recreated.
     }
     
-    //MARK: TableView Data and Delegate
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
         // #warning Potentially incomplete method implementation.
         // Return the number of sections.
@@ -416,6 +415,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 cell.circAddicted.hidden = false
             }
             
+            cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
             cell.leftUtilityButtons = temp as [AnyObject]
             
             //println(cell.leftUtilityButtons[0].titleLabel!!.text!)
@@ -429,6 +429,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             temp2.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1), title: "More Info")
             
             cell.rightUtilityButtons = nil
+            cell.setRightUtilityButtons(temp2 as [AnyObject], withButtonWidth: 75)
             cell.rightUtilityButtons = temp2 as [AnyObject]
             
             cell.delegate = self
@@ -545,6 +546,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 cell.circAddicted.hidden = false
             }
             
+            cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75) //must call after assign title and before assigning array to the buttons.
             cell.leftUtilityButtons = temp as [AnyObject]
             
             
@@ -552,6 +554,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             temp2.sw_addUtilityButtonWithColor(UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1), title: "Map")
             temp2.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1), title: "More Info")
             cell.rightUtilityButtons = nil
+            cell.setRightUtilityButtons(temp2 as [AnyObject], withButtonWidth: 75)//must call after assign title and before assigning array to the buttons.
             cell.rightUtilityButtons = temp2 as [AnyObject]
             
             cell.delegate = self
@@ -701,7 +704,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
                 cell.circAddicted.hidden = false
             }
-            
+            cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
             cell.leftUtilityButtons = temp as [AnyObject]
             
             
@@ -709,6 +712,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             temp2.sw_addUtilityButtonWithColor(UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1), title: "Map")
             temp2.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1), title: "More Info")
             cell.rightUtilityButtons = nil
+            cell.setRightUtilityButtons(temp2 as [AnyObject], withButtonWidth: 75)
             cell.rightUtilityButtons = temp2 as [AnyObject]
             
             cell.delegate = self
@@ -731,24 +735,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         
     }
     
-    //MARK: Swipe Cells Actions
-    func alertLogin() {
-        let alertController = UIAlertController(title: "You are not logged in!", message:nil, preferredStyle: .Alert)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
-        let loginAction = UIAlertAction(title: "Login", style: .Default) { (_) -> Void in
-            self.performSegueWithIdentifier("GoToLogin", sender: self) // Replace SomeSegue with your segue identifier (name)
-        }
-        let signupAction = UIAlertAction(title: "Signup", style: .Default) { (_) -> Void in
-            self.performSegueWithIdentifier("GoToSignup", sender: self) // Replace SomeSegue with your segue identifier (name)
-        }
-        alertController.addAction(signupAction)
-        alertController.addAction(loginAction)
-        alertController.addAction(cancelAction)
-        
-        self.presentViewController(alertController, animated: true, completion: nil)
-        
-    }
-    
+    //Swipe Cells Actions
     func swipeableTableViewCell( cell : SWTableViewCell!,didTriggerLeftUtilityButtonWithIndex index:NSInteger){
         
         switch(index){
@@ -786,6 +773,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                     
                                     var temp: NSMutableArray = NSMutableArray()
                                     temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),title: "Get Addicted")
+                                    cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
                                     cell.leftUtilityButtons = temp as [AnyObject]
                                     
                                     selectedCell.circAddicted.hidden = true
@@ -812,6 +800,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                 
                                 var temp: NSMutableArray = NSMutableArray()
                                 temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
+                                cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
                                 cell.leftUtilityButtons = temp as [AnyObject]
                                 
                                 selectedCell.circAddicted.hidden = false
@@ -848,6 +837,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                     
                                     var temp: NSMutableArray = NSMutableArray()
                                     temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),title: "Get Addicted")
+                                    cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
                                     cell.leftUtilityButtons = temp as [AnyObject]
                                     
                                     selectedCell.circAddicted.hidden = true
@@ -875,6 +865,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                 
                                 var temp: NSMutableArray = NSMutableArray()
                                 temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
+                                cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
                                 cell.leftUtilityButtons = temp as [AnyObject]
                                 
                                 selectedCell.circAddicted.hidden = false
@@ -948,6 +939,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                     
                                     let temp: NSMutableArray = NSMutableArray()
                                     temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),title: "Get Addicted")
+                                    cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
                                     cell.leftUtilityButtons = temp as [AnyObject]
                                     
                                     selectedCell.circAddicted.hidden = true
@@ -975,6 +967,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                 
                                 let temp: NSMutableArray = NSMutableArray()
                                 temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
+                                cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
                                 cell.leftUtilityButtons = temp as [AnyObject]
                                 
                                 selectedCell.circAddicted.hidden = false
@@ -985,15 +978,13 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 
             } else {
                 
-                //                let alert = UIAlertView(title: "Please log in for this!!!", message: nil, delegate: nil, cancelButtonTitle: nil)
-                //                alert.show()
-                //                let delay = 1.0 * Double(NSEC_PER_SEC)
-                //                var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-                //                dispatch_after(time, dispatch_get_main_queue(), {
-                //                    alert.dismissWithClickedButtonIndex(-1, animated: true)
-                //                    })
-                
-                alertLogin()
+                let alert = UIAlertView(title: "Please log in for this!!!", message: nil, delegate: nil, cancelButtonTitle: nil)
+                alert.show()
+                let delay = 1.0 * Double(NSEC_PER_SEC)
+                var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+                dispatch_after(time, dispatch_get_main_queue(), {
+                    alert.dismissWithClickedButtonIndex(-1, animated: true)
+                })
                 
             }
             break
@@ -1128,7 +1119,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         return true
     }
     
-    //MARK: Circ and Rect View changing
+    //Circ and Rect View changing
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         let indexPath = tableView.indexPathForSelectedRow;

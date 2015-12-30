@@ -245,6 +245,7 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
             
             let temp: NSMutableArray = NSMutableArray()
             temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
+            cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
             cell.leftUtilityButtons = temp as [AnyObject]
             
             
@@ -253,6 +254,7 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
             temp2.sw_addUtilityButtonWithColor(UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1), title: "Map")
             temp2.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1), title: "More Info")
             cell.rightUtilityButtons = nil
+            cell.setRightUtilityButtons(temp2 as [AnyObject], withButtonWidth: 75)
             cell.rightUtilityButtons = temp2 as [AnyObject]
             
             cell.delegate = self
@@ -312,6 +314,7 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
             
             let temp: NSMutableArray = NSMutableArray()
             temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
+            cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
             cell.leftUtilityButtons = temp as [AnyObject]
             
             
@@ -319,6 +322,7 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
             temp2.sw_addUtilityButtonWithColor(UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1), title: "Map")
             temp2.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1), title: "More Info")
             cell.rightUtilityButtons = nil
+            cell.setRightUtilityButtons(temp2 as [AnyObject], withButtonWidth: 75)
             cell.rightUtilityButtons = temp2 as [AnyObject]
             
             cell.delegate = self
@@ -375,6 +379,7 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
             
             let temp: NSMutableArray = NSMutableArray()
             temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
+            cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
             cell.leftUtilityButtons = temp as [AnyObject]
             
             
@@ -382,6 +387,7 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
             temp2.sw_addUtilityButtonWithColor(UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1), title: "Map")
             temp2.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1), title: "More Info")
             cell.rightUtilityButtons = nil
+            cell.setRightUtilityButtons(temp2 as [AnyObject], withButtonWidth: 75)
             cell.rightUtilityButtons = temp2 as [AnyObject]
             
             cell.delegate = self

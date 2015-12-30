@@ -314,16 +314,16 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             } else if like == 1 {
                 temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
             }
-            
+            cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
             cell.leftUtilityButtons = temp as [AnyObject]
             
             let temp2: NSMutableArray = NSMutableArray()
             temp2.sw_addUtilityButtonWithColor(UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1), title: "Buy Tickets")
-            temp2.sw_addUtilityButtonWithColor(UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1), title: "Map")
             temp2.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1), title: "More Info")
             
             
             cell.rightUtilityButtons = nil
+            cell.setRightUtilityButtons(temp2 as [AnyObject], withButtonWidth: 75)
             cell.rightUtilityButtons = temp2 as [AnyObject]
             
             cell.delegate = self
@@ -370,13 +370,14 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             } else if like == 1 {
                 temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
             }
-            
+            cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
             cell.leftUtilityButtons = temp as [AnyObject]
             
             let temp2: NSMutableArray = NSMutableArray()
             temp2.sw_addUtilityButtonWithColor(UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1), title: "Map")
             temp2.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1), title: "More Info")
             cell.rightUtilityButtons = nil
+            cell.setRightUtilityButtons(temp2 as [AnyObject], withButtonWidth: 75)
             cell.rightUtilityButtons = temp2 as [AnyObject]
             
             cell.delegate = self
@@ -422,13 +423,14 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             } else if like == 1 {
                 temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
             }
-            
+            cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
             cell.leftUtilityButtons = temp as [AnyObject]
             
             let temp2: NSMutableArray = NSMutableArray()
             temp2.sw_addUtilityButtonWithColor(UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1), title: "Map")
             temp2.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1), title: "More Info")
             cell.rightUtilityButtons = nil
+            cell.setRightUtilityButtons(temp2 as [AnyObject], withButtonWidth: 75)
             cell.rightUtilityButtons = temp2 as [AnyObject]
             
             cell.delegate = self
@@ -645,24 +647,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
         }        
     }
     
-    //MARK: Swipe Cells Actions
-    func alertLogin() {
-        let alertController = UIAlertController(title: "You are not logged in!", message:nil, preferredStyle: .Alert)
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
-        let loginAction = UIAlertAction(title: "Login", style: .Default) { (_) -> Void in
-            self.performSegueWithIdentifier("GoToLogin", sender: self) // Replace SomeSegue with your segue identifier (name)
-        }
-        let signupAction = UIAlertAction(title: "Signup", style: .Default) { (_) -> Void in
-            self.performSegueWithIdentifier("GoToSignup", sender: self) // Replace SomeSegue with your segue identifier (name)
-        }
-        alertController.addAction(signupAction)
-        alertController.addAction(loginAction)
-        alertController.addAction(cancelAction)
-        
-        self.presentViewController(alertController, animated: true, completion: nil)
-        
-    }
-    
+    //Swipe Cells Actions
     func swipeableTableViewCell( cell : SWTableViewCell!,didTriggerLeftUtilityButtonWithIndex index:NSInteger){
       
         switch(index){
@@ -701,6 +686,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
                                     
                                     var temp: NSMutableArray = NSMutableArray()
                                     temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Get Addicted")
+                                    cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
                                     cell.leftUtilityButtons = temp as [AnyObject]
                                     
                                 }
@@ -728,6 +714,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
                                 
                                 var temp: NSMutableArray = NSMutableArray()
                                 temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Addicted!")
+                                cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
                                 cell.leftUtilityButtons = temp as [AnyObject]
                                 
                                 
@@ -766,6 +753,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
                                     
                                     var temp: NSMutableArray = NSMutableArray()
                                     temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Get Addicted")
+                                    cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
                                     cell.leftUtilityButtons = temp as [AnyObject]
                                     
                                 }
@@ -793,6 +781,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
                                 
                                 var temp: NSMutableArray = NSMutableArray()
                                 temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Addicted!")
+                                cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
                                 cell.leftUtilityButtons = temp as [AnyObject]
                             }
                         }
@@ -830,6 +819,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
                                     
                                     let temp: NSMutableArray = NSMutableArray()
                                     temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Get Addicted")
+                                    cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
                                     cell.leftUtilityButtons = temp as [AnyObject]
                                     
                                 }
@@ -857,6 +847,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
                                 
                                 let temp: NSMutableArray = NSMutableArray()
                                 temp.sw_addUtilityButtonWithColor(UIColor.redColor(),title: "Addicted!")
+                                cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
                                 cell.leftUtilityButtons = temp as [AnyObject]
                             }
                         }
@@ -865,8 +856,12 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
                 
                 
             } else {
-
-                alertLogin()
+                
+                let alert = UIAlertView(title: "Please log in for this!!!", message: nil, delegate: nil, cancelButtonTitle: nil)
+                alert.show()
+                let delay = 5.0 * Double(NSEC_PER_SEC)
+                var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+                alert.dismissWithClickedButtonIndex(-1, animated: true)
                 
             }
             break
@@ -889,51 +884,35 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
                 let cellIndexPath = self.dropDownTable.indexPathForCell(cell)
                 let selectedCell = self.dropDownTable.cellForRowAtIndexPath(cellIndexPath!) as! MapDropTableViewCell
                 GlobalVariables.eventSelected = selectedCell.dropHiddenID.text!
-                self.performSegueWithIdentifier("ShowOnMap", sender: self)
+                self.performSegueWithIdentifier("EventsComing", sender: self)
             }
             else if GlobalVariables.selectedDisplay == "Organization" {
                 let cellIndexPath = self.dropDownTable.indexPathForCell(cell)
                 let selectedCell = self.dropDownTable.cellForRowAtIndexPath(cellIndexPath!) as! MapDropTableViewCell
                 GlobalVariables.eventSelected = selectedCell.dropHiddenID.text!
-                self.performSegueWithIdentifier("ShowOnMap", sender: self)
+                self.performSegueWithIdentifier("EventsComing", sender: self)
             }
             break
         case 1:
-            if GlobalVariables.selectedDisplay == "Event" {
-                //event map
-                let cellIndexPath = self.dropDownTable.indexPathForCell(cell)
-                let selectedCell = self.dropDownTable.cellForRowAtIndexPath(cellIndexPath!) as! MapDropTableViewCell
-                GlobalVariables.eventSelected = selectedCell.dropHiddenID.text!
-                self.performSegueWithIdentifier("ShowOnMap", sender: self)
-            }
-            //Venue MoreInfo
-            if (GlobalVariables.selectedDisplay == "Venue"){
-                let cellIndexPath = self.dropDownTable.indexPathForCell(cell)
-                let selectedCell = self.dropDownTable.cellForRowAtIndexPath(cellIndexPath!) as! MapDropTableViewCell
-                GlobalVariables.eventSelected = selectedCell.dropHiddenID.text!
-                self.performSegueWithIdentifier("MoreInfore", sender: self)
-            }
-            //Organization MoreInfo
-            if (GlobalVariables.selectedDisplay == "Organization"){
-                let cellIndexPath = self.dropDownTable.indexPathForCell(cell)
-                let selectedCell = self.dropDownTable.cellForRowAtIndexPath(cellIndexPath!) as! MapDropTableViewCell
-                GlobalVariables.eventSelected = selectedCell.dropHiddenID.text!
-                self.performSegueWithIdentifier("MoreInfore", sender: self)
-                
-            }
-            break
-        case 2:
-            //Event More info
-            print("event more info")
+            //More Info
             let cellIndexPath = self.dropDownTable.indexPathForCell(cell)
             let selectedCell = self.dropDownTable.cellForRowAtIndexPath(cellIndexPath!) as! MapDropTableViewCell
             GlobalVariables.eventSelected = selectedCell.dropHiddenID.text!
             self.performSegueWithIdentifier("MoreInfore", sender: self)
+            
             break
+       
         default:
             break
         }
         
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "MoreInfore" {
+            let infoController = segue.destinationViewController as! MoreInformationViewController
+            infoController.iconForSource = "MapIcon"
+        }
     }
     
     func swipeableTableViewCellShouldHideUtilityButtonsOnSwipe(cell : SWTableViewCell ) -> Bool {

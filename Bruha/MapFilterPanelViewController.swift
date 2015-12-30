@@ -230,9 +230,9 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
             
         case "Discoverable":
             
-            discoverableButtonIcon.image = UIImage(named: "Bruha_White")
+            discoverableButtonIcon.image = UIImage(named: "Venue_Orange")
             discoverableSelectedB.setTitleColor(UIColor.orangeColor(), forState: UIControlState.Normal)
-            discoverableSelectedB.layer.borderColor = UIColor.whiteColor().CGColor
+            discoverableSelectedB.layer.borderColor = UIColor.orangeColor().CGColor
             
         default:
             
@@ -366,25 +366,18 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
     func updateNotificationSent(){
         
         if(GlobalVariables.selectedDisplay == "Event"){
-            categoryTableView.alpha = 1
+            categoryTableView.alpha = 1;
             placeholder.alpha = 1
             priceLabelTitle.alpha = 1
             priceLabel.alpha = 1
             slider.alpha = 1
         }
-        else if (GlobalVariables.selectedDisplay == "Venue" || GlobalVariables.selectedDisplay == "Organization") {
-            categoryTableView.alpha = 1
+        else{
+            categoryTableView.alpha = 1;
             placeholder.alpha = 0
             priceLabelTitle.alpha = 0
             priceLabel.alpha = 0
             slider.alpha = 0
-        } else {
-            categoryTableView.alpha = 0
-            placeholder.alpha = 0
-            priceLabelTitle.alpha = 0
-            priceLabel.alpha = 0
-            slider.alpha = 0
-            clearFilter.alpha = 0
         }
         
     }
@@ -449,10 +442,8 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
     
     func discoverableTapped(){
         
-//        GlobalVariables.selectedDisplay = "Discoverable"
-        //NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
-        let alert = UIAlertView(title: "Discoverable Coming Soon", message: nil, delegate: nil, cancelButtonTitle: "OK")
-        alert.show()
+        GlobalVariables.selectedDisplay = "Discoverable"
+        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
         updateEVOD()
         //clearBackupCategories()
         //resetSliderValue()
