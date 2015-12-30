@@ -34,6 +34,7 @@
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="organizationID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="posterUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="price" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="primaryCategory" optional="YES" attributeType="String" syncable="YES"/>
@@ -85,6 +86,7 @@
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="longitude" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="organizationID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="posterUrl" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="price" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="primaryCategory" optional="YES" attributeType="String" syncable="YES"/>
@@ -150,14 +152,14 @@
         <element name="AddictionVenue" positionX="-18" positionY="126" width="128" height="75"/>
         <element name="ArtistCategories" positionX="-9" positionY="135" width="128" height="60"/>
         <element name="ArtistList" positionX="-27" positionY="126" width="128" height="120"/>
-        <element name="EventList" positionX="-63" positionY="-18" width="128" height="330"/>
+        <element name="EventList" positionX="-63" positionY="-18" width="128" height="345"/>
         <element name="EventPrimaryCategories" positionX="9" positionY="162" width="128" height="60"/>
         <element name="EventSubCategories" positionX="18" positionY="171" width="128" height="90"/>
         <element name="EventSubCategoryList" positionX="-18" positionY="126" width="128" height="90"/>
         <element name="ImageList" positionX="-18" positionY="135" width="128" height="75"/>
         <element name="OrganizationCategories" positionX="0" positionY="144" width="128" height="60"/>
         <element name="OrganizationList" positionX="0" positionY="144" width="128" height="165"/>
-        <element name="UserEventList" positionX="-18" positionY="126" width="128" height="315"/>
+        <element name="UserEventList" positionX="-18" positionY="126" width="128" height="330"/>
         <element name="UserEventSubCategoryList" positionX="0" positionY="153" width="128" height="90"/>
         <element name="UserList" positionX="27" positionY="171" width="128" height="135"/>
         <element name="UserOrganizationList" positionX="-9" positionY="144" width="128" height="165"/>
