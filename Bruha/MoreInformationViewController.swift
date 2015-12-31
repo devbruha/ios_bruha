@@ -32,9 +32,11 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
     }
     
     var iconForSource: String?
+    var sourceForComingEvent: String = "source"
+    var sourceID: String = "id"
+    
     
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
-    
     func customTopButtons() {
         
         let screenSize: CGRect = UIScreen.mainScreen().bounds
@@ -144,6 +146,9 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                     PriceCalendar.enabled = true
                     DateUpcoming.enabled = true
                     
+                    sourceForComingEvent = "venue"
+                    sourceID = venue.venueID
+                    
                     if let images = posterInfo {
                         for img in images {
                             if img.ID == venue.venueID {
@@ -181,6 +186,9 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                     PriceCalendar.enabled = true
                     DateUpcoming.enabled = true
                     
+                    sourceForComingEvent = "organization"
+                    sourceID = organization.organizationID
+                    
                     if let images = posterInfo {
                         for img in images {
                             if img.ID == organization.organizationID {
@@ -208,6 +216,15 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
         //GlobalVariables.eventSelected = "passing information"
         self.performSegueWithIdentifier("UpComing", sender: self)
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "UpComing" {
+            let comingController = segue.destinationViewController as! UpComingEventsViewController
+            comingController.sourceForEvent = sourceForComingEvent
+            comingController.sourceID = sourceID
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

@@ -2483,7 +2483,7 @@
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="goUpComing:" destination="k0E-gF-uXz" eventType="touchUpInside" id="55y-xN-rfN"/>
+                                                    <action selector="goUpComing:" destination="k0E-gF-uXz" eventType="touchUpInside" id="ZP3-4m-nZe"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Date/Upcoming" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2V8-HH-KVu">
@@ -2664,6 +2664,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JKe-Iu-h7E">
                                 <rect key="frame" x="1" y="20" width="30" height="35"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                                <connections>
+                                    <segue destination="zh2-4j-mHu" kind="modal" id="rem-Ny-Duh"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2707,14 +2710,14 @@
         <image name="Tickets_Sm" width="250" height="250"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="1Xm-3s-taQ"/>
-        <segue reference="C5E-mm-bjp"/>
-        <segue reference="QhX-ak-ZUZ"/>
-        <segue reference="pIM-BH-lfI"/>
+        <segue reference="l1y-Rt-Be8"/>
+        <segue reference="fNB-TA-9Vh"/>
+        <segue reference="f7C-vE-RdE"/>
+        <segue reference="8ee-hZ-bSl"/>
+        <segue reference="XHn-5o-VUf"/>
         <segue reference="5DM-Zi-tRH"/>
         <segue reference="J3w-Nl-jcV"/>
-        <segue reference="eyG-eD-cCw"/>
         <segue reference="QWR-kg-3LZ"/>
-        <segue reference="thc-CS-1cg"/>
+        <segue reference="eyG-eD-cCw"/>
     </inferredMetricsTieBreakers>
 </document>

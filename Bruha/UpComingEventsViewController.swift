@@ -23,6 +23,9 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
     var screenWidth: CGFloat = 0.0
     var screenHeight: CGFloat = 0.0
     
+    var upcomingEvents: [Event] = []
+    var sourceForEvent: String?
+    var sourceID: String?
     
     func configureView(){
         
@@ -68,6 +71,25 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
         upComingTableView.backgroundColor = UIColor.blackColor()
         upComingTableView.separatorColor = UIColor.blackColor()
         
+        upcomingEvents.removeAll()
+        print(sourceForEvent)
+        let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
+        for event in eventInfo {
+            if sourceForEvent == "venue" {
+                if event.venueID == sourceID {
+                    upcomingEvents.append(event)
+                    print(event.venueID)
+                }
+            }
+            if sourceForEvent == "organization" {
+                if event.organizationID == sourceID {
+                    upcomingEvents.append(event)
+                    print(event.organizationID)
+                }
+            }
+        }
+        
+        
         // Do any additional setup after loading the view.
     }
     
@@ -92,9 +114,8 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
         
-        let addictedEventInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
         
-        return (addictedEventInfo?.count)!
+        return (upcomingEvents.count)
         
     }
     
@@ -109,100 +130,99 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
         
         let posterInfo = FetchData(context: managedObjectContext).fetchPosterImages()
         
+        var cell : EventTableViewCell! = tableView.dequeueReusableCellWithIdentifier("eventTableViewCell") as! EventTableViewCell!
         
-            var cell : EventTableViewCell! = tableView.dequeueReusableCellWithIdentifier("eventTableViewCell") as! EventTableViewCell!
+        if(cell == nil){
             
-            if(cell == nil){
-                
-                cell = NSBundle.mainBundle().loadNibNamed("EventTableViewCell", owner: self, options: nil)[0] as! EventTableViewCell;
-            }
-            
-            let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
-            let addictedEventInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
-            for event in eventInfo!{
-                
-                //download only addicted poster image
-                if event.eventID == addictedEventInfo![indexPath.row].eventID  {
-                    //println("Begin of code")
-                    cell.ExploreImage.contentMode = UIViewContentMode.ScaleToFill
-                    if let images = posterInfo {
-                        for img in images {
-                            if img.ID == event.eventID {
-                                if img.Image?.length > 800 {
-                                    cell.ExploreImage.image = UIImage(data: img.Image!)
-                                } else {
-                                    cell.ExploreImage.image = randomImage()
-                                }
-                            }
-                        }
+            cell = NSBundle.mainBundle().loadNibNamed("EventTableViewCell", owner: self, options: nil)[0] as! EventTableViewCell;
+        }
+        
+        let event = upcomingEvents[indexPath.row]
+        
+        cell.ExploreImage.contentMode = UIViewContentMode.ScaleToFill
+        if let images = posterInfo {
+            for img in images {
+                if img.ID == event.eventID {
+                    if img.Image?.length > 800 {
+                        cell.ExploreImage.image = UIImage(data: img.Image!)
+                    } else {
+                        cell.ExploreImage.image = randomImage()
                     }
-                    
-                    cell.circTitle.text = event.eventName
-                    cell.circDate.text = event.eventStartDate
-                    cell.circPrice.text = "$\(event.eventPrice!)"
-                    cell.circHiddenID.text = event.eventID
-                    
-                    cell.rectTitle.text = event.eventName
-                    cell.rectPrice.text = "$\(event.eventPrice!)"
-                    
-                    if event.eventVenueName == "" {
-                        cell.venueName.text = "nil"
-                    }else{cell.venueName.text = event.eventVenueName}
-                    
-                    cell.venueAddress.text = "\(event.eventVenueAddress.componentsSeparatedByString(", ")[0])\n\(event.eventVenueCity)"
-                    
-                    cell.startTime.text = "\(convertRectTimeFormat("\(event.eventStartDate) \(event.eventStartTime)")) -"
-                    cell.endTime.text = convertRectTimeFormat("\(event.eventEndDate) \(event.eventEndTime)")
-                    
-                    //cell.startDate.text = event.eventStartDate
-                    //cell.startTime.text = "\(event.eventStartTime) -"
-                    //cell.endDate.text = event.eventEndDate
-                    //cell.endTime.text = event.eventEndTime
-                    
-                    cell.circAddicted.contentMode = UIViewContentMode.ScaleAspectFit
-                    cell.circAddicted.image = UIImage(named: "MyAddictions_Sm")
-                    cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
-                    cell.circCategory.image = UIImage(named: event.primaryCategory)
-                    
-                    cell.rectCategory.contentMode = UIViewContentMode.ScaleAspectFill
-                    cell.rectCategory.image = UIImage(named: event.primaryCategory)
-                    cell.rectCategoryName.text = event.primaryCategory
-                    // Configure the cell...
-                    
                 }
-                
             }
-            
-            //println("End of code. The image will continue downloading in the background and it will be loaded when it ends.")
-            //Synchronously:
-            /*if let url = NSURL(string: event.url) {
-            if let data = NSData(contentsOfURL: url){
-            cell.ExploreImage.contentMode = UIViewContentMode.ScaleToFill
-            cell.ExploreImage.image = UIImage(data: data)
+        }
+        
+        cell.circTitle.text = event.eventName
+        cell.circDate.text = event.eventStartDate
+        cell.circPrice.text = "$\(event.eventPrice!)"
+        cell.circHiddenID.text = event.eventID
+        
+        cell.rectTitle.text = event.eventName
+        cell.rectPrice.text = "$\(event.eventPrice!)"
+        
+        if event.eventVenueName == "" {
+            cell.venueName.text = "nil"
+        }else{cell.venueName.text = event.eventVenueName}
+        
+        cell.venueAddress.text = "\(event.eventVenueAddress.componentsSeparatedByString(", ")[0])\n\(event.eventVenueCity)"
+        
+        cell.startTime.text = "\(convertRectTimeFormat("\(event.eventStartDate) \(event.eventStartTime)")) -"
+        cell.endTime.text = convertRectTimeFormat("\(event.eventEndDate) \(event.eventEndTime)")
+        
+        //cell.startDate.text = event.eventStartDate
+        //cell.startTime.text = "\(event.eventStartTime) -"
+        //cell.endDate.text = event.eventEndDate
+        //cell.endTime.text = event.eventEndTime
+        
+        cell.circAddicted.contentMode = UIViewContentMode.ScaleAspectFit
+        cell.circAddicted.image = UIImage(named: "MyAddictions_Sm")
+        cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
+        cell.circCategory.image = UIImage(named: event.primaryCategory)
+        
+        cell.rectCategory.contentMode = UIViewContentMode.ScaleAspectFill
+        cell.rectCategory.image = UIImage(named: event.primaryCategory)
+        cell.rectCategoryName.text = event.primaryCategory
+        // Configure the cell...
+
+        
+        let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
+        var like = 0
+        
+        for addict in addictionInfo! {
+            if addict.eventID == event.eventID {
+                like = 1
             }
-            }*/
-            
-            
-            let temp: NSMutableArray = NSMutableArray()
-            temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),title: "Addicted!")
-            cell.leftUtilityButtons = temp as [AnyObject]
-            
-            
-            let temp2: NSMutableArray = NSMutableArray()
-            temp2.sw_addUtilityButtonWithColor(UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1), title: "Buy Tickets")
-            temp2.sw_addUtilityButtonWithColor(UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1), title: "Map")
-            temp2.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1), title: "More Info")
-            cell.rightUtilityButtons = nil
-            cell.rightUtilityButtons = temp2 as [AnyObject]
-            
-            cell.delegate = self
-            cell.selectionStyle = .None
-            
-            return cell as EventTableViewCell
-            
-     
+        }
         
         
+        let temp: NSMutableArray = NSMutableArray()
+        
+        if like == 0 {
+            temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),attributedTitle: swipeCellTitle("Get Addicted"))
+            cell.circAddicted.hidden = true
+        } else if like == 1 {
+            temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),attributedTitle: swipeCellTitle("Addicted!"))
+            cell.circAddicted.hidden = false
+        }
+        
+        cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
+        cell.leftUtilityButtons = temp as [AnyObject]
+        
+        
+        let temp2: NSMutableArray = NSMutableArray()
+        
+        temp2.sw_addUtilityButtonWithColor(UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1), attributedTitle: swipeCellTitle("Buy\nTickets"))
+        temp2.sw_addUtilityButtonWithColor(UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1), attributedTitle: swipeCellTitle("Map"))
+        temp2.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1), attributedTitle: swipeCellTitle("More\nInfo"))
+        
+        cell.rightUtilityButtons = nil
+        cell.setRightUtilityButtons(temp2 as [AnyObject], withButtonWidth: 75)
+        cell.rightUtilityButtons = temp2 as [AnyObject]
+        
+        cell.delegate = self
+        cell.selectionStyle = .None
+        
+        return cell as EventTableViewCell
         
     }
     
@@ -210,44 +230,69 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
     func swipeableTableViewCell( cell : SWTableViewCell!,didTriggerLeftUtilityButtonWithIndex index:NSInteger){
         switch(index){
         case 0:
+            //Like and get addicted
+            // Check if user is logged in
             if GlobalVariables.loggedIn == true {
                 let user = FetchData(context: managedObjectContext).fetchUserInfo()![0].userName
                 
-                let cellIndexPath = self.upComingTableView.indexPathForCell(cell)
-                let selectedCell = self.upComingTableView.cellForRowAtIndexPath(cellIndexPath!) as! EventTableViewCell
+                var cellIndexPath = self.upComingTableView.indexPathForCell(cell)
+                var selectedCell = self.upComingTableView.cellForRowAtIndexPath(cellIndexPath!) as! EventTableViewCell
                 GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
                 
-                let addictedEventInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
-                for addicted in addictedEventInfo!{
-                    if addicted.eventID == GlobalVariables.eventSelected {
-                        
-                        let alertController = UIAlertController(title: "Are you no longer addicted?", message:nil, preferredStyle: .Alert)
-                        let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
-                        let unlikeAction = UIAlertAction(title: "I'm Over It", style: .Default) { (_) -> Void in
+                let eventInfo = upcomingEvents
+                for event in eventInfo{
+                    if event.eventID == GlobalVariables.eventSelected {
+                        //Like and Unlike
+                        if(cell.leftUtilityButtons[0].titleLabel!!.text! == "Addicted!"){
                             
-                            //Unlike
-                            DeleteData(context: self.managedObjectContext).deleteAddictionsEvent(addicted.eventID, deleteUser: GlobalVariables.username)
-                            print("Removed from addiction(event) \(addicted.eventID), user \(GlobalVariables.username)")
-                            print("REMOVED")
+                            let alertController = UIAlertController(title: "Are you no longer addicted?", message:nil, preferredStyle: .Alert)
+                            let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+                            let unlikeAction = UIAlertAction(title: "I'm Over It", style: .Default) { (_) -> Void in
+                                //print("my idddd \(event.subCategoryID)")
+                                DeleteData(context: self.managedObjectContext).deleteAddictionsEvent(event.eventID, deleteUser: user)
+                                print("Removed from addiction(event) \(event.eventID)")
+                                print("REMOVED")
+                                
+                                let eventService = EventService()
+                                eventService.removeAddictedEvents(event.eventID) {
+                                    (let removeInfo ) in
+                                    print(removeInfo!)
+                                }
+                                
+                                var temp: NSMutableArray = NSMutableArray()
+                                temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),attributedTitle: self.swipeCellTitle("Get Addicted"))
+                                cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
+                                cell.leftUtilityButtons = temp as [AnyObject]
+                                
+                                selectedCell.circAddicted.hidden = true
+                            }
+                            alertController.addAction(unlikeAction)
+                            alertController.addAction(cancelAction)
+                            
+                            self.presentViewController(alertController, animated: true, completion: nil)
+                            
+                            
+                        } else if(cell.leftUtilityButtons[0].titleLabel!!.text! == "Get Addicted") {
+                            
+                            let addEvent = AddictionEvent(eventId: event.eventID, userId: user)
+                            SaveData(context: managedObjectContext).saveAddictionEvent(addEvent)
+                            print("Getting Addicted with event id \(event.eventID)")
+                            print("ADDICTED")
                             
                             let eventService = EventService()
-                            eventService.removeAddictedEvents(addicted.eventID) {
-                                (let removeInfo ) in
-                                print(removeInfo!)
+                            
+                            eventService.addAddictedEvents(event.eventID) {
+                                (let addInfo ) in
+                                print(addInfo!)
                             }
                             
-                            /*
-                            //Remove Cell
-                            var cellToDelete: AnyObject = cellIndexPath as! AnyObject
-                            self.addictionTableView.deleteRowsAtIndexPaths([cellToDelete], withRowAnimation: UITableViewRowAnimation.Fade)
-                            */
+                            var temp: NSMutableArray = NSMutableArray()
+                            temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),attributedTitle: swipeCellTitle("Addicted!"))
+                            cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
+                            cell.leftUtilityButtons = temp as [AnyObject]
                             
-                            self.upComingTableView.reloadData()
+                            selectedCell.circAddicted.hidden = false
                         }
-                        alertController.addAction(unlikeAction)
-                        alertController.addAction(cancelAction)
-                        
-                        self.presentViewController(alertController, animated: true, completion: nil)
                     }
                 }
             } else {
@@ -324,11 +369,6 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
     }
     
     
-    func updateNotificationAddiction(){
-        
-        self.upComingTableView.reloadData()
-    }
-    
     func convertCircTimeFormat(date: String) -> String {
         
         let dateFormatter = NSDateFormatter()
@@ -388,6 +428,14 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
             return UIImage(named: "Background1")!
         }
         
+    }
+    
+    func swipeCellTitle(title: String) -> NSAttributedString {
+        
+        let mAttribute = [NSFontAttributeName: UIFont(name: "OpenSans", size: 15)!, NSForegroundColorAttributeName : UIColor.whiteColor()]
+        let aString = NSMutableAttributedString(string: title, attributes: mAttribute)
+        
+        return aString
     }
     
 
