@@ -1371,6 +1371,8 @@
                         <outlet property="mapButton" destination="pMW-9I-rGS" id="0TN-ZW-Wxi"/>
                         <segue destination="8Gj-d3-yhz" kind="modal" identifier="ShowOnMap" id="thc-CS-1cg"/>
                         <segue destination="k0E-gF-uXz" kind="modal" identifier="MoreInfore" id="io6-cH-KWY"/>
+                        <segue destination="4Ye-gJ-nBR" kind="modal" identifier="GoToLogin" id="NAU-T1-EcU"/>
+                        <segue destination="Dba-0b-X1L" kind="modal" identifier="GoToSignup" id="dfw-c1-ntm"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wTm-IP-AoX" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2004,6 +2006,8 @@
                         <outlet property="viewMap" destination="Wxl-Jp-fhG" id="R3x-kF-OZD"/>
                         <segue destination="k0E-gF-uXz" kind="modal" identifier="MoreInfore" id="C5E-mm-bjp"/>
                         <segue destination="DYv-PS-7yH" kind="modal" identifier="EventsComing" id="QhX-ak-ZUZ"/>
+                        <segue destination="Dba-0b-X1L" kind="modal" identifier="GoToSignup" id="Igp-o7-BVW"/>
+                        <segue destination="4Ye-gJ-nBR" kind="modal" identifier="GoToLogin" id="jao-de-QNr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="H2m-0y-tpY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2604,14 +2608,14 @@
         <image name="Tickets_Sm" width="250" height="250"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="QWR-kg-3LZ"/>
-        <segue reference="R95-Q8-ZSY"/>
-        <segue reference="uZx-1x-ByM"/>
+        <segue reference="pgm-fT-IMJ"/>
+        <segue reference="1Xm-3s-taQ"/>
+        <segue reference="jao-de-QNr"/>
+        <segue reference="Igp-o7-BVW"/>
+        <segue reference="pIM-BH-lfI"/>
+        <segue reference="QhX-ak-ZUZ"/>
+        <segue reference="C5E-mm-bjp"/>
+        <segue reference="thc-CS-1cg"/>
         <segue reference="lw9-PB-bZ2"/>
-        <segue reference="zCE-mg-04b"/>
-        <segue reference="l1y-Rt-Be8"/>
-        <segue reference="XHn-5o-VUf"/>
-        <segue reference="8ee-hZ-bSl"/>
-        <segue reference="f7C-vE-RdE"/>
     </inferredMetricsTieBreakers>
 </document>
