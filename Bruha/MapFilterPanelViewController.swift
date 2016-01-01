@@ -230,7 +230,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
             
         case "Discoverable":
             
-            discoverableButtonIcon.image = UIImage(named: "Venue_Orange")
+            discoverableButtonIcon.image = UIImage(named: "Bruha_White")
             discoverableSelectedB.setTitleColor(UIColor.orangeColor(), forState: UIControlState.Normal)
             discoverableSelectedB.layer.borderColor = UIColor.orangeColor().CGColor
             
@@ -442,10 +442,18 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
     
     func discoverableTapped(){
         
-        GlobalVariables.selectedDisplay = "Discoverable"
+//        GlobalVariables.selectedDisplay = "Discoverable"
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
+        
+        let alert = UIAlertView(title: "Discoverable Coming Soon!!!", message: nil, delegate: nil, cancelButtonTitle: nil)
+        alert.show()
+        let delay = 1.5 * Double(NSEC_PER_SEC)
+        var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        dispatch_after(time, dispatch_get_main_queue(), {
+            alert.dismissWithClickedButtonIndex(-1, animated: true)
+        })
+        
         updateEVOD()
-        //clearBackupCategories()
         //resetSliderValue()
     }
     
