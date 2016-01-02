@@ -486,20 +486,24 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
         //println("Panel Controller was dragged")
     }
     
-    func scaleToSize(markerIcon: UIImage, scaledToSize: CGSize) -> UIImage {
-        UIGraphicsBeginImageContext(scaledToSize)
-        markerIcon.drawInRect(CGRectMake(0, 0, scaledToSize.width, scaledToSize.height))
-        let scaledIcon = UIGraphicsGetImageFromCurrentImageContext()
+    func resizeCategoryImage (imgString: String) -> UIImage {
+        
+        let newImgSize: CGFloat = 28
+        
+        let imgToResize = UIImage(named: imgString)
+        UIGraphicsBeginImageContextWithOptions(CGSizeMake(newImgSize, newImgSize), false, 0)
+        imgToResize?.drawInRect(CGRectMake(0, 0, newImgSize, newImgSize))
+        
+        let resizedImg = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
         
-        return scaledIcon
+        return resizedImg
     }
     
     func generateMarkers(){
         for event in displayedEvents{
-            let markerIcon = UIImage(named: event.primaryCategory)
-//            let scaledToSize: CGSize = CGSize(width: 30, height: 30)
-//            let scaledIcon: UIImage?
+            let markerIcon = resizeCategoryImage(event.primaryCategory)
+
             
             let eventMarker: GMSMarker! = GMSMarker()
             
@@ -507,11 +511,6 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             
             eventMarker.position = CLLocationCoordinate2D(latitude: event.eventLatitude,longitude: event.eventLongitude)
             
-//            if let icon = markerIcon {
-//                scaledIcon = scaleToSize(markerIcon!, scaledToSize: scaledToSize)
-//            } else {
-//                scaledIcon = nil
-//            }
             eventMarker.icon = markerIcon
             
             eventMarker.userData = event.eventID
@@ -525,20 +524,14 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
         
         
         for venue in displayedVenues{
-            let markerIcon = UIImage(named: venue.primaryCategory)
-//            let scaledToSize: CGSize = CGSize(width: 30, height: 30)
-//            let scaledIcon: UIImage?
+            let markerIcon = resizeCategoryImage(venue.primaryCategory)
+
             
             let venueMarker: GMSMarker! = GMSMarker()
             
             venueMarker.title = venue.venueName
             venueMarker.position = CLLocationCoordinate2D(latitude: venue.venueLatitude,longitude: venue.venueLongitude)
-            
-//            if let icon = markerIcon {
-//                scaledIcon = scaleToSize(markerIcon!, scaledToSize: scaledToSize)
-//            } else {
-//                scaledIcon = nil
-//            }
+
             venueMarker.icon = markerIcon
             
             venueMarker.userData = venue.venueID
@@ -549,20 +542,14 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
         }
         
         for organization in displayedOrganizations{
-            let markerIcon = UIImage(named: organization.primaryCategory)
-//            let scaledToSize: CGSize = CGSize(width: 30, height: 30)
-//            let scaledIcon: UIImage?
+            let markerIcon = resizeCategoryImage(organization.primaryCategory)
+
             
             let organizationMarker: GMSMarker! = GMSMarker()
             
             organizationMarker.title = organization.organizationName
             organizationMarker.position = CLLocationCoordinate2D(latitude: organization.organizationLatitude,longitude: organization.organizationLongitude)
-            
-//            if let icon = markerIcon {
-//                scaledIcon = scaleToSize(markerIcon!, scaledToSize: scaledToSize)
-//            } else {
-//                scaledIcon = nil
-//            }
+
             organizationMarker.icon = markerIcon
             
             organizationMarker.userData = organization.organizationID
@@ -857,11 +844,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
                 
             } else {
                 
-                let alert = UIAlertView(title: "Please log in for this!!!", message: nil, delegate: nil, cancelButtonTitle: nil)
-                alert.show()
-                let delay = 5.0 * Double(NSEC_PER_SEC)
-                var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-                alert.dismissWithClickedButtonIndex(-1, animated: true)
+                alertLogin()
                 
             }
             break
@@ -869,6 +852,23 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             break
         }
 
+    }
+    
+    func alertLogin() {
+        let alertController = UIAlertController(title: "You are not logged in!", message:nil, preferredStyle: .Alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+        let loginAction = UIAlertAction(title: "Login", style: .Default) { (_) -> Void in
+            self.performSegueWithIdentifier("GoToLogin", sender: self) // Replace SomeSegue with your segue identifier (name)
+        }
+        let signupAction = UIAlertAction(title: "Signup", style: .Default) { (_) -> Void in
+            self.performSegueWithIdentifier("GoToSignup", sender: self) // Replace SomeSegue with your segue identifier (name)
+        }
+        alertController.addAction(signupAction)
+        alertController.addAction(loginAction)
+        alertController.addAction(cancelAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+        
     }
     
     func swipeableTableViewCell( cell : SWTableViewCell!,didTriggerRightUtilityButtonWithIndex index:NSInteger){
