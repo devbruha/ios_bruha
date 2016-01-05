@@ -1128,10 +1128,6 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 destinationController.sourceID = GlobalVariables.eventSelected
             }
         }
-        if segue.identifier == "EventMoreInfo" {
-            let destinationController = segue.destinationViewController as! EventMoreInfomationViewController
-            
-        }
     }
     
     func swipeableTableViewCellShouldHideUtilityButtonsOnSwipe(cell : SWTableViewCell ) -> Bool {

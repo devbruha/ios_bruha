@@ -920,9 +920,11 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             destinationController.iconForSource = "MapIcon"
             if GlobalVariables.selectedDisplay == "Venue" {
                 destinationController.sourceForComingEvent = "venue"
+                destinationController.sourceID = GlobalVariables.eventSelected
             }
             if GlobalVariables.selectedDisplay == "Organization" {
                 destinationController.sourceForComingEvent = "organization"
+                destinationController.sourceID = GlobalVariables.eventSelected
             }
         }
     }

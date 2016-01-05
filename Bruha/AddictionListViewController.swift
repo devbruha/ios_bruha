@@ -612,9 +612,11 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
             let destinationController = segue.destinationViewController as! MoreInformationViewController
             if GlobalVariables.addictedDisplay == "Venue" {
                 destinationController.sourceForComingEvent = "venue"
+                destinationController.sourceID = GlobalVariables.eventSelected
             }
             if GlobalVariables.addictedDisplay == "Organization" {
                 destinationController.sourceForComingEvent = "organization"
+                destinationController.sourceID = GlobalVariables.eventSelected
             }
         }
     }

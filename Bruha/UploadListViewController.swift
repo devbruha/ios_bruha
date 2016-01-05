@@ -510,9 +510,11 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
             let destinationController = segue.destinationViewController as! MoreInformationViewController
             if GlobalVariables.uploadDisplay == "Venue" {
                 destinationController.sourceForComingEvent = "venue"
+                destinationController.sourceID = GlobalVariables.eventSelected
             }
             if GlobalVariables.uploadDisplay == "Organization" {
                 destinationController.sourceForComingEvent = "organization"
+                destinationController.sourceID = GlobalVariables.eventSelected
             }
         }
     }
