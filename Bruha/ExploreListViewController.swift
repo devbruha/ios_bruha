@@ -1107,12 +1107,31 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             let selectedCell = self.exploreTableView.cellForRowAtIndexPath(cellIndexPath!) as! EventTableViewCell
             
             GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
-            self.performSegueWithIdentifier("MoreInfore", sender: self)
+            self.performSegueWithIdentifier("EventMoreInfo", sender: self)
             break
         default:
             break
         }
         
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "MoreInfore" {
+            let destinationController = segue.destinationViewController as! MoreInformationViewController
+            if GlobalVariables.selectedDisplay == "Venue" {
+                destinationController.sourceForComingEvent = "venue"
+                destinationController.sourceID = GlobalVariables.eventSelected
+            }
+            if GlobalVariables.selectedDisplay == "Organization" {
+                destinationController.sourceForComingEvent = "organization"
+                destinationController.sourceID = GlobalVariables.eventSelected
+            }
+        }
+        if segue.identifier == "EventMoreInfo" {
+            let destinationController = segue.destinationViewController as! EventMoreInfomationViewController
+            
+        }
     }
     
     func swipeableTableViewCellShouldHideUtilityButtonsOnSwipe(cell : SWTableViewCell ) -> Bool {

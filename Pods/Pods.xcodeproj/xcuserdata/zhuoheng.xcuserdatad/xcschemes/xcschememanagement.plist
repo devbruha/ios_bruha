@@ -8,36 +8,61 @@
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>1</integer>
+		</dict>
+		<key>JTCalendar.xcscheme</key>
+		<dict>
+			<key>orderHint</key>
+			<integer>6</integer>
 		</dict>
 		<key>MBCalendarKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>2</integer>
 		</dict>
 		<key>MBPullDownController.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>3</integer>
 		</dict>
 		<key>Pods.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>4</integer>
 		</dict>
 		<key>SWTableViewCell.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
+			<key>orderHint</key>
+			<integer>5</integer>
 		</dict>
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>1C31D4C29F3D4081EFA77026D9C9C8C3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>559BB14BA049F3363E31100027A6E0ED</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>6396ADABB05EC8890CF759300D8AF13C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6C69033D5CC9FF0D33125070E82E063E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -63,6 +88,11 @@
 			<true/>
 		</dict>
 		<key>BE1E95BECAB84919B9D238CCDD8A10D3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C3AD7E342840A1BEA026D1D3A2D9C1A7</key>
 		<dict>
 			<key>primary</key>
 			<true/>

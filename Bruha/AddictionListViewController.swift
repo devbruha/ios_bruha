@@ -598,13 +598,27 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
             let selectedCell = self.addictionTableView.cellForRowAtIndexPath(cellIndexPath!) as! EventTableViewCell
             
             GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
-            self.performSegueWithIdentifier("MoreInfore", sender: self)
+            self.performSegueWithIdentifier("EventMoreInfo", sender: self)
             break
         default:
             break
         }
         
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "MoreInfore" {
+            let destinationController = segue.destinationViewController as! MoreInformationViewController
+            if GlobalVariables.addictedDisplay == "Venue" {
+                destinationController.sourceForComingEvent = "venue"
+            }
+            if GlobalVariables.addictedDisplay == "Organization" {
+                destinationController.sourceForComingEvent = "organization"
+            }
+        }
+    }
+
     
     func swipeableTableViewCellShouldHideUtilityButtonsOnSwipe(cell : SWTableViewCell ) -> Bool {
         return true
