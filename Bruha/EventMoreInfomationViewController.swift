@@ -172,6 +172,9 @@ class EventMoreInfomationViewController: UIViewController, UIWebViewDelegate{
         
         scrollView.contentMode = UIViewContentMode.ScaleAspectFit
         scrollView.backgroundColor = UIColor(patternImage: UIImage(named: "Splash Background")!)
+        
+        AffiliatedOrgButton.showsTouchWhenHighlighted = true
+        VenueButton.showsTouchWhenHighlighted = true
 
         // Do any additional setup after loading the view.
     }
@@ -309,6 +312,18 @@ class EventMoreInfomationViewController: UIViewController, UIWebViewDelegate{
         else {return "nil,error times"}
     }
 
+    func buttonBounce(sender: UIButton) {
+        
+        let pulseAnimation = CABasicAnimation(keyPath: "opacity")
+        pulseAnimation.duration = 1
+        pulseAnimation.fromValue = NSNumber(float: 0.5)
+        pulseAnimation.toValue = NSNumber(float: 1.0)
+        pulseAnimation.timingFunction = CAMediaTimingFunction(name: kCAMediaTimingFunctionEaseInEaseOut)
+        pulseAnimation.autoreverses = false
+        pulseAnimation.repeatCount = 1  //FLT_MAX
+        sender.layer.addAnimation(pulseAnimation, forKey: nil)
+        
+    }
 
     /*
     // MARK: - Navigation
