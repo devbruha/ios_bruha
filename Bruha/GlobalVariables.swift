@@ -44,4 +44,6 @@ class GlobalVariables{
     static var filterVenueBool = false
     static var filterOrganizationBool = false
     
+    static var datesSelected = NSMutableArray()
+    
 }
