@@ -32,9 +32,9 @@
             <string>OpenSans</string>
             <string>OpenSans</string>
             <string>OpenSans</string>
-            <string>OpenSans</string>
         </mutableArray>
         <mutableArray key="OpenSans-Semibold.ttf">
+            <string>OpenSans-Semibold</string>
             <string>OpenSans-Semibold</string>
             <string>OpenSans-Semibold</string>
             <string>OpenSans-Semibold</string>
@@ -698,21 +698,19 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MyAddictions_Sm" translatesAutoresizingMaskIntoConstraints="NO" id="drx-Tf-Uey">
-                                <rect key="frame" x="204.5" y="30" width="25" height="25"/>
-                                <color key="backgroundColor" red="0.27450980390000002" green="0.74509803919999995" blue="0.76078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="251.5" y="20" width="35" height="35"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="25" id="1ke-uv-ZSE"/>
-                                    <constraint firstAttribute="width" constant="25" id="gyF-87-iPI"/>
+                                    <constraint firstAttribute="width" constant="35" id="QNw-dv-bLN"/>
+                                    <constraint firstAttribute="height" constant="35" id="R22-SV-CI5"/>
                                 </constraints>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Addictions" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="B70-cO-8Mt">
-                                <rect key="frame" x="117.5" y="30" width="85" height="25"/>
-                                <color key="backgroundColor" red="0.27450980390000002" green="0.74509803919999995" blue="0.76078431369999999" alpha="1" colorSpace="calibratedRGB"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Addictions" textAlignment="center" lineBreakMode="tailTruncation" minimumScaleFactor="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="B70-cO-8Mt">
+                                <rect key="frame" x="69.5" y="20" width="180" height="35"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" constant="85" id="Tf3-LY-P3s"/>
-                                    <constraint firstAttribute="height" constant="25" id="qvt-Wf-xOm"/>
+                                    <constraint firstAttribute="height" constant="35" id="TI9-Qa-Ctm"/>
+                                    <constraint firstAttribute="width" constant="180" id="Tf3-LY-P3s"/>
                                 </constraints>
-                                <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="12"/>
+                                <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="35"/>
                                 <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -727,13 +725,19 @@
                             <constraint firstItem="drx-Tf-Uey" firstAttribute="centerY" secondItem="B70-cO-8Mt" secondAttribute="centerY" id="LMe-Qf-bfa"/>
                             <constraint firstAttribute="trailingMargin" secondItem="JYk-Oo-DVb" secondAttribute="trailing" constant="-16" id="aSC-3g-gTe"/>
                             <constraint firstItem="Gtn-zv-8Pb" firstAttribute="top" secondItem="WfF-QY-PZX" secondAttribute="bottom" id="gyR-Mf-ITJ"/>
-                            <constraint firstItem="B70-cO-8Mt" firstAttribute="bottom" secondItem="Gtn-zv-8Pb" secondAttribute="bottom" id="jBF-tW-Zs7"/>
+                            <constraint firstItem="B70-cO-8Mt" firstAttribute="centerY" secondItem="Gtn-zv-8Pb" secondAttribute="centerY" id="l7E-O3-Rht"/>
                             <constraint firstItem="B70-cO-8Mt" firstAttribute="centerX" secondItem="a5k-ZX-4KL" secondAttribute="centerX" id="s7X-rV-Iwj"/>
                             <constraint firstItem="JYk-Oo-DVb" firstAttribute="leading" secondItem="a5k-ZX-4KL" secondAttribute="leadingMargin" constant="-16" id="vsx-S8-H5z"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addictionHeightImage" destination="R22-SV-CI5" id="rEe-qF-yHu"/>
+                        <outlet property="addictionHeightLabel" destination="TI9-Qa-Ctm" id="Rd9-V3-exC"/>
+                        <outlet property="addictionImage" destination="drx-Tf-Uey" id="oQ7-OG-jAw"/>
+                        <outlet property="addictionLabel" destination="B70-cO-8Mt" id="wj4-s4-cxv"/>
                         <outlet property="addictionTableView" destination="JYk-Oo-DVb" id="emX-rl-PoO"/>
+                        <outlet property="addictionWidthImage" destination="QNw-dv-bLN" id="vZM-iF-Gcd"/>
+                        <outlet property="addictionWidthLabel" destination="Tf3-LY-P3s" id="YeY-cP-rlF"/>
                         <outlet property="bruhaButton" destination="Gtn-zv-8Pb" id="0Wj-s6-wph"/>
                         <segue destination="8Gj-d3-yhz" kind="modal" identifier="ShowOnMap" id="aLM-Zh-sU8"/>
                         <segue destination="Wi8-Ty-KnD" kind="modal" identifier="GoToMoreInfo" id="J6B-rB-QcV"/>

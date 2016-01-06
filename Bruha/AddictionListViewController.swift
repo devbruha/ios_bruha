@@ -13,6 +13,14 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
 
     @IBOutlet weak var addictionTableView: UITableView!
     @IBOutlet weak var bruhaButton: UIButton!
+    @IBOutlet weak var addictionWidthLabel: NSLayoutConstraint!
+    
+    @IBOutlet weak var addictionHeightLabel: NSLayoutConstraint!
+    @IBOutlet weak var addictionHeightImage: NSLayoutConstraint!
+    @IBOutlet weak var addictionWidthImage: NSLayoutConstraint!
+    
+    @IBOutlet weak var addictionImage: UIImageView!
+    @IBOutlet weak var addictionLabel: UILabel!
     
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
@@ -44,6 +52,24 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
         
         bruhaButton.addConstraints([heightContraints, widthContraints])
         
+        
+        adjustLabelConstraint(addictionWidthLabel)
+        adjustImageConstraint(addictionHeightLabel)
+        adjustImageConstraint(addictionHeightImage)
+        adjustImageConstraint(addictionWidthImage)
+        
+        addictionLabel.adjustsFontSizeToFitWidth = true
+    }
+    
+    func adjustLabelConstraint(constraint: NSLayoutConstraint) {
+        
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        constraint.constant = screenSize.height * 0.3
+    }
+    func adjustImageConstraint(constraint: NSLayoutConstraint) {
+        
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        constraint.constant = screenSize.height/15.5
     }
     
     func customStatusBar() {
