@@ -1,16 +1,16 @@
 //
-//  UpComingEventsViewController.swift
+//  AffiliatedOrgViewController.swift
 //  Bruha
 //
-//  Created by Zhuoheng Wu on 2015-12-17.
-//  Copyright © 2015 Bruha. All rights reserved.
+//  Created by Zhuoheng Wu on 2016-01-04.
+//  Copyright © 2016 Bruha. All rights reserved.
 //
 
 import UIKit
 
-class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
-
-    @IBOutlet weak var upComingTableView: UITableView!
+class AffiliatedOrgViewController: UIViewController, SWTableViewCellDelegate {
+    
+    @IBOutlet weak var affiliatedOrgTable: UITableView!
     @IBOutlet weak var backButton: UIButton!
     
     @IBOutlet weak var bruhaButton: UIButton!
@@ -23,17 +23,16 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
     var screenWidth: CGFloat = 0.0
     var screenHeight: CGFloat = 0.0
     
-    var upcomingEvents: [Event] = []
-    var sourceForEvent: String?
+    var affiliatedOrg: [Organization] = []
     var sourceID: String?
     
     func configureView(){
         
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         let screenHeight = screenSize.height
-        upComingTableView.rowHeight = screenHeight * 0.5
+        affiliatedOrgTable.rowHeight = screenHeight * 0.5
         
-        self.upComingTableView!.allowsMultipleSelection = false
+        self.affiliatedOrgTable!.allowsMultipleSelection = false
     }
     
     func customTopButtons() {
@@ -61,42 +60,36 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
         self.view.bringSubviewToFront(backButton)
         self.view.bringSubviewToFront(bruhaButton)
     }
-    
-    
+
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         configureView()
         customTopButtons()
         
-        upComingTableView.backgroundColor = UIColor.blackColor()
-        upComingTableView.separatorColor = UIColor.blackColor()
+        affiliatedOrgTable.backgroundColor = UIColor.blackColor()
+        affiliatedOrgTable.separatorColor = UIColor.blackColor()
         
-        upcomingEvents.removeAll()
-        print(sourceForEvent)
-        let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
-        for event in eventInfo {
-            if sourceForEvent == "venue" {
-                if event.venueID == sourceID {
-                    upcomingEvents.append(event)
-                    print(event.venueID)
-                }
+        affiliatedOrg.removeAll()
+        
+        let organizationInfo = FetchData(context: managedObjectContext).fetchOrganizations()
+        for organization in organizationInfo! {
+            
+            if organization.organizationID == sourceID {
+                print(sourceID)
+                affiliatedOrg.append(organization)
             }
-            if sourceForEvent == "organization" {
-                if event.organizationID == sourceID {
-                    upcomingEvents.append(event)
-                    print(event.organizationID)
-                }
-            }
+            
         }
-        
-        
+
         // Do any additional setup after loading the view.
     }
-    
+
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
-        upComingTableView.reloadData()
+        affiliatedOrgTable.reloadData()
     }
     
     override func didReceiveMemoryWarning() {
@@ -115,13 +108,13 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
         // Return the number of rows in the section.
         
         
-        return (upcomingEvents.count)
+        return (affiliatedOrg.count)
         
     }
     
     func tableView(tableView: UITableView, willDisplayCell cell: UITableViewCell, forRowAtIndexPath indexPath: NSIndexPath) {
         
-        if let animatedCell = cell as? EventTableViewCell {
+        if let animatedCell = cell as? OrganizationTableViewCell {
             animatedCell.animate()
         }
     }
@@ -130,66 +123,50 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
         
         let posterInfo = FetchData(context: managedObjectContext).fetchPosterImages()
         
-        var cell : EventTableViewCell! = tableView.dequeueReusableCellWithIdentifier("eventTableViewCell") as! EventTableViewCell!
+        var cell : OrganizationTableViewCell! = tableView.dequeueReusableCellWithIdentifier("organizationTableViewCell") as! OrganizationTableViewCell!
         
         if(cell == nil){
             
-            cell = NSBundle.mainBundle().loadNibNamed("EventTableViewCell", owner: self, options: nil)[0] as! EventTableViewCell;
+            cell = NSBundle.mainBundle().loadNibNamed("OrganizationTableViewCell", owner: self, options: nil)[0] as! OrganizationTableViewCell;
         }
         
-        let event = upcomingEvents[indexPath.row]
+        let organization = affiliatedOrg[indexPath.row]
         
-        cell.ExploreImage.contentMode = UIViewContentMode.ScaleToFill
+        cell.organizationImage.contentMode = UIViewContentMode.ScaleToFill
         if let images = posterInfo {
             for img in images {
-                if img.ID == event.eventID {
+                if img.ID == organization.organizationID {
                     if img.Image?.length > 800 {
-                        cell.ExploreImage.image = UIImage(data: img.Image!)
+                        cell.organizationImage.image = UIImage(data: img.Image!)
                     } else {
-                        cell.ExploreImage.image = randomImage()
+                        cell.organizationImage.image = randomImage()
                     }
                 }
             }
         }
         
-        cell.circTitle.text = event.eventName
-        cell.circDate.text = event.eventStartDate
-        cell.circPrice.text = "$\(event.eventPrice!)"
-        cell.circHiddenID.text = event.eventID
-        
-        cell.rectTitle.text = event.eventName
-        cell.rectPrice.text = "$\(event.eventPrice!)"
-        
-        if event.eventVenueName == "" {
-            cell.venueName.text = "nil"
-        }else{cell.venueName.text = event.eventVenueName}
-        
-        cell.venueAddress.text = "\(event.eventVenueAddress.componentsSeparatedByString(", ")[0])\n\(event.eventVenueCity)"
-        
-        cell.startTime.text = "\(convertRectTimeFormat("\(event.eventStartDate) \(event.eventStartTime)")) -"
-        cell.endTime.text = convertRectTimeFormat("\(event.eventEndDate) \(event.eventEndTime)")
-        
-        //cell.startDate.text = event.eventStartDate
-        //cell.startTime.text = "\(event.eventStartTime) -"
-        //cell.endDate.text = event.eventEndDate
-        //cell.endTime.text = event.eventEndTime
+        cell.organizationName.text = organization.organizationName
+        cell.organizationDescription.text = organization.organizationName
+        cell.address.text = "\(organization.organizationAddress.componentsSeparatedByString(", ")[0])"
+        cell.circOrgName.text = organization.organizationName
+        cell.circHiddenID.text = organization.organizationID
         
         cell.circAddicted.contentMode = UIViewContentMode.ScaleAspectFit
         cell.circAddicted.image = UIImage(named: "MyAddictions_Sm")
         cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
-        cell.circCategory.image = UIImage(named: event.primaryCategory)
+        cell.circCategory.image = UIImage(named: organization.primaryCategory)
         
         cell.rectCategory.contentMode = UIViewContentMode.ScaleAspectFill
-        cell.rectCategory.image = UIImage(named: event.primaryCategory)
-        cell.rectCategoryName.text = event.primaryCategory
+        cell.rectCategory.image = UIImage(named: organization.primaryCategory)
+        cell.rectCategoryName.text = organization.primaryCategory
         // Configure the cell...
-
         
-        let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
+        
+        let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsOrganization()
         var like = 0
         
         for addict in addictionInfo! {
-            if addict.eventID == event.eventID {
+            if addict.organizationID == organization.organizationID {
                 like = 1
             }
         }
@@ -211,7 +188,6 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
         
         let temp2: NSMutableArray = NSMutableArray()
         
-        temp2.sw_addUtilityButtonWithColor(UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1), attributedTitle: swipeCellTitle("Buy\nTickets"))
         temp2.sw_addUtilityButtonWithColor(UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1), attributedTitle: swipeCellTitle("Map"))
         temp2.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1), attributedTitle: swipeCellTitle("More\nInfo"))
         
@@ -222,7 +198,7 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
         cell.delegate = self
         cell.selectionStyle = .None
         
-        return cell as EventTableViewCell
+        return cell as OrganizationTableViewCell
         
     }
     
@@ -235,36 +211,38 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
             if GlobalVariables.loggedIn == true {
                 let user = FetchData(context: managedObjectContext).fetchUserInfo()![0].userName
                 
-                var cellIndexPath = self.upComingTableView.indexPathForCell(cell)
-                var selectedCell = self.upComingTableView.cellForRowAtIndexPath(cellIndexPath!) as! EventTableViewCell
+                var cellIndexPath = self.affiliatedOrgTable.indexPathForCell(cell)
+                var selectedCell = self.affiliatedOrgTable.cellForRowAtIndexPath(cellIndexPath!) as! OrganizationTableViewCell
                 GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
                 
-                let eventInfo = upcomingEvents
-                for event in eventInfo{
-                    if event.eventID == GlobalVariables.eventSelected {
+                let organizationInfo = affiliatedOrg
+                for organization in organizationInfo{
+                    if organization.organizationID == GlobalVariables.eventSelected {
                         //Like and Unlike
                         if(cell.leftUtilityButtons[0].titleLabel!!.text! == "Addicted!"){
                             
                             let alertController = UIAlertController(title: "Are you no longer addicted?", message:nil, preferredStyle: .Alert)
                             let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
                             let unlikeAction = UIAlertAction(title: "I'm Over It", style: .Default) { (_) -> Void in
-                                //print("my idddd \(event.subCategoryID)")
-                                DeleteData(context: self.managedObjectContext).deleteAddictionsEvent(event.eventID, deleteUser: user)
-                                print("Removed from addiction(event) \(event.eventID)")
+                                
+                                DeleteData(context: self.managedObjectContext).deleteAddictionsOrgainzation(organization.organizationID, deleteUser: user)
+                                print("Removed from addiction(event) \(organization.organizationID)")
                                 print("REMOVED")
                                 
-                                let eventService = EventService()
-                                eventService.removeAddictedEvents(event.eventID) {
+                                let organizationService = OrganizationService()
+                                
+                                organizationService.removeAddictedOrganizations(organization.organizationID) {
                                     (let removeInfo ) in
                                     print(removeInfo!)
                                 }
                                 
-                                var temp: NSMutableArray = NSMutableArray()
+                                let temp: NSMutableArray = NSMutableArray()
                                 temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),attributedTitle: self.swipeCellTitle("Get Addicted"))
                                 cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
                                 cell.leftUtilityButtons = temp as [AnyObject]
                                 
                                 selectedCell.circAddicted.hidden = true
+                                
                             }
                             alertController.addAction(unlikeAction)
                             alertController.addAction(cancelAction)
@@ -274,19 +252,19 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
                             
                         } else if(cell.leftUtilityButtons[0].titleLabel!!.text! == "Get Addicted") {
                             
-                            let addEvent = AddictionEvent(eventId: event.eventID, userId: user)
-                            SaveData(context: managedObjectContext).saveAddictionEvent(addEvent)
-                            print("Getting Addicted with event id \(event.eventID)")
+                            let addOrgainzation = AddictionOrganization(organizationId: organization.organizationID, userId: user)
+                            SaveData(context: managedObjectContext).saveAddictionOrganization(addOrgainzation)
+                            print("Getting Addicted with event id \(organization.organizationID)")
                             print("ADDICTED")
                             
-                            let eventService = EventService()
+                            let organizationService = OrganizationService()
                             
-                            eventService.addAddictedEvents(event.eventID) {
+                            organizationService.addAddictedOrganizations(organization.organizationID) {
                                 (let addInfo ) in
                                 print(addInfo!)
                             }
                             
-                            var temp: NSMutableArray = NSMutableArray()
+                            let temp: NSMutableArray = NSMutableArray()
                             temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),attributedTitle: swipeCellTitle("Addicted!"))
                             cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
                             cell.leftUtilityButtons = temp as [AnyObject]
@@ -295,6 +273,7 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
                         }
                     }
                 }
+            
             } else {
                 
                 let alert = UIAlertView(title: "Please log in for this!!!", message: nil, delegate: nil, cancelButtonTitle: nil)
@@ -316,35 +295,20 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
         
         switch(index){
         case 0:
-            //if GlobalVariables.addictedDisplay == "Event" {
-                //event ticket
-                print("event ticket")
-            //}
             
-            
+            let cellIndexPath = self.affiliatedOrgTable.indexPathForCell(cell)
+            let selectedCell = self.affiliatedOrgTable.cellForRowAtIndexPath(cellIndexPath!) as! OrganizationTableViewCell
+            GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
+            self.performSegueWithIdentifier("ShowOnMap", sender: self)
         case 1:
-            //Event Ticket
-            //if GlobalVariables.addictedDisplay == "Event"{
-                
-                let cellIndexPath = self.upComingTableView.indexPathForCell(cell)
-                let selectedCell = self.upComingTableView.cellForRowAtIndexPath(cellIndexPath!) as! EventTableViewCell
-                GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
-                self.performSegueWithIdentifier("ShowOnMap", sender: self)
-                
-            //}
             
-        case 2:
+            let cellIndexPath = self.affiliatedOrgTable.indexPathForCell(cell)
             
-            //Event More info
-            print("event more info")
-            
-            let cellIndexPath = self.upComingTableView.indexPathForCell(cell)
-            
-            let selectedCell = self.upComingTableView.cellForRowAtIndexPath(cellIndexPath!) as! EventTableViewCell
+            let selectedCell = self.affiliatedOrgTable.cellForRowAtIndexPath(cellIndexPath!) as! OrganizationTableViewCell
             
             GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
             self.performSegueWithIdentifier("MoreInfore", sender: self)
-            break
+        
         default:
             break
         }
@@ -354,7 +318,7 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "MoreInfore" {
             let destinationController = segue.destinationViewController as! MoreInformationViewController
-            destinationController.sourceForComingEvent = "event"
+            destinationController.sourceForComingEvent = "organization"
             destinationController.sourceID = GlobalVariables.eventSelected
         }
     }
@@ -369,7 +333,7 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
         let indexPath = tableView.indexPathForSelectedRow;
         
         
-            let currentCell = tableView.cellForRowAtIndexPath(indexPath!) as! EventTableViewCell;
+            let currentCell = tableView.cellForRowAtIndexPath(indexPath!) as! OrganizationTableViewCell;
             currentCell.tappedView();
             tableView.deselectRowAtIndexPath(indexPath!, animated: false)
             
@@ -445,7 +409,6 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
         
         return aString
     }
-    
 
     /*
     // MARK: - Navigation

@@ -45,7 +45,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
     var backupOrganizationCategories: [String] = ["Organization Categories"]
     //Calendar
     let calendarManager: JTCalendarManager = JTCalendarManager()
-    let datesSelected = NSMutableArray()
+    //let GlobalVariables.datesSelected = NSMutableArray()
 
 
     let priceLabelTitle = UILabel()
@@ -171,7 +171,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         if(newDayView.isFromAnotherMonth){
             newDayView.alpha = 0.5
         }
-        else if(datesSelected.containsObject(newDayView.date)){
+        else if(GlobalVariables.datesSelected.containsObject(newDayView.date)){
             newDayView.backgroundColor = UIColor.cyanColor()
         }
     }
@@ -180,15 +180,34 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
         let newDayView = dayView as! JTCalendarDayView
         
-        if(datesSelected.containsObject(newDayView.date)){
+        if(GlobalVariables.datesSelected.containsObject(newDayView.date)){
             
-            datesSelected.removeObject(newDayView.date)
+            GlobalVariables.datesSelected.removeObject(newDayView.date)
             newDayView.backgroundColor = UIColor.blackColor()
+            
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            let dateToRemove = dateFormatter.stringFromDate(newDayView.date)
+            
+            if let index = GlobalVariables.UserCustomFilters.dateFilter.indexOf("\(dateToRemove)"){
+                
+                GlobalVariables.UserCustomFilters.dateFilter.removeAtIndex(index)
+            }
+            
         }
         else{
-            datesSelected.addObject(newDayView.date)
+            GlobalVariables.datesSelected.addObject(newDayView.date)
             newDayView.backgroundColor = UIColor.cyanColor()
+            
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            let dateToStore = dateFormatter.stringFromDate(newDayView.date)
+            
+            GlobalVariables.UserCustomFilters.dateFilter.append("\(dateToStore)")
+            
         }
+        print(GlobalVariables.UserCustomFilters.dateFilter)
+        Filtering().filterEvents()
     }
     
     func calendar(calendar: JTCalendarManager!, prepareMenuItemView menuItemView: UIView!, date: NSDate!) {
@@ -211,7 +230,6 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         //newMenuItemView.scrollView
         
     }
- 
 
     
     func clearFilters(sender: UIButton) {
@@ -227,7 +245,8 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
         Filtering().clearFilter()
         resetSliderValue()
-        
+        GlobalVariables.datesSelected.removeAllObjects()
+        calendarManager.reload()
         switch(GlobalVariables.selectedDisplay){
             
         case "Event":

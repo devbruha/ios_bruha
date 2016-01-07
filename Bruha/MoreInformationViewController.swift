@@ -26,13 +26,14 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
     @IBOutlet weak var Image: UIImageView!
     @IBOutlet weak var ImgeHeight: NSLayoutConstraint!
     @IBOutlet weak var scrollView: UIScrollView!
+    @IBOutlet weak var EventCategory: UILabel!
     
     @IBAction func backToExploreButton(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
     var iconForSource: String?
-    var sourceForComingEvent: String = "source"
+    var sourceForComingEvent: String?
     var sourceID: String = "id"
     
     
@@ -83,12 +84,12 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
         
         let posterInfo = FetchData(context: managedObjectContext).fetchPosterImages()
         
-        if GlobalVariables.selectedDisplay == "Event" || GlobalVariables.addictedDisplay == "Event" || GlobalVariables.uploadDisplay == "Event"{
+        if sourceForComingEvent == "event" {
             
             let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
             let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
             for event in eventInfo{
-                if event.eventID == GlobalVariables.eventSelected{
+                if event.eventID == sourceID{
                     Name.text = event.eventName
                     
                     if event.eventVenueName == "" {
@@ -106,6 +107,7 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                     
                     DateUpcomingLabel.text = convertTimeFormat("\(event.eventStartDate)")
                     smallImage.image = UIImage(named: event.primaryCategory)
+                    EventCategory.text = event.primaryCategory
                     webDescriptionContent.loadHTMLString("<div style=\"font-family:OpenSans;color:white;width:100%;word-wrap:break-word;\">\(event.eventDescription)</div>", baseURL: nil)
                     
                     if let images = posterInfo {
@@ -121,7 +123,7 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                     }
                     
                 }
-                if event.eventID == GlobalVariables.eventSelected && addictionInfo!.contains({$0.eventID == GlobalVariables.eventSelected}) {
+                if event.eventID == sourceID && addictionInfo!.contains({$0.eventID == sourceID}) {
                     
                     getAddictedButton.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1)
                     getAddictedLabel.text = "You are addicted"
@@ -129,25 +131,23 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
             }
             
         }
-        if GlobalVariables.selectedDisplay == "Venue" || GlobalVariables.addictedDisplay == "Venue" || GlobalVariables.uploadDisplay == "Venue"{
+        if sourceForComingEvent == "venue"{
 
             let venueInfo = FetchData(context: managedObjectContext).fetchVenues()!
             let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsVenue()
             for venue in venueInfo{
-                if venue.venueID == GlobalVariables.eventSelected{
+                if venue.venueID == sourceID{
                     Name.text = venue.venueName
                     VenueName.text = venue.venueAddress   //this is venue address
                     Address.text = ""
                     PriceCalendarLabel.text = "Calendar"
                     DateUpcomingLabel.text = "Up Coming Events"
                     smallImage.image = UIImage(named: venue.primaryCategory)
+                    EventCategory.text = venue.primaryCategory
                     webDescriptionContent.loadHTMLString("<div style=\"font-family:OpenSans;color:white;width:100%;word-wrap:break-word;\">\(venue.venueDescription)</div>", baseURL: nil)
                     
                     PriceCalendar.enabled = true
                     DateUpcoming.enabled = true
-                    
-                    sourceForComingEvent = "venue"
-                    sourceID = venue.venueID
                     
                     if let images = posterInfo {
                         for img in images {
@@ -161,7 +161,7 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                         }
                     }
                 }
-                if venue.venueID == GlobalVariables.eventSelected && addictionInfo!.contains({$0.venueID == GlobalVariables.eventSelected}) {
+                if venue.venueID == sourceID && addictionInfo!.contains({$0.venueID == sourceID}) {
                     
                     getAddictedButton.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1)
                     getAddictedLabel.text = "You are addicted"
@@ -169,25 +169,23 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
             }
             
         }
-        if GlobalVariables.selectedDisplay == "Organization" || GlobalVariables.addictedDisplay == "Organization" || GlobalVariables.uploadDisplay == "Organization"{
+        if sourceForComingEvent == "organization"{
 
             let organizationInfo = FetchData(context: managedObjectContext).fetchOrganizations()
             let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsOrganization()
             for organization in organizationInfo!{
-                if organization.organizationID == GlobalVariables.eventSelected{
+                if organization.organizationID == sourceID{
                     Name.text = organization.organizationName
                     VenueName.text = organization.organizationAddress  //this is the org address
                     Address.text = ""
                     PriceCalendarLabel.text = "Calendar"
                     DateUpcomingLabel.text = "Up Coming Events"
                     smallImage.image = UIImage(named: organization.primaryCategory)
+                    EventCategory.text = organization.primaryCategory
                     webDescriptionContent.loadHTMLString("<div style=\"font-family:OpenSans;color:white;width:100%;word-wrap:break-word;\">\(organization.organizationDescription)</div>", baseURL: nil)
                     
                     PriceCalendar.enabled = true
                     DateUpcoming.enabled = true
-                    
-                    sourceForComingEvent = "organization"
-                    sourceID = organization.organizationID
                     
                     if let images = posterInfo {
                         for img in images {
@@ -201,7 +199,7 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                         }
                     }
                 }
-                if organization.organizationID == GlobalVariables.eventSelected && addictionInfo!.contains({$0.organizationID == GlobalVariables.eventSelected}) {
+                if organization.organizationID == sourceID && addictionInfo!.contains({$0.organizationID == sourceID}) {
                     
                     getAddictedButton.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1)
                     getAddictedLabel.text = "You are addicted"
@@ -240,6 +238,9 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
         scrollView.backgroundColor = UIColor(patternImage: UIImage(named: "Splash Background")!)
         
         
+        DateUpcoming.adjustsImageWhenHighlighted = true
+        PriceCalendar.showsTouchWhenHighlighted = true
+        
         // Do any additional setup after loading the view.
     }
     
@@ -256,11 +257,11 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
         if GlobalVariables.loggedIn == true {
             let user = FetchData(context: managedObjectContext).fetchUserInfo()![0].userName
             //Event
-            if GlobalVariables.selectedDisplay == "Event" || GlobalVariables.addictedDisplay == "Event" || GlobalVariables.uploadDisplay == "Event"{
+            if sourceForComingEvent == "event"{
                 let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
                 let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
                 for event in eventInfo!{
-                    if event.eventID == GlobalVariables.eventSelected && !addictionInfo!.contains({$0.eventID == GlobalVariables.eventSelected}) {
+                    if event.eventID == sourceID && !addictionInfo!.contains({$0.eventID == sourceID}) {
                         let addEvent = AddictionEvent(eventId: event.eventID, userId: user)
                         SaveData(context: managedObjectContext).saveAddictionEvent(addEvent)
                         print("new getaddicted success!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
@@ -273,7 +274,7 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                         getAddictedButton.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1)
                         getAddictedLabel.text = "You are addicted"
                         
-                    } else if event.eventID == GlobalVariables.eventSelected && addictionInfo!.contains({$0.eventID == GlobalVariables.eventSelected}) {
+                    } else if event.eventID == sourceID && addictionInfo!.contains({$0.eventID == sourceID}) {
                         
                         let alertController = UIAlertController(title: "Are you no longer addicted?", message:nil, preferredStyle: .Alert)
                         let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
@@ -309,11 +310,11 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                 }
             }
             //Venue
-            if GlobalVariables.selectedDisplay == "Venue" || GlobalVariables.addictedDisplay == "Venue" || GlobalVariables.uploadDisplay == "Venue"{
+            if sourceForComingEvent == "venue"{
                 let venueInfo = FetchData(context: managedObjectContext).fetchVenues()
                 let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsVenue()
                 for venue in venueInfo!{
-                    if venue.venueID == GlobalVariables.eventSelected && !addictionInfo!.contains({$0.venueID == GlobalVariables.eventSelected}) {
+                    if venue.venueID == sourceID && !addictionInfo!.contains({$0.venueID == sourceID}) {
                         let addVenue = AddictionVenue(venueId: venue.venueID, userId: user)
                         SaveData(context: managedObjectContext).saveAddictionVenue(addVenue)
                         print("new Venue getaddicted success!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
@@ -326,7 +327,7 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                         getAddictedButton.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1)
                         getAddictedLabel.text = "You are addicted"
                         
-                    } else if venue.venueID == GlobalVariables.eventSelected && addictionInfo!.contains({$0.venueID == GlobalVariables.eventSelected}) {
+                    } else if venue.venueID == sourceID && addictionInfo!.contains({$0.venueID == sourceID}) {
                         
                         let alertController = UIAlertController(title: "Are you no longer addicted?", message:nil, preferredStyle: .Alert)
                         let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
@@ -354,11 +355,11 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                 }
             }
             //Organization
-            if GlobalVariables.selectedDisplay == "Organization" || GlobalVariables.addictedDisplay == "Organization" || GlobalVariables.uploadDisplay == "Organization"{
+            if sourceForComingEvent == "organization"{
                 let organizationInfo = FetchData(context: managedObjectContext).fetchOrganizations()
                 let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsOrganization()
                 for organization in organizationInfo!{
-                    if organization.organizationID == GlobalVariables.eventSelected{
+                    if organization.organizationID == sourceID && !addictionInfo!.contains({$0.organizationID == sourceID}){
                         let addOrganization = AddictionOrganization(organizationId: organization.organizationID, userId: user)
                         SaveData(context: managedObjectContext).saveAddictionOrganization(addOrganization)
                         print("new ORG getaddicted success!!!!!!!!!!!!!!!!!!!!!!!!!!!!!")
@@ -367,18 +368,18 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                             (let addInfo) in
                             print(addInfo!)
                         }
-                        
+                        print(organization.organizationName)
                         getAddictedButton.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1)
                         getAddictedLabel.text = "You are addicted"
                         
-                    } else if organization.organizationID == GlobalVariables.eventSelected && addictionInfo!.contains({$0.organizationID == GlobalVariables.eventSelected}) {
+                    } else if organization.organizationID == sourceID && addictionInfo!.contains({$0.organizationID == sourceID}) {
                         
                         let alertController = UIAlertController(title: "Are you no longer addicted?", message:nil, preferredStyle: .Alert)
                         let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
                         let unlikeAction = UIAlertAction(title: "I'm Over It", style: .Default) { (_) -> Void in
                             
                             DeleteData(context: self.managedObjectContext).deleteAddictionsOrgainzation(organization.organizationID, deleteUser: user)
-                            print("Removed from addiction(event) \(organization.organizationID)")
+                            print("Removed from addiction(org) \(organization.organizationID)")
                             print("REMOVED")
                             
                             let organizationService = OrganizationService()
@@ -394,6 +395,8 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                         }
                         alertController.addAction(unlikeAction)
                         alertController.addAction(cancelAction)
+                        
+                        self.presentViewController(alertController, animated: true, completion: nil)
                     }
                 }
             }

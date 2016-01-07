@@ -898,7 +898,12 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             let cellIndexPath = self.dropDownTable.indexPathForCell(cell)
             let selectedCell = self.dropDownTable.cellForRowAtIndexPath(cellIndexPath!) as! MapDropTableViewCell
             GlobalVariables.eventSelected = selectedCell.dropHiddenID.text!
-            self.performSegueWithIdentifier("MoreInfore", sender: self)
+            
+            if GlobalVariables.selectedDisplay == "Event" {
+                self.performSegueWithIdentifier("EventMoreInfo", sender: self)
+            } else {
+                self.performSegueWithIdentifier("MoreInfore", sender: self)
+            }
             
             break
        
@@ -909,9 +914,18 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
         if segue.identifier == "MoreInfore" {
-            let infoController = segue.destinationViewController as! MoreInformationViewController
-            infoController.iconForSource = "MapIcon"
+            let destinationController = segue.destinationViewController as! MoreInformationViewController
+            destinationController.iconForSource = "MapIcon"
+            if GlobalVariables.selectedDisplay == "Venue" {
+                destinationController.sourceForComingEvent = "venue"
+                destinationController.sourceID = GlobalVariables.eventSelected
+            }
+            if GlobalVariables.selectedDisplay == "Organization" {
+                destinationController.sourceForComingEvent = "organization"
+                destinationController.sourceID = GlobalVariables.eventSelected
+            }
         }
     }
     

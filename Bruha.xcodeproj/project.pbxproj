@@ -139,6 +139,8 @@
 		A58A3A261BB980B200601749 /* AddictionEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = A58A3A251BB980B200601749 /* AddictionEvent.swift */; };
 		A59443A11C03C088000B3969 /* Image.swift in Sources */ = {isa = PBXBuildFile; fileRef = A59443A01C03C088000B3969 /* Image.swift */; };
 		A5967F171C2067E700559FC9 /* MoreInformationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5967F161C2067E700559FC9 /* MoreInformationViewController.swift */; };
+		A5C96A831C3AE5460051EF1C /* EventMoreInfomationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C96A821C3AE5460051EF1C /* EventMoreInfomationViewController.swift */; };
+		A5C96A851C3AEF770051EF1C /* AffiliatedOrgViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5C96A841C3AEF770051EF1C /* AffiliatedOrgViewController.swift */; };
 		A5CAB5781BED1ECE007E597B /* MapDropTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = A5CAB5771BED1ECE007E597B /* MapDropTableViewCell.xib */; };
 		A5CAB57A1BED2145007E597B /* MapDropTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5CAB5791BED2145007E597B /* MapDropTableViewCell.swift */; };
 		A5D34D621C06122C005F6236 /* FBSDKCoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A5D34D5F1C06122C005F6236 /* FBSDKCoreKit.framework */; };
@@ -305,6 +307,8 @@
 		A58A3A251BB980B200601749 /* AddictionEvent.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddictionEvent.swift; sourceTree = "<group>"; };
 		A59443A01C03C088000B3969 /* Image.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Image.swift; sourceTree = "<group>"; };
 		A5967F161C2067E700559FC9 /* MoreInformationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MoreInformationViewController.swift; sourceTree = "<group>"; };
+		A5C96A821C3AE5460051EF1C /* EventMoreInfomationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventMoreInfomationViewController.swift; sourceTree = "<group>"; };
+		A5C96A841C3AEF770051EF1C /* AffiliatedOrgViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AffiliatedOrgViewController.swift; sourceTree = "<group>"; };
 		A5CAB5771BED1ECE007E597B /* MapDropTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MapDropTableViewCell.xib; sourceTree = "<group>"; };
 		A5CAB5791BED2145007E597B /* MapDropTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapDropTableViewCell.swift; sourceTree = "<group>"; };
 		A5D34D5F1C06122C005F6236 /* FBSDKCoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = FBSDKCoreKit.framework; sourceTree = "<group>"; };
@@ -407,6 +411,8 @@
 				3C4FA13E1C04EE150034610E /* ShowOnMapViewController.swift */,
 				A5967F161C2067E700559FC9 /* MoreInformationViewController.swift */,
 				A501998B1C23239B0097624F /* UpComingEventsViewController.swift */,
+				A5C96A821C3AE5460051EF1C /* EventMoreInfomationViewController.swift */,
+				A5C96A841C3AEF770051EF1C /* AffiliatedOrgViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -888,7 +894,9 @@
 				181EB61A1B714B7600B9295E /* NSDateAdditions.swift in Sources */,
 				45C6D5C01B851ADE00EE4A05 /* EventSubCategoriesDBModel.swift in Sources */,
 				181EB6141B714B7600B9295E /* DayCollectionCell.swift in Sources */,
+				A5C96A851C3AEF770051EF1C /* AffiliatedOrgViewController.swift in Sources */,
 				A501998C1C23239B0097624F /* UpComingEventsViewController.swift in Sources */,
+				A5C96A831C3AE5460051EF1C /* EventMoreInfomationViewController.swift in Sources */,
 				A505C0F71BD17B910067CDD1 /* LoadScreenViewController.swift in Sources */,
 				1892A8001BEAFADE0063DFBB /* MoreInfoViewController.swift in Sources */,
 				181EB6101B714B7600B9295E /* CalendarView.swift in Sources */,

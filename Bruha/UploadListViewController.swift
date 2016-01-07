@@ -481,7 +481,7 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
                 let cellIndexPath = self.uploadTableView.indexPathForCell(cell)
                 let selectedCell = self.uploadTableView.cellForRowAtIndexPath(cellIndexPath!) as! EventTableViewCell
                 GlobalVariables.eventSelected = selectedCell.circHiddenID.text!
-                self.performSegueWithIdentifier("MoreInfore", sender: self)
+                self.performSegueWithIdentifier("EventMoreInfo", sender: self)
             }
             else if GlobalVariables.uploadDisplay == "Venue" {
                 let cellIndexPath = self.uploadTableView.indexPathForCell(cell)
@@ -503,6 +503,22 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
         }
         
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+        if segue.identifier == "MoreInfore" {
+            let destinationController = segue.destinationViewController as! MoreInformationViewController
+            if GlobalVariables.uploadDisplay == "Venue" {
+                destinationController.sourceForComingEvent = "venue"
+                destinationController.sourceID = GlobalVariables.eventSelected
+            }
+            if GlobalVariables.uploadDisplay == "Organization" {
+                destinationController.sourceForComingEvent = "organization"
+                destinationController.sourceID = GlobalVariables.eventSelected
+            }
+        }
+    }
+
     
     func swipeableTableViewCellShouldHideUtilityButtonsOnSwipe(cell : SWTableViewCell ) -> Bool {
         return true
