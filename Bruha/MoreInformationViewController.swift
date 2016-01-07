@@ -418,7 +418,18 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
         switch navigationType {
         case .LinkClicked:
             // Open links in Safari
-            UIApplication.sharedApplication().openURL(request.URL!)
+            
+            let alertController = UIAlertController(title: "This link will navigate to a 3rd party website", message:nil, preferredStyle: .Alert)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+            let yesAction = UIAlertAction(title: "Ok", style: .Default) { (_) -> Void in
+                
+                UIApplication.sharedApplication().openURL(request.URL!)
+            }
+            alertController.addAction(yesAction)
+            alertController.addAction(cancelAction)
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
+            
             return false
         default:
             // Handle other navigation types...
@@ -428,11 +439,16 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
     
     func webViewDidFinishLoad(webView: UIWebView) {
         
-        webDescriptionContent.scrollView.scrollEnabled = false
+//        webDescriptionContent.scrollView.scrollEnabled = false
+//        
+//        let height = webView.scrollView.contentSize.height
+//        
+//        scrollView.contentInset.bottom = height + 180 + 40 + UIScreen.mainScreen().bounds.height * 0.33 + 20
         
-        let height = webView.scrollView.contentSize.height
         
-        scrollView.contentInset.bottom = height + 180 + 40 + UIScreen.mainScreen().bounds.height * 0.33 + 20
+        webDescriptionContent.scrollView.scrollEnabled = true
+        
+        scrollView.scrollEnabled = false
     }
     
     func randomImage() -> UIImage {

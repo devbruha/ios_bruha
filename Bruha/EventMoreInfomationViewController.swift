@@ -262,9 +262,9 @@ class EventMoreInfomationViewController: UIViewController, UIWebViewDelegate{
         switch navigationType {
         case .LinkClicked:
             // Open links in Safari
-            let alertController = UIAlertController(title: "Do you want to navigate to a browser?", message:nil, preferredStyle: .Alert)
-            let cancelAction = UIAlertAction(title: "Go Away", style: .Default, handler: nil)
-            let yesAction = UIAlertAction(title: "Sure", style: .Default) { (_) -> Void in
+            let alertController = UIAlertController(title: "This link will navigate to a 3rd party website", message:nil, preferredStyle: .Alert)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+            let yesAction = UIAlertAction(title: "Ok", style: .Default) { (_) -> Void in
                 
                 UIApplication.sharedApplication().openURL(request.URL!)
             }
