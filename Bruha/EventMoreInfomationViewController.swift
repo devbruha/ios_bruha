@@ -258,13 +258,40 @@ class EventMoreInfomationViewController: UIViewController, UIWebViewDelegate{
         }
     }
     
+    func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
+        switch navigationType {
+        case .LinkClicked:
+            // Open links in Safari
+            let alertController = UIAlertController(title: "Do you want to navigate to a browser?", message:nil, preferredStyle: .Alert)
+            let cancelAction = UIAlertAction(title: "Go Away", style: .Default, handler: nil)
+            let yesAction = UIAlertAction(title: "Sure", style: .Default) { (_) -> Void in
+                
+                UIApplication.sharedApplication().openURL(request.URL!)
+            }
+            alertController.addAction(yesAction)
+            alertController.addAction(cancelAction)
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
+            
+            return false
+        default:
+            // Handle other navigation types...
+            return true
+        }
+    }
+    
     func webViewDidFinishLoad(webView: UIWebView) {
         
-        webDescriptionContent.scrollView.scrollEnabled = false
+//        webDescriptionContent.scrollView.scrollEnabled = false
+//        
+//        let height = webView.scrollView.contentSize.height
+//        
+//        scrollView.contentInset.bottom = height + 180 + 40 + UIScreen.mainScreen().bounds.height * 0.33 + 30
         
-        let height = webView.scrollView.contentSize.height
         
-        scrollView.contentInset.bottom = height + 180 + 40 + UIScreen.mainScreen().bounds.height * 0.33 + 30
+        webDescriptionContent.scrollView.scrollEnabled = true
+        
+        scrollView.scrollEnabled = false
     }
     
     func randomImage() -> UIImage {

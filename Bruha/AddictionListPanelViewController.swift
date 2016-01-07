@@ -177,9 +177,16 @@ class AddictionListPanelViewController: UIViewController, UITableViewDelegate {
     
     func discoverableTapped(){
         
-        GlobalVariables.addictedDisplay = "Discoverable"
+        //GlobalVariables.addictedDisplay = "Discoverable"
         updateEVOD()
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeAddiction", object: self)
+        let alert = UIAlertView(title: "Discoverable Coming Soon!!!", message: nil, delegate: nil, cancelButtonTitle: nil)
+        alert.show()
+        let delay = 1.5 * Double(NSEC_PER_SEC)
+        var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+        dispatch_after(time, dispatch_get_main_queue(), {
+            alert.dismissWithClickedButtonIndex(-1, animated: true)
+        })
     }
     
     func organizationTapped(){
