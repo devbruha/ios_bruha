@@ -88,7 +88,7 @@ class ShowOnMapViewController: UIViewController, GMSMapViewDelegate{
                     mapView.camera = cameraPosition
                     position = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
                     marker = GMSMarker(position: position)
-                    marker.icon = UIImage(named: primaryCategory!)
+                    marker.icon = resizeCategoryImage(primaryCategory!)
                     marker.title = name
                     marker.map = mapView
                 }
@@ -108,7 +108,7 @@ class ShowOnMapViewController: UIViewController, GMSMapViewDelegate{
                     mapView.camera = cameraPosition
                     position = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
                     marker = GMSMarker(position: position)
-                    marker.icon = UIImage(named: primaryCategory!)
+                    marker.icon = resizeCategoryImage(primaryCategory!)
                     marker.title = name
                     marker.map = mapView
                 }
@@ -128,13 +128,27 @@ class ShowOnMapViewController: UIViewController, GMSMapViewDelegate{
                     mapView.camera = cameraPosition
                     position = CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
                     marker = GMSMarker(position: position)
-                    marker.icon = UIImage(named: primaryCategory!)
+                    marker.icon = resizeCategoryImage(primaryCategory!)
                     marker.title = name
                     marker.map = mapView
                 }
             }
         }
         
+    }
+    
+    func resizeCategoryImage (imgString: String) -> UIImage {
+        
+        let newImgSize: CGFloat = 30
+        
+        let imgToResize = UIImage(named: imgString)
+        UIGraphicsBeginImageContextWithOptions(CGSizeMake(newImgSize, newImgSize), false, 0)
+        imgToResize?.drawInRect(CGRectMake(0, 0, newImgSize, newImgSize))
+        
+        let resizedImg = UIGraphicsGetImageFromCurrentImageContext()
+        UIGraphicsEndImageContext()
+        
+        return resizedImg
     }
     
     func mapView(mapView: GMSMapView!, didTapMarker marker: GMSMarker!) -> Bool {

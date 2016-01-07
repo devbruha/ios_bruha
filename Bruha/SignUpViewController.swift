@@ -14,6 +14,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, FBSDKLoginBut
     
     @IBOutlet weak var username: UITextField!
     @IBOutlet weak var password: UITextField!
+    @IBOutlet weak var verifyPassword: UITextField!
     @IBOutlet weak var emailaddress: UITextField!
     @IBOutlet weak var continueWithoutRegister: UIButton!
     
@@ -50,11 +51,15 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, FBSDKLoginBut
 
         self.username.delegate = self
         self.password.delegate = self
+        self.verifyPassword.delegate = self
         self.emailaddress.delegate = self
         
         self.username.tag = 0
-        self.password.tag = 1
-        self.emailaddress.tag = 2
+        self.password.tag = 0
+        self.verifyPassword.tag = 0
+        self.emailaddress.tag = 0
+        
+        self.emailaddress.keyboardType = .EmailAddress
         
         signupB.layer.cornerRadius = 2
         signupB.clipsToBounds = true
@@ -198,6 +203,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, FBSDKLoginBut
         let password:String = self.password.text!
         let emailaddress:String = self.emailaddress.text!
         
+        //error = "true" means that there is no error
         error = "true"
         
         error = CredentialCheck().internetCheck()
@@ -210,46 +216,52 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, FBSDKLoginBut
                 
                 error = CredentialCheck().passwordCheck(password)
                 
-                if error == "true"{
+                if error == "true" {
                     
-                    error = CredentialCheck().emailCheck(emailaddress)
-                    
-                    if error == "true"{
+                    if verifyPassword.text == self.password.text {
                         
-                        print("Register conditions are checked!")
-                        let registerService = RegisterService(context: managedObjectContext, username: username, password: password, emailaddress: emailaddress)
+                        error = CredentialCheck().emailCheck(emailaddress)
                         
-                        // Running the login service, currently hard coded credentials, needs to take user input
-                        
-                        registerService.registerNewUser{
-                            (let registerResponse) in
+                        if error == "true"{
                             
-                            dispatch_async(dispatch_get_main_queue()){
+                            print("Register conditions are checked!")
+                            let registerService = RegisterService(context: managedObjectContext, username: username, password: password, emailaddress: emailaddress)
+                            
+                            // Running the login service, currently hard coded credentials, needs to take user input
+                            
+                            registerService.registerNewUser{
+                                (let registerResponse) in
                                 
-                                let alertController = UIAlertController(title: "Register Successful", message:nil, preferredStyle: .Alert)
-                                
-                                let acceptAction = UIAlertAction(title: "OK", style: .Default) { (_) -> Void in
-                                    self.performSegueWithIdentifier("ProceedToDashBoard", sender: self) // Replace SomeSegue with your segue identifier (name)
+                                dispatch_async(dispatch_get_main_queue()){
                                     
-                                    let mUser = User(username: username, userEmail: emailaddress, userCity: "Not Set", userFName: "Not Set", userGender: "Not Set", userBirthdate: "Not Set")
+                                    let alertController = UIAlertController(title: "Register Successful", message:nil, preferredStyle: .Alert)
                                     
-                                    SaveData(context: self.managedObjectContext).saveUser(mUser)
+                                    let acceptAction = UIAlertAction(title: "OK", style: .Default) { (_) -> Void in
+                                        self.performSegueWithIdentifier("ProceedToDashBoard", sender: self) // Replace SomeSegue with your segue identifier (name)
+                                        
+                                        let mUser = User(username: username, userEmail: emailaddress, userCity: "Not Set", userFName: "Not Set", userGender: "Not Set", userBirthdate: "Not Set")
+                                        
+                                        SaveData(context: self.managedObjectContext).saveUser(mUser)
+                                        
+                                        GlobalVariables.loggedIn = true
+                                    }
                                     
-                                    GlobalVariables.loggedIn = true
+                                    alertController.addAction(acceptAction)
+                                    
+                                    self.presentViewController(alertController, animated: true, completion: nil)
                                 }
-                                
-                                alertController.addAction(acceptAction)
-                                
-                                self.presentViewController(alertController, animated: true, completion: nil)
                             }
                         }
-                    }
+                            
+                        else{
+                            
+                            let alert = UIAlertView(title: "Email Address Error", message: error, delegate: nil, cancelButtonTitle: "OK")
+                            alert.show()
+                        }
                         
-                    else{
-                        
-                        let alert = UIAlertView(title: "Email Address Error", message: error, delegate: nil, cancelButtonTitle: "OK")
-                        alert.show()
-                    }
+                    } else {
+                        let alert = UIAlertView(title: "Password Verification Error", message: "Please verify password match.", delegate: nil, cancelButtonTitle: "OK")
+                        alert.show()}
                 }
                     
                 else{
@@ -285,20 +297,25 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, FBSDKLoginBut
     
     func textFieldDidBeginEditing(textField: UITextField) {
         bruhaFace.hidden = true
-        if textField.tag == 0 || textField.tag == 2 {
-            animateViewMoving(true, moveValue: 253)
-        }
-        else if textField.tag == 1 {
-            animateViewMoving(true, moveValue: 216)
+        
+        switch textField.tag {
+        case 0...3:
+            animateViewMoving(true, moveValue: 200)
+            
+        default:
+            break
         }
     }
+    
     func textFieldDidEndEditing(textField: UITextField) {
         bruhaFace.hidden = false
-        if textField.tag == 0 || textField.tag == 2 {
-            animateViewMoving(false, moveValue: 253)
-        }
-        else if textField.tag == 1 {
-            animateViewMoving(false, moveValue: 216)
+        
+        switch textField.tag {
+        case 0...3:
+            animateViewMoving(false, moveValue: 200)
+            
+        default:
+            break
         }
     }
     func animateViewMoving (up:Bool, moveValue :CGFloat){
