@@ -24,7 +24,7 @@ class AffiliatedOrgViewController: UIViewController, SWTableViewCellDelegate {
     var screenHeight: CGFloat = 0.0
     
     var affiliatedOrg: [Organization] = []
-    var sourceID: String?
+    var sourceID: [String] = []
     
     func configureView(){
         
@@ -73,14 +73,15 @@ class AffiliatedOrgViewController: UIViewController, SWTableViewCellDelegate {
         
         affiliatedOrg.removeAll()
         
-        let organizationInfo = FetchData(context: managedObjectContext).fetchOrganizations()
-        for organization in organizationInfo! {
-            
-            if organization.organizationID == sourceID {
-                print(sourceID)
-                affiliatedOrg.append(organization)
+        let organizationInfo = FetchData(context: managedObjectContext).fetchOrganizations()!
+        
+
+        
+        for orgID in sourceID {
+            if organizationInfo.contains({$0.organizationID == orgID}) {
+                let idx = organizationInfo.indexOf({$0.organizationID == orgID})!
+                affiliatedOrg.append(organizationInfo[idx])
             }
-            
         }
 
         // Do any additional setup after loading the view.
@@ -107,7 +108,7 @@ class AffiliatedOrgViewController: UIViewController, SWTableViewCellDelegate {
         // #warning Incomplete method implementation.
         // Return the number of rows in the section.
         
-        
+        print("no. of aff org is:", affiliatedOrg.count)
         return (affiliatedOrg.count)
         
     }

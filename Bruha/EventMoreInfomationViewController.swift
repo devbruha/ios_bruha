@@ -35,7 +35,7 @@ class EventMoreInfomationViewController: UIViewController, UIWebViewDelegate{
     }
     
     var iconForSource: String?
-    var sourceID: String = "id"
+    var sourceID: [String] = ["id"]
     var eventVenueSource: String = "ID"
     
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
@@ -116,9 +116,9 @@ class EventMoreInfomationViewController: UIViewController, UIWebViewDelegate{
                     eventCategory.text = event.primaryCategory
                     webDescriptionContent.loadHTMLString("<div style=\"font-family:OpenSans;color:white;width:100%;word-wrap:break-word;\">\(event.eventDescription)</div>", baseURL: nil)
                     
-                    sourceID = event.organizationID
+                    sourceID.append(event.organizationID)
                     eventVenueSource = event.venueID
-                    
+                    print("org id passed", sourceID); print("event id", event.eventID)
                     if let images = posterInfo {
                         for img in images {
                             if img.ID == event.eventID {
