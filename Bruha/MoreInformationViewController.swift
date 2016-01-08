@@ -28,6 +28,16 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var EventCategory: UILabel!
     
+    @IBOutlet weak var moreInfoLabel: UILabel!
+    @IBOutlet weak var moreInfoHeightLabel: NSLayoutConstraint!
+    
+    @IBOutlet weak var moreInfoWidthLabel: NSLayoutConstraint!
+    
+    @IBOutlet weak var moreInfoImage: UIImageView!
+    @IBOutlet weak var moreInfoWidthImage: NSLayoutConstraint!
+    
+    @IBOutlet weak var moreInfoHeightImage: NSLayoutConstraint!
+    
     @IBAction func backToExploreButton(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -70,6 +80,40 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
         
         self.view.bringSubviewToFront(backButton)
         self.view.bringSubviewToFront(bruhaButton)
+        
+        
+        
+        adjustLabelConstraint(moreInfoWidthLabel)
+        adjustImageConstraint(moreInfoHeightLabel)
+        adjustImageConstraint(moreInfoHeightImage)
+        adjustImageConstraint(moreInfoWidthImage)
+        
+        moreInfoLabel.adjustsFontSizeToFitWidth = true
+    }
+    
+    func adjustLabelConstraint(constraint: NSLayoutConstraint) {
+        
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        constraint.constant = screenSize.height * 0.3
+    }
+    func adjustImageConstraint(constraint: NSLayoutConstraint) {
+        
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        constraint.constant = screenSize.height/15.5
+    }
+
+    func animateHeader() {
+        UIView.animateWithDuration(1.5, delay: 0.0, options: [.TransitionFlipFromLeft], animations: { () -> Void in
+            self.moreInfoLabel.alpha = 1
+            self.moreInfoImage.alpha = 1
+            }) {(finished) -> Void in
+                
+                UIView.animateWithDuration(2.5, delay: 0.3, options: [.TransitionFlipFromRight], animations: { () -> Void in
+                    self.moreInfoLabel.alpha = 0.0
+                    self.moreInfoImage.alpha = 0.0
+                    }) {(finished) -> Void in
+                }
+        }
     }
     
     func labelDisplay(){
@@ -96,6 +140,7 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                         VenueName.text = "nil"
                     } else {VenueName.text = event.eventVenueName }
                     
+                    moreInfoLabel.text = "Up & Coming"
                     
                     Address.text = "\(event.eventVenueAddress.componentsSeparatedByString(", ")[0]), \(event.eventVenueCity)"
                     
@@ -237,13 +282,19 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
         scrollView.contentMode = UIViewContentMode.ScaleAspectFit
         scrollView.backgroundColor = UIColor(patternImage: UIImage(named: "Splash Background")!)
         
-        
-        DateUpcoming.adjustsImageWhenHighlighted = true
+        DateUpcoming.showsTouchWhenHighlighted = true
         PriceCalendar.showsTouchWhenHighlighted = true
+        
+        moreInfoImage.alpha = 0
+        moreInfoLabel.alpha = 0
         
         // Do any additional setup after loading the view.
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        animateHeader()
+    }
    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

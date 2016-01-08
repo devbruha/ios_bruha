@@ -497,6 +497,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         eventCategoriesTable.reloadData()
         adjustHeightOfTableView(eventCategoriesTable, constraint: eventCategoryTableHeight)
         updateNotificationSent()
+        
     }
     
     func venueTapped(){

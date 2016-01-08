@@ -13,6 +13,15 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
     
     @IBOutlet weak var uploadTableView: UITableView!
     @IBOutlet weak var bruhaButton: UIButton!
+    @IBOutlet weak var myUploadLabel: UILabel!
+    @IBOutlet weak var myUploadWidthLabel: NSLayoutConstraint!
+    @IBOutlet weak var myUploadHeightLabel: NSLayoutConstraint!
+    
+    @IBOutlet weak var myUploadImage: UIImageView!
+    @IBOutlet weak var myUploadWidthImage: NSLayoutConstraint!
+    
+    @IBOutlet weak var myUploadHeightImage: NSLayoutConstraint!
+    
     
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
@@ -43,6 +52,33 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
         widthContraints.priority = UILayoutPriorityDefaultHigh
         
         bruhaButton.addConstraints([heightContraints, widthContraints])
+        
+        adjustLabelConstraint(myUploadWidthLabel)
+        adjustImageConstraint(myUploadHeightLabel)
+        adjustImageConstraint(myUploadHeightImage)
+        adjustImageConstraint(myUploadWidthImage)
+        
+        myUploadLabel.adjustsFontSizeToFitWidth = true
+    }
+    
+    func adjustLabelConstraint(constraint: NSLayoutConstraint) {
+        
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        constraint.constant = screenSize.height * 0.3
+    }
+    func adjustImageConstraint(constraint: NSLayoutConstraint) {
+        
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        constraint.constant = screenSize.height/15.5
+    }
+
+    func animateHeader() {
+        UIView.animateWithDuration(1.5, delay: 0.0, options: [.TransitionFlipFromLeft], animations: { () -> Void in
+            self.myUploadLabel.alpha = 1
+            self.myUploadImage.alpha = 1
+            }) {(finished) -> Void in
+                
+        }
     }
     
     func customStatusBar() {
@@ -61,12 +97,17 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
         uploadTableView.backgroundColor = UIColor.blackColor()
         uploadTableView.separatorColor = UIColor.blackColor()
         
+        self.myUploadLabel.alpha = 0.0
+        self.myUploadImage.alpha = 0.0
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateNotificationUpload", name: "itemDisplayChangeUpload", object: nil)
         // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        animateHeader()
+        
         uploadTableView.reloadData()
     }
     

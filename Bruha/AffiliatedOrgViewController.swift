@@ -14,6 +14,20 @@ class AffiliatedOrgViewController: UIViewController, SWTableViewCellDelegate {
     @IBOutlet weak var backButton: UIButton!
     
     @IBOutlet weak var bruhaButton: UIButton!
+    
+    @IBOutlet weak var affiliatedOrgLabel: UILabel!
+    
+    @IBOutlet weak var affiliatedOrgHeightLabel: NSLayoutConstraint!
+    
+    @IBOutlet weak var affiliatedOrgWidthLabel: NSLayoutConstraint!
+    
+    @IBOutlet weak var affiliatedOrgImage: UIImageView!
+
+    @IBOutlet weak var affiliatedOrgWidthImage: NSLayoutConstraint!
+    
+    @IBOutlet weak var affiliatedOrgHeightImage: NSLayoutConstraint!
+    
+    
     @IBAction func backToExploreButton(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -59,8 +73,40 @@ class AffiliatedOrgViewController: UIViewController, SWTableViewCellDelegate {
         
         self.view.bringSubviewToFront(backButton)
         self.view.bringSubviewToFront(bruhaButton)
+        
+        
+        adjustLabelConstraint(affiliatedOrgWidthLabel)
+        adjustImageConstraint(affiliatedOrgHeightLabel)
+        adjustImageConstraint(affiliatedOrgHeightImage)
+        adjustImageConstraint(affiliatedOrgWidthImage)
+        
+        affiliatedOrgLabel.adjustsFontSizeToFitWidth = true
+    }
+    
+    func adjustLabelConstraint(constraint: NSLayoutConstraint) {
+        
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        constraint.constant = screenSize.height * 0.3
+    }
+    func adjustImageConstraint(constraint: NSLayoutConstraint) {
+        
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        constraint.constant = screenSize.height/15.5
     }
 
+    func animateHeader() {
+        UIView.animateWithDuration(1.5, delay: 0.0, options: [.TransitionFlipFromLeft], animations: { () -> Void in
+            self.affiliatedOrgLabel.alpha = 1
+            self.affiliatedOrgImage.alpha = 1
+            }) {(finished) -> Void in
+                
+                UIView.animateWithDuration(2.5, delay: 0.3, options: [.TransitionFlipFromRight], animations: { () -> Void in
+                    self.affiliatedOrgLabel.alpha = 0.0
+                    self.affiliatedOrgImage.alpha = 0.0
+                    }) {(finished) -> Void in
+                }
+        }
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,11 +117,13 @@ class AffiliatedOrgViewController: UIViewController, SWTableViewCellDelegate {
         affiliatedOrgTable.backgroundColor = UIColor.blackColor()
         affiliatedOrgTable.separatorColor = UIColor.blackColor()
         
+        self.affiliatedOrgLabel.alpha = 0.0
+        self.affiliatedOrgImage.alpha = 0.0
+        
+        
         affiliatedOrg.removeAll()
         
         let organizationInfo = FetchData(context: managedObjectContext).fetchOrganizations()!
-        
-
         
         for orgID in sourceID {
             if organizationInfo.contains({$0.organizationID == orgID}) {
@@ -89,7 +137,7 @@ class AffiliatedOrgViewController: UIViewController, SWTableViewCellDelegate {
 
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
+        animateHeader()
         affiliatedOrgTable.reloadData()
     }
     

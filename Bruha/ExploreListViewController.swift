@@ -15,6 +15,16 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
     @IBOutlet weak var bruhaButton: UIButton!
     @IBOutlet weak var mapButton: UIButton!
     
+    @IBOutlet weak var exploreLabel: UILabel!
+    @IBOutlet weak var exploreHeightLabel: NSLayoutConstraint!
+    
+    @IBOutlet weak var exploreWidthLabel: NSLayoutConstraint!
+    
+    @IBOutlet weak var exploreImage: UIImageView!
+    @IBOutlet weak var exploreWidthImage: NSLayoutConstraint!
+    
+    @IBOutlet weak var exploreHeightImage: NSLayoutConstraint!
+    
     
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
@@ -60,6 +70,57 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         
         self.view.bringSubviewToFront(bruhaButton)
         self.view.bringSubviewToFront(mapButton)
+        
+        self.view.bringSubviewToFront(exploreLabel)
+        self.view.bringSubviewToFront(exploreImage)
+        adjustLabelConstraint(exploreWidthLabel)
+        adjustImageConstraint(exploreHeightLabel)
+        adjustImageConstraint(exploreHeightImage)
+        adjustImageConstraint(exploreWidthImage)
+        
+        exploreLabel.adjustsFontSizeToFitWidth = true
+    }
+    
+    func adjustLabelConstraint(constraint: NSLayoutConstraint) {
+        
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        constraint.constant = screenSize.height * 0.3
+    }
+    func adjustImageConstraint(constraint: NSLayoutConstraint) {
+        
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        constraint.constant = screenSize.height/15.5
+    }
+    
+    func animateHeader() {
+        
+        switch(GlobalVariables.selectedDisplay){
+            
+        case "Event":
+            exploreLabel.text = "Event"
+            
+        case "Venue":
+            exploreLabel.text = "Venue"
+            
+        case "Organization":
+            exploreLabel.text = "Organization"
+            
+        default:
+            exploreLabel.text = "Event"
+        }
+
+        
+        UIView.animateWithDuration(1.5, delay: 0.0, options: [.TransitionFlipFromLeft], animations: { () -> Void in
+            self.exploreLabel.alpha = 1
+            self.exploreImage.alpha = 1
+            }) {(finished) -> Void in
+                
+                UIView.animateWithDuration(2.5, delay: 0.3, options: [.TransitionFlipFromRight], animations: { () -> Void in
+                    self.exploreLabel.alpha = 0.0
+                    self.exploreImage.alpha = 0.0
+                    }) {(finished) -> Void in
+                }
+        }
     }
     
     /*func adjustCircSizeOfCell(view: UIView) {
@@ -101,11 +162,19 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateNotificationEvent", name: "filter", object: nil)
+        
+        
+        self.exploreLabel.alpha = 0.0
+        self.exploreImage.alpha = 0.0
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "animateHeader", name: "itemDisplayChangeEvent", object: nil)
+        
         // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        
+        animateHeader()
         
         exploreTableView.reloadData()
 //        if GlobalVariables.selectedDisplay == "Event"{

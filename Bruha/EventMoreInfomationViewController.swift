@@ -29,6 +29,15 @@ class EventMoreInfomationViewController: UIViewController, UIWebViewDelegate{
     @IBOutlet weak var eventPrice: UILabel!
     @IBOutlet weak var eventCategory: UILabel!
    
+    @IBOutlet weak var eventMoreInfoLabel: UILabel!
+    @IBOutlet weak var eventMoreInfoHeightLabel: NSLayoutConstraint!
+    
+    @IBOutlet weak var eventMoreInfoWidthLabel: NSLayoutConstraint!
+    
+    @IBOutlet weak var eventMoreInfoImage: UIImageView!
+    @IBOutlet weak var eventMoreInfoWidthImage: NSLayoutConstraint!
+    
+    @IBOutlet weak var eventMoreInfoHeightImage: NSLayoutConstraint!
     
     @IBAction func backToExploreButton(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
@@ -71,7 +80,40 @@ class EventMoreInfomationViewController: UIViewController, UIWebViewDelegate{
         
         self.view.bringSubviewToFront(backButton)
         self.view.bringSubviewToFront(bruhaButton)
+        
+        adjustLabelConstraint(eventMoreInfoWidthLabel)
+        adjustImageConstraint(eventMoreInfoHeightLabel)
+        adjustImageConstraint(eventMoreInfoHeightImage)
+        adjustImageConstraint(eventMoreInfoWidthImage)
+        
+        eventMoreInfoLabel.adjustsFontSizeToFitWidth = true
     }
+    
+    func adjustLabelConstraint(constraint: NSLayoutConstraint) {
+        
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        constraint.constant = screenSize.height * 0.3
+    }
+    func adjustImageConstraint(constraint: NSLayoutConstraint) {
+        
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        constraint.constant = screenSize.height/15.5
+    }
+    
+    func animateHeader() {
+        UIView.animateWithDuration(1.5, delay: 0.0, options: [.TransitionFlipFromLeft], animations: { () -> Void in
+            self.eventMoreInfoLabel.alpha = 1
+            self.eventMoreInfoImage.alpha = 1
+            }) {(finished) -> Void in
+                
+                UIView.animateWithDuration(2.5, delay: 0.3, options: [.TransitionFlipFromRight], animations: { () -> Void in
+                    self.eventMoreInfoLabel.alpha = 0.0
+                    self.eventMoreInfoImage.alpha = 0.0
+                    }) {(finished) -> Void in
+                }
+        }
+    }
+
     
     func labelDisplay(){
         webDescriptionContent.opaque = false
@@ -176,7 +218,17 @@ class EventMoreInfomationViewController: UIViewController, UIWebViewDelegate{
         AffiliatedOrgButton.showsTouchWhenHighlighted = true
         VenueButton.showsTouchWhenHighlighted = true
 
+        
+        self.eventMoreInfoLabel.alpha = 0
+        self.eventMoreInfoImage.alpha = 0
+        
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        animateHeader()
     }
 
     override func didReceiveMemoryWarning() {
