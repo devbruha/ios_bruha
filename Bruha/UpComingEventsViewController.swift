@@ -13,6 +13,17 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
     @IBOutlet weak var upComingTableView: UITableView!
     @IBOutlet weak var backButton: UIButton!
     
+    @IBOutlet weak var comingEventLabel: UILabel!
+    @IBOutlet weak var comingEventHeightLabel: NSLayoutConstraint!
+    
+    @IBOutlet weak var comingEventWidthLabel: NSLayoutConstraint!
+    
+    @IBOutlet weak var comingEventImage: UIImageView!
+    @IBOutlet weak var comingEventWidthImage: NSLayoutConstraint!
+    
+    @IBOutlet weak var comingEventHeightImage: NSLayoutConstraint!
+    
+    
     @IBOutlet weak var bruhaButton: UIButton!
     @IBAction func backToExploreButton(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
@@ -60,6 +71,39 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
         
         self.view.bringSubviewToFront(backButton)
         self.view.bringSubviewToFront(bruhaButton)
+        
+        
+        adjustLabelConstraint(comingEventWidthLabel)
+        adjustImageConstraint(comingEventHeightLabel)
+        adjustImageConstraint(comingEventHeightImage)
+        adjustImageConstraint(comingEventWidthImage)
+        
+        comingEventLabel.adjustsFontSizeToFitWidth = true
+    }
+    
+    func adjustLabelConstraint(constraint: NSLayoutConstraint) {
+        
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        constraint.constant = screenSize.height * 0.3
+    }
+    func adjustImageConstraint(constraint: NSLayoutConstraint) {
+        
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        constraint.constant = screenSize.height/15.5
+    }
+
+    func animateHeader() {
+        UIView.animateWithDuration(1.5, delay: 0.0, options: [.TransitionFlipFromLeft], animations: { () -> Void in
+            self.comingEventLabel.alpha = 1
+            self.comingEventImage.alpha = 1
+            }) {(finished) -> Void in
+                
+                UIView.animateWithDuration(2.5, delay: 0.3, options: [.TransitionFlipFromRight], animations: { () -> Void in
+                    self.comingEventLabel.alpha = 0.0
+                    self.comingEventImage.alpha = 0.0
+                    }) {(finished) -> Void in
+                }
+        }
     }
     
     
@@ -70,6 +114,9 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
         
         upComingTableView.backgroundColor = UIColor.blackColor()
         upComingTableView.separatorColor = UIColor.blackColor()
+        
+        self.comingEventLabel.alpha = 0.0
+        self.comingEventImage.alpha = 0.0
         
         upcomingEvents.removeAll()
         print(sourceForEvent)
@@ -95,7 +142,7 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
-        
+        animateHeader()
         upComingTableView.reloadData()
     }
     

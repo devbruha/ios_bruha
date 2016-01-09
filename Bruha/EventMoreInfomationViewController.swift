@@ -29,13 +29,22 @@ class EventMoreInfomationViewController: UIViewController, UIWebViewDelegate{
     @IBOutlet weak var eventPrice: UILabel!
     @IBOutlet weak var eventCategory: UILabel!
    
+    @IBOutlet weak var eventMoreInfoLabel: UILabel!
+    @IBOutlet weak var eventMoreInfoHeightLabel: NSLayoutConstraint!
+    
+    @IBOutlet weak var eventMoreInfoWidthLabel: NSLayoutConstraint!
+    
+    @IBOutlet weak var eventMoreInfoImage: UIImageView!
+    @IBOutlet weak var eventMoreInfoWidthImage: NSLayoutConstraint!
+    
+    @IBOutlet weak var eventMoreInfoHeightImage: NSLayoutConstraint!
     
     @IBAction func backToExploreButton(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
     
     var iconForSource: String?
-    var sourceID: String = "id"
+    var sourceID: [String] = ["id"]
     var eventVenueSource: String = "ID"
     
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
@@ -71,7 +80,40 @@ class EventMoreInfomationViewController: UIViewController, UIWebViewDelegate{
         
         self.view.bringSubviewToFront(backButton)
         self.view.bringSubviewToFront(bruhaButton)
+        
+        adjustLabelConstraint(eventMoreInfoWidthLabel)
+        adjustImageConstraint(eventMoreInfoHeightLabel)
+        adjustImageConstraint(eventMoreInfoHeightImage)
+        adjustImageConstraint(eventMoreInfoWidthImage)
+        
+        eventMoreInfoLabel.adjustsFontSizeToFitWidth = true
     }
+    
+    func adjustLabelConstraint(constraint: NSLayoutConstraint) {
+        
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        constraint.constant = screenSize.height * 0.3
+    }
+    func adjustImageConstraint(constraint: NSLayoutConstraint) {
+        
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        constraint.constant = screenSize.height/15.5
+    }
+    
+    func animateHeader() {
+        UIView.animateWithDuration(1.5, delay: 0.0, options: [.TransitionFlipFromLeft], animations: { () -> Void in
+            self.eventMoreInfoLabel.alpha = 1
+            self.eventMoreInfoImage.alpha = 1
+            }) {(finished) -> Void in
+                
+                UIView.animateWithDuration(2.5, delay: 0.3, options: [.TransitionFlipFromRight], animations: { () -> Void in
+                    self.eventMoreInfoLabel.alpha = 0.0
+                    self.eventMoreInfoImage.alpha = 0.0
+                    }) {(finished) -> Void in
+                }
+        }
+    }
+
     
     func labelDisplay(){
         webDescriptionContent.opaque = false
@@ -116,9 +158,9 @@ class EventMoreInfomationViewController: UIViewController, UIWebViewDelegate{
                     eventCategory.text = event.primaryCategory
                     webDescriptionContent.loadHTMLString("<div style=\"font-family:OpenSans;color:white;width:100%;word-wrap:break-word;\">\(event.eventDescription)</div>", baseURL: nil)
                     
-                    sourceID = event.organizationID
+                    sourceID.append(event.organizationID)
                     eventVenueSource = event.venueID
-                    
+                    print("org id passed", sourceID); print("event id", event.eventID)
                     if let images = posterInfo {
                         for img in images {
                             if img.ID == event.eventID {
@@ -176,7 +218,17 @@ class EventMoreInfomationViewController: UIViewController, UIWebViewDelegate{
         AffiliatedOrgButton.showsTouchWhenHighlighted = true
         VenueButton.showsTouchWhenHighlighted = true
 
+        
+        self.eventMoreInfoLabel.alpha = 0
+        self.eventMoreInfoImage.alpha = 0
+        
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        animateHeader()
     }
 
     override func didReceiveMemoryWarning() {
@@ -262,9 +314,9 @@ class EventMoreInfomationViewController: UIViewController, UIWebViewDelegate{
         switch navigationType {
         case .LinkClicked:
             // Open links in Safari
-            let alertController = UIAlertController(title: "Do you want to navigate to a browser?", message:nil, preferredStyle: .Alert)
-            let cancelAction = UIAlertAction(title: "Go Away", style: .Default, handler: nil)
-            let yesAction = UIAlertAction(title: "Sure", style: .Default) { (_) -> Void in
+            let alertController = UIAlertController(title: "This link will navigate to a 3rd party website", message:nil, preferredStyle: .Alert)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+            let yesAction = UIAlertAction(title: "Ok", style: .Default) { (_) -> Void in
                 
                 UIApplication.sharedApplication().openURL(request.URL!)
             }

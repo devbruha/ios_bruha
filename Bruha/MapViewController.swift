@@ -374,7 +374,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             cell.leftUtilityButtons = temp as [AnyObject]
             
             let temp2: NSMutableArray = NSMutableArray()
-            temp2.sw_addUtilityButtonWithColor(UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1), attributedTitle: swipeCellTitle("Map"))
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1), attributedTitle: swipeCellTitle("Events"))
             temp2.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1), attributedTitle: swipeCellTitle("More\nInfo"))
             cell.rightUtilityButtons = nil
             cell.setRightUtilityButtons(temp2 as [AnyObject], withButtonWidth: 75)
@@ -427,7 +427,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             cell.leftUtilityButtons = temp as [AnyObject]
             
             let temp2: NSMutableArray = NSMutableArray()
-            temp2.sw_addUtilityButtonWithColor(UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1), attributedTitle: swipeCellTitle("Map"))
+            temp2.sw_addUtilityButtonWithColor(UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1), attributedTitle: swipeCellTitle("Events"))
             temp2.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1), attributedTitle: swipeCellTitle("More\nInfo"))
             cell.rightUtilityButtons = nil
             cell.setRightUtilityButtons(temp2 as [AnyObject], withButtonWidth: 75)
@@ -879,7 +879,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
                 //event ticket
                 print("event ticket")
             }
-                //venue and organization map
+                //venue and organization up and coming Events
             else if GlobalVariables.selectedDisplay == "Venue" {
                 let cellIndexPath = self.dropDownTable.indexPathForCell(cell)
                 let selectedCell = self.dropDownTable.cellForRowAtIndexPath(cellIndexPath!) as! MapDropTableViewCell
@@ -925,6 +925,18 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             if GlobalVariables.selectedDisplay == "Organization" {
                 destinationController.sourceForComingEvent = "organization"
                 destinationController.sourceID = GlobalVariables.eventSelected
+            }
+        }
+        
+        if segue.identifier == "EventsComing" {
+            let comingController = segue.destinationViewController as! UpComingEventsViewController
+            if GlobalVariables.selectedDisplay == "Venue" {
+                comingController.sourceForEvent = "venue"
+                comingController.sourceID = GlobalVariables.eventSelected
+            }
+            if GlobalVariables.selectedDisplay == "Organization" {
+                comingController.sourceForEvent = "organization"
+                comingController.sourceID = GlobalVariables.eventSelected
             }
         }
     }

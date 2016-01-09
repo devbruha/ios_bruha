@@ -28,6 +28,16 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var EventCategory: UILabel!
     
+    @IBOutlet weak var moreInfoLabel: UILabel!
+    @IBOutlet weak var moreInfoHeightLabel: NSLayoutConstraint!
+    
+    @IBOutlet weak var moreInfoWidthLabel: NSLayoutConstraint!
+    
+    @IBOutlet weak var moreInfoImage: UIImageView!
+    @IBOutlet weak var moreInfoWidthImage: NSLayoutConstraint!
+    
+    @IBOutlet weak var moreInfoHeightImage: NSLayoutConstraint!
+    
     @IBAction func backToExploreButton(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -70,6 +80,40 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
         
         self.view.bringSubviewToFront(backButton)
         self.view.bringSubviewToFront(bruhaButton)
+        
+        
+        
+        adjustLabelConstraint(moreInfoWidthLabel)
+        adjustImageConstraint(moreInfoHeightLabel)
+        adjustImageConstraint(moreInfoHeightImage)
+        adjustImageConstraint(moreInfoWidthImage)
+        
+        moreInfoLabel.adjustsFontSizeToFitWidth = true
+    }
+    
+    func adjustLabelConstraint(constraint: NSLayoutConstraint) {
+        
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        constraint.constant = screenSize.height * 0.3
+    }
+    func adjustImageConstraint(constraint: NSLayoutConstraint) {
+        
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        constraint.constant = screenSize.height/15.5
+    }
+
+    func animateHeader() {
+        UIView.animateWithDuration(1.5, delay: 0.0, options: [.TransitionFlipFromLeft], animations: { () -> Void in
+            self.moreInfoLabel.alpha = 1
+            self.moreInfoImage.alpha = 1
+            }) {(finished) -> Void in
+                
+                UIView.animateWithDuration(2.5, delay: 0.3, options: [.TransitionFlipFromRight], animations: { () -> Void in
+                    self.moreInfoLabel.alpha = 0.0
+                    self.moreInfoImage.alpha = 0.0
+                    }) {(finished) -> Void in
+                }
+        }
     }
     
     func labelDisplay(){
@@ -96,6 +140,7 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                         VenueName.text = "nil"
                     } else {VenueName.text = event.eventVenueName }
                     
+                    moreInfoLabel.text = "Up & Coming"
                     
                     Address.text = "\(event.eventVenueAddress.componentsSeparatedByString(", ")[0]), \(event.eventVenueCity)"
                     
@@ -237,13 +282,19 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
         scrollView.contentMode = UIViewContentMode.ScaleAspectFit
         scrollView.backgroundColor = UIColor(patternImage: UIImage(named: "Splash Background")!)
         
-        
-        DateUpcoming.adjustsImageWhenHighlighted = true
+        DateUpcoming.showsTouchWhenHighlighted = true
         PriceCalendar.showsTouchWhenHighlighted = true
+        
+        moreInfoImage.alpha = 0
+        moreInfoLabel.alpha = 0
         
         // Do any additional setup after loading the view.
     }
     
+    override func viewDidAppear(animated: Bool) {
+        super.viewDidAppear(animated)
+        animateHeader()
+    }
    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -418,7 +469,18 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
         switch navigationType {
         case .LinkClicked:
             // Open links in Safari
-            UIApplication.sharedApplication().openURL(request.URL!)
+            
+            let alertController = UIAlertController(title: "This link will navigate to a 3rd party website", message:nil, preferredStyle: .Alert)
+            let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+            let yesAction = UIAlertAction(title: "Ok", style: .Default) { (_) -> Void in
+                
+                UIApplication.sharedApplication().openURL(request.URL!)
+            }
+            alertController.addAction(yesAction)
+            alertController.addAction(cancelAction)
+            
+            self.presentViewController(alertController, animated: true, completion: nil)
+            
             return false
         default:
             // Handle other navigation types...
@@ -428,11 +490,16 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
     
     func webViewDidFinishLoad(webView: UIWebView) {
         
-        webDescriptionContent.scrollView.scrollEnabled = false
+//        webDescriptionContent.scrollView.scrollEnabled = false
+//        
+//        let height = webView.scrollView.contentSize.height
+//        
+//        scrollView.contentInset.bottom = height + 180 + 40 + UIScreen.mainScreen().bounds.height * 0.33 + 20
         
-        let height = webView.scrollView.contentSize.height
         
-        scrollView.contentInset.bottom = height + 180 + 40 + UIScreen.mainScreen().bounds.height * 0.33 + 20
+        webDescriptionContent.scrollView.scrollEnabled = true
+        
+        scrollView.scrollEnabled = false
     }
     
     func randomImage() -> UIImage {

@@ -72,6 +72,15 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
         constraint.constant = screenSize.height/15.5
     }
     
+    func animateHeader() {
+        UIView.animateWithDuration(1.5, delay: 0.0, options: [.TransitionFlipFromLeft], animations: { () -> Void in
+            self.addictionLabel.alpha = 1
+            self.addictionImage.alpha = 1
+            }) {(finished) -> Void in
+                
+        }
+    }
+    
     func customStatusBar() {
         let barView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0))
         barView.backgroundColor = UIColor.grayColor()
@@ -88,12 +97,18 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
         addictionTableView.backgroundColor = UIColor.blackColor()
         addictionTableView.separatorColor = UIColor.blackColor()
         
+        self.addictionLabel.alpha = 0.0
+        self.addictionImage.alpha = 0.0
+        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateNotificationAddiction", name: "itemDisplayChangeAddiction", object: nil)
         // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
+        
+        animateHeader()
+        
         addictionTableView.reloadData()
         
 //        if GlobalVariables.addictedDisplay == "Event"{
