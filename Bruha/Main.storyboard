@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="6Rr-W4-lJ0">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="9059" systemVersion="14F27" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" initialViewController="6Rr-W4-lJ0">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
@@ -2253,24 +2253,34 @@
                                             <outlet property="delegate" destination="g80-UB-EVD" id="gMn-xR-YuF"/>
                                         </connections>
                                     </tableView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dZ8-L6-oEc">
-                                        <rect key="frame" x="8" y="38" width="292" height="170"/>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dZ8-L6-oEc" customClass="JTCalendarMenuView">
+                                        <rect key="frame" x="8" y="38" width="292" height="25"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="170" id="nIU-jw-TNj"/>
+                                            <constraint firstAttribute="height" constant="25" id="nIU-jw-TNj"/>
+                                        </constraints>
+                                    </view>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xpn-pa-Ks3" customClass="JTHorizontalCalendarView">
+                                        <rect key="frame" x="8" y="63" width="292" height="145"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="145" id="VzH-R6-dFu"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstItem="dZ8-L6-oEc" firstAttribute="leading" secondItem="Ta5-2f-oRH" secondAttribute="leading" constant="8" id="ABF-Pa-Fwg"/>
+                                    <constraint firstItem="xpn-pa-Ks3" firstAttribute="top" secondItem="dZ8-L6-oEc" secondAttribute="bottom" id="DcU-rj-n4s"/>
                                     <constraint firstItem="NoZ-Mg-783" firstAttribute="leading" secondItem="Ta5-2f-oRH" secondAttribute="leading" constant="8" id="F4B-qK-Tkn"/>
                                     <constraint firstItem="NoZ-Mg-783" firstAttribute="top" secondItem="Ta5-2f-oRH" secondAttribute="topMargin" id="Iq9-v9-Ttg"/>
                                     <constraint firstItem="dZ8-L6-oEc" firstAttribute="top" secondItem="NoZ-Mg-783" secondAttribute="bottom" id="MN0-S6-Xod"/>
                                     <constraint firstAttribute="trailing" secondItem="NoZ-Mg-783" secondAttribute="trailing" id="RNr-Mw-33h"/>
-                                    <constraint firstAttribute="bottom" secondItem="dZ8-L6-oEc" secondAttribute="bottom" constant="286" id="eGr-It-dEH"/>
+                                    <constraint firstAttribute="bottom" secondItem="dZ8-L6-oEc" secondAttribute="bottom" constant="431" id="eGr-It-dEH"/>
+                                    <constraint firstItem="xpn-pa-Ks3" firstAttribute="leading" secondItem="Ta5-2f-oRH" secondAttribute="leading" constant="8" id="i9X-pv-EjR"/>
                                     <constraint firstAttribute="centerX" secondItem="dZ8-L6-oEc" secondAttribute="centerX" id="iCC-Z9-gVe"/>
                                     <constraint firstAttribute="centerX" secondItem="NoZ-Mg-783" secondAttribute="centerX" id="ugO-VN-NRt"/>
+                                    <constraint firstItem="xpn-pa-Ks3" firstAttribute="centerX" secondItem="Ta5-2f-oRH" secondAttribute="centerX" id="yhX-wk-aIy"/>
                                 </constraints>
                             </scrollView>
                         </subviews>
@@ -2289,6 +2299,8 @@
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="calendarContentView" destination="xpn-pa-Ks3" id="bvQ-h4-dEi"/>
+                        <outlet property="calendarMenu" destination="dZ8-L6-oEc" id="D5A-HY-i7o"/>
                         <outlet property="categoryTableHeight" destination="jox-9X-I1E" id="tEW-Eu-rpk"/>
                         <outlet property="categoryTableView" destination="NoZ-Mg-783" id="MZo-jF-qsQ"/>
                         <outlet property="discoverableButtonIcon" destination="AgW-5G-L2X" id="Jp0-NO-mBd"/>
@@ -2297,7 +2309,6 @@
                         <outlet property="eventSelectedB" destination="2k7-nw-dEr" id="Dwm-H2-Ofz"/>
                         <outlet property="organizationButtonIcon" destination="fxJ-M1-ts5" id="r6i-Uo-KJt"/>
                         <outlet property="organizationSelectedB" destination="dfZ-g2-9Za" id="H6o-ZP-ZQO"/>
-                        <outlet property="placeholder" destination="dZ8-L6-oEc" id="JVl-Ik-6Ot"/>
                         <outlet property="scrollView" destination="Ta5-2f-oRH" id="TXh-4Z-WgZ"/>
                         <outlet property="venueButtonIcon" destination="QgK-1I-jI2" id="fjV-Pj-dB7"/>
                         <outlet property="venueSelectedB" destination="lCw-4E-69a" id="boa-Hy-0hV"/>
@@ -3150,15 +3161,15 @@
         <image name="Tickets_Sm" width="250" height="250"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="5DM-Zi-tRH"/>
-        <segue reference="fNB-TA-9Vh"/>
-        <segue reference="dtV-EI-jha"/>
-        <segue reference="0Iz-X0-JOq"/>
+        <segue reference="dfw-c1-ntm"/>
         <segue reference="l1y-Rt-Be8"/>
-        <segue reference="pgm-fT-IMJ"/>
-        <segue reference="12b-kc-Bij"/>
-        <segue reference="8ee-hZ-bSl"/>
-        <segue reference="J3w-Nl-jcV"/>
+        <segue reference="TpG-fQ-ZDS"/>
         <segue reference="eyG-eD-cCw"/>
+        <segue reference="0Iz-X0-JOq"/>
+        <segue reference="io6-cH-KWY"/>
+        <segue reference="pgm-fT-IMJ"/>
+        <segue reference="thc-CS-1cg"/>
+        <segue reference="NAU-T1-EcU"/>
+        <segue reference="8ee-hZ-bSl"/>
     </inferredMetricsTieBreakers>
 </document>

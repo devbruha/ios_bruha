@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, CalendarViewDelegate {
+class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, JTCalendarDelegate {
     
     @IBOutlet weak var eventSelectedB: UIButton!
     @IBOutlet weak var eventButtonIcon: UIImageView!
@@ -21,9 +21,11 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
     @IBOutlet weak var organizationButtonIcon: UIImageView!
     
     @IBOutlet weak var scrollView: UIScrollView!
-    @IBOutlet weak var placeholder: UIView!
     @IBOutlet weak var categoryTableHeight: NSLayoutConstraint!
     @IBOutlet weak var categoryTableView: UITableView!
+    @IBOutlet weak var calendarMenu: JTCalendarMenuView!
+    @IBOutlet weak var calendarContentView: JTHorizontalCalendarView!
+    
     
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
@@ -35,6 +37,9 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
     var backupVenueCategories: [String] = ["Venue Categories"]
     var backupOrganizationCategories: [String] = ["Organization Categories"]
 //    var backupArtistCategories: [String] = ["Artist Categories"]
+    
+    //Calendar
+    let calendarManager: JTCalendarManager = JTCalendarManager()
     
     let priceLabelTitle = UILabel()
     let priceLabel = UILabel()
@@ -129,16 +134,11 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         let organizationTgr = UITapGestureRecognizer(target: self, action: ("organizationTapped"))
         organizationSelectedB.addGestureRecognizer(organizationTgr)
         
-        let date = NSDate()
-        let calendarView = CalendarView.instance(date, selectedDate: date)
-        calendarView.delegate = self
-        calendarView.translatesAutoresizingMaskIntoConstraints = false
+        calendarManager.delegate = self
         
-        placeholder.addSubview(calendarView)
-        placeholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("H:|[calendarView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["calendarView": calendarView]))
-        placeholder.addConstraints(NSLayoutConstraint.constraintsWithVisualFormat("V:|[calendarView]|", options: NSLayoutFormatOptions(rawValue: 0), metrics: nil, views: ["calendarView": calendarView]))
-        placeholder.hidden = false
-        
+        calendarManager.menuView = calendarMenu
+        calendarManager.contentView = calendarContentView
+        calendarManager.setDate(NSDate())
         
         
         switch(GlobalVariables.selectedDisplay){
@@ -156,6 +156,83 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
             eventTapped()
         }
     }
+    func calendar(calendar: JTCalendarManager!, prepareDayView dayView: UIView!) {
+        
+        let newDayView = dayView as! JTCalendarDayView
+        
+        
+        newDayView.hidden = false
+        newDayView.backgroundColor = UIColor.blackColor()
+        newDayView.textLabel.textColor = UIColor.whiteColor()
+        
+        newDayView.layer.borderColor = UIColor.grayColor().CGColor
+        newDayView.layer.borderWidth = 0.5
+        
+        
+        if(newDayView.isFromAnotherMonth){
+            newDayView.alpha = 0.5
+        }
+        else if(GlobalVariables.datesSelected.containsObject(newDayView.date)){
+            newDayView.backgroundColor = UIColor.cyanColor()
+        }
+    }
+    
+    func calendar(calendar: JTCalendarManager!, didTouchDayView dayView: UIView!) {
+        
+        let newDayView = dayView as! JTCalendarDayView
+        
+        if(GlobalVariables.datesSelected.containsObject(newDayView.date)){
+            
+            GlobalVariables.datesSelected.removeObject(newDayView.date)
+            newDayView.backgroundColor = UIColor.blackColor()
+            
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            let dateToRemove = dateFormatter.stringFromDate(newDayView.date)
+            
+            if let index = GlobalVariables.UserCustomFilters.dateFilter.indexOf("\(dateToRemove)"){
+                
+                GlobalVariables.UserCustomFilters.dateFilter.removeAtIndex(index)
+            }
+            
+        }
+        else{
+            GlobalVariables.datesSelected.addObject(newDayView.date)
+            newDayView.backgroundColor = UIColor.cyanColor()
+            
+            let dateFormatter = NSDateFormatter()
+            dateFormatter.dateFormat = "yyyy-MM-dd"
+            let dateToStore = dateFormatter.stringFromDate(newDayView.date)
+            
+            GlobalVariables.UserCustomFilters.dateFilter.append("\(dateToStore)")
+            
+        }
+        print(GlobalVariables.UserCustomFilters.dateFilter)
+        Filtering().filterEvents()
+    }
+    
+    func calendar(calendar: JTCalendarManager!, prepareMenuItemView menuItemView: UIView!, date: NSDate!) {
+        
+        let newMenuItemView = menuItemView as! UILabel
+        
+        let calendar = NSCalendar.currentCalendar()
+        let component = calendar.component(NSCalendarUnit.Year, fromDate: date)
+        let month = calendar.component(NSCalendarUnit.Month, fromDate: date)
+        
+        let dateFormatter: NSDateFormatter = NSDateFormatter()
+        let months = dateFormatter.monthSymbols
+        let monthSymbol = months[month-1]
+        
+        //newMenuItemView.text = component as? String
+        newMenuItemView.text = monthSymbol + " " + String(component)
+        //newMenuItemView.text = monthSymbol
+        //newMenuItemView.backgroundColor = UIColor.cyanColor()
+        //newMenuItemView.textColor = UIColor.blackColor()
+        //newMenuItemView.scrollView
+        
+    }
+    
+
     
     func setupEVOD() {
         
@@ -367,14 +444,16 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         
         if(GlobalVariables.selectedDisplay == "Event"){
             categoryTableView.alpha = 1;
-            placeholder.alpha = 1
+            calendarMenu.alpha = 1
+            calendarContentView.alpha = 1
             priceLabelTitle.alpha = 1
             priceLabel.alpha = 1
             slider.alpha = 1
         }
         else{
             categoryTableView.alpha = 1;
-            placeholder.alpha = 0
+            calendarMenu.alpha = 0
+            calendarContentView.alpha = 0
             priceLabelTitle.alpha = 0
             priceLabel.alpha = 0
             slider.alpha = 0

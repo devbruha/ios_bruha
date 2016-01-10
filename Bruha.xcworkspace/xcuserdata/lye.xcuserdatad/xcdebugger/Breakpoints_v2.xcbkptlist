@@ -237,7 +237,7 @@
             endingColumnNumber = "9223372036854775807"
             startingLineNumber = "883"
             endingLineNumber = "883"
-            landmarkName = "updateNotificationSent()"
+            landmarkName = "sectionTapped(_:)"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>
