@@ -362,18 +362,23 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                     }
                 }
                 
+                
                 cell.ExploreImage.contentMode = UIViewContentMode.ScaleToFill
-                if let images = posterInfo {
-                    for img in images {
-                        if img.ID == event.eventID {
-                            if img.Image?.length > 800 {
-                                cell.ExploreImage.image = UIImage(data: img.Image!)
-                            } else {
-                                cell.ExploreImage.image = randomImage()
-                            }
-                        }
+                
+                if posterInfo!.contains({$0.ID == event.eventID}) {
+                    
+                    let idx = posterInfo!.indexOf({$0.ID == event.eventID})
+                    
+                    if posterInfo![idx!].Image?.length > 800 {
+                        cell.ExploreImage.image = UIImage(data: posterInfo![idx!].Image!)
+                    } else {
+                        cell.ExploreImage.image = randomImage()
                     }
                 }
+                else {
+                    cell.ExploreImage.image = randomImage()
+                }
+                
                 
                 cell.circTitle.text = event.eventName
                 cell.circDate.text = convertCircTimeFormat("\(event.eventStartDate)")
@@ -420,17 +425,33 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
 
                 
                 cell.ExploreImage.contentMode = UIViewContentMode.ScaleToFill
-                if let images = posterInfo {
-                    for img in images {
-                        if img.ID == event.eventID {
-                            if img.Image?.length > 800 {
-                                cell.ExploreImage.image = UIImage(data: img.Image!)
-                            } else {
-                                cell.ExploreImage.image = randomImage()
-                            }
-                        }
+                
+                if posterInfo!.contains({$0.ID == event.eventID}) {
+                    
+                    let idx = posterInfo!.indexOf({$0.ID == event.eventID})
+                    
+                    if posterInfo![idx!].Image?.length > 800 {
+                        cell.ExploreImage.image = UIImage(data: posterInfo![idx!].Image!)
+                    } else {
+                        cell.ExploreImage.image = randomImage()
                     }
                 }
+                else {
+                    cell.ExploreImage.image = randomImage()
+                }
+                
+//                if let images = posterInfo {
+//                    for img in images {
+//                        if img.ID == event.eventID {
+//                            if img.Image?.length > 800 {
+//                                cell.ExploreImage.image = UIImage(data: img.Image!)
+//                            } else {
+//                                cell.ExploreImage.image = randomImage()
+//                            }
+//                        }
+//                    }
+//                }
+                
 //                if let checkedUrl = NSURL(string:event.posterUrl) {
 //                    //println("Started downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
 //                    getDataFromUrl(checkedUrl) { data in
@@ -553,18 +574,21 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 }
                 
                 cell.venueImage.contentMode = UIViewContentMode.ScaleToFill
-                if let images = posterInfo {
-                    for img in images {
-                        if img.ID == venue.venueID {
-                            
-                            if img.Image?.length > 800 {
-                                cell.venueImage.image = UIImage(data: img.Image!)
-                            } else {
-                                cell.venueImage.image = randomImage()
-                            }
-                        }
+                
+                if posterInfo!.contains({$0.ID == venue.venueID}) {
+                    
+                    let idx = posterInfo!.indexOf({$0.ID == venue.venueID})
+                    
+                    if posterInfo![idx!].Image?.length > 800 {
+                        cell.venueImage.image = UIImage(data: posterInfo![idx!].Image!)
+                    } else {
+                        cell.venueImage.image = randomImage()
                     }
                 }
+                else {
+                    cell.venueImage.image = randomImage()
+                }
+            
                 
                 cell.venueName.text = venue.venueName
                 cell.venueDescription.text = venue.venueName
@@ -593,19 +617,20 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 }
             
                 cell.venueImage.contentMode = UIViewContentMode.ScaleToFill
-                if let images = posterInfo {
-                    for img in images {
-                        if img.ID == venue.venueID {
-                            // 475 bytes when no image
-                            if img.Image?.length > 800 {
-                                cell.venueImage.image = UIImage(data: img.Image!)
-                            } else {
-                                cell.venueImage.image = randomImage()
-                            }
-                        }
-                        //if img.ID == "venue201512030620212367" {print(img.Image)}
+                if posterInfo!.contains({$0.ID == venue.venueID}) {
+                    
+                    let idx = posterInfo!.indexOf({$0.ID == venue.venueID})
+                    
+                    if posterInfo![idx!].Image?.length > 800 {
+                        cell.venueImage.image = UIImage(data: posterInfo![idx!].Image!)
+                    } else {
+                        cell.venueImage.image = randomImage()
                     }
                 }
+                else {
+                    cell.venueImage.image = randomImage()
+                }
+                
                 //if venue.venueName == "zsdf" {print(venue.venueID)}
                 //if venue.venueName == "Niagra" {print(venue.venueID)}
                 cell.venueName.text = venue.venueName
@@ -716,17 +741,21 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 }
                 
                 cell.organizationImage.contentMode = UIViewContentMode.ScaleToFill
-                if let images = posterInfo {
-                    for img in images {
-                        if img.ID == organization.organizationID {
-                            if img.Image?.length > 800 {
-                                cell.organizationImage.image = UIImage(data: img.Image!)
-                            } else {
-                                cell.organizationImage.image = randomImage()
-                            }
-                        }
+                
+                if posterInfo!.contains({$0.ID == organization.organizationID}) {
+                    
+                    let idx = posterInfo!.indexOf({$0.ID == organization.organizationID})
+                    
+                    if posterInfo![idx!].Image?.length > 800 {
+                        cell.organizationImage.image = UIImage(data: posterInfo![idx!].Image!)
+                    } else {
+                        cell.organizationImage.image = randomImage()
                     }
                 }
+                else {
+                    cell.organizationImage.image = randomImage()
+                }
+                
                     
                 cell.organizationName.text = organization.organizationName
                 cell.organizationDescription.text = organization.organizationName
