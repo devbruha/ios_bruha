@@ -558,6 +558,22 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
                 destinationController.sourceID = GlobalVariables.eventSelected
             }
         }
+        
+        if segue.identifier == "ShowOnMap" {
+            let destinationController = segue.destinationViewController as! ShowOnMapViewController
+            if GlobalVariables.uploadDisplay == "Event" {
+                destinationController.sourceForMarker = "event"
+                destinationController.sourceID = GlobalVariables.eventSelected
+            }
+            if GlobalVariables.uploadDisplay == "Venue" {
+                destinationController.sourceForMarker = "venue"
+                destinationController.sourceID = GlobalVariables.eventSelected
+            }
+            if GlobalVariables.uploadDisplay == "Organization" {
+                destinationController.sourceForMarker = "organization"
+                destinationController.sourceID = GlobalVariables.eventSelected
+            }
+        }
     }
 
     

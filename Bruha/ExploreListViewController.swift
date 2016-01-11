@@ -1208,6 +1208,22 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 destinationController.sourceID = GlobalVariables.eventSelected
             }
         }
+        
+        if segue.identifier == "ShowOnMap" {
+            let destinationController = segue.destinationViewController as! ShowOnMapViewController
+            if GlobalVariables.selectedDisplay == "Event" {
+                destinationController.sourceForMarker = "event"
+                destinationController.sourceID = GlobalVariables.eventSelected
+            }
+            if GlobalVariables.selectedDisplay == "Venue" {
+                destinationController.sourceForMarker = "venue"
+                destinationController.sourceID = GlobalVariables.eventSelected
+            }
+            if GlobalVariables.selectedDisplay == "Organization" {
+                destinationController.sourceForMarker = "organization"
+                destinationController.sourceID = GlobalVariables.eventSelected
+            }
+        }
     }
     
     func swipeableTableViewCellShouldHideUtilityButtonsOnSwipe(cell : SWTableViewCell ) -> Bool {

@@ -404,6 +404,12 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
             destinationController.sourceForComingEvent = "event"
             destinationController.sourceID = GlobalVariables.eventSelected
         }
+        
+        if segue.identifier == "ShowOnMap" {
+            let destinationController = segue.destinationViewController as! ShowOnMapViewController
+            destinationController.sourceForMarker = "event"
+            destinationController.sourceID = GlobalVariables.eventSelected
+        }
     }
     
     func swipeableTableViewCellShouldHideUtilityButtonsOnSwipe(cell : SWTableViewCell ) -> Bool {

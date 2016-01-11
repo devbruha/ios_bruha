@@ -370,6 +370,12 @@ class AffiliatedOrgViewController: UIViewController, SWTableViewCellDelegate {
             destinationController.sourceForComingEvent = "organization"
             destinationController.sourceID = GlobalVariables.eventSelected
         }
+        if segue.identifier == "ShowOnMap" {
+            let destinationController = segue.destinationViewController as! ShowOnMapViewController
+            destinationController.sourceForMarker = "organization"
+            destinationController.sourceID = GlobalVariables.eventSelected
+        }
+        
     }
     
     func swipeableTableViewCellShouldHideUtilityButtonsOnSwipe(cell : SWTableViewCell ) -> Bool {

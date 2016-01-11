@@ -660,6 +660,22 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
                 destinationController.sourceID = GlobalVariables.eventSelected
             }
         }
+        
+        if segue.identifier == "ShowOnMap" {
+            let destinationController = segue.destinationViewController as! ShowOnMapViewController
+            if GlobalVariables.addictedDisplay == "Event" {
+                destinationController.sourceForMarker = "event"
+                destinationController.sourceID = GlobalVariables.eventSelected
+            }
+            if GlobalVariables.addictedDisplay == "Venue" {
+                destinationController.sourceForMarker = "venue"
+                destinationController.sourceID = GlobalVariables.eventSelected
+            }
+            if GlobalVariables.addictedDisplay == "Organization" {
+                destinationController.sourceForMarker = "organization"
+                destinationController.sourceID = GlobalVariables.eventSelected
+            }
+        }
     }
 
     

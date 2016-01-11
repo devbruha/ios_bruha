@@ -24,6 +24,9 @@ class ShowOnMapViewController: UIViewController, GMSMapViewDelegate{
     var latitude: Double = 0.0
     var longitude: Double = 0.0
     
+    var sourceForMarker: String?
+    var sourceID: String?
+    
     @IBAction func backToExploreButton(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -75,10 +78,10 @@ class ShowOnMapViewController: UIViewController, GMSMapViewDelegate{
         var primaryCategory: String?
 //        let venueArtist = FetchData(context: managedObjectContext).fetchArtists()
         
-        if GlobalVariables.selectedDisplay == "Event" || GlobalVariables.addictedDisplay == "Event" || GlobalVariables.uploadDisplay == "Event"{
+        if sourceForMarker == "event"{
             
             for event in eventInfo {
-                if event.eventID == GlobalVariables.eventSelected {
+                if event.eventID == sourceID {
                     latitude = event.eventLatitude
                     longitude = event.eventLongitude
                     name = event.eventName
@@ -95,10 +98,10 @@ class ShowOnMapViewController: UIViewController, GMSMapViewDelegate{
             }
         }
         
-        if GlobalVariables.selectedDisplay == "Venue" || GlobalVariables.addictedDisplay == "Venue" || GlobalVariables.uploadDisplay == "Venue"{
+        if sourceForMarker == "venue"{
             
             for venue in venueInfo! {
-                if venue.venueID == GlobalVariables.eventSelected {
+                if venue.venueID == sourceID {
                     latitude = venue.venueLatitude
                     longitude = venue.venueLongitude
                     name = venue.venueName
@@ -115,10 +118,10 @@ class ShowOnMapViewController: UIViewController, GMSMapViewDelegate{
             }
         }
         
-        if GlobalVariables.selectedDisplay == "Organization" || GlobalVariables.addictedDisplay == "Organization" || GlobalVariables.uploadDisplay == "Organization"{
+        if sourceForMarker == "organization"{
             
             for organization in organizationInfo! {
-                if organization.organizationID == GlobalVariables.eventSelected {
+                if organization.organizationID == sourceID {
                     latitude = organization.organizationLatitude
                     longitude = organization.organizationLongitude
                     name = organization.organizationName
