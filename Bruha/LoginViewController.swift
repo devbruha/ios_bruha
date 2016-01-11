@@ -72,7 +72,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
         let offSet = screenSize.width * 0.1
         let leadingConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.LeftMargin, relatedBy: NSLayoutRelation.Equal, toItem: self.continueWithoutLogIn, attribute: NSLayoutAttribute.LeftMargin, multiplier: 1, constant: offSet)
         
-        let trailingConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.RightMargin, relatedBy: NSLayoutRelation.Equal, toItem: self.registerB, attribute: NSLayoutAttribute.RightMargin, multiplier: 1, constant: -offSet)
+        let trailingConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.RightMargin, relatedBy: NSLayoutRelation.Equal, toItem: self.loginB, attribute: NSLayoutAttribute.RightMargin, multiplier: 1, constant: -offSet)
         
         NSLayoutConstraint.activateConstraints([topConstraint, leadingConstraint, trailingConstraint])
         

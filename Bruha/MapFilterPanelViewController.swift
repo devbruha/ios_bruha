@@ -487,7 +487,15 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
             }
         }
         else{
-            eventObject = [EventObjects(sectionName: "Event Categories", sectionObjectIDs: [], sectionObjects: [])]
+            //eventObject = [EventObjects(sectionName: "Event Categories", sectionObjectIDs: [], sectionObjects: [])]
+            
+            eventObject.removeAll(keepCapacity: false)
+            eventObject = (backupEventCategories)
+            
+            for(var i = 0 ; i < eventObject.count ; ++i){
+                
+                eventObject[i].sectionObjects.removeAll(keepCapacity: false)
+            }
         }
         
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
@@ -728,7 +736,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
             headerCell.detailTextLabel?.text = "\(section)"
             headerCell.categoryName?.font = UIFont(name: "OpenSans-Semibold", size: 18)
             
-            headerCell.categoryImage.image = UIImage(named: "Events_White")
+            headerCell.categoryImage.image = UIImage(named: "arrow-down")
             
         }
         else{
@@ -739,11 +747,11 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
                 
                 if(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.keys.contains((headerCell.categoryName?.text)!)){
                     headerCell.backgroundColor = UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1.0)
-                    headerCell.arrowimage.image = UIImage(named: "Events_White")
+                    headerCell.arrowimage.image = UIImage(named: "arrow-down")
                 }
                 else{
                     headerCell.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1.0)
-                    headerCell.arrowimage.image = UIImage(named: "SwipeRight_Light")
+                    headerCell.arrowimage.image = UIImage(named: "arrow-up")
                 }
                 
             } else if GlobalVariables.selectedDisplay == "Venue" {

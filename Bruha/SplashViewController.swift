@@ -71,6 +71,9 @@ class SplashViewController: UIViewController,UIScrollViewDelegate, FBSDKLoginBut
         self.scrollView.contentSize = CGSizeMake(scrollViewWidth*5, scrollViewHeight)
         self.scrollView.delegate = self
         self.pageControl.currentPage = 0
+        self.pageControl.currentPageIndicatorTintColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1)
+        self.pageControl.pageIndicatorTintColor = UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1)
+        self.pageControl.transform = CGAffineTransformMakeScale(1.8, 1.8)
         
         GlobalVariables.loggedIn = false
         
