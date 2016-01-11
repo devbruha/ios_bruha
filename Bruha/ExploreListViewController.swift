@@ -32,6 +32,15 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
     var screenWidth: CGFloat = 0.0
     var screenHeight: CGFloat = 0.0
     
+    var posterInfo: [Image]?
+    var eventInfo: [Event]!
+    var addictionEventInfo: [AddictionEvent]?
+    var venueInfo: [Venue]?
+    var addictionVenueInfo: [AddictionVenue]?
+    
+    var organizationInfo: [Organization]?
+    var addictionOrganizationInfo: [AddictionOrganization]?
+    
     func configureView(){
         
         let screenSize: CGRect = UIScreen.mainScreen().bounds
@@ -169,6 +178,19 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "animateHeader", name: "itemDisplayChangeEvent", object: nil)
         
         // Do any additional setup after loading the view.
+        
+        
+        
+        posterInfo = FetchData(context: managedObjectContext).fetchPosterImages()
+        
+        eventInfo = FetchData(context: managedObjectContext).fetchEvents()
+        addictionEventInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
+        
+        venueInfo = FetchData(context: managedObjectContext).fetchVenues()
+        addictionVenueInfo = FetchData(context: managedObjectContext).fetchAddictionsVenue()
+        
+        organizationInfo = FetchData(context: managedObjectContext).fetchOrganizations()
+        addictionOrganizationInfo = FetchData(context: managedObjectContext).fetchAddictionsOrganization()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -302,8 +324,6 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let posterInfo = FetchData(context: managedObjectContext).fetchPosterImages()
-        
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         
         switch (GlobalVariables.selectedDisplay){
@@ -327,8 +347,8 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
 //            cell.circView.frame = CGRectMake(0, 0, screenSize.height * 0.33, screenSize.height * 0.33)
 
             
-            let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
-            let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
+            //let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
+            //let addictionEventInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
             var like = 0
             
             if GlobalVariables.filterEventBool {
@@ -336,7 +356,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 let filteredEventInfo = GlobalVariables.displayFilteredEvents
                 let event = filteredEventInfo[indexPath.row]
                 
-                for addict in addictionInfo! {
+                for addict in addictionEventInfo! {
                     if addict.eventID == event.eventID {
                         like = 1
                     }
@@ -392,7 +412,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 
                 let event = eventInfo![indexPath.row]
                 
-                for addict in addictionInfo! {
+                for addict in addictionEventInfo! {
                     if addict.eventID == event.eventID {
                         like = 1
                     }
@@ -516,9 +536,9 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             }
             
             
-            let venueInfo = FetchData(context: managedObjectContext).fetchVenues()
+            //let venueInfo = FetchData(context: managedObjectContext).fetchVenues()
             var like = 0
-            let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsVenue()
+            //let addictionVenueInfo = FetchData(context: managedObjectContext).fetchAddictionsVenue()
             
             
             if GlobalVariables.filterVenueBool {
@@ -526,7 +546,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 let filteredVenueInfo = GlobalVariables.displayFilteredVenues
                 let venue = filteredVenueInfo[indexPath.row]
                 
-                for addict in addictionInfo! {
+                for addict in addictionVenueInfo! {
                     if addict.venueID == venue.venueID {
                         like = 1
                     }
@@ -566,7 +586,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                     
                 let venue = venueInfo![indexPath.row]
                 
-                for addict in addictionInfo! {
+                for addict in addictionVenueInfo! {
                     if addict.venueID == venue.venueID {
                         like = 1
                     }
@@ -682,14 +702,14 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             
             let organizationInfo = FetchData(context: managedObjectContext).fetchOrganizations()
             var like = 0
-            let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsOrganization()
+            let addictionOrganizationInfo = FetchData(context: managedObjectContext).fetchAddictionsOrganization()
             
             
             if GlobalVariables.filterOrganizationBool {
                 let filteredOrganizationInfo = GlobalVariables.displayFilteredOrganizations
                 let organization = filteredOrganizationInfo[indexPath.row]
                 
-                for addict in addictionInfo! {
+                for addict in addictionOrganizationInfo! {
                     if addict.organizationID == organization.organizationID {
                         like = 1
                     }
@@ -727,7 +747,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             } else { // when there is no filtering
                 let organization = organizationInfo![indexPath.row]
                 
-                for addict in addictionInfo! {
+                for addict in addictionOrganizationInfo! {
                     if addict.organizationID == organization.organizationID {
                         like = 1
                     }

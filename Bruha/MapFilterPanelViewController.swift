@@ -345,7 +345,8 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         
         Filtering().clearFilter()
         resetSliderValue()
-        
+        GlobalVariables.datesSelected.removeAllObjects()
+        calendarManager.reload()
         switch(GlobalVariables.selectedDisplay){
             
         case "Event":
