@@ -9,7 +9,7 @@
 import UIKit
 import Foundation
 
-class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UITableViewDataSource,CalendarViewDelegate, JTCalendarDelegate{
+class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, JTCalendarDelegate{
     
     @IBOutlet weak var eventSelectedB: UIButton!
     @IBOutlet weak var eventButtonIcon: UIImageView!
@@ -913,7 +913,6 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
         if(GlobalVariables.selectedDisplay == "Event"){
             eventCategoriesTable.alpha = 1;
-            //placeholder.alpha = 1
             calendarMenu.alpha = 1
             calendarContentView.alpha = 1
             priceLabelTitle.alpha = 1
@@ -922,7 +921,6 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         }
         else{
             eventCategoriesTable.alpha = 1;
-            //placeholder.alpha = 0
             calendarMenu.alpha = 0
             calendarContentView.alpha = 0
             priceLabelTitle.alpha = 0
