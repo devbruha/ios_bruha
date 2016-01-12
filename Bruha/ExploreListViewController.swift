@@ -32,14 +32,17 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
     var screenWidth: CGFloat = 0.0
     var screenHeight: CGFloat = 0.0
     
-    var posterInfo: [Image]?
-    var eventInfo: [Event]!
-    var addictionEventInfo: [AddictionEvent]?
-    var venueInfo: [Venue]?
-    var addictionVenueInfo: [AddictionVenue]?
+    var mPosterInfo: [Image]?
+    var mEventInfo: [Event]!
+    var mAddictionEventInfo: [AddictionEvent]?
+    var mVenueInfo: [Venue]?
+    var mAddictionVenueInfo: [AddictionVenue]?
+    var mOrganizationInfo: [Organization]?
+    var mAddictionOrganizationInfo: [AddictionOrganization]?
     
-    var organizationInfo: [Organization]?
-    var addictionOrganizationInfo: [AddictionOrganization]?
+    var filteredEventInfo: [Event] = []
+    var filteredVenueInfo: [Venue] = []
+    var filteredOrganizationInfo: [Organization] = []
     
     func configureView(){
         
@@ -117,7 +120,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         default:
             exploreLabel.text = "Event"
         }
-
+        
         
         UIView.animateWithDuration(1.5, delay: 0.0, options: [.TransitionFlipFromLeft], animations: { () -> Void in
             self.exploreLabel.alpha = 1
@@ -133,17 +136,17 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
     }
     
     /*func adjustCircSizeOfCell(view: UIView) {
-        
-        let screenSize: CGRect = UIScreen.mainScreen().bounds
-        
-        let heightContraint = NSLayoutConstraint(item: view, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.height * 0.5)
-        heightContraint.priority = UILayoutPriorityDefaultHigh
-        
-        let widthContraint = NSLayoutConstraint(item: view, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.height * 0.5)
-        widthContraint.priority = UILayoutPriorityDefaultHigh
-        
-        view.addConstraints([heightContraint, widthContraint])
-        
+    
+    let screenSize: CGRect = UIScreen.mainScreen().bounds
+    
+    let heightContraint = NSLayoutConstraint(item: view, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.height * 0.5)
+    heightContraint.priority = UILayoutPriorityDefaultHigh
+    
+    let widthContraint = NSLayoutConstraint(item: view, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.height * 0.5)
+    widthContraint.priority = UILayoutPriorityDefaultHigh
+    
+    view.addConstraints([heightContraint, widthContraint])
+    
     }*/
     
     func customStatusBar() {
@@ -158,7 +161,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         configureView()
         customTopButtons()
         //customStatusBar()
-            
+        
         exploreTableView.backgroundColor = UIColor.blackColor()
         exploreTableView.separatorColor = UIColor.blackColor()
         
@@ -171,7 +174,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateNotificationEvent", name: "filter", object: nil)
-        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateFilter", name: "filter", object: nil)
         
         self.exploreLabel.alpha = 0.0
         self.exploreImage.alpha = 0.0
@@ -181,16 +184,17 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         
         
         
-        posterInfo = FetchData(context: managedObjectContext).fetchPosterImages()
+        mPosterInfo = FetchData(context: managedObjectContext).fetchPosterImages()
         
-        eventInfo = FetchData(context: managedObjectContext).fetchEvents()
-        addictionEventInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
+        mEventInfo = FetchData(context: managedObjectContext).fetchEvents()
+        mAddictionEventInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
         
-        venueInfo = FetchData(context: managedObjectContext).fetchVenues()
-        addictionVenueInfo = FetchData(context: managedObjectContext).fetchAddictionsVenue()
+        mVenueInfo = FetchData(context: managedObjectContext).fetchVenues()
+        mAddictionVenueInfo = FetchData(context: managedObjectContext).fetchAddictionsVenue()
         
-        organizationInfo = FetchData(context: managedObjectContext).fetchOrganizations()
-        addictionOrganizationInfo = FetchData(context: managedObjectContext).fetchAddictionsOrganization()
+        mOrganizationInfo = FetchData(context: managedObjectContext).fetchOrganizations()
+        mAddictionOrganizationInfo = FetchData(context: managedObjectContext).fetchAddictionsOrganization()
+        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -199,47 +203,47 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         animateHeader()
         
         exploreTableView.reloadData()
-//        if GlobalVariables.selectedDisplay == "Event"{
-//            for cell in exploreTableView.visibleCells as! [EventTableViewCell] {
-//                cell.animate()
-//            }
-//            
-//        }
-//        if GlobalVariables.selectedDisplay == "Venue"{
-//            for cell in exploreTableView.visibleCells as! [VenueTableViewCell] {
-//                cell.animate()
-//            }
-//            
-//        }
-//        if GlobalVariables.selectedDisplay == "Organization"{
-//            for cell in exploreTableView.visibleCells as! [OrganizationTableViewCell] {
-//                cell.animate()
-//            }
-//            
-//        }
+        //        if GlobalVariables.selectedDisplay == "Event"{
+        //            for cell in exploreTableView.visibleCells as! [EventTableViewCell] {
+        //                cell.animate()
+        //            }
+        //
+        //        }
+        //        if GlobalVariables.selectedDisplay == "Venue"{
+        //            for cell in exploreTableView.visibleCells as! [VenueTableViewCell] {
+        //                cell.animate()
+        //            }
+        //
+        //        }
+        //        if GlobalVariables.selectedDisplay == "Organization"{
+        //            for cell in exploreTableView.visibleCells as! [OrganizationTableViewCell] {
+        //                cell.animate()
+        //            }
+        //
+        //        }
     }
     
     /*override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        if GlobalVariables.selectedDisplay == "Event"{
-            for cell in exploreTableView.visibleCells as! [EventTableViewCell] {
-                cell.animate()
-            }
-            
-        }
-        if GlobalVariables.selectedDisplay == "Venue"{
-            for cell in exploreTableView.visibleCells as! [VenueTableViewCell] {
-                cell.animate()
-            }
-            
-        }
-        if GlobalVariables.selectedDisplay == "Organization"{
-            for cell in exploreTableView.visibleCells as! [OrganizationTableViewCell] {
-                cell.animate()
-            }
-            
-        }
+    super.viewWillAppear(animated)
+    
+    if GlobalVariables.selectedDisplay == "Event"{
+    for cell in exploreTableView.visibleCells as! [EventTableViewCell] {
+    cell.animate()
+    }
+    
+    }
+    if GlobalVariables.selectedDisplay == "Venue"{
+    for cell in exploreTableView.visibleCells as! [VenueTableViewCell] {
+    cell.animate()
+    }
+    
+    }
+    if GlobalVariables.selectedDisplay == "Organization"{
+    for cell in exploreTableView.visibleCells as! [OrganizationTableViewCell] {
+    cell.animate()
+    }
+    
+    }
     }*/
     
     override func didReceiveMemoryWarning() {
@@ -287,7 +291,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             if GlobalVariables.filterEventBool {
                 eventInfo = GlobalVariables.displayFilteredEvents
             } else {
-                eventInfo = FetchData(context: managedObjectContext).fetchEvents()
+                eventInfo = mEventInfo
             }
             return (eventInfo.count)
             
@@ -297,7 +301,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             if GlobalVariables.filterVenueBool {
                 venueInfo = GlobalVariables.displayFilteredVenues
             } else {
-                venueInfo = FetchData(context: managedObjectContext).fetchVenues()!
+                venueInfo = mVenueInfo!
             }
             return (venueInfo.count)
             
@@ -311,12 +315,12 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             if GlobalVariables.filterOrganizationBool {
                 organizationInfo = GlobalVariables.displayFilteredOrganizations
             } else {
-                organizationInfo = FetchData(context: managedObjectContext).fetchOrganizations()!
+                organizationInfo = mOrganizationInfo!
             }
             return (organizationInfo.count)
             
         default:
-            let venueInfo = FetchData(context: managedObjectContext).fetchVenues()
+            let venueInfo = mVenueInfo
             return (venueInfo?.count)!
         }
         
@@ -337,15 +341,15 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 cell = NSBundle.mainBundle().loadNibNamed("EventTableViewCell", owner: self, options: nil)[0] as! EventTableViewCell;
             }
             
-//            cell.circView.autoresizingMask = UIViewAutoresizing.FlexibleHeight
-//            cell.circView.autoresizingMask = UIViewAutoresizing.FlexibleWidth
-////            cell.circView.sizeThatFits(circSize)
-//            adjustCircSizeOfCell(cell.circView)
+            //            cell.circView.autoresizingMask = UIViewAutoresizing.FlexibleHeight
+            //            cell.circView.autoresizingMask = UIViewAutoresizing.FlexibleWidth
+            ////            cell.circView.sizeThatFits(circSize)
+            //            adjustCircSizeOfCell(cell.circView)
             
-//            let c = cell.convertPoint(cell.circView.center, fromView: self.view)
-//            print(c.y, "mYSIDONs")
-//            cell.circView.frame = CGRectMake(0, 0, screenSize.height * 0.33, screenSize.height * 0.33)
-
+            //            let c = cell.convertPoint(cell.circView.center, fromView: self.view)
+            //            print(c.y, "mYSIDONs")
+            //            cell.circView.frame = CGRectMake(0, 0, screenSize.height * 0.33, screenSize.height * 0.33)
+            
             
             //let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
             //let addictionEventInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
@@ -353,10 +357,9 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             
             if GlobalVariables.filterEventBool {
                 
-                let filteredEventInfo = GlobalVariables.displayFilteredEvents
                 let event = filteredEventInfo[indexPath.row]
                 
-                for addict in addictionEventInfo! {
+                for addict in mAddictionEventInfo! {
                     if addict.eventID == event.eventID {
                         like = 1
                     }
@@ -365,12 +368,12 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 
                 cell.ExploreImage.contentMode = UIViewContentMode.ScaleToFill
                 
-                if posterInfo!.contains({$0.ID == event.eventID}) {
+                if mPosterInfo!.contains({$0.ID == event.eventID}) {
                     
-                    let idx = posterInfo!.indexOf({$0.ID == event.eventID})
+                    let idx = mPosterInfo!.indexOf({$0.ID == event.eventID})
                     
-                    if posterInfo![idx!].Image?.length > 800 {
-                        cell.ExploreImage.image = UIImage(data: posterInfo![idx!].Image!)
+                    if mPosterInfo![idx!].Image?.length > 800 {
+                        cell.ExploreImage.image = UIImage(data: mPosterInfo![idx!].Image!)
                     } else {
                         cell.ExploreImage.image = randomImage()
                     }
@@ -389,7 +392,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 } else {cell.circPrice.text = "No Price"; cell.rectPrice.text = "No Price"}
                 
                 cell.circHiddenID.text = event.eventID
-            
+                
                 cell.rectTitle.text = event.eventName
                 //cell.rectPrice.text = "$\(event.eventPrice!)"
                 
@@ -415,23 +418,23 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 
             } else { // when there is no filtering
                 
-                let event = eventInfo![indexPath.row]
+                let event = mEventInfo![indexPath.row]
                 
-                for addict in addictionEventInfo! {
+                for addict in mAddictionEventInfo! {
                     if addict.eventID == event.eventID {
                         like = 1
                     }
                 }
-
+                
                 
                 cell.ExploreImage.contentMode = UIViewContentMode.ScaleToFill
                 
-                if posterInfo!.contains({$0.ID == event.eventID}) {
+                if mPosterInfo!.contains({$0.ID == event.eventID}) {
                     
-                    let idx = posterInfo!.indexOf({$0.ID == event.eventID})
+                    let idx = mPosterInfo!.indexOf({$0.ID == event.eventID})
                     
-                    if posterInfo![idx!].Image?.length > 800 {
-                        cell.ExploreImage.image = UIImage(data: posterInfo![idx!].Image!)
+                    if mPosterInfo![idx!].Image?.length > 800 {
+                        cell.ExploreImage.image = UIImage(data: mPosterInfo![idx!].Image!)
                     } else {
                         cell.ExploreImage.image = randomImage()
                     }
@@ -440,29 +443,29 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                     cell.ExploreImage.image = randomImage()
                 }
                 
-//                if let images = posterInfo {
-//                    for img in images {
-//                        if img.ID == event.eventID {
-//                            if img.Image?.length > 800 {
-//                                cell.ExploreImage.image = UIImage(data: img.Image!)
-//                            } else {
-//                                cell.ExploreImage.image = randomImage()
-//                            }
-//                        }
-//                    }
-//                }
+                //                if let images = posterInfo {
+                //                    for img in images {
+                //                        if img.ID == event.eventID {
+                //                            if img.Image?.length > 800 {
+                //                                cell.ExploreImage.image = UIImage(data: img.Image!)
+                //                            } else {
+                //                                cell.ExploreImage.image = randomImage()
+                //                            }
+                //                        }
+                //                    }
+                //                }
                 
-//                if let checkedUrl = NSURL(string:event.posterUrl) {
-//                    //println("Started downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
-//                    getDataFromUrl(checkedUrl) { data in
-//                        dispatch_async(dispatch_get_main_queue()) {
-//                            //println("Finished downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
-//                            cell.ExploreImage.image = UIImage(data: data!)
-//                        }
-//                    
-//                    }
-//                
-//                }
+                //                if let checkedUrl = NSURL(string:event.posterUrl) {
+                //                    //println("Started downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
+                //                    getDataFromUrl(checkedUrl) { data in
+                //                        dispatch_async(dispatch_get_main_queue()) {
+                //                            //println("Finished downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
+                //                            cell.ExploreImage.image = UIImage(data: data!)
+                //                        }
+                //
+                //                    }
+                //
+                //                }
                 //println("End of code. The image will continue downloading in the background and it will be loaded when it ends.")
                 //Synchronously:
                 /*if let url = NSURL(string: event.url) {
@@ -471,9 +474,9 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 cell.ExploreImage.image = UIImage(data: data)
                 }
                 }*/
-            
-            
-            
+                
+                
+                
                 cell.circTitle.text = event.eventName
                 cell.circDate.text = convertCircTimeFormat("\(event.eventStartDate)")
                 
@@ -483,7 +486,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 } else {cell.circPrice.text = "No Price"; cell.rectPrice.text = "No Price"}
                 
                 cell.circHiddenID.text = event.eventID
-            
+                
                 cell.rectTitle.text = event.eventName
                 //cell.rectPrice.text = "$\(event.eventPrice!)"
                 
@@ -496,12 +499,12 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 cell.startTime.text = "\(convertRectTimeFormat("\(event.eventStartDate) \(event.eventStartTime)")) -"
                 cell.endTime.text = convertRectTimeFormat("\(event.eventEndDate) \(event.eventEndTime)")
                 
-//                let rStart = convertRectTimeFormat("\(event.eventStartDate) \(event.eventStartTime)")
-//                let rEnd = convertRectTimeFormat("\(event.eventEndDate) \(event.eventEndTime)")
-//                cell.startDate.text = rStart.componentsSeparatedByString(",")[0]
-//                cell.startTime.text = rStart.componentsSeparatedByString(",")[1]
-//                cell.endDate.text = rEnd.componentsSeparatedByString(",")[0]
-//                cell.endTime.text = rEnd.componentsSeparatedByString(",")[1]
+                //                let rStart = convertRectTimeFormat("\(event.eventStartDate) \(event.eventStartTime)")
+                //                let rEnd = convertRectTimeFormat("\(event.eventEndDate) \(event.eventEndTime)")
+                //                cell.startDate.text = rStart.componentsSeparatedByString(",")[0]
+                //                cell.startTime.text = rStart.componentsSeparatedByString(",")[1]
+                //                cell.endDate.text = rEnd.componentsSeparatedByString(",")[0]
+                //                cell.endTime.text = rEnd.componentsSeparatedByString(",")[1]
                 
                 cell.rectCategory.contentMode = UIViewContentMode.ScaleAspectFill
                 cell.rectCategory.image = UIImage(named: event.primaryCategory)
@@ -512,9 +515,9 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
                 cell.circCategory.image = UIImage(named: event.primaryCategory)
                 // Configure the cell...
-            
+                
             }
-                    
+            
             let temp: NSMutableArray = NSMutableArray()
             
             if like == 0 {
@@ -564,10 +567,9 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             
             if GlobalVariables.filterVenueBool {
                 
-                let filteredVenueInfo = GlobalVariables.displayFilteredVenues
                 let venue = filteredVenueInfo[indexPath.row]
                 
-                for addict in addictionVenueInfo! {
+                for addict in mAddictionVenueInfo! {
                     if addict.venueID == venue.venueID {
                         like = 1
                     }
@@ -575,12 +577,12 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 
                 cell.venueImage.contentMode = UIViewContentMode.ScaleToFill
                 
-                if posterInfo!.contains({$0.ID == venue.venueID}) {
+                if mPosterInfo!.contains({$0.ID == venue.venueID}) {
                     
-                    let idx = posterInfo!.indexOf({$0.ID == venue.venueID})
+                    let idx = mPosterInfo!.indexOf({$0.ID == venue.venueID})
                     
-                    if posterInfo![idx!].Image?.length > 800 {
-                        cell.venueImage.image = UIImage(data: posterInfo![idx!].Image!)
+                    if mPosterInfo![idx!].Image?.length > 800 {
+                        cell.venueImage.image = UIImage(data: mPosterInfo![idx!].Image!)
                     } else {
                         cell.venueImage.image = randomImage()
                     }
@@ -588,7 +590,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 else {
                     cell.venueImage.image = randomImage()
                 }
-            
+                
                 
                 cell.venueName.text = venue.venueName
                 cell.venueDescription.text = venue.venueName
@@ -607,22 +609,22 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 
                 
             } else { // when there is no filtering
-                                    
-                let venue = venueInfo![indexPath.row]
                 
-                for addict in addictionVenueInfo! {
+                let venue = mVenueInfo![indexPath.row]
+                
+                for addict in mAddictionVenueInfo! {
                     if addict.venueID == venue.venueID {
                         like = 1
                     }
                 }
-            
+                
                 cell.venueImage.contentMode = UIViewContentMode.ScaleToFill
-                if posterInfo!.contains({$0.ID == venue.venueID}) {
+                if mPosterInfo!.contains({$0.ID == venue.venueID}) {
                     
-                    let idx = posterInfo!.indexOf({$0.ID == venue.venueID})
+                    let idx = mPosterInfo!.indexOf({$0.ID == venue.venueID})
                     
-                    if posterInfo![idx!].Image?.length > 800 {
-                        cell.venueImage.image = UIImage(data: posterInfo![idx!].Image!)
+                    if mPosterInfo![idx!].Image?.length > 800 {
+                        cell.venueImage.image = UIImage(data: mPosterInfo![idx!].Image!)
                     } else {
                         cell.venueImage.image = randomImage()
                     }
@@ -690,11 +692,11 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             
             cell.artistsImage.contentMode = UIViewContentMode.ScaleToFill
             if let checkedUrl = NSURL(string:artist.posterUrl) {
-//                getDataFromUrl(checkedUrl) { data in
-//                    dispatch_async(dispatch_get_main_queue()) {
-//                        cell.artistsImage.image = UIImage(data: data!)
-//                    }
-//                }
+                //                getDataFromUrl(checkedUrl) { data in
+                //                    dispatch_async(dispatch_get_main_queue()) {
+                //                        cell.artistsImage.image = UIImage(data: data!)
+                //                    }
+                //                }
                 
             }
             
@@ -725,16 +727,16 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             }
             
             
-            let organizationInfo = FetchData(context: managedObjectContext).fetchOrganizations()
+            //let organizationInfo = FetchData(context: managedObjectContext).fetchOrganizations()
             var like = 0
-            let addictionOrganizationInfo = FetchData(context: managedObjectContext).fetchAddictionsOrganization()
+            //let addictionOrganizationInfo = FetchData(context: managedObjectContext).fetchAddictionsOrganization()
             
             
             if GlobalVariables.filterOrganizationBool {
-                let filteredOrganizationInfo = GlobalVariables.displayFilteredOrganizations
+                
                 let organization = filteredOrganizationInfo[indexPath.row]
                 
-                for addict in addictionOrganizationInfo! {
+                for addict in mAddictionOrganizationInfo! {
                     if addict.organizationID == organization.organizationID {
                         like = 1
                     }
@@ -742,12 +744,12 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 
                 cell.organizationImage.contentMode = UIViewContentMode.ScaleToFill
                 
-                if posterInfo!.contains({$0.ID == organization.organizationID}) {
+                if mPosterInfo!.contains({$0.ID == organization.organizationID}) {
                     
-                    let idx = posterInfo!.indexOf({$0.ID == organization.organizationID})
+                    let idx = mPosterInfo!.indexOf({$0.ID == organization.organizationID})
                     
-                    if posterInfo![idx!].Image?.length > 800 {
-                        cell.organizationImage.image = UIImage(data: posterInfo![idx!].Image!)
+                    if mPosterInfo![idx!].Image?.length > 800 {
+                        cell.organizationImage.image = UIImage(data: mPosterInfo![idx!].Image!)
                     } else {
                         cell.organizationImage.image = randomImage()
                     }
@@ -756,7 +758,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                     cell.organizationImage.image = randomImage()
                 }
                 
-                    
+                
                 cell.organizationName.text = organization.organizationName
                 cell.organizationDescription.text = organization.organizationName
                 cell.address.text = "\(organization.organizationAddress.componentsSeparatedByString(", ")[0])"
@@ -774,16 +776,16 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 
                 
             } else { // when there is no filtering
-                let organization = organizationInfo![indexPath.row]
+                let organization = mOrganizationInfo![indexPath.row]
                 
-                for addict in addictionOrganizationInfo! {
+                for addict in mAddictionOrganizationInfo! {
                     if addict.organizationID == organization.organizationID {
                         like = 1
                     }
                 }
-            
+                
                 cell.organizationImage.contentMode = UIViewContentMode.ScaleToFill
-                if let images = posterInfo {
+                if let images = mPosterInfo {
                     for img in images {
                         if img.ID == organization.organizationID {
                             if img.Image?.length > 800 {
@@ -794,7 +796,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                         }
                     }
                 }
-            
+                
                 cell.organizationName.text = organization.organizationName
                 cell.organizationDescription.text = organization.organizationName
                 cell.address.text = "\(organization.organizationAddress.componentsSeparatedByString(", ")[0])"
@@ -809,7 +811,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 cell.rectCategory.contentMode = UIViewContentMode.ScaleAspectFill
                 cell.rectCategory.image = UIImage(named: organization.primaryCategory)
                 cell.rectCategoryName.text = organization.primaryCategory
-            
+                
             }
             
             
@@ -1330,6 +1332,12 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
     func updateNotificationEvent(){
         
         self.exploreTableView.reloadData()
+    }
+    
+    func updateFilter(){
+        filteredEventInfo = GlobalVariables.displayFilteredEvents
+        filteredVenueInfo = GlobalVariables.displayFilteredVenues
+        filteredOrganizationInfo = GlobalVariables.displayFilteredOrganizations
     }
     
     func convertCircTimeFormat(date: String) -> String {
