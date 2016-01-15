@@ -46,4 +46,8 @@ class GlobalVariables{
     
     static var datesSelected = NSMutableArray()
     
+    static var eventImageCache = OrderedDictionary<String, UIImage>()
+    static var venueImageCache = OrderedDictionary<String, UIImage>()
+    static var organizationImageCache = OrderedDictionary<String, UIImage>()
+    
 }

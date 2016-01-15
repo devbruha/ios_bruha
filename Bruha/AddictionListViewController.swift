@@ -28,6 +28,15 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
     var screenHeight: CGFloat = 0.0
     var panelControllerContainer: ARSPContainerController!
     
+    var eventInfo: [Event]!
+    var addictedEventInfo: [AddictionEvent]?
+    var venueInfo: [Venue]?
+    var addictedVenueInfo: [AddictionVenue]?
+    var organizationInfo: [Organization]?
+    var addictedOrganizationInfo: [AddictionOrganization]?
+    
+    
+    
     func configureView(){
         
         let screenSize: CGRect = UIScreen.mainScreen().bounds
@@ -102,6 +111,8 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateNotificationAddiction", name: "itemDisplayChangeAddiction", object: nil)
         // Do any additional setup after loading the view.
+        
+        fetchInformation()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -149,19 +160,15 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
         //println("This is global variable on clicking \(GlobalVariables.selectedDisplay)")
         switch (GlobalVariables.addictedDisplay){
         case "Event":
-            let addictedEventInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
             return (addictedEventInfo?.count)!
         case "Venue":
-            let addictedVenueInfo = FetchData(context: managedObjectContext).fetchAddictionsVenue()
             return (addictedVenueInfo?.count)!
         case "Artist":
             let artistInfo = FetchData(context: managedObjectContext).fetchArtists()
             return (artistInfo?.count)!
         case "Organization":
-            let organizationInfo = FetchData(context: managedObjectContext).fetchAddictionsOrganization()
             return (organizationInfo?.count)!
         default:
-            let venueInfo = FetchData(context: managedObjectContext).fetchAddictionsVenue()
             return (venueInfo?.count)!
         }
         
@@ -188,10 +195,19 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
             
         }
     }
+    
+    func getDataFromUrl(urL:NSURL, completion: ((data: NSData?) -> Void)) {
+        NSURLSession.sharedSession().dataTaskWithURL(urL) { (data, response, error) in
+            completion(data: data)
+            }.resume()
+    }
 
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let posterInfo = FetchData(context: managedObjectContext).fetchPosterImages()
+        //let posterInfo = FetchData(context: managedObjectContext).fetchPosterImages()
+        if GlobalVariables.eventImageCache.count >= 50 { GlobalVariables.eventImageCache.removeAtIndex(0) }
+        if GlobalVariables.venueImageCache.count >= 50 { GlobalVariables.venueImageCache.removeAtIndex(0) }
+        if GlobalVariables.organizationImageCache.count >= 50 { GlobalVariables.organizationImageCache.removeAtIndex(0) }
         
         switch (GlobalVariables.addictedDisplay){
         case "Event":
@@ -202,21 +218,35 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
                 cell = NSBundle.mainBundle().loadNibNamed("EventTableViewCell", owner: self, options: nil)[0] as! EventTableViewCell;
             }
 
-            let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
-            let addictedEventInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
+            
             for event in eventInfo!{
                 
                 //download only addicted poster image
                 if event.eventID == addictedEventInfo![indexPath.row].eventID  {
-                    //println("Begin of code")
+
                     cell.ExploreImage.contentMode = UIViewContentMode.ScaleToFill
-                    if let images = posterInfo {
-                        for img in images {
-                            if img.ID == event.eventID {
-                                if img.Image?.length > 800 {
-                                    cell.ExploreImage.image = UIImage(data: img.Image!)
-                                } else {
-                                    cell.ExploreImage.image = randomImage()
+                    
+                    if let img = GlobalVariables.eventImageCache[event.eventID] {
+                        cell.ExploreImage.image = img
+                    }
+                    else if let checkedUrl = NSURL(string:event.posterUrl) {
+                        
+                        self.getDataFromUrl(checkedUrl) { data in
+                            dispatch_async(dispatch_get_main_queue()) {
+                                if let downloadImg = data {
+                                    if downloadImg.length > 800 {
+                                        
+                                        let image = UIImage(data: downloadImg)
+                                        GlobalVariables.eventImageCache[event.eventID] = image
+                                        
+                                        cell.ExploreImage.image = image
+                                        
+                                    } else {
+                                        cell.ExploreImage.image = self.randomImage()
+                                    }
+                                }
+                                else {
+                                    cell.ExploreImage.image = self.randomImage()
                                 }
                             }
                         }
@@ -313,20 +343,31 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
             }
             
             
-            let venueInfo = FetchData(context: managedObjectContext).fetchVenues()
-            let addictedVenueInfo = FetchData(context: managedObjectContext).fetchAddictionsVenue()
             
             for venue in venueInfo! {
                 if venue.venueID == addictedVenueInfo![indexPath.row].venueID  {
                     //println("Begin of code")
                     cell.venueImage.contentMode = UIViewContentMode.ScaleToFill
-                    if let images = posterInfo {
-                        for img in images {
-                            if img.ID == venue.venueID {
-                                if img.Image?.length > 800 {
-                                    cell.venueImage.image = UIImage(data: img.Image!)
-                                } else {
-                                    cell.venueImage.image = randomImage()
+                    if let img = GlobalVariables.venueImageCache[venue.venueID] {
+                        cell.venueImage.image = img
+                    }
+                    else if let checkedUrl = NSURL(string:venue.posterUrl) {
+                        
+                        self.getDataFromUrl(checkedUrl) { data in
+                            dispatch_async(dispatch_get_main_queue()) {
+                                if let downloadImg = data {
+                                    if downloadImg.length > 800 {
+                                        
+                                        let image = UIImage(data: downloadImg)
+                                        GlobalVariables.venueImageCache[venue.venueID] = image
+                                        cell.venueImage.image = image
+                                        
+                                    } else {
+                                        cell.venueImage.image = self.randomImage()
+                                    }
+                                }
+                                else {
+                                    cell.venueImage.image = self.randomImage()
                                 }
                             }
                         }
@@ -380,20 +421,30 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
                 cell = NSBundle.mainBundle().loadNibNamed("OrganizationTableViewCell", owner: self, options: nil)[0] as! OrganizationTableViewCell;
             }
             
-            let organizationInfo = FetchData(context: managedObjectContext).fetchOrganizations()
-            let addictedOrganizationInfo = FetchData(context: managedObjectContext).fetchAddictionsOrganization()
             
             for organization in organizationInfo! {
                 if organization.organizationID == addictedOrganizationInfo![indexPath.row].organizationID  {
                     //println("Begin of code")
                     cell.organizationImage.contentMode = UIViewContentMode.ScaleToFill
-                    if let images = posterInfo {
-                        for img in images {
-                            if img.ID == organization.organizationID {
-                                if img.Image?.length > 800 {
-                                    cell.organizationImage.image = UIImage(data: img.Image!)
-                                } else {
-                                    cell.organizationImage.image = randomImage()
+                    if let img = GlobalVariables.organizationImageCache[organization.organizationID] {
+                        cell.organizationImage.image = img
+                    }
+                    else if let checkedUrl = NSURL(string:organization.posterUrl) {
+                        
+                        self.getDataFromUrl(checkedUrl) { data in
+                            dispatch_async(dispatch_get_main_queue()) {
+                                if let downloadImg = data {
+                                    if downloadImg.length > 800 {
+                                        
+                                        let image = UIImage(data: downloadImg)
+                                        GlobalVariables.venueImageCache[organization.organizationID] = image
+                                        cell.organizationImage.image = image
+                                    } else {
+                                        cell.organizationImage.image = self.randomImage()
+                                    }
+                                }
+                                else {
+                                    cell.organizationImage.image = self.randomImage()
                                 }
                             }
                         }
@@ -477,6 +528,8 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
                             print("Removed from addiction(event) \(addicted.eventID), user \(GlobalVariables.username)")
                             print("REMOVED")
                             
+                            self.updateAddictFetch()
+                            
                             let eventService = EventService()
                             eventService.removeAddictedEvents(addicted.eventID) {
                                 (let removeInfo ) in
@@ -518,6 +571,8 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
                             print("Removed from addiction(venue) \(addicted.venueID), user \(GlobalVariables.username)")
                             print("REMOVED")
                             
+                            self.updateAddictFetch()
+                            
                             let venueService = VenueService()
                             venueService.removeAddictedVenues(addicted.venueID) {
                                 (let addInfo ) in
@@ -552,6 +607,8 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
                             DeleteData(context: self.managedObjectContext).deleteAddictionsOrgainzation(addicted.organizationID, deleteUser: GlobalVariables.username)
                             print("Removed from addiction(organization) \(addicted.organizationID), user \(GlobalVariables.username)")
                             print("REMOVED")
+                            
+                            self.updateAddictFetch()
                             
                             let organizationService = OrganizationService()
                             
@@ -803,6 +860,32 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
         let aString = NSMutableAttributedString(string: title, attributes: mAttribute)
         
         return aString
+    }
+    
+    func fetchInformation() {
+        eventInfo = FetchData(context: managedObjectContext).fetchEvents()
+        addictedEventInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
+        venueInfo = FetchData(context: managedObjectContext).fetchVenues()
+        addictedVenueInfo = FetchData(context: managedObjectContext).fetchAddictionsVenue()
+        organizationInfo = FetchData(context: managedObjectContext).fetchOrganizations()
+        addictedOrganizationInfo = FetchData(context: managedObjectContext).fetchAddictionsOrganization()
+    }
+    
+    func updateAddictFetch() {
+        
+        if GlobalVariables.uploadDisplay == "Event"{
+            
+            addictedEventInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
+        }
+        if GlobalVariables.uploadDisplay == "Venue"{
+            
+            addictedVenueInfo = FetchData(context: managedObjectContext).fetchAddictionsVenue()
+        }
+        if GlobalVariables.uploadDisplay == "Organization"{
+            
+            addictedOrganizationInfo = FetchData(context: managedObjectContext).fetchAddictionsOrganization()
+        }
+        
     }
     
     

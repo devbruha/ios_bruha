@@ -40,6 +40,8 @@ class AffiliatedOrgViewController: UIViewController, SWTableViewCellDelegate {
     var affiliatedOrg: [Organization] = []
     var sourceID: [String] = []
     
+    var addictionInfo: [AddictionOrganization]?
+    
     func configureView(){
         
         let screenSize: CGRect = UIScreen.mainScreen().bounds
@@ -133,6 +135,7 @@ class AffiliatedOrgViewController: UIViewController, SWTableViewCellDelegate {
         }
 
         // Do any additional setup after loading the view.
+        addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsOrganization()
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -168,9 +171,18 @@ class AffiliatedOrgViewController: UIViewController, SWTableViewCellDelegate {
         }
     }
     
+    func getDataFromUrl(urL:NSURL, completion: ((data: NSData?) -> Void)) {
+        NSURLSession.sharedSession().dataTaskWithURL(urL) { (data, response, error) in
+            completion(data: data)
+            }.resume()
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let posterInfo = FetchData(context: managedObjectContext).fetchPosterImages()
+        //let posterInfo = FetchData(context: managedObjectContext).fetchPosterImages()
+        if GlobalVariables.eventImageCache.count >= 50 { GlobalVariables.eventImageCache.removeAtIndex(0) }
+        if GlobalVariables.venueImageCache.count >= 50 { GlobalVariables.venueImageCache.removeAtIndex(0) }
+        if GlobalVariables.organizationImageCache.count >= 50 { GlobalVariables.organizationImageCache.removeAtIndex(0) }
         
         var cell : OrganizationTableViewCell! = tableView.dequeueReusableCellWithIdentifier("organizationTableViewCell") as! OrganizationTableViewCell!
         
@@ -182,13 +194,25 @@ class AffiliatedOrgViewController: UIViewController, SWTableViewCellDelegate {
         let organization = affiliatedOrg[indexPath.row]
         
         cell.organizationImage.contentMode = UIViewContentMode.ScaleToFill
-        if let images = posterInfo {
-            for img in images {
-                if img.ID == organization.organizationID {
-                    if img.Image?.length > 800 {
-                        cell.organizationImage.image = UIImage(data: img.Image!)
-                    } else {
-                        cell.organizationImage.image = randomImage()
+        if let img = GlobalVariables.organizationImageCache[organization.organizationID] {
+            cell.organizationImage.image = img
+        }
+        else if let checkedUrl = NSURL(string:organization.posterUrl) {
+            
+            self.getDataFromUrl(checkedUrl) { data in
+                dispatch_async(dispatch_get_main_queue()) {
+                    if let downloadImg = data {
+                        if downloadImg.length > 800 {
+                            
+                            let image = UIImage(data: downloadImg)
+                            GlobalVariables.venueImageCache[organization.organizationID] = image
+                            cell.organizationImage.image = image
+                        } else {
+                            cell.organizationImage.image = self.randomImage()
+                        }
+                    }
+                    else {
+                        cell.organizationImage.image = self.randomImage()
                     }
                 }
             }
@@ -211,7 +235,6 @@ class AffiliatedOrgViewController: UIViewController, SWTableViewCellDelegate {
         // Configure the cell...
         
         
-        let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsOrganization()
         var like = 0
         
         for addict in addictionInfo! {
@@ -278,6 +301,8 @@ class AffiliatedOrgViewController: UIViewController, SWTableViewCellDelegate {
                                 print("Removed from addiction(event) \(organization.organizationID)")
                                 print("REMOVED")
                                 
+                                self.updateAddictFetch()
+                                
                                 let organizationService = OrganizationService()
                                 
                                 organizationService.removeAddictedOrganizations(organization.organizationID) {
@@ -305,6 +330,8 @@ class AffiliatedOrgViewController: UIViewController, SWTableViewCellDelegate {
                             SaveData(context: managedObjectContext).saveAddictionOrganization(addOrgainzation)
                             print("Getting Addicted with event id \(organization.organizationID)")
                             print("ADDICTED")
+                            
+                            updateAddictFetch()
                             
                             let organizationService = OrganizationService()
                             
@@ -463,6 +490,11 @@ class AffiliatedOrgViewController: UIViewController, SWTableViewCellDelegate {
         let aString = NSMutableAttributedString(string: title, attributes: mAttribute)
         
         return aString
+    }
+    
+    func updateAddictFetch() {
+        
+        addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsOrganization()
     }
 
     /*

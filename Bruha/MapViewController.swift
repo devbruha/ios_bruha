@@ -255,11 +255,20 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
         }
     }
     
+    func getDataFromUrl(urL:NSURL, completion: ((data: NSData?) -> Void)) {
+        NSURLSession.sharedSession().dataTaskWithURL(urL) { (data, response, error) in
+            completion(data: data)
+            }.resume()
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) ->   UITableViewCell {
         
         let cell: MapDropTableViewCell = self.dropDownTable.dequeueReusableCellWithIdentifier("DropCell") as! MapDropTableViewCell
         
-        let posterInfo = FetchData(context: managedObjectContext).fetchPosterImages()
+        //let posterInfo = FetchData(context: managedObjectContext).fetchPosterImages()
+        if GlobalVariables.eventImageCache.count >= 50 { GlobalVariables.eventImageCache.removeAtIndex(0) }
+        if GlobalVariables.venueImageCache.count >= 50 { GlobalVariables.venueImageCache.removeAtIndex(0) }
+        if GlobalVariables.organizationImageCache.count >= 50 { GlobalVariables.organizationImageCache.removeAtIndex(0) }
         
         switch GlobalVariables.selectedDisplay {
         case "Event":
@@ -268,13 +277,27 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             
             // Poster Image
             cell.dropImage.contentMode = UIViewContentMode.ScaleToFill
-            if let images = posterInfo {
-                for img in images {
-                    if img.ID == e.eventID {
-                        if img.Image?.length > 800 {
-                            cell.dropImage.image = UIImage(data: img.Image!)
-                        } else {
-                            cell.dropImage.image = randomImage()
+            if let img = GlobalVariables.eventImageCache[e.eventID] {
+                cell.dropImage.image = img
+            }
+            else if let checkedUrl = NSURL(string:e.posterUrl) {
+                
+                self.getDataFromUrl(checkedUrl) { data in
+                    dispatch_async(dispatch_get_main_queue()) {
+                        if let downloadImg = data {
+                            if downloadImg.length > 800 {
+                                
+                                let image = UIImage(data: downloadImg)
+                                GlobalVariables.eventImageCache[e.eventID] = image
+                                
+                                cell.dropImage.image = image
+                                
+                            } else {
+                                cell.dropImage.image = self.randomImage()
+                            }
+                        }
+                        else {
+                            cell.dropImage.image = self.randomImage()
                         }
                     }
                 }
@@ -334,13 +357,26 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             let v = dropVenues[indexPath.row]
             
             cell.dropImage.contentMode = UIViewContentMode.ScaleToFill
-            if let images = posterInfo {
-                for img in images {
-                    if img.ID == v.venueID {
-                        if img.Image?.length > 800 {
-                            cell.dropImage.image = UIImage(data: img.Image!)
-                        } else {
-                            cell.dropImage.image = randomImage()
+            if let img = GlobalVariables.venueImageCache[v.venueID] {
+                cell.dropImage.image = img
+            }
+            else if let checkedUrl = NSURL(string:v.posterUrl) {
+                
+                self.getDataFromUrl(checkedUrl) { data in
+                    dispatch_async(dispatch_get_main_queue()) {
+                        if let downloadImg = data {
+                            if downloadImg.length > 800 {
+                                
+                                let image = UIImage(data: downloadImg)
+                                GlobalVariables.venueImageCache[v.venueID] = image
+                                cell.dropImage.image = image
+                                
+                            } else {
+                                cell.dropImage.image = self.randomImage()
+                            }
+                        }
+                        else {
+                            cell.dropImage.image = self.randomImage()
                         }
                     }
                 }
@@ -389,13 +425,25 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             let o = dropOrganizations[indexPath.row]
             
             cell.dropImage.contentMode = UIViewContentMode.ScaleToFill
-            if let images = posterInfo {
-                for img in images {
-                    if img.ID == o.organizationID {
-                        if img.Image?.length > 800 {
-                            cell.dropImage.image = UIImage(data: img.Image!)
-                        } else {
-                            cell.dropImage.image = randomImage()
+            if let img = GlobalVariables.organizationImageCache[o.organizationID] {
+                cell.dropImage.image = img
+            }
+            else if let checkedUrl = NSURL(string:o.posterUrl) {
+                
+                self.getDataFromUrl(checkedUrl) { data in
+                    dispatch_async(dispatch_get_main_queue()) {
+                        if let downloadImg = data {
+                            if downloadImg.length > 800 {
+                                
+                                let image = UIImage(data: downloadImg)
+                                GlobalVariables.venueImageCache[o.organizationID] = image
+                                cell.dropImage.image = image
+                            } else {
+                                cell.dropImage.image = self.randomImage()
+                            }
+                        }
+                        else {
+                            cell.dropImage.image = self.randomImage()
                         }
                     }
                 }

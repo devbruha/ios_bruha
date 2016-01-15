@@ -113,6 +113,12 @@ class EventMoreInfomationViewController: UIViewController, UIWebViewDelegate{
                 }
         }
     }
+    
+    func getDataFromUrl(urL:NSURL, completion: ((data: NSData?) -> Void)) {
+        NSURLSession.sharedSession().dataTaskWithURL(urL) { (data, response, error) in
+            completion(data: data)
+            }.resume()
+    }
 
     
     func labelDisplay(){
@@ -125,7 +131,10 @@ class EventMoreInfomationViewController: UIViewController, UIWebViewDelegate{
 //        PriceCalendar.enabled = false
 //        DateUpcoming.enabled = false
         
-        let posterInfo = FetchData(context: managedObjectContext).fetchPosterImages()
+        //let posterInfo = FetchData(context: managedObjectContext).fetchPosterImages()
+        if GlobalVariables.eventImageCache.count >= 50 { GlobalVariables.eventImageCache.removeAtIndex(0) }
+        if GlobalVariables.venueImageCache.count >= 50 { GlobalVariables.venueImageCache.removeAtIndex(0) }
+        if GlobalVariables.organizationImageCache.count >= 50 { GlobalVariables.organizationImageCache.removeAtIndex(0) }
         
         if GlobalVariables.selectedDisplay == "Event" || GlobalVariables.addictedDisplay == "Event" || GlobalVariables.uploadDisplay == "Event"{
             
@@ -161,13 +170,27 @@ class EventMoreInfomationViewController: UIViewController, UIWebViewDelegate{
                     sourceID.append(event.organizationID)
                     eventVenueSource = event.venueID
                     print("org id passed", sourceID); print("event id", event.eventID)
-                    if let images = posterInfo {
-                        for img in images {
-                            if img.ID == event.eventID {
-                                if img.Image?.length > 800 {
-                                    Image.image = UIImage(data: img.Image!)
-                                } else {
-                                    Image.image = randomImage()
+                    if let img = GlobalVariables.eventImageCache[event.eventID] {
+                        Image.image = img
+                    }
+                    else if let checkedUrl = NSURL(string:event.posterUrl) {
+                        
+                        self.getDataFromUrl(checkedUrl) { data in
+                            dispatch_async(dispatch_get_main_queue()) {
+                                if let downloadImg = data {
+                                    if downloadImg.length > 800 {
+                                        
+                                        let image = UIImage(data: downloadImg)
+                                        GlobalVariables.eventImageCache[event.eventID] = image
+                                        
+                                        self.Image.image = image
+                                        
+                                    } else {
+                                        self.Image.image = self.randomImage()
+                                    }
+                                }
+                                else {
+                                    self.Image.image = self.randomImage()
                                 }
                             }
                         }
@@ -223,6 +246,27 @@ class EventMoreInfomationViewController: UIViewController, UIWebViewDelegate{
         self.eventMoreInfoImage.alpha = 0
         
         // Do any additional setup after loading the view.
+        
+//        var events = OrderedDictionary<String, Int>()
+//        
+//        events["one"] = 1
+//        events["two"] = 2
+//        events["three"] = 3
+//        events["four"] = 4
+//        events["five"] = 5
+//        
+//        print(events)
+//        
+//        events.removeAtIndex(0)
+//        
+//        print(events)
+//        
+//        print(events["two"])
+//        
+//        if let aaa = events["one"] {
+//            print(aaa)
+//        }
+//        //print(events["one"])
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -334,16 +378,33 @@ class EventMoreInfomationViewController: UIViewController, UIWebViewDelegate{
     
     func webViewDidFinishLoad(webView: UIWebView) {
         
-//        webDescriptionContent.scrollView.scrollEnabled = false
-//        
-//        let height = webView.scrollView.contentSize.height
-//        
-//        scrollView.contentInset.bottom = height + 180 + 40 + UIScreen.mainScreen().bounds.height * 0.33 + 30
+        webDescriptionContent.scrollView.scrollEnabled = false
+        
+        let height = webView.scrollView.contentSize.height
+        
+        scrollView.contentInset.bottom = height + 180 + 40 + UIScreen.mainScreen().bounds.height * 0.33 + 30
         
         
-        webDescriptionContent.scrollView.scrollEnabled = true
         
-        scrollView.scrollEnabled = false
+        //scrollView.setContentOffset(CGPointMake(0, UIScreen.mainScreen().bounds.height * 0.33 + 50), animated: false)
+        
+//        scrollView.scrollEnabled = true
+//        scrollView.contentInset = UIEdgeInsetsMake(0, 0, 500, 0)
+//        webDescriptionContent.scrollView.scrollEnabled = true
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        print("touched")
+        if touches.count > 0 {
+            let tempTouch = UITouch()
+            let touchLocation: CGPoint = tempTouch.locationInView(webDescriptionContent)
+            if touchLocation.y > 20 {
+                webDescriptionContent.scrollView.scrollEnabled = true
+                print("Stop")
+            }
+            //scrollView.scrollEnabled = false
+            
+        }
     }
     
     func randomImage() -> UIImage {

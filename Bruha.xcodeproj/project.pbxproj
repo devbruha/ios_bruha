@@ -156,6 +156,7 @@
 		A5D90E061BBDD79300537F72 /* AddictionVenue.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D90E051BBDD79300537F72 /* AddictionVenue.swift */; };
 		A5E4EAD11BBEDFE500DAEE9D /* AddictionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E4EAD01BBEDFE500DAEE9D /* AddictionListViewController.swift */; };
 		A5E4EAD31BC2BC3900DAEE9D /* AddictionListPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E4EAD21BC2BC3900DAEE9D /* AddictionListPanelViewController.swift */; };
+		A5F286641C47023D004A1860 /* OrderedDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F286631C47023D004A1860 /* OrderedDictionary.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -324,6 +325,7 @@
 		A5D90E051BBDD79300537F72 /* AddictionVenue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddictionVenue.swift; sourceTree = "<group>"; };
 		A5E4EAD01BBEDFE500DAEE9D /* AddictionListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddictionListViewController.swift; sourceTree = "<group>"; };
 		A5E4EAD21BC2BC3900DAEE9D /* AddictionListPanelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddictionListPanelViewController.swift; sourceTree = "<group>"; };
+		A5F286631C47023D004A1860 /* OrderedDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderedDictionary.swift; sourceTree = "<group>"; };
 		CCB1783DB671A2F9EF9B679A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -519,6 +521,7 @@
 				45FA056B1B5D4158004AD819 /* Bruha.xcdatamodeld */,
 				1835F8F21B5EAD7200FD1BD1 /* Reachability.swift */,
 				45FA05691B5D4158004AD819 /* AppDelegate.swift */,
+				A5F286631C47023D004A1860 /* OrderedDictionary.swift */,
 				45FA05681B5D4158004AD819 /* Info.plist */,
 				A576578F1C1F6E2A00F871A2 /* Font */,
 			);
@@ -924,6 +927,7 @@
 				180B05941BE464E800E2F46F /* HorizontalLine.swift in Sources */,
 				45FA059B1B5D4188004AD819 /* GlobalVariables.swift in Sources */,
 				45FA05A51B5D4190004AD819 /* NetworkOperation.swift in Sources */,
+				A5F286641C47023D004A1860 /* OrderedDictionary.swift in Sources */,
 				4560C5491B66D42000AB5382 /* ExploreListViewController.swift in Sources */,
 				4560C54D1B66D45100AB5382 /* EventRectangleView.swift in Sources */,
 				18D2169D1B6BF1D9005DAAA8 /* ExploreListPanelViewController.swift in Sources */,

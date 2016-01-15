@@ -38,6 +38,9 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
     var sourceForEvent: String?
     var sourceID: String?
     
+    var addictionInfo: [AddictionEvent]?
+    
+    
     func configureView(){
         
         let screenSize: CGRect = UIScreen.mainScreen().bounds
@@ -138,6 +141,7 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
         
         
         // Do any additional setup after loading the view.
+        addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -173,9 +177,18 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
         }
     }
     
+    func getDataFromUrl(urL:NSURL, completion: ((data: NSData?) -> Void)) {
+        NSURLSession.sharedSession().dataTaskWithURL(urL) { (data, response, error) in
+            completion(data: data)
+            }.resume()
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let posterInfo = FetchData(context: managedObjectContext).fetchPosterImages()
+        //let posterInfo = FetchData(context: managedObjectContext).fetchPosterImages()
+        if GlobalVariables.eventImageCache.count >= 50 { GlobalVariables.eventImageCache.removeAtIndex(0) }
+        if GlobalVariables.venueImageCache.count >= 50 { GlobalVariables.venueImageCache.removeAtIndex(0) }
+        if GlobalVariables.organizationImageCache.count >= 50 { GlobalVariables.organizationImageCache.removeAtIndex(0) }
         
         var cell : EventTableViewCell! = tableView.dequeueReusableCellWithIdentifier("eventTableViewCell") as! EventTableViewCell!
         
@@ -187,13 +200,27 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
         let event = upcomingEvents[indexPath.row]
         
         cell.ExploreImage.contentMode = UIViewContentMode.ScaleToFill
-        if let images = posterInfo {
-            for img in images {
-                if img.ID == event.eventID {
-                    if img.Image?.length > 800 {
-                        cell.ExploreImage.image = UIImage(data: img.Image!)
-                    } else {
-                        cell.ExploreImage.image = randomImage()
+        if let img = GlobalVariables.eventImageCache[event.eventID] {
+            cell.ExploreImage.image = img
+        }
+        else if let checkedUrl = NSURL(string:event.posterUrl) {
+            
+            self.getDataFromUrl(checkedUrl) { data in
+                dispatch_async(dispatch_get_main_queue()) {
+                    if let downloadImg = data {
+                        if downloadImg.length > 800 {
+                            
+                            let image = UIImage(data: downloadImg)
+                            GlobalVariables.eventImageCache[event.eventID] = image
+                            
+                            cell.ExploreImage.image = image
+                            
+                        } else {
+                            cell.ExploreImage.image = self.randomImage()
+                        }
+                    }
+                    else {
+                        cell.ExploreImage.image = self.randomImage()
                     }
                 }
             }
@@ -232,7 +259,6 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
         // Configure the cell...
 
         
-        let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
         var like = 0
         
         for addict in addictionInfo! {
@@ -300,6 +326,8 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
                                 print("Removed from addiction(event) \(event.eventID)")
                                 print("REMOVED")
                                 
+                                self.updateAddictFetch()
+                                
                                 let eventService = EventService()
                                 eventService.removeAddictedEvents(event.eventID) {
                                     (let removeInfo ) in
@@ -325,6 +353,8 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
                             SaveData(context: managedObjectContext).saveAddictionEvent(addEvent)
                             print("Getting Addicted with event id \(event.eventID)")
                             print("ADDICTED")
+                            
+                            updateAddictFetch()
                             
                             let eventService = EventService()
                             
@@ -497,6 +527,11 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
         let aString = NSMutableAttributedString(string: title, attributes: mAttribute)
         
         return aString
+    }
+    
+    func updateAddictFetch() {
+        
+        addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
     }
     
 

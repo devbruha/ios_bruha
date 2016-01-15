@@ -121,7 +121,7 @@ class LoadScreenViewController: UIViewController {
         if hasInternet() == "true" {
             startSpinning()
             startLoadingProgress()
-            NSNotificationCenter.defaultCenter().addObserver(self, selector: "saveImages", name:"complete", object: nil)
+            //NSNotificationCenter.defaultCenter().addObserver(self, selector: "saveImages", name:"complete", object: nil)
             NSNotificationCenter.defaultCenter().addObserver(self, selector: "performSegue", name:"complete", object: nil)
             let timer = NSTimer.scheduledTimerWithTimeInterval(15.0, target: self, selector: "timeOutCheck", userInfo: nil, repeats: false)
             

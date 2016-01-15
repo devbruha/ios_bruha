@@ -116,6 +116,12 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
         }
     }
     
+    func getDataFromUrl(urL:NSURL, completion: ((data: NSData?) -> Void)) {
+        NSURLSession.sharedSession().dataTaskWithURL(urL) { (data, response, error) in
+            completion(data: data)
+            }.resume()
+    }
+    
     func labelDisplay(){
         webDescriptionContent.opaque = false
         webDescriptionContent.backgroundColor = UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
@@ -126,7 +132,10 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
         PriceCalendar.enabled = false
         DateUpcoming.enabled = false
         
-        let posterInfo = FetchData(context: managedObjectContext).fetchPosterImages()
+        //let posterInfo = FetchData(context: managedObjectContext).fetchPosterImages()
+        if GlobalVariables.eventImageCache.count >= 50 { GlobalVariables.eventImageCache.removeAtIndex(0) }
+        if GlobalVariables.venueImageCache.count >= 50 { GlobalVariables.venueImageCache.removeAtIndex(0) }
+        if GlobalVariables.organizationImageCache.count >= 50 { GlobalVariables.organizationImageCache.removeAtIndex(0) }
         
         if sourceForComingEvent == "event" {
             
@@ -155,13 +164,27 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                     EventCategory.text = event.primaryCategory
                     webDescriptionContent.loadHTMLString("<div style=\"font-family:OpenSans;color:white;width:100%;word-wrap:break-word;\">\(event.eventDescription)</div>", baseURL: nil)
                     
-                    if let images = posterInfo {
-                        for img in images {
-                            if img.ID == event.eventID {
-                                if img.Image?.length > 800 {
-                                    Image.image = UIImage(data: img.Image!)
-                                } else {
-                                    Image.image = randomImage()
+                    if let img = GlobalVariables.eventImageCache[event.eventID] {
+                        Image.image = img
+                    }
+                    else if let checkedUrl = NSURL(string:event.posterUrl) {
+                        
+                        self.getDataFromUrl(checkedUrl) { data in
+                            dispatch_async(dispatch_get_main_queue()) {
+                                if let downloadImg = data {
+                                    if downloadImg.length > 800 {
+                                        
+                                        let image = UIImage(data: downloadImg)
+                                        GlobalVariables.eventImageCache[event.eventID] = image
+                                        
+                                        self.Image.image = image
+                                        
+                                    } else {
+                                        self.Image.image = self.randomImage()
+                                    }
+                                }
+                                else {
+                                    self.Image.image = self.randomImage()
                                 }
                             }
                         }
@@ -194,13 +217,26 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                     PriceCalendar.enabled = true
                     DateUpcoming.enabled = true
                     
-                    if let images = posterInfo {
-                        for img in images {
-                            if img.ID == venue.venueID {
-                                if img.Image?.length > 800 {
-                                    Image.image = UIImage(data: img.Image!)
-                                } else {
-                                    Image.image = randomImage()
+                    if let img = GlobalVariables.venueImageCache[venue.venueID] {
+                        Image.image = img
+                    }
+                    else if let checkedUrl = NSURL(string:venue.posterUrl) {
+                        
+                        self.getDataFromUrl(checkedUrl) { data in
+                            dispatch_async(dispatch_get_main_queue()) {
+                                if let downloadImg = data {
+                                    if downloadImg.length > 800 {
+                                        
+                                        let image = UIImage(data: downloadImg)
+                                        GlobalVariables.venueImageCache[venue.venueID] = image
+                                        self.Image.image = image
+                                        
+                                    } else {
+                                        self.Image.image = self.randomImage()
+                                    }
+                                }
+                                else {
+                                    self.Image.image = self.randomImage()
                                 }
                             }
                         }
@@ -232,13 +268,25 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                     PriceCalendar.enabled = true
                     DateUpcoming.enabled = true
                     
-                    if let images = posterInfo {
-                        for img in images {
-                            if img.ID == organization.organizationID {
-                                if img.Image?.length > 800 {
-                                    Image.image = UIImage(data: img.Image!)
-                                } else {
-                                    Image.image = randomImage()
+                    if let img = GlobalVariables.organizationImageCache[organization.organizationID] {
+                        Image.image = img
+                    }
+                    else if let checkedUrl = NSURL(string:organization.posterUrl) {
+                        
+                        self.getDataFromUrl(checkedUrl) { data in
+                            dispatch_async(dispatch_get_main_queue()) {
+                                if let downloadImg = data {
+                                    if downloadImg.length > 800 {
+                                        
+                                        let image = UIImage(data: downloadImg)
+                                        GlobalVariables.venueImageCache[organization.organizationID] = image
+                                        self.Image.image = image
+                                    } else {
+                                        self.Image.image = self.randomImage()
+                                    }
+                                }
+                                else {
+                                    self.Image.image = self.randomImage()
                                 }
                             }
                         }
