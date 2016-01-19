@@ -176,9 +176,8 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         GlobalVariables.displayedArtists = FetchData(context: managedObjectContext).fetchArtists()!
         GlobalVariables.displayedOrganizations = FetchData(context: managedObjectContext).fetchOrganizations()!
         
-        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateNotificationEvent", name: "filter", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateFilter", name: "filter", object: nil)
+        
         
         self.exploreLabel.alpha = 0.0
         self.exploreImage.alpha = 0.0
@@ -282,7 +281,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             var mEventInfo: [Event] = []
             
             if GlobalVariables.filterEventBool {
-                mEventInfo = GlobalVariables.displayFilteredEvents
+                mEventInfo = filteredEventInfo
             } else {
                 mEventInfo = eventInfo
             }
@@ -292,7 +291,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             var mVenueInfo: [Venue] = []
             
             if GlobalVariables.filterVenueBool {
-                mVenueInfo = GlobalVariables.displayFilteredVenues
+                mVenueInfo = filteredVenueInfo
             } else {
                 mVenueInfo = venueInfo!
             }
@@ -306,7 +305,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             var mOrganizationInfo: [Organization] = []
             
             if GlobalVariables.filterOrganizationBool {
-                mOrganizationInfo = GlobalVariables.displayFilteredOrganizations
+                mOrganizationInfo = filteredOrganizationInfo
             } else {
                 mOrganizationInfo = organizationInfo!
             }
@@ -1460,13 +1459,17 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
     
     func updateNotificationEvent(){
         
+        if GlobalVariables.filterEventBool{
+            filteredEventInfo = GlobalVariables.displayFilteredEvents
+        }
+        if GlobalVariables.filterVenueBool{
+            filteredVenueInfo = GlobalVariables.displayFilteredVenues
+        }
+        if GlobalVariables.filterOrganizationBool{
+            filteredOrganizationInfo = GlobalVariables.displayFilteredOrganizations
+        }
+        
         self.exploreTableView.reloadData()
-    }
-    
-    func updateFilter(){
-        filteredEventInfo = GlobalVariables.displayFilteredEvents
-        filteredVenueInfo = GlobalVariables.displayFilteredVenues
-        filteredOrganizationInfo = GlobalVariables.displayFilteredOrganizations
     }
     
     func convertCircTimeFormat(date: String) -> String {

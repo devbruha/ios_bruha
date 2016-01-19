@@ -135,9 +135,17 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
         calendarManager.delegate = self
         
+        calendarMenu.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
+        calendarContentView.layer.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1).CGColor
+        
         calendarManager.menuView = calendarMenu
         calendarManager.contentView = calendarContentView
-        calendarManager.setDate(NSDate())
+        
+        if GlobalVariables.datesSelected.count != 0 {
+            calendarManager.setDate(GlobalVariables.datesSelected.lastObject as! NSDate)
+        } else {
+            calendarManager.setDate(NSDate())
+        }
         
         switch(GlobalVariables.selectedDisplay){
             
@@ -161,7 +169,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
         
         newDayView.hidden = false
-        newDayView.backgroundColor = UIColor.blackColor()
+        newDayView.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
         newDayView.textLabel.textColor = UIColor.whiteColor()
         
         newDayView.layer.borderColor = UIColor.grayColor().CGColor
@@ -169,10 +177,10 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
         
         if(newDayView.isFromAnotherMonth){
-            newDayView.alpha = 0.5
+            newDayView.removeFromSuperview()
         }
         else if(GlobalVariables.datesSelected.containsObject(newDayView.date)){
-            newDayView.backgroundColor = UIColor.cyanColor()
+            newDayView.backgroundColor = UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1)
         }
     }
     
@@ -183,7 +191,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         if(GlobalVariables.datesSelected.containsObject(newDayView.date)){
             
             GlobalVariables.datesSelected.removeObject(newDayView.date)
-            newDayView.backgroundColor = UIColor.blackColor()
+            newDayView.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
             
             let dateFormatter = NSDateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -197,7 +205,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         }
         else{
             GlobalVariables.datesSelected.addObject(newDayView.date)
-            newDayView.backgroundColor = UIColor.cyanColor()
+            newDayView.backgroundColor = UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1)
             
             let dateFormatter = NSDateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -223,10 +231,10 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         let monthSymbol = months[month-1]
         
         //newMenuItemView.text = component as? String
-        newMenuItemView.text = monthSymbol + " " + String(component)
+        newMenuItemView.text = "<<            " + monthSymbol + " " + String(component) + "            >>"
         //newMenuItemView.text = monthSymbol
         //newMenuItemView.backgroundColor = UIColor.cyanColor()
-        //newMenuItemView.textColor = UIColor.blackColor()
+        newMenuItemView.textColor = UIColor.whiteColor()
         //newMenuItemView.scrollView
         
     }

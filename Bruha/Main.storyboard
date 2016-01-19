@@ -1228,7 +1228,7 @@
                                         </constraints>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.14117647059999999" green="0.086274509799999996" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="jzo-it-x7s" firstAttribute="centerX" secondItem="es7-TA-QYx" secondAttribute="centerX" id="GA9-q1-D7J"/>
                                     <constraint firstItem="jzo-it-x7s" firstAttribute="top" secondItem="es7-TA-QYx" secondAttribute="top" id="GpE-4J-YYb"/>
@@ -1275,7 +1275,7 @@
                                         </constraints>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="backgroundColor" red="0.14117647059999999" green="0.086274509799999996" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="FaC-0A-mNq" firstAttribute="top" secondItem="KyL-l5-h1Y" secondAttribute="topMargin" id="4dq-0G-6to"/>
                                     <constraint firstItem="Om6-cY-JfT" firstAttribute="leading" secondItem="KyL-l5-h1Y" secondAttribute="leading" constant="8" id="8Yx-mw-jOW"/>

@@ -49,6 +49,8 @@ class CalendarViewController: UIViewController, JTCalendarDelegate, SWTableViewC
         let nib = UINib(nibName: "MapDropTableViewCell", bundle: nil)
         calendarTableView.registerNib(nib, forCellReuseIdentifier: "DropCell")
         
+        calendarTableView.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
+        
         
         for e in eventInfo {
             if addictionEventInfo.contains({$0.eventID == e.eventID}) {
@@ -188,7 +190,7 @@ class CalendarViewController: UIViewController, JTCalendarDelegate, SWTableViewC
         
         //newMenuItemView.text = component as? String
         newMenuItemView.textColor = UIColor.whiteColor()
-        newMenuItemView.text = monthSymbol + " " + String(component)
+        newMenuItemView.text = "<<            " + monthSymbol + " " + String(component) + "            >>"
         //newMenuItemView.text = monthSymbol
         //newMenuItemView.backgroundColor = UIColor.cyanColor()
         //newMenuItemView.textColor = UIColor.blackColor()
