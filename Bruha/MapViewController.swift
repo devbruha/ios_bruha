@@ -108,9 +108,9 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
         //customStatusBar()
         //UIApplication.sharedApplication().statusBarStyle = .Default
         let screenSize: CGRect = UIScreen.mainScreen().bounds
-        dropDownTable.separatorColor = UIColor.clearColor()
+        dropDownTable.separatorColor = UIColor.whiteColor()
         //dropDownTable.separatorStyle = UITableViewCellSeparatorStyle.SingleLineEtched
-        dropDownTable.backgroundColor = UIColor.blackColor()
+        //dropDownTable.backgroundColor = UIColor.clearColor()
         //dropDownTable.rowHeight = screenSize.width * 0.4
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateMarkers", name: "itemDisplayChangeEvent", object: nil)

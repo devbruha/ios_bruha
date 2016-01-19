@@ -378,19 +378,12 @@ class EventMoreInfomationViewController: UIViewController, UIWebViewDelegate{
     
     func webViewDidFinishLoad(webView: UIWebView) {
         
-        webDescriptionContent.scrollView.scrollEnabled = false
+        webDescriptionContent.scrollView.scrollEnabled = true
         
         let height = webView.scrollView.contentSize.height
         
         scrollView.contentInset.bottom = height + 180 + 40 + UIScreen.mainScreen().bounds.height * 0.33 + 30
         
-        
-        
-        //scrollView.setContentOffset(CGPointMake(0, UIScreen.mainScreen().bounds.height * 0.33 + 50), animated: false)
-        
-//        scrollView.scrollEnabled = true
-//        scrollView.contentInset = UIEdgeInsetsMake(0, 0, 500, 0)
-//        webDescriptionContent.scrollView.scrollEnabled = true
     }
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {

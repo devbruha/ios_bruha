@@ -20,7 +20,7 @@ class DashBoardViewController: UIViewController {
     
     @IBAction func Bruha(sender: UIButton) {
         
-        let alert = UIAlertView(title: "You are already in dashboard!!!", message: nil, delegate: nil, cancelButtonTitle: nil)
+        let alert = UIAlertView(title: "You are already in dashboard", message: nil, delegate: nil, cancelButtonTitle: nil)
         alert.show()
         let delay = 1.0 * Double(NSEC_PER_SEC)
         var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))

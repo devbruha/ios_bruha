@@ -538,16 +538,16 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
     
     func webViewDidFinishLoad(webView: UIWebView) {
         
-//        webDescriptionContent.scrollView.scrollEnabled = false
-//        
-//        let height = webView.scrollView.contentSize.height
-//        
-//        scrollView.contentInset.bottom = height + 180 + 40 + UIScreen.mainScreen().bounds.height * 0.33 + 20
-        
-        
         webDescriptionContent.scrollView.scrollEnabled = true
         
-        scrollView.scrollEnabled = false
+        let height = webView.scrollView.contentSize.height
+        
+        scrollView.contentInset.bottom = height + 180 + 40 + UIScreen.mainScreen().bounds.height * 0.33 + 20
+        
+        
+//        webDescriptionContent.scrollView.scrollEnabled = true
+//        
+//        scrollView.scrollEnabled = false
     }
     
     func randomImage() -> UIImage {

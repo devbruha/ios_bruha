@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9059" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="14F1021" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9049"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
     </dependencies>
     <customFonts key="customFonts">
         <mutableArray key="OpenSans-Bold.ttf">
@@ -19,7 +19,7 @@
             <rect key="frame" x="0.0" y="0.0" width="300" height="400"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You Can Get Addicted" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TY6-e6-i8U">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="You can get addicted" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="TY6-e6-i8U">
                     <rect key="frame" x="0.0" y="0.0" width="300" height="26"/>
                     <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -32,8 +32,8 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="MyAddictions_Sm" translatesAutoresizingMaskIntoConstraints="NO" id="vSE-k1-si6">
                     <rect key="frame" x="8" y="26" width="284" height="344"/>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Like/Follow Events, Venues, Artists and Organizations.)" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JKV-gW-0Mh">
-                    <rect key="frame" x="22.5" y="371" width="255.5" height="12"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="(Like/follow your favorite Events, Venues, Artists and Organizations.)" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JKV-gW-0Mh">
+                    <rect key="frame" x="60" y="370" width="180" height="28"/>
                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                     <fontDescription key="fontDescription" name="OpenSans" family="Open Sans" pointSize="10"/>
                     <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -44,16 +44,18 @@
             <constraints>
                 <constraint firstItem="TY6-e6-i8U" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="4D9-nf-atq"/>
                 <constraint firstItem="vSE-k1-si6" firstAttribute="top" secondItem="TY6-e6-i8U" secondAttribute="bottom" id="5Jz-XI-UH3"/>
+                <constraint firstAttribute="trailing" secondItem="JKV-gW-0Mh" secondAttribute="trailing" constant="60" id="9uU-ol-KhI"/>
                 <constraint firstAttribute="trailing" secondItem="JKV-gW-0Mh" secondAttribute="trailing" constant="20" id="HE5-J3-ZOx"/>
-                <constraint firstAttribute="bottom" secondItem="JKV-gW-0Mh" secondAttribute="bottom" constant="17" id="L4c-eA-uV2"/>
+                <constraint firstAttribute="bottom" secondItem="JKV-gW-0Mh" secondAttribute="bottom" constant="2" id="L4c-eA-uV2"/>
                 <constraint firstItem="JKV-gW-0Mh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="MJZ-LD-3X5"/>
                 <constraint firstAttribute="trailing" secondItem="vSE-k1-si6" secondAttribute="trailing" constant="8" id="MgU-4C-sfV"/>
                 <constraint firstItem="TY6-e6-i8U" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="SZ1-o8-4ur"/>
                 <constraint firstAttribute="bottom" secondItem="vSE-k1-si6" secondAttribute="bottom" constant="30" id="Ytc-h2-WwM"/>
                 <constraint firstAttribute="trailing" secondItem="TY6-e6-i8U" secondAttribute="trailing" id="hXr-uQ-pLS"/>
                 <constraint firstAttribute="centerX" secondItem="JKV-gW-0Mh" secondAttribute="centerX" id="ji9-qF-HfM"/>
-                <constraint firstItem="JKV-gW-0Mh" firstAttribute="top" secondItem="vSE-k1-si6" secondAttribute="bottom" constant="1" id="pcz-QV-WNC"/>
+                <constraint firstItem="JKV-gW-0Mh" firstAttribute="top" secondItem="vSE-k1-si6" secondAttribute="bottom" id="pcz-QV-WNC"/>
                 <constraint firstItem="vSE-k1-si6" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="8" id="rLC-5x-9c3"/>
+                <constraint firstItem="JKV-gW-0Mh" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="60" id="wRo-dN-W1h"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <variation key="default">

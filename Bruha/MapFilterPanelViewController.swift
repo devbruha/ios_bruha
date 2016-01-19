@@ -533,7 +533,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
 //        GlobalVariables.selectedDisplay = "Discoverable"
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
         
-        let alert = UIAlertView(title: "Discoverable Coming Soon!!!", message: nil, delegate: nil, cancelButtonTitle: nil)
+        let alert = UIAlertView(title: "Discoverable Coming Soon", message: nil, delegate: nil, cancelButtonTitle: nil)
         alert.show()
         let delay = 1.5 * Double(NSEC_PER_SEC)
         var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))

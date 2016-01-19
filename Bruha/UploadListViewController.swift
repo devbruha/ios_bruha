@@ -106,6 +106,8 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateNotificationUpload", name: "itemDisplayChangeUpload", object: nil)
         // Do any additional setup after loading the view.
+        
+        fetchInformation()
     }
     
     override func viewDidAppear(animated: Bool) {
