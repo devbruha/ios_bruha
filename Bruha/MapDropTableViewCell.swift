@@ -22,6 +22,12 @@ class MapDropTableViewCell: SWTableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        
+        let verticleLine = UIView.init(frame: CGRectMake(UIScreen.mainScreen().bounds.size.width - 0.25, 0, 0.25, self.contentView.layer.bounds.height))
+        
+        verticleLine.backgroundColor = UIColor.whiteColor()
+        
+        self.contentView.addSubview(verticleLine)
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

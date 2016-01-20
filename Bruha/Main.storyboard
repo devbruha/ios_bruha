@@ -1952,7 +1952,7 @@
                                     <segue destination="zh2-4j-mHu" kind="modal" id="cjQ-72-o8J"/>
                                 </connections>
                             </button>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="220" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LdH-T0-4Wv">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="220" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LdH-T0-4Wv">
                                 <rect key="frame" x="0.0" y="348" width="320" height="220"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
@@ -1995,6 +1995,7 @@
                         <outlet property="calendarContentView" destination="nqL-FP-j42" id="vSp-y1-LE7"/>
                         <outlet property="calendarMenu" destination="uOk-b9-Am1" id="w3a-0W-wEf"/>
                         <outlet property="calendarTableView" destination="LdH-T0-4Wv" id="LuL-fo-HrA"/>
+                        <segue destination="hKk-35-4q0" kind="modal" identifier="EventMoreInfo" id="AnT-IX-43l"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="i2b-P7-ctS" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3184,15 +3185,15 @@
         <image name="Tickets_Sm" width="250" height="250"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="pgm-fT-IMJ"/>
+        <segue reference="jG2-kU-Dir"/>
+        <segue reference="AnT-IX-43l"/>
+        <segue reference="dtV-EI-jha"/>
+        <segue reference="thc-CS-1cg"/>
         <segue reference="1Xm-3s-taQ"/>
         <segue reference="jao-de-QNr"/>
-        <segue reference="QhX-ak-ZUZ"/>
         <segue reference="Igp-o7-BVW"/>
-        <segue reference="bc1-hL-brY"/>
-        <segue reference="pIM-BH-lfI"/>
-        <segue reference="C5E-mm-bjp"/>
+        <segue reference="QhX-ak-ZUZ"/>
         <segue reference="UAd-9n-bZt"/>
-        <segue reference="thc-CS-1cg"/>
+        <segue reference="pgm-fT-IMJ"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -51,6 +51,8 @@ class CalendarViewController: UIViewController, JTCalendarDelegate, SWTableViewC
         
         calendarTableView.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
         
+        calendarTableView.indicatorStyle = UIScrollViewIndicatorStyle.White
+        
         
         for e in eventInfo {
             if addictionEventInfo.contains({$0.eventID == e.eventID}) {
@@ -127,7 +129,8 @@ class CalendarViewController: UIViewController, JTCalendarDelegate, SWTableViewC
         if(datesSelected.containsObject(newDayView.date)){
             print("on click")
             
-            if newDayView.backgroundColor == UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1.0) {
+            if newDayView.backgroundColor == UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1.0) &&
+                newDayView.alpha == 0.5 {
                 
                 eventsToDisplay.removeAll()
                 newDayView.alpha = 1
@@ -138,9 +141,19 @@ class CalendarViewController: UIViewController, JTCalendarDelegate, SWTableViewC
                     }
                 }
                 print(eventsToDisplay.count, "upload")
+                for a in addictedEvents {
+                    if a.eventStartDate == dateToMatch {
+                        if !eventsToDisplay.contains({$0.eventID == a.eventID}) {
+                            eventsToDisplay.append(a)
+                        }
+                    }
+                }
+                print(eventsToDisplay.count, "upload & addict in same date")
                 calendarTableView.reloadData()
+                calendarTableView.flashScrollIndicators()
             }
-            if newDayView.backgroundColor == UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1.0){
+            if newDayView.backgroundColor == UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1.0) &&
+                newDayView.alpha == 0.5 {
                 
                 eventsToDisplay.removeAll()
                 newDayView.alpha = 1
@@ -153,6 +166,7 @@ class CalendarViewController: UIViewController, JTCalendarDelegate, SWTableViewC
                 }
                 print(eventsToDisplay.count, "addict")
                 calendarTableView.reloadData()
+                calendarTableView.flashScrollIndicators()
             }
             
             calendarManager.reload()
@@ -240,7 +254,6 @@ class CalendarViewController: UIViewController, JTCalendarDelegate, SWTableViewC
         if GlobalVariables.venueImageCache.count >= 50 { GlobalVariables.venueImageCache.removeAtIndex(0) }
         if GlobalVariables.organizationImageCache.count >= 50 { GlobalVariables.organizationImageCache.removeAtIndex(0) }
 
-        
             
         let e = eventsToDisplay[indexPath.row]
         
@@ -297,7 +310,7 @@ class CalendarViewController: UIViewController, JTCalendarDelegate, SWTableViewC
         var like = 0
         let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
         for addict in addictionInfo! {
-            if addict.eventID == addictionEventInfo[indexPath.row].eventID {
+            if addict.eventID == eventsToDisplay[indexPath.row].eventID {
                 like = 1
             }
         }
@@ -379,6 +392,125 @@ class CalendarViewController: UIViewController, JTCalendarDelegate, SWTableViewC
         let aString = NSMutableAttributedString(string: title, attributes: mAttribute)
         
         return aString
+    }
+    
+    //Swipe Cells Actions
+    func swipeableTableViewCell( cell : SWTableViewCell!,didTriggerLeftUtilityButtonWithIndex index:NSInteger){
+        
+        switch(index){
+        case 0:
+        
+            let user = FetchData(context: managedObjectContext).fetchUserInfo()![0].userName
+            
+            var cellIndexPath = self.calendarTableView.indexPathForCell(cell)
+            var selectedCell = self.calendarTableView.cellForRowAtIndexPath(cellIndexPath!) as! MapDropTableViewCell
+            GlobalVariables.eventSelected = selectedCell.dropHiddenID.text!
+            
+            let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
+            for event in eventInfo!{
+                if event.eventID == GlobalVariables.eventSelected {
+                    //Like and Unlike
+                    if(cell.leftUtilityButtons[0].titleLabel!!.text! == "Addicted!"){
+                        
+                        let alertController = UIAlertController(title: "Are you no longer addicted?", message:nil, preferredStyle: .Alert)
+                        let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+                        let unlikeAction = UIAlertAction(title: "I'm Over It", style: .Default) { (_) -> Void in
+                            
+                            DeleteData(context: self.managedObjectContext).deleteAddictionsEvent(event.eventID, deleteUser: user)
+                            print("Removed from addiction(event) \(event.eventID)")
+                            print("REMOVED")
+                            
+                            self.updateAddictFetch()
+                            self.calendarManager.reload()
+                            
+                            if !self.userEventInfo.contains({$0.eventID == event.eventID}) {
+                                let idx = self.eventsToDisplay.indexOf({$0.eventID == event.eventID})
+                                self.eventsToDisplay.removeAtIndex(idx!)
+                                self.calendarTableView.reloadData()
+                            }
+                            
+                            let eventService = EventService()
+                            eventService.removeAddictedEvents(event.eventID) {
+                                (let removeInfo ) in
+                                print(removeInfo!)
+                            }
+                            
+                            var temp: NSMutableArray = NSMutableArray()
+                            temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),attributedTitle: self.swipeCellTitle("Get Addicted"))
+                            cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
+                            cell.leftUtilityButtons = temp as [AnyObject]
+                            
+                        }
+                        alertController.addAction(unlikeAction)
+                        alertController.addAction(cancelAction)
+                        
+                        self.presentViewController(alertController, animated: true, completion: nil)
+                        
+                        
+                    } else if(cell.leftUtilityButtons[0].titleLabel!!.text! == "Get Addicted") {
+                        
+                        let addEvent = AddictionEvent(eventId: event.eventID, userId: user)
+                        SaveData(context: managedObjectContext).saveAddictionEvent(addEvent)
+                        print("Getting Addicted with event id \(event.eventID)")
+                        print("ADDICTED")
+                        
+                        updateAddictFetch()
+                        
+                        let eventService = EventService()
+                        
+                        eventService.addAddictedEvents(event.eventID) {
+                            (let addInfo ) in
+                            print(addInfo!)
+                        }
+                        
+                        var temp: NSMutableArray = NSMutableArray()
+                        temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),attributedTitle: swipeCellTitle("Addicted!"))
+                        cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
+                        cell.leftUtilityButtons = temp as [AnyObject]
+                        
+                        
+                    }
+                }
+            }
+            break
+        default:
+            break
+        }
+        
+    }
+    
+    func swipeableTableViewCell( cell : SWTableViewCell!,didTriggerRightUtilityButtonWithIndex index:NSInteger){
+        
+        switch(index){
+        case 0:
+            
+            print("event ticket")
+            
+            break
+        case 1:
+            //More Info
+            let cellIndexPath = self.calendarTableView.indexPathForCell(cell)
+            let selectedCell = self.calendarTableView.cellForRowAtIndexPath(cellIndexPath!) as! MapDropTableViewCell
+            GlobalVariables.eventSelected = selectedCell.dropHiddenID.text!
+            
+            self.performSegueWithIdentifier("EventMoreInfo", sender: self)
+            break
+        default:
+            break
+        }
+        
+    }
+    
+    func updateAddictFetch() {
+        addictionEventInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()!
+        
+        addictedEvents.removeAll()
+        
+        for e in eventInfo {
+            if addictionEventInfo.contains({$0.eventID == e.eventID}) {
+                addictedEvents.append(e)
+            }
+        }
     }
 }
 

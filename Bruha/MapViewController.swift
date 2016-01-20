@@ -720,7 +720,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
                                     self.hideDrop()
                                     
                                     var temp: NSMutableArray = NSMutableArray()
-                                    temp.sw_addUtilityButtonWithColor(UIColor.redColor(),attributedTitle: self.swipeCellTitle("Get Addicted"))
+                                    temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),attributedTitle: self.swipeCellTitle("Get Addicted"))
                                     cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
                                     cell.leftUtilityButtons = temp as [AnyObject]
                                     
@@ -748,7 +748,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
                                 hideDrop()
                                 
                                 var temp: NSMutableArray = NSMutableArray()
-                                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),attributedTitle: swipeCellTitle("Addicted!"))
+                                temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),attributedTitle: swipeCellTitle("Addicted!"))
                                 cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
                                 cell.leftUtilityButtons = temp as [AnyObject]
                                 
@@ -787,7 +787,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
                                     self.hideDrop()
                                     
                                     var temp: NSMutableArray = NSMutableArray()
-                                    temp.sw_addUtilityButtonWithColor(UIColor.redColor(),attributedTitle: self.swipeCellTitle("Get Addicted"))
+                                    temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),attributedTitle: self.swipeCellTitle("Get Addicted"))
                                     cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
                                     cell.leftUtilityButtons = temp as [AnyObject]
                                     
@@ -815,7 +815,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
                                 hideDrop()
                                 
                                 var temp: NSMutableArray = NSMutableArray()
-                                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),attributedTitle: swipeCellTitle("Addicted!"))
+                                temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),attributedTitle: swipeCellTitle("Addicted!"))
                                 cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
                                 cell.leftUtilityButtons = temp as [AnyObject]
                             }
@@ -853,7 +853,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
                                     self.hideDrop()
                                     
                                     let temp: NSMutableArray = NSMutableArray()
-                                    temp.sw_addUtilityButtonWithColor(UIColor.redColor(),attributedTitle: self.swipeCellTitle("Get Addicted"))
+                                    temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),attributedTitle: self.swipeCellTitle("Get Addicted"))
                                     cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
                                     cell.leftUtilityButtons = temp as [AnyObject]
                                     
@@ -881,7 +881,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
                                 hideDrop()
                                 
                                 let temp: NSMutableArray = NSMutableArray()
-                                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),attributedTitle: swipeCellTitle("Addicted!"))
+                                temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),attributedTitle: swipeCellTitle("Addicted!"))
                                 cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
                                 cell.leftUtilityButtons = temp as [AnyObject]
                             }
