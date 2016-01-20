@@ -86,7 +86,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         let nib = UINib(nibName: "CategoryHeaderCellTableViewCell", bundle: nil)
         categoryTableView.registerNib(nib, forCellReuseIdentifier: "HeaderCell")
         
-        priceLabelTitle.frame = CGRectMake(10,230, screenSize.width - 20, 30)
+        priceLabelTitle.frame = CGRectMake(10,260, screenSize.width - 20, 30)
         priceLabelTitle.textAlignment = NSTextAlignment.Left
         priceLabelTitle.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1)
         priceLabelTitle.textColor = UIColor.whiteColor()
@@ -95,7 +95,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         self.scrollView.addSubview(priceLabelTitle)
         
         
-        priceLabel.frame = CGRectMake(10, 260, screenSize.width - 20, 20)
+        priceLabel.frame = CGRectMake(10, 290, screenSize.width - 20, 20)
         priceLabel.textAlignment = NSTextAlignment.Center
         priceLabel.backgroundColor = UIColor.clearColor()
         priceLabel.textColor = UIColor.whiteColor()
@@ -108,7 +108,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         slider.continuous = true
         slider.tintColor = UIColor.whiteColor()
         slider.backgroundColor = UIColor.whiteColor()
-        slider.frame = CGRectMake(10, 280, screenSize.width - 20, 20)
+        slider.frame = CGRectMake(10, 310, screenSize.width - 20, 20)
         slider.value = -1
         slider.addTarget(self, action: "sliderValueDidChange:", forControlEvents: .ValueChanged)
         self.scrollView.addSubview(slider)
@@ -181,6 +181,14 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         }
         else if(GlobalVariables.datesSelected.containsObject(newDayView.date)){
             newDayView.backgroundColor = UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1)
+        }
+        
+        if calendarManager.dateHelper.date(NSDate(), isTheSameDayThan: newDayView.date){
+            
+            newDayView.circleView.backgroundColor = UIColor.clearColor()
+            newDayView.circleView.layer.borderWidth = 1
+            newDayView.circleView.layer.borderColor = UIColor.whiteColor().CGColor
+            newDayView.circleView.hidden = false
         }
     }
     
@@ -961,16 +969,16 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         
         //scrollView.contentSize.height = 500 + constraint.constant
         
-        priceLabelTitle.frame = CGRectMake(10, 200 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 30)
-        priceLabel.frame = CGRectMake(10, 230 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 20)
-        slider.frame = CGRectMake(10, 250 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 20)
+        priceLabelTitle.frame = CGRectMake(10, 230 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 30)
+        priceLabel.frame = CGRectMake(10, 260 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 20)
+        slider.frame = CGRectMake(10, 280 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 20)
         
         if GlobalVariables.selectedDisplay == "Event" {
-            scrollView.contentInset.bottom = 100
-            clearFilter.frame = CGRectMake(UIScreen.mainScreen().bounds.width * 0.7 - 10, 280 + constraint.constant, UIScreen.mainScreen().bounds.width * 0.3, 30)
+            scrollView.contentInset.bottom = 110
+            clearFilter.frame = CGRectMake(UIScreen.mainScreen().bounds.width * 0.7 - 10, 310 + constraint.constant, UIScreen.mainScreen().bounds.width * 0.3, 30)
         } else {
             scrollView.contentInset.bottom = -150
-            clearFilter.frame = CGRectMake(UIScreen.mainScreen().bounds.width * 0.7 - 10, 30 + constraint.constant, UIScreen.mainScreen().bounds.width * 0.3, 30)
+            clearFilter.frame = CGRectMake(UIScreen.mainScreen().bounds.width * 0.7 - 10, 20 + constraint.constant, UIScreen.mainScreen().bounds.width * 0.3, 30)
         }
         
         self.view.setNeedsUpdateConstraints()

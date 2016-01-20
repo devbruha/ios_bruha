@@ -1268,10 +1268,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mIo-RM-JQ7" customClass="JTHorizontalCalendarView">
-                                        <rect key="frame" x="8" y="63" width="304" height="145"/>
+                                        <rect key="frame" x="8" y="63" width="304" height="180"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="145" id="ckx-Ge-bBL"/>
+                                            <constraint firstAttribute="height" constant="180" id="ckx-Ge-bBL"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -2285,10 +2285,10 @@
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xpn-pa-Ks3" customClass="JTHorizontalCalendarView">
-                                        <rect key="frame" x="8" y="63" width="292" height="145"/>
+                                        <rect key="frame" x="8" y="63" width="292" height="180"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="145" id="VzH-R6-dFu"/>
+                                            <constraint firstAttribute="height" constant="180" id="VzH-R6-dFu"/>
                                         </constraints>
                                     </view>
                                 </subviews>

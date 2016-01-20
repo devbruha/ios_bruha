@@ -114,6 +114,16 @@ class CalendarViewController: UIViewController, JTCalendarDelegate, SWTableViewC
                     newDayView.alpha = 1
                 }
             }
+            
+            if calendarManager.dateHelper.date(NSDate(), isTheSameDayThan: newDayView.date){
+                print(newDayView.date)
+                
+                newDayView.circleView.backgroundColor = UIColor.clearColor()
+                newDayView.circleView.layer.borderWidth = 1
+                newDayView.circleView.layer.borderColor = UIColor.whiteColor().CGColor
+                newDayView.circleView.hidden = false
+            }
+            
         }
         
     }
