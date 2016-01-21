@@ -165,6 +165,7 @@ class SaveData {
             newItem.latitude = event.eventLatitude
             newItem.longitude = event.eventLongitude
             
+            
             newItem.organizationID = event.organizationID
             
             newItem.venueID = event.venueID

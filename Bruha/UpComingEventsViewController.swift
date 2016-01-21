@@ -132,9 +132,12 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
                 }
             }
             if sourceForEvent == "organization" {
-                if event.organizationID == sourceID {
-                    upcomingEvents.append(event)
-                    print(event.organizationID)
+                
+                for orgID in event.organizationID {
+                    if orgID == sourceID {
+                        upcomingEvents.append(event)
+                        print(event.eventName)
+                    }
                 }
             }
         }

@@ -167,7 +167,7 @@ class EventMoreInfomationViewController: UIViewController, UIWebViewDelegate{
                     eventCategory.text = event.primaryCategory
                     webDescriptionContent.loadHTMLString("<div style=\"font-family:OpenSans;color:white;width:100%;word-wrap:break-word;\">\(event.eventDescription)</div>", baseURL: nil)
                     
-                    sourceID.append(event.organizationID)
+                    sourceID = event.organizationID
                     eventVenueSource = event.venueID
                     print("org id passed", sourceID); print("event id", event.eventID)
                     if let img = GlobalVariables.eventImageCache[event.eventID] {
