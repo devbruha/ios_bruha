@@ -598,7 +598,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
             
             if(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[eventObject[indexPath.section].sectionName]![0].contains(eventObject[indexPath.section].sectionObjectIDs[indexPath.row])){
                 
-                cell.backgroundColor = UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
+                cell.backgroundColor = UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1)
             }
         }
         
@@ -609,7 +609,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
         let selectedCell = self.eventCategoriesTable.cellForRowAtIndexPath(indexPath) as! CategoryHeaderCellTableViewCell!
         
-        selectedCell.backgroundColor = UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
+        selectedCell.backgroundColor = UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1)
     
         let headerTitle = eventObject[indexPath.section].sectionName
         
@@ -620,7 +620,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
         if GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].contains(subCategoryID){
             
-            selectedCell.backgroundColor = UIColor.blackColor()
+            selectedCell.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1.0)
             
             //Handled in didDeselectRowAtIndexPath
         
@@ -647,7 +647,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
         let selectedCell = self.eventCategoriesTable.cellForRowAtIndexPath(indexPath) as! CategoryHeaderCellTableViewCell!
         
-         selectedCell.backgroundColor = UIColor.blackColor()
+         selectedCell.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1.0)
         
         let headerTitle = eventObject[indexPath.section].sectionName
         
@@ -668,7 +668,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         }
         else{
             
-            selectedCell.backgroundColor = UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
+            selectedCell.backgroundColor = UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1)
             
             GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].append(subCategoryID)
             GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![1].append(subCategoryName)
@@ -748,10 +748,10 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
                 headerCell.categoryImage.image = UIImage(named: venueObject[section])
                 
                 if(GlobalVariables.UserCustomFilters.categoryFilter.venueCategories.contains((headerCell.categoryName?.text)!)){
-                    headerCell.backgroundColor = UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
+                    headerCell.backgroundColor = UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1)
                 }
                 else{
-                    headerCell.backgroundColor = UIColor.blackColor()
+                    headerCell.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1.0)
                 }
                 
             } else if GlobalVariables.selectedDisplay == "Organization" {
@@ -759,10 +759,10 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
                 headerCell.categoryImage.image = UIImage(named: organizationObject[section])
                 
                 if(GlobalVariables.UserCustomFilters.categoryFilter.organizationCategories.contains((headerCell.categoryName?.text)!)){
-                    headerCell.backgroundColor = UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
+                    headerCell.backgroundColor = UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1)
                 }
                 else{
-                    headerCell.backgroundColor = UIColor.blackColor()
+                    headerCell.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1.0)
                 }
             }
             

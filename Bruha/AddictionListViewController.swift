@@ -167,9 +167,9 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
             let artistInfo = FetchData(context: managedObjectContext).fetchArtists()
             return (artistInfo?.count)!
         case "Organization":
-            return (organizationInfo?.count)!
+            return (addictedOrganizationInfo?.count)!
         default:
-            return (venueInfo?.count)!
+            return (addictedVenueInfo?.count)!
         }
         
     }
@@ -873,15 +873,15 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
     
     func updateAddictFetch() {
         
-        if GlobalVariables.uploadDisplay == "Event"{
+        if GlobalVariables.addictedDisplay == "Event"{
             
             addictedEventInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
         }
-        if GlobalVariables.uploadDisplay == "Venue"{
+        if GlobalVariables.addictedDisplay == "Venue"{
             
             addictedVenueInfo = FetchData(context: managedObjectContext).fetchAddictionsVenue()
         }
-        if GlobalVariables.uploadDisplay == "Organization"{
+        if GlobalVariables.addictedDisplay == "Organization"{
             
             addictedOrganizationInfo = FetchData(context: managedObjectContext).fetchAddictionsOrganization()
         }
