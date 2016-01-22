@@ -166,8 +166,8 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         customTopButtons()
         //customStatusBar()
         
-        exploreTableView.backgroundColor = UIColor.blackColor()
-        exploreTableView.separatorColor = UIColor.blackColor()
+        exploreTableView.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
+        exploreTableView.separatorColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateNotificationEvent", name: "itemDisplayChangeEvent", object: nil)
         

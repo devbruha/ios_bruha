@@ -98,8 +98,8 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
         customTopButtons()
         //customStatusBar()
         
-        uploadTableView.backgroundColor = UIColor.blackColor()
-        uploadTableView.separatorColor = UIColor.blackColor()
+        uploadTableView.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
+        uploadTableView.separatorColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
         
         self.myUploadLabel.alpha = 0.0
         self.myUploadImage.alpha = 0.0

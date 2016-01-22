@@ -136,7 +136,7 @@ class EventMoreInfomationViewController: UIViewController, UIWebViewDelegate{
         if GlobalVariables.venueImageCache.count >= 50 { GlobalVariables.venueImageCache.removeAtIndex(0) }
         if GlobalVariables.organizationImageCache.count >= 50 { GlobalVariables.organizationImageCache.removeAtIndex(0) }
         
-        if GlobalVariables.selectedDisplay == "Event" || GlobalVariables.addictedDisplay == "Event" || GlobalVariables.uploadDisplay == "Event"{
+        //if GlobalVariables.selectedDisplay == "Event" || GlobalVariables.addictedDisplay == "Event" || GlobalVariables.uploadDisplay == "Event"{
             
             let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
             let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
@@ -204,7 +204,7 @@ class EventMoreInfomationViewController: UIViewController, UIWebViewDelegate{
                 }
             }
             
-        }
+        
     }
 
     @IBAction func goAffiliatedOrg(sender: UIButton) {
@@ -289,7 +289,7 @@ class EventMoreInfomationViewController: UIViewController, UIWebViewDelegate{
         if GlobalVariables.loggedIn == true {
             let user = FetchData(context: managedObjectContext).fetchUserInfo()![0].userName
             //Event
-            if GlobalVariables.selectedDisplay == "Event" || GlobalVariables.addictedDisplay == "Event" || GlobalVariables.uploadDisplay == "Event"{
+            //if GlobalVariables.selectedDisplay == "Event" || GlobalVariables.addictedDisplay == "Event" || GlobalVariables.uploadDisplay == "Event"{
                 let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
                 let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
                 for event in eventInfo!{
@@ -340,18 +340,28 @@ class EventMoreInfomationViewController: UIViewController, UIWebViewDelegate{
                         //                        })
                     }
                 }
-            }
-            else { //user not logged in
-                
-                let alert = UIAlertView(title: "Please log in for this!!!", message: nil, delegate: nil, cancelButtonTitle: nil)
-                alert.show()
-                let delay = 1.0 * Double(NSEC_PER_SEC)
-                var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-                dispatch_after(time, dispatch_get_main_queue(), {
-                    alert.dismissWithClickedButtonIndex(-1, animated: true)
-                })
-            }
         }
+        else { //user not logged in
+            
+            alertLogin()
+        }
+    }
+    
+    func alertLogin() {
+        let alertController = UIAlertController(title: "You are not logged in!", message:nil, preferredStyle: .Alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+        let loginAction = UIAlertAction(title: "Login", style: .Default) { (_) -> Void in
+            self.performSegueWithIdentifier("GoToLogin", sender: self) // Replace SomeSegue with your segue identifier (name)
+        }
+        let signupAction = UIAlertAction(title: "Signup", style: .Default) { (_) -> Void in
+            self.performSegueWithIdentifier("GoToSignup", sender: self) // Replace SomeSegue with your segue identifier (name)
+        }
+        alertController.addAction(signupAction)
+        alertController.addAction(loginAction)
+        alertController.addAction(cancelAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+        
     }
     
     func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {

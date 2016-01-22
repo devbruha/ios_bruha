@@ -103,8 +103,8 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
         customTopButtons()
         //customStatusBar()
         
-        addictionTableView.backgroundColor = UIColor.blackColor()
-        addictionTableView.separatorColor = UIColor.blackColor()
+        addictionTableView.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
+        addictionTableView.separatorColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
         
         self.addictionLabel.alpha = 0.0
         self.addictionImage.alpha = 0.0

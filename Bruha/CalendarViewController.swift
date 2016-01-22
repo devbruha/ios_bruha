@@ -16,6 +16,20 @@ class CalendarViewController: UIViewController, JTCalendarDelegate, SWTableViewC
     
     @IBOutlet weak var calendarTableView: UITableView!
     
+    @IBOutlet weak var myAddictionLegend: UIView!
+    @IBOutlet weak var myAddictionLegendHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var myAddictionLegendWidth: NSLayoutConstraint!
+    
+    @IBOutlet weak var myUploadLegend: UIView!
+    @IBOutlet weak var myUploadLegendHeight: NSLayoutConstraint!
+    
+    @IBOutlet weak var myUploadLegendWidth: NSLayoutConstraint!
+    
+    @IBOutlet weak var addictionLegendLabel: UILabel!
+    @IBOutlet weak var uploadLegendLabel: UILabel!
+    
+    
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     let calendarManager: JTCalendarManager = JTCalendarManager()
@@ -26,6 +40,16 @@ class CalendarViewController: UIViewController, JTCalendarDelegate, SWTableViewC
     var userEventInfo: [Event] = [] //user uploaded Events
     var addictedEvents: [Event] = [] // user addicted Events
     var eventsToDisplay: [Event] = [] // Events displayed on calendar click
+    
+    
+    func adjustLegendConstraint(constraint: NSLayoutConstraint) {
+        
+        let legendSize: CGRect = calendarContentView.layer.bounds
+        
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        constraint.constant = screenSize.width / 14.0
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -60,6 +84,11 @@ class CalendarViewController: UIViewController, JTCalendarDelegate, SWTableViewC
             }
         }
         
+        adjustLegendConstraint(myAddictionLegendHeight)
+        adjustLegendConstraint(myAddictionLegendWidth)
+        adjustLegendConstraint(myUploadLegendHeight)
+        adjustLegendConstraint(myUploadLegendWidth)
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -72,6 +101,21 @@ class CalendarViewController: UIViewController, JTCalendarDelegate, SWTableViewC
         super.viewWillDisappear(animated)
         
         datesSelected.removeAllObjects()
+    }
+    
+    func showHideLegend() {
+        if eventsToDisplay.count == 0 {
+            myAddictionLegend.hidden = false; calendarTableView.bringSubviewToFront(myAddictionLegend)
+            myUploadLegend.hidden = false
+            addictionLegendLabel.hidden = false
+            uploadLegendLabel.hidden = false
+            
+        } else {
+            myAddictionLegend.hidden = true
+            myUploadLegend.hidden = true
+            addictionLegendLabel.hidden = true
+            uploadLegendLabel.hidden = true
+        }
     }
     
     
@@ -116,7 +160,7 @@ class CalendarViewController: UIViewController, JTCalendarDelegate, SWTableViewC
             }
             
             if calendarManager.dateHelper.date(NSDate(), isTheSameDayThan: newDayView.date){
-                print(newDayView.date)
+                print("today is", newDayView.date)
                 
                 newDayView.circleView.backgroundColor = UIColor.clearColor()
                 newDayView.circleView.layer.borderWidth = 1
@@ -236,6 +280,9 @@ class CalendarViewController: UIViewController, JTCalendarDelegate, SWTableViewC
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         print(eventsToDisplay.count, "r in sec")
+        
+        showHideLegend()
+        
         return eventsToDisplay.count
         
     }
@@ -263,7 +310,7 @@ class CalendarViewController: UIViewController, JTCalendarDelegate, SWTableViewC
         if GlobalVariables.eventImageCache.count >= 50 { GlobalVariables.eventImageCache.removeAtIndex(0) }
         if GlobalVariables.venueImageCache.count >= 50 { GlobalVariables.venueImageCache.removeAtIndex(0) }
         if GlobalVariables.organizationImageCache.count >= 50 { GlobalVariables.organizationImageCache.removeAtIndex(0) }
-
+        
             
         let e = eventsToDisplay[indexPath.row]
         

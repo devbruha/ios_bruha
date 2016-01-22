@@ -70,6 +70,8 @@
             <string>OpenSans-Semibold</string>
             <string>OpenSans-Semibold</string>
             <string>OpenSans-Semibold</string>
+            <string>OpenSans-Semibold</string>
+            <string>OpenSans-Semibold</string>
         </mutableArray>
     </customFonts>
     <scenes>
@@ -1261,17 +1263,17 @@
                                         </connections>
                                     </tableView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Om6-cY-JfT" customClass="JTCalendarMenuView">
-                                        <rect key="frame" x="8" y="38" width="304" height="25"/>
+                                        <rect key="frame" x="8" y="53" width="304" height="30"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="25" id="fV3-5o-GJR"/>
+                                            <constraint firstAttribute="height" constant="30" id="fV3-5o-GJR"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="mIo-RM-JQ7" customClass="JTHorizontalCalendarView">
-                                        <rect key="frame" x="8" y="63" width="304" height="180"/>
+                                        <rect key="frame" x="8" y="83" width="304" height="250"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="180" id="ckx-Ge-bBL"/>
+                                            <constraint firstAttribute="height" constant="250" id="ckx-Ge-bBL"/>
                                         </constraints>
                                     </view>
                                 </subviews>
@@ -1284,7 +1286,7 @@
                                     <constraint firstItem="FaC-0A-mNq" firstAttribute="leading" secondItem="KyL-l5-h1Y" secondAttribute="leading" constant="8" id="a0W-LV-zEr"/>
                                     <constraint firstItem="FaC-0A-mNq" firstAttribute="trailing" secondItem="KyL-l5-h1Y" secondAttribute="trailingMargin" id="bBx-nN-Io9"/>
                                     <constraint firstItem="mIo-RM-JQ7" firstAttribute="leading" secondItem="KyL-l5-h1Y" secondAttribute="leading" constant="8" id="kZ5-Qs-yEq"/>
-                                    <constraint firstItem="Om6-cY-JfT" firstAttribute="top" secondItem="FaC-0A-mNq" secondAttribute="bottom" id="mZC-Qd-zEe"/>
+                                    <constraint firstItem="Om6-cY-JfT" firstAttribute="top" secondItem="FaC-0A-mNq" secondAttribute="bottom" constant="15" id="mZC-Qd-zEe"/>
                                     <constraint firstItem="mIo-RM-JQ7" firstAttribute="top" secondItem="Om6-cY-JfT" secondAttribute="bottom" id="rSL-gB-ZQX"/>
                                     <constraint firstAttribute="centerX" secondItem="FaC-0A-mNq" secondAttribute="centerX" id="tkF-VP-faP"/>
                                     <constraint firstItem="Om6-cY-JfT" firstAttribute="centerX" secondItem="KyL-l5-h1Y" secondAttribute="centerX" id="yt7-5f-8db"/>
@@ -1973,6 +1975,34 @@
                                     <outlet property="delegate" destination="RVH-wf-xu0" id="2ne-D6-2vj"/>
                                 </connections>
                             </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="DVq-ip-Wzz">
+                                <rect key="frame" x="21" y="363" width="40" height="40"/>
+                                <color key="backgroundColor" red="0.27450980392156865" green="0.74509803921568629" blue="0.76078431372549016" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="0et-ay-gBp"/>
+                                    <constraint firstAttribute="width" constant="40" id="aXv-JY-BBn"/>
+                                </constraints>
+                            </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="SrO-8Z-Lee">
+                                <rect key="frame" x="21" y="415" width="40" height="40"/>
+                                <color key="backgroundColor" red="0.95686274510000002" green="0.45882352939999999" blue="0.12941176469999999" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="40" id="ESp-px-ttz"/>
+                                    <constraint firstAttribute="height" constant="40" id="z3o-fg-Q9G"/>
+                                </constraints>
+                            </view>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Addictions" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="g3y-f5-wbo">
+                                <rect key="frame" x="76" y="371" width="116" height="23.5"/>
+                                <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Uploads" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ebk-wS-bSj">
+                                <rect key="frame" x="76" y="423" width="96.5" height="23.5"/>
+                                <fontDescription key="fontDescription" name="OpenSans-Semibold" family="Open Sans" pointSize="17"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -1982,19 +2012,35 @@
                             <constraint firstItem="uOk-b9-Am1" firstAttribute="top" secondItem="6Do-Hn-dty" secondAttribute="top" constant="42" id="7cb-Nb-ELS"/>
                             <constraint firstItem="nqL-FP-j42" firstAttribute="top" secondItem="uOk-b9-Am1" secondAttribute="bottom" id="947-j8-pAL"/>
                             <constraint firstAttribute="trailing" secondItem="LdH-T0-4Wv" secondAttribute="trailing" id="9Hg-Kb-gZC"/>
+                            <constraint firstItem="SrO-8Z-Lee" firstAttribute="centerX" secondItem="DVq-ip-Wzz" secondAttribute="centerX" id="Ee2-pE-olY"/>
+                            <constraint firstItem="SrO-8Z-Lee" firstAttribute="top" secondItem="DVq-ip-Wzz" secondAttribute="bottom" constant="12" id="GEZ-g6-uud"/>
                             <constraint firstItem="uOk-b9-Am1" firstAttribute="top" secondItem="BtF-ay-Juf" secondAttribute="bottom" constant="7" id="HTC-lC-kQj"/>
                             <constraint firstItem="BtF-ay-Juf" firstAttribute="leading" secondItem="6Do-Hn-dty" secondAttribute="leading" constant="8" id="J8u-8J-v9m"/>
+                            <constraint firstItem="g3y-f5-wbo" firstAttribute="leading" secondItem="DVq-ip-Wzz" secondAttribute="trailing" constant="15" id="MtD-4q-mhm"/>
+                            <constraint firstItem="g3y-f5-wbo" firstAttribute="centerY" secondItem="DVq-ip-Wzz" secondAttribute="centerY" id="NDs-wc-xsy"/>
                             <constraint firstItem="nqL-FP-j42" firstAttribute="leading" secondItem="6Do-Hn-dty" secondAttribute="leading" id="S3U-Yv-nUt"/>
+                            <constraint firstItem="DVq-ip-Wzz" firstAttribute="leading" secondItem="6Do-Hn-dty" secondAttribute="leadingMargin" constant="5" id="WUY-7k-9R2"/>
+                            <constraint firstItem="ebk-wS-bSj" firstAttribute="leading" secondItem="g3y-f5-wbo" secondAttribute="leading" id="Ymk-11-54V"/>
                             <constraint firstItem="uOk-b9-Am1" firstAttribute="leading" secondItem="6Do-Hn-dty" secondAttribute="leading" id="c9X-yd-msu"/>
                             <constraint firstAttribute="trailing" secondItem="nqL-FP-j42" secondAttribute="trailing" id="cgK-bT-BZG"/>
                             <constraint firstItem="BtF-ay-Juf" firstAttribute="top" secondItem="6Do-Hn-dty" secondAttribute="top" constant="5" id="f29-K1-nt9"/>
                             <constraint firstItem="LdH-T0-4Wv" firstAttribute="leading" secondItem="6Do-Hn-dty" secondAttribute="leading" id="kQY-CW-faK"/>
+                            <constraint firstItem="SrO-8Z-Lee" firstAttribute="centerY" secondItem="ebk-wS-bSj" secondAttribute="centerY" id="pIf-xu-29Z"/>
+                            <constraint firstItem="DVq-ip-Wzz" firstAttribute="top" secondItem="LdH-T0-4Wv" secondAttribute="top" constant="15" id="viZ-9f-29l"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="addictionLegendLabel" destination="g3y-f5-wbo" id="1Qh-ar-2mn"/>
                         <outlet property="calendarContentView" destination="nqL-FP-j42" id="vSp-y1-LE7"/>
                         <outlet property="calendarMenu" destination="uOk-b9-Am1" id="w3a-0W-wEf"/>
                         <outlet property="calendarTableView" destination="LdH-T0-4Wv" id="LuL-fo-HrA"/>
+                        <outlet property="myAddictionLegend" destination="DVq-ip-Wzz" id="jFG-cV-u4G"/>
+                        <outlet property="myAddictionLegendHeight" destination="0et-ay-gBp" id="8b7-1W-zw1"/>
+                        <outlet property="myAddictionLegendWidth" destination="aXv-JY-BBn" id="JxH-cG-i1r"/>
+                        <outlet property="myUploadLegend" destination="SrO-8Z-Lee" id="UI1-ji-UC3"/>
+                        <outlet property="myUploadLegendHeight" destination="z3o-fg-Q9G" id="oxn-iy-rUr"/>
+                        <outlet property="myUploadLegendWidth" destination="ESp-px-ttz" id="hLZ-Kp-Eaj"/>
+                        <outlet property="uploadLegendLabel" destination="ebk-wS-bSj" id="CUZ-0C-QAE"/>
                         <segue destination="hKk-35-4q0" kind="modal" identifier="EventMoreInfo" id="AnT-IX-43l"/>
                     </connections>
                 </viewController>
@@ -2278,29 +2324,29 @@
                                         </connections>
                                     </tableView>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dZ8-L6-oEc" customClass="JTCalendarMenuView">
-                                        <rect key="frame" x="8" y="38" width="292" height="25"/>
+                                        <rect key="frame" x="8" y="53" width="292" height="30"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="25" id="nIU-jw-TNj"/>
+                                            <constraint firstAttribute="height" constant="30" id="nIU-jw-TNj"/>
                                         </constraints>
                                     </view>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="xpn-pa-Ks3" customClass="JTHorizontalCalendarView">
-                                        <rect key="frame" x="8" y="63" width="292" height="180"/>
+                                        <rect key="frame" x="8" y="83" width="292" height="250"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="180" id="VzH-R6-dFu"/>
+                                            <constraint firstAttribute="height" constant="250" id="VzH-R6-dFu"/>
                                         </constraints>
                                     </view>
                                 </subviews>
                                 <color key="backgroundColor" red="0.14117647059999999" green="0.086274509799999996" blue="0.2470588235" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="xpn-pa-Ks3" secondAttribute="bottom" constant="286" id="01z-E5-vLc"/>
                                     <constraint firstItem="dZ8-L6-oEc" firstAttribute="leading" secondItem="Ta5-2f-oRH" secondAttribute="leading" constant="8" id="ABF-Pa-Fwg"/>
                                     <constraint firstItem="xpn-pa-Ks3" firstAttribute="top" secondItem="dZ8-L6-oEc" secondAttribute="bottom" id="DcU-rj-n4s"/>
                                     <constraint firstItem="NoZ-Mg-783" firstAttribute="leading" secondItem="Ta5-2f-oRH" secondAttribute="leading" constant="8" id="F4B-qK-Tkn"/>
                                     <constraint firstItem="NoZ-Mg-783" firstAttribute="top" secondItem="Ta5-2f-oRH" secondAttribute="topMargin" id="Iq9-v9-Ttg"/>
-                                    <constraint firstItem="dZ8-L6-oEc" firstAttribute="top" secondItem="NoZ-Mg-783" secondAttribute="bottom" id="MN0-S6-Xod"/>
+                                    <constraint firstItem="dZ8-L6-oEc" firstAttribute="top" secondItem="NoZ-Mg-783" secondAttribute="bottom" constant="15" id="MN0-S6-Xod"/>
                                     <constraint firstAttribute="trailing" secondItem="NoZ-Mg-783" secondAttribute="trailing" id="RNr-Mw-33h"/>
-                                    <constraint firstAttribute="bottom" secondItem="dZ8-L6-oEc" secondAttribute="bottom" constant="431" id="eGr-It-dEH"/>
                                     <constraint firstItem="xpn-pa-Ks3" firstAttribute="leading" secondItem="Ta5-2f-oRH" secondAttribute="leading" constant="8" id="i9X-pv-EjR"/>
                                     <constraint firstAttribute="centerX" secondItem="dZ8-L6-oEc" secondAttribute="centerX" id="iCC-Z9-gVe"/>
                                     <constraint firstAttribute="centerX" secondItem="NoZ-Mg-783" secondAttribute="centerX" id="ugO-VN-NRt"/>
@@ -2646,6 +2692,8 @@
                         <outlet property="smallImage" destination="jf9-OK-F6G" id="VTa-eh-n3i"/>
                         <outlet property="webDescriptionContent" destination="S7i-vd-7tx" id="5CC-6O-fEq"/>
                         <segue destination="DYv-PS-7yH" kind="modal" identifier="UpComing" id="8ee-hZ-bSl"/>
+                        <segue destination="4Ye-gJ-nBR" kind="modal" identifier="GoToLogin" id="uPq-YE-bkr"/>
+                        <segue destination="Dba-0b-X1L" kind="modal" identifier="GoToSignup" id="I6f-j4-nE4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="qZQ-kw-2Py" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -2743,6 +2791,8 @@
                         <outlet property="upComingTableView" destination="WGM-nb-Ve0" id="cfl-Vk-uSe"/>
                         <segue destination="8Gj-d3-yhz" kind="modal" identifier="ShowOnMap" id="XHn-5o-VUf"/>
                         <segue destination="k0E-gF-uXz" kind="modal" identifier="MoreInfore" id="f7C-vE-RdE"/>
+                        <segue destination="4Ye-gJ-nBR" kind="modal" identifier="GoToLogin" id="eZQ-pv-rBu"/>
+                        <segue destination="Dba-0b-X1L" kind="modal" identifier="GoToSignup" id="PFd-4U-Vhs"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Yjn-Q3-bpJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3065,6 +3115,8 @@
                         <outlet property="webDescriptionContent" destination="Joz-Dk-3jv" id="rfv-Nh-1IV"/>
                         <segue destination="96t-J7-OUy" kind="modal" identifier="AffiliatedOrg" id="2Ny-3j-E2x"/>
                         <segue destination="k0E-gF-uXz" kind="modal" identifier="MoreInfore" id="dtV-EI-jha"/>
+                        <segue destination="4Ye-gJ-nBR" kind="modal" identifier="GoToLogin" id="jya-Jh-KkI"/>
+                        <segue destination="Dba-0b-X1L" kind="modal" identifier="GoToSignup" id="dH5-g0-cuQ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="sk7-jb-Vpt" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3162,6 +3214,8 @@
                         <outlet property="bruhaButton" destination="Jqc-KU-6TA" id="MXW-HM-Q2z"/>
                         <segue destination="k0E-gF-uXz" kind="modal" identifier="MoreInfore" id="IGt-qU-hK5"/>
                         <segue destination="8Gj-d3-yhz" kind="modal" identifier="ShowOnMap" id="12b-kc-Bij"/>
+                        <segue destination="4Ye-gJ-nBR" kind="modal" identifier="GoToLogin" id="pvC-pq-Poh"/>
+                        <segue destination="Dba-0b-X1L" kind="modal" identifier="GoToSignup" id="yqR-01-cks"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="DqO-eZ-coD" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -3185,15 +3239,15 @@
         <image name="Tickets_Sm" width="250" height="250"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="jG2-kU-Dir"/>
+        <segue reference="cjQ-72-o8J"/>
         <segue reference="AnT-IX-43l"/>
-        <segue reference="dtV-EI-jha"/>
-        <segue reference="thc-CS-1cg"/>
-        <segue reference="1Xm-3s-taQ"/>
-        <segue reference="jao-de-QNr"/>
-        <segue reference="Igp-o7-BVW"/>
-        <segue reference="QhX-ak-ZUZ"/>
+        <segue reference="IGt-qU-hK5"/>
+        <segue reference="12b-kc-Bij"/>
+        <segue reference="8ee-hZ-bSl"/>
+        <segue reference="I6f-j4-nE4"/>
+        <segue reference="uPq-YE-bkr"/>
         <segue reference="UAd-9n-bZt"/>
+        <segue reference="1Xm-3s-taQ"/>
         <segue reference="pgm-fT-IMJ"/>
     </inferredMetricsTieBreakers>
 </document>

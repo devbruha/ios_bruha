@@ -86,7 +86,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         let nib = UINib(nibName: "CategoryHeaderCellTableViewCell", bundle: nil)
         categoryTableView.registerNib(nib, forCellReuseIdentifier: "HeaderCell")
         
-        priceLabelTitle.frame = CGRectMake(10,260, screenSize.width - 20, 30)
+        priceLabelTitle.frame = CGRectMake(10,330, screenSize.width - 20, 30)
         priceLabelTitle.textAlignment = NSTextAlignment.Left
         priceLabelTitle.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1)
         priceLabelTitle.textColor = UIColor.whiteColor()
@@ -95,7 +95,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         self.scrollView.addSubview(priceLabelTitle)
         
         
-        priceLabel.frame = CGRectMake(10, 290, screenSize.width - 20, 20)
+        priceLabel.frame = CGRectMake(10, 360, screenSize.width - 20, 20)
         priceLabel.textAlignment = NSTextAlignment.Center
         priceLabel.backgroundColor = UIColor.clearColor()
         priceLabel.textColor = UIColor.whiteColor()
@@ -108,7 +108,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         slider.continuous = true
         slider.tintColor = UIColor.whiteColor()
         slider.backgroundColor = UIColor.whiteColor()
-        slider.frame = CGRectMake(10, 310, screenSize.width - 20, 20)
+        slider.frame = CGRectMake(10, 380, screenSize.width - 20, 20)
         slider.value = -1
         slider.addTarget(self, action: "sliderValueDidChange:", forControlEvents: .ValueChanged)
         self.scrollView.addSubview(slider)
@@ -614,7 +614,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
             
             if(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[eventObject[indexPath.section].sectionName]![0].contains(eventObject[indexPath.section].sectionObjectIDs[indexPath.row])){
                 
-                cell.backgroundColor = UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1.0)
+                cell.backgroundColor = UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
             }
     
         }
@@ -625,7 +625,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         
         let selectedCell = self.categoryTableView.cellForRowAtIndexPath(indexPath) as! CategoryHeaderCellTableViewCell!
-         selectedCell.backgroundColor = UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1.0)
+         selectedCell.backgroundColor = UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
         
         let headerTitle = eventObject[indexPath.section].sectionName
         //categoryTableView.headerViewForSection(indexPath.section)?.textLabel!.text!
@@ -639,7 +639,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
             
             //Handled in didDeselectRowAtIndexPath
             
-            selectedCell.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
+            selectedCell.backgroundColor = UIColor.blackColor()
             
             let index = GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].indexOf(subCategoryID)
             
@@ -665,7 +665,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
     func tableView(tableView: UITableView, didDeselectRowAtIndexPath indexPath: NSIndexPath) {
         
         let selectedCell = self.categoryTableView.cellForRowAtIndexPath(indexPath) as! CategoryHeaderCellTableViewCell!
-         selectedCell.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
+         selectedCell.backgroundColor = UIColor.blackColor()
         
         let headerTitle = eventObject[indexPath.section].sectionName
         //categoryTableView.headerViewForSection(indexPath.section)?.textLabel!.text!
@@ -690,7 +690,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
             
             //Handled in didSelectRowAtIndexPath
             
-            selectedCell.backgroundColor = UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1.0)
+            selectedCell.backgroundColor = UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
             
             GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![0].append(subCategoryID)
             GlobalVariables.UserCustomFilters.categoryFilter.eventCategories[headerTitle!]![1].append(subCategoryName)
@@ -969,15 +969,15 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         
         //scrollView.contentSize.height = 500 + constraint.constant
         
-        priceLabelTitle.frame = CGRectMake(10, 230 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 30)
-        priceLabel.frame = CGRectMake(10, 260 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 20)
-        slider.frame = CGRectMake(10, 280 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 20)
+        priceLabelTitle.frame = CGRectMake(10, 320 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 30)
+        priceLabel.frame = CGRectMake(10, 350 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 20)
+        slider.frame = CGRectMake(10, 370 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 20)
         
         if GlobalVariables.selectedDisplay == "Event" {
             scrollView.contentInset.bottom = 110
-            clearFilter.frame = CGRectMake(UIScreen.mainScreen().bounds.width * 0.7 - 10, 310 + constraint.constant, UIScreen.mainScreen().bounds.width * 0.3, 30)
+            clearFilter.frame = CGRectMake(UIScreen.mainScreen().bounds.width * 0.7 - 10, 400 + constraint.constant, UIScreen.mainScreen().bounds.width * 0.3, 30)
         } else {
-            scrollView.contentInset.bottom = -150
+            scrollView.contentInset.bottom = -270
             clearFilter.frame = CGRectMake(UIScreen.mainScreen().bounds.width * 0.7 - 10, 20 + constraint.constant, UIScreen.mainScreen().bounds.width * 0.3, 30)
         }
         
