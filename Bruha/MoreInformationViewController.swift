@@ -308,6 +308,11 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
         self.performSegueWithIdentifier("UpComing", sender: self)
     }
     
+    @IBAction func goCalendar(sender: UIButton) {
+        self.performSegueWithIdentifier("ComingCalendar", sender: self)
+    }
+    
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "UpComing" {
             let comingController = segue.destinationViewController as! UpComingEventsViewController

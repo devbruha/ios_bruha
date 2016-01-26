@@ -120,6 +120,7 @@
 		A505C0F31BCEE8730067CDD1 /* UploadListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A505C0F21BCEE8730067CDD1 /* UploadListViewController.swift */; };
 		A505C0F51BCEE9860067CDD1 /* UploadListPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A505C0F41BCEE9860067CDD1 /* UploadListPanelViewController.swift */; };
 		A505C0F71BD17B910067CDD1 /* LoadScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A505C0F61BD17B910067CDD1 /* LoadScreenViewController.swift */; };
+		A537502C1C57C78900178357 /* UpComingCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A537502B1C57C78900178357 /* UpComingCalendarViewController.swift */; };
 		A576579A1C1F6E4300F871A2 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A57657901C1F6E4300F871A2 /* OpenSans-Bold.ttf */; };
 		A576579B1C1F6E4300F871A2 /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A57657911C1F6E4300F871A2 /* OpenSans-BoldItalic.ttf */; };
 		A576579C1C1F6E4300F871A2 /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A57657921C1F6E4300F871A2 /* OpenSans-ExtraBold.ttf */; };
@@ -289,6 +290,7 @@
 		A505C0F21BCEE8730067CDD1 /* UploadListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadListViewController.swift; sourceTree = "<group>"; };
 		A505C0F41BCEE9860067CDD1 /* UploadListPanelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadListPanelViewController.swift; sourceTree = "<group>"; };
 		A505C0F61BD17B910067CDD1 /* LoadScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadScreenViewController.swift; sourceTree = "<group>"; };
+		A537502B1C57C78900178357 /* UpComingCalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpComingCalendarViewController.swift; sourceTree = "<group>"; };
 		A57657901C1F6E4300F871A2 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		A57657911C1F6E4300F871A2 /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; };
 		A57657921C1F6E4300F871A2 /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
@@ -415,6 +417,7 @@
 				A501998B1C23239B0097624F /* UpComingEventsViewController.swift */,
 				A5C96A821C3AE5460051EF1C /* EventMoreInfomationViewController.swift */,
 				A5C96A841C3AEF770051EF1C /* AffiliatedOrgViewController.swift */,
+				A537502B1C57C78900178357 /* UpComingCalendarViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -909,6 +912,7 @@
 				45C938AC1B8D089800BB0D0C /* Categories.swift in Sources */,
 				1891B2821B86529B000949C8 /* SplashView.swift in Sources */,
 				4560C54F1B66D49800AB5382 /* EventTableViewCell.swift in Sources */,
+				A537502C1C57C78900178357 /* UpComingCalendarViewController.swift in Sources */,
 				181EB6191B714B7600B9295E /* Date.swift in Sources */,
 				45FA05A71B5D4190004AD819 /* LoadScreenService.swift in Sources */,
 				45AFAF231B60332E00BA6854 /* CredentialCheck.swift in Sources */,
