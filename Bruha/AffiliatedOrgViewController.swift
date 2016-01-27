@@ -64,7 +64,7 @@ class AffiliatedOrgViewController: UIViewController, SWTableViewCellDelegate {
         
         bruhaButton.addConstraints([heightContraints, widthContraints])
         
-        backButton.setBackgroundImage(UIImage(named: "List"), forState: UIControlState.Normal)
+        backButton.setBackgroundImage(UIImage(named: "arrow-left"), forState: UIControlState.Normal)
         let heightContraint = NSLayoutConstraint(item: backButton, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.height/15.5)
         heightContraint.priority = UILayoutPriorityDefaultHigh
         
@@ -116,12 +116,13 @@ class AffiliatedOrgViewController: UIViewController, SWTableViewCellDelegate {
         configureView()
         customTopButtons()
         
-        affiliatedOrgTable.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
-        affiliatedOrgTable.separatorColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
+        //affiliatedOrgTable.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
+        affiliatedOrgTable.separatorColor = UIColor.clearColor()
         
         self.affiliatedOrgLabel.alpha = 0.0
         self.affiliatedOrgImage.alpha = 0.0
         
+        backgroundGradient()
         
         affiliatedOrg.removeAll()
         
@@ -136,6 +137,12 @@ class AffiliatedOrgViewController: UIViewController, SWTableViewCellDelegate {
 
         // Do any additional setup after loading the view.
         addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsOrganization()
+    }
+    
+    func backgroundGradient() {
+        let background = CAGradientLayer().gradientColor()
+        background.frame = self.view.bounds
+        self.affiliatedOrgTable.layer.insertSublayer(background, atIndex: 0)
     }
 
     override func viewDidAppear(animated: Bool) {

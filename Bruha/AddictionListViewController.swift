@@ -103,16 +103,24 @@ class AddictionListViewController: UIViewController, SWTableViewCellDelegate, AR
         customTopButtons()
         //customStatusBar()
         
-        addictionTableView.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
-        addictionTableView.separatorColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
+        //addictionTableView.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
+        addictionTableView.separatorColor = UIColor.clearColor()
         
         self.addictionLabel.alpha = 0.0
         self.addictionImage.alpha = 0.0
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateNotificationAddiction", name: "itemDisplayChangeAddiction", object: nil)
+        
+        backgroundGradient()
         // Do any additional setup after loading the view.
         
         fetchInformation()
+    }
+    
+    func backgroundGradient() {
+        let background = CAGradientLayer().gradientColor()
+        background.frame = self.view.bounds
+        self.addictionTableView.layer.insertSublayer(background, atIndex: 0)
     }
     
     override func viewDidAppear(animated: Bool) {

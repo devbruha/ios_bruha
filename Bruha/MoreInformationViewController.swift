@@ -319,6 +319,12 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
             comingController.sourceForEvent = sourceForComingEvent
             comingController.sourceID = sourceID
         }
+        
+        if segue.identifier == "ComingCalendar" {
+            let comingController = segue.destinationViewController as! UpComingCalendarViewController
+            comingController.sourceForEvent = sourceForComingEvent
+            comingController.sourceID = sourceID
+        }
     }
     
     override func viewDidLoad() {

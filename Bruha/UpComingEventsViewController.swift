@@ -63,7 +63,7 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
         
         bruhaButton.addConstraints([heightContraints, widthContraints])
         
-        backButton.setBackgroundImage(UIImage(named: "List"), forState: UIControlState.Normal)
+        backButton.setBackgroundImage(UIImage(named: "arrow-left"), forState: UIControlState.Normal)
         let heightContraint = NSLayoutConstraint(item: backButton, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.height/15.5)
         heightContraint.priority = UILayoutPriorityDefaultHigh
         
@@ -115,11 +115,13 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
         configureView()
         customTopButtons()
         
-        upComingTableView.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
-        upComingTableView.separatorColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
+        //upComingTableView.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
+        upComingTableView.separatorColor = UIColor.clearColor()
         
         self.comingEventLabel.alpha = 0.0
         self.comingEventImage.alpha = 0.0
+        
+        backgroundGradient()
         
         upcomingEvents.removeAll()
         print(sourceForEvent)
@@ -145,6 +147,12 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
         
         // Do any additional setup after loading the view.
         addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
+    }
+    
+    func backgroundGradient() {
+        let background = CAGradientLayer().gradientColor()
+        background.frame = self.view.bounds
+        self.upComingTableView.layer.insertSublayer(background, atIndex: 0)
     }
     
     override func viewDidAppear(animated: Bool) {

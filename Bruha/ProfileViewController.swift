@@ -87,7 +87,7 @@ class ProfileViewController: UIViewController, FBSDKLoginButtonDelegate {
     }
     
     func backgroundGradient() {
-        let background = CAGradientLayer().profileColor()
+        let background = CAGradientLayer().gradientColor()
         background.frame = self.view.bounds
         self.view.layer.insertSublayer(background, atIndex: 0)
     }

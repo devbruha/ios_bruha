@@ -15,13 +15,36 @@ class UpComingCalendarViewController: UIViewController, JTCalendarDelegate, SWTa
     
     @IBOutlet weak var calendarTableView: UITableView!
     
+    @IBOutlet weak var upComingLegend: UIView!
+    @IBOutlet weak var upComingLegendHeight: NSLayoutConstraint!
+    @IBOutlet weak var upComingLegendWidth: NSLayoutConstraint!
+    
+    @IBOutlet weak var upComingLegendLabel: UILabel!
+    
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     let calendarManager: JTCalendarManager = JTCalendarManager()
     let datesSelected = NSMutableArray()
     
-    var eventInfo: [Event]!
     
+    var upcomingEvents: [Event] = []
+    var eventsToDisplay: [Event] = []
+    
+    var sourceForEvent: String?
+    var sourceID: String?
+    
+    
+    @IBAction func backButton(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func adjustLegendConstraint(constraint: NSLayoutConstraint) {
+        
+        let legendSize: CGRect = calendarContentView.layer.bounds
+        
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        constraint.constant = screenSize.width / 14.0
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +58,43 @@ class UpComingCalendarViewController: UIViewController, JTCalendarDelegate, SWTa
         calendarManager.contentView = calendarContentView
         calendarManager.setDate(NSDate())
         
-        eventInfo = FetchData(context: managedObjectContext).fetchEvents()
+        
+        
+        upcomingEvents.removeAll()
+        
+        let dateFormatter = NSDateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd"
+        let today = dateFormatter.stringFromDate(NSDate())
+        
+        var events = FetchData(context: managedObjectContext).fetchEvents()
+        for e in events {
+            if e.eventStartDate < today {
+                let idx = events.indexOf({$0.eventID == e.eventID})
+                events.removeAtIndex(idx!)
+            }
+        }
+        //eventInfo = FetchData(context: managedObjectContext).fetchEvents()
+        let eventInfo = events.sort({ $0.eventStartDate < $1.eventStartDate })
+        
+        for event in eventInfo {
+            if sourceForEvent == "venue" {
+                if event.venueID == sourceID {
+                    upcomingEvents.append(event)
+                    print(event.venueID)
+                }
+            }
+            if sourceForEvent == "organization" {
+                
+                for orgID in event.organizationID {
+                    if orgID == sourceID {
+                        upcomingEvents.append(event)
+                        print(event.eventName)
+                    }
+                }
+            }
+        }
+        
+        
         
         let nib = UINib(nibName: "MapDropTableViewCell", bundle: nil)
         calendarTableView.registerNib(nib, forCellReuseIdentifier: "DropCell")
@@ -43,6 +102,9 @@ class UpComingCalendarViewController: UIViewController, JTCalendarDelegate, SWTa
         calendarTableView.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
         
         calendarTableView.indicatorStyle = UIScrollViewIndicatorStyle.White
+        
+        adjustLegendConstraint(upComingLegendHeight)
+        adjustLegendConstraint(upComingLegendWidth)
 
         // Do any additional setup after loading the view.
     }
@@ -68,20 +130,20 @@ class UpComingCalendarViewController: UIViewController, JTCalendarDelegate, SWTa
         }
         else {
             
-                newDayView.backgroundColor = UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1.0)
-                newDayView.alpha = 0.5
+            if upcomingEvents.contains({$0.eventStartDate == dateToMatch}) {
+            
+                newDayView.backgroundColor = UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 0.75)
+                
                 if !(datesSelected.containsObject(newDayView.date)){
                     datesSelected.addObject(newDayView.date)
                 }
-            
-            
-                newDayView.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1.0)
-                newDayView.alpha = 0.5
-                if !(datesSelected.containsObject(newDayView.date)){
-                    datesSelected.addObject(newDayView.date)
+                
+                for e in eventsToDisplay {
+                    if e.eventStartDate == dateToMatch {
+                        newDayView.backgroundColor = UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1.0)
+                    }
                 }
-            
-           
+            }
             
             if calendarManager.dateHelper.date(NSDate(), isTheSameDayThan: newDayView.date){
                 print("today is", newDayView.date)
@@ -107,31 +169,34 @@ class UpComingCalendarViewController: UIViewController, JTCalendarDelegate, SWTa
         if(datesSelected.containsObject(newDayView.date)){
             print("on click")
             
-            if newDayView.backgroundColor == UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1.0) &&
-                newDayView.alpha == 0.5 {
-                    
-                   
-                    newDayView.alpha = 1
-                    
-                    
-                    
-                    calendarTableView.reloadData()
-                    calendarTableView.flashScrollIndicators()
+            eventsToDisplay.removeAll()
+            
+            for e in upcomingEvents {
+                if e.eventStartDate == dateToMatch {
+                    eventsToDisplay.append(e)
+                    newDayView.backgroundColor = UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1.0)
+                }
             }
-            if newDayView.backgroundColor == UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1.0) &&
-                newDayView.alpha == 0.5 {
-                    
-                    
-                    newDayView.alpha = 1
-                    
-                    
-                    calendarTableView.reloadData()
-                    calendarTableView.flashScrollIndicators()
-            }
+            print(eventsToDisplay.count, "up coming events")
+            
+            
+            calendarTableView.reloadData()
+            calendarTableView.flashScrollIndicators()
             
             calendarManager.reload()
+            datesSelected.removeObject(newDayView.date)
         }
         
+        else if !datesSelected.containsObject(newDayView.date) && newDayView.backgroundColor != UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1) {
+            
+            if newDayView.backgroundColor == UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1.0) {
+                newDayView.backgroundColor = UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 0.75)
+            }
+            
+            eventsToDisplay.removeAll()
+            datesSelected.addObject(newDayView.date)
+            calendarTableView.reloadData()
+        }
         
         //        if(datesSelected.containsObject(newDayView.date)){
         //
@@ -171,19 +236,41 @@ class UpComingCalendarViewController: UIViewController, JTCalendarDelegate, SWTa
         //newMenuItemView.scrollView
         
     }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        calendarManager.reload()
+    }
 
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        datesSelected.removeAllObjects()
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    func showHideLegend() {
+        if eventsToDisplay.count == 0 {
+            upComingLegend.hidden = false; calendarTableView.bringSubviewToFront(upComingLegend)
+            upComingLegendLabel.hidden = false
+            
+        } else {
+            upComingLegend.hidden = true
+            upComingLegendLabel.hidden = true
+        }
+    }
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
        
+        showHideLegend()
         
-        return eventInfo.count
+        return eventsToDisplay.count
         
     }
     
@@ -212,7 +299,7 @@ class UpComingCalendarViewController: UIViewController, JTCalendarDelegate, SWTa
         if GlobalVariables.organizationImageCache.count >= 50 { GlobalVariables.organizationImageCache.removeAtIndex(0) }
         
         
-        let e = eventInfo[indexPath.row]
+        let e = eventsToDisplay[indexPath.row]
         
         print("\(e.eventName), ")
         
@@ -267,7 +354,7 @@ class UpComingCalendarViewController: UIViewController, JTCalendarDelegate, SWTa
         var like = 0
         let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
         for addict in addictionInfo! {
-            if addict.eventID == eventInfo[indexPath.row].eventID {
+            if addict.eventID == eventsToDisplay[indexPath.row].eventID {
                 like = 1
             }
         }
@@ -351,6 +438,110 @@ class UpComingCalendarViewController: UIViewController, JTCalendarDelegate, SWTa
         return aString
     }
     
+    //Swipe Cells Actions
+    func swipeableTableViewCell( cell : SWTableViewCell!,didTriggerLeftUtilityButtonWithIndex index:NSInteger){
+        
+        switch(index){
+        case 0:
+            
+            let user = FetchData(context: managedObjectContext).fetchUserInfo()![0].userName
+            
+            var cellIndexPath = self.calendarTableView.indexPathForCell(cell)
+            var selectedCell = self.calendarTableView.cellForRowAtIndexPath(cellIndexPath!) as! MapDropTableViewCell
+            GlobalVariables.eventSelected = selectedCell.dropHiddenID.text!
+            
+            let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
+            for event in eventInfo!{
+                if event.eventID == GlobalVariables.eventSelected {
+                    //Like and Unlike
+                    if(cell.leftUtilityButtons[0].titleLabel!!.text! == "Addicted!"){
+                        
+                        let alertController = UIAlertController(title: "Are you no longer addicted?", message:nil, preferredStyle: .Alert)
+                        let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+                        let unlikeAction = UIAlertAction(title: "I'm Over It", style: .Default) { (_) -> Void in
+                            
+                            DeleteData(context: self.managedObjectContext).deleteAddictionsEvent(event.eventID, deleteUser: user)
+                            print("Removed from addiction(event) \(event.eventID)")
+                            print("REMOVED")
+                            
+                            let eventService = EventService()
+                            eventService.removeAddictedEvents(event.eventID) {
+                                (let removeInfo ) in
+                                print(removeInfo!)
+                            }
+                            
+                            var temp: NSMutableArray = NSMutableArray()
+                            temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),attributedTitle: self.swipeCellTitle("Get Addicted"))
+                            cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
+                            cell.leftUtilityButtons = temp as [AnyObject]
+                            
+                        }
+                        alertController.addAction(unlikeAction)
+                        alertController.addAction(cancelAction)
+                        
+                        self.presentViewController(alertController, animated: true, completion: nil)
+                        
+                        
+                    } else if(cell.leftUtilityButtons[0].titleLabel!!.text! == "Get Addicted") {
+                        
+                        let addEvent = AddictionEvent(eventId: event.eventID, userId: user)
+                        SaveData(context: managedObjectContext).saveAddictionEvent(addEvent)
+                        print("Getting Addicted with event id \(event.eventID)")
+                        print("ADDICTED")
+                        
+                        let eventService = EventService()
+                        
+                        eventService.addAddictedEvents(event.eventID) {
+                            (let addInfo ) in
+                            print(addInfo!)
+                        }
+                        
+                        var temp: NSMutableArray = NSMutableArray()
+                        temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),attributedTitle: swipeCellTitle("Addicted!"))
+                        cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
+                        cell.leftUtilityButtons = temp as [AnyObject]
+                        
+                        
+                    }
+                }
+            }
+            break
+        default:
+            break
+        }
+        
+    }
+    
+    func swipeableTableViewCell( cell : SWTableViewCell!,didTriggerRightUtilityButtonWithIndex index:NSInteger){
+        
+        switch(index){
+        case 0:
+            
+            print("event ticket")
+            
+            break
+        case 1:
+            //More Info
+            let cellIndexPath = self.calendarTableView.indexPathForCell(cell)
+            let selectedCell = self.calendarTableView.cellForRowAtIndexPath(cellIndexPath!) as! MapDropTableViewCell
+            GlobalVariables.eventSelected = selectedCell.dropHiddenID.text!
+            
+            self.performSegueWithIdentifier("MoreInfore", sender: self)
+            break
+        default:
+            break
+        }
+        
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "MoreInfore" {
+            let destinationController = segue.destinationViewController as! MoreInformationViewController
+            destinationController.sourceForComingEvent = "event"
+            destinationController.sourceID = GlobalVariables.eventSelected
+        }
+    }
+    
 
     /*
     // MARK: - Navigation
@@ -361,33 +552,5 @@ class UpComingCalendarViewController: UIViewController, JTCalendarDelegate, SWTa
         // Pass the selected object to the new view controller.
     }
     */
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 
 }

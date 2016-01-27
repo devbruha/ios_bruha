@@ -140,22 +140,29 @@ class CalendarViewController: UIViewController, JTCalendarDelegate, SWTableViewC
         }
         else {
             if addictedEvents.contains({$0.eventStartDate == dateToMatch}){
-                newDayView.backgroundColor = UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1.0)
-                newDayView.alpha = 0.5
+                newDayView.backgroundColor = UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 0.75)
+                //newDayView.alpha = 0.5
                 if !(datesSelected.containsObject(newDayView.date)){
                     datesSelected.addObject(newDayView.date)
+                }
+                
+                for e in eventsToDisplay {
+                    if e.eventStartDate == dateToMatch {
+                        newDayView.backgroundColor = UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1.0)
+                    }
                 }
             }
             if userEventInfo.contains({$0.eventStartDate == dateToMatch}) {
-                newDayView.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1.0)
-                newDayView.alpha = 0.5
+                newDayView.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 0.75)
+                //newDayView.alpha = 0.5
                 if !(datesSelected.containsObject(newDayView.date)){
                     datesSelected.addObject(newDayView.date)
                 }
-            }
-            for e in eventsToDisplay {
-                if e.eventStartDate == dateToMatch {
-                    newDayView.alpha = 1
+                
+                for e in eventsToDisplay {
+                    if e.eventStartDate == dateToMatch {
+                        newDayView.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1.0)
+                    }
                 }
             }
             
@@ -183,47 +190,47 @@ class CalendarViewController: UIViewController, JTCalendarDelegate, SWTableViewC
         if(datesSelected.containsObject(newDayView.date)){
             print("on click")
             
-            if newDayView.backgroundColor == UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1.0) &&
-                newDayView.alpha == 0.5 {
-                
-                eventsToDisplay.removeAll()
-                newDayView.alpha = 1
-                
-                for u in userEventInfo {
-                    if u.eventStartDate == dateToMatch {
-                        eventsToDisplay.append(u)
-                    }
-                }
-                print(eventsToDisplay.count, "upload")
-                for a in addictedEvents {
-                    if a.eventStartDate == dateToMatch {
-                        if !eventsToDisplay.contains({$0.eventID == a.eventID}) {
-                            eventsToDisplay.append(a)
-                        }
-                    }
-                }
-                print(eventsToDisplay.count, "upload & addict in same date")
-                calendarTableView.reloadData()
-                calendarTableView.flashScrollIndicators()
-            }
-            if newDayView.backgroundColor == UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1.0) &&
-                newDayView.alpha == 0.5 {
-                
-                eventsToDisplay.removeAll()
-                newDayView.alpha = 1
-                
-                for a in addictedEvents{
-                    if a.eventStartDate == dateToMatch {
-                        print("\(a.eventName)\n")
+            eventsToDisplay.removeAll()
+            
+            for a in addictedEvents {
+                if a.eventStartDate == dateToMatch {
+                    if !eventsToDisplay.contains({$0.eventID == a.eventID}) {
                         eventsToDisplay.append(a)
+                        newDayView.backgroundColor = UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1.0)
                     }
                 }
-                print(eventsToDisplay.count, "addict")
-                calendarTableView.reloadData()
-                calendarTableView.flashScrollIndicators()
             }
+            print(eventsToDisplay.count, "addicted")
+            for u in userEventInfo {
+                if u.eventStartDate == dateToMatch {
+                    if !eventsToDisplay.contains({$0.eventID == u.eventID}) {
+                        eventsToDisplay.append(u)
+                        newDayView.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1.0)
+                    }
+                }
+            }
+            print(eventsToDisplay.count, "upload & addict in same date")
+            
+            calendarTableView.reloadData()
+            calendarTableView.flashScrollIndicators()
             
             calendarManager.reload()
+            datesSelected.removeObject(newDayView.date)
+        }
+        
+        else if !datesSelected.containsObject(newDayView.date) && newDayView.backgroundColor != UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1) {
+            
+            if newDayView.backgroundColor == UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1.0) {
+                newDayView.backgroundColor = UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 0.75)
+            }
+            if newDayView.backgroundColor == UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1.0) {
+                newDayView.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 0.75)
+            }
+            
+            eventsToDisplay.removeAll()
+            datesSelected.addObject(newDayView.date)
+            calendarTableView.reloadData()
+            //calendarManager.reload()
         }
         
         

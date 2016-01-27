@@ -98,16 +98,24 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
         customTopButtons()
         //customStatusBar()
         
-        uploadTableView.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
-        uploadTableView.separatorColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
+        //uploadTableView.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
+        uploadTableView.separatorColor = UIColor.clearColor()
         
         self.myUploadLabel.alpha = 0.0
         self.myUploadImage.alpha = 0.0
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateNotificationUpload", name: "itemDisplayChangeUpload", object: nil)
+        
+        backgroundGradient()
         // Do any additional setup after loading the view.
         
         fetchInformation()
+    }
+    
+    func backgroundGradient() {
+        let background = CAGradientLayer().gradientColor()
+        background.frame = self.view.bounds
+        self.uploadTableView.layer.insertSublayer(background, atIndex: 0)
     }
     
     override func viewDidAppear(animated: Bool) {

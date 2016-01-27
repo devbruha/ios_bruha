@@ -166,8 +166,8 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         customTopButtons()
         //customStatusBar()
         
-        exploreTableView.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
-        exploreTableView.separatorColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
+        //exploreTableView.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
+        exploreTableView.separatorColor = UIColor.clearColor()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateNotificationEvent", name: "itemDisplayChangeEvent", object: nil)
         
@@ -183,10 +183,17 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         self.exploreImage.alpha = 0.0
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "animateHeader", name: "itemDisplayChangeEvent", object: nil)
         
+        backgroundGradient()
         // Do any additional setup after loading the view.
         
         fetchInformation()
         
+    }
+    
+    func backgroundGradient() {
+        let background = CAGradientLayer().gradientColor()
+        background.frame = self.view.bounds
+        self.exploreTableView.layer.insertSublayer(background, atIndex: 0)
     }
     
     override func viewDidAppear(animated: Bool) {
