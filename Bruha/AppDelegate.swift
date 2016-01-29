@@ -24,6 +24,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         application.statusBarStyle = .LightContent
         //application.statusBarHidden = true
         
+        
+        let navigationBarAppearace = UINavigationBar.appearance()
+        navigationBarAppearace.tintColor = UIColor.whiteColor()
+        navigationBarAppearace.barTintColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
+        let navbarFont = UIFont(name: "OpenSans-Semibold", size: 20) ?? UIFont.systemFontOfSize(20)
+        navigationBarAppearace.titleTextAttributes = [NSFontAttributeName: navbarFont, NSForegroundColorAttributeName:UIColor.whiteColor()]
+        navigationBarAppearace.translucent = false
+        
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     

@@ -1550,19 +1550,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
     
     func fetchInformation() {
         
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        let today = dateFormatter.stringFromDate(NSDate())
-        
-        var events = FetchData(context: managedObjectContext).fetchEvents()
-        for e in events {
-            if e.eventStartDate < today {
-                let idx = events.indexOf({$0.eventID == e.eventID})
-                events.removeAtIndex(idx!)
-            }
-        }
-        //eventInfo = FetchData(context: managedObjectContext).fetchEvents()
-        eventInfo = events.sort({ $0.eventStartDate < $1.eventStartDate })
+        eventInfo = FetchData(context: managedObjectContext).fetchEvents().sort({ $0.eventStartDate < $1.eventStartDate })
         
         addictionEventInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
         
