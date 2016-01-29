@@ -139,7 +139,7 @@ class AddictionListViewController: UIViewController, UITableViewDelegate, UITabl
         searchController.searchBar.delegate = self
         definesPresentationContext = true
         searchController.dimsBackgroundDuringPresentation = false
-        searchController.searchBar.placeholder = "Search Events in this awesome bar"
+        searchController.searchBar.placeholder = "Search Events"
         
         searchController.searchBar.barTintColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
         searchController.searchBar.tintColor = UIColor.whiteColor()
@@ -1070,13 +1070,13 @@ class AddictionListViewController: UIViewController, UITableViewDelegate, UITabl
     func updateNotificationAddiction(){
         
         if GlobalVariables.addictedDisplay == "Event"{
-            searchController.searchBar.placeholder = "Search Events in this awesome bar"
+            searchController.searchBar.placeholder = "Search Events"
         }
         if GlobalVariables.addictedDisplay == "Venue"{
-            searchController.searchBar.placeholder = "Search Venues in this awesome bar"
+            searchController.searchBar.placeholder = "Search Venues"
         }
         if GlobalVariables.addictedDisplay == "Organization"{
-            searchController.searchBar.placeholder = "Search Organizatons in this awesome bar"
+            searchController.searchBar.placeholder = "Search Organizatons"
         }
         
         if self.searchController.active && self.searchController.searchBar.text != "" {
