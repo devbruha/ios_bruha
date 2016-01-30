@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPDragDelegate, ARSPVisibilityStateDelegate {
+class ExploreListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchBarDelegate, SWTableViewCellDelegate,ARSPDragDelegate, ARSPVisibilityStateDelegate {
     
     @IBOutlet weak var exploreTableView: UITableView!
     @IBOutlet weak var bruhaButton: UIButton!
@@ -25,6 +25,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
     
     @IBOutlet weak var exploreHeightImage: NSLayoutConstraint!
     
+    @IBOutlet weak var navigationTitle: UINavigationItem!
     
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
@@ -44,6 +45,11 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
     var filteredVenueInfo: [Venue] = []
     var filteredOrganizationInfo: [Organization] = []
     
+    var searchController: UISearchController!
+    var searchedEvents = [Event]()
+    var searchedVenues = [Venue]()
+    var searchedOrganizations = [Organization]()
+    
     //var GlobalVariables.eventImageCache = [String:UIImage]()
     //var GlobalVariables.venueImageCache = [String:UIImage]()
     //var GlobalVariables.organizationImageCache = [String:UIImage]()
@@ -52,7 +58,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         let screenHeight = screenSize.height
-        exploreTableView.rowHeight = screenHeight * 0.5
+        exploreTableView.rowHeight = ( screenHeight - screenHeight * 70 / 568 ) * 0.5
         self.panelControllerContainer = self.parentViewController as! ARSPContainerController
         self.panelControllerContainer.dragDelegate = self
         self.panelControllerContainer.visibilityStateDelegate = self
@@ -155,7 +161,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
     
     func customStatusBar() {
         let barView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0))
-        barView.backgroundColor = UIColor.grayColor()
+        barView.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
         //barView.alpha = 0.5
         self.view.addSubview(barView)
     }
@@ -163,8 +169,8 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
-        customTopButtons()
-        //customStatusBar()
+        //customTopButtons()
+        customStatusBar()
         
         //exploreTableView.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
         exploreTableView.separatorColor = UIColor.clearColor()
@@ -187,6 +193,35 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         // Do any additional setup after loading the view.
         
         fetchInformation()
+        
+        setUpSearchBar()
+        
+    }
+    
+    func setUpSearchBar() {
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.delegate = self
+        definesPresentationContext = true
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Events"
+        
+        searchController.searchBar.barTintColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
+        searchController.searchBar.tintColor = UIColor.whiteColor()
+        
+        searchController.searchBar.scopeButtonTitles = ["Search", "Location"]
+        
+        searchController.searchBar.sizeToFit()
+        
+        exploreTableView.tableHeaderView = searchController.searchBar
+        
+        //        let searchView = UIView.init(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, searchController.searchBar.bounds.size.height))
+        //
+        //        searchView.addSubview(searchController.searchBar)
+        //
+        //        self.view.addSubview(searchView)
+        
+        //self.navigationItem.titleView = searchController.searchBar
         
     }
     
@@ -245,9 +280,79 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
     }
     }*/
     
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        GlobalVariables.displayedEvents = FetchData(context: managedObjectContext).fetchEvents()!
+        GlobalVariables.displayedVenues = FetchData(context: managedObjectContext).fetchVenues()!
+        GlobalVariables.displayedArtists = FetchData(context: managedObjectContext).fetchArtists()!
+        GlobalVariables.displayedOrganizations = FetchData(context: managedObjectContext).fetchOrganizations()!
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func filterForSearchText(searchText: String, scope: String = "Search") {
+        
+        if GlobalVariables.selectedDisplay == "Event" {
+            if GlobalVariables.filterEventBool {
+                searchedEvents = filteredEventInfo.filter({ (event: Event) -> Bool in
+                    //print(event.eventVenueAddress.componentsSeparatedByString(", ")[0] + " " + event.eventVenueCity)
+                    return ( scope == "Search" && event.eventName.lowercaseString.containsString(searchText.lowercaseString) ) ||
+                        ( scope == "Location" && (event.eventVenueAddress.componentsSeparatedByString(", ")[0] + " " + event.eventVenueCity).lowercaseString.containsString(searchText.lowercaseString) )
+                })
+            }
+            else {
+                searchedEvents = eventInfo.filter({ (event: Event) -> Bool in
+                    //print(event.eventVenueAddress.componentsSeparatedByString(", ")[0] + " " + event.eventVenueCity)
+                    return ( scope == "Search" && event.eventName.lowercaseString.containsString(searchText.lowercaseString) ) ||
+                        ( scope == "Location" && (event.eventVenueAddress.componentsSeparatedByString(", ")[0] + " " + event.eventVenueCity).lowercaseString.containsString(searchText.lowercaseString) )
+                })
+            }
+        }
+        if GlobalVariables.selectedDisplay == "Venue" {
+            if GlobalVariables.filterVenueBool {
+                searchedVenues = filteredVenueInfo.filter({ (venue: Venue) -> Bool in
+                    return ( scope == "Search" && venue.venueName.lowercaseString.containsString(searchText.lowercaseString) ) ||
+                        ( scope == "Location" && (venue.venueAddress.componentsSeparatedByString(", ")[0]).lowercaseString.containsString(searchText.lowercaseString) )
+                })
+            }
+            else {
+                searchedVenues = venueInfo!.filter({ (venue: Venue) -> Bool in
+                    return ( scope == "Search" && venue.venueName.lowercaseString.containsString(searchText.lowercaseString) ) ||
+                        ( scope == "Location" && (venue.venueAddress.componentsSeparatedByString(", ")[0]).lowercaseString.containsString(searchText.lowercaseString) )
+                })
+            }
+        }
+        if GlobalVariables.selectedDisplay == "Organization" {
+            if GlobalVariables.filterVenueBool {
+                searchedOrganizations = filteredOrganizationInfo.filter({ (organization: Organization) -> Bool in
+                    return ( scope == "Search" && organization.organizationName.lowercaseString.containsString(searchText.lowercaseString) ) ||
+                        ( scope == "Location" && (organization.organizationAddress.componentsSeparatedByString(", ")[0]).lowercaseString.containsString(searchText.lowercaseString) )
+                })
+            }
+            else {
+                searchedOrganizations = organizationInfo!.filter({ (organization: Organization) -> Bool in
+                    return ( scope == "Search" && organization.organizationName.lowercaseString.containsString(searchText.lowercaseString) ) ||
+                        ( scope == "Location" && (organization.organizationAddress.componentsSeparatedByString(", ")[0]).lowercaseString.containsString(searchText.lowercaseString) )
+                })
+            }
+        }
+        
+        exploreTableView.reloadData()
+    }
+    
+    func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        filterForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
+    }
+    
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        let searchBar = searchController.searchBar
+        let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
+        filterForSearchText(searchController.searchBar.text!, scope: scope)
+        
+        //print(searchedEvents.count, "searchEvents")
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -287,21 +392,31 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         case "Event":
             var mEventInfo: [Event] = []
             
-            if GlobalVariables.filterEventBool {
-                mEventInfo = filteredEventInfo
-            } else {
+            if !(searchController.active && searchController.searchBar.text != "") && !GlobalVariables.filterEventBool{
                 mEventInfo = eventInfo
             }
+            else if !(searchController.active && searchController.searchBar.text != "") && GlobalVariables.filterEventBool {
+                mEventInfo = filteredEventInfo
+            }
+            else if (searchController.active && searchController.searchBar.text != "") {
+                mEventInfo = searchedEvents
+            }
+            
             return (mEventInfo.count)
             
         case "Venue":
             var mVenueInfo: [Venue] = []
             
-            if GlobalVariables.filterVenueBool {
-                mVenueInfo = filteredVenueInfo
-            } else {
+            if !(searchController.active && searchController.searchBar.text != "") && !GlobalVariables.filterVenueBool{
                 mVenueInfo = venueInfo!
             }
+            else if !(searchController.active && searchController.searchBar.text != "") && GlobalVariables.filterVenueBool {
+                mVenueInfo = filteredVenueInfo
+            }
+            else if (searchController.active && searchController.searchBar.text != "") {
+                mVenueInfo = searchedVenues
+            }
+            
             return (mVenueInfo.count)
             
         case "Artist":
@@ -311,11 +426,16 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         case "Organization":
             var mOrganizationInfo: [Organization] = []
             
-            if GlobalVariables.filterOrganizationBool {
-                mOrganizationInfo = filteredOrganizationInfo
-            } else {
+            if !(searchController.active && searchController.searchBar.text != "") && !GlobalVariables.filterOrganizationBool{
                 mOrganizationInfo = organizationInfo!
             }
+            else if !(searchController.active && searchController.searchBar.text != "") && GlobalVariables.filterOrganizationBool {
+                mOrganizationInfo = filteredOrganizationInfo
+            }
+            else if (searchController.active && searchController.searchBar.text != "") {
+                mOrganizationInfo = searchedOrganizations
+            }
+            
             return (mOrganizationInfo.count)
             
         default:
@@ -362,121 +482,38 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             
             //let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
             //let addictionEventInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
+            
             var like = 0
             
-            
-            if GlobalVariables.filterEventBool {
-                
-                let event = filteredEventInfo[indexPath.row]
-                
-                for addict in addictionEventInfo! {
-                    if addict.eventID == event.eventID {
-                        like = 1
-                    }
-                }
-                
-                cell.ExploreImage.contentMode = UIViewContentMode.ScaleToFill
-                
-                // if there is already cache
-                if let img = GlobalVariables.eventImageCache[event.eventID] {
-                    cell.ExploreImage.image = img
-                    //print("catched! \(event.eventName)")
-                }
-                    
-                // get image from url
-                else if let checkedUrl = NSURL(string:event.posterUrl) {
-                    print(checkedUrl)
-                    
-                    self.getDataFromUrl(checkedUrl) { data in
-                        dispatch_async(dispatch_get_main_queue()) {
-                            if let downloadImg = data {
-                                
-                                // getting the image data
-                                if downloadImg.length > 800 {
-                                    
-                                    let image = UIImage(data: downloadImg)
-                                    
-                                    GlobalVariables.eventImageCache[event.eventID] = image
-                                    
-                                    cell.ExploreImage.image = image
-                                    //print("new! \(event.eventName)")
-                                    
-                                } else { // when getting error message
-                                    cell.ExploreImage.image = self.randomImage()
-                                }
-                            }
-                            else { // when there is no data retrieved, most likely no internet
-                                cell.ExploreImage.image = self.randomImage()
-                            }
-                        }
-                    }
-                    
-                }
-                
-                
-                cell.circTitle.text = event.eventName
-                cell.circDate.text = convertCircTimeFormat("\(event.eventStartDate)")
-                
-                if let price = Float(event.eventPrice!) {
-                    if price == 0.0 {cell.circPrice.text = "Free!"; cell.rectPrice.text = "Free!"}
-                    else {cell.circPrice.text = "$\(price)"; cell.rectPrice.text = "$\(price)"}
-                } else {cell.circPrice.text = "No Price"; cell.rectPrice.text = "No Price"}
-                
-                cell.circHiddenID.text = event.eventID
-                
-                cell.rectTitle.text = event.eventName
-                //cell.rectPrice.text = "$\(event.eventPrice!)"
-                
-                if event.eventVenueName == "" {
-                    cell.venueName.text = "nil"
-                }else{cell.venueName.text = event.eventVenueName}
-                
-                cell.venueAddress.text = "\(event.eventVenueAddress.componentsSeparatedByString(", ")[0])\n\(event.eventVenueCity)"
-                
-                cell.startTime.text = "\(convertRectTimeFormat("\(event.eventStartDate) \(event.eventStartTime)")) -"
-                cell.endTime.text = convertRectTimeFormat("\(event.eventEndDate) \(event.eventEndTime)")
-                
-                cell.rectCategory.contentMode = UIViewContentMode.ScaleAspectFill
-                cell.rectCategory.image = UIImage(named: event.primaryCategory)
-                cell.rectCategoryName.text = event.primaryCategory
-                
-                cell.circAddicted.contentMode = UIViewContentMode.ScaleAspectFit
-                cell.circAddicted.image = UIImage(named: "MyAddictions_Sm")
-                cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
-                cell.circCategory.image = UIImage(named: event.primaryCategory)
-                // Configure the cell...
-                
-                
-            } else { // when there is no filtering
-                
+            if !(searchController.active && searchController.searchBar.text != "") && !GlobalVariables.filterEventBool{ //when there is no filtering & searching
                 let event = eventInfo![indexPath.row]
-            
+                
                 for addict in addictionEventInfo! {
                     if addict.eventID == event.eventID {
                         like = 1
                     }
                 }
                 
-//                let start = NSDate()
-//                let end = NSDate()
-//                let timeInterval: Double = end.timeIntervalSinceDate(start)
-//                print("time running is \(timeInterval)")
+                //                let start = NSDate()
+                //                let end = NSDate()
+                //                let timeInterval: Double = end.timeIntervalSinceDate(start)
+                //                print("time running is \(timeInterval)")
                 
                 cell.ExploreImage.contentMode = UIViewContentMode.ScaleToFill
                 
-//                if mPosterInfo!.contains({$0.ID == event.eventID}) {
-//                    
-//                    let idx = mPosterInfo!.indexOf({$0.ID == event.eventID})
-//                    
-//                    if mPosterInfo![idx!].Image?.length > 800 {
-//                        cell.ExploreImage.image = UIImage(data: mPosterInfo![idx!].Image!)
-//                    } else {
-//                        cell.ExploreImage.image = randomImage()
-//                    }
-//                }
-//                else {
-//                    cell.ExploreImage.image = randomImage()
-//                }
+                //                if mPosterInfo!.contains({$0.ID == event.eventID}) {
+                //
+                //                    let idx = mPosterInfo!.indexOf({$0.ID == event.eventID})
+                //
+                //                    if mPosterInfo![idx!].Image?.length > 800 {
+                //                        cell.ExploreImage.image = UIImage(data: mPosterInfo![idx!].Image!)
+                //                    } else {
+                //                        cell.ExploreImage.image = randomImage()
+                //                    }
+                //                }
+                //                else {
+                //                    cell.ExploreImage.image = randomImage()
+                //                }
                 
                 
                 if let img = GlobalVariables.eventImageCache[event.eventID] {
@@ -506,7 +543,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                     
                                 }
                             }
-                            
+                                
                             else {
                                 cell.ExploreImage.image = self.randomImage()
                             }
@@ -587,8 +624,170 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
                 cell.circCategory.image = UIImage(named: event.primaryCategory)
                 // Configure the cell...
-                
             }
+            else if !(searchController.active && searchController.searchBar.text != "") && GlobalVariables.filterEventBool { // when there is filter
+                let event = filteredEventInfo[indexPath.row]
+                
+                for addict in addictionEventInfo! {
+                    if addict.eventID == event.eventID {
+                        like = 1
+                    }
+                }
+                
+                cell.ExploreImage.contentMode = UIViewContentMode.ScaleToFill
+                
+                // if there is already cache
+                if let img = GlobalVariables.eventImageCache[event.eventID] {
+                    cell.ExploreImage.image = img
+                    //print("catched! \(event.eventName)")
+                }
+                    
+                    // get image from url
+                else if let checkedUrl = NSURL(string:event.posterUrl) {
+                    print(checkedUrl)
+                    
+                    self.getDataFromUrl(checkedUrl) { data in
+                        dispatch_async(dispatch_get_main_queue()) {
+                            if let downloadImg = data {
+                                
+                                // getting the image data
+                                if downloadImg.length > 800 {
+                                    
+                                    let image = UIImage(data: downloadImg)
+                                    
+                                    GlobalVariables.eventImageCache[event.eventID] = image
+                                    
+                                    cell.ExploreImage.image = image
+                                    //print("new! \(event.eventName)")
+                                    
+                                } else { // when getting error message
+                                    cell.ExploreImage.image = self.randomImage()
+                                }
+                            }
+                            else { // when there is no data retrieved, most likely no internet
+                                cell.ExploreImage.image = self.randomImage()
+                            }
+                        }
+                    }
+                    
+                }
+                
+                
+                cell.circTitle.text = event.eventName
+                cell.circDate.text = convertCircTimeFormat("\(event.eventStartDate)")
+                
+                if let price = Float(event.eventPrice!) {
+                    if price == 0.0 {cell.circPrice.text = "Free!"; cell.rectPrice.text = "Free!"}
+                    else {cell.circPrice.text = "$\(price)"; cell.rectPrice.text = "$\(price)"}
+                } else {cell.circPrice.text = "No Price"; cell.rectPrice.text = "No Price"}
+                
+                cell.circHiddenID.text = event.eventID
+                
+                cell.rectTitle.text = event.eventName
+                //cell.rectPrice.text = "$\(event.eventPrice!)"
+                
+                if event.eventVenueName == "" {
+                    cell.venueName.text = "nil"
+                }else{cell.venueName.text = event.eventVenueName}
+                
+                cell.venueAddress.text = "\(event.eventVenueAddress.componentsSeparatedByString(", ")[0])\n\(event.eventVenueCity)"
+                
+                cell.startTime.text = "\(convertRectTimeFormat("\(event.eventStartDate) \(event.eventStartTime)")) -"
+                cell.endTime.text = convertRectTimeFormat("\(event.eventEndDate) \(event.eventEndTime)")
+                
+                cell.rectCategory.contentMode = UIViewContentMode.ScaleAspectFill
+                cell.rectCategory.image = UIImage(named: event.primaryCategory)
+                cell.rectCategoryName.text = event.primaryCategory
+                
+                cell.circAddicted.contentMode = UIViewContentMode.ScaleAspectFit
+                cell.circAddicted.image = UIImage(named: "MyAddictions_Sm")
+                cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
+                cell.circCategory.image = UIImage(named: event.primaryCategory)
+                // Configure the cell...
+            }
+            else if (searchController.active && searchController.searchBar.text != "") { // when there is search and/or filter
+                let event = searchedEvents[indexPath.row]
+                
+                for addict in addictionEventInfo! {
+                    if addict.eventID == event.eventID {
+                        like = 1
+                    }
+                }
+                
+                cell.ExploreImage.contentMode = UIViewContentMode.ScaleToFill
+                
+                // if there is already cache
+                if let img = GlobalVariables.eventImageCache[event.eventID] {
+                    cell.ExploreImage.image = img
+                    //print("catched! \(event.eventName)")
+                }
+                    
+                    // get image from url
+                else if let checkedUrl = NSURL(string:event.posterUrl) {
+                    print(checkedUrl)
+                    
+                    self.getDataFromUrl(checkedUrl) { data in
+                        dispatch_async(dispatch_get_main_queue()) {
+                            if let downloadImg = data {
+                                
+                                // getting the image data
+                                if downloadImg.length > 800 {
+                                    
+                                    let image = UIImage(data: downloadImg)
+                                    
+                                    GlobalVariables.eventImageCache[event.eventID] = image
+                                    
+                                    cell.ExploreImage.image = image
+                                    //print("new! \(event.eventName)")
+                                    
+                                } else { // when getting error message
+                                    cell.ExploreImage.image = self.randomImage()
+                                }
+                            }
+                            else { // when there is no data retrieved, most likely no internet
+                                cell.ExploreImage.image = self.randomImage()
+                            }
+                        }
+                    }
+                    
+                }
+                
+                
+                cell.circTitle.text = event.eventName
+                cell.circDate.text = convertCircTimeFormat("\(event.eventStartDate)")
+                
+                if let price = Float(event.eventPrice!) {
+                    if price == 0.0 {cell.circPrice.text = "Free!"; cell.rectPrice.text = "Free!"}
+                    else {cell.circPrice.text = "$\(price)"; cell.rectPrice.text = "$\(price)"}
+                } else {cell.circPrice.text = "No Price"; cell.rectPrice.text = "No Price"}
+                
+                cell.circHiddenID.text = event.eventID
+                
+                cell.rectTitle.text = event.eventName
+                //cell.rectPrice.text = "$\(event.eventPrice!)"
+                
+                if event.eventVenueName == "" {
+                    cell.venueName.text = "nil"
+                }else{cell.venueName.text = event.eventVenueName}
+                
+                cell.venueAddress.text = "\(event.eventVenueAddress.componentsSeparatedByString(", ")[0])\n\(event.eventVenueCity)"
+                
+                cell.startTime.text = "\(convertRectTimeFormat("\(event.eventStartDate) \(event.eventStartTime)")) -"
+                cell.endTime.text = convertRectTimeFormat("\(event.eventEndDate) \(event.eventEndTime)")
+                
+                cell.rectCategory.contentMode = UIViewContentMode.ScaleAspectFill
+                cell.rectCategory.image = UIImage(named: event.primaryCategory)
+                cell.rectCategoryName.text = event.primaryCategory
+                
+                cell.circAddicted.contentMode = UIViewContentMode.ScaleAspectFit
+                cell.circAddicted.image = UIImage(named: "MyAddictions_Sm")
+                cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
+                cell.circCategory.image = UIImage(named: event.primaryCategory)
+                // Configure the cell...
+            }
+            
+            
+            
             
             let temp: NSMutableArray = NSMutableArray()
             
@@ -637,62 +836,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             //let addictionVenueInfo = FetchData(context: managedObjectContext).fetchAddictionsVenue()
             
             
-            if GlobalVariables.filterVenueBool {
-                
-                let venue = filteredVenueInfo[indexPath.row]
-                
-                for addict in addictionVenueInfo! {
-                    if addict.venueID == venue.venueID {
-                        like = 1
-                    }
-                }
-                
-                cell.venueImage.contentMode = UIViewContentMode.ScaleToFill
-                
-                if let img = GlobalVariables.venueImageCache[venue.venueID] {
-                    cell.venueImage.image = img
-                }
-                else if let checkedUrl = NSURL(string:venue.posterUrl) {
-                    
-                    self.getDataFromUrl(checkedUrl) { data in
-                        dispatch_async(dispatch_get_main_queue()) {
-                            if let downloadImg = data {
-                                if downloadImg.length > 800 {
-                                    
-                                    let image = UIImage(data: downloadImg)
-                                    GlobalVariables.venueImageCache[venue.venueID] = image
-                                    cell.venueImage.image = image
-                                    
-                                } else {
-                                    cell.venueImage.image = self.randomImage()
-                                }
-                            }
-                            else {
-                                cell.venueImage.image = self.randomImage()
-                            }
-                        }
-                    }
-                }
-                
-                
-                cell.venueName.text = venue.venueName
-                cell.venueDescription.text = venue.venueName
-                cell.venueAddress.text = "\(venue.venueAddress.componentsSeparatedByString(", ")[0])"
-                cell.circVenueName.text = venue.venueName
-                cell.circHiddenID.text = venue.venueID
-                
-                cell.circAddicted.contentMode = UIViewContentMode.ScaleAspectFit
-                cell.circAddicted.image = UIImage(named: "MyAddictions_Sm")
-                cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
-                cell.circCategory.image = UIImage(named: venue.primaryCategory)
-                
-                cell.rectCategory.contentMode = UIViewContentMode.ScaleAspectFill
-                cell.rectCategory.image = UIImage(named: venue.primaryCategory)
-                cell.rectCategoryName.text = venue.primaryCategory
-                
-                
-            } else { // when there is no filtering
-                
+            if !(searchController.active && searchController.searchBar.text != "") && !GlobalVariables.filterVenueBool{ // when there is no filtering & searching
                 let venue = venueInfo![indexPath.row]
                 
                 for addict in addictionVenueInfo! {
@@ -749,6 +893,111 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 cell.rectCategory.image = UIImage(named: venue.primaryCategory)
                 cell.rectCategoryName.text = venue.primaryCategory
             }
+            else if !(searchController.active && searchController.searchBar.text != "") && GlobalVariables.filterVenueBool { // when there is filter
+                let venue = filteredVenueInfo[indexPath.row]
+                
+                for addict in addictionVenueInfo! {
+                    if addict.venueID == venue.venueID {
+                        like = 1
+                    }
+                }
+                
+                cell.venueImage.contentMode = UIViewContentMode.ScaleToFill
+                
+                if let img = GlobalVariables.venueImageCache[venue.venueID] {
+                    cell.venueImage.image = img
+                }
+                else if let checkedUrl = NSURL(string:venue.posterUrl) {
+                    
+                    self.getDataFromUrl(checkedUrl) { data in
+                        dispatch_async(dispatch_get_main_queue()) {
+                            if let downloadImg = data {
+                                if downloadImg.length > 800 {
+                                    
+                                    let image = UIImage(data: downloadImg)
+                                    GlobalVariables.venueImageCache[venue.venueID] = image
+                                    cell.venueImage.image = image
+                                    
+                                } else {
+                                    cell.venueImage.image = self.randomImage()
+                                }
+                            }
+                            else {
+                                cell.venueImage.image = self.randomImage()
+                            }
+                        }
+                    }
+                }
+                
+                
+                cell.venueName.text = venue.venueName
+                cell.venueDescription.text = venue.venueName
+                cell.venueAddress.text = "\(venue.venueAddress.componentsSeparatedByString(", ")[0])"
+                cell.circVenueName.text = venue.venueName
+                cell.circHiddenID.text = venue.venueID
+                
+                cell.circAddicted.contentMode = UIViewContentMode.ScaleAspectFit
+                cell.circAddicted.image = UIImage(named: "MyAddictions_Sm")
+                cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
+                cell.circCategory.image = UIImage(named: venue.primaryCategory)
+                
+                cell.rectCategory.contentMode = UIViewContentMode.ScaleAspectFill
+                cell.rectCategory.image = UIImage(named: venue.primaryCategory)
+                cell.rectCategoryName.text = venue.primaryCategory
+            }
+            else if (searchController.active && searchController.searchBar.text != "") { // when there is search and/or filter
+                let venue = searchedVenues[indexPath.row]
+                
+                for addict in addictionVenueInfo! {
+                    if addict.venueID == venue.venueID {
+                        like = 1
+                    }
+                }
+                
+                cell.venueImage.contentMode = UIViewContentMode.ScaleToFill
+                
+                if let img = GlobalVariables.venueImageCache[venue.venueID] {
+                    cell.venueImage.image = img
+                }
+                else if let checkedUrl = NSURL(string:venue.posterUrl) {
+                    
+                    self.getDataFromUrl(checkedUrl) { data in
+                        dispatch_async(dispatch_get_main_queue()) {
+                            if let downloadImg = data {
+                                if downloadImg.length > 800 {
+                                    
+                                    let image = UIImage(data: downloadImg)
+                                    GlobalVariables.venueImageCache[venue.venueID] = image
+                                    cell.venueImage.image = image
+                                    
+                                } else {
+                                    cell.venueImage.image = self.randomImage()
+                                }
+                            }
+                            else {
+                                cell.venueImage.image = self.randomImage()
+                            }
+                        }
+                    }
+                }
+                
+                
+                cell.venueName.text = venue.venueName
+                cell.venueDescription.text = venue.venueName
+                cell.venueAddress.text = "\(venue.venueAddress.componentsSeparatedByString(", ")[0])"
+                cell.circVenueName.text = venue.venueName
+                cell.circHiddenID.text = venue.venueID
+                
+                cell.circAddicted.contentMode = UIViewContentMode.ScaleAspectFit
+                cell.circAddicted.image = UIImage(named: "MyAddictions_Sm")
+                cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
+                cell.circCategory.image = UIImage(named: venue.primaryCategory)
+                
+                cell.rectCategory.contentMode = UIViewContentMode.ScaleAspectFill
+                cell.rectCategory.image = UIImage(named: venue.primaryCategory)
+                cell.rectCategoryName.text = venue.primaryCategory
+            }
+            
             
             
             let temp: NSMutableArray = NSMutableArray()
@@ -831,7 +1080,59 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             //let addictionOrganizationInfo = FetchData(context: managedObjectContext).fetchAddictionsOrganization()
             
             
-            if GlobalVariables.filterOrganizationBool {
+            
+            if !(searchController.active && searchController.searchBar.text != "") && !GlobalVariables.filterOrganizationBool{
+                let organization = organizationInfo![indexPath.row]
+                
+                for addict in addictionOrganizationInfo! {
+                    if addict.organizationID == organization.organizationID {
+                        like = 1
+                    }
+                }
+                
+                cell.organizationImage.contentMode = UIViewContentMode.ScaleToFill
+                if let img = GlobalVariables.organizationImageCache[organization.organizationID] {
+                    cell.organizationImage.image = img
+                }
+                    
+                else if let checkedUrl = NSURL(string:organization.posterUrl) {
+                    
+                    self.getDataFromUrl(checkedUrl) { data in
+                        dispatch_async(dispatch_get_main_queue()) {
+                            if let downloadImg = data {
+                                
+                                if downloadImg.length > 800 {
+                                    
+                                    let image = UIImage(data: downloadImg)
+                                    GlobalVariables.venueImageCache[organization.organizationID] = image
+                                    cell.organizationImage.image = image
+                                } else {
+                                    cell.organizationImage.image = self.randomImage()
+                                }
+                            }
+                            else {
+                                cell.organizationImage.image = self.randomImage()
+                            }
+                        }
+                    }
+                }
+                
+                cell.organizationName.text = organization.organizationName
+                cell.organizationDescription.text = organization.organizationName
+                cell.address.text = "\(organization.organizationAddress.componentsSeparatedByString(", ")[0])"
+                cell.circOrgName.text = organization.organizationName
+                cell.circHiddenID.text = organization.organizationID
+                
+                cell.circAddicted.contentMode = UIViewContentMode.ScaleAspectFit
+                cell.circAddicted.image = UIImage(named: "MyAddictions_Sm")
+                cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
+                cell.circCategory.image = UIImage(named: organization.primaryCategory)
+                
+                cell.rectCategory.contentMode = UIViewContentMode.ScaleAspectFill
+                cell.rectCategory.image = UIImage(named: organization.primaryCategory)
+                cell.rectCategoryName.text = organization.primaryCategory
+            }
+            else if !(searchController.active && searchController.searchBar.text != "") && GlobalVariables.filterOrganizationBool {
                 
                 let organization = filteredOrganizationInfo[indexPath.row]
                 
@@ -882,10 +1183,10 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 cell.rectCategory.contentMode = UIViewContentMode.ScaleAspectFill
                 cell.rectCategory.image = UIImage(named: organization.primaryCategory)
                 cell.rectCategoryName.text = organization.primaryCategory
+            }
+            else if (searchController.active && searchController.searchBar.text != "") {
                 
-                
-            } else { // when there is no filtering
-                let organization = organizationInfo![indexPath.row]
+                let organization = searchedOrganizations[indexPath.row]
                 
                 for addict in addictionOrganizationInfo! {
                     if addict.organizationID == organization.organizationID {
@@ -894,18 +1195,17 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 }
                 
                 cell.organizationImage.contentMode = UIViewContentMode.ScaleToFill
+                
                 if let img = GlobalVariables.organizationImageCache[organization.organizationID] {
                     cell.organizationImage.image = img
                 }
-                    
                 else if let checkedUrl = NSURL(string:organization.posterUrl) {
                     
                     self.getDataFromUrl(checkedUrl) { data in
                         dispatch_async(dispatch_get_main_queue()) {
                             if let downloadImg = data {
-                                
                                 if downloadImg.length > 800 {
-                                
+                                    
                                     let image = UIImage(data: downloadImg)
                                     GlobalVariables.venueImageCache[organization.organizationID] = image
                                     cell.organizationImage.image = image
@@ -919,6 +1219,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                         }
                     }
                 }
+                
                 
                 cell.organizationName.text = organization.organizationName
                 cell.organizationDescription.text = organization.organizationName
@@ -934,6 +1235,15 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 cell.rectCategory.contentMode = UIViewContentMode.ScaleAspectFill
                 cell.rectCategory.image = UIImage(named: organization.primaryCategory)
                 cell.rectCategoryName.text = organization.primaryCategory
+            }
+            
+            if GlobalVariables.filterOrganizationBool {
+                
+                
+                
+                
+            } else { // when there is no filtering
+                
                 
             }
             
@@ -1022,6 +1332,8 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                     cell.leftUtilityButtons = temp as [AnyObject]
                                     
                                     selectedCell.circAddicted.hidden = true
+                                    
+                                    self.exploreTableView.reloadData()
                                 }
                                 alertController.addAction(unlikeAction)
                                 alertController.addAction(cancelAction)
@@ -1090,6 +1402,8 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                     cell.leftUtilityButtons = temp as [AnyObject]
                                     
                                     selectedCell.circAddicted.hidden = true
+                                    
+                                    self.exploreTableView.reloadData()
                                     
                                 }
                                 alertController.addAction(unlikeAction)
@@ -1196,6 +1510,8 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                     cell.leftUtilityButtons = temp as [AnyObject]
                                     
                                     selectedCell.circAddicted.hidden = true
+                                    
+                                    self.exploreTableView.reloadData()
                                     
                                 }
                                 alertController.addAction(unlikeAction)
@@ -1466,15 +1782,31 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
     
     func updateNotificationEvent(){
         
-        if GlobalVariables.filterEventBool{
-            filteredEventInfo = GlobalVariables.displayFilteredEvents
+        if GlobalVariables.selectedDisplay == "Event"{
+            navigationTitle.title = "Event"
+            searchController.searchBar.placeholder = "Search Events"
+            if GlobalVariables.filterEventBool{
+                filteredEventInfo = GlobalVariables.displayFilteredEvents
+            }
         }
-        if GlobalVariables.filterVenueBool{
-            filteredVenueInfo = GlobalVariables.displayFilteredVenues
+        if GlobalVariables.selectedDisplay == "Venue"{
+            navigationTitle.title = "Venue"
+            searchController.searchBar.placeholder = "Search Venues"
+            if GlobalVariables.filterVenueBool{
+                filteredVenueInfo = GlobalVariables.displayFilteredVenues
+            }
         }
-        if GlobalVariables.filterOrganizationBool{
-            filteredOrganizationInfo = GlobalVariables.displayFilteredOrganizations
+        if GlobalVariables.selectedDisplay == "Organization"{
+            navigationTitle.title = "Organization"
+            searchController.searchBar.placeholder = "Search Organizations"
+            if GlobalVariables.filterOrganizationBool{
+                filteredOrganizationInfo = GlobalVariables.displayFilteredOrganizations
+            }
         }
+        
+        
+        
+        
         
         self.exploreTableView.reloadData()
     }

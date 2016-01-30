@@ -42,7 +42,6 @@ class AddictionListViewController: UIViewController, UITableViewDelegate, UITabl
     var displayOrganizationInfo: [Organization] = []
     
     var searchController: UISearchController!
-    var isSearching: Bool?
     var searchedEvents = [Event]()
     var searchedVenues = [Venue]()
     var searchedOrganizations = [Organization]()
