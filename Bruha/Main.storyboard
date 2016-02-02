@@ -1787,13 +1787,25 @@
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
-                                <connections>
-                                    <action selector="Bruha:" destination="zh2-4j-mHu" eventType="touchUpInside" id="NLX-l8-ujJ"/>
-                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Tickets_Sm" translatesAutoresizingMaskIntoConstraints="NO" id="PS8-Pl-ADI">
                                 <rect key="frame" x="48" y="244" width="100" height="70"/>
                             </imageView>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ycJ-UA-mw6">
+                                <rect key="frame" x="0.0" y="20" width="320" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="R2E-3M-eeN"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem id="whm-H7-A7m">
+                                        <barButtonItem key="leftBarButtonItem" image="Bruha_White_Med" style="plain" id="Qwy-hb-weD">
+                                            <connections>
+                                                <action selector="Bruha:" destination="zh2-4j-mHu" id="qXQ-eN-haC"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -1809,6 +1821,7 @@
                             <constraint firstItem="oE9-KC-C0a" firstAttribute="top" secondItem="Ixa-ww-lX2" secondAttribute="bottom" constant="20" id="DIO-bH-xU6"/>
                             <constraint firstItem="q5A-Yr-fda" firstAttribute="width" secondItem="Ixa-ww-lX2" secondAttribute="width" id="DXp-ff-2if"/>
                             <constraint firstAttribute="trailing" secondItem="Hdv-s4-6nL" secondAttribute="trailing" constant="48" id="EcH-dR-4un"/>
+                            <constraint firstItem="ycJ-UA-mw6" firstAttribute="leading" secondItem="BaH-Yg-fti" secondAttribute="leading" id="HNC-Pu-hXa"/>
                             <constraint firstItem="yhZ-V3-a0s" firstAttribute="top" secondItem="CLm-Gd-Eao" secondAttribute="bottom" constant="92" id="I4Z-FP-7uf"/>
                             <constraint firstItem="CLm-Gd-Eao" firstAttribute="top" secondItem="PS8-Pl-ADI" secondAttribute="bottom" constant="92" id="IIJ-ID-wd2"/>
                             <constraint firstItem="q5A-Yr-fda" firstAttribute="top" secondItem="uEA-o1-ACD" secondAttribute="bottom" constant="92" id="ITD-uH-WH1"/>
@@ -1816,10 +1829,12 @@
                             <constraint firstItem="BRY-VT-Ogc" firstAttribute="top" secondItem="CLm-Gd-Eao" secondAttribute="bottom" constant="20" id="JuU-YI-Ret"/>
                             <constraint firstItem="q5A-Yr-fda" firstAttribute="height" secondItem="uEA-o1-ACD" secondAttribute="height" id="OX4-dO-iLi"/>
                             <constraint firstItem="oE9-KC-C0a" firstAttribute="centerX" secondItem="Ixa-ww-lX2" secondAttribute="centerX" id="PZJ-0V-qPs"/>
+                            <constraint firstAttribute="trailing" secondItem="ycJ-UA-mw6" secondAttribute="trailing" id="QsQ-4h-1Tl"/>
                             <constraint firstItem="f3l-47-jeH" firstAttribute="top" secondItem="uEA-o1-ACD" secondAttribute="bottom" constant="20" id="Sbs-nH-0bd"/>
                             <constraint firstItem="PS8-Pl-ADI" firstAttribute="centerX" secondItem="Kk6-Q9-s1r" secondAttribute="centerX" id="UXZ-bp-lXD"/>
                             <constraint firstItem="q5A-Yr-fda" firstAttribute="width" secondItem="Hdv-s4-6nL" secondAttribute="width" id="ZVZ-n2-Tn4"/>
                             <constraint firstItem="PS8-Pl-ADI" firstAttribute="top" secondItem="Ixa-ww-lX2" secondAttribute="bottom" constant="92" id="ZjN-mV-8RR"/>
+                            <constraint firstItem="ycJ-UA-mw6" firstAttribute="top" secondItem="4AR-ba-Xdn" secondAttribute="bottom" id="bBW-4g-cbH"/>
                             <constraint firstItem="Kk6-Q9-s1r" firstAttribute="top" secondItem="PS8-Pl-ADI" secondAttribute="bottom" constant="20" id="bIj-HL-ksu"/>
                             <constraint firstItem="Agw-Bd-lK9" firstAttribute="top" secondItem="Hdv-s4-6nL" secondAttribute="bottom" constant="20" id="d6C-De-EVW"/>
                             <constraint firstItem="Ixa-ww-lX2" firstAttribute="leading" secondItem="BaH-Yg-fti" secondAttribute="leading" constant="48" id="d8x-AB-EYx"/>
@@ -1928,6 +1943,22 @@
                                     <segue destination="zh2-4j-mHu" kind="modal" id="Fiu-Z9-r1Z"/>
                                 </connections>
                             </button>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uEc-Ww-rjX">
+                                <rect key="frame" x="0.0" y="20" width="320" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="aGZ-fV-3WC"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="Profile" id="QCQ-Cq-HT7">
+                                        <barButtonItem key="leftBarButtonItem" image="Bruha_White_Med" style="plain" id="qZO-2u-6KR">
+                                            <connections>
+                                                <action selector="Bruha:" destination="zh2-4j-mHu" id="qZc-3A-MoB"/>
+                                                <segue destination="zh2-4j-mHu" kind="modal" id="4rf-83-RRd"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -1940,6 +1971,8 @@
                             <constraint firstItem="raK-F4-ROO" firstAttribute="top" secondItem="Ati-7s-gHt" secondAttribute="bottom" constant="14" id="MCR-qv-9ZW"/>
                             <constraint firstAttribute="trailing" secondItem="Ati-7s-gHt" secondAttribute="trailing" constant="37" id="MKt-m3-3mK"/>
                             <constraint firstItem="hvb-l2-fcB" firstAttribute="trailing" secondItem="Ati-7s-gHt" secondAttribute="trailing" id="O7q-Is-j8S"/>
+                            <constraint firstItem="uEc-Ww-rjX" firstAttribute="leading" secondItem="Z0X-VC-d7J" secondAttribute="leading" id="Rre-S1-1n8"/>
+                            <constraint firstItem="uEc-Ww-rjX" firstAttribute="top" secondItem="0jP-Km-6ze" secondAttribute="bottom" id="UMU-rn-8Ax"/>
                             <constraint firstItem="hvb-l2-fcB" firstAttribute="top" secondItem="Dpq-48-wfr" secondAttribute="bottom" constant="4" id="Vqv-Iy-58o"/>
                             <constraint firstItem="TWM-fA-QSS" firstAttribute="top" secondItem="0jP-Km-6ze" secondAttribute="bottom" constant="100" id="Ymb-Hd-ctA"/>
                             <constraint firstItem="hvb-l2-fcB" firstAttribute="trailing" secondItem="raK-F4-ROO" secondAttribute="trailing" id="a1W-Mw-aT6"/>
@@ -1949,6 +1982,7 @@
                             <constraint firstItem="Dpq-48-wfr" firstAttribute="centerY" secondItem="raK-F4-ROO" secondAttribute="centerY" id="qOQ-Y2-307"/>
                             <constraint firstItem="Ati-7s-gHt" firstAttribute="top" secondItem="TWM-fA-QSS" secondAttribute="bottom" constant="22" id="sV6-Ht-GLf"/>
                             <constraint firstItem="VLR-wf-sSr" firstAttribute="top" secondItem="hvb-l2-fcB" secondAttribute="bottom" constant="112" id="t3R-bW-ge7"/>
+                            <constraint firstAttribute="trailing" secondItem="uEc-Ww-rjX" secondAttribute="trailing" id="xBN-8I-YyF"/>
                             <constraint firstItem="Ati-7s-gHt" firstAttribute="leading" secondItem="Z0X-VC-d7J" secondAttribute="leading" constant="37" id="y65-cQ-fhq"/>
                         </constraints>
                     </view>
@@ -1978,25 +2012,15 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="uOk-b9-Am1" customClass="JTCalendarMenuView">
-                                <rect key="frame" x="0.0" y="42" width="320" height="50"/>
+                                <rect key="frame" x="0.0" y="70" width="320" height="50"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="50" id="QZ5-Ps-Dtm"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nqL-FP-j42" customClass="JTHorizontalCalendarView">
-                                <rect key="frame" x="0.0" y="92" width="320" height="256"/>
+                                <rect key="frame" x="0.0" y="120" width="320" height="228"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="BtF-ay-Juf">
-                                <rect key="frame" x="8" y="5" width="41" height="30"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="41" id="E7j-IH-tSV"/>
-                                </constraints>
-                                <state key="normal" title="Bruha"/>
-                                <connections>
-                                    <segue destination="zh2-4j-mHu" kind="modal" id="cjQ-72-o8J"/>
-                                </connections>
-                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="220" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="LdH-T0-4Wv">
                                 <rect key="frame" x="0.0" y="348" width="320" height="220"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -2046,30 +2070,46 @@
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="jz3-bO-7P6">
+                                <rect key="frame" x="0.0" y="20" width="320" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="GvK-Hn-12f"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="Calendar" id="3mt-OE-8sO">
+                                        <barButtonItem key="leftBarButtonItem" image="Bruha_White_Med" style="plain" id="xl4-ZG-i4w">
+                                            <connections>
+                                                <segue destination="zh2-4j-mHu" kind="modal" id="smr-y4-vF9"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="LdH-T0-4Wv" firstAttribute="top" secondItem="nqL-FP-j42" secondAttribute="bottom" id="0Kw-TN-7BC"/>
                             <constraint firstItem="Tt2-C5-J1m" firstAttribute="top" secondItem="LdH-T0-4Wv" secondAttribute="bottom" id="2CU-Ny-wQL"/>
                             <constraint firstAttribute="trailing" secondItem="uOk-b9-Am1" secondAttribute="trailing" id="5cE-5p-Ypk"/>
-                            <constraint firstItem="uOk-b9-Am1" firstAttribute="top" secondItem="6Do-Hn-dty" secondAttribute="top" constant="42" id="7cb-Nb-ELS"/>
+                            <constraint firstAttribute="trailing" secondItem="jz3-bO-7P6" secondAttribute="trailing" id="7CT-j0-eDW"/>
                             <constraint firstItem="DVq-ip-Wzz" firstAttribute="leading" secondItem="6Do-Hn-dty" secondAttribute="leading" constant="15" id="8Pk-A2-XDa"/>
                             <constraint firstItem="nqL-FP-j42" firstAttribute="top" secondItem="uOk-b9-Am1" secondAttribute="bottom" id="947-j8-pAL"/>
                             <constraint firstAttribute="trailing" secondItem="LdH-T0-4Wv" secondAttribute="trailing" id="9Hg-Kb-gZC"/>
                             <constraint firstItem="SrO-8Z-Lee" firstAttribute="leading" secondItem="g3y-f5-wbo" secondAttribute="trailing" constant="15" id="Gon-g3-otm"/>
-                            <constraint firstItem="uOk-b9-Am1" firstAttribute="top" secondItem="BtF-ay-Juf" secondAttribute="bottom" constant="7" id="HTC-lC-kQj"/>
-                            <constraint firstItem="BtF-ay-Juf" firstAttribute="leading" secondItem="6Do-Hn-dty" secondAttribute="leading" constant="8" id="J8u-8J-v9m"/>
                             <constraint firstItem="g3y-f5-wbo" firstAttribute="leading" secondItem="DVq-ip-Wzz" secondAttribute="trailing" constant="5" id="MtD-4q-mhm"/>
+                            <constraint firstItem="jz3-bO-7P6" firstAttribute="leading" secondItem="6Do-Hn-dty" secondAttribute="leading" id="N4W-aj-OXj"/>
                             <constraint firstItem="g3y-f5-wbo" firstAttribute="centerY" secondItem="DVq-ip-Wzz" secondAttribute="centerY" id="NDs-wc-xsy"/>
                             <constraint firstItem="nqL-FP-j42" firstAttribute="leading" secondItem="6Do-Hn-dty" secondAttribute="leading" id="S3U-Yv-nUt"/>
+                            <constraint firstItem="uOk-b9-Am1" firstAttribute="top" secondItem="jz3-bO-7P6" secondAttribute="bottom" id="a1i-ho-qlq"/>
                             <constraint firstItem="uOk-b9-Am1" firstAttribute="leading" secondItem="6Do-Hn-dty" secondAttribute="leading" id="c9X-yd-msu"/>
                             <constraint firstAttribute="trailing" secondItem="nqL-FP-j42" secondAttribute="trailing" id="cgK-bT-BZG"/>
+                            <constraint firstItem="jz3-bO-7P6" firstAttribute="leading" secondItem="6Do-Hn-dty" secondAttribute="leading" id="eP3-U8-FJi"/>
                             <constraint firstItem="ebk-wS-bSj" firstAttribute="centerY" secondItem="SrO-8Z-Lee" secondAttribute="centerY" id="eao-QL-r7B"/>
-                            <constraint firstItem="BtF-ay-Juf" firstAttribute="top" secondItem="6Do-Hn-dty" secondAttribute="top" constant="5" id="f29-K1-nt9"/>
                             <constraint firstItem="ebk-wS-bSj" firstAttribute="leading" secondItem="SrO-8Z-Lee" secondAttribute="trailing" constant="5" id="j56-WD-gOa"/>
                             <constraint firstItem="LdH-T0-4Wv" firstAttribute="leading" secondItem="6Do-Hn-dty" secondAttribute="leading" id="kQY-CW-faK"/>
                             <constraint firstItem="SrO-8Z-Lee" firstAttribute="centerY" secondItem="DVq-ip-Wzz" secondAttribute="centerY" id="sk1-Eo-evY"/>
                             <constraint firstItem="DVq-ip-Wzz" firstAttribute="top" secondItem="LdH-T0-4Wv" secondAttribute="top" constant="15" id="viZ-9f-29l"/>
+                            <constraint firstItem="jz3-bO-7P6" firstAttribute="top" secondItem="EUF-sD-Fz0" secondAttribute="bottom" id="ztx-b5-9P0"/>
                         </constraints>
                     </view>
                     <connections>
@@ -2221,7 +2261,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                 <subviews>
                                     <tableView clipsSubviews="YES" alpha="0.0" contentMode="scaleToFill" bounces="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="220" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="S4f-vD-iAs">
-                                        <rect key="frame" x="0.0" y="0.0" width="320" height="220"/>
+                                        <rect key="frame" x="0.0" y="110" width="320" height="220"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="220" id="OQv-ln-4bn"/>
@@ -2244,11 +2284,36 @@
                                 </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
-                                    <constraint firstItem="S4f-vD-iAs" firstAttribute="top" secondItem="Wxl-Jp-fhG" secondAttribute="top" id="9zf-q6-Cmz"/>
                                     <constraint firstItem="S4f-vD-iAs" firstAttribute="leading" secondItem="Wxl-Jp-fhG" secondAttribute="leading" id="FHD-xo-xrr"/>
                                     <constraint firstAttribute="trailing" secondItem="S4f-vD-iAs" secondAttribute="trailing" id="jGz-y1-68R"/>
                                 </constraints>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wci-UX-jBx">
+                                <rect key="frame" x="0.0" y="70" width="320" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="40" id="f53-12-q8Y"/>
+                                </constraints>
+                            </view>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Cbq-dL-07v">
+                                <rect key="frame" x="0.0" y="20" width="320" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="50" id="qto-p8-yKo"/>
+                                </constraints>
+                                <items>
+                                    <navigationItem title="Map" id="htr-Id-xOq">
+                                        <barButtonItem key="leftBarButtonItem" image="Bruha_White_Med" style="plain" id="MN4-7v-GKU">
+                                            <connections>
+                                                <segue destination="zh2-4j-mHu" kind="modal" id="MdE-F6-kzt"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" image="MapIcon_Medium" style="plain" id="suH-aA-Bsj">
+                                            <connections>
+                                                <segue destination="2fB-2K-YbP" kind="modal" id="RHc-TZ-2hx"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="vMm-n0-f4z">
                                 <rect key="frame" x="1" y="20" width="30" height="35"/>
                                 <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
@@ -2273,12 +2338,20 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="Wxl-Jp-fhG" firstAttribute="top" secondItem="apt-tR-3tk" secondAttribute="topMargin" id="0sh-UR-Ufn"/>
+                            <constraint firstItem="Wci-UX-jBx" firstAttribute="top" secondItem="Cbq-dL-07v" secondAttribute="bottom" id="1Bk-HP-Ngn"/>
                             <constraint firstAttribute="trailingMargin" secondItem="xyk-8Q-oD6" secondAttribute="trailing" constant="-15" id="9jY-PS-jEn"/>
+                            <constraint firstItem="S4f-vD-iAs" firstAttribute="top" secondItem="Wci-UX-jBx" secondAttribute="bottom" id="NKw-tZ-Ea2"/>
                             <constraint firstItem="vMm-n0-f4z" firstAttribute="leading" secondItem="apt-tR-3tk" secondAttribute="leadingMargin" constant="-15" id="ODu-1N-IOe"/>
                             <constraint firstItem="vMm-n0-f4z" firstAttribute="top" secondItem="Hw2-f4-qDs" secondAttribute="bottom" id="Q4h-fa-Nlb"/>
+                            <constraint firstAttribute="trailing" secondItem="Cbq-dL-07v" secondAttribute="trailing" id="S27-7k-vy8"/>
                             <constraint firstItem="S4z-sB-Adr" firstAttribute="top" secondItem="Wxl-Jp-fhG" secondAttribute="bottom" id="UAd-uf-Oke"/>
                             <constraint firstAttribute="trailing" secondItem="Wxl-Jp-fhG" secondAttribute="trailing" id="X2h-0v-w6R"/>
+                            <constraint firstAttribute="trailing" secondItem="Wci-UX-jBx" secondAttribute="trailing" id="bjf-HY-guw"/>
+                            <constraint firstItem="Cbq-dL-07v" firstAttribute="leading" secondItem="apt-tR-3tk" secondAttribute="leading" id="dFM-lt-c69"/>
+                            <constraint firstItem="S4f-vD-iAs" firstAttribute="bottom" secondItem="Wci-UX-jBx" secondAttribute="bottom" constant="220" id="dYy-Dc-S7Z"/>
                             <constraint firstItem="xyk-8Q-oD6" firstAttribute="top" secondItem="Hw2-f4-qDs" secondAttribute="bottom" id="el8-zW-aDM"/>
+                            <constraint firstItem="Wci-UX-jBx" firstAttribute="leading" secondItem="apt-tR-3tk" secondAttribute="leading" id="fTP-DF-A7B"/>
+                            <constraint firstItem="Cbq-dL-07v" firstAttribute="top" secondItem="Hw2-f4-qDs" secondAttribute="bottom" id="fXz-vj-c1G"/>
                             <constraint firstItem="Wxl-Jp-fhG" firstAttribute="leading" secondItem="apt-tR-3tk" secondAttribute="leading" id="kZM-GP-7wR"/>
                         </constraints>
                     </view>
@@ -2286,6 +2359,7 @@
                         <outlet property="BackButton" destination="xyk-8Q-oD6" id="zTp-jP-Dyx"/>
                         <outlet property="BruhaButton" destination="vMm-n0-f4z" id="SBD-X9-lCJ"/>
                         <outlet property="dropDownTable" destination="S4f-vD-iAs" id="ZvN-tY-Dvf"/>
+                        <outlet property="searchView" destination="Wci-UX-jBx" id="j2k-Vv-lfX"/>
                         <outlet property="viewMap" destination="Wxl-Jp-fhG" id="R3x-kF-OZD"/>
                         <segue destination="k0E-gF-uXz" kind="modal" identifier="MoreInfore" id="C5E-mm-bjp"/>
                         <segue destination="DYv-PS-7yH" kind="modal" identifier="EventsComing" id="QhX-ak-ZUZ"/>
@@ -3402,16 +3476,16 @@
         <image name="Tickets_Sm" width="250" height="250"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="aLM-Zh-sU8"/>
-        <segue reference="pIM-BH-lfI"/>
-        <segue reference="uOk-Ws-dFz"/>
-        <segue reference="1Xm-3s-taQ"/>
-        <segue reference="C5E-mm-bjp"/>
-        <segue reference="jao-de-QNr"/>
-        <segue reference="Igp-o7-BVW"/>
-        <segue reference="QhX-ak-ZUZ"/>
-        <segue reference="bc1-hL-brY"/>
-        <segue reference="UAd-9n-bZt"/>
+        <segue reference="Fiu-Z9-r1Z"/>
+        <segue reference="eyG-eD-cCw"/>
+        <segue reference="l1y-Rt-Be8"/>
+        <segue reference="5DM-Zi-tRH"/>
+        <segue reference="J3w-Nl-jcV"/>
         <segue reference="J6B-rB-QcV"/>
+        <segue reference="QLA-oh-xLR"/>
+        <segue reference="aLM-Zh-sU8"/>
+        <segue reference="uOk-Ws-dFz"/>
+        <segue reference="QhX-ak-ZUZ"/>
+        <segue reference="AnT-IX-43l"/>
     </inferredMetricsTieBreakers>
 </document>
