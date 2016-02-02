@@ -280,14 +280,6 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
     }
     }*/
     
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        GlobalVariables.displayedEvents = FetchData(context: managedObjectContext).fetchEvents()!
-        GlobalVariables.displayedVenues = FetchData(context: managedObjectContext).fetchVenues()!
-        GlobalVariables.displayedArtists = FetchData(context: managedObjectContext).fetchArtists()!
-        GlobalVariables.displayedOrganizations = FetchData(context: managedObjectContext).fetchOrganizations()!
-    }
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -297,46 +289,67 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
         
         if GlobalVariables.selectedDisplay == "Event" {
             if GlobalVariables.filterEventBool {
-                searchedEvents = filteredEventInfo.filter({ (event: Event) -> Bool in
-                    //print(event.eventVenueAddress.componentsSeparatedByString(", ")[0] + " " + event.eventVenueCity)
-                    return ( scope == "Search" && event.eventName.lowercaseString.containsString(searchText.lowercaseString) ) ||
-                        ( scope == "Location" && (event.eventVenueAddress.componentsSeparatedByString(", ")[0] + " " + event.eventVenueCity).lowercaseString.containsString(searchText.lowercaseString) )
-                })
+                if searchController.searchBar.text != ""  {
+                    searchedEvents = filteredEventInfo.filter({ (event: Event) -> Bool in
+                        //print(event.eventVenueAddress.componentsSeparatedByString(", ")[0] + " " + event.eventVenueCity)
+                        return ( scope == "Search" && event.eventName.lowercaseString.containsString(searchText.lowercaseString) ) ||
+                            ( scope == "Location" && (event.eventVenueAddress.componentsSeparatedByString(", ")[0] + " " + event.eventVenueCity).lowercaseString.containsString(searchText.lowercaseString) )
+                    })
+                } else if searchController.searchBar.text == "" {
+                    searchedEvents = filteredEventInfo
+                }
             }
             else {
-                searchedEvents = eventInfo.filter({ (event: Event) -> Bool in
-                    //print(event.eventVenueAddress.componentsSeparatedByString(", ")[0] + " " + event.eventVenueCity)
-                    return ( scope == "Search" && event.eventName.lowercaseString.containsString(searchText.lowercaseString) ) ||
-                        ( scope == "Location" && (event.eventVenueAddress.componentsSeparatedByString(", ")[0] + " " + event.eventVenueCity).lowercaseString.containsString(searchText.lowercaseString) )
-                })
+                if searchController.searchBar.text != "" {
+                    // searched results
+                    searchedEvents = eventInfo.filter({ (event: Event) -> Bool in
+                        //print(event.eventVenueAddress.componentsSeparatedByString(", ")[0] + " " + event.eventVenueCity)
+                        return ( scope == "Search" && event.eventName.lowercaseString.containsString(searchText.lowercaseString) ) ||
+                            ( scope == "Location" && (event.eventVenueAddress.componentsSeparatedByString(", ")[0] + " " + event.eventVenueCity).lowercaseString.containsString(searchText.lowercaseString) )
+                    })
+                }
             }
         }
+        
         if GlobalVariables.selectedDisplay == "Venue" {
             if GlobalVariables.filterVenueBool {
-                searchedVenues = filteredVenueInfo.filter({ (venue: Venue) -> Bool in
-                    return ( scope == "Search" && venue.venueName.lowercaseString.containsString(searchText.lowercaseString) ) ||
-                        ( scope == "Location" && (venue.venueAddress.componentsSeparatedByString(", ")[0]).lowercaseString.containsString(searchText.lowercaseString) )
-                })
+                if searchController.searchBar.text != ""  {
+                    searchedVenues = filteredVenueInfo.filter({ (venue: Venue) -> Bool in
+                        return ( scope == "Search" && venue.venueName.lowercaseString.containsString(searchText.lowercaseString) ) ||
+                            ( scope == "Location" && (venue.venueAddress.componentsSeparatedByString(", ")[0]).lowercaseString.containsString(searchText.lowercaseString) )
+                    })
+                } else if searchController.searchBar.text == "" {
+                    searchedVenues = filteredVenueInfo
+                }
             }
             else {
-                searchedVenues = venueInfo!.filter({ (venue: Venue) -> Bool in
-                    return ( scope == "Search" && venue.venueName.lowercaseString.containsString(searchText.lowercaseString) ) ||
-                        ( scope == "Location" && (venue.venueAddress.componentsSeparatedByString(", ")[0]).lowercaseString.containsString(searchText.lowercaseString) )
-                })
+                if searchController.searchBar.text != "" {
+                    searchedVenues = venueInfo!.filter({ (venue: Venue) -> Bool in
+                        return ( scope == "Search" && venue.venueName.lowercaseString.containsString(searchText.lowercaseString) ) ||
+                            ( scope == "Location" && (venue.venueAddress.componentsSeparatedByString(", ")[0]).lowercaseString.containsString(searchText.lowercaseString) )
+                    })
+                }
             }
         }
+        
         if GlobalVariables.selectedDisplay == "Organization" {
-            if GlobalVariables.filterVenueBool {
-                searchedOrganizations = filteredOrganizationInfo.filter({ (organization: Organization) -> Bool in
-                    return ( scope == "Search" && organization.organizationName.lowercaseString.containsString(searchText.lowercaseString) ) ||
-                        ( scope == "Location" && (organization.organizationAddress.componentsSeparatedByString(", ")[0]).lowercaseString.containsString(searchText.lowercaseString) )
-                })
+            if GlobalVariables.filterOrganizationBool {
+                if searchController.searchBar.text != ""  {
+                    searchedOrganizations = filteredOrganizationInfo.filter({ (organization: Organization) -> Bool in
+                        return ( scope == "Search" && organization.organizationName.lowercaseString.containsString(searchText.lowercaseString) ) ||
+                            ( scope == "Location" && (organization.organizationAddress.componentsSeparatedByString(", ")[0]).lowercaseString.containsString(searchText.lowercaseString) )
+                    })
+                } else if searchController.searchBar.text == "" {
+                    searchedOrganizations = filteredOrganizationInfo
+                }
             }
             else {
-                searchedOrganizations = organizationInfo!.filter({ (organization: Organization) -> Bool in
-                    return ( scope == "Search" && organization.organizationName.lowercaseString.containsString(searchText.lowercaseString) ) ||
-                        ( scope == "Location" && (organization.organizationAddress.componentsSeparatedByString(", ")[0]).lowercaseString.containsString(searchText.lowercaseString) )
-                })
+                if searchController.searchBar.text != "" {
+                    searchedOrganizations = organizationInfo!.filter({ (organization: Organization) -> Bool in
+                        return ( scope == "Search" && organization.organizationName.lowercaseString.containsString(searchText.lowercaseString) ) ||
+                            ( scope == "Location" && (organization.organizationAddress.componentsSeparatedByString(", ")[0]).lowercaseString.containsString(searchText.lowercaseString) )
+                    })
+                }
             }
         }
         
@@ -485,7 +498,8 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
             
             var like = 0
             
-            if !(searchController.active && searchController.searchBar.text != "") && !GlobalVariables.filterEventBool{ //when there is no filtering & searching
+            
+            if !(searchController.active && searchController.searchBar.text != "") && !GlobalVariables.filterEventBool{ //when there is no filtering & no searching
                 let event = eventInfo![indexPath.row]
                 
                 for addict in addictionEventInfo! {
@@ -625,7 +639,7 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
                 cell.circCategory.image = UIImage(named: event.primaryCategory)
                 // Configure the cell...
             }
-            else if !(searchController.active && searchController.searchBar.text != "") && GlobalVariables.filterEventBool { // when there is filter
+            else if !(searchController.active && searchController.searchBar.text != "") && GlobalVariables.filterEventBool { // when there is filter and no search
                 let event = filteredEventInfo[indexPath.row]
                 
                 for addict in addictionEventInfo! {
@@ -644,7 +658,7 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
                     
                     // get image from url
                 else if let checkedUrl = NSURL(string:event.posterUrl) {
-                    print(checkedUrl)
+                    //print(checkedUrl)
                     
                     self.getDataFromUrl(checkedUrl) { data in
                         dispatch_async(dispatch_get_main_queue()) {
@@ -705,7 +719,7 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
                 cell.circCategory.image = UIImage(named: event.primaryCategory)
                 // Configure the cell...
             }
-            else if (searchController.active && searchController.searchBar.text != "") { // when there is search and/or filter
+            else if (searchController.active && searchController.searchBar.text != "") { // when there is search
                 let event = searchedEvents[indexPath.row]
                 
                 for addict in addictionEventInfo! {
@@ -724,7 +738,7 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
                     
                     // get image from url
                 else if let checkedUrl = NSURL(string:event.posterUrl) {
-                    print(checkedUrl)
+                    //print(checkedUrl)
                     
                     self.getDataFromUrl(checkedUrl) { data in
                         dispatch_async(dispatch_get_main_queue()) {
@@ -836,7 +850,7 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
             //let addictionVenueInfo = FetchData(context: managedObjectContext).fetchAddictionsVenue()
             
             
-            if !(searchController.active && searchController.searchBar.text != "") && !GlobalVariables.filterVenueBool{ // when there is no filtering & searching
+            if !(searchController.active && searchController.searchBar.text != "") && !GlobalVariables.filterVenueBool{ // when there is no filtering & no searching
                 let venue = venueInfo![indexPath.row]
                 
                 for addict in addictionVenueInfo! {
@@ -893,7 +907,7 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
                 cell.rectCategory.image = UIImage(named: venue.primaryCategory)
                 cell.rectCategoryName.text = venue.primaryCategory
             }
-            else if !(searchController.active && searchController.searchBar.text != "") && GlobalVariables.filterVenueBool { // when there is filter
+            else if !(searchController.active && searchController.searchBar.text != "") && GlobalVariables.filterVenueBool { // when there is filter and no search
                 let venue = filteredVenueInfo[indexPath.row]
                 
                 for addict in addictionVenueInfo! {
@@ -945,7 +959,7 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
                 cell.rectCategory.image = UIImage(named: venue.primaryCategory)
                 cell.rectCategoryName.text = venue.primaryCategory
             }
-            else if (searchController.active && searchController.searchBar.text != "") { // when there is search and/or filter
+            else if (searchController.active && searchController.searchBar.text != "") { // when there is search
                 let venue = searchedVenues[indexPath.row]
                 
                 for addict in addictionVenueInfo! {
@@ -1804,11 +1818,11 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
             }
         }
         
+        if self.searchController.active && self.searchController.searchBar.text != "" {
+            self.searchController.searchResultsUpdater?.updateSearchResultsForSearchController(self.searchController)
+        } else { self.exploreTableView.reloadData() }
         
         
-        
-        
-        self.exploreTableView.reloadData()
     }
     
     func convertCircTimeFormat(date: String) -> String {
@@ -1882,7 +1896,7 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
     
     func fetchInformation() {
         
-        eventInfo = FetchData(context: managedObjectContext).fetchEvents().sort({ $0.eventStartDate < $1.eventStartDate })
+        eventInfo = FetchData(context: managedObjectContext).fetchEvents()
         
         addictionEventInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
         

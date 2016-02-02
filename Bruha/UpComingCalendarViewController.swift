@@ -62,19 +62,8 @@ class UpComingCalendarViewController: UIViewController, JTCalendarDelegate, SWTa
         
         upcomingEvents.removeAll()
         
-        let dateFormatter = NSDateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd"
-        let today = dateFormatter.stringFromDate(NSDate())
         
-        var events = FetchData(context: managedObjectContext).fetchEvents()
-        for e in events {
-            if e.eventStartDate < today {
-                let idx = events.indexOf({$0.eventID == e.eventID})
-                events.removeAtIndex(idx!)
-            }
-        }
-        //eventInfo = FetchData(context: managedObjectContext).fetchEvents()
-        let eventInfo = events.sort({ $0.eventStartDate < $1.eventStartDate })
+        let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
         
         for event in eventInfo {
             if sourceForEvent == "venue" {

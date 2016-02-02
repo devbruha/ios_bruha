@@ -1172,7 +1172,6 @@ class AddictionListViewController: UIViewController, UITableViewDelegate, UITabl
             }
         }
         
-        displayEventInfo.sortInPlace({ $0.eventStartDate < $1.eventStartDate })
         
 //        let end1 = NSDate()
 //        let timeInterval1: Double = end1.timeIntervalSinceDate(start1)
