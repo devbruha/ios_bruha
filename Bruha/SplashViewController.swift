@@ -45,7 +45,7 @@ class SplashViewController: UIViewController,UIScrollViewDelegate, FBSDKLoginBut
         let scrollViewHeight:CGFloat = self.scrollView.frame.height-168
         //2
         self.skipButton.layer.cornerRadius = 4.0
-        self.skipButton.layer.borderWidth = 1.0
+        //self.skipButton.layer.borderWidth = 1.0
         //self.skipButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
         //self.skipButton.backgroundColor = UIColor.clearColor()
         //self.skipButton.layer.borderColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1).CGColor

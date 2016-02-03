@@ -129,6 +129,11 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
         
         //self.navigationItem.titleView = searchController.searchBar
         
+        
+        if GlobalVariables.searchedText != "" {
+            searchController.searchBar.text = GlobalVariables.searchedText
+        }
+        
     }
     
     override func viewDidLoad() {
@@ -362,6 +367,10 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
         }
         
         updateMarkers()
+    }
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        GlobalVariables.searchedText = searchText
     }
     
     func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
@@ -752,6 +761,17 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
         }
     }
     func updateFilterSearchResult() {
+        
+        if GlobalVariables.selectedDisplay == "Event"{
+            searchController.searchBar.placeholder = "Search Events"
+        }
+        if GlobalVariables.selectedDisplay == "Venue"{
+            searchController.searchBar.placeholder = "Search Venues"
+        }
+        if GlobalVariables.selectedDisplay == "Organization"{
+            searchController.searchBar.placeholder = "Search Organizations"
+        }
+        
         if self.searchController.active && self.searchController.searchBar.text != "" {
             self.searchController.searchResultsUpdater?.updateSearchResultsForSearchController(self.searchController)
         } else { updateMarkers() }

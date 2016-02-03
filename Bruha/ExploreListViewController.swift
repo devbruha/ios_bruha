@@ -215,6 +215,11 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
         
         exploreTableView.tableHeaderView = searchController.searchBar
         
+        
+        if GlobalVariables.searchedText != "" {
+            searchController.searchBar.text = GlobalVariables.searchedText
+        }
+        
         //        let searchView = UIView.init(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, searchController.searchBar.bounds.size.height))
         //
         //        searchView.addSubview(searchController.searchBar)
@@ -354,6 +359,10 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
         }
         
         exploreTableView.reloadData()
+    }
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        GlobalVariables.searchedText = searchText
     }
     
     func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {

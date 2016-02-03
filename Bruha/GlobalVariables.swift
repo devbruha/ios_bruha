@@ -50,4 +50,6 @@ class GlobalVariables{
     static var venueImageCache = OrderedDictionary<String, UIImage>()
     static var organizationImageCache = OrderedDictionary<String, UIImage>()
     
+    static var searchedText = ""
+    
 }
