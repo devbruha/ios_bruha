@@ -33,7 +33,7 @@ class ShowOnMapViewController: UIViewController, GMSMapViewDelegate{
     
     func customStatusBar() {
         let barView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0))
-        barView.backgroundColor = UIColor.blackColor()
+        barView.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
         
         self.view.addSubview(barView)
     }
@@ -56,8 +56,8 @@ class ShowOnMapViewController: UIViewController, GMSMapViewDelegate{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        //customStatusBar()
-        customTopButtons()
+        customStatusBar()
+        //customTopButtons()
         
         mapView.delegate = self
         let mapFrame = mapView.frame.size

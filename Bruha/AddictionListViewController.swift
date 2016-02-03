@@ -112,7 +112,7 @@ class AddictionListViewController: UIViewController, UITableViewDelegate, UITabl
         fetchInformation()
         
         configureView()
-        customTopButtons()
+        //customTopButtons()
         customStatusBar()
         
         //addictionTableView.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)

@@ -45,9 +45,18 @@ class UpComingCalendarViewController: UIViewController, JTCalendarDelegate, SWTa
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         constraint.constant = screenSize.width / 14.0
     }
+    
+    func customStatusBar() {
+        let barView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0))
+        barView.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
+        //barView.alpha = 0.5
+        self.view.addSubview(barView)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        customStatusBar()
         
         calendarManager.delegate = self
         
@@ -216,9 +225,26 @@ class UpComingCalendarViewController: UIViewController, JTCalendarDelegate, SWTa
         let months = dateFormatter.monthSymbols
         let monthSymbol = months[month-1]
         
+        // Month title
+        let attribute = [NSFontAttributeName: UIFont(name: "OpenSans", size: 18)!, NSForegroundColorAttributeName : UIColor.whiteColor()]
+        let attributedMonth = NSMutableAttributedString(string: "\(monthSymbol) ", attributes: attribute)
+        let attributedDay = NSMutableAttributedString(string: String(component), attributes: attribute)
+        
+        let arrowAttribute = [NSFontAttributeName: UIFont(name: "OpenSans", size: 18)!, NSForegroundColorAttributeName : UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1)]
+        let leftArrowString = NSMutableAttributedString(string: "<<            ", attributes: arrowAttribute)
+        let rightArrowString = NSMutableAttributedString(string: "            >>", attributes: arrowAttribute)
+        
+        let calendarTitle = NSMutableAttributedString()
+        calendarTitle.appendAttributedString(leftArrowString)
+        calendarTitle.appendAttributedString(attributedMonth)
+        calendarTitle.appendAttributedString(attributedDay)
+        calendarTitle.appendAttributedString(rightArrowString)
+        
+        newMenuItemView.attributedText = calendarTitle
+        
         //newMenuItemView.text = component as? String
-        newMenuItemView.textColor = UIColor.whiteColor()
-        newMenuItemView.text = "<<            " + monthSymbol + " " + String(component) + "            >>"
+        //newMenuItemView.textColor = UIColor.whiteColor()
+        //newMenuItemView.text = "<<            " + monthSymbol + " " + String(component) + "            >>"
         //newMenuItemView.text = monthSymbol
         //newMenuItemView.backgroundColor = UIColor.cyanColor()
         //newMenuItemView.textColor = UIColor.blackColor()

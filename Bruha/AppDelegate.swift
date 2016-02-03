@@ -32,6 +32,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         navigationBarAppearace.titleTextAttributes = [NSFontAttributeName: navbarFont, NSForegroundColorAttributeName:UIColor.whiteColor()]
         navigationBarAppearace.translucent = false
         
+        //remove navigation border
+        navigationBarAppearace.shadowImage = UIImage()
+        navigationBarAppearace.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+        
         return FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
     }
     

@@ -87,16 +87,16 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
     
     func customStatusBar() {
         let barView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0))
-        barView.backgroundColor = UIColor.grayColor()
-        
+        barView.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
+        //barView.alpha = 0.5
         self.view.addSubview(barView)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
-        customTopButtons()
-        //customStatusBar()
+        //customTopButtons()
+        customStatusBar()
         
         //uploadTableView.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
         uploadTableView.separatorColor = UIColor.clearColor()

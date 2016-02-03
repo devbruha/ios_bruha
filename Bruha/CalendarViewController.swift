@@ -45,7 +45,6 @@ class CalendarViewController: UIViewController, JTCalendarDelegate, SWTableViewC
     func adjustLegendConstraint(constraint: NSLayoutConstraint) {
         
         let legendSize: CGRect = calendarContentView.layer.bounds
-        
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         constraint.constant = screenSize.width / 14.0
     }
@@ -128,7 +127,6 @@ class CalendarViewController: UIViewController, JTCalendarDelegate, SWTableViewC
     func calendar(calendar: JTCalendarManager!, prepareDayView dayView: UIView!) {
         
         let newDayView = dayView as! JTCalendarDayView
-        
         
         newDayView.hidden = false
         newDayView.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
@@ -313,7 +311,7 @@ class CalendarViewController: UIViewController, JTCalendarDelegate, SWTableViewC
     
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(eventsToDisplay.count, "r in sec")
+        print(eventsToDisplay.count, "row in sec")
         
         showHideLegend()
         

@@ -28,6 +28,7 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var EventCategory: UILabel!
     
+    @IBOutlet weak var moreInfoNavItem: UINavigationItem!
     @IBOutlet weak var moreInfoLabel: UILabel!
     @IBOutlet weak var moreInfoHeightLabel: NSLayoutConstraint!
     
@@ -116,6 +117,13 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
         }
     }
     
+    func customStatusBar() {
+        let barView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0))
+        barView.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
+        //barView.alpha = 0.5
+        self.view.addSubview(barView)
+    }
+    
     func getDataFromUrl(urL:NSURL, completion: ((data: NSData?) -> Void)) {
         NSURLSession.sharedSession().dataTaskWithURL(urL) { (data, response, error) in
             completion(data: data)
@@ -149,6 +157,7 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                         VenueName.text = "nil"
                     } else {VenueName.text = event.eventVenueName }
                     
+                    moreInfoNavItem.title = "Up & Coming"
                     moreInfoLabel.text = "Up & Coming"
                     
                     Address.text = "\(event.eventVenueAddress.componentsSeparatedByString(", ")[0]), \(event.eventVenueCity)"
@@ -334,7 +343,8 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
         let imgHeight: CGFloat = screenSize.height * 0.33
         ImgeHeight.constant = imgHeight
         
-        customTopButtons()
+        customStatusBar()
+        //customTopButtons()
         labelDisplay()
         webDescriptionContent.delegate = self
         

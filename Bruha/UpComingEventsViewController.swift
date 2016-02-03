@@ -45,7 +45,7 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
         
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         let screenHeight = screenSize.height
-        upComingTableView.rowHeight = screenHeight * 0.5
+        upComingTableView.rowHeight = ( screenHeight - screenHeight * 70 / 568 ) * 0.5
         
         self.upComingTableView!.allowsMultipleSelection = false
     }
@@ -109,11 +109,19 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
         }
     }
     
+    func customStatusBar() {
+        let barView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0))
+        barView.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
+        //barView.alpha = 0.5
+        self.view.addSubview(barView)
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
-        customTopButtons()
+        //customTopButtons()
+        customStatusBar()
         
         //upComingTableView.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
         upComingTableView.separatorColor = UIColor.clearColor()

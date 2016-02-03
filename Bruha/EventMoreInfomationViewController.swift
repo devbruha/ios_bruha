@@ -114,6 +114,13 @@ class EventMoreInfomationViewController: UIViewController, UIWebViewDelegate{
         }
     }
     
+    func customStatusBar() {
+        let barView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0))
+        barView.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
+        //barView.alpha = 0.5
+        self.view.addSubview(barView)
+    }
+    
     func getDataFromUrl(urL:NSURL, completion: ((data: NSData?) -> Void)) {
         NSURLSession.sharedSession().dataTaskWithURL(urL) { (data, response, error) in
             completion(data: data)
@@ -231,7 +238,8 @@ class EventMoreInfomationViewController: UIViewController, UIWebViewDelegate{
         let imgHeight: CGFloat = screenSize.height * 0.33
         ImgeHeight.constant = imgHeight
         
-        customTopButtons()
+        customStatusBar()
+        //customTopButtons()
         labelDisplay()
         webDescriptionContent.delegate = self
         

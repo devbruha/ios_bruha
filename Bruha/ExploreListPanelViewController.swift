@@ -461,6 +461,15 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
     }
     
+    func animatePanelJump() {
+        self.view.center.y = self.view.center.y - 5
+        
+        UIView.animateWithDuration(1.5, delay: 0.0, usingSpringWithDamping: CGFloat(1), initialSpringVelocity: CGFloat(1), options: UIViewAnimationOptions.TransitionNone, animations: { () -> Void in
+            self.view.center.y = self.view.center.y + 5
+            }) { (finished) -> Void in
+        }
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.swipeZoneHeight = self.panelControllerContainer.swipableZoneHeight
@@ -470,6 +479,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         super.viewDidAppear(animated)
         
         uiPriceFilter()
+        animatePanelJump()
         
     }
     override func didReceiveMemoryWarning() {

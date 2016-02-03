@@ -85,7 +85,7 @@
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MCF-I7-dys">
                     <rect key="frame" x="61" y="332" width="67" height="67"/>
                     <subviews>
-                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Brüha_Face_Purple_Lrg" translatesAutoresizingMaskIntoConstraints="NO" id="gdd-Sb-gsH">
+                        <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Bruha_White" translatesAutoresizingMaskIntoConstraints="NO" id="gdd-Sb-gsH">
                             <rect key="frame" x="0.0" y="0.0" width="67" height="67.5"/>
                         </imageView>
                     </subviews>
@@ -188,7 +188,7 @@
         </view>
     </objects>
     <resources>
-        <image name="Brüha_Face_Purple_Lrg" width="500" height="500"/>
+        <image name="Bruha_White" width="124" height="124"/>
         <image name="Events_White" width="124" height="124"/>
         <image name="Organization_White" width="124" height="124"/>
         <image name="Venue_White" width="124" height="124"/>
