@@ -210,11 +210,11 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
         searchController.searchBar.tintColor = UIColor.whiteColor()
         
         searchController.searchBar.scopeButtonTitles = ["Search", "Location"]
+        searchController.active = true
         
         searchController.searchBar.sizeToFit()
         
         exploreTableView.tableHeaderView = searchController.searchBar
-        
         
         if GlobalVariables.searchedText != "" {
             searchController.searchBar.text = GlobalVariables.searchedText
@@ -241,7 +241,13 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
         
         animateHeader()
         
+        if GlobalVariables.searchedText != "" {
+            searchController.active = true
+            searchController.becomeFirstResponder()
+        }
+        
         exploreTableView.reloadData()
+        
         //        if GlobalVariables.selectedDisplay == "Event"{
         //            for cell in exploreTableView.visibleCells as! [EventTableViewCell] {
         //                cell.animate()
@@ -290,6 +296,11 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
         // Dispose of any resources that can be recreated.
     }
     
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        GlobalVariables.searchedText = ""
+    }
+    
     func filterForSearchText(searchText: String, scope: String = "Search") {
         
         if GlobalVariables.selectedDisplay == "Event" {
@@ -312,6 +323,9 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
                         return ( scope == "Search" && event.eventName.lowercaseString.containsString(searchText.lowercaseString) ) ||
                             ( scope == "Location" && (event.eventVenueAddress.componentsSeparatedByString(", ")[0] + " " + event.eventVenueCity).lowercaseString.containsString(searchText.lowercaseString) )
                     })
+                    print("searched Events numebr", searchedEvents.count)
+                } else if searchController.searchBar.text == "" {
+                    searchedEvents = eventInfo
                 }
             }
         }
@@ -333,6 +347,8 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
                         return ( scope == "Search" && venue.venueName.lowercaseString.containsString(searchText.lowercaseString) ) ||
                             ( scope == "Location" && (venue.venueAddress.componentsSeparatedByString(", ")[0]).lowercaseString.containsString(searchText.lowercaseString) )
                     })
+                } else if searchController.searchBar.text == "" {
+                    searchedVenues = venueInfo!
                 }
             }
         }
@@ -354,6 +370,8 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
                         return ( scope == "Search" && organization.organizationName.lowercaseString.containsString(searchText.lowercaseString) ) ||
                             ( scope == "Location" && (organization.organizationAddress.componentsSeparatedByString(", ")[0]).lowercaseString.containsString(searchText.lowercaseString) )
                     })
+                } else if searchController.searchBar.text == "" {
+                    searchedOrganizations = organizationInfo!
                 }
             }
         }
@@ -414,13 +432,13 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
         case "Event":
             var mEventInfo: [Event] = []
             
-            if !(searchController.active && searchController.searchBar.text != "") && !GlobalVariables.filterEventBool{
+            if searchController.searchBar.text == "" && !GlobalVariables.filterEventBool{
                 mEventInfo = eventInfo
             }
-            else if !(searchController.active && searchController.searchBar.text != "") && GlobalVariables.filterEventBool {
+            else if searchController.searchBar.text == "" && GlobalVariables.filterEventBool {
                 mEventInfo = filteredEventInfo
             }
-            else if (searchController.active && searchController.searchBar.text != "") {
+            else if searchController.searchBar.text != "" {
                 mEventInfo = searchedEvents
             }
             
@@ -429,13 +447,13 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
         case "Venue":
             var mVenueInfo: [Venue] = []
             
-            if !(searchController.active && searchController.searchBar.text != "") && !GlobalVariables.filterVenueBool{
+            if searchController.searchBar.text == "" && !GlobalVariables.filterVenueBool{
                 mVenueInfo = venueInfo!
             }
-            else if !(searchController.active && searchController.searchBar.text != "") && GlobalVariables.filterVenueBool {
+            else if searchController.searchBar.text == "" && GlobalVariables.filterVenueBool {
                 mVenueInfo = filteredVenueInfo
             }
-            else if (searchController.active && searchController.searchBar.text != "") {
+            else if searchController.searchBar.text != "" {
                 mVenueInfo = searchedVenues
             }
             
@@ -448,13 +466,13 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
         case "Organization":
             var mOrganizationInfo: [Organization] = []
             
-            if !(searchController.active && searchController.searchBar.text != "") && !GlobalVariables.filterOrganizationBool{
+            if searchController.searchBar.text == "" && !GlobalVariables.filterOrganizationBool{
                 mOrganizationInfo = organizationInfo!
             }
-            else if !(searchController.active && searchController.searchBar.text != "") && GlobalVariables.filterOrganizationBool {
+            else if searchController.searchBar.text == "" && GlobalVariables.filterOrganizationBool {
                 mOrganizationInfo = filteredOrganizationInfo
             }
-            else if (searchController.active && searchController.searchBar.text != "") {
+            else if searchController.searchBar.text != "" {
                 mOrganizationInfo = searchedOrganizations
             }
             
@@ -508,7 +526,7 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
             var like = 0
             
             
-            if !(searchController.active && searchController.searchBar.text != "") && !GlobalVariables.filterEventBool{ //when there is no filtering & no searching
+            if searchController.searchBar.text == "" && !GlobalVariables.filterEventBool{ //when there is no filtering & no searching
                 let event = eventInfo![indexPath.row]
                 
                 for addict in addictionEventInfo! {
@@ -648,7 +666,7 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
                 cell.circCategory.image = UIImage(named: event.primaryCategory)
                 // Configure the cell...
             }
-            else if !(searchController.active && searchController.searchBar.text != "") && GlobalVariables.filterEventBool { // when there is filter and no search
+            else if searchController.searchBar.text == "" && GlobalVariables.filterEventBool { // when there is filter and no search
                 let event = filteredEventInfo[indexPath.row]
                 
                 for addict in addictionEventInfo! {
@@ -728,7 +746,8 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
                 cell.circCategory.image = UIImage(named: event.primaryCategory)
                 // Configure the cell...
             }
-            else if (searchController.active && searchController.searchBar.text != "") { // when there is search
+            else if searchController.searchBar.text != "" { // when there is search
+                print(searchedEvents.count, "error count")
                 let event = searchedEvents[indexPath.row]
                 
                 for addict in addictionEventInfo! {
@@ -859,7 +878,7 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
             //let addictionVenueInfo = FetchData(context: managedObjectContext).fetchAddictionsVenue()
             
             
-            if !(searchController.active && searchController.searchBar.text != "") && !GlobalVariables.filterVenueBool{ // when there is no filtering & no searching
+            if searchController.searchBar.text == "" && !GlobalVariables.filterVenueBool{ // when there is no filtering & no searching
                 let venue = venueInfo![indexPath.row]
                 
                 for addict in addictionVenueInfo! {
@@ -916,7 +935,7 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
                 cell.rectCategory.image = UIImage(named: venue.primaryCategory)
                 cell.rectCategoryName.text = venue.primaryCategory
             }
-            else if !(searchController.active && searchController.searchBar.text != "") && GlobalVariables.filterVenueBool { // when there is filter and no search
+            else if searchController.searchBar.text == "" && GlobalVariables.filterVenueBool { // when there is filter and no search
                 let venue = filteredVenueInfo[indexPath.row]
                 
                 for addict in addictionVenueInfo! {
@@ -968,7 +987,7 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
                 cell.rectCategory.image = UIImage(named: venue.primaryCategory)
                 cell.rectCategoryName.text = venue.primaryCategory
             }
-            else if (searchController.active && searchController.searchBar.text != "") { // when there is search
+            else if searchController.searchBar.text != "" { // when there is search
                 let venue = searchedVenues[indexPath.row]
                 
                 for addict in addictionVenueInfo! {
@@ -1104,7 +1123,7 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
             
             
             
-            if !(searchController.active && searchController.searchBar.text != "") && !GlobalVariables.filterOrganizationBool{
+            if searchController.searchBar.text == "" && !GlobalVariables.filterOrganizationBool{
                 let organization = organizationInfo![indexPath.row]
                 
                 for addict in addictionOrganizationInfo! {
@@ -1155,7 +1174,7 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
                 cell.rectCategory.image = UIImage(named: organization.primaryCategory)
                 cell.rectCategoryName.text = organization.primaryCategory
             }
-            else if !(searchController.active && searchController.searchBar.text != "") && GlobalVariables.filterOrganizationBool {
+            else if searchController.searchBar.text == "" && GlobalVariables.filterOrganizationBool {
                 
                 let organization = filteredOrganizationInfo[indexPath.row]
                 
@@ -1207,7 +1226,7 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
                 cell.rectCategory.image = UIImage(named: organization.primaryCategory)
                 cell.rectCategoryName.text = organization.primaryCategory
             }
-            else if (searchController.active && searchController.searchBar.text != "") {
+            else if searchController.searchBar.text != "" {
                 
                 let organization = searchedOrganizations[indexPath.row]
                 
@@ -1260,15 +1279,6 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
                 cell.rectCategoryName.text = organization.primaryCategory
             }
             
-            if GlobalVariables.filterOrganizationBool {
-                
-                
-                
-                
-            } else { // when there is no filtering
-                
-                
-            }
             
             
             let temp: NSMutableArray = NSMutableArray()

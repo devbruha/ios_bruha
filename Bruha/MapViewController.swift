@@ -180,6 +180,11 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
+        if GlobalVariables.searchedText != "" {
+            searchController.active = true
+            searchController.becomeFirstResponder()
+        }
+        
         dropDownTable.reloadData()
     }
     
@@ -190,21 +195,21 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
         //Event
         if GlobalVariables.selectedDisplay == "Event" {
             dropEvents.removeAll()
-            if !(searchController.active && searchController.searchBar.text != "") && !GlobalVariables.filterEventBool{
+            if searchController.searchBar.text == "" && !GlobalVariables.filterEventBool{
                 for event in GlobalVariables.displayedEvents{
                     if(event.eventLatitude == marker.position.latitude && event.eventLongitude == marker.position.longitude){
                         dropEvents.append(event)
                     }
                 }
             }
-            else if !(searchController.active && searchController.searchBar.text != "") && GlobalVariables.filterEventBool {
+            else if searchController.searchBar.text == "" && GlobalVariables.filterEventBool {
                 for event in GlobalVariables.displayFilteredEvents{
                     if(event.eventLatitude == marker.position.latitude && event.eventLongitude == marker.position.longitude){
                         dropEvents.append(event)
                     }
                 }
             }
-            else if (searchController.active && searchController.searchBar.text != "") {
+            else if searchController.searchBar.text != "" {
                 for event in searchedEvents{
                     if(event.eventLatitude == marker.position.latitude && event.eventLongitude == marker.position.longitude){
                         dropEvents.append(event)
@@ -215,21 +220,21 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
         //Venue
         else if GlobalVariables.selectedDisplay == "Venue" {
             dropVenues.removeAll()
-            if !(searchController.active && searchController.searchBar.text != "") && !GlobalVariables.filterVenueBool{
+            if searchController.searchBar.text == "" && !GlobalVariables.filterVenueBool{
                 for venue in GlobalVariables.displayedVenues{
                     if(venue.venueLatitude == marker.position.latitude && venue.venueLongitude == marker.position.longitude){
                         dropVenues.append(venue)
                     }
                 }
             }
-            else if !(searchController.active && searchController.searchBar.text != "") && GlobalVariables.filterVenueBool {
+            else if searchController.searchBar.text == "" && GlobalVariables.filterVenueBool {
                 for venue in GlobalVariables.displayFilteredVenues{
                     if(venue.venueLatitude == marker.position.latitude && venue.venueLongitude == marker.position.longitude){
                         dropVenues.append(venue)
                     }
                 }
             }
-            else if (searchController.active && searchController.searchBar.text != "") {
+            else if searchController.searchBar.text != "" {
                 for venue in searchedVenues{
                     if(venue.venueLatitude == marker.position.latitude && venue.venueLongitude == marker.position.longitude){
                         dropVenues.append(venue)
@@ -240,21 +245,21 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
         //Organization
         else if GlobalVariables.selectedDisplay == "Organization" {
             dropOrganizations.removeAll()
-            if !(searchController.active && searchController.searchBar.text != "") && !GlobalVariables.filterOrganizationBool{
+            if searchController.searchBar.text == "" && !GlobalVariables.filterOrganizationBool{
                 for organization in GlobalVariables.displayedOrganizations{
                     if(organization.organizationLatitude == marker.position.latitude && organization.organizationLongitude == marker.position.longitude){
                         dropOrganizations.append(organization)
                     }
                 }
             }
-            else if !(searchController.active && searchController.searchBar.text != "") && GlobalVariables.filterOrganizationBool {
+            else if searchController.searchBar.text == "" && GlobalVariables.filterOrganizationBool {
                 for organization in GlobalVariables.displayFilteredOrganizations{
                     if(organization.organizationLatitude == marker.position.latitude && organization.organizationLongitude == marker.position.longitude){
                         dropOrganizations.append(organization)
                     }
                 }
             }
-            else if (searchController.active && searchController.searchBar.text != "") {
+            else if searchController.searchBar.text != "" {
                 for organization in searchedOrganizations{
                     if(organization.organizationLatitude == marker.position.latitude && organization.organizationLongitude == marker.position.longitude){
                         dropOrganizations.append(organization)
@@ -297,6 +302,9 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
         }
     }
     
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        GlobalVariables.searchedText = ""
+    }
     
     func filterForSearchText(searchText: String, scope: String = "Search") {
         
@@ -320,6 +328,8 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
                         return ( scope == "Search" && event.eventName.lowercaseString.containsString(searchText.lowercaseString) ) ||
                             ( scope == "Location" && (event.eventVenueAddress.componentsSeparatedByString(", ")[0] + " " + event.eventVenueCity).lowercaseString.containsString(searchText.lowercaseString) )
                     })
+                } else if searchController.searchBar.text == "" {
+                    searchedEvents = GlobalVariables.displayedEvents
                 }
             }
         }
@@ -341,6 +351,8 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
                         return ( scope == "Search" && venue.venueName.lowercaseString.containsString(searchText.lowercaseString) ) ||
                             ( scope == "Location" && (venue.venueAddress.componentsSeparatedByString(", ")[0]).lowercaseString.containsString(searchText.lowercaseString) )
                     })
+                } else if searchController.searchBar.text == "" {
+                    searchedVenues = GlobalVariables.displayedVenues
                 }
             }
         }
@@ -362,6 +374,8 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
                         return ( scope == "Search" && organization.organizationName.lowercaseString.containsString(searchText.lowercaseString) ) ||
                             ( scope == "Location" && (organization.organizationAddress.componentsSeparatedByString(", ")[0]).lowercaseString.containsString(searchText.lowercaseString) )
                     })
+                } else if searchController.searchBar.text == "" {
+                    searchedOrganizations = GlobalVariables.displayedOrganizations
                 }
             }
         }
@@ -795,12 +809,12 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             
         case "Event":
             
-            if !(searchController.active && searchController.searchBar.text != "") && !GlobalVariables.filterEventBool{
+            if searchController.searchBar.text == "" && !GlobalVariables.filterEventBool{
                 for marker in eventMarkers{
                     marker.map = viewMap
                 }
             }
-            else if !(searchController.active && searchController.searchBar.text != "") && GlobalVariables.filterEventBool {
+            else if searchController.searchBar.text == "" && GlobalVariables.filterEventBool {
                 for var i = eventMarkers.count; i > 0; i-- {
                     if GlobalVariables.displayFilteredEvents.contains({$0.eventID == eventMarkers[i-1].userData as! String}) {
                         
@@ -808,7 +822,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
                     }
                 }
             }
-            else if (searchController.active && searchController.searchBar.text != "") {
+            else if searchController.searchBar.text != "" {
                 for var i = eventMarkers.count; i > 0; i-- {
                     if searchedEvents.contains({$0.eventID == eventMarkers[i-1].userData as! String}) {
                         
@@ -819,12 +833,12 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             
         case "Venue":
             
-            if !(searchController.active && searchController.searchBar.text != "") && !GlobalVariables.filterVenueBool{
+            if searchController.searchBar.text == "" && !GlobalVariables.filterVenueBool{
                 for marker in venueMarkers{
                     marker.map = viewMap
                 }
             }
-            else if !(searchController.active && searchController.searchBar.text != "") && GlobalVariables.filterVenueBool {
+            else if searchController.searchBar.text == "" && GlobalVariables.filterVenueBool {
                 for var i = venueMarkers.count; i > 0; i-- {
                     if GlobalVariables.displayFilteredVenues.contains({$0.venueID == venueMarkers[i-1].userData as! String}) {
                         
@@ -832,7 +846,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
                     }
                 }
             }
-            else if (searchController.active && searchController.searchBar.text != "") {
+            else if searchController.searchBar.text != "" {
                 for var i = venueMarkers.count; i > 0; i-- {
                     if searchedVenues.contains({$0.venueID == venueMarkers[i-1].userData as! String}) {
                         
@@ -843,12 +857,12 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             
         case "Organization":
             
-            if !(searchController.active && searchController.searchBar.text != "") && !GlobalVariables.filterOrganizationBool{
+            if searchController.searchBar.text == "" && !GlobalVariables.filterOrganizationBool{
                 for marker in organizationMarkers{
                     marker.map = viewMap
                 }
             }
-            else if !(searchController.active && searchController.searchBar.text != "") && GlobalVariables.filterOrganizationBool {
+            else if searchController.searchBar.text == "" && GlobalVariables.filterOrganizationBool {
                 for var i = organizationMarkers.count; i > 0; i-- {
                     if GlobalVariables.displayFilteredOrganizations.contains({$0.organizationID == organizationMarkers[i-1].userData as! String}) {
                         
@@ -856,7 +870,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
                     }
                 }
             }
-            else if (searchController.active && searchController.searchBar.text != "") {
+            else if searchController.searchBar.text != "" {
                 for var i = organizationMarkers.count; i > 0; i-- {
                     if searchedOrganizations.contains({$0.organizationID == organizationMarkers[i-1].userData as! String}) {
                         

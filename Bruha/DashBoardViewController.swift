@@ -221,6 +221,7 @@ class DashBoardViewController: UIViewController {
         backgroundGradient()
         FetchData(context: managedObjectContext).fetchCategories()
         Filtering().clearAllFilter()
+        GlobalVariables.searchedText = ""
         GlobalVariables.datesSelected.removeAllObjects()
         // Do any additional setup after loading the view.
     }
