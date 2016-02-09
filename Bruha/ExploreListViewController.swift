@@ -210,7 +210,6 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
         searchController.searchBar.tintColor = UIColor.whiteColor()
         
         searchController.searchBar.scopeButtonTitles = ["Search", "Location"]
-        searchController.active = true
         
         searchController.searchBar.sizeToFit()
         

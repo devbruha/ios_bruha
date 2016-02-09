@@ -271,6 +271,14 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
         }
     }
     
+    
+    @IBAction func forgotPasswordPressed(sender: UIButton) {
+        
+        self.performSegueWithIdentifier("forgotPassword", sender: self)
+        
+    }
+    
+    
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
         self.view.endEditing(true)
         //super.touchesBegan(touches, withEvent: event)
