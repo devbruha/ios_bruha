@@ -155,7 +155,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
         //dropDownTable.rowHeight = screenSize.width * 0.4
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateFilterSearchResult", name: "itemDisplayChangeEvent", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "clearDrop", name: "itemDisplayChangeEvent", object: nil)
+        //NSNotificationCenter.defaultCenter().addObserver(self, selector: "clearDrop", name: "itemDisplayChangeEvent", object: nil)
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateFilterSearchResult", name: "filter", object: nil)
         
         // Do any additional setup after loading the view, typically from a nib.
@@ -775,7 +775,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
         }
     }
     func updateFilterSearchResult() {
-        
+        clearDrop()
         if GlobalVariables.selectedDisplay == "Event"{
             searchController.searchBar.placeholder = "Search Events"
         }

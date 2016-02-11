@@ -136,7 +136,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         
         calendarManager.delegate = self
         
-        calendarMenu.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
+        calendarMenu.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1)
         calendarContentView.layer.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1).CGColor
         
         calendarManager.menuView = calendarMenu
@@ -717,7 +717,8 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if GlobalVariables.selectedDisplay == "Event" {
-            return eventObject[section].sectionObjects.count
+            return 0
+            //return eventObject[section].sectionObjects.count
         }
         else {
             return 0
@@ -773,11 +774,11 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
                 
                 if(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.keys.contains((headerCell.categoryName?.text)!)){
                     headerCell.backgroundColor = UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1.0)
-                    headerCell.arrowimage.image = UIImage(named: "arrow-down")
+                    //headerCell.arrowimage.image = UIImage(named: "arrow-down")
                 }
                 else{
                     headerCell.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1.0)
-                    headerCell.arrowimage.image = UIImage(named: "arrow-up")
+                    //headerCell.arrowimage.image = UIImage(named: "arrow-up")
                 }
                 
             } else if GlobalVariables.selectedDisplay == "Venue" {
