@@ -48,7 +48,7 @@ class CredentialCheck {
     }
     
     func passwordCheck(password:String) -> String{
-        if password.characters.count >= 6 && password.characters.count <= 20 {
+        if password.characters.count >= 8 && password.characters.count <= 20 {
             
             let characters = try! NSRegularExpression(pattern: ".*[^A-Za-z0-9_].*", options: [])
             
@@ -82,7 +82,7 @@ class CredentialCheck {
         }
         else{
             
-            error = "Passwords must have a length between 6 and 20 characters."
+            error = "Passwords must have a length between 8 and 20 characters."
         }
         
         return error

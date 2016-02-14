@@ -74,11 +74,11 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
             let networkOperation = NetworkOperation(url: resetPassURL)
             
             dispatch_async(dispatch_get_main_queue()) {
-                print("-\(self.username.text)-and-\(self.userEmail.text)-")
-                networkOperation.stringFromURLPost("forget-username=\(self.username.text)&forget-email=\(self.userEmail.text)") {
+                print("-\(self.username.text!)-and-\(self.userEmail.text!)-")
+                networkOperation.stringFromURLPost("forget-email=\(self.userEmail.text!)&forget-username=\(self.username.text!)") {
                     
                     (let resetSignal) in
-                    //print("-\(self.username.text)-and-\(self.userEmail.text)-")
+                    
                     completion(resetSignal)
                 }
             }
@@ -100,7 +100,32 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
         
         resetPassword {
             (let resetResponse) in
-            print(resetResponse, "is the returned value")
+            
+            let mResetResponse = resetResponse?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+            
+            if mResetResponse == "1" {
+                
+                dispatch_async(dispatch_get_main_queue()){
+                    let alertController = UIAlertController(title: "It takes few minutes to get to Email. Please check your Email. Your password has been reset", message:nil, preferredStyle: .Alert)
+                    let okAction = UIAlertAction(title: "OK", style: .Default) { (_) -> Void in
+                        self.performSegueWithIdentifier("goToSplash", sender: self.registerB)
+                    }
+                    
+                    /*let resendAction = UIAlertAction(title: "Resend", style: .Default) { (_) -> Void in
+                        print("resend email and then segue to splash")
+                    }
+                    alertController.addAction(resendAction)*/
+                    alertController.addAction(okAction)
+                    
+                    self.presentViewController(alertController, animated: true, completion: nil)
+                }
+                
+                
+            }
+            
+            print(mResetResponse, "is the returned value")
+            
+            
         }
         
         /*
@@ -109,11 +134,11 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
         error = CredentialCheck().internetCheck()
         
         if error == "true"{
-            
+        
             error = CredentialCheck().usernameCheck(username)
-            
+        
             if error == "true"{
-                
+        
                 error = CredentialCheck().passwordCheck(password)
                 
                 if error == "true"{
@@ -181,12 +206,6 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
         }*/
     }
     
-    
-    @IBAction func forgotPasswordPressed(sender: UIButton) {
-        
-        self.performSegueWithIdentifier("forgotPassword", sender: self)
-        
-    }
     
     
     override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {

@@ -216,8 +216,9 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
                         (let loginResponse) in
                         
                         // If server response from credential check = "1", procede with downloading user info
-                        
-                        if (loginResponse! == "  1"){
+                        let mLoginResponse = loginResponse?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+                        print("-the returned---\(mLoginResponse)---")
+                        if (mLoginResponse! == "1"){
                             
                             loginService.getUserInformation{
                                 (let userInfo) in
@@ -242,11 +243,35 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
                             GlobalVariables.loggedIn = true
                         }
                             
+                        else if (mLoginResponse! == "2"){
+                            dispatch_async(dispatch_get_main_queue()) {
+                                
+                                let alert = UIAlertView(title: "Login Failed", message: "Please check your Email and confirm sign up with Bruha", delegate: nil, cancelButtonTitle: "OK")
+                                alert.show()
+                            }
+                        }
+                            
+                        else if (mLoginResponse! == "3"){
+                            dispatch_async(dispatch_get_main_queue()) {
+                                
+                                let alert = UIAlertView(title: "Login Failed", message: "Please try again. The username you have entered does not exist", delegate: nil, cancelButtonTitle: "OK")
+                                alert.show()
+                            }
+                        }
+                            
+                        else if (mLoginResponse! == "4"){
+                            dispatch_async(dispatch_get_main_queue()) {
+                                
+                                let alert = UIAlertView(title: "Login Failed", message: "Please try again. You have entered incorrect password", delegate: nil, cancelButtonTitle: "OK")
+                                alert.show()
+                            }
+                        }
+                            
                         else{
                             
                             dispatch_async(dispatch_get_main_queue()) {
                                 
-                                let alert = UIAlertView(title: "Login Failed", message: "Password and username pair does not exists", delegate: nil, cancelButtonTitle: "OK")
+                                let alert = UIAlertView(title: "Login Failed", message: "Sorry, Someting strange happened", delegate: nil, cancelButtonTitle: "OK")
                                 alert.show()
                             }
                         }
