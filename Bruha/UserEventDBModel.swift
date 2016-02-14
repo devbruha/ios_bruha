@@ -29,6 +29,6 @@ class UserEventDBModel: NSManagedObject {
     @NSManaged var eventDescription: String
     @NSManaged var endTime: String
     @NSManaged var endDate: String
-    @NSManaged var organizationID: String
+    @NSManaged var organizationID: NSArray
 
 }

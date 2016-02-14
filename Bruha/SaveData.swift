@@ -127,11 +127,11 @@ class SaveData {
         print("Organization Categories Saved")
     }
     
-    func saveEvents(EventList: [Event]){
+    func saveEvents(var EventList: [Event]){
                 
         let en = NSEntityDescription.entityForName("EventList", inManagedObjectContext: managedObjectContext!)
         let en2 = NSEntityDescription.entityForName("EventSubCategoryList", inManagedObjectContext: managedObjectContext!)
-        
+        EventList = EventList.sort({ $0.eventStartDate < $1.eventStartDate })
         for event in EventList{
             
             // Creating template object that'll be pushed into the local database
@@ -164,6 +164,7 @@ class SaveData {
             newItem.endDate = event.eventEndDate
             newItem.latitude = event.eventLatitude
             newItem.longitude = event.eventLongitude
+            
             
             newItem.organizationID = event.organizationID
             

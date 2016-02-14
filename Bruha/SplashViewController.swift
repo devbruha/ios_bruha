@@ -45,10 +45,10 @@ class SplashViewController: UIViewController,UIScrollViewDelegate, FBSDKLoginBut
         let scrollViewHeight:CGFloat = self.scrollView.frame.height-168
         //2
         self.skipButton.layer.cornerRadius = 4.0
-        self.skipButton.layer.borderWidth = 1.0
-        self.skipButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
-        self.skipButton.backgroundColor = UIColor.clearColor()
-        self.skipButton.layer.borderColor = UIColor.orangeColor().CGColor
+        //self.skipButton.layer.borderWidth = 1.0
+        //self.skipButton.setTitleColor(UIColor.blueColor(), forState: .Normal)
+        //self.skipButton.backgroundColor = UIColor.clearColor()
+        //self.skipButton.layer.borderColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1).CGColor
         //3
         let imgOne = SplashView.instanceFromNib1()
         imgOne.frame = CGRectMake(0, 0, scrollViewWidth, scrollViewHeight+30)
@@ -71,6 +71,9 @@ class SplashViewController: UIViewController,UIScrollViewDelegate, FBSDKLoginBut
         self.scrollView.contentSize = CGSizeMake(scrollViewWidth*5, scrollViewHeight)
         self.scrollView.delegate = self
         self.pageControl.currentPage = 0
+        self.pageControl.currentPageIndicatorTintColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1)
+        self.pageControl.pageIndicatorTintColor = UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1)
+        self.pageControl.transform = CGAffineTransformMakeScale(1.8, 1.8)
         
         GlobalVariables.loggedIn = false
         

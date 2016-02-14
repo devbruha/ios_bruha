@@ -46,7 +46,69 @@ class ProfileViewController: UIViewController, FBSDKLoginButtonDelegate {
             getFacebookProfilePic()
             
         } else {
-            myImage.image = UIImage(named: "Slide 3.png")
+            
+            getProfilePicLink((userInfo?.first?.userName)!) {
+                (let response) in
+                
+                let mResponse = response?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+                
+                if mResponse == "1" {
+                    print("User does not have profile picture")
+                }
+                else if mResponse == "2" {
+                    print("php query fails")
+                }
+                else if mResponse == "3" {
+                    print("username is nil, printing username \(userInfo?.first?.userName)")
+                }
+                    
+                else {
+                    
+                    let urlString = "http://www.bruha.com/WorkingWebsite/\(mResponse!)"
+                    let url = NSURL(string: urlString)
+                    
+                    self.getDataFromUrl(url!) {
+                        (let data) in
+                        dispatch_async(dispatch_get_main_queue()) {
+                            
+                            self.myImage.contentMode = UIViewContentMode.ScaleAspectFill
+                            self.myImage.image = UIImage(data: data!)
+                        }
+                    }
+                }
+                
+                
+            }
+        }
+    }
+    
+    func getDataFromUrl(urL:NSURL, completion: ((data: NSData?) -> Void)) {
+        NSURLSession.sharedSession().dataTaskWithURL(urL) { (data, response, error) in
+            completion(data: data)
+            }.resume()
+    }
+    
+    func getProfilePicLink(username: String, completion: (NSString? -> Void)) {
+        
+        let bruhaBaseURL: NSURL? = NSURL(string: "http://bruha.com/mobile_php/RetrieveMyPHP/")
+        
+        if let loginURL = NSURL(string: "getuserPicLink.php?", relativeToURL: bruhaBaseURL) {
+            
+            let networkOperation = NetworkOperation(url: loginURL)
+            
+            dispatch_async(dispatch_get_main_queue()) {
+                
+                networkOperation.stringFromURLPost("username=\(username)") {
+                    
+                    (let picSignal) in
+                    
+                    completion(picSignal)
+                }
+            }
+        }
+            
+        else {
+            print("Could not construct a valid URL")
         }
     }
     
@@ -66,7 +128,7 @@ class ProfileViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     func customStatusBar() {
         let barView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0))
-        barView.backgroundColor = UIColor.grayColor()
+        barView.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
         
         self.view.addSubview(barView)
     }
@@ -76,8 +138,8 @@ class ProfileViewController: UIViewController, FBSDKLoginButtonDelegate {
         configureView()
         loadUserInfo()
         backgroundGradient()
-        customTopButtons()
-        //customStatusBar()
+        //customTopButtons()
+        customStatusBar()
         // Do any additional setup after loading the view.
     }
     
@@ -87,7 +149,7 @@ class ProfileViewController: UIViewController, FBSDKLoginButtonDelegate {
     }
     
     func backgroundGradient() {
-        let background = CAGradientLayer().profileColor()
+        let background = CAGradientLayer().gradientColor()
         background.frame = self.view.bounds
         self.view.layer.insertSublayer(background, atIndex: 0)
     }

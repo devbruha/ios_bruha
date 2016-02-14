@@ -28,6 +28,7 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var EventCategory: UILabel!
     
+    @IBOutlet weak var moreInfoNavItem: UINavigationItem!
     @IBOutlet weak var moreInfoLabel: UILabel!
     @IBOutlet weak var moreInfoHeightLabel: NSLayoutConstraint!
     
@@ -116,6 +117,19 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
         }
     }
     
+    func customStatusBar() {
+        let barView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0))
+        barView.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
+        //barView.alpha = 0.5
+        self.view.addSubview(barView)
+    }
+    
+    func getDataFromUrl(urL:NSURL, completion: ((data: NSData?) -> Void)) {
+        NSURLSession.sharedSession().dataTaskWithURL(urL) { (data, response, error) in
+            completion(data: data)
+            }.resume()
+    }
+    
     func labelDisplay(){
         webDescriptionContent.opaque = false
         webDescriptionContent.backgroundColor = UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
@@ -126,7 +140,10 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
         PriceCalendar.enabled = false
         DateUpcoming.enabled = false
         
-        let posterInfo = FetchData(context: managedObjectContext).fetchPosterImages()
+        //let posterInfo = FetchData(context: managedObjectContext).fetchPosterImages()
+        if GlobalVariables.eventImageCache.count >= 50 { GlobalVariables.eventImageCache.removeAtIndex(0) }
+        if GlobalVariables.venueImageCache.count >= 50 { GlobalVariables.venueImageCache.removeAtIndex(0) }
+        if GlobalVariables.organizationImageCache.count >= 50 { GlobalVariables.organizationImageCache.removeAtIndex(0) }
         
         if sourceForComingEvent == "event" {
             
@@ -140,6 +157,7 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                         VenueName.text = "nil"
                     } else {VenueName.text = event.eventVenueName }
                     
+                    moreInfoNavItem.title = "Up & Coming"
                     moreInfoLabel.text = "Up & Coming"
                     
                     Address.text = "\(event.eventVenueAddress.componentsSeparatedByString(", ")[0]), \(event.eventVenueCity)"
@@ -155,13 +173,27 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                     EventCategory.text = event.primaryCategory
                     webDescriptionContent.loadHTMLString("<div style=\"font-family:OpenSans;color:white;width:100%;word-wrap:break-word;\">\(event.eventDescription)</div>", baseURL: nil)
                     
-                    if let images = posterInfo {
-                        for img in images {
-                            if img.ID == event.eventID {
-                                if img.Image?.length > 800 {
-                                    Image.image = UIImage(data: img.Image!)
-                                } else {
-                                    Image.image = randomImage()
+                    if let img = GlobalVariables.eventImageCache[event.eventID] {
+                        Image.image = img
+                    }
+                    else if let checkedUrl = NSURL(string:event.posterUrl) {
+                        
+                        self.getDataFromUrl(checkedUrl) { data in
+                            dispatch_async(dispatch_get_main_queue()) {
+                                if let downloadImg = data {
+                                    if downloadImg.length > 800 {
+                                        
+                                        let image = UIImage(data: downloadImg)
+                                        GlobalVariables.eventImageCache[event.eventID] = image
+                                        
+                                        self.Image.image = image
+                                        
+                                    } else {
+                                        self.Image.image = self.randomImage()
+                                    }
+                                }
+                                else {
+                                    self.Image.image = self.randomImage()
                                 }
                             }
                         }
@@ -194,13 +226,26 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                     PriceCalendar.enabled = true
                     DateUpcoming.enabled = true
                     
-                    if let images = posterInfo {
-                        for img in images {
-                            if img.ID == venue.venueID {
-                                if img.Image?.length > 800 {
-                                    Image.image = UIImage(data: img.Image!)
-                                } else {
-                                    Image.image = randomImage()
+                    if let img = GlobalVariables.venueImageCache[venue.venueID] {
+                        Image.image = img
+                    }
+                    else if let checkedUrl = NSURL(string:venue.posterUrl) {
+                        
+                        self.getDataFromUrl(checkedUrl) { data in
+                            dispatch_async(dispatch_get_main_queue()) {
+                                if let downloadImg = data {
+                                    if downloadImg.length > 800 {
+                                        
+                                        let image = UIImage(data: downloadImg)
+                                        GlobalVariables.venueImageCache[venue.venueID] = image
+                                        self.Image.image = image
+                                        
+                                    } else {
+                                        self.Image.image = self.randomImage()
+                                    }
+                                }
+                                else {
+                                    self.Image.image = self.randomImage()
                                 }
                             }
                         }
@@ -232,13 +277,25 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                     PriceCalendar.enabled = true
                     DateUpcoming.enabled = true
                     
-                    if let images = posterInfo {
-                        for img in images {
-                            if img.ID == organization.organizationID {
-                                if img.Image?.length > 800 {
-                                    Image.image = UIImage(data: img.Image!)
-                                } else {
-                                    Image.image = randomImage()
+                    if let img = GlobalVariables.organizationImageCache[organization.organizationID] {
+                        Image.image = img
+                    }
+                    else if let checkedUrl = NSURL(string:organization.posterUrl) {
+                        
+                        self.getDataFromUrl(checkedUrl) { data in
+                            dispatch_async(dispatch_get_main_queue()) {
+                                if let downloadImg = data {
+                                    if downloadImg.length > 800 {
+                                        
+                                        let image = UIImage(data: downloadImg)
+                                        GlobalVariables.venueImageCache[organization.organizationID] = image
+                                        self.Image.image = image
+                                    } else {
+                                        self.Image.image = self.randomImage()
+                                    }
+                                }
+                                else {
+                                    self.Image.image = self.randomImage()
                                 }
                             }
                         }
@@ -260,9 +317,20 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
         self.performSegueWithIdentifier("UpComing", sender: self)
     }
     
+    @IBAction func goCalendar(sender: UIButton) {
+        self.performSegueWithIdentifier("ComingCalendar", sender: self)
+    }
+    
+    
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if segue.identifier == "UpComing" {
             let comingController = segue.destinationViewController as! UpComingEventsViewController
+            comingController.sourceForEvent = sourceForComingEvent
+            comingController.sourceID = sourceID
+        }
+        
+        if segue.identifier == "ComingCalendar" {
+            let comingController = segue.destinationViewController as! UpComingCalendarViewController
             comingController.sourceForEvent = sourceForComingEvent
             comingController.sourceID = sourceID
         }
@@ -275,7 +343,8 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
         let imgHeight: CGFloat = screenSize.height * 0.33
         ImgeHeight.constant = imgHeight
         
-        customTopButtons()
+        customStatusBar()
+        //customTopButtons()
         labelDisplay()
         webDescriptionContent.delegate = self
         
@@ -454,14 +523,25 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
         }
         else { //user not logged in
             
-            let alert = UIAlertView(title: "Please log in for this!!!", message: nil, delegate: nil, cancelButtonTitle: nil)
-            alert.show()
-            let delay = 1.0 * Double(NSEC_PER_SEC)
-            var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-            dispatch_after(time, dispatch_get_main_queue(), {
-                alert.dismissWithClickedButtonIndex(-1, animated: true)
-            })
+            alertLogin()
         }
+    }
+    
+    func alertLogin() {
+        let alertController = UIAlertController(title: "You are not logged in!", message:nil, preferredStyle: .Alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+        let loginAction = UIAlertAction(title: "Login", style: .Default) { (_) -> Void in
+            self.performSegueWithIdentifier("GoToLogin", sender: self) // Replace SomeSegue with your segue identifier (name)
+        }
+        let signupAction = UIAlertAction(title: "Signup", style: .Default) { (_) -> Void in
+            self.performSegueWithIdentifier("GoToSignup", sender: self) // Replace SomeSegue with your segue identifier (name)
+        }
+        alertController.addAction(signupAction)
+        alertController.addAction(loginAction)
+        alertController.addAction(cancelAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+        
     }
     
     
@@ -490,16 +570,16 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
     
     func webViewDidFinishLoad(webView: UIWebView) {
         
-//        webDescriptionContent.scrollView.scrollEnabled = false
-//        
-//        let height = webView.scrollView.contentSize.height
-//        
-//        scrollView.contentInset.bottom = height + 180 + 40 + UIScreen.mainScreen().bounds.height * 0.33 + 20
-        
-        
         webDescriptionContent.scrollView.scrollEnabled = true
         
-        scrollView.scrollEnabled = false
+        let height = webView.scrollView.contentSize.height
+        
+        scrollView.contentInset.bottom = height + 180 + 40 + UIScreen.mainScreen().bounds.height * 0.33 + 20
+        
+        
+//        webDescriptionContent.scrollView.scrollEnabled = true
+//        
+//        scrollView.scrollEnabled = false
     }
     
     func randomImage() -> UIImage {

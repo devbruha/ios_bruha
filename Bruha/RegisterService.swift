@@ -29,7 +29,7 @@ struct RegisterService{
     
     func registerNewUser(completion: (NSString? -> Void)) {
         
-        if let registerURL = NSURL(string: "SignUp.php?", relativeToURL: bruhaBaseURL) {
+        if let registerURL = NSURL(string: "signupZW.php?", relativeToURL: bruhaBaseURL) {
             
             let networkOperation = NetworkOperation(url: registerURL)
             

@@ -29,6 +29,10 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
     var screenHeight: CGFloat = 0.0
     var panelControllerContainer: ARSPContainerController!
     
+    var eventInfo: [Event]?
+    var venueInfo: [Venue]?
+    var organizationInfo: [Organization]?
+    
     func configureView(){
         
         let screenSize: CGRect = UIScreen.mainScreen().bounds
@@ -83,25 +87,35 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
     
     func customStatusBar() {
         let barView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0))
-        barView.backgroundColor = UIColor.grayColor()
-        
+        barView.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
+        //barView.alpha = 0.5
         self.view.addSubview(barView)
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
-        customTopButtons()
-        //customStatusBar()
+        //customTopButtons()
+        customStatusBar()
         
-        uploadTableView.backgroundColor = UIColor.blackColor()
-        uploadTableView.separatorColor = UIColor.blackColor()
+        //uploadTableView.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
+        uploadTableView.separatorColor = UIColor.clearColor()
         
         self.myUploadLabel.alpha = 0.0
         self.myUploadImage.alpha = 0.0
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateNotificationUpload", name: "itemDisplayChangeUpload", object: nil)
+        
+        backgroundGradient()
         // Do any additional setup after loading the view.
+        
+        fetchInformation()
+    }
+    
+    func backgroundGradient() {
+        let background = CAGradientLayer().gradientColor()
+        background.frame = self.view.bounds
+        self.uploadTableView.layer.insertSublayer(background, atIndex: 0)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -129,20 +143,16 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
         //println("This is global variable on clicking \(GlobalVariables.selectedDisplay)")
         switch (GlobalVariables.uploadDisplay){
         case "Event":
-            let userEventInfo = FetchData(context: managedObjectContext).fetchUserEvents()
             //print("this is THE USER EVEVEVENTTTSSSSS", userEventInfo)
-            return (userEventInfo?.count)!
+            return (eventInfo?.count)!
         case "Venue":
-            let userVenueInfo = FetchData(context: managedObjectContext).fetchUserVenues()
-            return (userVenueInfo?.count)!
+            return (venueInfo?.count)!
         case "Artist":
             let artistInfo = FetchData(context: managedObjectContext).fetchArtists()
             return (artistInfo?.count)!
         case "Organization":
-            let organizationInfo = FetchData(context: managedObjectContext).fetchUserOrganizations()
             return (organizationInfo?.count)!
         default:
-            let venueInfo = FetchData(context: managedObjectContext).fetchUserVenues()
             return (venueInfo?.count)!
         }
         
@@ -170,9 +180,18 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
         }
     }
     
+    func getDataFromUrl(urL:NSURL, completion: ((data: NSData?) -> Void)) {
+        NSURLSession.sharedSession().dataTaskWithURL(urL) { (data, response, error) in
+            completion(data: data)
+            }.resume()
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let posterInfo = FetchData(context: managedObjectContext).fetchPosterImages()
+        //let posterInfo = FetchData(context: managedObjectContext).fetchPosterImages()
+        if GlobalVariables.eventImageCache.count >= 50 { GlobalVariables.eventImageCache.removeAtIndex(0) }
+        if GlobalVariables.venueImageCache.count >= 50 { GlobalVariables.venueImageCache.removeAtIndex(0) }
+        if GlobalVariables.organizationImageCache.count >= 50 { GlobalVariables.organizationImageCache.removeAtIndex(0) }
         
         switch (GlobalVariables.uploadDisplay){
         case "Event":
@@ -183,18 +202,31 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
                 cell = NSBundle.mainBundle().loadNibNamed("EventTableViewCell", owner: self, options: nil)[0] as! EventTableViewCell;
             }
             
-            let eventInfo = FetchData(context: managedObjectContext).fetchUserEvents()
             let event = eventInfo![indexPath.row]
             
             //println("Begin of code")
             cell.ExploreImage.contentMode = UIViewContentMode.ScaleToFill
-            if let images = posterInfo {
-                for img in images {
-                    if img.ID == event.eventID {
-                        if img.Image?.length > 800 {
-                            cell.ExploreImage.image = UIImage(data: img.Image!)
-                        } else {
-                            cell.ExploreImage.image = randomImage()
+            if let img = GlobalVariables.eventImageCache[event.eventID] {
+                cell.ExploreImage.image = img
+            }
+            else if let checkedUrl = NSURL(string:event.posterUrl) {
+                
+                self.getDataFromUrl(checkedUrl) { data in
+                    dispatch_async(dispatch_get_main_queue()) {
+                        if let downloadImg = data {
+                            if downloadImg.length > 800 {
+                                
+                                let image = UIImage(data: downloadImg)
+                                GlobalVariables.eventImageCache[event.eventID] = image
+                                
+                                cell.ExploreImage.image = image
+                                
+                            } else {
+                                cell.ExploreImage.image = self.randomImage()
+                            }
+                        }
+                        else {
+                            cell.ExploreImage.image = self.randomImage()
                         }
                     }
                 }
@@ -279,17 +311,29 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
             }
             
             
-            let venueInfo = FetchData(context: managedObjectContext).fetchUserVenues()
             let venue = venueInfo![indexPath.row]
             
             cell.venueImage.contentMode = UIViewContentMode.ScaleToFill
-            if let images = posterInfo {
-                for img in images {
-                    if img.ID == venue.venueID {
-                        if img.Image?.length > 800 {
-                            cell.venueImage.image = UIImage(data: img.Image!)
-                        } else {
-                            cell.venueImage.image = randomImage()
+            if let img = GlobalVariables.venueImageCache[venue.venueID] {
+                cell.venueImage.image = img
+            }
+            else if let checkedUrl = NSURL(string:venue.posterUrl) {
+                
+                self.getDataFromUrl(checkedUrl) { data in
+                    dispatch_async(dispatch_get_main_queue()) {
+                        if let downloadImg = data {
+                            if downloadImg.length > 800 {
+                                
+                                let image = UIImage(data: downloadImg)
+                                GlobalVariables.venueImageCache[venue.venueID] = image
+                                cell.venueImage.image = image
+                                
+                            } else {
+                                cell.venueImage.image = self.randomImage()
+                            }
+                        }
+                        else {
+                            cell.venueImage.image = self.randomImage()
                         }
                     }
                 }
@@ -341,17 +385,29 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
                 cell = NSBundle.mainBundle().loadNibNamed("OrganizationTableViewCell", owner: self, options: nil)[0] as! OrganizationTableViewCell;
             }
             
-            let organizationInfo = FetchData(context: managedObjectContext).fetchUserOrganizations()
+            
             let organization = organizationInfo![indexPath.row]
             
             cell.organizationImage.contentMode = UIViewContentMode.ScaleToFill
-            if let images = posterInfo {
-                for img in images {
-                    if img.ID == organization.organizationID {
-                        if img.Image?.length > 800 {
-                            cell.organizationImage.image = UIImage(data: img.Image!)
-                        } else {
-                            cell.organizationImage.image = randomImage()
+            if let img = GlobalVariables.organizationImageCache[organization.organizationID] {
+                cell.organizationImage.image = img
+            }
+            else if let checkedUrl = NSURL(string:organization.posterUrl) {
+                
+                self.getDataFromUrl(checkedUrl) { data in
+                    dispatch_async(dispatch_get_main_queue()) {
+                        if let downloadImg = data {
+                            if downloadImg.length > 800 {
+                                
+                                let image = UIImage(data: downloadImg)
+                                GlobalVariables.venueImageCache[organization.organizationID] = image
+                                cell.organizationImage.image = image
+                            } else {
+                                cell.organizationImage.image = self.randomImage()
+                            }
+                        }
+                        else {
+                            cell.organizationImage.image = self.randomImage()
                         }
                     }
                 }
@@ -424,6 +480,8 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
                         print("Removed from upload(event) \(userEvent.eventID)")
                         print("REMOVED")
                         
+                        updateUserFetch()
+                        
                         let eventService = EventService()
                         eventService.removeUserEvents(userEvent.eventID) {
                             (let removeInfo ) in
@@ -449,6 +507,8 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
                         print("Removed from upload(venue) \(userVenue.venueID)")
                         print("REMOVED")
                         
+                        updateUserFetch()
+                        
                         let venueService = VenueService()
                         venueService.removeUserVenues(userVenue.venueID) {
                             (let removeInfo ) in
@@ -473,6 +533,8 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
                         DeleteData(context: managedObjectContext).deleteUserOrganization(userOrganization.organizationID)
                         print("Removed from upload(organization) \(userOrganization.organizationID)")
                         print("REMOVED")
+                        
+                        updateUserFetch()
                         
                         let organizationService = OrganizationService()
                         organizationService.removeUserOrganizations(userOrganization.organizationID) {
@@ -555,6 +617,22 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
             }
             if GlobalVariables.uploadDisplay == "Organization" {
                 destinationController.sourceForComingEvent = "organization"
+                destinationController.sourceID = GlobalVariables.eventSelected
+            }
+        }
+        
+        if segue.identifier == "ShowOnMap" {
+            let destinationController = segue.destinationViewController as! ShowOnMapViewController
+            if GlobalVariables.uploadDisplay == "Event" {
+                destinationController.sourceForMarker = "event"
+                destinationController.sourceID = GlobalVariables.eventSelected
+            }
+            if GlobalVariables.uploadDisplay == "Venue" {
+                destinationController.sourceForMarker = "venue"
+                destinationController.sourceID = GlobalVariables.eventSelected
+            }
+            if GlobalVariables.uploadDisplay == "Organization" {
+                destinationController.sourceForMarker = "organization"
                 destinationController.sourceID = GlobalVariables.eventSelected
             }
         }
@@ -685,6 +763,29 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
         let aString = NSMutableAttributedString(string: title, attributes: mAttribute)
         
         return aString
+    }
+    
+    func fetchInformation() {
+        eventInfo = FetchData(context: managedObjectContext).fetchUserEvents()
+        venueInfo = FetchData(context: managedObjectContext).fetchUserVenues()
+        organizationInfo = FetchData(context: managedObjectContext).fetchUserOrganizations()
+    }
+    
+    func updateUserFetch() {
+        
+        if GlobalVariables.uploadDisplay == "Event"{
+            
+            eventInfo = FetchData(context: managedObjectContext).fetchUserEvents()
+        }
+        if GlobalVariables.uploadDisplay == "Venue"{
+            
+            venueInfo = FetchData(context: managedObjectContext).fetchUserVenues()
+        }
+        if GlobalVariables.uploadDisplay == "Organization"{
+            
+            organizationInfo = FetchData(context: managedObjectContext).fetchUserOrganizations()
+        }
+        
     }
     
     /*

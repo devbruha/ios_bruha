@@ -113,6 +113,19 @@ class EventMoreInfomationViewController: UIViewController, UIWebViewDelegate{
                 }
         }
     }
+    
+    func customStatusBar() {
+        let barView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0))
+        barView.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
+        //barView.alpha = 0.5
+        self.view.addSubview(barView)
+    }
+    
+    func getDataFromUrl(urL:NSURL, completion: ((data: NSData?) -> Void)) {
+        NSURLSession.sharedSession().dataTaskWithURL(urL) { (data, response, error) in
+            completion(data: data)
+            }.resume()
+    }
 
     
     func labelDisplay(){
@@ -125,9 +138,12 @@ class EventMoreInfomationViewController: UIViewController, UIWebViewDelegate{
 //        PriceCalendar.enabled = false
 //        DateUpcoming.enabled = false
         
-        let posterInfo = FetchData(context: managedObjectContext).fetchPosterImages()
+        //let posterInfo = FetchData(context: managedObjectContext).fetchPosterImages()
+        if GlobalVariables.eventImageCache.count >= 50 { GlobalVariables.eventImageCache.removeAtIndex(0) }
+        if GlobalVariables.venueImageCache.count >= 50 { GlobalVariables.venueImageCache.removeAtIndex(0) }
+        if GlobalVariables.organizationImageCache.count >= 50 { GlobalVariables.organizationImageCache.removeAtIndex(0) }
         
-        if GlobalVariables.selectedDisplay == "Event" || GlobalVariables.addictedDisplay == "Event" || GlobalVariables.uploadDisplay == "Event"{
+        //if GlobalVariables.selectedDisplay == "Event" || GlobalVariables.addictedDisplay == "Event" || GlobalVariables.uploadDisplay == "Event"{
             
             let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
             let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
@@ -158,16 +174,30 @@ class EventMoreInfomationViewController: UIViewController, UIWebViewDelegate{
                     eventCategory.text = event.primaryCategory
                     webDescriptionContent.loadHTMLString("<div style=\"font-family:OpenSans;color:white;width:100%;word-wrap:break-word;\">\(event.eventDescription)</div>", baseURL: nil)
                     
-                    sourceID.append(event.organizationID)
+                    sourceID = event.organizationID
                     eventVenueSource = event.venueID
                     print("org id passed", sourceID); print("event id", event.eventID)
-                    if let images = posterInfo {
-                        for img in images {
-                            if img.ID == event.eventID {
-                                if img.Image?.length > 800 {
-                                    Image.image = UIImage(data: img.Image!)
-                                } else {
-                                    Image.image = randomImage()
+                    if let img = GlobalVariables.eventImageCache[event.eventID] {
+                        Image.image = img
+                    }
+                    else if let checkedUrl = NSURL(string:event.posterUrl) {
+                        
+                        self.getDataFromUrl(checkedUrl) { data in
+                            dispatch_async(dispatch_get_main_queue()) {
+                                if let downloadImg = data {
+                                    if downloadImg.length > 800 {
+                                        
+                                        let image = UIImage(data: downloadImg)
+                                        GlobalVariables.eventImageCache[event.eventID] = image
+                                        
+                                        self.Image.image = image
+                                        
+                                    } else {
+                                        self.Image.image = self.randomImage()
+                                    }
+                                }
+                                else {
+                                    self.Image.image = self.randomImage()
                                 }
                             }
                         }
@@ -181,7 +211,7 @@ class EventMoreInfomationViewController: UIViewController, UIWebViewDelegate{
                 }
             }
             
-        }
+        
     }
 
     @IBAction func goAffiliatedOrg(sender: UIButton) {
@@ -208,7 +238,8 @@ class EventMoreInfomationViewController: UIViewController, UIWebViewDelegate{
         let imgHeight: CGFloat = screenSize.height * 0.33
         ImgeHeight.constant = imgHeight
         
-        customTopButtons()
+        customStatusBar()
+        //customTopButtons()
         labelDisplay()
         webDescriptionContent.delegate = self
         
@@ -223,6 +254,27 @@ class EventMoreInfomationViewController: UIViewController, UIWebViewDelegate{
         self.eventMoreInfoImage.alpha = 0
         
         // Do any additional setup after loading the view.
+        
+//        var events = OrderedDictionary<String, Int>()
+//        
+//        events["one"] = 1
+//        events["two"] = 2
+//        events["three"] = 3
+//        events["four"] = 4
+//        events["five"] = 5
+//        
+//        print(events)
+//        
+//        events.removeAtIndex(0)
+//        
+//        print(events)
+//        
+//        print(events["two"])
+//        
+//        if let aaa = events["one"] {
+//            print(aaa)
+//        }
+//        //print(events["one"])
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -245,7 +297,7 @@ class EventMoreInfomationViewController: UIViewController, UIWebViewDelegate{
         if GlobalVariables.loggedIn == true {
             let user = FetchData(context: managedObjectContext).fetchUserInfo()![0].userName
             //Event
-            if GlobalVariables.selectedDisplay == "Event" || GlobalVariables.addictedDisplay == "Event" || GlobalVariables.uploadDisplay == "Event"{
+            //if GlobalVariables.selectedDisplay == "Event" || GlobalVariables.addictedDisplay == "Event" || GlobalVariables.uploadDisplay == "Event"{
                 let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
                 let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
                 for event in eventInfo!{
@@ -296,18 +348,28 @@ class EventMoreInfomationViewController: UIViewController, UIWebViewDelegate{
                         //                        })
                     }
                 }
-            }
-            else { //user not logged in
-                
-                let alert = UIAlertView(title: "Please log in for this!!!", message: nil, delegate: nil, cancelButtonTitle: nil)
-                alert.show()
-                let delay = 1.0 * Double(NSEC_PER_SEC)
-                var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-                dispatch_after(time, dispatch_get_main_queue(), {
-                    alert.dismissWithClickedButtonIndex(-1, animated: true)
-                })
-            }
         }
+        else { //user not logged in
+            
+            alertLogin()
+        }
+    }
+    
+    func alertLogin() {
+        let alertController = UIAlertController(title: "You are not logged in!", message:nil, preferredStyle: .Alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+        let loginAction = UIAlertAction(title: "Login", style: .Default) { (_) -> Void in
+            self.performSegueWithIdentifier("GoToLogin", sender: self) // Replace SomeSegue with your segue identifier (name)
+        }
+        let signupAction = UIAlertAction(title: "Signup", style: .Default) { (_) -> Void in
+            self.performSegueWithIdentifier("GoToSignup", sender: self) // Replace SomeSegue with your segue identifier (name)
+        }
+        alertController.addAction(signupAction)
+        alertController.addAction(loginAction)
+        alertController.addAction(cancelAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+        
     }
     
     func webView(webView: UIWebView, shouldStartLoadWithRequest request: NSURLRequest, navigationType: UIWebViewNavigationType) -> Bool {
@@ -334,16 +396,26 @@ class EventMoreInfomationViewController: UIViewController, UIWebViewDelegate{
     
     func webViewDidFinishLoad(webView: UIWebView) {
         
-//        webDescriptionContent.scrollView.scrollEnabled = false
-//        
-//        let height = webView.scrollView.contentSize.height
-//        
-//        scrollView.contentInset.bottom = height + 180 + 40 + UIScreen.mainScreen().bounds.height * 0.33 + 30
-        
-        
         webDescriptionContent.scrollView.scrollEnabled = true
         
-        scrollView.scrollEnabled = false
+        let height = webView.scrollView.contentSize.height
+        
+        scrollView.contentInset.bottom = height + 180 + 40 + UIScreen.mainScreen().bounds.height * 0.33 + 30
+        
+    }
+    
+    override func touchesBegan(touches: Set<UITouch>, withEvent event: UIEvent?) {
+        print("touched")
+        if touches.count > 0 {
+            let tempTouch = UITouch()
+            let touchLocation: CGPoint = tempTouch.locationInView(webDescriptionContent)
+            if touchLocation.y > 20 {
+                webDescriptionContent.scrollView.scrollEnabled = true
+                print("Stop")
+            }
+            //scrollView.scrollEnabled = false
+            
+        }
     }
     
     func randomImage() -> UIImage {

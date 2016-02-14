@@ -86,7 +86,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         let nib = UINib(nibName: "CategoryHeaderCellTableViewCell", bundle: nil)
         categoryTableView.registerNib(nib, forCellReuseIdentifier: "HeaderCell")
         
-        priceLabelTitle.frame = CGRectMake(10,230, screenSize.width - 20, 30)
+        priceLabelTitle.frame = CGRectMake(10,330, screenSize.width - 20, 30)
         priceLabelTitle.textAlignment = NSTextAlignment.Left
         priceLabelTitle.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1)
         priceLabelTitle.textColor = UIColor.whiteColor()
@@ -95,7 +95,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         self.scrollView.addSubview(priceLabelTitle)
         
         
-        priceLabel.frame = CGRectMake(10, 260, screenSize.width - 20, 20)
+        priceLabel.frame = CGRectMake(10, 360, screenSize.width - 20, 20)
         priceLabel.textAlignment = NSTextAlignment.Center
         priceLabel.backgroundColor = UIColor.clearColor()
         priceLabel.textColor = UIColor.whiteColor()
@@ -108,7 +108,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         slider.continuous = true
         slider.tintColor = UIColor.whiteColor()
         slider.backgroundColor = UIColor.whiteColor()
-        slider.frame = CGRectMake(10, 280, screenSize.width - 20, 20)
+        slider.frame = CGRectMake(10, 380, screenSize.width - 20, 20)
         slider.value = -1
         slider.addTarget(self, action: "sliderValueDidChange:", forControlEvents: .ValueChanged)
         self.scrollView.addSubview(slider)
@@ -136,10 +136,17 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         
         calendarManager.delegate = self
         
+        calendarMenu.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1)
+        calendarContentView.layer.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1).CGColor
+        
         calendarManager.menuView = calendarMenu
         calendarManager.contentView = calendarContentView
-        calendarManager.setDate(NSDate())
         
+        if GlobalVariables.datesSelected.count != 0 {
+            calendarManager.setDate(GlobalVariables.datesSelected.lastObject as! NSDate)
+        } else {
+            calendarManager.setDate(NSDate())
+        }
         
         switch(GlobalVariables.selectedDisplay){
             
@@ -162,7 +169,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         
         
         newDayView.hidden = false
-        newDayView.backgroundColor = UIColor.blackColor()
+        newDayView.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
         newDayView.textLabel.textColor = UIColor.whiteColor()
         
         newDayView.layer.borderColor = UIColor.grayColor().CGColor
@@ -170,10 +177,18 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         
         
         if(newDayView.isFromAnotherMonth){
-            newDayView.alpha = 0.5
+            newDayView.removeFromSuperview()
         }
         else if(GlobalVariables.datesSelected.containsObject(newDayView.date)){
-            newDayView.backgroundColor = UIColor.cyanColor()
+            newDayView.backgroundColor = UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1)
+        }
+        
+        if calendarManager.dateHelper.date(NSDate(), isTheSameDayThan: newDayView.date){
+            
+            newDayView.circleView.backgroundColor = UIColor.clearColor()
+            newDayView.circleView.layer.borderWidth = 1
+            newDayView.circleView.layer.borderColor = UIColor.whiteColor().CGColor
+            newDayView.circleView.hidden = false
         }
     }
     
@@ -184,7 +199,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         if(GlobalVariables.datesSelected.containsObject(newDayView.date)){
             
             GlobalVariables.datesSelected.removeObject(newDayView.date)
-            newDayView.backgroundColor = UIColor.blackColor()
+            newDayView.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
             
             let dateFormatter = NSDateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -198,7 +213,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         }
         else{
             GlobalVariables.datesSelected.addObject(newDayView.date)
-            newDayView.backgroundColor = UIColor.cyanColor()
+            newDayView.backgroundColor = UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1)
             
             let dateFormatter = NSDateFormatter()
             dateFormatter.dateFormat = "yyyy-MM-dd"
@@ -224,10 +239,10 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         let monthSymbol = months[month-1]
         
         //newMenuItemView.text = component as? String
-        newMenuItemView.text = monthSymbol + " " + String(component)
+        newMenuItemView.text = "<<            " + monthSymbol + " " + String(component) + "            >>"
         //newMenuItemView.text = monthSymbol
         //newMenuItemView.backgroundColor = UIColor.cyanColor()
-        //newMenuItemView.textColor = UIColor.blackColor()
+        newMenuItemView.textColor = UIColor.whiteColor()
         //newMenuItemView.scrollView
         
     }
@@ -345,7 +360,8 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         
         Filtering().clearFilter()
         resetSliderValue()
-        
+        GlobalVariables.datesSelected.removeAllObjects()
+        calendarManager.reload()
         switch(GlobalVariables.selectedDisplay){
             
         case "Event":
@@ -487,7 +503,15 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
             }
         }
         else{
-            eventObject = [EventObjects(sectionName: "Event Categories", sectionObjectIDs: [], sectionObjects: [])]
+            //eventObject = [EventObjects(sectionName: "Event Categories", sectionObjectIDs: [], sectionObjects: [])]
+            
+            eventObject.removeAll(keepCapacity: false)
+            eventObject = (backupEventCategories)
+            
+            for(var i = 0 ; i < eventObject.count ; ++i){
+                
+                eventObject[i].sectionObjects.removeAll(keepCapacity: false)
+            }
         }
         
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
@@ -524,7 +548,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
 //        GlobalVariables.selectedDisplay = "Discoverable"
         NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
         
-        let alert = UIAlertView(title: "Discoverable Coming Soon!!!", message: nil, delegate: nil, cancelButtonTitle: nil)
+        let alert = UIAlertView(title: "Discoverable Coming Soon", message: nil, delegate: nil, cancelButtonTitle: nil)
         alert.show()
         let delay = 1.5 * Double(NSEC_PER_SEC)
         var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
@@ -557,6 +581,15 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         updateNotificationSent()
     }
     
+    func animatePanelJump() {
+        self.view.center.y = self.view.center.y - 5
+        
+        UIView.animateWithDuration(1.5, delay: 0.0, usingSpringWithDamping: CGFloat(1), initialSpringVelocity: CGFloat(1), options: UIViewAnimationOptions.TransitionNone, animations: { () -> Void in
+            self.view.center.y = self.view.center.y + 5
+            }) { (finished) -> Void in
+        }
+    }
+    
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.swipeZoneHeight = self.panelControllerContainer.swipableZoneHeight
@@ -566,6 +599,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         uiPriceFilter()
+        animatePanelJump()
     }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -683,7 +717,8 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         
         if GlobalVariables.selectedDisplay == "Event" {
-            return eventObject[section].sectionObjects.count
+            return 0
+            //return eventObject[section].sectionObjects.count
         }
         else {
             return 0
@@ -728,7 +763,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
             headerCell.detailTextLabel?.text = "\(section)"
             headerCell.categoryName?.font = UIFont(name: "OpenSans-Semibold", size: 18)
             
-            headerCell.categoryImage.image = UIImage(named: "Events_White")
+            headerCell.categoryImage.image = UIImage(named: "arrow-down")
             
         }
         else{
@@ -739,11 +774,11 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
                 
                 if(GlobalVariables.UserCustomFilters.categoryFilter.eventCategories.keys.contains((headerCell.categoryName?.text)!)){
                     headerCell.backgroundColor = UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1.0)
-                    headerCell.arrowimage.image = UIImage(named: "Events_White")
+                    //headerCell.arrowimage.image = UIImage(named: "arrow-down")
                 }
                 else{
                     headerCell.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1.0)
-                    headerCell.arrowimage.image = UIImage(named: "SwipeRight_Light")
+                    //headerCell.arrowimage.image = UIImage(named: "arrow-up")
                 }
                 
             } else if GlobalVariables.selectedDisplay == "Venue" {
@@ -751,10 +786,10 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
                 headerCell.categoryImage.image = UIImage(named: venueObject[section])
                 
                 if(GlobalVariables.UserCustomFilters.categoryFilter.venueCategories.contains((headerCell.categoryName?.text)!)){
-                    headerCell.backgroundColor = UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
+                    headerCell.backgroundColor = UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1.0)
                 }
                 else{
-                    headerCell.backgroundColor = UIColor.blackColor()
+                    headerCell.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
                 }
                 
             } else if GlobalVariables.selectedDisplay == "Organization" {
@@ -762,10 +797,10 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
                 headerCell.categoryImage.image = UIImage(named: organizationObject[section])
                 
                 if(GlobalVariables.UserCustomFilters.categoryFilter.organizationCategories.contains((headerCell.categoryName?.text)!)){
-                    headerCell.backgroundColor = UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1)
+                    headerCell.backgroundColor = UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1.0)
                 }
                 else{
-                    headerCell.backgroundColor = UIColor.blackColor()
+                    headerCell.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
                 }
             }
             
@@ -945,16 +980,16 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         
         //scrollView.contentSize.height = 500 + constraint.constant
         
-        priceLabelTitle.frame = CGRectMake(10, 200 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 30)
-        priceLabel.frame = CGRectMake(10, 230 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 20)
-        slider.frame = CGRectMake(10, 250 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 20)
+        priceLabelTitle.frame = CGRectMake(10, 320 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 30)
+        priceLabel.frame = CGRectMake(10, 350 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 20)
+        slider.frame = CGRectMake(10, 370 + constraint.constant, UIScreen.mainScreen().bounds.width - 20, 20)
         
         if GlobalVariables.selectedDisplay == "Event" {
-            scrollView.contentInset.bottom = 100
-            clearFilter.frame = CGRectMake(UIScreen.mainScreen().bounds.width * 0.7 - 10, 280 + constraint.constant, UIScreen.mainScreen().bounds.width * 0.3, 30)
+            scrollView.contentInset.bottom = 110
+            clearFilter.frame = CGRectMake(UIScreen.mainScreen().bounds.width * 0.7 - 10, 400 + constraint.constant, UIScreen.mainScreen().bounds.width * 0.3, 30)
         } else {
-            scrollView.contentInset.bottom = -150
-            clearFilter.frame = CGRectMake(UIScreen.mainScreen().bounds.width * 0.7 - 10, 30 + constraint.constant, UIScreen.mainScreen().bounds.width * 0.3, 30)
+            scrollView.contentInset.bottom = -270
+            clearFilter.frame = CGRectMake(UIScreen.mainScreen().bounds.width * 0.7 - 10, 20 + constraint.constant, UIScreen.mainScreen().bounds.width * 0.3, 30)
         }
         
         self.view.setNeedsUpdateConstraints()

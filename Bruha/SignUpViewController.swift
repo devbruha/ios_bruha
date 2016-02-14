@@ -81,7 +81,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, FBSDKLoginBut
         let offSet = screenSize.width * 0.1
         let leadingConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.LeftMargin, relatedBy: NSLayoutRelation.Equal, toItem: self.continueWithoutRegister, attribute: NSLayoutAttribute.LeftMargin, multiplier: 1, constant: offSet)
         
-        let trailingConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.RightMargin, relatedBy: NSLayoutRelation.Equal, toItem: self.loginB, attribute: NSLayoutAttribute.RightMargin, multiplier: 1, constant: -offSet)
+        let trailingConstraint = NSLayoutConstraint(item: faceLoginButton, attribute: NSLayoutAttribute.RightMargin, relatedBy: NSLayoutRelation.Equal, toItem: self.signupB, attribute: NSLayoutAttribute.RightMargin, multiplier: 1, constant: -offSet)
         
         NSLayoutConstraint.activateConstraints([topConstraint, leadingConstraint, trailingConstraint])
         
@@ -232,12 +232,34 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, FBSDKLoginBut
                             registerService.registerNewUser{
                                 (let registerResponse) in
                                 
-                                dispatch_async(dispatch_get_main_queue()){
+                                let mRegisterResponse = registerResponse?.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+                                //print("the sign up returned value is \(mRegisterResponse)")
+                                
+                                if mRegisterResponse == "1" {
+                                    
+                                    dispatch_async(dispatch_get_main_queue()){
+                                        let alertController = UIAlertController(title: "Register Successful", message:"Please confirm registration through your Email", preferredStyle: .Alert)
+                                        let acceptAction = UIAlertAction(title: "OK", style: .Default) { (_) -> Void in
+                                            self.performSegueWithIdentifier("goToSplash", sender: self)
+                                        }
+                                        alertController.addAction(acceptAction)
+                                        self.presentViewController(alertController, animated: true, completion: nil)
+                                    }
+                                    
+                                }
+                                else {
+                                    dispatch_async(dispatch_get_main_queue()){
+                                        let alert = UIAlertView(title: "Resgister Fail", message: mRegisterResponse, delegate: nil, cancelButtonTitle: "OK")
+                                        alert.show()
+                                    }
+                                }
+                                
+                                /*dispatch_async(dispatch_get_main_queue()){
                                     
                                     let alertController = UIAlertController(title: "Register Successful", message:nil, preferredStyle: .Alert)
                                     
                                     let acceptAction = UIAlertAction(title: "OK", style: .Default) { (_) -> Void in
-                                        self.performSegueWithIdentifier("ProceedToDashBoard", sender: self) // Replace SomeSegue with your segue identifier (name)
+                                        //self.performSegueWithIdentifier("ProceedToDashBoard", sender: self) // Replace SomeSegue with your segue identifier (name)
                                         
                                         let mUser = User(username: username, userEmail: emailaddress, userCity: "Not Set", userFName: "Not Set", userGender: "Not Set", userBirthdate: "Not Set")
                                         
@@ -249,8 +271,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, FBSDKLoginBut
                                     alertController.addAction(acceptAction)
                                     
                                     self.presentViewController(alertController, animated: true, completion: nil)
+                                }*/
                                 }
-                            }
                         }
                             
                         else{

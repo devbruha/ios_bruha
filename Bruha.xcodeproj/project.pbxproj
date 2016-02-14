@@ -120,6 +120,8 @@
 		A505C0F31BCEE8730067CDD1 /* UploadListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A505C0F21BCEE8730067CDD1 /* UploadListViewController.swift */; };
 		A505C0F51BCEE9860067CDD1 /* UploadListPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A505C0F41BCEE9860067CDD1 /* UploadListPanelViewController.swift */; };
 		A505C0F71BD17B910067CDD1 /* LoadScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A505C0F61BD17B910067CDD1 /* LoadScreenViewController.swift */; };
+		A537502C1C57C78900178357 /* UpComingCalendarViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A537502B1C57C78900178357 /* UpComingCalendarViewController.swift */; };
+		A54827FD1C692A7300319DF7 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A54827FC1C692A7300319DF7 /* ForgotPasswordViewController.swift */; };
 		A576579A1C1F6E4300F871A2 /* OpenSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A57657901C1F6E4300F871A2 /* OpenSans-Bold.ttf */; };
 		A576579B1C1F6E4300F871A2 /* OpenSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A57657911C1F6E4300F871A2 /* OpenSans-BoldItalic.ttf */; };
 		A576579C1C1F6E4300F871A2 /* OpenSans-ExtraBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = A57657921C1F6E4300F871A2 /* OpenSans-ExtraBold.ttf */; };
@@ -156,6 +158,7 @@
 		A5D90E061BBDD79300537F72 /* AddictionVenue.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5D90E051BBDD79300537F72 /* AddictionVenue.swift */; };
 		A5E4EAD11BBEDFE500DAEE9D /* AddictionListViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E4EAD01BBEDFE500DAEE9D /* AddictionListViewController.swift */; };
 		A5E4EAD31BC2BC3900DAEE9D /* AddictionListPanelViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5E4EAD21BC2BC3900DAEE9D /* AddictionListPanelViewController.swift */; };
+		A5F286641C47023D004A1860 /* OrderedDictionary.swift in Sources */ = {isa = PBXBuildFile; fileRef = A5F286631C47023D004A1860 /* OrderedDictionary.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -288,6 +291,8 @@
 		A505C0F21BCEE8730067CDD1 /* UploadListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadListViewController.swift; sourceTree = "<group>"; };
 		A505C0F41BCEE9860067CDD1 /* UploadListPanelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadListPanelViewController.swift; sourceTree = "<group>"; };
 		A505C0F61BD17B910067CDD1 /* LoadScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadScreenViewController.swift; sourceTree = "<group>"; };
+		A537502B1C57C78900178357 /* UpComingCalendarViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpComingCalendarViewController.swift; sourceTree = "<group>"; };
+		A54827FC1C692A7300319DF7 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		A57657901C1F6E4300F871A2 /* OpenSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-Bold.ttf"; sourceTree = "<group>"; };
 		A57657911C1F6E4300F871A2 /* OpenSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-BoldItalic.ttf"; sourceTree = "<group>"; };
 		A57657921C1F6E4300F871A2 /* OpenSans-ExtraBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "OpenSans-ExtraBold.ttf"; sourceTree = "<group>"; };
@@ -324,6 +329,7 @@
 		A5D90E051BBDD79300537F72 /* AddictionVenue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddictionVenue.swift; sourceTree = "<group>"; };
 		A5E4EAD01BBEDFE500DAEE9D /* AddictionListViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddictionListViewController.swift; sourceTree = "<group>"; };
 		A5E4EAD21BC2BC3900DAEE9D /* AddictionListPanelViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddictionListPanelViewController.swift; sourceTree = "<group>"; };
+		A5F286631C47023D004A1860 /* OrderedDictionary.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OrderedDictionary.swift; sourceTree = "<group>"; };
 		CCB1783DB671A2F9EF9B679A /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -413,6 +419,8 @@
 				A501998B1C23239B0097624F /* UpComingEventsViewController.swift */,
 				A5C96A821C3AE5460051EF1C /* EventMoreInfomationViewController.swift */,
 				A5C96A841C3AEF770051EF1C /* AffiliatedOrgViewController.swift */,
+				A537502B1C57C78900178357 /* UpComingCalendarViewController.swift */,
+				A54827FC1C692A7300319DF7 /* ForgotPasswordViewController.swift */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -519,6 +527,7 @@
 				45FA056B1B5D4158004AD819 /* Bruha.xcdatamodeld */,
 				1835F8F21B5EAD7200FD1BD1 /* Reachability.swift */,
 				45FA05691B5D4158004AD819 /* AppDelegate.swift */,
+				A5F286631C47023D004A1860 /* OrderedDictionary.swift */,
 				45FA05681B5D4158004AD819 /* Info.plist */,
 				A576578F1C1F6E2A00F871A2 /* Font */,
 			);
@@ -738,7 +747,7 @@
 				TargetAttributes = {
 					45FA05631B5D4158004AD819 = {
 						CreatedOnToolsVersion = 6.4;
-						DevelopmentTeam = 2XYHY4M8GS;
+						DevelopmentTeam = PS3272THNU;
 					};
 					45FA057B1B5D4158004AD819 = {
 						CreatedOnToolsVersion = 6.4;
@@ -906,6 +915,7 @@
 				45C938AC1B8D089800BB0D0C /* Categories.swift in Sources */,
 				1891B2821B86529B000949C8 /* SplashView.swift in Sources */,
 				4560C54F1B66D49800AB5382 /* EventTableViewCell.swift in Sources */,
+				A537502C1C57C78900178357 /* UpComingCalendarViewController.swift in Sources */,
 				181EB6191B714B7600B9295E /* Date.swift in Sources */,
 				45FA05A71B5D4190004AD819 /* LoadScreenService.swift in Sources */,
 				45AFAF231B60332E00BA6854 /* CredentialCheck.swift in Sources */,
@@ -924,9 +934,11 @@
 				180B05941BE464E800E2F46F /* HorizontalLine.swift in Sources */,
 				45FA059B1B5D4188004AD819 /* GlobalVariables.swift in Sources */,
 				45FA05A51B5D4190004AD819 /* NetworkOperation.swift in Sources */,
+				A5F286641C47023D004A1860 /* OrderedDictionary.swift in Sources */,
 				4560C5491B66D42000AB5382 /* ExploreListViewController.swift in Sources */,
 				4560C54D1B66D45100AB5382 /* EventRectangleView.swift in Sources */,
 				18D2169D1B6BF1D9005DAAA8 /* ExploreListPanelViewController.swift in Sources */,
+				A54827FD1C692A7300319DF7 /* ForgotPasswordViewController.swift in Sources */,
 				45C6D5BE1B851ACE00EE4A05 /* EventPrimaryCategoriesDBModel.swift in Sources */,
 				45FA056D1B5D4158004AD819 /* Bruha.xcdatamodeld in Sources */,
 				45FA05961B5D4188004AD819 /* EventDBModel.swift in Sources */,

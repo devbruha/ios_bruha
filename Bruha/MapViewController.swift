@@ -22,7 +22,7 @@ extension UITableView {
     }
 }
 
-class MapViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,CLLocationManagerDelegate, GMSMapViewDelegate,ARSPDragDelegate, ARSPVisibilityStateDelegate, SWTableViewCellDelegate {
+class MapViewController: UIViewController,UITableViewDataSource,UITableViewDelegate,UISearchResultsUpdating, UISearchBarDelegate,CLLocationManagerDelegate, GMSMapViewDelegate,ARSPDragDelegate, ARSPVisibilityStateDelegate, SWTableViewCellDelegate {
     
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
@@ -33,6 +33,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
     @IBOutlet var BruhaButton: UIButton!
     @IBOutlet var BackButton: UIButton!
     
+    @IBOutlet weak var searchView: UIView!
     
     var panelControllerContainer: ARSPContainerController!
     
@@ -54,6 +55,11 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
     var dropEvents: [Event] = []
     var dropVenues: [Venue] = []
     var dropOrganizations: [Organization] = []
+    
+    var searchController: UISearchController!
+    var searchedEvents = [Event]()
+    var searchedVenues = [Venue]()
+    var searchedOrganizations = [Organization]()
     
     func configureView(){
         
@@ -93,9 +99,41 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
     
     func customStatusBar() {
         let barView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0))
-        barView.backgroundColor = UIColor.grayColor()
+        barView.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
         
         self.view.addSubview(barView)
+    }
+    
+    func setUpSearchBar() {
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.delegate = self
+        definesPresentationContext = true
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Events"
+        
+        searchController.searchBar.barTintColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
+        searchController.searchBar.tintColor = UIColor.whiteColor()
+        
+        searchController.searchBar.scopeButtonTitles = ["Search", "Location"]
+        
+        searchController.searchBar.sizeToFit()
+        
+        
+        
+        //        let searchView = UIView.init(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, searchController.searchBar.bounds.size.height))
+        //
+                searchView.addSubview(searchController.searchBar)
+        //
+        //        self.view.addSubview(searchView)
+        
+        //self.navigationItem.titleView = searchController.searchBar
+        
+        
+        if GlobalVariables.searchedText != "" {
+            searchController.searchBar.text = GlobalVariables.searchedText
+        }
+        
     }
     
     override func viewDidLoad() {
@@ -103,19 +141,22 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
         
         generateMarkers()
         
-        customTopButtons()
+        //customTopButtons()
         
-        //customStatusBar()
+        setUpSearchBar()
+        
+        customStatusBar()
+        
         //UIApplication.sharedApplication().statusBarStyle = .Default
         let screenSize: CGRect = UIScreen.mainScreen().bounds
-        dropDownTable.separatorColor = UIColor.clearColor()
+        dropDownTable.separatorColor = UIColor.whiteColor()
         //dropDownTable.separatorStyle = UITableViewCellSeparatorStyle.SingleLineEtched
-        dropDownTable.backgroundColor = UIColor.blackColor()
+        dropDownTable.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
         //dropDownTable.rowHeight = screenSize.width * 0.4
         
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateMarkers", name: "itemDisplayChangeEvent", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "clearDrop", name: "itemDisplayChangeEvent", object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateMarkers", name: "filter", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateFilterSearchResult", name: "itemDisplayChangeEvent", object: nil)
+        //NSNotificationCenter.defaultCenter().addObserver(self, selector: "clearDrop", name: "itemDisplayChangeEvent", object: nil)
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateFilterSearchResult", name: "filter", object: nil)
         
         // Do any additional setup after loading the view, typically from a nib.
         locationManager.delegate = self
@@ -139,22 +180,37 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
     override func viewDidAppear(animated: Bool) {
         super.viewDidAppear(animated)
         
+        if GlobalVariables.searchedText != "" {
+            searchController.active = true
+            searchController.becomeFirstResponder()
+        }
+        
         dropDownTable.reloadData()
     }
     
     func mapView(mapView: GMSMapView!, didTapMarker marker: GMSMarker!) -> Bool {
+        
+        dropDownTable.contentInset.top = 30     // avoid search scope block title
+        
         //Event
         if GlobalVariables.selectedDisplay == "Event" {
             dropEvents.removeAll()
-            if GlobalVariables.filterEventBool {
+            if searchController.searchBar.text == "" && !GlobalVariables.filterEventBool{
+                for event in GlobalVariables.displayedEvents{
+                    if(event.eventLatitude == marker.position.latitude && event.eventLongitude == marker.position.longitude){
+                        dropEvents.append(event)
+                    }
+                }
+            }
+            else if searchController.searchBar.text == "" && GlobalVariables.filterEventBool {
                 for event in GlobalVariables.displayFilteredEvents{
                     if(event.eventLatitude == marker.position.latitude && event.eventLongitude == marker.position.longitude){
                         dropEvents.append(event)
                     }
                 }
             }
-            else {
-                for event in GlobalVariables.displayedEvents{
+            else if searchController.searchBar.text != "" {
+                for event in searchedEvents{
                     if(event.eventLatitude == marker.position.latitude && event.eventLongitude == marker.position.longitude){
                         dropEvents.append(event)
                     }
@@ -164,15 +220,22 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
         //Venue
         else if GlobalVariables.selectedDisplay == "Venue" {
             dropVenues.removeAll()
-            if GlobalVariables.filterVenueBool {
+            if searchController.searchBar.text == "" && !GlobalVariables.filterVenueBool{
+                for venue in GlobalVariables.displayedVenues{
+                    if(venue.venueLatitude == marker.position.latitude && venue.venueLongitude == marker.position.longitude){
+                        dropVenues.append(venue)
+                    }
+                }
+            }
+            else if searchController.searchBar.text == "" && GlobalVariables.filterVenueBool {
                 for venue in GlobalVariables.displayFilteredVenues{
                     if(venue.venueLatitude == marker.position.latitude && venue.venueLongitude == marker.position.longitude){
                         dropVenues.append(venue)
                     }
                 }
             }
-            else {
-                for venue in GlobalVariables.displayedVenues{
+            else if searchController.searchBar.text != "" {
+                for venue in searchedVenues{
                     if(venue.venueLatitude == marker.position.latitude && venue.venueLongitude == marker.position.longitude){
                         dropVenues.append(venue)
                     }
@@ -182,15 +245,22 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
         //Organization
         else if GlobalVariables.selectedDisplay == "Organization" {
             dropOrganizations.removeAll()
-            if GlobalVariables.filterOrganizationBool {
+            if searchController.searchBar.text == "" && !GlobalVariables.filterOrganizationBool{
+                for organization in GlobalVariables.displayedOrganizations{
+                    if(organization.organizationLatitude == marker.position.latitude && organization.organizationLongitude == marker.position.longitude){
+                        dropOrganizations.append(organization)
+                    }
+                }
+            }
+            else if searchController.searchBar.text == "" && GlobalVariables.filterOrganizationBool {
                 for organization in GlobalVariables.displayFilteredOrganizations{
                     if(organization.organizationLatitude == marker.position.latitude && organization.organizationLongitude == marker.position.longitude){
                         dropOrganizations.append(organization)
                     }
                 }
             }
-            else {
-                for organization in GlobalVariables.displayedOrganizations{
+            else if searchController.searchBar.text != "" {
+                for organization in searchedOrganizations{
                     if(organization.organizationLatitude == marker.position.latitude && organization.organizationLongitude == marker.position.longitude){
                         dropOrganizations.append(organization)
                     }
@@ -232,6 +302,103 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
         }
     }
     
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        GlobalVariables.searchedText = ""
+    }
+    
+    func filterForSearchText(searchText: String, scope: String = "Search") {
+        
+        if GlobalVariables.selectedDisplay == "Event" {
+            if GlobalVariables.filterEventBool {
+                if searchController.searchBar.text != ""  {
+                    searchedEvents = GlobalVariables.displayFilteredEvents.filter({ (event: Event) -> Bool in
+                        //print(event.eventVenueAddress.componentsSeparatedByString(", ")[0] + " " + event.eventVenueCity)
+                        return ( scope == "Search" && event.eventName.lowercaseString.containsString(searchText.lowercaseString) ) ||
+                            ( scope == "Location" && (event.eventVenueAddress.componentsSeparatedByString(", ")[0] + " " + event.eventVenueCity).lowercaseString.containsString(searchText.lowercaseString) )
+                    })
+                } else if searchController.searchBar.text == "" {
+                    searchedEvents = GlobalVariables.displayFilteredEvents
+                }
+            }
+            else {
+                if searchController.searchBar.text != "" {
+                    // searched results
+                    searchedEvents = GlobalVariables.displayedEvents.filter({ (event: Event) -> Bool in
+                        //print(event.eventVenueAddress.componentsSeparatedByString(", ")[0] + " " + event.eventVenueCity)
+                        return ( scope == "Search" && event.eventName.lowercaseString.containsString(searchText.lowercaseString) ) ||
+                            ( scope == "Location" && (event.eventVenueAddress.componentsSeparatedByString(", ")[0] + " " + event.eventVenueCity).lowercaseString.containsString(searchText.lowercaseString) )
+                    })
+                } else if searchController.searchBar.text == "" {
+                    searchedEvents = GlobalVariables.displayedEvents
+                }
+            }
+        }
+        
+        if GlobalVariables.selectedDisplay == "Venue" {
+            if GlobalVariables.filterVenueBool {
+                if searchController.searchBar.text != ""  {
+                    searchedVenues = GlobalVariables.displayFilteredVenues.filter({ (venue: Venue) -> Bool in
+                        return ( scope == "Search" && venue.venueName.lowercaseString.containsString(searchText.lowercaseString) ) ||
+                            ( scope == "Location" && (venue.venueAddress.componentsSeparatedByString(", ")[0]).lowercaseString.containsString(searchText.lowercaseString) )
+                    })
+                } else if searchController.searchBar.text == "" {
+                    searchedVenues = GlobalVariables.displayFilteredVenues
+                }
+            }
+            else {
+                if searchController.searchBar.text != "" {
+                    searchedVenues = GlobalVariables.displayedVenues.filter({ (venue: Venue) -> Bool in
+                        return ( scope == "Search" && venue.venueName.lowercaseString.containsString(searchText.lowercaseString) ) ||
+                            ( scope == "Location" && (venue.venueAddress.componentsSeparatedByString(", ")[0]).lowercaseString.containsString(searchText.lowercaseString) )
+                    })
+                } else if searchController.searchBar.text == "" {
+                    searchedVenues = GlobalVariables.displayedVenues
+                }
+            }
+        }
+        
+        if GlobalVariables.selectedDisplay == "Organization" {
+            if GlobalVariables.filterOrganizationBool {
+                if searchController.searchBar.text != ""  {
+                    searchedOrganizations = GlobalVariables.displayFilteredOrganizations.filter({ (organization: Organization) -> Bool in
+                        return ( scope == "Search" && organization.organizationName.lowercaseString.containsString(searchText.lowercaseString) ) ||
+                            ( scope == "Location" && (organization.organizationAddress.componentsSeparatedByString(", ")[0]).lowercaseString.containsString(searchText.lowercaseString) )
+                    })
+                } else if searchController.searchBar.text == "" {
+                    searchedOrganizations = GlobalVariables.displayFilteredOrganizations
+                }
+            }
+            else {
+                if searchController.searchBar.text != "" {
+                    searchedOrganizations = GlobalVariables.displayedOrganizations.filter({ (organization: Organization) -> Bool in
+                        return ( scope == "Search" && organization.organizationName.lowercaseString.containsString(searchText.lowercaseString) ) ||
+                            ( scope == "Location" && (organization.organizationAddress.componentsSeparatedByString(", ")[0]).lowercaseString.containsString(searchText.lowercaseString) )
+                    })
+                } else if searchController.searchBar.text == "" {
+                    searchedOrganizations = GlobalVariables.displayedOrganizations
+                }
+            }
+        }
+        
+        updateMarkers()
+    }
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        GlobalVariables.searchedText = searchText
+    }
+    
+    func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        filterForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
+    }
+    
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        let searchBar = searchController.searchBar
+        let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
+        filterForSearchText(searchController.searchBar.text!, scope: scope)
+        
+        //print(searchedEvents.count, "searchEvents")
+    }
+    
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         switch (GlobalVariables.selectedDisplay){
         case "Event":
@@ -255,11 +422,20 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
         }
     }
     
+    func getDataFromUrl(urL:NSURL, completion: ((data: NSData?) -> Void)) {
+        NSURLSession.sharedSession().dataTaskWithURL(urL) { (data, response, error) in
+            completion(data: data)
+            }.resume()
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) ->   UITableViewCell {
         
         let cell: MapDropTableViewCell = self.dropDownTable.dequeueReusableCellWithIdentifier("DropCell") as! MapDropTableViewCell
         
-        let posterInfo = FetchData(context: managedObjectContext).fetchPosterImages()
+        //let posterInfo = FetchData(context: managedObjectContext).fetchPosterImages()
+        if GlobalVariables.eventImageCache.count >= 50 { GlobalVariables.eventImageCache.removeAtIndex(0) }
+        if GlobalVariables.venueImageCache.count >= 50 { GlobalVariables.venueImageCache.removeAtIndex(0) }
+        if GlobalVariables.organizationImageCache.count >= 50 { GlobalVariables.organizationImageCache.removeAtIndex(0) }
         
         switch GlobalVariables.selectedDisplay {
         case "Event":
@@ -268,13 +444,27 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             
             // Poster Image
             cell.dropImage.contentMode = UIViewContentMode.ScaleToFill
-            if let images = posterInfo {
-                for img in images {
-                    if img.ID == e.eventID {
-                        if img.Image?.length > 800 {
-                            cell.dropImage.image = UIImage(data: img.Image!)
-                        } else {
-                            cell.dropImage.image = randomImage()
+            if let img = GlobalVariables.eventImageCache[e.eventID] {
+                cell.dropImage.image = img
+            }
+            else if let checkedUrl = NSURL(string:e.posterUrl) {
+                
+                self.getDataFromUrl(checkedUrl) { data in
+                    dispatch_async(dispatch_get_main_queue()) {
+                        if let downloadImg = data {
+                            if downloadImg.length > 800 {
+                                
+                                let image = UIImage(data: downloadImg)
+                                GlobalVariables.eventImageCache[e.eventID] = image
+                                
+                                cell.dropImage.image = image
+                                
+                            } else {
+                                cell.dropImage.image = self.randomImage()
+                            }
+                        }
+                        else {
+                            cell.dropImage.image = self.randomImage()
                         }
                     }
                 }
@@ -334,13 +524,26 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             let v = dropVenues[indexPath.row]
             
             cell.dropImage.contentMode = UIViewContentMode.ScaleToFill
-            if let images = posterInfo {
-                for img in images {
-                    if img.ID == v.venueID {
-                        if img.Image?.length > 800 {
-                            cell.dropImage.image = UIImage(data: img.Image!)
-                        } else {
-                            cell.dropImage.image = randomImage()
+            if let img = GlobalVariables.venueImageCache[v.venueID] {
+                cell.dropImage.image = img
+            }
+            else if let checkedUrl = NSURL(string:v.posterUrl) {
+                
+                self.getDataFromUrl(checkedUrl) { data in
+                    dispatch_async(dispatch_get_main_queue()) {
+                        if let downloadImg = data {
+                            if downloadImg.length > 800 {
+                                
+                                let image = UIImage(data: downloadImg)
+                                GlobalVariables.venueImageCache[v.venueID] = image
+                                cell.dropImage.image = image
+                                
+                            } else {
+                                cell.dropImage.image = self.randomImage()
+                            }
+                        }
+                        else {
+                            cell.dropImage.image = self.randomImage()
                         }
                     }
                 }
@@ -389,13 +592,25 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             let o = dropOrganizations[indexPath.row]
             
             cell.dropImage.contentMode = UIViewContentMode.ScaleToFill
-            if let images = posterInfo {
-                for img in images {
-                    if img.ID == o.organizationID {
-                        if img.Image?.length > 800 {
-                            cell.dropImage.image = UIImage(data: img.Image!)
-                        } else {
-                            cell.dropImage.image = randomImage()
+            if let img = GlobalVariables.organizationImageCache[o.organizationID] {
+                cell.dropImage.image = img
+            }
+            else if let checkedUrl = NSURL(string:o.posterUrl) {
+                
+                self.getDataFromUrl(checkedUrl) { data in
+                    dispatch_async(dispatch_get_main_queue()) {
+                        if let downloadImg = data {
+                            if downloadImg.length > 800 {
+                                
+                                let image = UIImage(data: downloadImg)
+                                GlobalVariables.venueImageCache[o.organizationID] = image
+                                cell.dropImage.image = image
+                            } else {
+                                cell.dropImage.image = self.randomImage()
+                            }
+                        }
+                        else {
+                            cell.dropImage.image = self.randomImage()
                         }
                     }
                 }
@@ -559,6 +774,22 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             organizationMarkers.append(organizationMarker)
         }
     }
+    func updateFilterSearchResult() {
+        clearDrop()
+        if GlobalVariables.selectedDisplay == "Event"{
+            searchController.searchBar.placeholder = "Search Events"
+        }
+        if GlobalVariables.selectedDisplay == "Venue"{
+            searchController.searchBar.placeholder = "Search Venues"
+        }
+        if GlobalVariables.selectedDisplay == "Organization"{
+            searchController.searchBar.placeholder = "Search Organizations"
+        }
+        
+        if self.searchController.active && self.searchController.searchBar.text != "" {
+            self.searchController.searchResultsUpdater?.updateSearchResultsForSearchController(self.searchController)
+        } else { updateMarkers() }
+    }
     
     func updateMarkers(){
         
@@ -573,51 +804,78 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             marker.map = nil
         }
         
-        //updates according to filter
+        //updates according to filter and search
         switch (GlobalVariables.selectedDisplay){
             
         case "Event":
-            if GlobalVariables.filterEventBool {
-                
+            
+            if searchController.searchBar.text == "" && !GlobalVariables.filterEventBool{
+                for marker in eventMarkers{
+                    marker.map = viewMap
+                }
+            }
+            else if searchController.searchBar.text == "" && GlobalVariables.filterEventBool {
                 for var i = eventMarkers.count; i > 0; i-- {
                     if GlobalVariables.displayFilteredEvents.contains({$0.eventID == eventMarkers[i-1].userData as! String}) {
                         
                         eventMarkers[i-1].map = viewMap
                     }
                 }
-            } else {
-                for marker in eventMarkers{
-                    marker.map = viewMap
+            }
+            else if searchController.searchBar.text != "" {
+                for var i = eventMarkers.count; i > 0; i-- {
+                    if searchedEvents.contains({$0.eventID == eventMarkers[i-1].userData as! String}) {
+                        
+                        eventMarkers[i-1].map = viewMap
+                    }
                 }
             }
             
         case "Venue":
-            if GlobalVariables.filterVenueBool {
-                
+            
+            if searchController.searchBar.text == "" && !GlobalVariables.filterVenueBool{
+                for marker in venueMarkers{
+                    marker.map = viewMap
+                }
+            }
+            else if searchController.searchBar.text == "" && GlobalVariables.filterVenueBool {
                 for var i = venueMarkers.count; i > 0; i-- {
                     if GlobalVariables.displayFilteredVenues.contains({$0.venueID == venueMarkers[i-1].userData as! String}) {
                         
                         venueMarkers[i-1].map = viewMap
                     }
                 }
-            } else {
-                for marker in venueMarkers{
-                    marker.map = viewMap
+            }
+            else if searchController.searchBar.text != "" {
+                for var i = venueMarkers.count; i > 0; i-- {
+                    if searchedVenues.contains({$0.venueID == venueMarkers[i-1].userData as! String}) {
+                        
+                        venueMarkers[i-1].map = viewMap
+                    }
                 }
             }
             
         case "Organization":
-            if GlobalVariables.filterOrganizationBool {
-                
+            
+            if searchController.searchBar.text == "" && !GlobalVariables.filterOrganizationBool{
+                for marker in organizationMarkers{
+                    marker.map = viewMap
+                }
+            }
+            else if searchController.searchBar.text == "" && GlobalVariables.filterOrganizationBool {
                 for var i = organizationMarkers.count; i > 0; i-- {
                     if GlobalVariables.displayFilteredOrganizations.contains({$0.organizationID == organizationMarkers[i-1].userData as! String}) {
                         
                         organizationMarkers[i-1].map = viewMap
                     }
                 }
-            } else {
-                for marker in organizationMarkers{
-                    marker.map = viewMap
+            }
+            else if searchController.searchBar.text != "" {
+                for var i = organizationMarkers.count; i > 0; i-- {
+                    if searchedOrganizations.contains({$0.organizationID == organizationMarkers[i-1].userData as! String}) {
+                        
+                        organizationMarkers[i-1].map = viewMap
+                    }
                 }
             }
 
@@ -672,7 +930,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
                                     self.hideDrop()
                                     
                                     var temp: NSMutableArray = NSMutableArray()
-                                    temp.sw_addUtilityButtonWithColor(UIColor.redColor(),attributedTitle: self.swipeCellTitle("Get Addicted"))
+                                    temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),attributedTitle: self.swipeCellTitle("Get Addicted"))
                                     cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
                                     cell.leftUtilityButtons = temp as [AnyObject]
                                     
@@ -700,7 +958,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
                                 hideDrop()
                                 
                                 var temp: NSMutableArray = NSMutableArray()
-                                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),attributedTitle: swipeCellTitle("Addicted!"))
+                                temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),attributedTitle: swipeCellTitle("Addicted!"))
                                 cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
                                 cell.leftUtilityButtons = temp as [AnyObject]
                                 
@@ -739,7 +997,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
                                     self.hideDrop()
                                     
                                     var temp: NSMutableArray = NSMutableArray()
-                                    temp.sw_addUtilityButtonWithColor(UIColor.redColor(),attributedTitle: self.swipeCellTitle("Get Addicted"))
+                                    temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),attributedTitle: self.swipeCellTitle("Get Addicted"))
                                     cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
                                     cell.leftUtilityButtons = temp as [AnyObject]
                                     
@@ -767,7 +1025,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
                                 hideDrop()
                                 
                                 var temp: NSMutableArray = NSMutableArray()
-                                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),attributedTitle: swipeCellTitle("Addicted!"))
+                                temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),attributedTitle: swipeCellTitle("Addicted!"))
                                 cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
                                 cell.leftUtilityButtons = temp as [AnyObject]
                             }
@@ -805,7 +1063,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
                                     self.hideDrop()
                                     
                                     let temp: NSMutableArray = NSMutableArray()
-                                    temp.sw_addUtilityButtonWithColor(UIColor.redColor(),attributedTitle: self.swipeCellTitle("Get Addicted"))
+                                    temp.sw_addUtilityButtonWithColor(UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1),attributedTitle: self.swipeCellTitle("Get Addicted"))
                                     cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
                                     cell.leftUtilityButtons = temp as [AnyObject]
                                     
@@ -833,7 +1091,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
                                 hideDrop()
                                 
                                 let temp: NSMutableArray = NSMutableArray()
-                                temp.sw_addUtilityButtonWithColor(UIColor.redColor(),attributedTitle: swipeCellTitle("Addicted!"))
+                                temp.sw_addUtilityButtonWithColor(UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1),attributedTitle: swipeCellTitle("Addicted!"))
                                 cell.setLeftUtilityButtons(temp as [AnyObject], withButtonWidth: 75)
                                 cell.leftUtilityButtons = temp as [AnyObject]
                             }

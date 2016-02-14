@@ -1,63 +1,61 @@
 //
-//  CalendarViewController.swift
+//  UpComingCalendarViewController.swift
 //  Bruha
 //
-//  Created by lye on 15/12/25.
-//  Copyright © 2015年 Bruha. All rights reserved.
+//  Created by Zhuoheng Wu on 2016-01-26.
+//  Copyright © 2016 Bruha. All rights reserved.
 //
 
 import UIKit
-import Foundation
 
-class CalendarViewController: UIViewController, JTCalendarDelegate, SWTableViewCellDelegate{
-
+class UpComingCalendarViewController: UIViewController, JTCalendarDelegate, SWTableViewCellDelegate {
+    
     @IBOutlet weak var calendarMenu: JTCalendarMenuView!
     @IBOutlet weak var calendarContentView: JTHorizontalCalendarView!
     
     @IBOutlet weak var calendarTableView: UITableView!
     
-    @IBOutlet weak var myAddictionLegend: UIView!
-    @IBOutlet weak var myAddictionLegendHeight: NSLayoutConstraint!
+    @IBOutlet weak var upComingLegend: UIView!
+    @IBOutlet weak var upComingLegendHeight: NSLayoutConstraint!
+    @IBOutlet weak var upComingLegendWidth: NSLayoutConstraint!
     
-    @IBOutlet weak var myAddictionLegendWidth: NSLayoutConstraint!
-    
-    @IBOutlet weak var myUploadLegend: UIView!
-    @IBOutlet weak var myUploadLegendHeight: NSLayoutConstraint!
-    
-    @IBOutlet weak var myUploadLegendWidth: NSLayoutConstraint!
-    
-    @IBOutlet weak var addictionLegendLabel: UILabel!
-    @IBOutlet weak var uploadLegendLabel: UILabel!
-    
+    @IBOutlet weak var upComingLegendLabel: UILabel!
     
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     let calendarManager: JTCalendarManager = JTCalendarManager()
     let datesSelected = NSMutableArray()
     
-    var eventInfo: [Event]! //All Events
-    var addictionEventInfo: [AddictionEvent] = [] // user addicted ids
-    var userEventInfo: [Event] = [] //user uploaded Events
-    var addictedEvents: [Event] = [] // user addicted Events
-    var eventsToDisplay: [Event] = [] // Events displayed on calendar click
     
+    var upcomingEvents: [Event] = []
+    var eventsToDisplay: [Event] = []
+    
+    var sourceForEvent: String?
+    var sourceID: String?
+    
+    
+    @IBAction func backButton(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
+    }
     
     func adjustLegendConstraint(constraint: NSLayoutConstraint) {
         
         let legendSize: CGRect = calendarContentView.layer.bounds
+        
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         constraint.constant = screenSize.width / 14.0
     }
+    
     func customStatusBar() {
         let barView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0))
         barView.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
         //barView.alpha = 0.5
         self.view.addSubview(barView)
     }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
         customStatusBar()
         
         calendarManager.delegate = self
@@ -69,11 +67,32 @@ class CalendarViewController: UIViewController, JTCalendarDelegate, SWTableViewC
         calendarManager.contentView = calendarContentView
         calendarManager.setDate(NSDate())
         
-        //calendarManager.contentView?.backgroundColor = UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1.0)
         
-        eventInfo = FetchData(context: managedObjectContext).fetchEvents()
-        addictionEventInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()!
-        userEventInfo = FetchData(context: managedObjectContext).fetchUserEvents()!
+        
+        upcomingEvents.removeAll()
+        
+        
+        let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
+        
+        for event in eventInfo {
+            if sourceForEvent == "venue" {
+                if event.venueID == sourceID {
+                    upcomingEvents.append(event)
+                    print(event.venueID)
+                }
+            }
+            if sourceForEvent == "organization" {
+                
+                for orgID in event.organizationID {
+                    if orgID == sourceID {
+                        upcomingEvents.append(event)
+                        print(event.eventName)
+                    }
+                }
+            }
+        }
+        
+        
         
         let nib = UINib(nibName: "MapDropTableViewCell", bundle: nil)
         calendarTableView.registerNib(nib, forCellReuseIdentifier: "DropCell")
@@ -82,51 +101,16 @@ class CalendarViewController: UIViewController, JTCalendarDelegate, SWTableViewC
         
         calendarTableView.indicatorStyle = UIScrollViewIndicatorStyle.White
         
-        
-        for e in eventInfo {
-            if addictionEventInfo.contains({$0.eventID == e.eventID}) {
-                addictedEvents.append(e)
-            }
-        }
-        
-        adjustLegendConstraint(myAddictionLegendHeight)
-        adjustLegendConstraint(myAddictionLegendWidth)
-        adjustLegendConstraint(myUploadLegendHeight)
-        adjustLegendConstraint(myUploadLegendWidth)
-        
+        adjustLegendConstraint(upComingLegendHeight)
+        adjustLegendConstraint(upComingLegendWidth)
+
+        // Do any additional setup after loading the view.
     }
-    
-    override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        calendarManager.reload()
-    }
-    
-    override func viewWillDisappear(animated: Bool) {
-        super.viewWillDisappear(animated)
-        
-        datesSelected.removeAllObjects()
-    }
-    
-    func showHideLegend() {
-        if eventsToDisplay.count == 0 {
-            myAddictionLegend.hidden = false; calendarTableView.bringSubviewToFront(myAddictionLegend)
-            myUploadLegend.hidden = false
-            addictionLegendLabel.hidden = false
-            uploadLegendLabel.hidden = false
-            
-        } else {
-            myAddictionLegend.hidden = true
-            myUploadLegend.hidden = true
-            addictionLegendLabel.hidden = true
-            uploadLegendLabel.hidden = true
-        }
-    }
-    
     
     func calendar(calendar: JTCalendarManager!, prepareDayView dayView: UIView!) {
         
         let newDayView = dayView as! JTCalendarDayView
+        
         
         newDayView.hidden = false
         newDayView.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
@@ -143,9 +127,11 @@ class CalendarViewController: UIViewController, JTCalendarDelegate, SWTableViewC
             newDayView.removeFromSuperview()
         }
         else {
-            if addictedEvents.contains({$0.eventStartDate == dateToMatch}){
+            
+            if upcomingEvents.contains({$0.eventStartDate == dateToMatch}) {
+            
                 newDayView.backgroundColor = UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 0.75)
-                //newDayView.alpha = 0.5
+                
                 if !(datesSelected.containsObject(newDayView.date)){
                     datesSelected.addObject(newDayView.date)
                 }
@@ -153,19 +139,6 @@ class CalendarViewController: UIViewController, JTCalendarDelegate, SWTableViewC
                 for e in eventsToDisplay {
                     if e.eventStartDate == dateToMatch {
                         newDayView.backgroundColor = UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1.0)
-                    }
-                }
-            }
-            if userEventInfo.contains({$0.eventStartDate == dateToMatch}) {
-                newDayView.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 0.75)
-                //newDayView.alpha = 0.5
-                if !(datesSelected.containsObject(newDayView.date)){
-                    datesSelected.addObject(newDayView.date)
-                }
-                
-                for e in eventsToDisplay {
-                    if e.eventStartDate == dateToMatch {
-                        newDayView.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1.0)
                     }
                 }
             }
@@ -196,24 +169,14 @@ class CalendarViewController: UIViewController, JTCalendarDelegate, SWTableViewC
             
             eventsToDisplay.removeAll()
             
-            for a in addictedEvents {
-                if a.eventStartDate == dateToMatch {
-                    if !eventsToDisplay.contains({$0.eventID == a.eventID}) {
-                        eventsToDisplay.append(a)
-                        newDayView.backgroundColor = UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1.0)
-                    }
+            for e in upcomingEvents {
+                if e.eventStartDate == dateToMatch {
+                    eventsToDisplay.append(e)
+                    newDayView.backgroundColor = UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1.0)
                 }
             }
-            print(eventsToDisplay.count, "addicted")
-            for u in userEventInfo {
-                if u.eventStartDate == dateToMatch {
-                    if !eventsToDisplay.contains({$0.eventID == u.eventID}) {
-                        eventsToDisplay.append(u)
-                        newDayView.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1.0)
-                    }
-                }
-            }
-            print(eventsToDisplay.count, "upload & addict in same date")
+            print(eventsToDisplay.count, "up coming events")
+            
             
             calendarTableView.reloadData()
             calendarTableView.flashScrollIndicators()
@@ -227,32 +190,27 @@ class CalendarViewController: UIViewController, JTCalendarDelegate, SWTableViewC
             if newDayView.backgroundColor == UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 1.0) {
                 newDayView.backgroundColor = UIColor(red: 70/255, green: 190/255, blue: 194/255, alpha: 0.75)
             }
-            if newDayView.backgroundColor == UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 1.0) {
-                newDayView.backgroundColor = UIColor(red: 244/255, green: 117/255, blue: 33/255, alpha: 0.75)
-            }
             
             eventsToDisplay.removeAll()
             datesSelected.addObject(newDayView.date)
             calendarTableView.reloadData()
-            //calendarManager.reload()
         }
         
-        
-//        if(datesSelected.containsObject(newDayView.date)){
-//            
-//            datesSelected.removeObject(newDayView.date)
-//            if (newDayView.isFromAnotherMonth) {
-//                newDayView.backgroundColor = UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1.0)
-//            }
-//            else {
-//                newDayView.backgroundColor = UIColor.blackColor()
-//            }
-//            
-//        }
-//        else{
-//            datesSelected.addObject(newDayView.date)
-//            newDayView.backgroundColor = UIColor.cyanColor()
-//        }
+        //        if(datesSelected.containsObject(newDayView.date)){
+        //
+        //            datesSelected.removeObject(newDayView.date)
+        //            if (newDayView.isFromAnotherMonth) {
+        //                newDayView.backgroundColor = UIColor(red: 71/255, green: 71/255, blue: 71/255, alpha: 1.0)
+        //            }
+        //            else {
+        //                newDayView.backgroundColor = UIColor.blackColor()
+        //            }
+        //
+        //        }
+        //        else{
+        //            datesSelected.addObject(newDayView.date)
+        //            newDayView.backgroundColor = UIColor.cyanColor()
+        //        }
     }
     
     func calendar(calendar: JTCalendarManager!, prepareMenuItemView menuItemView: UIView!, date: NSDate!) {
@@ -266,7 +224,6 @@ class CalendarViewController: UIViewController, JTCalendarDelegate, SWTableViewC
         let dateFormatter: NSDateFormatter = NSDateFormatter()
         let months = dateFormatter.monthSymbols
         let monthSymbol = months[month-1]
-        
         
         // Month title
         let attribute = [NSFontAttributeName: UIFont(name: "OpenSans", size: 18)!, NSForegroundColorAttributeName : UIColor.whiteColor()]
@@ -285,11 +242,8 @@ class CalendarViewController: UIViewController, JTCalendarDelegate, SWTableViewC
         
         newMenuItemView.attributedText = calendarTitle
         
-        
-        
         //newMenuItemView.text = component as? String
         //newMenuItemView.textColor = UIColor.whiteColor()
-        
         //newMenuItemView.text = "<<            " + monthSymbol + " " + String(component) + "            >>"
         //newMenuItemView.text = monthSymbol
         //newMenuItemView.backgroundColor = UIColor.cyanColor()
@@ -297,22 +251,38 @@ class CalendarViewController: UIViewController, JTCalendarDelegate, SWTableViewC
         //newMenuItemView.scrollView
         
     }
-    //
-    //    func calendarBuildWeekDayView(calendar: JTCalendarManager!) -> UIView! {
-    //
-    //
-    //    }
     
-    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        calendarManager.reload()
+    }
+
+    override func viewWillDisappear(animated: Bool) {
+        super.viewWillDisappear(animated)
+        
+        datesSelected.removeAllObjects()
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
     
+    func showHideLegend() {
+        if eventsToDisplay.count == 0 {
+            upComingLegend.hidden = false; calendarTableView.bringSubviewToFront(upComingLegend)
+            upComingLegendLabel.hidden = false
+            
+        } else {
+            upComingLegend.hidden = true
+            upComingLegendLabel.hidden = true
+        }
+    }
+    
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(eventsToDisplay.count, "row in sec")
-        
+       
         showHideLegend()
         
         return eventsToDisplay.count
@@ -343,7 +313,7 @@ class CalendarViewController: UIViewController, JTCalendarDelegate, SWTableViewC
         if GlobalVariables.venueImageCache.count >= 50 { GlobalVariables.venueImageCache.removeAtIndex(0) }
         if GlobalVariables.organizationImageCache.count >= 50 { GlobalVariables.organizationImageCache.removeAtIndex(0) }
         
-            
+        
         let e = eventsToDisplay[indexPath.row]
         
         print("\(e.eventName), ")
@@ -488,7 +458,7 @@ class CalendarViewController: UIViewController, JTCalendarDelegate, SWTableViewC
         
         switch(index){
         case 0:
-        
+            
             let user = FetchData(context: managedObjectContext).fetchUserInfo()![0].userName
             
             var cellIndexPath = self.calendarTableView.indexPathForCell(cell)
@@ -508,15 +478,6 @@ class CalendarViewController: UIViewController, JTCalendarDelegate, SWTableViewC
                             DeleteData(context: self.managedObjectContext).deleteAddictionsEvent(event.eventID, deleteUser: user)
                             print("Removed from addiction(event) \(event.eventID)")
                             print("REMOVED")
-                            
-                            self.updateAddictFetch()
-                            self.calendarManager.reload()
-                            
-                            if !self.userEventInfo.contains({$0.eventID == event.eventID}) {
-                                let idx = self.eventsToDisplay.indexOf({$0.eventID == event.eventID})
-                                self.eventsToDisplay.removeAtIndex(idx!)
-                                self.calendarTableView.reloadData()
-                            }
                             
                             let eventService = EventService()
                             eventService.removeAddictedEvents(event.eventID) {
@@ -542,8 +503,6 @@ class CalendarViewController: UIViewController, JTCalendarDelegate, SWTableViewC
                         SaveData(context: managedObjectContext).saveAddictionEvent(addEvent)
                         print("Getting Addicted with event id \(event.eventID)")
                         print("ADDICTED")
-                        
-                        updateAddictFetch()
                         
                         let eventService = EventService()
                         
@@ -582,7 +541,7 @@ class CalendarViewController: UIViewController, JTCalendarDelegate, SWTableViewC
             let selectedCell = self.calendarTableView.cellForRowAtIndexPath(cellIndexPath!) as! MapDropTableViewCell
             GlobalVariables.eventSelected = selectedCell.dropHiddenID.text!
             
-            self.performSegueWithIdentifier("EventMoreInfo", sender: self)
+            self.performSegueWithIdentifier("MoreInfore", sender: self)
             break
         default:
             break
@@ -590,16 +549,23 @@ class CalendarViewController: UIViewController, JTCalendarDelegate, SWTableViewC
         
     }
     
-    func updateAddictFetch() {
-        addictionEventInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()!
-        
-        addictedEvents.removeAll()
-        
-        for e in eventInfo {
-            if addictionEventInfo.contains({$0.eventID == e.eventID}) {
-                addictedEvents.append(e)
-            }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "MoreInfore" {
+            let destinationController = segue.destinationViewController as! MoreInformationViewController
+            destinationController.sourceForComingEvent = "event"
+            destinationController.sourceID = GlobalVariables.eventSelected
         }
     }
-}
+    
 
+    /*
+    // MARK: - Navigation
+
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        // Get the new view controller using segue.destinationViewController.
+        // Pass the selected object to the new view controller.
+    }
+    */
+
+}

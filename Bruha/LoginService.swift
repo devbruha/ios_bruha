@@ -35,7 +35,7 @@ struct LoginService {
     
     func loginCheck(completion: (NSString? -> Void)) {
         
-        if let loginURL = NSURL(string: "Login.php?", relativeToURL: bruhaBaseURL) {
+        if let loginURL = NSURL(string: "loginZW.php?", relativeToURL: bruhaBaseURL) {
             
             let networkOperation = NetworkOperation(url: loginURL)
             

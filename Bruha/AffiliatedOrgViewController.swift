@@ -40,11 +40,13 @@ class AffiliatedOrgViewController: UIViewController, SWTableViewCellDelegate {
     var affiliatedOrg: [Organization] = []
     var sourceID: [String] = []
     
+    var addictionInfo: [AddictionOrganization]?
+    
     func configureView(){
         
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         let screenHeight = screenSize.height
-        affiliatedOrgTable.rowHeight = screenHeight * 0.5
+        affiliatedOrgTable.rowHeight = ( screenHeight - screenHeight * 70 / 568 ) * 0.5
         
         self.affiliatedOrgTable!.allowsMultipleSelection = false
     }
@@ -62,7 +64,7 @@ class AffiliatedOrgViewController: UIViewController, SWTableViewCellDelegate {
         
         bruhaButton.addConstraints([heightContraints, widthContraints])
         
-        backButton.setBackgroundImage(UIImage(named: "List"), forState: UIControlState.Normal)
+        backButton.setBackgroundImage(UIImage(named: "arrow-left"), forState: UIControlState.Normal)
         let heightContraint = NSLayoutConstraint(item: backButton, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.height/15.5)
         heightContraint.priority = UILayoutPriorityDefaultHigh
         
@@ -107,19 +109,28 @@ class AffiliatedOrgViewController: UIViewController, SWTableViewCellDelegate {
                 }
         }
     }
+    
+    func customStatusBar() {
+        let barView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0))
+        barView.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
+        //barView.alpha = 0.5
+        self.view.addSubview(barView)
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
         configureView()
-        customTopButtons()
+        //customTopButtons()
+        customStatusBar()
         
-        affiliatedOrgTable.backgroundColor = UIColor.blackColor()
-        affiliatedOrgTable.separatorColor = UIColor.blackColor()
+        //affiliatedOrgTable.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
+        affiliatedOrgTable.separatorColor = UIColor.clearColor()
         
         self.affiliatedOrgLabel.alpha = 0.0
         self.affiliatedOrgImage.alpha = 0.0
         
+        backgroundGradient()
         
         affiliatedOrg.removeAll()
         
@@ -133,6 +144,13 @@ class AffiliatedOrgViewController: UIViewController, SWTableViewCellDelegate {
         }
 
         // Do any additional setup after loading the view.
+        addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsOrganization()
+    }
+    
+    func backgroundGradient() {
+        let background = CAGradientLayer().gradientColor()
+        background.frame = self.view.bounds
+        self.affiliatedOrgTable.layer.insertSublayer(background, atIndex: 0)
     }
 
     override func viewDidAppear(animated: Bool) {
@@ -168,9 +186,18 @@ class AffiliatedOrgViewController: UIViewController, SWTableViewCellDelegate {
         }
     }
     
+    func getDataFromUrl(urL:NSURL, completion: ((data: NSData?) -> Void)) {
+        NSURLSession.sharedSession().dataTaskWithURL(urL) { (data, response, error) in
+            completion(data: data)
+            }.resume()
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let posterInfo = FetchData(context: managedObjectContext).fetchPosterImages()
+        //let posterInfo = FetchData(context: managedObjectContext).fetchPosterImages()
+        if GlobalVariables.eventImageCache.count >= 50 { GlobalVariables.eventImageCache.removeAtIndex(0) }
+        if GlobalVariables.venueImageCache.count >= 50 { GlobalVariables.venueImageCache.removeAtIndex(0) }
+        if GlobalVariables.organizationImageCache.count >= 50 { GlobalVariables.organizationImageCache.removeAtIndex(0) }
         
         var cell : OrganizationTableViewCell! = tableView.dequeueReusableCellWithIdentifier("organizationTableViewCell") as! OrganizationTableViewCell!
         
@@ -182,13 +209,25 @@ class AffiliatedOrgViewController: UIViewController, SWTableViewCellDelegate {
         let organization = affiliatedOrg[indexPath.row]
         
         cell.organizationImage.contentMode = UIViewContentMode.ScaleToFill
-        if let images = posterInfo {
-            for img in images {
-                if img.ID == organization.organizationID {
-                    if img.Image?.length > 800 {
-                        cell.organizationImage.image = UIImage(data: img.Image!)
-                    } else {
-                        cell.organizationImage.image = randomImage()
+        if let img = GlobalVariables.organizationImageCache[organization.organizationID] {
+            cell.organizationImage.image = img
+        }
+        else if let checkedUrl = NSURL(string:organization.posterUrl) {
+            
+            self.getDataFromUrl(checkedUrl) { data in
+                dispatch_async(dispatch_get_main_queue()) {
+                    if let downloadImg = data {
+                        if downloadImg.length > 800 {
+                            
+                            let image = UIImage(data: downloadImg)
+                            GlobalVariables.venueImageCache[organization.organizationID] = image
+                            cell.organizationImage.image = image
+                        } else {
+                            cell.organizationImage.image = self.randomImage()
+                        }
+                    }
+                    else {
+                        cell.organizationImage.image = self.randomImage()
                     }
                 }
             }
@@ -211,7 +250,6 @@ class AffiliatedOrgViewController: UIViewController, SWTableViewCellDelegate {
         // Configure the cell...
         
         
-        let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsOrganization()
         var like = 0
         
         for addict in addictionInfo! {
@@ -278,6 +316,8 @@ class AffiliatedOrgViewController: UIViewController, SWTableViewCellDelegate {
                                 print("Removed from addiction(event) \(organization.organizationID)")
                                 print("REMOVED")
                                 
+                                self.updateAddictFetch()
+                                
                                 let organizationService = OrganizationService()
                                 
                                 organizationService.removeAddictedOrganizations(organization.organizationID) {
@@ -306,6 +346,8 @@ class AffiliatedOrgViewController: UIViewController, SWTableViewCellDelegate {
                             print("Getting Addicted with event id \(organization.organizationID)")
                             print("ADDICTED")
                             
+                            updateAddictFetch()
+                            
                             let organizationService = OrganizationService()
                             
                             organizationService.addAddictedOrganizations(organization.organizationID) {
@@ -325,19 +367,30 @@ class AffiliatedOrgViewController: UIViewController, SWTableViewCellDelegate {
             
             } else {
                 
-                let alert = UIAlertView(title: "Please log in for this!!!", message: nil, delegate: nil, cancelButtonTitle: nil)
-                alert.show()
-                let delay = 1.0 * Double(NSEC_PER_SEC)
-                var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-                dispatch_after(time, dispatch_get_main_queue(), {
-                    alert.dismissWithClickedButtonIndex(-1, animated: true)
-                })
+                alertLogin()
                 
             }
             
         default:
             break
         }
+    }
+    
+    func alertLogin() {
+        let alertController = UIAlertController(title: "You are not logged in!", message:nil, preferredStyle: .Alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+        let loginAction = UIAlertAction(title: "Login", style: .Default) { (_) -> Void in
+            self.performSegueWithIdentifier("GoToLogin", sender: self) // Replace SomeSegue with your segue identifier (name)
+        }
+        let signupAction = UIAlertAction(title: "Signup", style: .Default) { (_) -> Void in
+            self.performSegueWithIdentifier("GoToSignup", sender: self) // Replace SomeSegue with your segue identifier (name)
+        }
+        alertController.addAction(signupAction)
+        alertController.addAction(loginAction)
+        alertController.addAction(cancelAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+        
     }
     
     func swipeableTableViewCell( cell : SWTableViewCell!,didTriggerRightUtilityButtonWithIndex index:NSInteger){
@@ -370,6 +423,12 @@ class AffiliatedOrgViewController: UIViewController, SWTableViewCellDelegate {
             destinationController.sourceForComingEvent = "organization"
             destinationController.sourceID = GlobalVariables.eventSelected
         }
+        if segue.identifier == "ShowOnMap" {
+            let destinationController = segue.destinationViewController as! ShowOnMapViewController
+            destinationController.sourceForMarker = "organization"
+            destinationController.sourceID = GlobalVariables.eventSelected
+        }
+        
     }
     
     func swipeableTableViewCellShouldHideUtilityButtonsOnSwipe(cell : SWTableViewCell ) -> Bool {
@@ -457,6 +516,11 @@ class AffiliatedOrgViewController: UIViewController, SWTableViewCellDelegate {
         let aString = NSMutableAttributedString(string: title, attributes: mAttribute)
         
         return aString
+    }
+    
+    func updateAddictFetch() {
+        
+        addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsOrganization()
     }
 
     /*

@@ -18,15 +18,54 @@ class DashBoardViewController: UIViewController {
     @IBOutlet weak var ticketImage: UIImageView!
     @IBOutlet weak var bruhaButton: UIButton!
     
-    @IBAction func Bruha(sender: UIButton) {
+    var numberClicked = 0
+    
+    @IBAction func Bruha(sender: UIBarButtonItem) {
         
-        let alert = UIAlertView(title: "You are already in dashboard!!!", message: nil, delegate: nil, cancelButtonTitle: nil)
-        alert.show()
-        let delay = 1.0 * Double(NSEC_PER_SEC)
-        var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-        dispatch_after(time, dispatch_get_main_queue(), {
-            alert.dismissWithClickedButtonIndex(-1, animated: true)
-        })
+        if numberClicked < 6 {
+            numberClicked++
+        }
+        
+        switch (numberClicked) {
+        case 1:
+            let alert = UIAlertView(title: "You are already in dashboard", message: nil, delegate: nil, cancelButtonTitle: nil)
+            alert.show()
+            let delay = 1.0 * Double(NSEC_PER_SEC)
+            var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+            dispatch_after(time, dispatch_get_main_queue(), {
+                alert.dismissWithClickedButtonIndex(-1, animated: true)
+            })
+        case 2:
+            let alert = UIAlertView(title: "Hey, didn't you hear me? You are already in dashboard", message: nil, delegate: nil, cancelButtonTitle: nil)
+            alert.show()
+            let delay = 1.2 * Double(NSEC_PER_SEC)
+            var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+            dispatch_after(time, dispatch_get_main_queue(), {
+                alert.dismissWithClickedButtonIndex(-1, animated: true)
+            })
+        case 3:
+            let alert = UIAlertView(title: "Well now... You think you're funny?", message: nil, delegate: nil, cancelButtonTitle: nil)
+            alert.show()
+            let delay = 1.0 * Double(NSEC_PER_SEC)
+            var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+            dispatch_after(time, dispatch_get_main_queue(), {
+                alert.dismissWithClickedButtonIndex(-1, animated: true)
+            })
+        case 4:
+            let alert = UIAlertView(title: "Now I am just getting angry", message: nil, delegate: nil, cancelButtonTitle: nil)
+            alert.show()
+            let delay = 1.0 * Double(NSEC_PER_SEC)
+            var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+            dispatch_after(time, dispatch_get_main_queue(), {
+                sender.tintColor = UIColor.redColor()
+                alert.dismissWithClickedButtonIndex(-1, animated: true)
+            })
+        case 5:
+            sender.tintColor = UIColor.clearColor()
+            print("disappear")
+        default:
+            break
+        }
     }
     
     
@@ -151,7 +190,7 @@ class DashBoardViewController: UIViewController {
     
     func customStatusBar() {
         let barView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0))
-        barView.backgroundColor = UIColor.grayColor()
+        barView.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
         
         self.view.addSubview(barView)
     }
@@ -162,7 +201,7 @@ class DashBoardViewController: UIViewController {
         //setConstraint(imgViews)
         
         customBruhaButton()
-        //customStatusBar()
+        customStatusBar()
         
         if GlobalVariables.loggedIn == false{
             addictionImage.alpha = 0.5
@@ -182,6 +221,7 @@ class DashBoardViewController: UIViewController {
         backgroundGradient()
         FetchData(context: managedObjectContext).fetchCategories()
         Filtering().clearAllFilter()
+        GlobalVariables.searchedText = ""
         GlobalVariables.datesSelected.removeAllObjects()
         // Do any additional setup after loading the view.
     }

@@ -22,7 +22,7 @@ struct Event {
     var eventStartTime: String
     var eventEndDate: String
     var eventEndTime: String
-    var organizationID: String
+    var organizationID: [String] = []
     
     //Event location variables
     
@@ -64,7 +64,8 @@ struct Event {
         eventLatitude = fetchResults.latitude as Double
         eventLongitude = fetchResults.longitude as Double
         
-        organizationID = fetchResults.organizationID
+        
+        organizationID = fetchResults.organizationID as! [String]
         
         venueID = fetchResults.venueID
         eventVenueName = fetchResults.venueName
@@ -98,7 +99,7 @@ struct Event {
         eventLatitude = fetchUserResults.latitude as Double
         eventLongitude = fetchUserResults.longitude as Double
         
-        organizationID = fetchUserResults.organizationID
+        organizationID = fetchUserResults.organizationID as! [String]
         
         venueID = fetchUserResults.venueID
         eventVenueName = fetchUserResults.venueName
@@ -147,10 +148,10 @@ struct Event {
         eventID = eventDictionary["event_id"] as! String
         eventDescription = eventDictionary["event_desc"] as! String
         
-        if let organizationIDString = eventDictionary["organization_id"] as? String {
+        if let organizationIDString = eventDictionary["organization_id"] as? [String] {
             organizationID = organizationIDString
         }else {
-            organizationID = ""
+            organizationID = []
         }
         
         if let venueIDString = eventDictionary["venue_id"] as? String {

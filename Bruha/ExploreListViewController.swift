@@ -9,7 +9,7 @@
 import UIKit
 import CoreData
 
-class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPDragDelegate, ARSPVisibilityStateDelegate {
+class ExploreListViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UISearchResultsUpdating, UISearchBarDelegate, SWTableViewCellDelegate,ARSPDragDelegate, ARSPVisibilityStateDelegate {
     
     @IBOutlet weak var exploreTableView: UITableView!
     @IBOutlet weak var bruhaButton: UIButton!
@@ -25,6 +25,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
     
     @IBOutlet weak var exploreHeightImage: NSLayoutConstraint!
     
+    @IBOutlet weak var navigationTitle: UINavigationItem!
     
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
@@ -32,11 +33,32 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
     var screenWidth: CGFloat = 0.0
     var screenHeight: CGFloat = 0.0
     
+    //var posterInfo: [Image]?
+    var eventInfo: [Event]!
+    var addictionEventInfo: [AddictionEvent]?
+    var venueInfo: [Venue]?
+    var addictionVenueInfo: [AddictionVenue]?
+    var organizationInfo: [Organization]?
+    var addictionOrganizationInfo: [AddictionOrganization]?
+    
+    var filteredEventInfo: [Event] = []
+    var filteredVenueInfo: [Venue] = []
+    var filteredOrganizationInfo: [Organization] = []
+    
+    var searchController: UISearchController!
+    var searchedEvents = [Event]()
+    var searchedVenues = [Venue]()
+    var searchedOrganizations = [Organization]()
+    
+    //var GlobalVariables.eventImageCache = [String:UIImage]()
+    //var GlobalVariables.venueImageCache = [String:UIImage]()
+    //var GlobalVariables.organizationImageCache = [String:UIImage]()
+    
     func configureView(){
         
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         let screenHeight = screenSize.height
-        exploreTableView.rowHeight = screenHeight * 0.5
+        exploreTableView.rowHeight = ( screenHeight - screenHeight * 70 / 568 ) * 0.5
         self.panelControllerContainer = self.parentViewController as! ARSPContainerController
         self.panelControllerContainer.dragDelegate = self
         self.panelControllerContainer.visibilityStateDelegate = self
@@ -108,7 +130,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         default:
             exploreLabel.text = "Event"
         }
-
+        
         
         UIView.animateWithDuration(1.5, delay: 0.0, options: [.TransitionFlipFromLeft], animations: { () -> Void in
             self.exploreLabel.alpha = 1
@@ -124,22 +146,22 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
     }
     
     /*func adjustCircSizeOfCell(view: UIView) {
-        
-        let screenSize: CGRect = UIScreen.mainScreen().bounds
-        
-        let heightContraint = NSLayoutConstraint(item: view, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.height * 0.5)
-        heightContraint.priority = UILayoutPriorityDefaultHigh
-        
-        let widthContraint = NSLayoutConstraint(item: view, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.height * 0.5)
-        widthContraint.priority = UILayoutPriorityDefaultHigh
-        
-        view.addConstraints([heightContraint, widthContraint])
-        
+    
+    let screenSize: CGRect = UIScreen.mainScreen().bounds
+    
+    let heightContraint = NSLayoutConstraint(item: view, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.height * 0.5)
+    heightContraint.priority = UILayoutPriorityDefaultHigh
+    
+    let widthContraint = NSLayoutConstraint(item: view, attribute: .Width, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.height * 0.5)
+    widthContraint.priority = UILayoutPriorityDefaultHigh
+    
+    view.addConstraints([heightContraint, widthContraint])
+    
     }*/
     
     func customStatusBar() {
         let barView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0))
-        barView.backgroundColor = UIColor.grayColor()
+        barView.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
         //barView.alpha = 0.5
         self.view.addSubview(barView)
     }
@@ -147,11 +169,11 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
-        customTopButtons()
-        //customStatusBar()
-            
-        exploreTableView.backgroundColor = UIColor.blackColor()
-        exploreTableView.separatorColor = UIColor.blackColor()
+        //customTopButtons()
+        customStatusBar()
+        
+        //exploreTableView.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
+        exploreTableView.separatorColor = UIColor.clearColor()
         
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateNotificationEvent", name: "itemDisplayChangeEvent", object: nil)
         
@@ -160,7 +182,6 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         GlobalVariables.displayedArtists = FetchData(context: managedObjectContext).fetchArtists()!
         GlobalVariables.displayedOrganizations = FetchData(context: managedObjectContext).fetchOrganizations()!
         
-        
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "updateNotificationEvent", name: "filter", object: nil)
         
         
@@ -168,7 +189,50 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         self.exploreImage.alpha = 0.0
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "animateHeader", name: "itemDisplayChangeEvent", object: nil)
         
+        backgroundGradient()
         // Do any additional setup after loading the view.
+        
+        fetchInformation()
+        
+        setUpSearchBar()
+        
+    }
+    
+    func setUpSearchBar() {
+        searchController = UISearchController(searchResultsController: nil)
+        searchController.searchResultsUpdater = self
+        searchController.searchBar.delegate = self
+        definesPresentationContext = true
+        searchController.dimsBackgroundDuringPresentation = false
+        searchController.searchBar.placeholder = "Search Events"
+        
+        searchController.searchBar.barTintColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
+        searchController.searchBar.tintColor = UIColor.whiteColor()
+        
+        searchController.searchBar.scopeButtonTitles = ["Search", "Location"]
+        
+        searchController.searchBar.sizeToFit()
+        
+        exploreTableView.tableHeaderView = searchController.searchBar
+        
+        if GlobalVariables.searchedText != "" {
+            searchController.searchBar.text = GlobalVariables.searchedText
+        }
+        
+        //        let searchView = UIView.init(frame: CGRectMake(0, 0, UIScreen.mainScreen().bounds.size.width, searchController.searchBar.bounds.size.height))
+        //
+        //        searchView.addSubview(searchController.searchBar)
+        //
+        //        self.view.addSubview(searchView)
+        
+        //self.navigationItem.titleView = searchController.searchBar
+        
+    }
+    
+    func backgroundGradient() {
+        let background = CAGradientLayer().gradientColor()
+        background.frame = self.view.bounds
+        self.exploreTableView.layer.insertSublayer(background, atIndex: 0)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -176,53 +240,158 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         
         animateHeader()
         
+        if GlobalVariables.searchedText != "" {
+            searchController.active = true
+            searchController.becomeFirstResponder()
+        }
+        
         exploreTableView.reloadData()
-//        if GlobalVariables.selectedDisplay == "Event"{
-//            for cell in exploreTableView.visibleCells as! [EventTableViewCell] {
-//                cell.animate()
-//            }
-//            
-//        }
-//        if GlobalVariables.selectedDisplay == "Venue"{
-//            for cell in exploreTableView.visibleCells as! [VenueTableViewCell] {
-//                cell.animate()
-//            }
-//            
-//        }
-//        if GlobalVariables.selectedDisplay == "Organization"{
-//            for cell in exploreTableView.visibleCells as! [OrganizationTableViewCell] {
-//                cell.animate()
-//            }
-//            
-//        }
+        
+        //        if GlobalVariables.selectedDisplay == "Event"{
+        //            for cell in exploreTableView.visibleCells as! [EventTableViewCell] {
+        //                cell.animate()
+        //            }
+        //
+        //        }
+        //        if GlobalVariables.selectedDisplay == "Venue"{
+        //            for cell in exploreTableView.visibleCells as! [VenueTableViewCell] {
+        //                cell.animate()
+        //            }
+        //
+        //        }
+        //        if GlobalVariables.selectedDisplay == "Organization"{
+        //            for cell in exploreTableView.visibleCells as! [OrganizationTableViewCell] {
+        //                cell.animate()
+        //            }
+        //
+        //        }
     }
     
     /*override func viewWillAppear(animated: Bool) {
-        super.viewWillAppear(animated)
-        
-        if GlobalVariables.selectedDisplay == "Event"{
-            for cell in exploreTableView.visibleCells as! [EventTableViewCell] {
-                cell.animate()
-            }
-            
-        }
-        if GlobalVariables.selectedDisplay == "Venue"{
-            for cell in exploreTableView.visibleCells as! [VenueTableViewCell] {
-                cell.animate()
-            }
-            
-        }
-        if GlobalVariables.selectedDisplay == "Organization"{
-            for cell in exploreTableView.visibleCells as! [OrganizationTableViewCell] {
-                cell.animate()
-            }
-            
-        }
+    super.viewWillAppear(animated)
+    
+    if GlobalVariables.selectedDisplay == "Event"{
+    for cell in exploreTableView.visibleCells as! [EventTableViewCell] {
+    cell.animate()
+    }
+    
+    }
+    if GlobalVariables.selectedDisplay == "Venue"{
+    for cell in exploreTableView.visibleCells as! [VenueTableViewCell] {
+    cell.animate()
+    }
+    
+    }
+    if GlobalVariables.selectedDisplay == "Organization"{
+    for cell in exploreTableView.visibleCells as! [OrganizationTableViewCell] {
+    cell.animate()
+    }
+    
+    }
     }*/
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        GlobalVariables.searchedText = ""
+    }
+    
+    func filterForSearchText(searchText: String, scope: String = "Search") {
+        
+        if GlobalVariables.selectedDisplay == "Event" {
+            if GlobalVariables.filterEventBool {
+                if searchController.searchBar.text != ""  {
+                    searchedEvents = filteredEventInfo.filter({ (event: Event) -> Bool in
+                        //print(event.eventVenueAddress.componentsSeparatedByString(", ")[0] + " " + event.eventVenueCity)
+                        return ( scope == "Search" && event.eventName.lowercaseString.containsString(searchText.lowercaseString) ) ||
+                            ( scope == "Location" && (event.eventVenueAddress.componentsSeparatedByString(", ")[0] + " " + event.eventVenueCity).lowercaseString.containsString(searchText.lowercaseString) )
+                    })
+                } else if searchController.searchBar.text == "" {
+                    searchedEvents = filteredEventInfo
+                }
+            }
+            else {
+                if searchController.searchBar.text != "" {
+                    // searched results
+                    searchedEvents = eventInfo.filter({ (event: Event) -> Bool in
+                        //print(event.eventVenueAddress.componentsSeparatedByString(", ")[0] + " " + event.eventVenueCity)
+                        return ( scope == "Search" && event.eventName.lowercaseString.containsString(searchText.lowercaseString) ) ||
+                            ( scope == "Location" && (event.eventVenueAddress.componentsSeparatedByString(", ")[0] + " " + event.eventVenueCity).lowercaseString.containsString(searchText.lowercaseString) )
+                    })
+                    print("searched Events numebr", searchedEvents.count)
+                } else if searchController.searchBar.text == "" {
+                    searchedEvents = eventInfo
+                }
+            }
+        }
+        
+        if GlobalVariables.selectedDisplay == "Venue" {
+            if GlobalVariables.filterVenueBool {
+                if searchController.searchBar.text != ""  {
+                    searchedVenues = filteredVenueInfo.filter({ (venue: Venue) -> Bool in
+                        return ( scope == "Search" && venue.venueName.lowercaseString.containsString(searchText.lowercaseString) ) ||
+                            ( scope == "Location" && (venue.venueAddress.componentsSeparatedByString(", ")[0]).lowercaseString.containsString(searchText.lowercaseString) )
+                    })
+                } else if searchController.searchBar.text == "" {
+                    searchedVenues = filteredVenueInfo
+                }
+            }
+            else {
+                if searchController.searchBar.text != "" {
+                    searchedVenues = venueInfo!.filter({ (venue: Venue) -> Bool in
+                        return ( scope == "Search" && venue.venueName.lowercaseString.containsString(searchText.lowercaseString) ) ||
+                            ( scope == "Location" && (venue.venueAddress.componentsSeparatedByString(", ")[0]).lowercaseString.containsString(searchText.lowercaseString) )
+                    })
+                } else if searchController.searchBar.text == "" {
+                    searchedVenues = venueInfo!
+                }
+            }
+        }
+        
+        if GlobalVariables.selectedDisplay == "Organization" {
+            if GlobalVariables.filterOrganizationBool {
+                if searchController.searchBar.text != ""  {
+                    searchedOrganizations = filteredOrganizationInfo.filter({ (organization: Organization) -> Bool in
+                        return ( scope == "Search" && organization.organizationName.lowercaseString.containsString(searchText.lowercaseString) ) ||
+                            ( scope == "Location" && (organization.organizationAddress.componentsSeparatedByString(", ")[0]).lowercaseString.containsString(searchText.lowercaseString) )
+                    })
+                } else if searchController.searchBar.text == "" {
+                    searchedOrganizations = filteredOrganizationInfo
+                }
+            }
+            else {
+                if searchController.searchBar.text != "" {
+                    searchedOrganizations = organizationInfo!.filter({ (organization: Organization) -> Bool in
+                        return ( scope == "Search" && organization.organizationName.lowercaseString.containsString(searchText.lowercaseString) ) ||
+                            ( scope == "Location" && (organization.organizationAddress.componentsSeparatedByString(", ")[0]).lowercaseString.containsString(searchText.lowercaseString) )
+                    })
+                } else if searchController.searchBar.text == "" {
+                    searchedOrganizations = organizationInfo!
+                }
+            }
+        }
+        
+        exploreTableView.reloadData()
+    }
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        GlobalVariables.searchedText = searchText
+    }
+    
+    func searchBar(searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
+        filterForSearchText(searchBar.text!, scope: searchBar.scopeButtonTitles![selectedScope])
+    }
+    
+    func updateSearchResultsForSearchController(searchController: UISearchController) {
+        let searchBar = searchController.searchBar
+        let scope = searchBar.scopeButtonTitles![searchBar.selectedScopeButtonIndex]
+        filterForSearchText(searchController.searchBar.text!, scope: scope)
+        
+        //print(searchedEvents.count, "searchEvents")
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -260,51 +429,74 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         //println("This is global variable on clicking \(GlobalVariables.selectedDisplay)")
         switch (GlobalVariables.selectedDisplay){
         case "Event":
-            var eventInfo: [Event] = []
+            var mEventInfo: [Event] = []
             
-            if GlobalVariables.filterEventBool {
-                eventInfo = GlobalVariables.displayFilteredEvents
-            } else {
-                eventInfo = FetchData(context: managedObjectContext).fetchEvents()
+            if searchController.searchBar.text == "" && !GlobalVariables.filterEventBool{
+                mEventInfo = eventInfo
             }
-            return (eventInfo.count)
+            else if searchController.searchBar.text == "" && GlobalVariables.filterEventBool {
+                mEventInfo = filteredEventInfo
+            }
+            else if searchController.searchBar.text != "" {
+                mEventInfo = searchedEvents
+            }
+            
+            return (mEventInfo.count)
             
         case "Venue":
-            var venueInfo: [Venue] = []
+            var mVenueInfo: [Venue] = []
             
-            if GlobalVariables.filterVenueBool {
-                venueInfo = GlobalVariables.displayFilteredVenues
-            } else {
-                venueInfo = FetchData(context: managedObjectContext).fetchVenues()!
+            if searchController.searchBar.text == "" && !GlobalVariables.filterVenueBool{
+                mVenueInfo = venueInfo!
             }
-            return (venueInfo.count)
+            else if searchController.searchBar.text == "" && GlobalVariables.filterVenueBool {
+                mVenueInfo = filteredVenueInfo
+            }
+            else if searchController.searchBar.text != "" {
+                mVenueInfo = searchedVenues
+            }
+            
+            return (mVenueInfo.count)
             
         case "Artist":
             let artistInfo = FetchData(context: managedObjectContext).fetchArtists()
             return (artistInfo?.count)!
             
         case "Organization":
-            var organizationInfo: [Organization] = []
+            var mOrganizationInfo: [Organization] = []
             
-            if GlobalVariables.filterOrganizationBool {
-                organizationInfo = GlobalVariables.displayFilteredOrganizations
-            } else {
-                organizationInfo = FetchData(context: managedObjectContext).fetchOrganizations()!
+            if searchController.searchBar.text == "" && !GlobalVariables.filterOrganizationBool{
+                mOrganizationInfo = organizationInfo!
             }
-            return (organizationInfo.count)
+            else if searchController.searchBar.text == "" && GlobalVariables.filterOrganizationBool {
+                mOrganizationInfo = filteredOrganizationInfo
+            }
+            else if searchController.searchBar.text != "" {
+                mOrganizationInfo = searchedOrganizations
+            }
+            
+            return (mOrganizationInfo.count)
             
         default:
-            let venueInfo = FetchData(context: managedObjectContext).fetchVenues()
-            return (venueInfo?.count)!
+            
+            return (venueInfo!.count)
         }
         
     }
     
+    func getDataFromUrl(urL:NSURL, completion: ((data: NSData?) -> Void)) {
+        NSURLSession.sharedSession().dataTaskWithURL(urL) { (data, response, error) in
+            completion(data: data)
+            }.resume()
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let posterInfo = FetchData(context: managedObjectContext).fetchPosterImages()
-        
         let screenSize: CGRect = UIScreen.mainScreen().bounds
+        
+        if GlobalVariables.eventImageCache.count >= 50 { GlobalVariables.eventImageCache.removeAtIndex(0) }
+        if GlobalVariables.venueImageCache.count >= 50 { GlobalVariables.venueImageCache.removeAtIndex(0) }
+        if GlobalVariables.organizationImageCache.count >= 50 { GlobalVariables.organizationImageCache.removeAtIndex(0) }
         
         switch (GlobalVariables.selectedDisplay){
             
@@ -317,111 +509,112 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 cell = NSBundle.mainBundle().loadNibNamed("EventTableViewCell", owner: self, options: nil)[0] as! EventTableViewCell;
             }
             
-//            cell.circView.autoresizingMask = UIViewAutoresizing.FlexibleHeight
-//            cell.circView.autoresizingMask = UIViewAutoresizing.FlexibleWidth
-////            cell.circView.sizeThatFits(circSize)
-//            adjustCircSizeOfCell(cell.circView)
+            //            cell.circView.autoresizingMask = UIViewAutoresizing.FlexibleHeight
+            //            cell.circView.autoresizingMask = UIViewAutoresizing.FlexibleWidth
+            ////            cell.circView.sizeThatFits(circSize)
+            //            adjustCircSizeOfCell(cell.circView)
             
-//            let c = cell.convertPoint(cell.circView.center, fromView: self.view)
-//            print(c.y, "mYSIDONs")
-//            cell.circView.frame = CGRectMake(0, 0, screenSize.height * 0.33, screenSize.height * 0.33)
-
+            //            let c = cell.convertPoint(cell.circView.center, fromView: self.view)
+            //            print(c.y, "mYSIDONs")
+            //            cell.circView.frame = CGRectMake(0, 0, screenSize.height * 0.33, screenSize.height * 0.33)
             
-            let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
-            let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
+            
+            //let eventInfo = FetchData(context: managedObjectContext).fetchEvents()
+            //let addictionEventInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
+            
             var like = 0
             
-            if GlobalVariables.filterEventBool {
-                
-                let filteredEventInfo = GlobalVariables.displayFilteredEvents
-                let event = filteredEventInfo[indexPath.row]
-                
-                for addict in addictionInfo! {
-                    if addict.eventID == event.eventID {
-                        like = 1
-                    }
-                }
-                
-                cell.ExploreImage.contentMode = UIViewContentMode.ScaleToFill
-                if let images = posterInfo {
-                    for img in images {
-                        if img.ID == event.eventID {
-                            if img.Image?.length > 800 {
-                                cell.ExploreImage.image = UIImage(data: img.Image!)
-                            } else {
-                                cell.ExploreImage.image = randomImage()
-                            }
-                        }
-                    }
-                }
-                
-                cell.circTitle.text = event.eventName
-                cell.circDate.text = convertCircTimeFormat("\(event.eventStartDate)")
-                
-                if let price = Float(event.eventPrice!) {
-                    if price == 0.0 {cell.circPrice.text = "Free!"; cell.rectPrice.text = "Free!"}
-                    else {cell.circPrice.text = "$\(price)"; cell.rectPrice.text = "$\(price)"}
-                } else {cell.circPrice.text = "No Price"; cell.rectPrice.text = "No Price"}
-                
-                cell.circHiddenID.text = event.eventID
             
-                cell.rectTitle.text = event.eventName
-                //cell.rectPrice.text = "$\(event.eventPrice!)"
-                
-                if event.eventVenueName == "" {
-                    cell.venueName.text = "nil"
-                }else{cell.venueName.text = event.eventVenueName}
-                
-                cell.venueAddress.text = "\(event.eventVenueAddress.componentsSeparatedByString(", ")[0])\n\(event.eventVenueCity)"
-                
-                cell.startTime.text = "\(convertRectTimeFormat("\(event.eventStartDate) \(event.eventStartTime)")) -"
-                cell.endTime.text = convertRectTimeFormat("\(event.eventEndDate) \(event.eventEndTime)")
-                
-                cell.rectCategory.contentMode = UIViewContentMode.ScaleAspectFill
-                cell.rectCategory.image = UIImage(named: event.primaryCategory)
-                cell.rectCategoryName.text = event.primaryCategory
-                
-                cell.circAddicted.contentMode = UIViewContentMode.ScaleAspectFit
-                cell.circAddicted.image = UIImage(named: "MyAddictions_Sm")
-                cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
-                cell.circCategory.image = UIImage(named: event.primaryCategory)
-                // Configure the cell...
-                
-                
-            } else { // when there is no filtering
-                
+            if searchController.searchBar.text == "" && !GlobalVariables.filterEventBool{ //when there is no filtering & no searching
                 let event = eventInfo![indexPath.row]
                 
-                for addict in addictionInfo! {
+                for addict in addictionEventInfo! {
                     if addict.eventID == event.eventID {
                         like = 1
                     }
                 }
-
+                
+                //                let start = NSDate()
+                //                let end = NSDate()
+                //                let timeInterval: Double = end.timeIntervalSinceDate(start)
+                //                print("time running is \(timeInterval)")
                 
                 cell.ExploreImage.contentMode = UIViewContentMode.ScaleToFill
-                if let images = posterInfo {
-                    for img in images {
-                        if img.ID == event.eventID {
-                            if img.Image?.length > 800 {
-                                cell.ExploreImage.image = UIImage(data: img.Image!)
-                            } else {
-                                cell.ExploreImage.image = randomImage()
+                
+                //                if mPosterInfo!.contains({$0.ID == event.eventID}) {
+                //
+                //                    let idx = mPosterInfo!.indexOf({$0.ID == event.eventID})
+                //
+                //                    if mPosterInfo![idx!].Image?.length > 800 {
+                //                        cell.ExploreImage.image = UIImage(data: mPosterInfo![idx!].Image!)
+                //                    } else {
+                //                        cell.ExploreImage.image = randomImage()
+                //                    }
+                //                }
+                //                else {
+                //                    cell.ExploreImage.image = randomImage()
+                //                }
+                
+                
+                if let img = GlobalVariables.eventImageCache[event.eventID] {
+                    cell.ExploreImage.image = img
+                    //print("catched! \(event.eventName)")
+                    
+                    //print(GlobalVariables.eventImageCache[event.eventID])
+                }
+                    
+                else if let checkedUrl = NSURL(string:event.posterUrl) {
+                    
+                    self.getDataFromUrl(checkedUrl) { data in
+                        dispatch_async(dispatch_get_main_queue()) {
+                            
+                            if let downloadImg = data {
+                                
+                                if downloadImg.length > 800 {
+                                    
+                                    let image = UIImage(data: downloadImg)
+                                    GlobalVariables.eventImageCache[event.eventID] = image
+                                    
+                                    cell.ExploreImage.image = image
+                                    //print("new! \(event.eventName)", GlobalVariables.eventImageCache.count)
+                                    
+                                } else {
+                                    cell.ExploreImage.image = self.randomImage()
+                                    
+                                }
+                            }
+                                
+                            else {
+                                cell.ExploreImage.image = self.randomImage()
                             }
                         }
                     }
                 }
-//                if let checkedUrl = NSURL(string:event.posterUrl) {
-//                    //println("Started downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
-//                    getDataFromUrl(checkedUrl) { data in
-//                        dispatch_async(dispatch_get_main_queue()) {
-//                            //println("Finished downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
-//                            cell.ExploreImage.image = UIImage(data: data!)
-//                        }
-//                    
-//                    }
-//                
-//                }
+                
+                
+                //                if let images = posterInfo {
+                //                    for img in images {
+                //                        if img.ID == event.eventID {
+                //                            if img.Image?.length > 800 {
+                //                                cell.ExploreImage.image = UIImage(data: img.Image!)
+                //                            } else {
+                //                                cell.ExploreImage.image = randomImage()
+                //                            }
+                //                        }
+                //                    }
+                //                }
+                
+                //                if let checkedUrl = NSURL(string:event.posterUrl) {
+                //                    //println("Started downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
+                //                    getDataFromUrl(checkedUrl) { data in
+                //                        dispatch_async(dispatch_get_main_queue()) {
+                //                            //println("Finished downloading \"\(checkedUrl.lastPathComponent!.stringByDeletingPathExtension)\".")
+                //                            cell.ExploreImage.image = UIImage(data: data!)
+                //                        }
+                //
+                //                    }
+                //
+                //                }
                 //println("End of code. The image will continue downloading in the background and it will be loaded when it ends.")
                 //Synchronously:
                 /*if let url = NSURL(string: event.url) {
@@ -430,9 +623,9 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 cell.ExploreImage.image = UIImage(data: data)
                 }
                 }*/
-            
-            
-            
+                
+                
+                
                 cell.circTitle.text = event.eventName
                 cell.circDate.text = convertCircTimeFormat("\(event.eventStartDate)")
                 
@@ -442,7 +635,7 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 } else {cell.circPrice.text = "No Price"; cell.rectPrice.text = "No Price"}
                 
                 cell.circHiddenID.text = event.eventID
-            
+                
                 cell.rectTitle.text = event.eventName
                 //cell.rectPrice.text = "$\(event.eventPrice!)"
                 
@@ -455,12 +648,12 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 cell.startTime.text = "\(convertRectTimeFormat("\(event.eventStartDate) \(event.eventStartTime)")) -"
                 cell.endTime.text = convertRectTimeFormat("\(event.eventEndDate) \(event.eventEndTime)")
                 
-//                let rStart = convertRectTimeFormat("\(event.eventStartDate) \(event.eventStartTime)")
-//                let rEnd = convertRectTimeFormat("\(event.eventEndDate) \(event.eventEndTime)")
-//                cell.startDate.text = rStart.componentsSeparatedByString(",")[0]
-//                cell.startTime.text = rStart.componentsSeparatedByString(",")[1]
-//                cell.endDate.text = rEnd.componentsSeparatedByString(",")[0]
-//                cell.endTime.text = rEnd.componentsSeparatedByString(",")[1]
+                //                let rStart = convertRectTimeFormat("\(event.eventStartDate) \(event.eventStartTime)")
+                //                let rEnd = convertRectTimeFormat("\(event.eventEndDate) \(event.eventEndTime)")
+                //                cell.startDate.text = rStart.componentsSeparatedByString(",")[0]
+                //                cell.startTime.text = rStart.componentsSeparatedByString(",")[1]
+                //                cell.endDate.text = rEnd.componentsSeparatedByString(",")[0]
+                //                cell.endTime.text = rEnd.componentsSeparatedByString(",")[1]
                 
                 cell.rectCategory.contentMode = UIViewContentMode.ScaleAspectFill
                 cell.rectCategory.image = UIImage(named: event.primaryCategory)
@@ -471,9 +664,172 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
                 cell.circCategory.image = UIImage(named: event.primaryCategory)
                 // Configure the cell...
-            
             }
+            else if searchController.searchBar.text == "" && GlobalVariables.filterEventBool { // when there is filter and no search
+                let event = filteredEventInfo[indexPath.row]
+                
+                for addict in addictionEventInfo! {
+                    if addict.eventID == event.eventID {
+                        like = 1
+                    }
+                }
+                
+                cell.ExploreImage.contentMode = UIViewContentMode.ScaleToFill
+                
+                // if there is already cache
+                if let img = GlobalVariables.eventImageCache[event.eventID] {
+                    cell.ExploreImage.image = img
+                    //print("catched! \(event.eventName)")
+                }
                     
+                    // get image from url
+                else if let checkedUrl = NSURL(string:event.posterUrl) {
+                    //print(checkedUrl)
+                    
+                    self.getDataFromUrl(checkedUrl) { data in
+                        dispatch_async(dispatch_get_main_queue()) {
+                            if let downloadImg = data {
+                                
+                                // getting the image data
+                                if downloadImg.length > 800 {
+                                    
+                                    let image = UIImage(data: downloadImg)
+                                    
+                                    GlobalVariables.eventImageCache[event.eventID] = image
+                                    
+                                    cell.ExploreImage.image = image
+                                    //print("new! \(event.eventName)")
+                                    
+                                } else { // when getting error message
+                                    cell.ExploreImage.image = self.randomImage()
+                                }
+                            }
+                            else { // when there is no data retrieved, most likely no internet
+                                cell.ExploreImage.image = self.randomImage()
+                            }
+                        }
+                    }
+                    
+                }
+                
+                
+                cell.circTitle.text = event.eventName
+                cell.circDate.text = convertCircTimeFormat("\(event.eventStartDate)")
+                
+                if let price = Float(event.eventPrice!) {
+                    if price == 0.0 {cell.circPrice.text = "Free!"; cell.rectPrice.text = "Free!"}
+                    else {cell.circPrice.text = "$\(price)"; cell.rectPrice.text = "$\(price)"}
+                } else {cell.circPrice.text = "No Price"; cell.rectPrice.text = "No Price"}
+                
+                cell.circHiddenID.text = event.eventID
+                
+                cell.rectTitle.text = event.eventName
+                //cell.rectPrice.text = "$\(event.eventPrice!)"
+                
+                if event.eventVenueName == "" {
+                    cell.venueName.text = "nil"
+                }else{cell.venueName.text = event.eventVenueName}
+                
+                cell.venueAddress.text = "\(event.eventVenueAddress.componentsSeparatedByString(", ")[0])\n\(event.eventVenueCity)"
+                
+                cell.startTime.text = "\(convertRectTimeFormat("\(event.eventStartDate) \(event.eventStartTime)")) -"
+                cell.endTime.text = convertRectTimeFormat("\(event.eventEndDate) \(event.eventEndTime)")
+                
+                cell.rectCategory.contentMode = UIViewContentMode.ScaleAspectFill
+                cell.rectCategory.image = UIImage(named: event.primaryCategory)
+                cell.rectCategoryName.text = event.primaryCategory
+                
+                cell.circAddicted.contentMode = UIViewContentMode.ScaleAspectFit
+                cell.circAddicted.image = UIImage(named: "MyAddictions_Sm")
+                cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
+                cell.circCategory.image = UIImage(named: event.primaryCategory)
+                // Configure the cell...
+            }
+            else if searchController.searchBar.text != "" { // when there is search
+                print(searchedEvents.count, "error count")
+                let event = searchedEvents[indexPath.row]
+                
+                for addict in addictionEventInfo! {
+                    if addict.eventID == event.eventID {
+                        like = 1
+                    }
+                }
+                
+                cell.ExploreImage.contentMode = UIViewContentMode.ScaleToFill
+                
+                // if there is already cache
+                if let img = GlobalVariables.eventImageCache[event.eventID] {
+                    cell.ExploreImage.image = img
+                    //print("catched! \(event.eventName)")
+                }
+                    
+                    // get image from url
+                else if let checkedUrl = NSURL(string:event.posterUrl) {
+                    //print(checkedUrl)
+                    
+                    self.getDataFromUrl(checkedUrl) { data in
+                        dispatch_async(dispatch_get_main_queue()) {
+                            if let downloadImg = data {
+                                
+                                // getting the image data
+                                if downloadImg.length > 800 {
+                                    
+                                    let image = UIImage(data: downloadImg)
+                                    
+                                    GlobalVariables.eventImageCache[event.eventID] = image
+                                    
+                                    cell.ExploreImage.image = image
+                                    //print("new! \(event.eventName)")
+                                    
+                                } else { // when getting error message
+                                    cell.ExploreImage.image = self.randomImage()
+                                }
+                            }
+                            else { // when there is no data retrieved, most likely no internet
+                                cell.ExploreImage.image = self.randomImage()
+                            }
+                        }
+                    }
+                    
+                }
+                
+                
+                cell.circTitle.text = event.eventName
+                cell.circDate.text = convertCircTimeFormat("\(event.eventStartDate)")
+                
+                if let price = Float(event.eventPrice!) {
+                    if price == 0.0 {cell.circPrice.text = "Free!"; cell.rectPrice.text = "Free!"}
+                    else {cell.circPrice.text = "$\(price)"; cell.rectPrice.text = "$\(price)"}
+                } else {cell.circPrice.text = "No Price"; cell.rectPrice.text = "No Price"}
+                
+                cell.circHiddenID.text = event.eventID
+                
+                cell.rectTitle.text = event.eventName
+                //cell.rectPrice.text = "$\(event.eventPrice!)"
+                
+                if event.eventVenueName == "" {
+                    cell.venueName.text = "nil"
+                }else{cell.venueName.text = event.eventVenueName}
+                
+                cell.venueAddress.text = "\(event.eventVenueAddress.componentsSeparatedByString(", ")[0])\n\(event.eventVenueCity)"
+                
+                cell.startTime.text = "\(convertRectTimeFormat("\(event.eventStartDate) \(event.eventStartTime)")) -"
+                cell.endTime.text = convertRectTimeFormat("\(event.eventEndDate) \(event.eventEndTime)")
+                
+                cell.rectCategory.contentMode = UIViewContentMode.ScaleAspectFill
+                cell.rectCategory.image = UIImage(named: event.primaryCategory)
+                cell.rectCategoryName.text = event.primaryCategory
+                
+                cell.circAddicted.contentMode = UIViewContentMode.ScaleAspectFit
+                cell.circAddicted.image = UIImage(named: "MyAddictions_Sm")
+                cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
+                cell.circCategory.image = UIImage(named: event.primaryCategory)
+                // Configure the cell...
+            }
+            
+            
+            
+            
             let temp: NSMutableArray = NSMutableArray()
             
             if like == 0 {
@@ -516,76 +872,51 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             }
             
             
-            let venueInfo = FetchData(context: managedObjectContext).fetchVenues()
+            //let venueInfo = FetchData(context: managedObjectContext).fetchVenues()
             var like = 0
-            let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsVenue()
+            //let addictionVenueInfo = FetchData(context: managedObjectContext).fetchAddictionsVenue()
             
             
-            if GlobalVariables.filterVenueBool {
-                
-                let filteredVenueInfo = GlobalVariables.displayFilteredVenues
-                let venue = filteredVenueInfo[indexPath.row]
-                
-                for addict in addictionInfo! {
-                    if addict.venueID == venue.venueID {
-                        like = 1
-                    }
-                }
-                
-                cell.venueImage.contentMode = UIViewContentMode.ScaleToFill
-                if let images = posterInfo {
-                    for img in images {
-                        if img.ID == venue.venueID {
-                            
-                            if img.Image?.length > 800 {
-                                cell.venueImage.image = UIImage(data: img.Image!)
-                            } else {
-                                cell.venueImage.image = randomImage()
-                            }
-                        }
-                    }
-                }
-                
-                cell.venueName.text = venue.venueName
-                cell.venueDescription.text = venue.venueName
-                cell.venueAddress.text = "\(venue.venueAddress.componentsSeparatedByString(", ")[0])"
-                cell.circVenueName.text = venue.venueName
-                cell.circHiddenID.text = venue.venueID
-                
-                cell.circAddicted.contentMode = UIViewContentMode.ScaleAspectFit
-                cell.circAddicted.image = UIImage(named: "MyAddictions_Sm")
-                cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
-                cell.circCategory.image = UIImage(named: venue.primaryCategory)
-                
-                cell.rectCategory.contentMode = UIViewContentMode.ScaleAspectFill
-                cell.rectCategory.image = UIImage(named: venue.primaryCategory)
-                cell.rectCategoryName.text = venue.primaryCategory
-                
-                
-            } else { // when there is no filtering
-                                    
+            if searchController.searchBar.text == "" && !GlobalVariables.filterVenueBool{ // when there is no filtering & no searching
                 let venue = venueInfo![indexPath.row]
                 
-                for addict in addictionInfo! {
+                for addict in addictionVenueInfo! {
                     if addict.venueID == venue.venueID {
                         like = 1
                     }
                 }
-            
+                
                 cell.venueImage.contentMode = UIViewContentMode.ScaleToFill
-                if let images = posterInfo {
-                    for img in images {
-                        if img.ID == venue.venueID {
-                            // 475 bytes when no image
-                            if img.Image?.length > 800 {
-                                cell.venueImage.image = UIImage(data: img.Image!)
-                            } else {
-                                cell.venueImage.image = randomImage()
+                if let img = GlobalVariables.venueImageCache[venue.venueID] {
+                    cell.venueImage.image = img
+                }
+                    
+                else if let checkedUrl = NSURL(string:venue.posterUrl) {
+                    
+                    self.getDataFromUrl(checkedUrl) { data in
+                        
+                        dispatch_async(dispatch_get_main_queue()) {
+                            if let downloadImg = data {
+                                if downloadImg.length > 800 {
+                                    
+                                    let image = UIImage(data: downloadImg)
+                                    GlobalVariables.venueImageCache[venue.venueID] = image
+                                    cell.venueImage.image = image
+                                    
+                                } else {
+                                    
+                                    cell.venueImage.image = self.randomImage()
+                                }
+                            }
+                                
+                            else {
+                                cell.venueImage.image = self.randomImage()
                             }
                         }
-                        //if img.ID == "venue201512030620212367" {print(img.Image)}
                     }
+                    
                 }
+                
                 //if venue.venueName == "zsdf" {print(venue.venueID)}
                 //if venue.venueName == "Niagra" {print(venue.venueID)}
                 cell.venueName.text = venue.venueName
@@ -603,6 +934,111 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 cell.rectCategory.image = UIImage(named: venue.primaryCategory)
                 cell.rectCategoryName.text = venue.primaryCategory
             }
+            else if searchController.searchBar.text == "" && GlobalVariables.filterVenueBool { // when there is filter and no search
+                let venue = filteredVenueInfo[indexPath.row]
+                
+                for addict in addictionVenueInfo! {
+                    if addict.venueID == venue.venueID {
+                        like = 1
+                    }
+                }
+                
+                cell.venueImage.contentMode = UIViewContentMode.ScaleToFill
+                
+                if let img = GlobalVariables.venueImageCache[venue.venueID] {
+                    cell.venueImage.image = img
+                }
+                else if let checkedUrl = NSURL(string:venue.posterUrl) {
+                    
+                    self.getDataFromUrl(checkedUrl) { data in
+                        dispatch_async(dispatch_get_main_queue()) {
+                            if let downloadImg = data {
+                                if downloadImg.length > 800 {
+                                    
+                                    let image = UIImage(data: downloadImg)
+                                    GlobalVariables.venueImageCache[venue.venueID] = image
+                                    cell.venueImage.image = image
+                                    
+                                } else {
+                                    cell.venueImage.image = self.randomImage()
+                                }
+                            }
+                            else {
+                                cell.venueImage.image = self.randomImage()
+                            }
+                        }
+                    }
+                }
+                
+                
+                cell.venueName.text = venue.venueName
+                cell.venueDescription.text = venue.venueName
+                cell.venueAddress.text = "\(venue.venueAddress.componentsSeparatedByString(", ")[0])"
+                cell.circVenueName.text = venue.venueName
+                cell.circHiddenID.text = venue.venueID
+                
+                cell.circAddicted.contentMode = UIViewContentMode.ScaleAspectFit
+                cell.circAddicted.image = UIImage(named: "MyAddictions_Sm")
+                cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
+                cell.circCategory.image = UIImage(named: venue.primaryCategory)
+                
+                cell.rectCategory.contentMode = UIViewContentMode.ScaleAspectFill
+                cell.rectCategory.image = UIImage(named: venue.primaryCategory)
+                cell.rectCategoryName.text = venue.primaryCategory
+            }
+            else if searchController.searchBar.text != "" { // when there is search
+                let venue = searchedVenues[indexPath.row]
+                
+                for addict in addictionVenueInfo! {
+                    if addict.venueID == venue.venueID {
+                        like = 1
+                    }
+                }
+                
+                cell.venueImage.contentMode = UIViewContentMode.ScaleToFill
+                
+                if let img = GlobalVariables.venueImageCache[venue.venueID] {
+                    cell.venueImage.image = img
+                }
+                else if let checkedUrl = NSURL(string:venue.posterUrl) {
+                    
+                    self.getDataFromUrl(checkedUrl) { data in
+                        dispatch_async(dispatch_get_main_queue()) {
+                            if let downloadImg = data {
+                                if downloadImg.length > 800 {
+                                    
+                                    let image = UIImage(data: downloadImg)
+                                    GlobalVariables.venueImageCache[venue.venueID] = image
+                                    cell.venueImage.image = image
+                                    
+                                } else {
+                                    cell.venueImage.image = self.randomImage()
+                                }
+                            }
+                            else {
+                                cell.venueImage.image = self.randomImage()
+                            }
+                        }
+                    }
+                }
+                
+                
+                cell.venueName.text = venue.venueName
+                cell.venueDescription.text = venue.venueName
+                cell.venueAddress.text = "\(venue.venueAddress.componentsSeparatedByString(", ")[0])"
+                cell.circVenueName.text = venue.venueName
+                cell.circHiddenID.text = venue.venueID
+                
+                cell.circAddicted.contentMode = UIViewContentMode.ScaleAspectFit
+                cell.circAddicted.image = UIImage(named: "MyAddictions_Sm")
+                cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
+                cell.circCategory.image = UIImage(named: venue.primaryCategory)
+                
+                cell.rectCategory.contentMode = UIViewContentMode.ScaleAspectFill
+                cell.rectCategory.image = UIImage(named: venue.primaryCategory)
+                cell.rectCategoryName.text = venue.primaryCategory
+            }
+            
             
             
             let temp: NSMutableArray = NSMutableArray()
@@ -645,11 +1081,11 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             
             cell.artistsImage.contentMode = UIViewContentMode.ScaleToFill
             if let checkedUrl = NSURL(string:artist.posterUrl) {
-//                getDataFromUrl(checkedUrl) { data in
-//                    dispatch_async(dispatch_get_main_queue()) {
-//                        cell.artistsImage.image = UIImage(data: data!)
-//                    }
-//                }
+                //                getDataFromUrl(checkedUrl) { data in
+                //                    dispatch_async(dispatch_get_main_queue()) {
+                //                        cell.artistsImage.image = UIImage(data: data!)
+                //                    }
+                //                }
                 
             }
             
@@ -680,72 +1116,48 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
             }
             
             
-            let organizationInfo = FetchData(context: managedObjectContext).fetchOrganizations()
+            //let organizationInfo = FetchData(context: managedObjectContext).fetchOrganizations()
             var like = 0
-            let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsOrganization()
+            //let addictionOrganizationInfo = FetchData(context: managedObjectContext).fetchAddictionsOrganization()
             
             
-            if GlobalVariables.filterOrganizationBool {
-                let filteredOrganizationInfo = GlobalVariables.displayFilteredOrganizations
-                let organization = filteredOrganizationInfo[indexPath.row]
-                
-                for addict in addictionInfo! {
-                    if addict.organizationID == organization.organizationID {
-                        like = 1
-                    }
-                }
-                
-                cell.organizationImage.contentMode = UIViewContentMode.ScaleToFill
-                if let images = posterInfo {
-                    for img in images {
-                        if img.ID == organization.organizationID {
-                            if img.Image?.length > 800 {
-                                cell.organizationImage.image = UIImage(data: img.Image!)
-                            } else {
-                                cell.organizationImage.image = randomImage()
-                            }
-                        }
-                    }
-                }
-                    
-                cell.organizationName.text = organization.organizationName
-                cell.organizationDescription.text = organization.organizationName
-                cell.address.text = "\(organization.organizationAddress.componentsSeparatedByString(", ")[0])"
-                cell.circOrgName.text = organization.organizationName
-                cell.circHiddenID.text = organization.organizationID
-                
-                cell.circAddicted.contentMode = UIViewContentMode.ScaleAspectFit
-                cell.circAddicted.image = UIImage(named: "MyAddictions_Sm")
-                cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
-                cell.circCategory.image = UIImage(named: organization.primaryCategory)
-                
-                cell.rectCategory.contentMode = UIViewContentMode.ScaleAspectFill
-                cell.rectCategory.image = UIImage(named: organization.primaryCategory)
-                cell.rectCategoryName.text = organization.primaryCategory
-                
-                
-            } else { // when there is no filtering
+            
+            if searchController.searchBar.text == "" && !GlobalVariables.filterOrganizationBool{
                 let organization = organizationInfo![indexPath.row]
                 
-                for addict in addictionInfo! {
+                for addict in addictionOrganizationInfo! {
                     if addict.organizationID == organization.organizationID {
                         like = 1
                     }
                 }
-            
+                
                 cell.organizationImage.contentMode = UIViewContentMode.ScaleToFill
-                if let images = posterInfo {
-                    for img in images {
-                        if img.ID == organization.organizationID {
-                            if img.Image?.length > 800 {
-                                cell.organizationImage.image = UIImage(data: img.Image!)
-                            } else {
-                                cell.organizationImage.image = randomImage()
+                if let img = GlobalVariables.organizationImageCache[organization.organizationID] {
+                    cell.organizationImage.image = img
+                }
+                    
+                else if let checkedUrl = NSURL(string:organization.posterUrl) {
+                    
+                    self.getDataFromUrl(checkedUrl) { data in
+                        dispatch_async(dispatch_get_main_queue()) {
+                            if let downloadImg = data {
+                                
+                                if downloadImg.length > 800 {
+                                    
+                                    let image = UIImage(data: downloadImg)
+                                    GlobalVariables.venueImageCache[organization.organizationID] = image
+                                    cell.organizationImage.image = image
+                                } else {
+                                    cell.organizationImage.image = self.randomImage()
+                                }
+                            }
+                            else {
+                                cell.organizationImage.image = self.randomImage()
                             }
                         }
                     }
                 }
-            
+                
                 cell.organizationName.text = organization.organizationName
                 cell.organizationDescription.text = organization.organizationName
                 cell.address.text = "\(organization.organizationAddress.componentsSeparatedByString(", ")[0])"
@@ -760,8 +1172,112 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 cell.rectCategory.contentMode = UIViewContentMode.ScaleAspectFill
                 cell.rectCategory.image = UIImage(named: organization.primaryCategory)
                 cell.rectCategoryName.text = organization.primaryCategory
-            
             }
+            else if searchController.searchBar.text == "" && GlobalVariables.filterOrganizationBool {
+                
+                let organization = filteredOrganizationInfo[indexPath.row]
+                
+                for addict in addictionOrganizationInfo! {
+                    if addict.organizationID == organization.organizationID {
+                        like = 1
+                    }
+                }
+                
+                cell.organizationImage.contentMode = UIViewContentMode.ScaleToFill
+                
+                if let img = GlobalVariables.organizationImageCache[organization.organizationID] {
+                    cell.organizationImage.image = img
+                }
+                else if let checkedUrl = NSURL(string:organization.posterUrl) {
+                    
+                    self.getDataFromUrl(checkedUrl) { data in
+                        dispatch_async(dispatch_get_main_queue()) {
+                            if let downloadImg = data {
+                                if downloadImg.length > 800 {
+                                    
+                                    let image = UIImage(data: downloadImg)
+                                    GlobalVariables.venueImageCache[organization.organizationID] = image
+                                    cell.organizationImage.image = image
+                                } else {
+                                    cell.organizationImage.image = self.randomImage()
+                                }
+                            }
+                            else {
+                                cell.organizationImage.image = self.randomImage()
+                            }
+                        }
+                    }
+                }
+                
+                
+                cell.organizationName.text = organization.organizationName
+                cell.organizationDescription.text = organization.organizationName
+                cell.address.text = "\(organization.organizationAddress.componentsSeparatedByString(", ")[0])"
+                cell.circOrgName.text = organization.organizationName
+                cell.circHiddenID.text = organization.organizationID
+                
+                cell.circAddicted.contentMode = UIViewContentMode.ScaleAspectFit
+                cell.circAddicted.image = UIImage(named: "MyAddictions_Sm")
+                cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
+                cell.circCategory.image = UIImage(named: organization.primaryCategory)
+                
+                cell.rectCategory.contentMode = UIViewContentMode.ScaleAspectFill
+                cell.rectCategory.image = UIImage(named: organization.primaryCategory)
+                cell.rectCategoryName.text = organization.primaryCategory
+            }
+            else if searchController.searchBar.text != "" {
+                
+                let organization = searchedOrganizations[indexPath.row]
+                
+                for addict in addictionOrganizationInfo! {
+                    if addict.organizationID == organization.organizationID {
+                        like = 1
+                    }
+                }
+                
+                cell.organizationImage.contentMode = UIViewContentMode.ScaleToFill
+                
+                if let img = GlobalVariables.organizationImageCache[organization.organizationID] {
+                    cell.organizationImage.image = img
+                }
+                else if let checkedUrl = NSURL(string:organization.posterUrl) {
+                    
+                    self.getDataFromUrl(checkedUrl) { data in
+                        dispatch_async(dispatch_get_main_queue()) {
+                            if let downloadImg = data {
+                                if downloadImg.length > 800 {
+                                    
+                                    let image = UIImage(data: downloadImg)
+                                    GlobalVariables.venueImageCache[organization.organizationID] = image
+                                    cell.organizationImage.image = image
+                                } else {
+                                    cell.organizationImage.image = self.randomImage()
+                                }
+                            }
+                            else {
+                                cell.organizationImage.image = self.randomImage()
+                            }
+                        }
+                    }
+                }
+                
+                
+                cell.organizationName.text = organization.organizationName
+                cell.organizationDescription.text = organization.organizationName
+                cell.address.text = "\(organization.organizationAddress.componentsSeparatedByString(", ")[0])"
+                cell.circOrgName.text = organization.organizationName
+                cell.circHiddenID.text = organization.organizationID
+                
+                cell.circAddicted.contentMode = UIViewContentMode.ScaleAspectFit
+                cell.circAddicted.image = UIImage(named: "MyAddictions_Sm")
+                cell.circCategory.contentMode = UIViewContentMode.ScaleAspectFit
+                cell.circCategory.image = UIImage(named: organization.primaryCategory)
+                
+                cell.rectCategory.contentMode = UIViewContentMode.ScaleAspectFill
+                cell.rectCategory.image = UIImage(named: organization.primaryCategory)
+                cell.rectCategoryName.text = organization.primaryCategory
+            }
+            
             
             
             let temp: NSMutableArray = NSMutableArray()
@@ -834,6 +1350,8 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                     print("Removed from addiction(event) \(event.eventID)")
                                     print("REMOVED")
                                     
+                                    self.updateAddictFetch()
+                                    
                                     let eventService = EventService()
                                     eventService.removeAddictedEvents(event.eventID) {
                                         (let removeInfo ) in
@@ -846,6 +1364,8 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                     cell.leftUtilityButtons = temp as [AnyObject]
                                     
                                     selectedCell.circAddicted.hidden = true
+                                    
+                                    self.exploreTableView.reloadData()
                                 }
                                 alertController.addAction(unlikeAction)
                                 alertController.addAction(cancelAction)
@@ -859,6 +1379,8 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                 SaveData(context: managedObjectContext).saveAddictionEvent(addEvent)
                                 print("Getting Addicted with event id \(event.eventID)")
                                 print("ADDICTED")
+                                
+                                updateAddictFetch()
                                 
                                 let eventService = EventService()
                                 
@@ -898,6 +1420,8 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                     print("Removed from addiction(venue) \(venue.venueID)")
                                     print("REMOVED")
                                     
+                                    self.updateAddictFetch()
+                                    
                                     let venueService = VenueService()
                                     venueService.removeAddictedVenues(venue.venueID) {
                                         (let removeInfo ) in
@@ -910,6 +1434,8 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                     cell.leftUtilityButtons = temp as [AnyObject]
                                     
                                     selectedCell.circAddicted.hidden = true
+                                    
+                                    self.exploreTableView.reloadData()
                                     
                                 }
                                 alertController.addAction(unlikeAction)
@@ -924,6 +1450,8 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                 SaveData(context: managedObjectContext).saveAddictionVenue(addVenue)
                                 print("Getting Addicted with venue id \(venue.venueID)")
                                 print("ADDICTED")
+                                
+                                updateAddictFetch()
                                 
                                 let venueService = VenueService()
                                 
@@ -999,6 +1527,8 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                     print("Removed from addiction(event) \(organization.organizationID)")
                                     print("REMOVED")
                                     
+                                    self.updateAddictFetch()
+                                    
                                     let organizationService = OrganizationService()
                                     
                                     organizationService.removeAddictedOrganizations(organization.organizationID) {
@@ -1013,6 +1543,8 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                     
                                     selectedCell.circAddicted.hidden = true
                                     
+                                    self.exploreTableView.reloadData()
+                                    
                                 }
                                 alertController.addAction(unlikeAction)
                                 alertController.addAction(cancelAction)
@@ -1026,6 +1558,8 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                                 SaveData(context: managedObjectContext).saveAddictionOrganization(addOrgainzation)
                                 print("Getting Addicted with event id \(organization.organizationID)")
                                 print("ADDICTED")
+                                
+                                updateAddictFetch()
                                 
                                 let organizationService = OrganizationService()
                                 
@@ -1208,6 +1742,22 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
                 destinationController.sourceID = GlobalVariables.eventSelected
             }
         }
+        
+        if segue.identifier == "ShowOnMap" {
+            let destinationController = segue.destinationViewController as! ShowOnMapViewController
+            if GlobalVariables.selectedDisplay == "Event" {
+                destinationController.sourceForMarker = "event"
+                destinationController.sourceID = GlobalVariables.eventSelected
+            }
+            if GlobalVariables.selectedDisplay == "Venue" {
+                destinationController.sourceForMarker = "venue"
+                destinationController.sourceID = GlobalVariables.eventSelected
+            }
+            if GlobalVariables.selectedDisplay == "Organization" {
+                destinationController.sourceForMarker = "organization"
+                destinationController.sourceID = GlobalVariables.eventSelected
+            }
+        }
     }
     
     func swipeableTableViewCellShouldHideUtilityButtonsOnSwipe(cell : SWTableViewCell ) -> Bool {
@@ -1264,7 +1814,33 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
     
     func updateNotificationEvent(){
         
-        self.exploreTableView.reloadData()
+        if GlobalVariables.selectedDisplay == "Event"{
+            navigationTitle.title = "Event"
+            searchController.searchBar.placeholder = "Search Events"
+            if GlobalVariables.filterEventBool{
+                filteredEventInfo = GlobalVariables.displayFilteredEvents
+            }
+        }
+        if GlobalVariables.selectedDisplay == "Venue"{
+            navigationTitle.title = "Venue"
+            searchController.searchBar.placeholder = "Search Venues"
+            if GlobalVariables.filterVenueBool{
+                filteredVenueInfo = GlobalVariables.displayFilteredVenues
+            }
+        }
+        if GlobalVariables.selectedDisplay == "Organization"{
+            navigationTitle.title = "Organization"
+            searchController.searchBar.placeholder = "Search Organizations"
+            if GlobalVariables.filterOrganizationBool{
+                filteredOrganizationInfo = GlobalVariables.displayFilteredOrganizations
+            }
+        }
+        
+        if self.searchController.active && self.searchController.searchBar.text != "" {
+            self.searchController.searchResultsUpdater?.updateSearchResultsForSearchController(self.searchController)
+        } else { self.exploreTableView.reloadData() }
+        
+        
     }
     
     func convertCircTimeFormat(date: String) -> String {
@@ -1334,6 +1910,38 @@ class ExploreListViewController: UIViewController, SWTableViewCellDelegate,ARSPD
         let aString = NSMutableAttributedString(string: title, attributes: mAttribute)
         
         return aString
+    }
+    
+    func fetchInformation() {
+        
+        eventInfo = FetchData(context: managedObjectContext).fetchEvents()
+        
+        addictionEventInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
+        
+        venueInfo = FetchData(context: managedObjectContext).fetchVenues()
+        
+        addictionVenueInfo = FetchData(context: managedObjectContext).fetchAddictionsVenue()
+        
+        organizationInfo = FetchData(context: managedObjectContext).fetchOrganizations()
+        
+        addictionOrganizationInfo = FetchData(context: managedObjectContext).fetchAddictionsOrganization()
+    }
+    
+    func updateAddictFetch() {
+        
+        if GlobalVariables.selectedDisplay == "Event"{
+            
+            addictionEventInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
+        }
+        if GlobalVariables.selectedDisplay == "Venue"{
+            
+            addictionVenueInfo = FetchData(context: managedObjectContext).fetchAddictionsVenue()
+        }
+        if GlobalVariables.selectedDisplay == "Organization"{
+            
+            addictionOrganizationInfo = FetchData(context: managedObjectContext).fetchAddictionsOrganization()
+        }
+        
     }
     
 }

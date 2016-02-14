@@ -38,11 +38,14 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
     var sourceForEvent: String?
     var sourceID: String?
     
+    var addictionInfo: [AddictionEvent]?
+    
+    
     func configureView(){
         
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         let screenHeight = screenSize.height
-        upComingTableView.rowHeight = screenHeight * 0.5
+        upComingTableView.rowHeight = ( screenHeight - screenHeight * 70 / 568 ) * 0.5
         
         self.upComingTableView!.allowsMultipleSelection = false
     }
@@ -60,7 +63,7 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
         
         bruhaButton.addConstraints([heightContraints, widthContraints])
         
-        backButton.setBackgroundImage(UIImage(named: "List"), forState: UIControlState.Normal)
+        backButton.setBackgroundImage(UIImage(named: "arrow-left"), forState: UIControlState.Normal)
         let heightContraint = NSLayoutConstraint(item: backButton, attribute: .Height, relatedBy: .Equal, toItem: nil, attribute: NSLayoutAttribute.NotAnAttribute, multiplier: 1.0, constant: screenSize.height/15.5)
         heightContraint.priority = UILayoutPriorityDefaultHigh
         
@@ -106,17 +109,27 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
         }
     }
     
+    func customStatusBar() {
+        let barView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0))
+        barView.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
+        //barView.alpha = 0.5
+        self.view.addSubview(barView)
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureView()
-        customTopButtons()
+        //customTopButtons()
+        customStatusBar()
         
-        upComingTableView.backgroundColor = UIColor.blackColor()
-        upComingTableView.separatorColor = UIColor.blackColor()
+        //upComingTableView.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1)
+        upComingTableView.separatorColor = UIColor.clearColor()
         
         self.comingEventLabel.alpha = 0.0
         self.comingEventImage.alpha = 0.0
+        
+        backgroundGradient()
         
         upcomingEvents.removeAll()
         print(sourceForEvent)
@@ -129,15 +142,25 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
                 }
             }
             if sourceForEvent == "organization" {
-                if event.organizationID == sourceID {
-                    upcomingEvents.append(event)
-                    print(event.organizationID)
+                
+                for orgID in event.organizationID {
+                    if orgID == sourceID {
+                        upcomingEvents.append(event)
+                        print(event.eventName)
+                    }
                 }
             }
         }
         
         
         // Do any additional setup after loading the view.
+        addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
+    }
+    
+    func backgroundGradient() {
+        let background = CAGradientLayer().gradientColor()
+        background.frame = self.view.bounds
+        self.upComingTableView.layer.insertSublayer(background, atIndex: 0)
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -173,9 +196,18 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
         }
     }
     
+    func getDataFromUrl(urL:NSURL, completion: ((data: NSData?) -> Void)) {
+        NSURLSession.sharedSession().dataTaskWithURL(urL) { (data, response, error) in
+            completion(data: data)
+            }.resume()
+    }
+    
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         
-        let posterInfo = FetchData(context: managedObjectContext).fetchPosterImages()
+        //let posterInfo = FetchData(context: managedObjectContext).fetchPosterImages()
+        if GlobalVariables.eventImageCache.count >= 50 { GlobalVariables.eventImageCache.removeAtIndex(0) }
+        if GlobalVariables.venueImageCache.count >= 50 { GlobalVariables.venueImageCache.removeAtIndex(0) }
+        if GlobalVariables.organizationImageCache.count >= 50 { GlobalVariables.organizationImageCache.removeAtIndex(0) }
         
         var cell : EventTableViewCell! = tableView.dequeueReusableCellWithIdentifier("eventTableViewCell") as! EventTableViewCell!
         
@@ -187,13 +219,27 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
         let event = upcomingEvents[indexPath.row]
         
         cell.ExploreImage.contentMode = UIViewContentMode.ScaleToFill
-        if let images = posterInfo {
-            for img in images {
-                if img.ID == event.eventID {
-                    if img.Image?.length > 800 {
-                        cell.ExploreImage.image = UIImage(data: img.Image!)
-                    } else {
-                        cell.ExploreImage.image = randomImage()
+        if let img = GlobalVariables.eventImageCache[event.eventID] {
+            cell.ExploreImage.image = img
+        }
+        else if let checkedUrl = NSURL(string:event.posterUrl) {
+            
+            self.getDataFromUrl(checkedUrl) { data in
+                dispatch_async(dispatch_get_main_queue()) {
+                    if let downloadImg = data {
+                        if downloadImg.length > 800 {
+                            
+                            let image = UIImage(data: downloadImg)
+                            GlobalVariables.eventImageCache[event.eventID] = image
+                            
+                            cell.ExploreImage.image = image
+                            
+                        } else {
+                            cell.ExploreImage.image = self.randomImage()
+                        }
+                    }
+                    else {
+                        cell.ExploreImage.image = self.randomImage()
                     }
                 }
             }
@@ -232,7 +278,6 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
         // Configure the cell...
 
         
-        let addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
         var like = 0
         
         for addict in addictionInfo! {
@@ -300,6 +345,8 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
                                 print("Removed from addiction(event) \(event.eventID)")
                                 print("REMOVED")
                                 
+                                self.updateAddictFetch()
+                                
                                 let eventService = EventService()
                                 eventService.removeAddictedEvents(event.eventID) {
                                     (let removeInfo ) in
@@ -326,6 +373,8 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
                             print("Getting Addicted with event id \(event.eventID)")
                             print("ADDICTED")
                             
+                            updateAddictFetch()
+                            
                             let eventService = EventService()
                             
                             eventService.addAddictedEvents(event.eventID) {
@@ -344,19 +393,30 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
                 }
             } else {
                 
-                let alert = UIAlertView(title: "Please log in for this!!!", message: nil, delegate: nil, cancelButtonTitle: nil)
-                alert.show()
-                let delay = 1.0 * Double(NSEC_PER_SEC)
-                var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
-                dispatch_after(time, dispatch_get_main_queue(), {
-                    alert.dismissWithClickedButtonIndex(-1, animated: true)
-                })
+                alertLogin()
                 
             }
             
         default:
             break
         }
+    }
+    
+    func alertLogin() {
+        let alertController = UIAlertController(title: "You are not logged in!", message:nil, preferredStyle: .Alert)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+        let loginAction = UIAlertAction(title: "Login", style: .Default) { (_) -> Void in
+            self.performSegueWithIdentifier("GoToLogin", sender: self) // Replace SomeSegue with your segue identifier (name)
+        }
+        let signupAction = UIAlertAction(title: "Signup", style: .Default) { (_) -> Void in
+            self.performSegueWithIdentifier("GoToSignup", sender: self) // Replace SomeSegue with your segue identifier (name)
+        }
+        alertController.addAction(signupAction)
+        alertController.addAction(loginAction)
+        alertController.addAction(cancelAction)
+        
+        self.presentViewController(alertController, animated: true, completion: nil)
+        
     }
     
     func swipeableTableViewCell( cell : SWTableViewCell!,didTriggerRightUtilityButtonWithIndex index:NSInteger){
@@ -402,6 +462,12 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
         if segue.identifier == "MoreInfore" {
             let destinationController = segue.destinationViewController as! MoreInformationViewController
             destinationController.sourceForComingEvent = "event"
+            destinationController.sourceID = GlobalVariables.eventSelected
+        }
+        
+        if segue.identifier == "ShowOnMap" {
+            let destinationController = segue.destinationViewController as! ShowOnMapViewController
+            destinationController.sourceForMarker = "event"
             destinationController.sourceID = GlobalVariables.eventSelected
         }
     }
@@ -491,6 +557,11 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
         let aString = NSMutableAttributedString(string: title, attributes: mAttribute)
         
         return aString
+    }
+    
+    func updateAddictFetch() {
+        
+        addictionInfo = FetchData(context: managedObjectContext).fetchAddictionsEvent()
     }
     
 

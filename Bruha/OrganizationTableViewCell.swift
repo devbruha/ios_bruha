@@ -39,6 +39,7 @@ class OrganizationTableViewCell: SWTableViewCell {
         self.addGestureRecognizer(tapRec)
         // Initialization code
         
+        self.organizationImage.backgroundColor = UIColor(red: 36/255, green: 22/255, blue: 63/255, alpha: 1.0)
     }
     
     override func setSelected(selected: Bool, animated: Bool) {
