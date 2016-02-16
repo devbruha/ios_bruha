@@ -1629,6 +1629,13 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
             if GlobalVariables.selectedDisplay == "Event" {
                 //event ticket
                 print("event ticket")
+                let alert = UIAlertView(title: "Tickets Coming Soon", message: nil, delegate: nil, cancelButtonTitle: nil)
+                alert.show()
+                let delay = 1.0 * Double(NSEC_PER_SEC)
+                var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+                dispatch_after(time, dispatch_get_main_queue(), {
+                    alert.dismissWithClickedButtonIndex(-1, animated: true)
+                })
             }
                 //venue and organization map
             else if GlobalVariables.selectedDisplay == "Venue" {

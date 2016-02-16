@@ -2085,15 +2085,15 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Slide 3" translatesAutoresizingMaskIntoConstraints="NO" id="TWM-fA-QSS">
-                                <rect key="frame" x="70" y="120" width="180" height="180"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Profile_Sm" translatesAutoresizingMaskIntoConstraints="NO" id="TWM-fA-QSS">
+                                <rect key="frame" x="72.5" y="120" width="175" height="175"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="180" id="naZ-HG-BHd"/>
-                                    <constraint firstAttribute="width" constant="180" id="q5H-bk-bSj"/>
+                                    <constraint firstAttribute="height" constant="175" id="naZ-HG-BHd"/>
+                                    <constraint firstAttribute="width" constant="175" id="q5H-bk-bSj"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Name" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Ati-7s-gHt">
-                                <rect key="frame" x="37" y="322" width="246" height="54"/>
+                                <rect key="frame" x="37" y="317" width="246" height="54"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="54" id="mcc-7K-Gx4"/>
@@ -2103,7 +2103,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Dpq-48-wfr">
-                                <rect key="frame" x="37" y="384" width="45" height="45"/>
+                                <rect key="frame" x="37" y="379" width="45" height="45"/>
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="2iJ-Sv-M9S"/>
@@ -2111,11 +2111,11 @@
                                 </constraints>
                             </imageView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hvb-l2-fcB" customClass="HorizontalLine" customModule="Bruha" customModuleProvider="target">
-                                <rect key="frame" x="37" y="433" width="246" height="23"/>
+                                <rect key="frame" x="37" y="428" width="246" height="28"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                             </view>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="raK-F4-ROO">
-                                <rect key="frame" x="90" y="390" width="193" height="33"/>
+                                <rect key="frame" x="90" y="385" width="193" height="33"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -3744,19 +3744,18 @@
         <image name="MyUploads_Sm" width="250" height="250"/>
         <image name="Profile_Sm" width="250" height="250"/>
         <image name="Restaurant" width="124" height="124"/>
-        <image name="Slide 3" width="414" height="736"/>
         <image name="Splash Background" width="800" height="1280"/>
         <image name="Swipe-Up" width="200" height="96"/>
         <image name="Tickets_Sm" width="250" height="250"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="dJ8-Vb-duU"/>
-        <segue reference="R95-Q8-ZSY"/>
-        <segue reference="uZx-1x-ByM"/>
-        <segue reference="UAd-9n-bZt"/>
-        <segue reference="zjY-DB-duY"/>
+        <segue reference="Fiu-Z9-r1Z"/>
+        <segue reference="eyG-eD-cCw"/>
         <segue reference="l1y-Rt-Be8"/>
+        <segue reference="5DM-Zi-tRH"/>
+        <segue reference="J3w-Nl-jcV"/>
         <segue reference="uOk-Ws-dFz"/>
+        <segue reference="dJ8-Vb-duU"/>
         <segue reference="h7c-CJ-gwM"/>
         <segue reference="QWR-kg-3LZ"/>
         <segue reference="c6U-a6-g1g"/>

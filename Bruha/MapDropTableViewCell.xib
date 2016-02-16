@@ -136,6 +136,7 @@
                     </mask>
                 </variation>
             </tableViewCellContentView>
+            <color key="backgroundColor" red="0.14117647059999999" green="0.086274509799999996" blue="0.2470588235" alpha="0.75" colorSpace="calibratedRGB"/>
             <connections>
                 <outlet property="dropContent" destination="tLh-jQ-5nw" id="Xp1-IP-nYK"/>
                 <outlet property="dropHiddenID" destination="F2Z-de-82C" id="veP-Bg-oVV"/>
