@@ -1604,7 +1604,7 @@
                                                 <segue destination="zh2-4j-mHu" kind="modal" id="3LC-A2-iEP"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" image="MapIcon_Medium" style="plain" id="wqR-Sg-N3q">
+                                        <barButtonItem key="rightBarButtonItem" image="MapIcon_Medium" style="done" id="wqR-Sg-N3q">
                                             <connections>
                                                 <segue destination="blf-Nq-gr7" kind="modal" id="xe8-fc-WXt"/>
                                             </connections>
@@ -2086,7 +2086,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Profile_Sm" translatesAutoresizingMaskIntoConstraints="NO" id="TWM-fA-QSS">
-                                <rect key="frame" x="72.5" y="120" width="175" height="175"/>
+                                <rect key="frame" x="72" y="120" width="175" height="175"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="175" id="naZ-HG-BHd"/>
                                     <constraint firstAttribute="width" constant="175" id="q5H-bk-bSj"/>
@@ -2121,8 +2121,11 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="PBo-Ia-KBv">
-                                <rect key="frame" x="129" y="464" width="62" height="30"/>
-                                <color key="backgroundColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
+                                <rect key="frame" x="112.5" y="464" width="95" height="30"/>
+                                <color key="backgroundColor" red="0.14117647059999999" green="0.086274509799999996" blue="0.2470588235" alpha="0.75" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="95" id="dhk-72-mqO"/>
+                                </constraints>
                                 <state key="normal" title="LOGOUT">
                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 </state>
@@ -2397,7 +2400,7 @@
                                                 <segue destination="zh2-4j-mHu" kind="modal" id="uNM-El-MpZ"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" image="MapIcon_Medium" style="plain" id="JCI-Kw-8zL">
+                                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="reply" id="JCI-Kw-8zL">
                                             <connections>
                                                 <action selector="backButton:" destination="6rA-nS-vtg" id="cAu-N3-ZD8"/>
                                             </connections>
@@ -3083,7 +3086,7 @@
                                                 <segue destination="zh2-4j-mHu" kind="modal" id="vZi-2e-L6b"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" image="MapIcon_Medium" style="plain" id="WNt-IC-K4e">
+                                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="reply" id="WNt-IC-K4e">
                                             <connections>
                                                 <action selector="backToExploreButton:" destination="k0E-gF-uXz" id="vVl-DO-yDX"/>
                                             </connections>
@@ -3222,7 +3225,7 @@
                                                 <segue destination="zh2-4j-mHu" kind="modal" id="k77-2u-JtS"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" image="MapIcon_Medium" style="plain" id="1Vk-vQ-zfN">
+                                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="reply" id="1Vk-vQ-zfN">
                                             <connections>
                                                 <action selector="backToExploreButton:" destination="DYv-PS-7yH" id="ZP2-dU-J9D"/>
                                             </connections>
@@ -3683,7 +3686,7 @@
                                                 <segue destination="zh2-4j-mHu" kind="modal" id="x9r-Lj-z5l"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" image="MapIcon_Medium" style="plain" id="HZe-Uc-ivd">
+                                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="reply" id="HZe-Uc-ivd">
                                             <connections>
                                                 <action selector="backToExploreButton:" destination="96t-J7-OUy" id="IVE-OE-g6V"/>
                                             </connections>
@@ -3749,16 +3752,16 @@
         <image name="Tickets_Sm" width="250" height="250"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Fiu-Z9-r1Z"/>
-        <segue reference="eyG-eD-cCw"/>
+        <segue reference="TpG-fQ-ZDS"/>
         <segue reference="l1y-Rt-Be8"/>
-        <segue reference="5DM-Zi-tRH"/>
-        <segue reference="J3w-Nl-jcV"/>
+        <segue reference="pgm-fT-IMJ"/>
+        <segue reference="thc-CS-1cg"/>
+        <segue reference="dfw-c1-ntm"/>
         <segue reference="uOk-Ws-dFz"/>
-        <segue reference="dJ8-Vb-duU"/>
-        <segue reference="h7c-CJ-gwM"/>
-        <segue reference="QWR-kg-3LZ"/>
-        <segue reference="c6U-a6-g1g"/>
+        <segue reference="NAU-T1-EcU"/>
+        <segue reference="0Iz-X0-JOq"/>
+        <segue reference="io6-cH-KWY"/>
         <segue reference="8ee-hZ-bSl"/>
+        <segue reference="eyG-eD-cCw"/>
     </inferredMetricsTieBreakers>
 </document>
