@@ -129,6 +129,27 @@ class DashBoardViewController: UIViewController {
         }
     }
     
+    func ticketImageTapped(){
+        if GlobalVariables.loggedIn == false{
+            let alert = UIAlertView(title: "Tickets Coming Soon", message: nil, delegate: nil, cancelButtonTitle: nil)
+            alert.show()
+            let delay = 1.0 * Double(NSEC_PER_SEC)
+            var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+            dispatch_after(time, dispatch_get_main_queue(), {
+                alert.dismissWithClickedButtonIndex(-1, animated: true)
+            })
+        }
+        else{
+            let alert = UIAlertView(title: "Tickets Coming Soon", message: nil, delegate: nil, cancelButtonTitle: nil)
+            alert.show()
+            let delay = 1.0 * Double(NSEC_PER_SEC)
+            var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))
+            dispatch_after(time, dispatch_get_main_queue(), {
+                alert.dismissWithClickedButtonIndex(-1, animated: true)
+            })
+        }
+    }
+    
     func performImageSegue(){
         let tgr1 = UITapGestureRecognizer(target:self , action: Selector("profileImageTapped"))
         profileImage.addGestureRecognizer(tgr1)
@@ -149,6 +170,10 @@ class DashBoardViewController: UIViewController {
         let tgr5 = UITapGestureRecognizer(target:self , action: Selector("uploadImageTapped"))
         uploadImage.addGestureRecognizer(tgr5)
         uploadImage.userInteractionEnabled = true
+        
+        let tgr6 = UITapGestureRecognizer(target:self , action: Selector("ticketImageTapped"))
+        ticketImage.addGestureRecognizer(tgr6)
+        ticketImage.userInteractionEnabled = true
     }
     
     func setConstraint(uiimageview: [UIImageView!]) {
@@ -212,7 +237,7 @@ class DashBoardViewController: UIViewController {
         }
         else{
             addictionImage.alpha = 1
-            ticketImage.alpha = 1
+            ticketImage.alpha = 0.5
             calendarImage.alpha = 1
             uploadImage.alpha = 1
             profileImage.alpha = 1
@@ -237,7 +262,7 @@ class DashBoardViewController: UIViewController {
         }
         else{
             addictionImage.alpha = 1
-            ticketImage.alpha = 1
+            ticketImage.alpha = 0.5
             calendarImage.alpha = 1
             uploadImage.alpha = 1
             profileImage.alpha = 1

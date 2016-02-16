@@ -106,7 +106,7 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
             if mResetResponse == "1" {
                 
                 dispatch_async(dispatch_get_main_queue()){
-                    let alertController = UIAlertController(title: "It takes few minutes to get to Email. Please check your Email. Your password has been reset", message:nil, preferredStyle: .Alert)
+                    let alertController = UIAlertController(title: "Your email has been sent! Please give it a few moments and check your inbox for more information", message:nil, preferredStyle: .Alert)
                     let okAction = UIAlertAction(title: "OK", style: .Default) { (_) -> Void in
                         self.performSegueWithIdentifier("goToSplash", sender: self.registerB)
                     }

@@ -239,7 +239,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
         let monthSymbol = months[month-1]
         
         //newMenuItemView.text = component as? String
-        newMenuItemView.text = "<<            " + monthSymbol + " " + String(component) + "            >>"
+        newMenuItemView.text = "<            " + monthSymbol + " " + String(component) + "            >"
         //newMenuItemView.text = monthSymbol
         //newMenuItemView.backgroundColor = UIColor.cyanColor()
         newMenuItemView.textColor = UIColor.whiteColor()
