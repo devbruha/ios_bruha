@@ -69,13 +69,14 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
         
         let bruhaBaseURL: NSURL? = NSURL(string: "http://bruha.com/mobile_php/CredentialsPHP/")
         
-        if let resetPassURL = NSURL(string: "forgotPassword.php?", relativeToURL: bruhaBaseURL) {
+        if let resetPassURL = NSURL(string: "forgotPassword2.php?", relativeToURL: bruhaBaseURL) {
             
             let networkOperation = NetworkOperation(url: resetPassURL)
             
             dispatch_async(dispatch_get_main_queue()) {
                 print("-\(self.username.text!)-and-\(self.userEmail.text!)-")
-                networkOperation.stringFromURLPost("forget-email=\(self.userEmail.text!)&forget-username=\(self.username.text!)") {
+                
+                networkOperation.stringFromURLPost("forget-email=\(self.username.text!)&forget-username=\(self.username.text!)") {
                     
                     (let resetSignal) in
                     
@@ -121,6 +122,12 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
                 }
                 
                 
+            }
+            else {
+                dispatch_async(dispatch_get_main_queue()){
+                    let alert = UIAlertView(title: "Failed", message: mResetResponse, delegate: nil, cancelButtonTitle: "OK")
+                    alert.show()
+                }
             }
             
             print(mResetResponse, "is the returned value")

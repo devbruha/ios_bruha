@@ -404,24 +404,24 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Splash Background" translatesAutoresizingMaskIntoConstraints="NO" id="rYz-fj-aSu">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter Your Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ae-Uk-7ee">
-                                <rect key="frame" x="79" y="296" width="162.5" height="20.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username or Email" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ae-Uk-7ee">
+                                <rect key="frame" x="88.5" y="328" width="144" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xzj-TN-RLw">
-                                <rect key="frame" x="49" y="322" width="222" height="30"/>
+                                <rect key="frame" x="49" y="354" width="222" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YHE-Bm-X7K">
-                                <rect key="frame" x="49" y="387" width="222" height="30"/>
+                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YHE-Bm-X7K">
+                                <rect key="frame" x="49" y="419" width="222" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="Enter Your Email" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C9A-ZQ-3l7">
-                                <rect key="frame" x="98" y="362" width="125" height="20.5"/>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="Enter Your Email" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C9A-ZQ-3l7">
+                                <rect key="frame" x="98" y="394" width="125" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -482,7 +482,7 @@
                             <constraint firstItem="rYz-fj-aSu" firstAttribute="top" secondItem="ld8-rQ-c1X" secondAttribute="top" id="AY2-I1-zgv"/>
                             <constraint firstItem="xzj-TN-RLw" firstAttribute="top" secondItem="1ae-Uk-7ee" secondAttribute="bottom" constant="5" id="Fnh-UG-Ybi"/>
                             <constraint firstItem="oFr-TP-T3E" firstAttribute="top" secondItem="BoJ-XH-5FL" secondAttribute="bottom" constant="55" id="KK3-N6-ZDd"/>
-                            <constraint firstItem="xzj-TN-RLw" firstAttribute="centerY" secondItem="ld8-rQ-c1X" secondAttribute="centerY" constant="53" id="Nfy-T3-5dL"/>
+                            <constraint firstItem="xzj-TN-RLw" firstAttribute="centerY" secondItem="ld8-rQ-c1X" secondAttribute="centerY" constant="85" id="Nfy-T3-5dL"/>
                             <constraint firstItem="EDx-bB-799" firstAttribute="centerX" secondItem="ld8-rQ-c1X" secondAttribute="centerX" id="OJb-rA-D5z"/>
                             <constraint firstItem="oFr-TP-T3E" firstAttribute="top" secondItem="rYz-fj-aSu" secondAttribute="bottom" id="ORc-QC-vlR"/>
                             <constraint firstItem="2P4-6V-8k1" firstAttribute="baseline" secondItem="EDx-bB-799" secondAttribute="baseline" id="QMY-pn-zpI"/>
@@ -2506,7 +2506,7 @@
                                                 <segue destination="zh2-4j-mHu" kind="modal" id="MdE-F6-kzt"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" image="MapIcon_Medium" style="plain" id="suH-aA-Bsj">
+                                        <barButtonItem key="rightBarButtonItem" image="List-New-Lrg-Test" style="plain" id="suH-aA-Bsj">
                                             <connections>
                                                 <segue destination="2fB-2K-YbP" kind="modal" id="RHc-TZ-2hx"/>
                                             </connections>
@@ -3547,7 +3547,7 @@
                                                 <segue destination="zh2-4j-mHu" kind="modal" id="ld0-ed-9yf"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" image="MapIcon_Medium" style="plain" id="E2U-aZ-mQX">
+                                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="reply" id="E2U-aZ-mQX">
                                             <connections>
                                                 <action selector="backToExploreButton:" destination="hKk-35-4q0" id="gMl-3Y-e7H"/>
                                             </connections>
@@ -3742,6 +3742,7 @@
         <image name="Club" width="48" height="48"/>
         <image name="Explore_Sm" width="250" height="250"/>
         <image name="Image" width="1719" height="3094"/>
+        <image name="List-New-Lrg-Test" width="37" height="37"/>
         <image name="MapIcon_Medium" width="31" height="31"/>
         <image name="MyAddictions_Sm" width="250" height="250"/>
         <image name="MyUploads_Sm" width="250" height="250"/>
@@ -3752,16 +3753,16 @@
         <image name="Tickets_Sm" width="250" height="250"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="TpG-fQ-ZDS"/>
-        <segue reference="l1y-Rt-Be8"/>
+        <segue reference="o3I-cR-Prt"/>
+        <segue reference="jya-Jh-KkI"/>
+        <segue reference="bc1-hL-brY"/>
+        <segue reference="uOk-Ws-dFz"/>
+        <segue reference="RHc-TZ-2hx"/>
         <segue reference="pgm-fT-IMJ"/>
         <segue reference="thc-CS-1cg"/>
-        <segue reference="dfw-c1-ntm"/>
-        <segue reference="uOk-Ws-dFz"/>
-        <segue reference="NAU-T1-EcU"/>
-        <segue reference="0Iz-X0-JOq"/>
-        <segue reference="io6-cH-KWY"/>
-        <segue reference="8ee-hZ-bSl"/>
-        <segue reference="eyG-eD-cCw"/>
+        <segue reference="QhX-ak-ZUZ"/>
+        <segue reference="dtV-EI-jha"/>
+        <segue reference="dH5-g0-cuQ"/>
+        <segue reference="ymP-hi-1Gp"/>
     </inferredMetricsTieBreakers>
 </document>
