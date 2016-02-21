@@ -39,6 +39,8 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
     
     @IBOutlet weak var moreInfoHeightImage: NSLayoutConstraint!
     
+    @IBOutlet weak var backNav: UIBarButtonItem!
+    
     @IBAction func backToExploreButton(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -356,6 +358,17 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
         
         moreInfoImage.alpha = 0
         moreInfoLabel.alpha = 0
+        
+        if iconForSource == "MapIcon" {
+            
+            backNav.image = UIImage(named: "MapIcon_Medium")
+            
+        }
+        else if iconForSource == "Explore" {
+            
+            backNav.image = UIImage(named: "List-New-Lrg-Test")
+            
+        }
         
         // Do any additional setup after loading the view.
     }

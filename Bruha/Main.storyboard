@@ -3086,7 +3086,7 @@
                                                 <segue destination="zh2-4j-mHu" kind="modal" id="vZi-2e-L6b"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="reply" id="WNt-IC-K4e">
+                                        <barButtonItem key="rightBarButtonItem" image="goBack" style="plain" id="WNt-IC-K4e">
                                             <connections>
                                                 <action selector="backToExploreButton:" destination="k0E-gF-uXz" id="vVl-DO-yDX"/>
                                             </connections>
@@ -3132,6 +3132,7 @@
                         <outlet property="PriceCalendarLabel" destination="zb0-BP-cnh" id="tjY-gC-hJt"/>
                         <outlet property="VenueName" destination="g5v-rT-mCu" id="Y3u-1W-XQ5"/>
                         <outlet property="backButton" destination="Js0-WU-th1" id="Ze5-60-fG4"/>
+                        <outlet property="backNav" destination="WNt-IC-K4e" id="C8O-vF-NDa"/>
                         <outlet property="bruhaButton" destination="4DL-YH-xr6" id="3XS-PU-YzK"/>
                         <outlet property="getAddictedButton" destination="atz-Xy-3qB" id="DwV-Gl-z68"/>
                         <outlet property="getAddictedLabel" destination="Y7u-uY-c5t" id="Gq6-hj-uTT"/>
@@ -3225,7 +3226,7 @@
                                                 <segue destination="zh2-4j-mHu" kind="modal" id="k77-2u-JtS"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="reply" id="1Vk-vQ-zfN">
+                                        <barButtonItem key="rightBarButtonItem" image="goBack" style="plain" id="1Vk-vQ-zfN">
                                             <connections>
                                                 <action selector="backToExploreButton:" destination="DYv-PS-7yH" id="ZP2-dU-J9D"/>
                                             </connections>
@@ -3547,7 +3548,7 @@
                                                 <segue destination="zh2-4j-mHu" kind="modal" id="ld0-ed-9yf"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="reply" id="E2U-aZ-mQX">
+                                        <barButtonItem key="rightBarButtonItem" image="List-New-Lrg-Test" style="plain" id="E2U-aZ-mQX">
                                             <connections>
                                                 <action selector="backToExploreButton:" destination="hKk-35-4q0" id="gMl-3Y-e7H"/>
                                             </connections>
@@ -3686,7 +3687,7 @@
                                                 <segue destination="zh2-4j-mHu" kind="modal" id="x9r-Lj-z5l"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="reply" id="HZe-Uc-ivd">
+                                        <barButtonItem key="rightBarButtonItem" image="goBack" style="plain" id="HZe-Uc-ivd">
                                             <connections>
                                                 <action selector="backToExploreButton:" destination="96t-J7-OUy" id="IVE-OE-g6V"/>
                                             </connections>
@@ -3751,18 +3752,19 @@
         <image name="Splash Background" width="800" height="1280"/>
         <image name="Swipe-Up" width="200" height="96"/>
         <image name="Tickets_Sm" width="250" height="250"/>
+        <image name="goBack" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="o3I-cR-Prt"/>
-        <segue reference="jya-Jh-KkI"/>
-        <segue reference="bc1-hL-brY"/>
-        <segue reference="uOk-Ws-dFz"/>
-        <segue reference="RHc-TZ-2hx"/>
-        <segue reference="pgm-fT-IMJ"/>
-        <segue reference="thc-CS-1cg"/>
-        <segue reference="QhX-ak-ZUZ"/>
-        <segue reference="dtV-EI-jha"/>
-        <segue reference="dH5-g0-cuQ"/>
+        <segue reference="vZi-2e-L6b"/>
+        <segue reference="f7C-vE-RdE"/>
+        <segue reference="8ee-hZ-bSl"/>
+        <segue reference="XHn-5o-VUf"/>
+        <segue reference="I6f-j4-nE4"/>
+        <segue reference="uPq-YE-bkr"/>
         <segue reference="ymP-hi-1Gp"/>
+        <segue reference="pgm-fT-IMJ"/>
+        <segue reference="RHc-TZ-2hx"/>
+        <segue reference="uOk-Ws-dFz"/>
+        <segue reference="bc1-hL-brY"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -93,8 +93,13 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
     
     // Login Button Onclick logic
     
+//    func enableButton() {
+//        sendReset.enabled = true
+//    }
     
     @IBAction func loginPress(sender: AnyObject) {
+        
+        sendReset.enabled = false
         
         let username:String = self.username.text!
         let password:String = self.userEmail.text!
@@ -119,6 +124,7 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
                     alertController.addAction(okAction)
                     
                     self.presentViewController(alertController, animated: true, completion: nil)
+                    self.sendReset.enabled = true
                 }
                 
                 
@@ -127,6 +133,7 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
                 dispatch_async(dispatch_get_main_queue()){
                     let alert = UIAlertView(title: "Failed", message: mResetResponse, delegate: nil, cancelButtonTitle: "OK")
                     alert.show()
+                    self.sendReset.enabled = true
                 }
             }
             
@@ -134,6 +141,8 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
             
             
         }
+        
+        //NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: "enableButton", userInfo: nil, repeats: false)
         
         /*
         error = "true"
