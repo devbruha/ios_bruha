@@ -361,7 +361,7 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
         
         if iconForSource == "MapIcon" {
             
-            backNav.image = UIImage(named: "MapIcon_Medium")
+            backNav.image = UIImage(named: "mapicon_2")
             
         }
         else if iconForSource == "Explore" {

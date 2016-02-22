@@ -39,6 +39,8 @@ class EventMoreInfomationViewController: UIViewController, UIWebViewDelegate{
     
     @IBOutlet weak var eventMoreInfoHeightImage: NSLayoutConstraint!
     
+    @IBOutlet weak var backNav: UIBarButtonItem!
+    
     @IBAction func backToExploreButton(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -252,6 +254,12 @@ class EventMoreInfomationViewController: UIViewController, UIWebViewDelegate{
         
         self.eventMoreInfoLabel.alpha = 0
         self.eventMoreInfoImage.alpha = 0
+        
+        if iconForSource == "MapIcon" {
+            
+            backNav.image = UIImage(named: "mapicon_2")
+            
+        }
         
         // Do any additional setup after loading the view.
         

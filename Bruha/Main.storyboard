@@ -1117,7 +1117,7 @@
                                                 <segue destination="zh2-4j-mHu" kind="modal" id="72o-Yy-sA0"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" image="MapIcon_Medium" style="plain" id="rtq-q2-ZlJ">
+                                        <barButtonItem key="rightBarButtonItem" image="List-New-Lrg-Test" style="plain" id="rtq-q2-ZlJ">
                                             <connections>
                                                 <action selector="backToExploreButton:" destination="8Gj-d3-yhz" id="DHG-fn-XZR"/>
                                             </connections>
@@ -1604,7 +1604,7 @@
                                                 <segue destination="zh2-4j-mHu" kind="modal" id="3LC-A2-iEP"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" image="MapIcon_Medium" style="done" id="wqR-Sg-N3q">
+                                        <barButtonItem key="rightBarButtonItem" image="mapicon_2" style="done" id="wqR-Sg-N3q">
                                             <connections>
                                                 <segue destination="blf-Nq-gr7" kind="modal" id="xe8-fc-WXt"/>
                                             </connections>
@@ -3256,6 +3256,7 @@
                     </view>
                     <connections>
                         <outlet property="backButton" destination="r73-BQ-0Mb" id="AZt-Xl-ZuU"/>
+                        <outlet property="backNav" destination="1Vk-vQ-zfN" id="XzD-YS-S5N"/>
                         <outlet property="bruhaButton" destination="JKe-Iu-h7E" id="l1L-Nr-dSk"/>
                         <outlet property="comingEventHeightImage" destination="C3E-BS-6cV" id="lAZ-7k-6SW"/>
                         <outlet property="comingEventHeightLabel" destination="N97-3I-9qN" id="uKM-8W-yT0"/>
@@ -3591,6 +3592,7 @@
                         <outlet property="VenueButton" destination="u9C-ny-cLx" id="2Uq-01-0SF"/>
                         <outlet property="VenueNameLabel" destination="S1g-6z-cyt" id="BZD-HX-Lzh"/>
                         <outlet property="backButton" destination="0aG-cS-ABR" id="qQ4-EX-2yv"/>
+                        <outlet property="backNav" destination="E2U-aZ-mQX" id="aU6-6I-6W0"/>
                         <outlet property="bruhaButton" destination="acR-hz-rSl" id="WC2-Fn-bEX"/>
                         <outlet property="eventCategory" destination="oED-NY-qVQ" id="xch-Zm-kde"/>
                         <outlet property="eventMoreInfoHeightImage" destination="3z9-V7-2NS" id="SVd-ek-K7z"/>
@@ -3744,7 +3746,6 @@
         <image name="Explore_Sm" width="250" height="250"/>
         <image name="Image" width="1719" height="3094"/>
         <image name="List-New-Lrg-Test" width="37" height="37"/>
-        <image name="MapIcon_Medium" width="31" height="31"/>
         <image name="MyAddictions_Sm" width="250" height="250"/>
         <image name="MyUploads_Sm" width="250" height="250"/>
         <image name="Profile_Sm" width="250" height="250"/>
@@ -3753,18 +3754,19 @@
         <image name="Swipe-Up" width="200" height="96"/>
         <image name="Tickets_Sm" width="250" height="250"/>
         <image name="goBack" width="32" height="32"/>
+        <image name="mapicon_2" width="75" height="75"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="vZi-2e-L6b"/>
-        <segue reference="f7C-vE-RdE"/>
+        <segue reference="ld0-ed-9yf"/>
+        <segue reference="bc1-hL-brY"/>
+        <segue reference="uOk-Ws-dFz"/>
+        <segue reference="RHc-TZ-2hx"/>
+        <segue reference="pgm-fT-IMJ"/>
+        <segue reference="jya-Jh-KkI"/>
+        <segue reference="dH5-g0-cuQ"/>
+        <segue reference="dtV-EI-jha"/>
+        <segue reference="ymP-hi-1Gp"/>
         <segue reference="8ee-hZ-bSl"/>
         <segue reference="XHn-5o-VUf"/>
-        <segue reference="I6f-j4-nE4"/>
-        <segue reference="uPq-YE-bkr"/>
-        <segue reference="ymP-hi-1Gp"/>
-        <segue reference="pgm-fT-IMJ"/>
-        <segue reference="RHc-TZ-2hx"/>
-        <segue reference="uOk-Ws-dFz"/>
-        <segue reference="bc1-hL-brY"/>
     </inferredMetricsTieBreakers>
 </document>
