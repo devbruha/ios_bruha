@@ -27,6 +27,8 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
     
     @IBOutlet weak var navigationTitle: UINavigationItem!
     
+    @IBOutlet weak var emptyStateImage: UIImageView!
+    
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
     var panelControllerContainer: ARSPContainerController!
@@ -441,6 +443,12 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
                 mEventInfo = searchedEvents
             }
             
+            if mEventInfo.count == 0 {
+                emptyStateImage.hidden = false
+            } else {
+                emptyStateImage.hidden = true
+            }
+            
             return (mEventInfo.count)
             
         case "Venue":
@@ -454,6 +462,12 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
             }
             else if searchController.searchBar.text != "" {
                 mVenueInfo = searchedVenues
+            }
+            
+            if mVenueInfo.count == 0 {
+                emptyStateImage.hidden = false
+            } else {
+                emptyStateImage.hidden = true
             }
             
             return (mVenueInfo.count)
@@ -473,6 +487,12 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
             }
             else if searchController.searchBar.text != "" {
                 mOrganizationInfo = searchedOrganizations
+            }
+            
+            if mOrganizationInfo.count == 0 {
+                emptyStateImage.hidden = false
+            } else {
+                emptyStateImage.hidden = true
             }
             
             return (mOrganizationInfo.count)
@@ -1823,6 +1843,7 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
     func updateNotificationEvent(){
         
         if GlobalVariables.selectedDisplay == "Event"{
+            emptyStateImage.image = UIImage(named: "Event-Taco-White")
             navigationTitle.title = "Event"
             searchController.searchBar.placeholder = "Search Events"
             if GlobalVariables.filterEventBool{
@@ -1830,6 +1851,7 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
             }
         }
         if GlobalVariables.selectedDisplay == "Venue"{
+            emptyStateImage.image = UIImage(named: "Venue_Stool-White")
             navigationTitle.title = "Venue"
             searchController.searchBar.placeholder = "Search Venues"
             if GlobalVariables.filterVenueBool{
@@ -1837,6 +1859,7 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
             }
         }
         if GlobalVariables.selectedDisplay == "Organization"{
+            emptyStateImage.image = UIImage(named: "Glasses-White")
             navigationTitle.title = "Organization"
             searchController.searchBar.placeholder = "Search Organizations"
             if GlobalVariables.filterOrganizationBool{

@@ -22,6 +22,7 @@ class AddictionListViewController: UIViewController, UITableViewDelegate, UITabl
     @IBOutlet weak var addictionImage: UIImageView!
     @IBOutlet weak var addictionLabel: UILabel!
     
+    @IBOutlet weak var emptyStateImage: UIImageView!
     
     
     
@@ -250,15 +251,44 @@ class AddictionListViewController: UIViewController, UITableViewDelegate, UITabl
         switch (GlobalVariables.addictedDisplay){
         case "Event":
             if searchController.active && searchController.searchBar.text != "" {
+                if searchedEvents.count == 0 {
+                    emptyStateImage.image = UIImage(named: "Event-Taco-White")
+                    emptyStateImage.hidden = false
+                }
+                else {
+                    emptyStateImage.hidden = true
+                }
+                
                 return searchedEvents.count
             }else {
+                if displayEventInfo.count == 0 {
+                    emptyStateImage.image = UIImage(named: "Addictions-white")
+                    emptyStateImage.hidden = false
+                }
+                else {
+                    emptyStateImage.hidden = true
+                }
                 return (displayEventInfo.count)
             }
             
         case "Venue":
             if searchController.active && searchController.searchBar.text != "" {
+                if searchedVenues.count == 0 {
+                    emptyStateImage.image = UIImage(named: "Venue_Stool-White")
+                    emptyStateImage.hidden = false
+                }
+                else {
+                    emptyStateImage.hidden = true
+                }
                 return searchedVenues.count
             } else {
+                if displayVenueInfo.count == 0 {
+                    emptyStateImage.image = UIImage(named: "Addictions-white")
+                    emptyStateImage.hidden = false
+                }
+                else {
+                    emptyStateImage.hidden = true
+                }
                 return (displayVenueInfo.count)
             }
             
@@ -267,8 +297,22 @@ class AddictionListViewController: UIViewController, UITableViewDelegate, UITabl
             return (artistInfo?.count)!
         case "Organization":
             if searchController.active && searchController.searchBar.text != "" {
+                if searchedOrganizations.count == 0 {
+                    emptyStateImage.image = UIImage(named: "Glasses-White")
+                    emptyStateImage.hidden = false
+                }
+                else {
+                    emptyStateImage.hidden = true
+                }
                 return searchedOrganizations.count
             } else {
+                if displayOrganizationInfo.count == 0 {
+                    emptyStateImage.image = UIImage(named: "Addictions-white")
+                    emptyStateImage.hidden = false
+                }
+                else {
+                    emptyStateImage.hidden = true
+                }
                 return (displayOrganizationInfo.count)
             }
             
