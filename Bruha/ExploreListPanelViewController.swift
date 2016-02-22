@@ -174,6 +174,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
         
         newDayView.layer.borderColor = UIColor.grayColor().CGColor
         newDayView.layer.borderWidth = 0.5
+        newDayView.circleView.hidden = true
         
         
         if(newDayView.isFromAnotherMonth){

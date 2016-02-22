@@ -134,6 +134,7 @@ class CalendarViewController: UIViewController, JTCalendarDelegate, SWTableViewC
         
         newDayView.layer.borderColor = UIColor.grayColor().CGColor
         newDayView.layer.borderWidth = 0.5
+        newDayView.circleView.hidden = true
         
         let dateFormatter = NSDateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"
