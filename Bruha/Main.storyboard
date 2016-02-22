@@ -573,15 +573,22 @@
                                     <outlet property="delegate" destination="Nog-NB-5cc" id="L5H-F5-nxY"/>
                                 </connections>
                             </tableView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Upload_empty-white" translatesAutoresizingMaskIntoConstraints="NO" id="Lb4-TL-oGx">
+                                <rect key="frame" x="35" y="159" width="250" height="250"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="250" id="0mN-O7-CkL"/>
+                                    <constraint firstAttribute="width" constant="250" id="Cd6-gN-XWl"/>
+                                </constraints>
+                            </imageView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="uO1-wl-BzC">
-                                <rect key="frame" x="251.5" y="20" width="35" height="35"/>
+                                <rect key="frame" x="252" y="20" width="35" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="35" id="FMd-GV-Hqp"/>
                                     <constraint firstAttribute="height" constant="35" id="lhu-hg-kSZ"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="My Uploads" textAlignment="center" lineBreakMode="tailTruncation" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ac3-d6-kuA">
-                                <rect key="frame" x="69.5" y="20" width="180" height="35"/>
+                                <rect key="frame" x="70" y="20" width="180" height="35"/>
                                 <color key="backgroundColor" red="0.95686274509803915" green="0.45882352941176469" blue="0.12941176470588234" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="180" id="P4Y-gP-2sc"/>
@@ -620,10 +627,12 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="uO1-wl-BzC" firstAttribute="leading" secondItem="ac3-d6-kuA" secondAttribute="trailing" constant="2" id="4Ab-8J-UP7"/>
+                            <constraint firstItem="Lb4-TL-oGx" firstAttribute="centerX" secondItem="3F8-SM-fpX" secondAttribute="centerX" id="75y-3y-YGx"/>
                             <constraint firstItem="djY-vf-2vv" firstAttribute="leading" secondItem="3F8-SM-fpX" secondAttribute="leading" id="9dL-oP-hsZ"/>
                             <constraint firstAttribute="trailing" secondItem="djY-vf-2vv" secondAttribute="trailing" id="CQS-4u-cPS"/>
                             <constraint firstAttribute="bottom" secondItem="ydO-sc-8mN" secondAttribute="bottom" id="FGb-pZ-Jqt"/>
                             <constraint firstItem="9WL-Up-96w" firstAttribute="top" secondItem="pJd-hK-yGY" secondAttribute="bottom" id="HNG-q4-Op5"/>
+                            <constraint firstItem="Lb4-TL-oGx" firstAttribute="centerY" secondItem="3F8-SM-fpX" secondAttribute="centerY" id="IM0-ex-O9V"/>
                             <constraint firstItem="ac3-d6-kuA" firstAttribute="centerX" secondItem="3F8-SM-fpX" secondAttribute="centerX" id="QcC-a7-O3h"/>
                             <constraint firstItem="uO1-wl-BzC" firstAttribute="centerY" secondItem="ac3-d6-kuA" secondAttribute="centerY" id="Qmt-i5-fcj"/>
                             <constraint firstItem="ydO-sc-8mN" firstAttribute="leading" secondItem="3F8-SM-fpX" secondAttribute="leading" id="TAq-ME-T7d"/>
@@ -638,6 +647,7 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="bruhaButton" destination="9WL-Up-96w" id="M4q-qn-4qw"/>
+                        <outlet property="emptyStateImage" destination="Lb4-TL-oGx" id="byr-uc-7pJ"/>
                         <outlet property="myUploadHeightImage" destination="lhu-hg-kSZ" id="izm-qq-NB4"/>
                         <outlet property="myUploadHeightLabel" destination="XgP-v8-FD7" id="sTH-6T-GYb"/>
                         <outlet property="myUploadImage" destination="uO1-wl-BzC" id="mxu-Ta-a6k"/>
@@ -828,7 +838,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="drx-Tf-Uey">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Addictions-white" translatesAutoresizingMaskIntoConstraints="NO" id="drx-Tf-Uey">
                                 <rect key="frame" x="252" y="20" width="35" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="35" id="QNw-dv-bLN"/>
@@ -885,10 +895,18 @@
                                     <outlet property="delegate" destination="9Q7-Yz-kgZ" id="Mfn-om-wSL"/>
                                 </connections>
                             </tableView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Addictions-white" translatesAutoresizingMaskIntoConstraints="NO" id="7mh-z6-ZQ7">
+                                <rect key="frame" x="35" y="159" width="250" height="250"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="OKX-TD-yeP"/>
+                                    <constraint firstAttribute="height" constant="250" id="bc4-Wn-9rt"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="wad-2H-Gdv" secondAttribute="trailing" id="3Xh-Rl-bmm"/>
+                            <constraint firstItem="7mh-z6-ZQ7" firstAttribute="centerX" secondItem="a5k-ZX-4KL" secondAttribute="centerX" id="F2Y-ke-RNP"/>
                             <constraint firstItem="drx-Tf-Uey" firstAttribute="leading" secondItem="B70-cO-8Mt" secondAttribute="trailing" constant="2" id="Fbs-zY-WZC"/>
                             <constraint firstItem="wad-2H-Gdv" firstAttribute="top" secondItem="a5k-ZX-4KL" secondAttribute="top" constant="20" id="Fu3-F4-99E"/>
                             <constraint firstItem="KsU-gR-P29" firstAttribute="top" secondItem="JYk-Oo-DVb" secondAttribute="bottom" id="Kg8-sZ-Mrl"/>
@@ -897,6 +915,7 @@
                             <constraint firstItem="drx-Tf-Uey" firstAttribute="centerY" secondItem="B70-cO-8Mt" secondAttribute="centerY" id="LMe-Qf-bfa"/>
                             <constraint firstAttribute="trailing" secondItem="JYk-Oo-DVb" secondAttribute="trailing" id="PLR-t0-VT4"/>
                             <constraint firstItem="Gtn-zv-8Pb" firstAttribute="top" secondItem="WfF-QY-PZX" secondAttribute="bottom" id="gyR-Mf-ITJ"/>
+                            <constraint firstItem="7mh-z6-ZQ7" firstAttribute="centerY" secondItem="a5k-ZX-4KL" secondAttribute="centerY" id="l3t-ZD-XzK"/>
                             <constraint firstItem="B70-cO-8Mt" firstAttribute="centerY" secondItem="Gtn-zv-8Pb" secondAttribute="centerY" id="l7E-O3-Rht"/>
                             <constraint firstItem="B70-cO-8Mt" firstAttribute="centerX" secondItem="a5k-ZX-4KL" secondAttribute="centerX" id="s7X-rV-Iwj"/>
                             <constraint firstItem="wad-2H-Gdv" firstAttribute="leading" secondItem="a5k-ZX-4KL" secondAttribute="leading" id="tKs-M5-TSJ"/>
@@ -912,6 +931,7 @@
                         <outlet property="addictionWidthImage" destination="QNw-dv-bLN" id="vZM-iF-Gcd"/>
                         <outlet property="addictionWidthLabel" destination="Tf3-LY-P3s" id="YeY-cP-rlF"/>
                         <outlet property="bruhaButton" destination="Gtn-zv-8Pb" id="0Wj-s6-wph"/>
+                        <outlet property="emptyStateImage" destination="7mh-z6-ZQ7" id="5ya-qJ-qXE"/>
                         <segue destination="8Gj-d3-yhz" kind="modal" identifier="ShowOnMap" id="aLM-Zh-sU8"/>
                         <segue destination="Wi8-Ty-KnD" kind="modal" identifier="GoToMoreInfo" id="J6B-rB-QcV"/>
                         <segue destination="k0E-gF-uXz" kind="modal" identifier="MoreInfore" id="QLA-oh-xLR"/>
@@ -1635,6 +1655,13 @@
                                     <outlet property="delegate" destination="ZTL-oo-whu" id="hZm-d6-OK5"/>
                                 </connections>
                             </tableView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="11k-Fi-G4F">
+                                <rect key="frame" x="35" y="159" width="250" height="250"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="250" id="4YR-0U-Qpj"/>
+                                    <constraint firstAttribute="height" constant="250" id="IMO-04-TXg"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -1649,14 +1676,17 @@
                             <constraint firstAttribute="trailing" secondItem="1Zp-fu-Gs1" secondAttribute="trailing" id="ePf-i7-gZO"/>
                             <constraint firstItem="n21-Wl-Yau" firstAttribute="top" secondItem="4pW-Hk-hNi" secondAttribute="bottom" id="hJG-p5-UYo"/>
                             <constraint firstItem="pMW-9I-rGS" firstAttribute="top" secondItem="4pW-Hk-hNi" secondAttribute="bottom" id="hWM-AM-aVP"/>
+                            <constraint firstItem="11k-Fi-G4F" firstAttribute="centerX" secondItem="oSL-oJ-OZJ" secondAttribute="centerX" id="iim-qf-BmR"/>
                             <constraint firstItem="pOn-fF-3Bn" firstAttribute="centerY" secondItem="n21-Wl-Yau" secondAttribute="centerY" id="ivI-VD-VId"/>
                             <constraint firstAttribute="trailingMargin" secondItem="pMW-9I-rGS" secondAttribute="trailing" constant="-15" id="oGi-zi-Erh"/>
                             <constraint firstItem="oaV-wG-kyD" firstAttribute="leading" secondItem="oSL-oJ-OZJ" secondAttribute="leading" id="pMQ-I2-uPK"/>
                             <constraint firstAttribute="trailing" secondItem="oaV-wG-kyD" secondAttribute="trailing" id="qoH-k7-7dq"/>
+                            <constraint firstItem="11k-Fi-G4F" firstAttribute="centerY" secondItem="oSL-oJ-OZJ" secondAttribute="centerY" id="wMS-x5-5jU"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="bruhaButton" destination="n21-Wl-Yau" id="ZHe-SD-gKd"/>
+                        <outlet property="emptyStateImage" destination="11k-Fi-G4F" id="bUk-ZC-JiH"/>
                         <outlet property="exploreHeightImage" destination="nxg-T5-xXT" id="c8U-dH-h8Z"/>
                         <outlet property="exploreHeightLabel" destination="Mmy-Ae-uTY" id="QDD-6H-QBM"/>
                         <outlet property="exploreImage" destination="d79-Ts-l61" id="D3v-jj-53i"/>
@@ -3739,7 +3769,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Bruha_White_Med" width="31" height="31"/>
+        <image name="Addictions-white" width="400" height="400"/>
+        <image name="Bruha_White_Med" width="37" height="37"/>
         <image name="Brüha_Face_Purple_Lrg" width="500" height="500"/>
         <image name="Calendar_Med" width="250" height="250"/>
         <image name="Club" width="48" height="48"/>
@@ -3753,20 +3784,21 @@
         <image name="Splash Background" width="800" height="1280"/>
         <image name="Swipe-Up" width="200" height="96"/>
         <image name="Tickets_Sm" width="250" height="250"/>
+        <image name="Upload_empty-white" width="400" height="400"/>
         <image name="goBack" width="32" height="32"/>
         <image name="mapicon_2" width="75" height="75"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ld0-ed-9yf"/>
-        <segue reference="bc1-hL-brY"/>
-        <segue reference="uOk-Ws-dFz"/>
+        <segue reference="NAU-T1-EcU"/>
         <segue reference="RHc-TZ-2hx"/>
-        <segue reference="pgm-fT-IMJ"/>
-        <segue reference="jya-Jh-KkI"/>
-        <segue reference="dH5-g0-cuQ"/>
-        <segue reference="dtV-EI-jha"/>
+        <segue reference="uOk-Ws-dFz"/>
+        <segue reference="dfw-c1-ntm"/>
         <segue reference="ymP-hi-1Gp"/>
+        <segue reference="pBV-qE-UtE"/>
+        <segue reference="aLM-Zh-sU8"/>
+        <segue reference="J6B-rB-QcV"/>
+        <segue reference="QLA-oh-xLR"/>
+        <segue reference="oFN-QX-sjl"/>
         <segue reference="8ee-hZ-bSl"/>
-        <segue reference="XHn-5o-VUf"/>
     </inferredMetricsTieBreakers>
 </document>

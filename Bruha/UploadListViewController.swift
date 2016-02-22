@@ -22,6 +22,7 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
     
     @IBOutlet weak var myUploadHeightImage: NSLayoutConstraint!
     
+    @IBOutlet weak var emptyStateImage: UIImageView!
     
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
@@ -144,13 +145,31 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
         switch (GlobalVariables.uploadDisplay){
         case "Event":
             //print("this is THE USER EVEVEVENTTTSSSSS", userEventInfo)
+            if eventInfo?.count == 0 {
+                emptyStateImage.hidden = false
+            }
+            else {
+                emptyStateImage.hidden = true
+            }
             return (eventInfo?.count)!
         case "Venue":
+            if venueInfo?.count == 0 {
+                emptyStateImage.hidden = false
+            }
+            else {
+                emptyStateImage.hidden = true
+            }
             return (venueInfo?.count)!
         case "Artist":
             let artistInfo = FetchData(context: managedObjectContext).fetchArtists()
             return (artistInfo?.count)!
         case "Organization":
+            if organizationInfo?.count == 0 {
+                emptyStateImage.hidden = false
+            }
+            else {
+                emptyStateImage.hidden = true
+            }
             return (organizationInfo?.count)!
         default:
             return (venueInfo?.count)!

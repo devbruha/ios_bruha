@@ -2,11 +2,11 @@
   "images" : [
     {
       "idiom" : "universal",
+      "filename" : "Event-Taco-White-Lrg.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "Brüha_Face_white.png",
       "scale" : "2x"
     },
     {
