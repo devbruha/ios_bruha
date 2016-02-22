@@ -25,6 +25,8 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
     
     
     @IBOutlet weak var bruhaButton: UIButton!
+    @IBOutlet weak var backNav: UIBarButtonItem!
+    
     @IBAction func backToExploreButton(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -37,6 +39,7 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
     var upcomingEvents: [Event] = []
     var sourceForEvent: String?
     var sourceID: String?
+    var iconForSource: String?
     
     var addictionInfo: [AddictionEvent]?
     
@@ -130,6 +133,12 @@ class UpComingEventsViewController: UIViewController, SWTableViewCellDelegate {
         self.comingEventImage.alpha = 0.0
         
         backgroundGradient()
+        
+        if iconForSource == "MapIcon" {
+            
+            backNav.image = UIImage(named: "mapicon_2")
+            
+        }
         
         upcomingEvents.removeAll()
         print(sourceForEvent)

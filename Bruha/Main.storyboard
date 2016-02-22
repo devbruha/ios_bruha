@@ -404,24 +404,24 @@
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Splash Background" translatesAutoresizingMaskIntoConstraints="NO" id="rYz-fj-aSu">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Enter Your Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ae-Uk-7ee">
-                                <rect key="frame" x="79" y="296" width="162.5" height="20.5"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username or Email" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="1ae-Uk-7ee">
+                                <rect key="frame" x="88.5" y="328" width="144" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="xzj-TN-RLw">
-                                <rect key="frame" x="49" y="322" width="222" height="30"/>
+                                <rect key="frame" x="49" y="354" width="222" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YHE-Bm-X7K">
-                                <rect key="frame" x="49" y="387" width="222" height="30"/>
+                            <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="YHE-Bm-X7K">
+                                <rect key="frame" x="49" y="419" width="222" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="Enter Your Email" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C9A-ZQ-3l7">
-                                <rect key="frame" x="98" y="362" width="125" height="20.5"/>
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="249" text="Enter Your Email" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="C9A-ZQ-3l7">
+                                <rect key="frame" x="98" y="394" width="125" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -482,7 +482,7 @@
                             <constraint firstItem="rYz-fj-aSu" firstAttribute="top" secondItem="ld8-rQ-c1X" secondAttribute="top" id="AY2-I1-zgv"/>
                             <constraint firstItem="xzj-TN-RLw" firstAttribute="top" secondItem="1ae-Uk-7ee" secondAttribute="bottom" constant="5" id="Fnh-UG-Ybi"/>
                             <constraint firstItem="oFr-TP-T3E" firstAttribute="top" secondItem="BoJ-XH-5FL" secondAttribute="bottom" constant="55" id="KK3-N6-ZDd"/>
-                            <constraint firstItem="xzj-TN-RLw" firstAttribute="centerY" secondItem="ld8-rQ-c1X" secondAttribute="centerY" constant="53" id="Nfy-T3-5dL"/>
+                            <constraint firstItem="xzj-TN-RLw" firstAttribute="centerY" secondItem="ld8-rQ-c1X" secondAttribute="centerY" constant="85" id="Nfy-T3-5dL"/>
                             <constraint firstItem="EDx-bB-799" firstAttribute="centerX" secondItem="ld8-rQ-c1X" secondAttribute="centerX" id="OJb-rA-D5z"/>
                             <constraint firstItem="oFr-TP-T3E" firstAttribute="top" secondItem="rYz-fj-aSu" secondAttribute="bottom" id="ORc-QC-vlR"/>
                             <constraint firstItem="2P4-6V-8k1" firstAttribute="baseline" secondItem="EDx-bB-799" secondAttribute="baseline" id="QMY-pn-zpI"/>
@@ -1117,7 +1117,7 @@
                                                 <segue destination="zh2-4j-mHu" kind="modal" id="72o-Yy-sA0"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" image="MapIcon_Medium" style="plain" id="rtq-q2-ZlJ">
+                                        <barButtonItem key="rightBarButtonItem" image="List-New-Lrg-Test" style="plain" id="rtq-q2-ZlJ">
                                             <connections>
                                                 <action selector="backToExploreButton:" destination="8Gj-d3-yhz" id="DHG-fn-XZR"/>
                                             </connections>
@@ -1604,7 +1604,7 @@
                                                 <segue destination="zh2-4j-mHu" kind="modal" id="3LC-A2-iEP"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" image="MapIcon_Medium" style="done" id="wqR-Sg-N3q">
+                                        <barButtonItem key="rightBarButtonItem" image="mapicon_2" style="done" id="wqR-Sg-N3q">
                                             <connections>
                                                 <segue destination="blf-Nq-gr7" kind="modal" id="xe8-fc-WXt"/>
                                             </connections>
@@ -2506,7 +2506,7 @@
                                                 <segue destination="zh2-4j-mHu" kind="modal" id="MdE-F6-kzt"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" image="MapIcon_Medium" style="plain" id="suH-aA-Bsj">
+                                        <barButtonItem key="rightBarButtonItem" image="List-New-Lrg-Test" style="plain" id="suH-aA-Bsj">
                                             <connections>
                                                 <segue destination="2fB-2K-YbP" kind="modal" id="RHc-TZ-2hx"/>
                                             </connections>
@@ -3086,7 +3086,7 @@
                                                 <segue destination="zh2-4j-mHu" kind="modal" id="vZi-2e-L6b"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="reply" id="WNt-IC-K4e">
+                                        <barButtonItem key="rightBarButtonItem" image="goBack" style="plain" id="WNt-IC-K4e">
                                             <connections>
                                                 <action selector="backToExploreButton:" destination="k0E-gF-uXz" id="vVl-DO-yDX"/>
                                             </connections>
@@ -3132,6 +3132,7 @@
                         <outlet property="PriceCalendarLabel" destination="zb0-BP-cnh" id="tjY-gC-hJt"/>
                         <outlet property="VenueName" destination="g5v-rT-mCu" id="Y3u-1W-XQ5"/>
                         <outlet property="backButton" destination="Js0-WU-th1" id="Ze5-60-fG4"/>
+                        <outlet property="backNav" destination="WNt-IC-K4e" id="C8O-vF-NDa"/>
                         <outlet property="bruhaButton" destination="4DL-YH-xr6" id="3XS-PU-YzK"/>
                         <outlet property="getAddictedButton" destination="atz-Xy-3qB" id="DwV-Gl-z68"/>
                         <outlet property="getAddictedLabel" destination="Y7u-uY-c5t" id="Gq6-hj-uTT"/>
@@ -3225,7 +3226,7 @@
                                                 <segue destination="zh2-4j-mHu" kind="modal" id="k77-2u-JtS"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="reply" id="1Vk-vQ-zfN">
+                                        <barButtonItem key="rightBarButtonItem" image="goBack" style="plain" id="1Vk-vQ-zfN">
                                             <connections>
                                                 <action selector="backToExploreButton:" destination="DYv-PS-7yH" id="ZP2-dU-J9D"/>
                                             </connections>
@@ -3255,6 +3256,7 @@
                     </view>
                     <connections>
                         <outlet property="backButton" destination="r73-BQ-0Mb" id="AZt-Xl-ZuU"/>
+                        <outlet property="backNav" destination="1Vk-vQ-zfN" id="XzD-YS-S5N"/>
                         <outlet property="bruhaButton" destination="JKe-Iu-h7E" id="l1L-Nr-dSk"/>
                         <outlet property="comingEventHeightImage" destination="C3E-BS-6cV" id="lAZ-7k-6SW"/>
                         <outlet property="comingEventHeightLabel" destination="N97-3I-9qN" id="uKM-8W-yT0"/>
@@ -3547,7 +3549,7 @@
                                                 <segue destination="zh2-4j-mHu" kind="modal" id="ld0-ed-9yf"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" image="MapIcon_Medium" style="plain" id="E2U-aZ-mQX">
+                                        <barButtonItem key="rightBarButtonItem" image="List-New-Lrg-Test" style="plain" id="E2U-aZ-mQX">
                                             <connections>
                                                 <action selector="backToExploreButton:" destination="hKk-35-4q0" id="gMl-3Y-e7H"/>
                                             </connections>
@@ -3590,6 +3592,7 @@
                         <outlet property="VenueButton" destination="u9C-ny-cLx" id="2Uq-01-0SF"/>
                         <outlet property="VenueNameLabel" destination="S1g-6z-cyt" id="BZD-HX-Lzh"/>
                         <outlet property="backButton" destination="0aG-cS-ABR" id="qQ4-EX-2yv"/>
+                        <outlet property="backNav" destination="E2U-aZ-mQX" id="aU6-6I-6W0"/>
                         <outlet property="bruhaButton" destination="acR-hz-rSl" id="WC2-Fn-bEX"/>
                         <outlet property="eventCategory" destination="oED-NY-qVQ" id="xch-Zm-kde"/>
                         <outlet property="eventMoreInfoHeightImage" destination="3z9-V7-2NS" id="SVd-ek-K7z"/>
@@ -3686,7 +3689,7 @@
                                                 <segue destination="zh2-4j-mHu" kind="modal" id="x9r-Lj-z5l"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" style="plain" systemItem="reply" id="HZe-Uc-ivd">
+                                        <barButtonItem key="rightBarButtonItem" image="goBack" style="plain" id="HZe-Uc-ivd">
                                             <connections>
                                                 <action selector="backToExploreButton:" destination="96t-J7-OUy" id="IVE-OE-g6V"/>
                                             </connections>
@@ -3742,7 +3745,7 @@
         <image name="Club" width="48" height="48"/>
         <image name="Explore_Sm" width="250" height="250"/>
         <image name="Image" width="1719" height="3094"/>
-        <image name="MapIcon_Medium" width="31" height="31"/>
+        <image name="List-New-Lrg-Test" width="37" height="37"/>
         <image name="MyAddictions_Sm" width="250" height="250"/>
         <image name="MyUploads_Sm" width="250" height="250"/>
         <image name="Profile_Sm" width="250" height="250"/>
@@ -3750,18 +3753,20 @@
         <image name="Splash Background" width="800" height="1280"/>
         <image name="Swipe-Up" width="200" height="96"/>
         <image name="Tickets_Sm" width="250" height="250"/>
+        <image name="goBack" width="32" height="32"/>
+        <image name="mapicon_2" width="75" height="75"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="TpG-fQ-ZDS"/>
-        <segue reference="l1y-Rt-Be8"/>
-        <segue reference="pgm-fT-IMJ"/>
-        <segue reference="thc-CS-1cg"/>
-        <segue reference="dfw-c1-ntm"/>
+        <segue reference="ld0-ed-9yf"/>
+        <segue reference="bc1-hL-brY"/>
         <segue reference="uOk-Ws-dFz"/>
-        <segue reference="NAU-T1-EcU"/>
-        <segue reference="0Iz-X0-JOq"/>
-        <segue reference="io6-cH-KWY"/>
+        <segue reference="RHc-TZ-2hx"/>
+        <segue reference="pgm-fT-IMJ"/>
+        <segue reference="jya-Jh-KkI"/>
+        <segue reference="dH5-g0-cuQ"/>
+        <segue reference="dtV-EI-jha"/>
+        <segue reference="ymP-hi-1Gp"/>
         <segue reference="8ee-hZ-bSl"/>
-        <segue reference="eyG-eD-cCw"/>
+        <segue reference="XHn-5o-VUf"/>
     </inferredMetricsTieBreakers>
 </document>

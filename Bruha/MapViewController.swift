@@ -1180,6 +1180,11 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         
+        if segue.identifier == "EventMoreInfo" {
+            let destinationController = segue.destinationViewController as! EventMoreInfomationViewController
+            destinationController.iconForSource = "MapIcon"
+        }
+        
         if segue.identifier == "MoreInfore" {
             let destinationController = segue.destinationViewController as! MoreInformationViewController
             destinationController.iconForSource = "MapIcon"
@@ -1195,6 +1200,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
         
         if segue.identifier == "EventsComing" {
             let comingController = segue.destinationViewController as! UpComingEventsViewController
+            comingController.iconForSource = "MapIcon"
             if GlobalVariables.selectedDisplay == "Venue" {
                 comingController.sourceForEvent = "venue"
                 comingController.sourceID = GlobalVariables.eventSelected

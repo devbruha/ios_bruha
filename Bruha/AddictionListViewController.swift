@@ -993,6 +993,7 @@ class AddictionListViewController: UIViewController, UITableViewDelegate, UITabl
         
         if segue.identifier == "MoreInfore" {
             let destinationController = segue.destinationViewController as! MoreInformationViewController
+            destinationController.iconForSource = "Explore"
             if GlobalVariables.addictedDisplay == "Venue" {
                 destinationController.sourceForComingEvent = "venue"
                 destinationController.sourceID = GlobalVariables.eventSelected

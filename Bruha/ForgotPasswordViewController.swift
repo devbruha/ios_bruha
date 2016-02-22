@@ -69,13 +69,14 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
         
         let bruhaBaseURL: NSURL? = NSURL(string: "http://bruha.com/mobile_php/CredentialsPHP/")
         
-        if let resetPassURL = NSURL(string: "forgotPassword.php?", relativeToURL: bruhaBaseURL) {
+        if let resetPassURL = NSURL(string: "forgotPassword2.php?", relativeToURL: bruhaBaseURL) {
             
             let networkOperation = NetworkOperation(url: resetPassURL)
             
             dispatch_async(dispatch_get_main_queue()) {
                 print("-\(self.username.text!)-and-\(self.userEmail.text!)-")
-                networkOperation.stringFromURLPost("forget-email=\(self.userEmail.text!)&forget-username=\(self.username.text!)") {
+                
+                networkOperation.stringFromURLPost("forget-email=\(self.username.text!)&forget-username=\(self.username.text!)") {
                     
                     (let resetSignal) in
                     
@@ -92,8 +93,13 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
     
     // Login Button Onclick logic
     
+//    func enableButton() {
+//        sendReset.enabled = true
+//    }
     
     @IBAction func loginPress(sender: AnyObject) {
+        
+        sendReset.enabled = false
         
         let username:String = self.username.text!
         let password:String = self.userEmail.text!
@@ -118,15 +124,25 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
                     alertController.addAction(okAction)
                     
                     self.presentViewController(alertController, animated: true, completion: nil)
+                    self.sendReset.enabled = true
                 }
                 
                 
+            }
+            else {
+                dispatch_async(dispatch_get_main_queue()){
+                    let alert = UIAlertView(title: "Failed", message: mResetResponse, delegate: nil, cancelButtonTitle: "OK")
+                    alert.show()
+                    self.sendReset.enabled = true
+                }
             }
             
             print(mResetResponse, "is the returned value")
             
             
         }
+        
+        //NSTimer.scheduledTimerWithTimeInterval(5, target: self, selector: "enableButton", userInfo: nil, repeats: false)
         
         /*
         error = "true"

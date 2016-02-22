@@ -1740,6 +1740,7 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
         
         if segue.identifier == "MoreInfore" {
             let destinationController = segue.destinationViewController as! MoreInformationViewController
+            destinationController.iconForSource = "Explore"
             if GlobalVariables.selectedDisplay == "Venue" {
                 destinationController.sourceForComingEvent = "venue"
                 destinationController.sourceID = GlobalVariables.eventSelected

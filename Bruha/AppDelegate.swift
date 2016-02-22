@@ -19,7 +19,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         // Override point for customization after application launch.
         //GMSServices.provideAPIKey("AIzaSyDWPbYMQPFcbFg4yWO-4Rk1Rn9DiaUOn34")
-        GMSServices.provideAPIKey("AIzaSyAKkkWxNZfMrQLvsOhBPNxeErdgvhnnKZY")
+        
+        GMSServices.provideAPIKey("AIzaSyCIBib634Ut2i4nkWlc-ZjzDZloiU94r0o") //com.bruha.bruhaios
+        //GMSServices.provideAPIKey("AIzaSyAKkkWxNZfMrQLvsOhBPNxeErdgvhnnKZY") //com.bruha.Bruha
         
         application.statusBarStyle = .LightContent
         //application.statusBarHidden = true
