@@ -339,7 +339,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
                 if searchController.searchBar.text != ""  {
                     searchedVenues = GlobalVariables.displayFilteredVenues.filter({ (venue: Venue) -> Bool in
                         return ( scope == "Search" && venue.venueName.lowercaseString.containsString(searchText.lowercaseString) ) ||
-                            ( scope == "Location" && (venue.venueAddress.componentsSeparatedByString(", ")[0]).lowercaseString.containsString(searchText.lowercaseString) )
+                            ( scope == "Location" && (venue.venueAddress.stringByReplacingOccurrencesOfString(",", withString: "")).lowercaseString.containsString(searchText.lowercaseString) )
                     })
                 } else if searchController.searchBar.text == "" {
                     searchedVenues = GlobalVariables.displayFilteredVenues
@@ -349,7 +349,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
                 if searchController.searchBar.text != "" {
                     searchedVenues = GlobalVariables.displayedVenues.filter({ (venue: Venue) -> Bool in
                         return ( scope == "Search" && venue.venueName.lowercaseString.containsString(searchText.lowercaseString) ) ||
-                            ( scope == "Location" && (venue.venueAddress.componentsSeparatedByString(", ")[0]).lowercaseString.containsString(searchText.lowercaseString) )
+                            ( scope == "Location" && (venue.venueAddress.stringByReplacingOccurrencesOfString(",", withString: "")).lowercaseString.containsString(searchText.lowercaseString) )
                     })
                 } else if searchController.searchBar.text == "" {
                     searchedVenues = GlobalVariables.displayedVenues
@@ -362,7 +362,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
                 if searchController.searchBar.text != ""  {
                     searchedOrganizations = GlobalVariables.displayFilteredOrganizations.filter({ (organization: Organization) -> Bool in
                         return ( scope == "Search" && organization.organizationName.lowercaseString.containsString(searchText.lowercaseString) ) ||
-                            ( scope == "Location" && (organization.organizationAddress.componentsSeparatedByString(", ")[0]).lowercaseString.containsString(searchText.lowercaseString) )
+                            ( scope == "Location" && (organization.organizationAddress.stringByReplacingOccurrencesOfString(",", withString: "")).lowercaseString.containsString(searchText.lowercaseString) )
                     })
                 } else if searchController.searchBar.text == "" {
                     searchedOrganizations = GlobalVariables.displayFilteredOrganizations
@@ -372,7 +372,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
                 if searchController.searchBar.text != "" {
                     searchedOrganizations = GlobalVariables.displayedOrganizations.filter({ (organization: Organization) -> Bool in
                         return ( scope == "Search" && organization.organizationName.lowercaseString.containsString(searchText.lowercaseString) ) ||
-                            ( scope == "Location" && (organization.organizationAddress.componentsSeparatedByString(", ")[0]).lowercaseString.containsString(searchText.lowercaseString) )
+                            ( scope == "Location" && (organization.organizationAddress.stringByReplacingOccurrencesOfString(",", withString: "")).lowercaseString.containsString(searchText.lowercaseString) )
                     })
                 } else if searchController.searchBar.text == "" {
                     searchedOrganizations = GlobalVariables.displayedOrganizations
@@ -551,7 +551,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             //cell.dropWebContent.loadHTMLString("<font color=\"white\">\(v.venueDescription)</font>", baseURL: nil)
             
             cell.dropTitle.text = "\(v.venueName)"
-            cell.dropContent.text = "\(v.venueAddress.componentsSeparatedByString(", ")[0])"
+            cell.dropContent.text = "\(v.venueAddress.componentsSeparatedByString(", ")[0])\n\(v.venueAddress.componentsSeparatedByString(", ")[1])\n\(v.venueAddress.componentsSeparatedByString(", ")[2])"
             cell.dropStartDate.text = ""
             cell.dropPrice.text = ""
             
@@ -617,7 +617,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             }
             
             cell.dropTitle.text = "\(o.organizationName)"
-            cell.dropContent.text = "\(o.organizationAddress.componentsSeparatedByString(", ")[0])"
+            cell.dropContent.text = "\(o.organizationAddress.componentsSeparatedByString(", ")[0])\n\(o.organizationAddress.componentsSeparatedByString(", ")[1])\n\(o.organizationAddress.componentsSeparatedByString(", ")[2])"
             cell.dropStartDate.text = ""
             cell.dropPrice.text = ""
             
