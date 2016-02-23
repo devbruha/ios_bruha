@@ -912,7 +912,7 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
                 }
                     
                 else if let checkedUrl = NSURL(string:venue.posterUrl) {
-                    
+                    print(checkedUrl, "idehfiefh~~~~")
                     self.getDataFromUrl(checkedUrl) { data in
                         
                         dispatch_async(dispatch_get_main_queue()) {
