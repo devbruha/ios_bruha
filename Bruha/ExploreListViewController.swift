@@ -336,7 +336,7 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
                 if searchController.searchBar.text != ""  {
                     searchedVenues = filteredVenueInfo.filter({ (venue: Venue) -> Bool in
                         return ( scope == "Search" && venue.venueName.lowercaseString.containsString(searchText.lowercaseString) ) ||
-                            ( scope == "Location" && (venue.venueAddress.componentsSeparatedByString(", ")[0]).lowercaseString.containsString(searchText.lowercaseString) )
+                            ( scope == "Location" && (venue.venueAddress.stringByReplacingOccurrencesOfString(",", withString: "")).lowercaseString.containsString(searchText.lowercaseString) )
                     })
                 } else if searchController.searchBar.text == "" {
                     searchedVenues = filteredVenueInfo
@@ -346,7 +346,7 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
                 if searchController.searchBar.text != "" {
                     searchedVenues = venueInfo!.filter({ (venue: Venue) -> Bool in
                         return ( scope == "Search" && venue.venueName.lowercaseString.containsString(searchText.lowercaseString) ) ||
-                            ( scope == "Location" && (venue.venueAddress.componentsSeparatedByString(", ")[0]).lowercaseString.containsString(searchText.lowercaseString) )
+                            ( scope == "Location" && (venue.venueAddress.stringByReplacingOccurrencesOfString(",", withString: "")).lowercaseString.containsString(searchText.lowercaseString) )
                     })
                 } else if searchController.searchBar.text == "" {
                     searchedVenues = venueInfo!
@@ -359,7 +359,7 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
                 if searchController.searchBar.text != ""  {
                     searchedOrganizations = filteredOrganizationInfo.filter({ (organization: Organization) -> Bool in
                         return ( scope == "Search" && organization.organizationName.lowercaseString.containsString(searchText.lowercaseString) ) ||
-                            ( scope == "Location" && (organization.organizationAddress.componentsSeparatedByString(", ")[0]).lowercaseString.containsString(searchText.lowercaseString) )
+                            ( scope == "Location" && (organization.organizationAddress.stringByReplacingOccurrencesOfString(",", withString: "")).lowercaseString.containsString(searchText.lowercaseString) )
                     })
                 } else if searchController.searchBar.text == "" {
                     searchedOrganizations = filteredOrganizationInfo
@@ -369,7 +369,7 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
                 if searchController.searchBar.text != "" {
                     searchedOrganizations = organizationInfo!.filter({ (organization: Organization) -> Bool in
                         return ( scope == "Search" && organization.organizationName.lowercaseString.containsString(searchText.lowercaseString) ) ||
-                            ( scope == "Location" && (organization.organizationAddress.componentsSeparatedByString(", ")[0]).lowercaseString.containsString(searchText.lowercaseString) )
+                            ( scope == "Location" && (organization.organizationAddress.stringByReplacingOccurrencesOfString(",", withString: "")).lowercaseString.containsString(searchText.lowercaseString) )
                     })
                 } else if searchController.searchBar.text == "" {
                     searchedOrganizations = organizationInfo!
@@ -912,7 +912,7 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
                 }
                     
                 else if let checkedUrl = NSURL(string:venue.posterUrl) {
-                    print(checkedUrl, "idehfiefh~~~~")
+                    
                     self.getDataFromUrl(checkedUrl) { data in
                         
                         dispatch_async(dispatch_get_main_queue()) {
@@ -940,8 +940,8 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
                 //if venue.venueName == "zsdf" {print(venue.venueID)}
                 //if venue.venueName == "Niagra" {print(venue.venueID)}
                 cell.venueName.text = venue.venueName
-                cell.venueDescription.text = venue.venueName
-                cell.venueAddress.text = "\(venue.venueAddress.componentsSeparatedByString(", ")[0])"
+                //cell.venueDescription.text = venue.venueName
+                cell.venueAddress.text = "\(venue.venueAddress.componentsSeparatedByString(", ")[0])\n\(venue.venueAddress.componentsSeparatedByString(", ")[1])\n\(venue.venueAddress.componentsSeparatedByString(", ")[2])"
                 cell.circVenueName.text = venue.venueName
                 cell.circHiddenID.text = venue.venueID
                 
@@ -992,8 +992,8 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
                 
                 
                 cell.venueName.text = venue.venueName
-                cell.venueDescription.text = venue.venueName
-                cell.venueAddress.text = "\(venue.venueAddress.componentsSeparatedByString(", ")[0])"
+                //cell.venueDescription.text = venue.venueName
+                cell.venueAddress.text = "\(venue.venueAddress.componentsSeparatedByString(", ")[0])\n\(venue.venueAddress.componentsSeparatedByString(", ")[1])\n\(venue.venueAddress.componentsSeparatedByString(", ")[2])"
                 cell.circVenueName.text = venue.venueName
                 cell.circHiddenID.text = venue.venueID
                 
@@ -1044,8 +1044,8 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
                 
                 
                 cell.venueName.text = venue.venueName
-                cell.venueDescription.text = venue.venueName
-                cell.venueAddress.text = "\(venue.venueAddress.componentsSeparatedByString(", ")[0])"
+                //cell.venueDescription.text = venue.venueName
+                cell.venueAddress.text = "\(venue.venueAddress.componentsSeparatedByString(", ")[0])\n\(venue.venueAddress.componentsSeparatedByString(", ")[1])\n\(venue.venueAddress.componentsSeparatedByString(", ")[2])"
                 cell.circVenueName.text = venue.venueName
                 cell.circHiddenID.text = venue.venueID
                 
@@ -1179,8 +1179,8 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
                 }
                 
                 cell.organizationName.text = organization.organizationName
-                cell.organizationDescription.text = organization.organizationName
-                cell.address.text = "\(organization.organizationAddress.componentsSeparatedByString(", ")[0])"
+                //cell.organizationDescription.text = organization.organizationName
+                cell.address.text = "\(organization.organizationAddress.componentsSeparatedByString(", ")[0])\n\(organization.organizationAddress.componentsSeparatedByString(", ")[1])\n\(organization.organizationAddress.componentsSeparatedByString(", ")[2])"
                 cell.circOrgName.text = organization.organizationName
                 cell.circHiddenID.text = organization.organizationID
                 
@@ -1231,8 +1231,8 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
                 
                 
                 cell.organizationName.text = organization.organizationName
-                cell.organizationDescription.text = organization.organizationName
-                cell.address.text = "\(organization.organizationAddress.componentsSeparatedByString(", ")[0])"
+                //cell.organizationDescription.text = organization.organizationName
+                cell.address.text = "\(organization.organizationAddress.componentsSeparatedByString(", ")[0])\n\(organization.organizationAddress.componentsSeparatedByString(", ")[1])\n\(organization.organizationAddress.componentsSeparatedByString(", ")[2])"
                 cell.circOrgName.text = organization.organizationName
                 cell.circHiddenID.text = organization.organizationID
                 
@@ -1283,8 +1283,8 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
                 
                 
                 cell.organizationName.text = organization.organizationName
-                cell.organizationDescription.text = organization.organizationName
-                cell.address.text = "\(organization.organizationAddress.componentsSeparatedByString(", ")[0])"
+                //cell.organizationDescription.text = organization.organizationName
+                cell.address.text = "\(organization.organizationAddress.componentsSeparatedByString(", ")[0])\n\(organization.organizationAddress.componentsSeparatedByString(", ")[1])\n\(organization.organizationAddress.componentsSeparatedByString(", ")[2])"
                 cell.circOrgName.text = organization.organizationName
                 cell.circHiddenID.text = organization.organizationID
                 

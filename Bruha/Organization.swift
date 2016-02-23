@@ -63,8 +63,10 @@ struct Organization {
         let streetName = organizationDictionary["street_name"] as! String
         var city = organizationDictionary["location_city"] as! String
         let postalCode = organizationDictionary["postal_code"] as! String
+        let province = organizationDictionary["state"] as! String
+        let country = organizationDictionary["country"] as! String
         
-        organizationAddress = "\(streetNo) \(streetName), \(postalCode)"
+        organizationAddress = "\(streetNo) \(streetName), \(city) \(province), \(country)"
         
         organizationName = organizationDictionary["organization_name"] as! String
         

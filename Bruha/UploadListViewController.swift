@@ -359,8 +359,8 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
             }
             
             cell.venueName.text = venue.venueName
-            cell.venueDescription.text = venue.venueName
-            cell.venueAddress.text = "\(venue.venueAddress.componentsSeparatedByString(", ")[0])"
+            //cell.venueDescription.text = venue.venueName
+            cell.venueAddress.text = "\(venue.venueAddress.componentsSeparatedByString(", ")[0])\n\(venue.venueAddress.componentsSeparatedByString(", ")[1])\n\(venue.venueAddress.componentsSeparatedByString(", ")[2])"
             cell.circVenueName.text = venue.venueName
             cell.circHiddenID.text = venue.venueID
             
@@ -433,8 +433,8 @@ class UploadListViewController: UIViewController, SWTableViewCellDelegate, ARSPD
             }
             
             cell.organizationName.text = organization.organizationName
-            cell.organizationDescription.text = organization.organizationName
-            cell.address.text = "\(organization.organizationAddress.componentsSeparatedByString(", ")[0])"
+            //cell.organizationDescription.text = organization.organizationName
+            cell.address.text = "\(organization.organizationAddress.componentsSeparatedByString(", ")[0])\n\(organization.organizationAddress.componentsSeparatedByString(", ")[1])\n\(organization.organizationAddress.componentsSeparatedByString(", ")[2])"
             cell.circOrgName.text = organization.organizationName
             cell.circHiddenID.text = organization.organizationID
             
