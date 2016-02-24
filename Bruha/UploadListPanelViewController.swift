@@ -179,8 +179,8 @@ class UploadListPanelViewController: UIViewController, UITableViewDelegate {
     func discoverableTapped(){
         
         //GlobalVariables.uploadDisplay = "Discoverable"
-        updateEVOD()
-        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeUpload", object: self)
+        //updateEVOD()
+        //NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeUpload", object: self)
         
         let alert = UIAlertView(title: "Discoverable Coming Soon", message: nil, delegate: nil, cancelButtonTitle: nil)
         alert.show()

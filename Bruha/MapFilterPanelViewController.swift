@@ -547,7 +547,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
     func discoverableTapped(){
         
 //        GlobalVariables.selectedDisplay = "Discoverable"
-        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
+        //NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
         
         let alert = UIAlertView(title: "Discoverable Coming Soon", message: nil, delegate: nil, cancelButtonTitle: nil)
         alert.show()
@@ -557,7 +557,7 @@ class MapFilterPanelViewController: UIViewController, UITableViewDelegate, UITab
             alert.dismissWithClickedButtonIndex(-1, animated: true)
         })
         
-        updateEVOD()
+        //updateEVOD()
         //resetSliderValue()
     }
     

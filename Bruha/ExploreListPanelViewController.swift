@@ -558,7 +558,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
     func discoverableTapped(){
         
 //        GlobalVariables.selectedDisplay = "Discoverable"
-        NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
+        //NSNotificationCenter.defaultCenter().postNotificationName("itemDisplayChangeEvent", object: self)
         
         let alert = UIAlertView(title: "Discoverable Coming Soon", message: nil, delegate: nil, cancelButtonTitle: nil)
         alert.show()
@@ -568,7 +568,7 @@ class ExploreListPanelViewController: UIViewController, UITableViewDelegate, UIT
             alert.dismissWithClickedButtonIndex(-1, animated: true)
         })
         
-        updateEVOD()
+        //updateEVOD()
     }
     
     func organizationTapped(){
