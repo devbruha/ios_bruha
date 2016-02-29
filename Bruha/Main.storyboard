@@ -305,10 +305,10 @@
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Brüha_Face_Purple_Lrg" translatesAutoresizingMaskIntoConstraints="NO" id="zuy-f0-nCR">
-                                <rect key="frame" x="35" y="25" width="250" height="250"/>
+                                <rect key="frame" x="50" y="25" width="220" height="220"/>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="250" id="6mM-iu-QAF"/>
-                                    <constraint firstAttribute="width" constant="250" id="Ggg-y7-M20"/>
+                                    <constraint firstAttribute="height" constant="220" id="6mM-iu-QAF"/>
+                                    <constraint firstAttribute="width" constant="220" id="Ggg-y7-M20"/>
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="YEh-NT-ahx">
@@ -3805,16 +3805,16 @@
         <image name="mapicon_2" width="75" height="75"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="R95-Q8-ZSY"/>
-        <segue reference="dH5-g0-cuQ"/>
+        <segue reference="GCp-aN-ne7"/>
+        <segue reference="jya-Jh-KkI"/>
         <segue reference="bc1-hL-brY"/>
         <segue reference="xe8-fc-WXt"/>
         <segue reference="RHc-TZ-2hx"/>
         <segue reference="pgm-fT-IMJ"/>
-        <segue reference="jya-Jh-KkI"/>
+        <segue reference="dH5-g0-cuQ"/>
         <segue reference="dtV-EI-jha"/>
         <segue reference="12b-kc-Bij"/>
         <segue reference="8ee-hZ-bSl"/>
-        <segue reference="UAd-9n-bZt"/>
+        <segue reference="ITg-3K-FOL"/>
     </inferredMetricsTieBreakers>
 </document>
