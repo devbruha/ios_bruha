@@ -22,6 +22,8 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, FBSDKLoginBut
     @IBOutlet weak var bruhaFace: UIImageView!
     @IBOutlet weak var signupB: UIButton!
     
+    @IBOutlet weak var textBottomSpace: NSLayoutConstraint!
+    
     // Retreive the managedObjectContext from AppDelegate
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
@@ -93,6 +95,26 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, FBSDKLoginBut
             faceLoginButton.hidden = true
         }
     }*/
+    
+    func adjustTextfiledPosition(constraint: NSLayoutConstraint){
+        
+        let spacing: CGFloat = -160
+        
+        constraint.constant = spacing
+    }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        let screenSize: CGRect = UIScreen.mainScreen().bounds
+        let imgWidthHeight: CGFloat = 120
+        
+        if screenSize.height == 480 { //update constraint for ipad
+            
+            bruhaFace.frame = CGRectMake((self.view.frame.width*0.5)-(imgWidthHeight*0.5), self.bruhaFace.frame.origin.y, imgWidthHeight, imgWidthHeight)
+            
+            adjustTextfiledPosition(textBottomSpace)
+        }
+    }
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
