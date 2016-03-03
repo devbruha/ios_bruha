@@ -736,7 +736,7 @@ class ExploreListViewController: UIViewController, UITableViewDelegate, UITableV
                 cell.circTitle.text = event.eventName
                 cell.circDate.text = convertCircTimeFormat("\(event.eventStartDate)")
                 
-                if let price = event.eventPrice! {
+                if let price = event.eventPrice {
                     if price == "0.00" {cell.circPrice.text = "Free!"; cell.rectPrice.text = "Free!"}
                     else {cell.circPrice.text = "$\(price)"; cell.rectPrice.text = "$\(price)"}
                 } else {cell.circPrice.text = "No Price"; cell.rectPrice.text = "No Price"}

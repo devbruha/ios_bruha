@@ -166,7 +166,7 @@ class EventMoreInfomationViewController: UIViewController, UIWebViewDelegate{
                     eventTime.text = "\(convertTimeFormat("\(event.eventStartDate) \(event.eventStartTime)"))"
                     
                     
-                    if let price = event.eventPrice! {
+                    if let price = event.eventPrice {
                         if price == "0.00" {eventPrice.text = "Free!"}
                         else {eventPrice.text = "$\(price)"}
                     } else {eventPrice.text = "No Price"}
