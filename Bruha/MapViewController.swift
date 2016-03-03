@@ -473,7 +473,7 @@ class MapViewController: UIViewController,UITableViewDataSource,UITableViewDeleg
             cell.dropTitle.text = "\(e.eventName)"
             
             //Price
-            if let price = e.eventPrice! {
+            if let price = e.eventPrice {
                 if price == "0.00" {cell.dropPrice.text = "Free!"}
                 else {cell.dropPrice.text = "$\(price)"}
             } else {cell.dropPrice.text = "No Price"}
