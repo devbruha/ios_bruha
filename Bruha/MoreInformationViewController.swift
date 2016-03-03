@@ -165,8 +165,8 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                     Address.text = "\(event.eventVenueAddress.componentsSeparatedByString(", ")[0]), \(event.eventVenueCity)"
                     
                     
-                    if let price = Float(event.eventPrice!) {
-                        if price == 0.0 {PriceCalendarLabel.text = "Free!"}
+                    if let price = event.eventPrice! {
+                        if price == "0.00" {PriceCalendarLabel.text = "Free!"}
                         else {PriceCalendarLabel.text = "$\(price)"}
                     } else {PriceCalendarLabel.text = "No Price"}
                     

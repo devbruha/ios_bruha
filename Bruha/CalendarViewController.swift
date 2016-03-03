@@ -379,8 +379,8 @@ class CalendarViewController: UIViewController, JTCalendarDelegate, SWTableViewC
         cell.dropTitle.text = "\(e.eventName)"
         
         //Price
-        if let price = Float(e.eventPrice!) {
-            if price == 0.0 {cell.dropPrice.text = "Free!"}
+        if let price = e.eventPrice! {
+            if price == "0.00" {cell.dropPrice.text = "Free!"}
             else {cell.dropPrice.text = "$\(price)"}
         } else {cell.dropPrice.text = "No Price"}
         
