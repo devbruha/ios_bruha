@@ -44,6 +44,8 @@ class LoadScreenViewController: UIViewController {
     
     var userLog: Int = 0
     
+    var timer: NSTimer = NSTimer()
+    
     func customStatusBar() {
         let barView = UIView(frame: CGRect(x: 0.0, y: 0.0, width: UIScreen.mainScreen().bounds.size.width, height: 20.0))
         barView.backgroundColor = UIColor.blackColor()
@@ -123,7 +125,7 @@ class LoadScreenViewController: UIViewController {
             startLoadingProgress()
             //NSNotificationCenter.defaultCenter().addObserver(self, selector: "saveImages", name:"complete", object: nil)
             NSNotificationCenter.defaultCenter().addObserver(self, selector: "performSegue", name:"complete", object: nil)
-            let timer = NSTimer.scheduledTimerWithTimeInterval(15.0, target: self, selector: "timeOutCheck", userInfo: nil, repeats: false)
+            timer = NSTimer.scheduledTimerWithTimeInterval(15.0, target: self, selector: "timeOutCheck", userInfo: nil, repeats: false)
             
         } else {
             
@@ -168,6 +170,9 @@ class LoadScreenViewController: UIViewController {
         NSNotificationCenter.defaultCenter().removeObserver(self, name: "complete", object: nil)
         
         print("observer removed")
+        
+        // controller will not deallocate memory with timer running
+        timer.invalidate()
     }
     
     override func didReceiveMemoryWarning() {
@@ -326,6 +331,7 @@ class LoadScreenViewController: UIViewController {
             alert.show()
             self.delay(5.0){
                 alert.dismissWithClickedButtonIndex(-1, animated: true)
+                NSNotificationCenter.defaultCenter().postNotificationName("complete", object: nil)
             }
 //            let delay = 5.0 * Double(NSEC_PER_SEC)
 //            var time = dispatch_time(DISPATCH_TIME_NOW, Int64(delay))

@@ -68,6 +68,11 @@ class DashBoardViewController: UIViewController {
         }
     }
     
+    @IBAction func unwindToDashboard(segue: UIStoryboardSegue) {
+        
+        //Access this in other storyboard controller's Exit button
+    }
+    
     
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
