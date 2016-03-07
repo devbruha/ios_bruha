@@ -2104,6 +2104,7 @@
                     </view>
                     <connections>
                         <outlet property="addictionImage" destination="uEA-o1-ACD" id="C8k-9G-JXF"/>
+                        <outlet property="bruhaBarButton" destination="Qwy-hb-weD" id="G5R-jh-oRv"/>
                         <outlet property="bruhaButton" destination="ypt-Ql-HWE" id="KmB-d8-BSa"/>
                         <outlet property="calendarImage" destination="q5A-Yr-fda" id="Mg6-KC-TD3"/>
                         <outlet property="exploreImage" destination="Ixa-ww-lX2" id="7J5-sx-VTY"/>
@@ -3817,16 +3818,16 @@
         <image name="mapicon_2" width="75" height="75"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="RHc-TZ-2hx"/>
-        <segue reference="xe8-fc-WXt"/>
-        <segue reference="QhX-ak-ZUZ"/>
-        <segue reference="NAU-T1-EcU"/>
         <segue reference="TpG-fQ-ZDS"/>
-        <segue reference="thc-CS-1cg"/>
+        <segue reference="l1y-Rt-Be8"/>
+        <segue reference="xe8-fc-WXt"/>
         <segue reference="pgm-fT-IMJ"/>
         <segue reference="io6-cH-KWY"/>
-        <segue reference="dfw-c1-ntm"/>
-        <segue reference="0Iz-X0-JOq"/>
+        <segue reference="thc-CS-1cg"/>
+        <segue reference="QhX-ak-ZUZ"/>
+        <segue reference="5DM-Zi-tRH"/>
+        <segue reference="J3w-Nl-jcV"/>
+        <segue reference="AnT-IX-43l"/>
         <segue reference="eyG-eD-cCw"/>
     </inferredMetricsTieBreakers>
 </document>

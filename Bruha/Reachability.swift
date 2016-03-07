@@ -30,4 +30,15 @@ public class Reachability {
         
         return Status
     }
+    
+    class func internetCheck(controller: UIViewController) {
+        
+        if !isConnectedToNetwork() {
+            let error = "The Information displayed is not up to date and some of our features will not be available to you due to no internet connection being detected. Please turn on your internet connection and restart the app to get updated information."
+            let alertController = UIAlertController(title: "No Internet Connection Detected!", message:error, preferredStyle: .Alert)
+            let okAction = UIAlertAction(title: "OK", style: .Default, handler: nil)
+            alertController.addAction(okAction)
+            controller.presentViewController(alertController, animated: true, completion: nil)
+        }
+    }
 }
