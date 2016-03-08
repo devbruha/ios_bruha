@@ -173,7 +173,7 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                     DateUpcomingLabel.text = convertTimeFormat("\(event.eventStartDate)")
                     smallImage.image = UIImage(named: event.primaryCategory)
                     EventCategory.text = event.primaryCategory
-                    webDescriptionContent.loadHTMLString("<div style=\"font-family:OpenSans;color:white;width:100%;word-wrap:break-word;\">\(event.eventDescription)</div>", baseURL: nil)
+                    webDescriptionContent.loadHTMLString("<style> a { color: rgba(70,190,194,1);}</style><div style=\"font-family:OpenSans;color:white;width:100%;word-wrap:break-word;\">\(event.eventDescription)</div>", baseURL: nil)
                     
                     if let img = GlobalVariables.eventImageCache[event.eventID] {
                         Image.image = img
@@ -223,8 +223,7 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                     DateUpcomingLabel.text = "Up Coming Events"
                     smallImage.image = UIImage(named: venue.primaryCategory)
                     EventCategory.text = venue.primaryCategory
-                    webDescriptionContent.loadHTMLString("<div style=\"font-family:OpenSans;color:white;width:100%;word-wrap:break-word;\">\(venue.venueDescription)</div>", baseURL: nil)
-                    
+                    webDescriptionContent.loadHTMLString("<style> a { color: rgba(70,190,194,1);}</style><div style=\"font-family:OpenSans;color:white;width:100%;word-wrap:break-word;\">\(venue.venueDescription)</div>", baseURL: nil)
                     PriceCalendar.enabled = true
                     DateUpcoming.enabled = true
                     
@@ -274,7 +273,7 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                     DateUpcomingLabel.text = "Up Coming Events"
                     smallImage.image = UIImage(named: organization.primaryCategory)
                     EventCategory.text = organization.primaryCategory
-                    webDescriptionContent.loadHTMLString("<div style=\"font-family:OpenSans;color:white;width:100%;word-wrap:break-word;\">\(organization.organizationDescription)</div>", baseURL: nil)
+                    webDescriptionContent.loadHTMLString("<style> a { color: rgba(70,190,194,1);}</style><div style=\"font-family:OpenSans;color:white;width:100%;word-wrap:break-word;\">\(organization.organizationDescription)</div>", baseURL: nil)
                     
                     PriceCalendar.enabled = true
                     DateUpcoming.enabled = true

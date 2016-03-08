@@ -174,7 +174,7 @@ class EventMoreInfomationViewController: UIViewController, UIWebViewDelegate{
                     AffiliatedOrgLabel.text = "Affiliated Organizations" //convertTimeFormat("\(event.eventStartDate)")
                     smallImage.image = UIImage(named: event.primaryCategory)
                     eventCategory.text = event.primaryCategory
-                    webDescriptionContent.loadHTMLString("<div style=\"font-family:OpenSans;color:white;width:100%;word-wrap:break-word;\">\(event.eventDescription)</div>", baseURL: nil)
+                    webDescriptionContent.loadHTMLString("<style> a { color: rgba(70,190,194,1);}</style><div style=\"font-family:OpenSans;color:white;width:100%;word-wrap:break-word;\">\(event.eventDescription)</div>", baseURL: nil)
                     
                     sourceID = event.organizationID
                     eventVenueSource = event.venueID
