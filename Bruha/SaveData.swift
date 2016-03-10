@@ -140,7 +140,7 @@ class SaveData {
             
             newItem.id = event.eventID
             newItem.name = event.eventName
-            newItem.price = event.eventPrice!
+            newItem.price = String(format: "%.2f", Float(event.eventPrice!)!)
             newItem.eventDescription = event.eventDescription
             newItem.primaryCategory = event.primaryCategory
             

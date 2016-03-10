@@ -166,15 +166,15 @@ class EventMoreInfomationViewController: UIViewController, UIWebViewDelegate{
                     eventTime.text = "\(convertTimeFormat("\(event.eventStartDate) \(event.eventStartTime)"))"
                     
                     
-                    if let price = Float(event.eventPrice!) {
-                        if price == 0.0 {eventPrice.text = "Free!"}
+                    if let price = event.eventPrice {
+                        if price == "0.00" {eventPrice.text = "Free!"}
                         else {eventPrice.text = "$\(price)"}
                     } else {eventPrice.text = "No Price"}
                     
                     AffiliatedOrgLabel.text = "Affiliated Organizations" //convertTimeFormat("\(event.eventStartDate)")
                     smallImage.image = UIImage(named: event.primaryCategory)
                     eventCategory.text = event.primaryCategory
-                    webDescriptionContent.loadHTMLString("<div style=\"font-family:OpenSans;color:white;width:100%;word-wrap:break-word;\">\(event.eventDescription)</div>", baseURL: nil)
+                    webDescriptionContent.loadHTMLString("<style> a { color: rgba(70,190,194,1);}</style><div style=\"font-family:OpenSans;color:white;width:100%;word-wrap:break-word;\">\(event.eventDescription)</div>", baseURL: nil)
                     
                     sourceID = event.organizationID
                     eventVenueSource = event.venueID

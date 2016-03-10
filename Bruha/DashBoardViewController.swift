@@ -18,6 +18,8 @@ class DashBoardViewController: UIViewController {
     @IBOutlet weak var ticketImage: UIImageView!
     @IBOutlet weak var bruhaButton: UIButton!
     
+    @IBOutlet weak var bruhaBarButton: UIBarButtonItem!
+    
     var numberClicked = 0
     
     @IBAction func Bruha(sender: UIBarButtonItem) {
@@ -66,6 +68,11 @@ class DashBoardViewController: UIViewController {
         default:
             break
         }
+    }
+    
+    @IBAction func unwindToDashboard(segue: UIStoryboardSegue) {
+        
+        //Access this in other storyboard controller's Exit button
     }
     
     
@@ -245,10 +252,13 @@ class DashBoardViewController: UIViewController {
         performImageSegue()
         backgroundGradient()
         FetchData(context: managedObjectContext).fetchCategories()
-        Filtering().clearAllFilter()
-        GlobalVariables.searchedText = ""
-        GlobalVariables.datesSelected.removeAllObjects()
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        super.viewWillAppear(animated)
+        numberClicked = 0
+        bruhaBarButton.tintColor = UIColor.whiteColor()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -267,6 +277,11 @@ class DashBoardViewController: UIViewController {
             uploadImage.alpha = 1
             profileImage.alpha = 1
         }
+        
+        Filtering().clearAllFilter()
+        GlobalVariables.searchedText = ""
+        GlobalVariables.datesSelected.removeAllObjects()
+        Reachability.internetCheck(self)
     }
 
     override func didReceiveMemoryWarning() {
