@@ -208,6 +208,6 @@ struct Event {
         subCategoryID = eventDictionary["sub_category_id"] as! [String]
         
         let tempUrl = eventDictionary["image_link"] as! String
-        posterUrl = "http://www.bruha.com/\(tempUrl)"
+        posterUrl = "http://temp.bruha.com/\(tempUrl)"
     }
 }

@@ -102,6 +102,6 @@ struct Organization {
         
         let tempUrl = organizationDictionary["media"] as! String
         
-        posterUrl = "http://www.bruha.com/\(tempUrl)"
+        posterUrl = "http://temp.bruha.com/\(tempUrl)"
     }
 }

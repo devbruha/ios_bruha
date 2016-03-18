@@ -64,7 +64,7 @@ class ProfileViewController: UIViewController, FBSDKLoginButtonDelegate {
                     
                 else {
                     
-                    let urlString = "http://www.bruha.com/\(mResponse!)"
+                    let urlString = "http://temp.bruha.com/\(mResponse!)"
                     let url = NSURL(string: urlString)
                     
                     self.getDataFromUrl(url!) {
@@ -90,7 +90,7 @@ class ProfileViewController: UIViewController, FBSDKLoginButtonDelegate {
     
     func getProfilePicLink(username: String, completion: (NSString? -> Void)) {
         
-        let bruhaBaseURL: NSURL? = NSURL(string: "http://bruha.com/mobile_php/RetrieveMyPHP/")
+        let bruhaBaseURL: NSURL? = NSURL(string: "http://temp.bruha.com/mobile_php/RetrieveMyPHP/")
         
         if let loginURL = NSURL(string: "getuserPicLink.php?", relativeToURL: bruhaBaseURL) {
             
