@@ -41,6 +41,9 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
     
     @IBOutlet weak var backNav: UIBarButtonItem!
     
+    @IBOutlet weak var ticketingView: UIView!
+    
+    @IBOutlet weak var ticketingBottomConstraint: NSLayoutConstraint!
     @IBAction func backToExploreButton(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
     }
@@ -226,6 +229,8 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                     webDescriptionContent.loadHTMLString("<style> a { color: rgba(70,190,194,1);}</style><div style=\"font-family:OpenSans;color:white;width:100%;word-wrap:break-word;\">\(venue.venueDescription)</div>", baseURL: nil)
                     PriceCalendar.enabled = true
                     DateUpcoming.enabled = true
+                    ticketingView.hidden = true
+                    ticketingBottomConstraint.constant = -42
                     
                     if let img = GlobalVariables.venueImageCache[venue.venueID] {
                         Image.image = img
@@ -277,6 +282,8 @@ class MoreInformationViewController: UIViewController, UIWebViewDelegate {
                     
                     PriceCalendar.enabled = true
                     DateUpcoming.enabled = true
+                    ticketingView.hidden = true
+                    ticketingBottomConstraint.constant = -42
                     
                     if let img = GlobalVariables.organizationImageCache[organization.organizationID] {
                         Image.image = img
