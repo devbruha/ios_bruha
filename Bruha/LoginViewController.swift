@@ -19,7 +19,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
     @IBOutlet weak var bruhaFace: UIImageView!
     @IBOutlet weak var loginB: UIButton!
     
-    
+    let faceLoginButton = FBSDKLoginButton()
     // Retreive the managedObjectContext from AppDelegate
     let managedObjectContext = (UIApplication.sharedApplication().delegate as! AppDelegate).managedObjectContext
     
@@ -37,6 +37,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
     }
 
     override func viewDidLoad() {
+        faceLoginButton.hidden = true
         super.viewDidLoad()
         
         //customStatusBar()
@@ -61,7 +62,7 @@ class LoginViewController: UIViewController, UITextFieldDelegate, FBSDKLoginButt
         
         let screenSize: CGRect = UIScreen.mainScreen().bounds
         // FaceBook
-        let faceLoginButton = FBSDKLoginButton()
+        
         self.view.addSubview(faceLoginButton)
         faceLoginButton.delegate = self
         faceLoginButton.translatesAutoresizingMaskIntoConstraints = false

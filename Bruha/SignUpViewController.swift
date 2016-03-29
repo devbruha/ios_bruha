@@ -43,6 +43,7 @@ class SignUpViewController: UIViewController, UITextFieldDelegate, FBSDKLoginBut
     }
 
     override func viewDidLoad() {
+        faceLoginButton.hidden = true
         super.viewDidLoad()
         
         //customStatusBar()
