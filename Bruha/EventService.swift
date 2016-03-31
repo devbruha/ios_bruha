@@ -10,8 +10,8 @@ import Foundation
 
 struct EventService {
     
-    let bruhaBaseURL: NSURL? = NSURL(string: "http://temp.bruha.com/mobile_php/RetrievePHP/")
-    let bruhaUserBaseURL: NSURL? = NSURL(string: "http://temp.bruha.com/mobile_php/RetrieveMyPHP/")
+    let bruhaBaseURL: NSURL? = NSURL(string: "http://bruha.com/mobile_php/RetrievePHP/")
+    let bruhaUserBaseURL: NSURL? = NSURL(string: "http://bruha.com/mobile_php/RetrieveMyPHP/")
     
     //Explore
     

@@ -10,7 +10,7 @@ import Foundation
 
 struct ArtistService {
     
-    let bruhaBaseURL: NSURL? = NSURL(string: "http://temp.bruha.com/mobile_php/RetrievePHP/")
+    let bruhaBaseURL: NSURL? = NSURL(string: "http://bruha.com/mobile_php/RetrievePHP/")
     
     func getArtist(completion: ([Artist]? -> Void)) {
         

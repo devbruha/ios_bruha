@@ -27,7 +27,7 @@ struct FacebookService {
         userGender = usergender
     }
     
-    let bruhaBaseURL: NSURL? = NSURL(string: "http://temp.bruha.com/mobile_php/CredentialsPHP/")
+    let bruhaBaseURL: NSURL? = NSURL(string: "http://bruha.com/mobile_php/CredentialsPHP/")
     
     func registerNewUser(completion: (NSString? -> Void)) {
         
@@ -52,7 +52,7 @@ struct FacebookService {
     
     func getUserInformation(completion: (User? -> Void)) {
         
-        let userInfoBaseURL: NSURL? = NSURL(string: "http://temp.bruha.com/mobile_php/RetrieveMyPHP/")
+        let userInfoBaseURL: NSURL? = NSURL(string: "http://bruha.com/mobile_php/RetrieveMyPHP/")
         
         if let userInfoURL = NSURL(string: "UserInfo.php?", relativeToURL: userInfoBaseURL) {
             

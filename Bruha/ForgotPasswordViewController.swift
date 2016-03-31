@@ -67,7 +67,7 @@ class ForgotPasswordViewController: UIViewController, UITextFieldDelegate {
     
     func resetPassword(completion: (NSString? -> Void)) {
         
-        let bruhaBaseURL: NSURL? = NSURL(string: "http://temp.bruha.com/mobile_php/CredentialsPHP/")
+        let bruhaBaseURL: NSURL? = NSURL(string: "http://bruha.com/mobile_php/CredentialsPHP/")
         
         if let resetPassURL = NSURL(string: "forgotPassword2.php?", relativeToURL: bruhaBaseURL) {
             

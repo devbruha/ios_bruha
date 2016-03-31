@@ -45,6 +45,6 @@ struct Artist {
         
         let tempUrl = artistDictionary["Artist_media"] as! String
         
-        posterUrl = "http://temp.bruha.com/\(tempUrl)"
+        posterUrl = "http://bruha.com/\(tempUrl)"
     }
 }
