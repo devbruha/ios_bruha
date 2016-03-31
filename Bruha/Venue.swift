@@ -93,7 +93,7 @@ struct Venue {
         
         let tempUrl = venueDictionary["media"] as! String
         
-        posterUrl = "http://www.bruha.com/\(tempUrl)"
+        posterUrl = "http://bruha.com/\(tempUrl)"
         
     }
 }

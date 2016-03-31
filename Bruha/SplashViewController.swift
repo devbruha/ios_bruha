@@ -35,7 +35,7 @@ class SplashViewController: UIViewController,UIScrollViewDelegate, FBSDKLoginBut
     }
     
     override func viewDidLoad() {
-        
+        faceLoginButton.hidden = true
         super.viewDidLoad()
         
         //customStatusBar()

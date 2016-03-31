@@ -64,7 +64,7 @@ class ProfileViewController: UIViewController, FBSDKLoginButtonDelegate {
                     
                 else {
                     
-                    let urlString = "http://www.bruha.com/\(mResponse!)"
+                    let urlString = "http://bruha.com/\(mResponse!)"
                     let url = NSURL(string: urlString)
                     
                     self.getDataFromUrl(url!) {
